@@ -1,4 +1,5 @@
 class MuseumObjectsController < ApplicationController
+  
   def index
   end
 
@@ -6,6 +7,8 @@ class MuseumObjectsController < ApplicationController
   end
   
   def new
+    @museum_object = MuseumObject.create
+    redirect_to new_museum_object_build_path @museum_object.id
   end
 
   def create
