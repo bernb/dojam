@@ -5,3 +5,24 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+museum = Museum.create name: "JAM"
+storage1 = Storage.create name: "exhibition"
+storage2 = Storage.create name: "storage"
+
+storage_location1 = StorageLocation.create name: "Shelf 1" 
+storage_location2 = StorageLocation.create name: "Shelf 2"
+
+storage_locationA = StorageLocation.create name: "Shelf A"
+storage_locationB = StorageLocation.create name: "Shelf B"
+
+storage1.storage_locations << storage_location1
+storage1.storage_locations << storage_location2
+
+storage2.storage_locations << storage_locationA
+storage2.storage_locations << storage_locationB
+
+museum.storages << storage1
+museum.storages << storage2
+
+museum.save!
