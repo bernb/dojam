@@ -8,7 +8,7 @@ class MuseumObjectsController < ApplicationController
   
   def new
     @museum_object = MuseumObject.create
-    redirect_to new_museum_object_build_path @museum_object.id
+    redirect_to new_museum_object_build_path @museum_object.id # automatically sets correct params[:museum_object_id]
   end
 
   def create
