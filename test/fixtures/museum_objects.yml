@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  inv_number: 1
+  inv_extension: 1
+  inv_numberdoa: MyString
+  amount: 1
+  finding_context: MyString
+  finding_remarks: MyText
+  description_authenticities_name: MyString
+  description_conservation: MyString
+  description_preservation_state_name: MyString
+  acquisition_delivered_by: MyString
+  acquisition_kind_name: MyString
+  acquisition_deliverer_name: MyString
+  acquisition_date: MyString
+  ex_site: one
+  storage_location: one
+
+two:
+  inv_number: 1
+  inv_extension: 1
+  inv_numberdoa: MyString
+  amount: 1
+  finding_context: MyString
+  finding_remarks: MyText
+  description_authenticities_name: MyString
+  description_conservation: MyString
+  description_preservation_state_name: MyString
+  acquisition_delivered_by: MyString
+  acquisition_kind_name: MyString
+  acquisition_deliverer_name: MyString
+  acquisition_date: MyString
+  ex_site: two
+  storage_location: two
