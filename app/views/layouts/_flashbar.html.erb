@@ -1,0 +1,9 @@
+<% flash.each do |key, value| %>
+  <% if value.is_a? Hash %>
+    <% value.each do |nested_key, nested_value| %>
+      <div class="alert alert-<%= key %>"><%= nested_value %></div>
+    <% end %>
+  <% else %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+<% end %>

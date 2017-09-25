@@ -1,0 +1,20 @@
+<div class="col-md-4">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>inv. no.</th>
+      <th>ext.</th>
+      <th>site name</th>
+    </tr>
+  </thead>
+  <% @objects.each do |o| %>
+    <tbody>
+      <tr class="search-result-row" data-link="<%= mobject_path(o) %>">
+        <td><%= o.invnumber %></td>
+        <td><%= o.invextension %></td>
+        <td><%= o.ex_site.name %></td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>
+</div>

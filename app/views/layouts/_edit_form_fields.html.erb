@@ -1,0 +1,33 @@
+<%= fields_for shown_object do |f| %>
+<% shown_object.attributes.each do |attr_name, attr_value| %>  
+  <% if  (!(["id", "created_at", "updated_at"].include? attr_name) && !attr_name.end_with?("_id")) %><br>
+    <%= f.label attr_name.to_s.to_sym %>
+    <div class="field">
+    <% case attr_value.class.to_s %>
+      <% when "String" %>
+        <%= f.text_field attr_name.to_s.to_sym %>
+      <% when "Fixnum" %>
+        <% if false && attr_name.end_with?('_id') %>
+          <% nested_object_id = shown_object.read_attribute attr_name %>
+          <% nested_object_class = Object.const_get attr_name.chomp('_id').capitalize %>
+          <% nested_object = nested_object_class.find nested_object_id %>
+          <% render 'layouts/edit_form_fields', shown_object: nested_object %>
+        <% end %>
+      <% end %>
+    </div>
+    <% end %>
+  <% end %>
+  
+  <% shown_object.class.reflect_on_all_associations(:has_many).each do |child| %>
+    <% unless child.name.to_s == "mobjects" %>
+      <h3>List of <%=child.name %> </h3>
+      <% class_name = Object.const_get child.name.to_s.camelcase.singularize %>
+      <% foreign_key_name = shown_object.class.to_s.underscore + '_id' %>
+      <% nested_objects = class_name.where(foreign_key_name.to_sym => shown_object.id) %>
+      <%= render 'layouts/index_table', objects: nested_objects %>
+      <% nested_objects.each do |n| %>
+        <% link_to n.name, [:edit, n] %></br>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
