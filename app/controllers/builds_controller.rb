@@ -4,6 +4,12 @@ class BuildsController < ApplicationController
   
   def show
     @museum_object = MuseumObject.find params[:museum_object_id]
+    @museums = Museum.where name: "JAM" # we restrict to the JAM museum for now
+    @storages = @museums.first.storages
+    @storage_locations = @storages.first.storage_locations
+    
+    @selected_storage = @storages.first
+    
     render_wizard
   end
 
