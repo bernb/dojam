@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170925083504) do
+ActiveRecord::Schema.define(version: 20170925141039) do
 
   create_table "museum_objects", force: :cascade do |t|
     t.integer  "inv_number"
@@ -32,6 +32,28 @@ ActiveRecord::Schema.define(version: 20170925083504) do
     t.datetime "updated_at",                          null: false
     t.index ["ex_site_id"], name: "index_museum_objects_on_ex_site_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
+  end
+
+  create_table "museums", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "storage_locations", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "storage_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["storage_id"], name: "index_storage_locations_on_storage_id"
+  end
+
+  create_table "storages", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "museum_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["museum_id"], name: "index_storages_on_museum_id"
   end
 
 end
