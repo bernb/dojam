@@ -6,6 +6,19 @@ git_source(:github) do |repo_name|
 end
 
 
+# read env variables from serverfile as puma doesnt load env variables itself
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
+
+# bootstrap 3 for use with simple_form
+gem 'bootstrap-sass'
+
+# will be initialized with bootstrap support
+gem 'simple_form'
+
+# creates multistep forms for models
+gem 'wicked'
+
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.6'
 # Use sqlite3 as the database for Active Record
@@ -47,6 +60,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "rails-erd" # Generate Entity-Relationship Diagrams
+  gem 'capistrano'
+  gem 'capistrano-bundler' # for bundle install task
+  gem 'capistrano-rails' # migrate and compile asset tasks
+  gem 'capistrano3-puma' # puma tasks
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
