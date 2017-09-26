@@ -1,6 +1,6 @@
 class BuildsController < ApplicationController
   include Wicked::Wizard
-  steps :museum, :acquisition, :provenance, :confirm
+  steps :step_museum, :step_acquisition, :step_provenance, :step_confirm
   
   def show
     @museum_object = MuseumObject.find params[:museum_object_id]
@@ -15,6 +15,12 @@ class BuildsController < ApplicationController
 
   def new
     redirect_to wizard_path steps.first
+  end
+  
+  def update
+    @museum_object = MuseumObject.find params[:museum_object_id]
+    @museum_object.update_attributes museum_object_params
+    render_wizard @museum_object # does also attempt to save and renders same view again if fails
   end
   
   def storages
@@ -36,8 +42,8 @@ class BuildsController < ApplicationController
   end
   
   private
-  def builds_params
-    params.require(:builds).permit(:name, :prefix, storage_location: [:id, :name, :_destroy])
+  def museum_object_params
+    params.require(:museum_object).permit(:inv_number, :inv_extension, :inv_numberdoa, :amount, :storage_location_id)
   end
   
 end
