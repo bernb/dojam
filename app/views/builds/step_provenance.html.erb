@@ -1,0 +1,16 @@
+<%= render 'layouts/title', title_name: "Add new Object" %>
+
+<%= render 'layouts/new_entry_progress_bar', state: 'provenance' %>
+
+<div class="col-md-3">
+<%= simple_form_for @museum_object, url: wizard_path do |f| %>
+  <%= f.association :ex_site, label: "site name", include_blank: false%>
+  <%= f.input :finding_context, label: "finding_context_specified" %>
+  <%= f.input :remarks, label: "remarks" %>
+  
+  <div class="submit">
+  <%= f.submit class: "btn btn-primary" %>
+  </div>
+  
+<% end %>
+</div>
