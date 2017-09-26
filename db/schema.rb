@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926080900) do
+ActiveRecord::Schema.define(version: 20170926083624) do
 
   create_table "museum_objects", force: :cascade do |t|
     t.integer  "inv_number"
@@ -22,8 +22,6 @@ ActiveRecord::Schema.define(version: 20170926080900) do
     t.string   "description_authenticities_name"
     t.string   "description_conservation"
     t.string   "description_preservation_state_name"
-    t.string   "acquisition_delivered_by"
-    t.string   "acquisition_kind_name"
     t.string   "acquisition_deliverer_name"
     t.string   "acquisition_date"
     t.integer  "ex_site_id"
