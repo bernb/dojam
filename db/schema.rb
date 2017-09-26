@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170925141039) do
+ActiveRecord::Schema.define(version: 20170926080900) do
 
   create_table "museum_objects", force: :cascade do |t|
     t.integer  "inv_number"
@@ -28,10 +28,14 @@ ActiveRecord::Schema.define(version: 20170925141039) do
     t.string   "acquisition_date"
     t.integer  "ex_site_id"
     t.integer  "storage_location_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "termlist_acquisition_delivered_by_id"
+    t.integer  "termlist_acquisition_kind_id"
     t.index ["ex_site_id"], name: "index_museum_objects_on_ex_site_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
+    t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id"
+    t.index ["termlist_acquisition_kind_id"], name: "index_museum_objects_on_termlist_acquisition_kind_id"
   end
 
   create_table "museums", force: :cascade do |t|
@@ -54,6 +58,18 @@ ActiveRecord::Schema.define(version: 20170925141039) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["museum_id"], name: "index_storages_on_museum_id"
+  end
+
+  create_table "termlist_acquisition_delivered_bies", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "termlist_acquisition_kinds", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
