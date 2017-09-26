@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926091717) do
+ActiveRecord::Schema.define(version: 20170926104849) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -37,13 +37,13 @@ ActiveRecord::Schema.define(version: 20170926091717) do
     t.string   "description_conservation"
     t.string   "description_preservation_state_name"
     t.string   "acquisition_deliverer_name"
-    t.string   "acquisition_date"
     t.integer  "storage_location_id"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.integer  "termlist_acquisition_delivered_by_id"
     t.integer  "termlist_acquisition_kind_id"
     t.integer  "excavation_site_id"
+    t.date     "acquisition_date"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id"
