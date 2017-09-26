@@ -43,7 +43,9 @@ class BuildsController < ApplicationController
   
   private
   def museum_object_params
-    params.require(:museum_object).permit(:inv_number, :inv_extension, :inv_numberdoa, :amount, :storage_location_id)
+    params.require(:museum_object).permit :inv_number, :inv_extension, :inv_numberdoa, :amount, :storage_location_id,
+                                          :termlist_acquisition_kind_id, :termlist_acquisition_delivered_by_id, :acquisition_deliverer_name, :acquisition_date
+                                    
   end
   
 end
