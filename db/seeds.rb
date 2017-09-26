@@ -26,3 +26,17 @@ museum.storages << storage1
 museum.storages << storage2
 
 museum.save!
+
+
+TermlistAcquisitionKind.create name: "chance find"
+TermlistAcquisitionKind.create name: "confiscation"
+TermlistAcquisitionKind.create name: "excavation"
+TermlistAcquisitionKind.create name: "gift"
+TermlistAcquisitionKind.create name: "purchase"
+TermlistAcquisitionKind.create name: "unknown"
+
+TermlistAcquisitionDeliveredBy.create name: "excavator"
+TermlistAcquisitionDeliveredBy.create name: "donor"
+TermlistAcquisitionDeliveredBy.create name: "seller"
+TermlistAcquisitionDeliveredBy.create name: "institution"
+TermlistAcquisitionDeliveredBy.create name: "unknown"
