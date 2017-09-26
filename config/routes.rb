@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
-
-  get 'builds/new'
-
-  root 'static_pages#menu'
   
+  root 'static_pages#menu'
+  get 'builds/new'
   get 'static_pages/menu'
 
   resources :museum_objects do
     resources :builds
+    post 'builds/step_confirm', to: 'builds#create'
   end
   
   # Helper actions for ajax call to get correct storage(_location)s for selected museum/storage

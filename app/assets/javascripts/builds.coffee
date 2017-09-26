@@ -19,6 +19,13 @@ ready = ->
       dataType: "script"
       data:
         storage_id: $('.storage_selection option:selected').val()
+  $(".museum_selection").on "change", ->
+    $.ajax
+      url: "/builds/museum_prefix"
+      type: "GET"
+      dataType: "script"
+      data:
+        museum_id: $('.museum_selection option:selected').val()
         
 $(document).ready(ready)
 $(document).on('turbolinks:load', ready)
