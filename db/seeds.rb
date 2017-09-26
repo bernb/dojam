@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-museum = Museum.create name: "JAM"
+museum = Museum.create name: "JAM", prefix: "J"
 storage1 = Storage.create name: "exhibition"
 storage2 = Storage.create name: "storage"
 

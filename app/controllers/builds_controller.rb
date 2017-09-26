@@ -23,6 +23,24 @@ class BuildsController < ApplicationController
     render_wizard @museum_object # does also attempt to save and renders same view again if fails
   end
   
+  def create
+    museum_object = MuseumObject.find params[:museum_object_id]
+    museum_object.is_finished = true
+    if museum_object.save
+      flash[:success] = "Object saved in database"
+      redirect_to root_path
+    else
+      flash[:danger] = Hash.new
+      flash[:danger][:not_saved] = "Could not save object."
+      museum_object.errors.full_messages.each_with_index do |message, i|
+        flash[:danger][i] = message
+      end
+      museum_object.is_finished = false
+      render_wizard
+    end
+    
+  end
+  
   def storages
     respond_to do |format|
       format.js {
@@ -37,6 +55,15 @@ class BuildsController < ApplicationController
       format.js {
         storage = Storage.find params[:storage_id]
         @storage_locations = storage.storage_locations
+      }
+    end
+  end
+  
+  def museum_prefix
+    respond_to do |format|
+      format.js {
+        museum = Museum.find params[:museum]
+        @prefix = museum.prefix
       }
     end
   end
