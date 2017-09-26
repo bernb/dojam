@@ -18,6 +18,9 @@ gem 'simple_form'
 # creates multistep forms for models
 gem 'wicked'
 
+# creates simple and nice nested forms
+gem 'cocoon'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.6'

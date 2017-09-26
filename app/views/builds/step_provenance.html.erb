@@ -4,9 +4,18 @@
 
 <div class="col-md-3">
 <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-  <%= f.association :ex_site, label: "site name", include_blank: false%>
-  <%= f.input :finding_context, label: "finding_context_specified" %>
-  <%= f.input :remarks, label: "remarks" %>
+  <h3>Excavation Sites</h3>
+  <div id="excavation_sites">
+    <%= f.association :excavation_site %>
+    <% f.simple_fields_for :excavation_sites do |site| %>
+      <%= render 'excavation_site_fields', f: site %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'new excavation', f, :excavation_site %>
+    </div>
+  </div>
+  <%= f.input :finding_context, label: "finding context specified" %>
+  <%= f.input :finding_remarks, label: "remarks" %>
   
   <div class="submit">
   <%= f.submit class: "btn btn-primary" %>
