@@ -17,4 +17,27 @@ class BuildsController < ApplicationController
     redirect_to wizard_path steps.first
   end
   
+  def storages
+    respond_to do |format|
+      format.js {
+        museum = Museum.find params[:museum_id]
+        @storages = museum.storages
+      }
+    end
+  end
+  
+  def storage_locations
+    respond_to do |format|
+      format.js {
+        storage = Storage.find params[:storage_id]
+        @storage_locations = storage.storage_locations
+      }
+    end
+  end
+  
+  private
+  def builds_params
+    params.require(:builds).permit(:name, :prefix, storage_location: [:id, :name, :_destroy])
+  end
+  
 end

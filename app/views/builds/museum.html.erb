@@ -7,7 +7,7 @@
   <%= label_tag "", "museum" %>
   <%= collection_select(:museum, :museum_id, @museums, :id, :name, {}, {class: "museum_selection form-control select required disabled"}) %>
   <%= label_tag "", "storage location" %>
-  <%= collection_select(:storage_location, :storage_location_id, @storages, :id, :name, {selected: @selected_storage.id}, {class: "storage_selection form-control select required"}) %>
+  <%= collection_select(:storage, :storage_id, @storages, :id, :name, {selected: @selected_storage.id}, {class: "storage_selection form-control select required"}) %>
   <%= label_tag "", "detailed location" %>
   <%= f.collection_select(:storage_location_id, @storage_locations, :id, :name,{}, {class: "storage_location_selection form-control select required"}) %>
   <%= f.input :inv_number, label: "inventory number of museum", as: :string %>
