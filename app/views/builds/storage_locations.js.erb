@@ -1,0 +1,6 @@
+$('.storage_location_selection').empty();
+$('.storage_location_selection').append( $('<option>Select the Storage Detailed Location</option>'));
+<% @storage_locations.each do |s| %>
+  $('.storage_location_selection').append($('<option value="<%= s.id %>"><%= s.name %></option>'));
+<% end %>
+$('.storage_location_selection').find("option").eq(0).remove();
