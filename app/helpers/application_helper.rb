@@ -2,13 +2,13 @@ module ApplicationHelper
 
 def calc_progress_percentage state
   case state
-    when 'museum'
+    when :step_museum
       return 20
-    when 'acquisition'
+    when :step_acquisition
       return 40
-    when 'provenance'
+    when :step_provenance
       return 60
-    when 'confirm'
+    when :step_confirm
       return 100
     else
       return 0

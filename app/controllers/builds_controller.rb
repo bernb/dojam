@@ -7,6 +7,7 @@ class BuildsController < ApplicationController
     @museums = Museum.where name: "JAM" # we restrict to the JAM museum for now
     @storages = @museums.first.storages
     @storage_locations = @storages.first.storage_locations
+    @step = step
     
     @selected_storage = @storages.first
     

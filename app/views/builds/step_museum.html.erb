@@ -1,7 +1,5 @@
 <%= render 'layouts/title', title_name: "Add new Object" %>
-
-<%= render 'layouts/new_entry_progress_bar', state: 'museum' %>
-
+<%= render 'layouts/new_entry_progress_bar', state: @step %>
 <div class="col-md-3">
 <%= simple_form_for @museum_object, url: wizard_path, method: :put do |f| %>
   <%= label_tag "", "museum" %>
