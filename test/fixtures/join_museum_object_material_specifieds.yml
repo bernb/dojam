@@ -2,8 +2,8 @@
 
 one:
   museum_object: one
-  termlist_material: one
+  termlist_material_specified: one
 
 two:
   museum_object: two
-  termlist_material: two
+  termlist_material_specified: two

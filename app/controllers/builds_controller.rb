@@ -11,6 +11,10 @@ class BuildsController < ApplicationController
     
     @selected_storage = @storages.first
     
+    if step = :step_material
+      @materials = TermlistMaterial.all
+    end
+    
     render_wizard
   end
 

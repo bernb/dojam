@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170928072539) do
+ActiveRecord::Schema.define(version: 20170928080207) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20170928072539) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.index ["excavation_site_kind_id"], name: "index_excavation_sites_on_excavation_site_kind_id"
+  end
+
+  create_table "join_museum_object_material_specifieds", force: :cascade do |t|
+    t.integer  "museum_object_id"
+    t.integer  "termlist_material_specified_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["museum_object_id"], name: "index_join_museum_object"
+    t.index ["termlist_material_specified_id"], name: "index_join_material_specified"
   end
 
   create_table "join_table_museum_object_termlist_materials", force: :cascade do |t|
