@@ -1,0 +1,14 @@
+<%= render 'layouts/title', title_name: "Add new Object" %>
+<%= render 'layouts/new_entry_progress_bar', state: @step %>
+
+<div class="col-md-3">
+<%= simple_form_for @museum_object, url: wizard_path, method: :put do |f| %>
+  <%= label_tag "", "material" %>
+  <%= f.association :termlist_materials, as: :check_boxes %>
+  
+  <div class="submit">
+  <%= f.submit "next step", class: "btn btn-primary" %>
+  </div>
+  
+<% end %>
+</div>
