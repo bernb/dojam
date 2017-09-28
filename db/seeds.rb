@@ -40,3 +40,6 @@ TermlistAcquisitionDeliveredBy.create name: "donor"
 TermlistAcquisitionDeliveredBy.create name: "seller"
 TermlistAcquisitionDeliveredBy.create name: "institution"
 TermlistAcquisitionDeliveredBy.create name: "unknown"
+
+TermlistMaterial.create name: "stone"
+TermlistMaterial.create name: "metal"
