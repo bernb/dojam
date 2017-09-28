@@ -41,5 +41,16 @@ TermlistAcquisitionDeliveredBy.create name: "seller"
 TermlistAcquisitionDeliveredBy.create name: "institution"
 TermlistAcquisitionDeliveredBy.create name: "unknown"
 
-TermlistMaterial.create name: "stone"
-TermlistMaterial.create name: "metal"
+stone =TermlistMaterial.create name: "stone"
+metal = TermlistMaterial.create name: "metal"
+
+silver =  TermlistMaterialSpecified.create name: "silver"
+gold   =  TermlistMaterialSpecified.create name: "gold"
+iron   =  TermlistMaterialSpecified.create name: "iron"
+
+flint   =  TermlistMaterialSpecified.create name: "flint"
+
+stone.termlist_material_specifieds << flint
+metal.termlist_material_specifieds << gold
+metal.termlist_material_specifieds << silver
+metal.termlist_material_specifieds << iron

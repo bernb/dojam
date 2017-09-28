@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class JoinTableMuseumObjectTermlistMaterialTest < ActiveSupport::TestCase
+class JoinMuseumObjectMaterialSpecifiedTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -2,12 +2,32 @@
 <%= render 'layouts/new_entry_progress_bar', state: @step %>
 
 <div class="col-md-3">
+  <h3> Material </h3>
+  <form>
+  <% @materials.each do |m| %>
+    <div>
+      <input class="checkbox material" type="checkbox" value="<%= m.name %>"><label><%= m.name %></label></input>
+    </div>
+  <% end %>
+  </form>
+</div>
+
+<div class="col-md-3">
 <%= simple_form_for @museum_object, url: wizard_path, method: :put do |f| %>
-  <%= label_tag "", "material" %>
-  <%= f.association :termlist_materials, as: :check_boxes %>
-  
+  <h3> Material Specified </h3>
+  <% f.fields_for :termlist_material_specifieds do |m| %>
+    <%= m.select :name, TermlistMaterialSpecified.all, prompt: 'Please select' %><br /> 
+  <% end %>  
+  <% f.grouped_collection_select :termlist_material_specified_ids, @materials, :termlist_material_specifieds, :name, :id, :name %>
+      <% f.input :termlist_material_specifieds, as: :grouped_select, collection: @materials, group_method: :termlist_material_specifieds %>
+  <% @materials.each do |m| %>
+    <div id='<%= m.name %>' class='hidden material_specific_select'>
+      <div><%= m.name %> </div>
+      <%= f.collection_select :termlist_material_specified_ids, m.termlist_material_specifieds, :id, :name %>
+    </div>
+  <% end %>
   <div class="submit">
-  <%= f.submit "next step", class: "btn btn-primary" %>
+  <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
   </div>
   
 <% end %>
