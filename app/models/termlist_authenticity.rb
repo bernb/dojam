@@ -1,0 +1,2 @@
+class TermlistAuthenticity < ApplicationRecord
+end

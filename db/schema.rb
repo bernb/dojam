@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929092010) do
+ActiveRecord::Schema.define(version: 20170929111333) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -77,10 +77,12 @@ ActiveRecord::Schema.define(version: 20170929092010) do
     t.string   "inscription_language"
     t.string   "inscription_text"
     t.string   "inscription_translation"
+    t.integer  "termlist_authenticity_id"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id"
     t.index ["termlist_acquisition_kind_id"], name: "index_museum_objects_on_termlist_acquisition_kind_id"
+    t.index ["termlist_authenticity_id"], name: "index_museum_objects_on_termlist_authenticity_id"
   end
 
   create_table "museums", force: :cascade do |t|
@@ -113,6 +115,12 @@ ActiveRecord::Schema.define(version: 20170929092010) do
   end
 
   create_table "termlist_acquisition_kinds", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "termlist_authenticities", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
