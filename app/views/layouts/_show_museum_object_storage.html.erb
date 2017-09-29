@@ -1,0 +1,22 @@
+<div class="museum_object_page museum_object_storage">
+  <h2>STORAGE</h2>
+  <dl class="dl-horizontal">
+    <dt>museum</dt>
+    <dd><%= @museum_object&.museum&.name %></dd>
+    
+    <dt>inv. number (JAM)</dt>  
+    <dd><%= @museum_object&.inv_number %></dd>
+    
+    <dt>other inv. number</dt>
+    <dd><%= @museum_object&.inv_numberdoa %></dd>
+    
+    <dt>amount of objects</dt>
+    <dd><%= @museum_object&.amount %></dd>
+    
+    <dt>place of storage</dt>
+    <dd><%= @museum_object&.storage&.name %></dd>
+    
+    <dt>place of storage specified</dt>
+    <dd><%= @museum_object&.storage_location&.name %></dd>
+  </dl>
+</div>

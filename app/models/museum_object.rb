@@ -7,4 +7,5 @@ class MuseumObject < ApplicationRecord
   has_many :termlist_material_specifieds, through: :join_museum_object_material_specifieds
   accepts_nested_attributes_for :excavation_site, reject_if: :all_blank, allow_destroy: true
   delegate :museum, to: :storage_location
+  delegate :storage, to: :storage_location
 end
