@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170928080207) do
+ActiveRecord::Schema.define(version: 20170929091318) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20170928080207) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.index ["excavation_site_kind_id"], name: "index_excavation_sites_on_excavation_site_kind_id"
+  end
+
+  create_table "join_museum_object_colors", force: :cascade do |t|
+    t.integer  "termlist_color_id"
+    t.integer  "museum_object_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["museum_object_id"], name: "index_join_museum_object_colors_on_museum_object_id"
+    t.index ["termlist_color_id"], name: "index_join_museum_object_colors_on_termlist_color_id"
   end
 
   create_table "join_museum_object_material_specifieds", force: :cascade do |t|
@@ -99,6 +108,12 @@ ActiveRecord::Schema.define(version: 20170928080207) do
   end
 
   create_table "termlist_acquisition_kinds", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "termlist_colors", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

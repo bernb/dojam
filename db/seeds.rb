@@ -54,3 +54,7 @@ stone.termlist_material_specifieds << flint
 metal.termlist_material_specifieds << gold
 metal.termlist_material_specifieds << silver
 metal.termlist_material_specifieds << iron
+
+TermlistColor.create name: "grey"
+TermlistColor.create name: "black"
+TermlistColor.create name: "dark red"
