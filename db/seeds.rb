@@ -58,3 +58,6 @@ metal.termlist_material_specifieds << iron
 TermlistColor.create name: "grey"
 TermlistColor.create name: "black"
 TermlistColor.create name: "dark red"
+
+TermlistAuthenticity.create name: "archaeological object"
+TermlistAuthenticity.create name: "unknown"
