@@ -13,6 +13,7 @@ class BuildsController < ApplicationController
     
     if step = :step_material
       @materials = TermlistMaterial.all
+      @colors = TermlistColor.all
     end
     
     render_wizard
