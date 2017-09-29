@@ -1,11 +1,23 @@
 <%= render 'layouts/title', title_name: "Add new Object" %>
 <%= render 'layouts/new_entry_progress_bar', state: @step %>
 
-<%= render 'layouts/show_museum_object'%>
+<%= render 'layouts/show_museum_object_storage'%>
+<%= render 'layouts/show_museum_object_acquisition'%>
+<%= render 'layouts/show_museum_object_provenance'%>
 
-<div class="col-xs-1">
-  <%= button_to "Confirm",{}, class: "btn btn-primary" %>
+<div class="row">
+  <%= link_to "storage", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_storage" %>
+  <%= link_to "acquisition", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_acquisition" %>
+  <%= link_to "provenance", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_provenance" %>
+  <%= link_to "description 1", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_description1" %>
+  <%= link_to "description 2", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_description2" %>
 </div>
-<div class="col-xs-1">
-  <% link_to "Edit", edit_museum_object_path, class: "btn btn-primary" %>
+
+<div class="row">
+  <div class="col-xs-1">
+    <%= button_to "Confirm",{}, class: "btn btn-primary" %>
+  </div>
+  <div class="col-xs-1">
+    <% link_to "Edit", edit_museum_object_path, class: "btn btn-primary" %>
+  </div>
 </div>
