@@ -1,6 +1,6 @@
 class BuildsController < ApplicationController
   include Wicked::Wizard
-  steps :step_museum, :step_acquisition, :step_provenance, :step_material, :step_inscription, :step_auth_and_prio, :step_confirm
+  steps :step_museum, :step_acquisition, :step_provenance, :step_material, :step_inscription, :step_authenticity_and_priority, :step_confirm
   
   def show
     @museum_object = MuseumObject.find params[:museum_object_id]
