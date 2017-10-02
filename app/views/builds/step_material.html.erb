@@ -15,22 +15,21 @@
   <%= simple_form_for @museum_object, url: wizard_path, method: :put do |f| %>
     <div class="col-md-3">
       <h3> Material Specified </h3>
-      <% f.fields_for :termlist_material_specifieds do |m| %>
-        <%= m.select :name, TermlistMaterialSpecified.all, prompt: 'Please select' %><br /> 
-      <% end %>  
-      <% f.grouped_collection_select :termlist_material_specified_ids, @materials, :termlist_material_specifieds, :name, :id, :name %>
-          <% f.input :termlist_material_specifieds, as: :grouped_select, collection: @materials, group_method: :termlist_material_specifieds %>
       <% @materials.each do |m| %>
-        <div id='<%= m.name %>' class='hidden material_specific_select'>
+        <div id='<%= m.name %>' class='material_specific_select'>
           <div><%= m.name %> </div>
-          <%= f.collection_select :termlist_material_specified_ids, m.termlist_material_specifieds, :id, :name %>
+          <% m.termlist_material_specifieds.each do |s| %>
+            <label class="checkbox inline">
+              <%= f.check_box :termlist_material_specified_ids, {multiple: true}, s.id, nil %>
+              <%= s.name %>
+            </label>
+          <% end %>
         </div>
       <% end %>
     </div>
     
     <div class="col-md-3">
       <h3> Colors </h3>
-        <%= f.association :termlist_colors, as: :check_boxes, label: "" %>
     </div>
 </div>
     <div class="row">
