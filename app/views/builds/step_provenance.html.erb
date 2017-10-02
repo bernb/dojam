@@ -10,7 +10,7 @@
       <%= render 'excavation_site_fields', f: site %>
     <% end %>
     <div class="links">
-      <%= link_to_add_association 'new excavation', f, :excavation_site %>
+      <% link_to_add_association 'new excavation', f, :excavation_site %>
     </div>
   </div>
   <%= f.input :finding_context, label: "finding context specified" %>
