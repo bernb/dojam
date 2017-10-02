@@ -1,0 +1,16 @@
+<%= render 'layouts/title', title_name: "Add new Object" %>
+<%= render 'layouts/new_entry_progress_bar', state: @step %>
+
+<div class="col-md-3">
+<%= simple_form_for @museum_object, url: wizard_path do |f| %>
+  <h3>Authenticity and Priority</h3>
+  <%= f.association :termlist_authenticity, label: "authenticity" %>
+  <%= f.input :priority, collection: 1..5, label: "priority" %>
+  <%= f.input :priority_determined_by, label: "priority determined by" %>
+  
+  <div class="submit">
+  <%= f.submit "Next Step", class: "btn btn-primary" %>
+  </div>
+  
+<% end %>
+</div>

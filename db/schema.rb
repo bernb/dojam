@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929111333) do
+ActiveRecord::Schema.define(version: 20171002072445) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 20170929111333) do
     t.string   "inscription_text"
     t.string   "inscription_translation"
     t.integer  "termlist_authenticity_id"
+    t.integer  "priority"
+    t.string   "priority_determined_by"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id"
