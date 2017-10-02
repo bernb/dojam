@@ -1,26 +1,10 @@
 <% perc = calc_progress_percentage state %>
-<div class="row"><br>
-<div class="col-xs-12">
-<div class="progress">
-  <div class="bar-step" style="left: 16%">
-    <div class="label-txt">MUSEUM</div>
-    <div class="label-line"></div>                 
+<% state_string = state.to_s %>
+<% state_string["step_"] = "" %>
+<% state_string = state_string.gsub '_', ' ' %>
+ <div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="<%= perc %>"
+  aria-valuemin="0" aria-valuemax="100" style="width:<%= perc %>%">
+    <%= state_string %>
   </div>
-  <div class="bar-step" style="left: 33%">
-    <div class="label-txt">ACQUISITION</div>
-    <div class="label-line"></div>                 
-  </div>
-  <div class="bar-step" style="left: 52%">
-    <div class="label-txt">PROVENANCE</div>
-    <div class="label-line"></div>                 
-  </div>
-  <div class="bar-step" style="left: 94%">
-    <div class="label-txt">CONFIRM</div>
-    <div class="label-line"></div>                 
-  </div>
-  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= perc %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= perc %>%">
-    <span class="sr-only">20% Complete</span>
-  </div>
-</div>
-</div>
-</div>
+</div> 
