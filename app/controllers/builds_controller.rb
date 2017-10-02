@@ -78,7 +78,11 @@ class BuildsController < ApplicationController
   def museum_object_params
     params.require(:museum_object).permit :inv_number, :inv_extension, :inv_numberdoa, :amount, :storage_location_id,
                                           :termlist_acquisition_kind_id, :termlist_acquisition_delivered_by_id, :acquisition_deliverer_name, :acquisition_date,
-                                          :finding_context, :finding_remarks, excavation_site_attributes: [:id, :_destroy]
+                                          :finding_context, :finding_remarks, :termlist_authenticity_id, :priority, :priority_determined_by,
+                                          :inscription_decoration, :inscription_letters, :inscription_text, :inscription_translation,
+                                          :termlist_material_specified_ids, :termlist_color_ids, 
+                                          :excavation_site_id,                                        
+                                           excavation_site_attributes: [:id, :_destroy]
                                     
   end
   
