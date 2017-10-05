@@ -61,3 +61,24 @@ TermlistColor.create name: "dark red"
 
 TermlistAuthenticity.create name: "archaeological object"
 TermlistAuthenticity.create name: "unknown"
+
+tomb = TermlistExcavationSiteKind.create name: "tomb"
+settlement = TermlistExcavationSiteKind.create name: "settlement"
+
+ExcavationSite.create name: "‘Ain Ghazal", 
+                      name_mega_jordan: "AIN GHAZAL", 
+                      name_expedition: "‘Ain Ghazal", 
+                      site_number_mega: 2710,
+                      site_number_jadis: 2415001,
+                      site_number_expedition: "",
+                      coordinates_mega: "E 35.97735 N 31.99006",
+                      termlist_excavation_site_kind: settlement
+
+ExcavationSite.create name: "Tell es-Sa’idiyeh", 
+                      name_mega_jordan: "SAIDIYEH", 
+                      name_expedition: "Tell es-Sa’idiyeh", 
+                      site_number_mega: 2655,
+                      site_number_jadis: 2018001,
+                      site_number_expedition: "",
+                      coordinates_mega: "E 35.57650, N 32.26870",
+                      termlist_excavation_site_kind: tomb
