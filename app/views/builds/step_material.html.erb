@@ -1,35 +1,29 @@
 <%= render 'layouts/title', title_name: "Add new Object" %>
 <%= render 'layouts/new_entry_progress_bar', state: @step %>
 <div class="row">
-  <div class="col-md-3">
-    <h3> Material </h3>
-    <form>
-    <% @materials.each do |m| %>
-      <div class="checkbox">
-        <input class="material checkbox" type="checkbox" value="<%= m.name %>"><label><%= m.name %></label></input>
-      </div>
-    <% end %>
-    </form>
-  </div>
-
-  <%= simple_form_for @museum_object, url: wizard_path, method: :put do |f| %>
-    <div class="col-md-3">
+  <div class="col-md-2">
+  <%= simple_form_for @museum_object, url: wizard_path do |f| %>
       <h3> Material Specified </h3>
       <% @materials.each do |m| %>
-        <div id='<%= m.name %>' class='material_specific_select'>
-          <div><%= m.name %> </div>
-          <% m.termlist_material_specifieds.each do |s| %>
-            <label class="checkbox inline">
-              <%= f.check_box :termlist_material_specified_ids, {multiple: true}, s.id, nil %>
-              <%= s.name %>
-            </label>
-          <% end %>
+        <div class="col">
+          <div id='<%= m.name %>' class='material_specific_select'>
+            <h4><%= m.name %> </h4>
+            <% m.termlist_material_specifieds.each do |s| %>
+              <span class="checkbox">
+                <label>
+                  <%= f.check_box :termlist_material_specified_ids, {multiple: true}, s.id, nil %>
+                  <%= s.name %>
+                </label>
+              </span>
+            <% end %>
+          </div>
         </div>
-      <% end %>
+      <% end %> 
     </div>
     
-    <div class="col-md-3">
+    <div class="col-md-2">
       <h3> Colors </h3>
+      <%= f.association :termlist_colors, label: "", as: :check_boxes %>
     </div>
 </div>
     <div class="row">
