@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# Simpliest fulltext search
+gem 'search_cop'
 
 # read env variables from serverfile as puma doesnt load env variables itself
 gem 'dotenv-rails', :require => 'dotenv/rails-now'

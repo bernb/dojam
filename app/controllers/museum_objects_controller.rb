@@ -2,7 +2,7 @@ class MuseumObjectsController < ApplicationController
   
   def index
   if params.has_key? :search_query
-    @museum_objects = MuseumObject.where "inv_number LIKE :search_query", search_query: "%#{params[:search_query]}%"
+    @museum_objects = MuseumObject.search "#{params[:search_query]}"
   else
     @musem_objects = MuseumObjects.find :all, limit: 100
   end
