@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'builds/new'
   get 'static_pages/menu'
 
+  get 'museum_objects/search' # remember that orders matter
   resources :museum_objects do
     resources :builds
     post 'builds/step_confirm', to: 'builds#create'

@@ -7,12 +7,12 @@
       <th>site name</th>
     </tr>
   </thead>
-  <% @objects.each do |o| %>
+  <% @museum_objects.each do |o| %>
     <tbody>
-      <tr class="search-result-row" data-link="<%= mobject_path(o) %>">
-        <td><%= o.invnumber %></td>
-        <td><%= o.invextension %></td>
-        <td><%= o.ex_site.name %></td>
+      <tr class="search-result-row" data-link="<%= museum_object_path(o) %>">
+        <td><%= o.inv_number %></td>
+        <td><%= o.inv_extension %></td>
+        <td><%= o&.excavation_site&.name %></td>
       </tr>
     </tbody>
   <% end %>
