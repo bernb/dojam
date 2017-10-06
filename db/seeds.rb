@@ -12,12 +12,18 @@ storage2 = Storage.create name: "storage"
 
 storage_location1 = StorageLocation.create name: "Shelf 1" 
 storage_location2 = StorageLocation.create name: "Shelf 2"
+storage_location3 = StorageLocation.create name: "Shelf 3"
+storage_location4 = StorageLocation.create name: "Shelf 4"
+storage_location5 = StorageLocation.create name: "Shelf 5"
 
 storage_locationA = StorageLocation.create name: "Shelf A"
 storage_locationB = StorageLocation.create name: "Shelf B"
 
 storage1.storage_locations << storage_location1
 storage1.storage_locations << storage_location2
+storage1.storage_locations << storage_location3
+storage1.storage_locations << storage_location4
+storage1.storage_locations << storage_location5
 
 storage2.storage_locations << storage_locationA
 storage2.storage_locations << storage_locationB
@@ -41,25 +47,36 @@ TermlistAcquisitionDeliveredBy.create name: "seller"
 TermlistAcquisitionDeliveredBy.create name: "institution"
 TermlistAcquisitionDeliveredBy.create name: "unknown"
 
-stone =TermlistMaterial.create name: "stone"
+stone = TermlistMaterial.create name: "stone"
 metal = TermlistMaterial.create name: "metal"
 
 silver =  TermlistMaterialSpecified.create name: "silver"
 gold   =  TermlistMaterialSpecified.create name: "gold"
 iron   =  TermlistMaterialSpecified.create name: "iron"
+copper   =  TermlistMaterialSpecified.create name: "copper"
+lead   =  TermlistMaterialSpecified.create name: "lead"
 
 flint   =  TermlistMaterialSpecified.create name: "flint"
+carnelian   =  TermlistMaterialSpecified.create name: "carnelian"
+limestone   =  TermlistMaterialSpecified.create name: "limestone"
 
 stone.termlist_material_specifieds << flint
+stone.termlist_material_specifieds << carnelian
+stone.termlist_material_specifieds << limestone
 metal.termlist_material_specifieds << gold
 metal.termlist_material_specifieds << silver
 metal.termlist_material_specifieds << iron
+metal.termlist_material_specifieds << copper
+metal.termlist_material_specifieds << lead
 
 TermlistColor.create name: "grey"
 TermlistColor.create name: "black"
 TermlistColor.create name: "dark red"
 
 TermlistAuthenticity.create name: "archaeological object"
+TermlistAuthenticity.create name: "copy"
+TermlistAuthenticity.create name: "forgery"
+TermlistAuthenticity.create name: "unspecific"
 TermlistAuthenticity.create name: "unknown"
 
 tomb = TermlistExcavationSiteKind.create name: "tomb"
