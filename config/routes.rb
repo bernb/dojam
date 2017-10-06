@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'termlists/index'
+  get 'termlists/choose'
+  get 'termlists/show'
+
   root 'static_pages#menu'
   get 'builds/new'
   get 'static_pages/menu'
