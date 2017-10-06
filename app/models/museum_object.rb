@@ -1,4 +1,6 @@
 class MuseumObject < ApplicationRecord
+  include SearchCop
+
   belongs_to :excavation_site, required: false # do not require for now while in early dev state
   belongs_to :storage_location, required: false
   belongs_to :termlist_acquisition_delivered_by, required: false
@@ -11,4 +13,15 @@ class MuseumObject < ApplicationRecord
   accepts_nested_attributes_for :excavation_site, reject_if: :all_blank, allow_destroy: true
   delegate :museum, to: :storage_location
   delegate :storage, to: :storage_location
+  
+  
+  search_scope :search do
+    attributes :inv_number, :inv_numberdoa, :finding_context, :finding_remarks
+    attributes :description_authenticities_name, :description_conservation, :description_preservation_state_name
+    attributes :acquisition_deliverer_name
+    attributes :inscription_decoration, :inscription_letters, :inscription_language, :inscription_text, :inscription_translation
+    attributes excavation_site: ["excavation_site.name", "excavation_site.name_mega_jordan", "excavation_site.name_expedition"]
+    attributes excavation_site: ["excavation_site.site_number_mega", "excavation_site.site_number_jadis", "excavation_site.site_number_expedition"]
+  end
+  
 end
