@@ -1,20 +1,7 @@
 <%= render 'layouts/title', title_name: "Add new Object" %>
 <%= render 'layouts/new_entry_progress_bar', state: @step %>
 
-<div class="row table-row">
-  <div class="col"><%= render 'layouts/show_museum_object_storage'%></div>
-  <div class="col"><%= render 'layouts/show_museum_object_acquisition'%></div>
-  <div class="col"><%= render 'layouts/show_museum_object_provenance'%></div>
-  <div class="col"><%= render 'layouts/show_museum_object_description1'%></div>
-</div>
-
-<div class="row"">
-  <%= link_to "storage", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_storage" %>
-  <%= link_to "acquisition", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_acquisition" %>
-  <%= link_to "provenance", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_provenance" %>
-  <%= link_to "description", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_description1" %>
-  <% link_to "description 2", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_description2" %>
-</div>
+<%= render 'layouts/show_museum_object' %>
 
 <div class="row">
   <div class="col-xs-1">
