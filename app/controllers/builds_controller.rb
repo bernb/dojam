@@ -11,7 +11,7 @@ class BuildsController < ApplicationController
     
     @selected_storage = @storages.first
     
-    if step = :step_material
+    if step == :step_material
       @materials = TermlistMaterial.all
       @colors = TermlistColor.all
     end
