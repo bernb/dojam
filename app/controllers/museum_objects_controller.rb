@@ -10,6 +10,7 @@ class MuseumObjectsController < ApplicationController
   end
 
   def show
+    @museum_object = MuseumObject.find params[:id]
   end
   
   def new
