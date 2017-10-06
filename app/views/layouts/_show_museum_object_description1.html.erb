@@ -6,19 +6,10 @@
       <dd><%= m.termlist_material&.name %> (<%= m.name %>)</dd>
     <% end %>
     
-    <dt>inv. number (JAM)</dt>  
-    <dd><%= @museum_object&.inv_number %></dd>
+    <dt>colors</dt>  
+    <% @museum_object&.termlist_colors.each do |m| %>
+      <dd><%= m&.name %></dd>
+    <% end %>
     
-    <dt>other inv. number</dt>
-    <dd><%= @museum_object&.inv_numberdoa %></dd>
-    
-    <dt>amount of objects</dt>
-    <dd><%= @museum_object&.amount %></dd>
-    
-    <dt>place of storage</dt>
-    <dd><%= @museum_object&.storage&.name %></dd>
-    
-    <dt>place of storage specified</dt>
-    <dd><%= @museum_object&.storage_location&.name %></dd>
   </dl>
 </div>
