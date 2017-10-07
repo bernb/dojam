@@ -1,9 +1,8 @@
-<%= render 'layouts/title', title_name: "Add new Object" %>
+<%= render 'layouts/title', title_name: "add new object" %>
 <%= render 'layouts/new_entry_progress_bar', state: @step %>
 <div class="row">
   <div class="col-md-2">
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-      <h3> Material Specified </h3>
       <% @materials.each do |m| %>
         <div class="col">
           <div id='<%= m.name %>' class='material_specific_select'>
@@ -22,7 +21,6 @@
     </div>
     
     <div class="col-md-2">
-      <h3> Colors </h3>
       <%= f.association :termlist_colors, label: "", as: :check_boxes %>
     </div>
 </div>

@@ -1,9 +1,8 @@
-<%= render 'layouts/title', title_name: "Add new Object" %>
+<%= render 'layouts/title', title_name: "add new object" %>
 <%= render 'layouts/new_entry_progress_bar', state: @step %>
 
 <div class="col-md-3">
 <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-  <h3>Excavation Sites</h3>
   <div id="excavation_sites">
     <%= f.association :excavation_site %>
     <% f.simple_fields_for :excavation_sites do |site| %>
