@@ -1,0 +1,2 @@
+class TermlistKindOfObject < ApplicationRecord
+end
