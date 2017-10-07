@@ -93,3 +93,11 @@ ExcavationSite.create name: "Tell es-Sa’idiyeh",
                       site_number_expedition: "",
                       coordinates_mega: "E 35.57650, N 32.26870",
                       termlist_excavation_site_kind: tomb
+                      
+
+metal_kind_of_objects = [ "applicator","arrowhead","ax","balance weight","bangle","bead","bell","bracelet","brazier (Kohlenbecken)", 
+                          "brooch", "buckle", "button", "candelabra", "cannon", "chain", "chain armor (Kettenhemd)", "coin", 
+                          "compasses (Zirkel)", "cosmetic containers", "cosmetic spatula", "cosmetic spoon", "cotter-pin (Splint)" ]
+metal_kind_of_objects.each do |kind|
+  TermlistKindOfObject.create name: kind
+end
