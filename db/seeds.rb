@@ -7,29 +7,22 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 museum = Museum.create name: "JAM", prefix: "J"
-storage1 = Storage.create name: "exhibition"
-storage2 = Storage.create name: "storage"
 
-storage_location1 = StorageLocation.create name: "Shelf 1" 
-storage_location2 = StorageLocation.create name: "Shelf 2"
-storage_location3 = StorageLocation.create name: "Shelf 3"
-storage_location4 = StorageLocation.create name: "Shelf 4"
-storage_location5 = StorageLocation.create name: "Shelf 5"
+storages = []
 
-storage_locationA = StorageLocation.create name: "Shelf A"
-storage_locationB = StorageLocation.create name: "Shelf B"
+('A'..'D').each do |n|
+  storage = Storage.create name: "Hall " + n.to_s
+  storages.push storage
+end
 
-storage1.storage_locations << storage_location1
-storage1.storage_locations << storage_location2
-storage1.storage_locations << storage_location3
-storage1.storage_locations << storage_location4
-storage1.storage_locations << storage_location5
+storages.each do |storage|
+  (1..30).each do |n|
+  location = StorageLocation.create name: "showcase " + n.to_s
+  storage.storage_locations << location
+  end
+end
 
-storage2.storage_locations << storage_locationA
-storage2.storage_locations << storage_locationB
-
-museum.storages << storage1
-museum.storages << storage2
+museum.storages << storages
 
 museum.save!
 
