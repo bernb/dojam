@@ -1,0 +1,36 @@
+<%= render 'layouts/title', title_name: "add new object" %>
+<%= render 'layouts/new_entry_progress_bar', state: @step %>
+<div class="row">
+  <div class="col-md-2">
+  <%= simple_form_for @museum_object, url: wizard_path do |f| %>
+      <% @materials.each do |m| %>
+        <div class="col">
+          <div id='<%= m.name %>' class='material_specific_select'>
+            <h4><%= m.name %> </h4>
+            <% m.termlist_material_specifieds.each do |s| %>
+              <span class="checkbox">
+                <label>
+                  <%= f.check_box :termlist_material_specified_ids, {multiple: true}, s.id, nil %>
+                  <%= s.name %>
+                </label>
+              </span>
+            <% end %>
+          </div>
+        </div>
+      <% end %> 
+    </div>
+    
+    <div class="col-md-2">
+      <%= f.association :termlist_colors, label: "", as: :check_boxes %>
+    </div>
+</div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="submit">
+            <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+
