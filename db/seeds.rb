@@ -17,7 +17,8 @@ end
 
 storages.each do |storage|
   (1..30).each do |n|
-  location = StorageLocation.create name: "showcase " + n.to_s
+  letter = storage.name[-1] # counts backwards the string thus gets the last char
+  location = StorageLocation.create name: "showcase " + letter + n.to_s
   storage.storage_locations << location
   end
 end
