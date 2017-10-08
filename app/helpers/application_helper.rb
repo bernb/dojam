@@ -3,17 +3,29 @@ module ApplicationHelper
 def calc_progress_percentage state
   case state
     when :step_museum
-      return 14
+      return 5
     when :step_acquisition
-      return 28
+      return 10
     when :step_provenance
-      return 42
+      return 15
     when :step_material
-      return 56
+      return 20
     when :step_inscription
-      return 70
+      return 25
     when :step_authenticity_and_priority
-      return 84
+      return 30
+    when :step_material
+      return 35
+    when :step_material_specified
+      return 40
+    when :step_kind_of_object
+      return 45
+    when :step_kind_of_object_specified
+      return 50
+    when :step_production
+      return  55
+    when :step_color
+      return 60
     when :step_confirm
       return 100
     else

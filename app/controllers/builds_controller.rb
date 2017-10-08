@@ -14,6 +14,9 @@ class BuildsController < ApplicationController
     
     if step == :step_material
       @materials = TermlistMaterial.all
+    end
+    
+    if step == :step_color
       @colors = TermlistColor.all
     end
     
