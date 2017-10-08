@@ -101,3 +101,22 @@ metal_kind_of_objects = [ "applicator","arrowhead","ax","balance weight","bangle
 metal_kind_of_objects.each do |kind|
   TermlistKindOfObject.create name: kind
 end
+
+# ToDo: Add real entries for specified kind of objects
+metal_kind_of_object_specifieds = [ "applicator","arrowhead","ax","balance weight","bangle","bead","bell","bracelet","brazier (Kohlenbecken)", 
+                          "brooch", "buckle", "button", "candelabra", "cannon", "chain", "chain armor (Kettenhemd)", "coin", 
+                          "compasses (Zirkel)", "cosmetic containers", "cosmetic spatula", "cosmetic spoon", "cotter-pin (Splint)" ]
+metal_kind_of_object_specifieds.each do |kind|
+  TermlistKindOfObjectSpecified.create name: kind
+end
+
+metal_productions = [ "annealing", "beating", "casting in a mould", "casting with lost wax technique", "cutting", "drawing", "forging", "hammering", "repousé", "riveting", "smelting", "soldering"]
+metal_productions.each do |production|
+  TermlistProduction.create name: production
+end
+
+metal_decorations = [ "chasing", "differential alloying", "engraving", "filigree", "gilding", "granulation", "inlay", "niello", "patination", "punching", "stamping", "plated"]
+
+metal_productions.each do |decoration|
+  TermlistDecoration.create name: decoration
+end

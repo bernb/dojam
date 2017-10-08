@@ -1,0 +1,2 @@
+class TermlistProduction < ApplicationRecord
+end

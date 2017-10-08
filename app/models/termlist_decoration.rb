@@ -1,0 +1,2 @@
+class TermlistDecoration < ApplicationRecord
+end
