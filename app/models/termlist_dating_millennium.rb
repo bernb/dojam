@@ -1,0 +1,2 @@
+class TermlistDatingMillennium < ApplicationRecord
+end
