@@ -30,6 +30,14 @@ def calc_progress_percentage state
       return 75
     when :step_authenticity
       return 80
+    when :step_preservation
+      return 85
+    when :step_dating
+      return 90
+    when :step_remarks
+      return 95
+    when :step_literature
+      return 95
     when :step_confirm
       return 100
     else

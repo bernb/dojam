@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171009075720) do
+ActiveRecord::Schema.define(version: 20171009081504) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 20171009075720) do
     t.float    "remaining_opening_dm"
     t.float    "remaining_bottom_dm"
     t.float    "remaining_weight_in_gram"
+    t.text     "remarks"
+    t.text     "literature"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id"
@@ -135,6 +137,18 @@ ActiveRecord::Schema.define(version: 20171009075720) do
   end
 
   create_table "termlist_colors", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "termlist_conservations", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "termlist_dating_periods", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
