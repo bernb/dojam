@@ -1,0 +1,17 @@
+<%= render 'layouts/title', title_name: "add new object" %>
+<%= render 'layouts/new_entry_progress_bar', state: @step %>
+
+<div class="col-md-3">
+  <h3> remaining measurements in cm</h3>
+  <%= simple_form_for @museum_object, url: wizard_path do |f| %>
+    <%= f.input :remaining_length, as: :string, label: "remaining length" %>
+    <%= f.input :remaining_width, as: :string, label: "remaining width" %>
+    <%= f.input :remaining_height, as: :string, label: "remaining height" %>
+    <%= f.input :remaining_opening_dm, as: :string, label: "remaining opening dm" %>
+    <%= f.input :remaining_bottom_dm, as: :string, label: "remaining bottom dm" %>
+    <%= f.input :remaining_weight_in_gram, as: :string, label: "remaining weight in gram" %>
+    <div class="submit">
+      <%= f.submit "next step", class: "btn btn-primary" %>
+  </div>
+  <% end %>
+</div>

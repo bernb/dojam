@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008205536) do
+ActiveRecord::Schema.define(version: 20171009073026) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -80,6 +80,12 @@ ActiveRecord::Schema.define(version: 20171008205536) do
     t.integer  "termlist_authenticity_id"
     t.integer  "priority"
     t.string   "priority_determined_by"
+    t.float    "remaining_length"
+    t.float    "remaining_width"
+    t.float    "remaining_height"
+    t.float    "remaining_opening_dm"
+    t.float    "remaining_bottom_dm"
+    t.float    "remaining_weight_in_gram"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id"
