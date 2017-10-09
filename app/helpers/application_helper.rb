@@ -32,6 +32,8 @@ def calc_progress_percentage state
       return 80
     when :step_preservation
       return 85
+    when :step_conservation
+      return 85
     when :step_dating
       return 90
     when :step_remarks

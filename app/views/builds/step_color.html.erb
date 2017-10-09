@@ -2,6 +2,7 @@
 <%= render 'layouts/new_entry_progress_bar', state: @step %>
 <div class="row">
   <div class="col-md-2">
+    <h3>color</h3>
     <%= simple_form_for @museum_object, url: wizard_path do |f| %>
         <%= f.association :termlist_colors, label: "", as: :check_boxes %>
         <div class="submit">
