@@ -1,0 +1,11 @@
+<%= render 'layouts/title', title_name: "add new object" %>
+<%= render 'layouts/new_entry_progress_bar', state: @step %>
+<div class="row">
+  <div class="col-md-2">
+    <%= simple_form_for @museum_object, url: wizard_path do |f| %>
+      <%= select_tag "production", options_from_collection_for_select(TermlistConservation.all, "id", "name"), include_blank: false, class: "form-control" %>
+      <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
