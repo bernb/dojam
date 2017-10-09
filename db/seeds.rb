@@ -146,20 +146,63 @@ ExcavationSite.create name: "Tell es-Sa’idiyeh",
                       coordinates_mega: "E 35.57650, N 32.26870",
                       termlist_excavation_site_kind: tomb
                       
+stone_kind_of_objects = 
+              ["architectural element","balance weight", "bead",
+               "cylinder seal", "cosmetic palette", "finger ring", "gravestone",
+               "hammer stone", "lamp", "lid", "loom weight", "lower grinding stone",
+               "mace head", "mill", "pendant", "quern", "ring", "rubbing stone",
+               "scarab", "scraper", "sculpture", "spindle whorl", "stamp seal",
+               "stelae", "tile", "tool", "unworked stone", "upper grinding stone",
+               "vessel", "whetstone", "undetermined" ]
 
+
+# Contains WRONG ENTRIES!
 metal_kind_of_objects = [ "architectural element","arrowhead","ax","balance weight","bangle","bead","bell","bracelet","brazier", 
                           "brooch", "buckle", "button", "candelabra", "cannon", "chain", "chain armor", "coin", 
                           "compasses", "cosmetic containers", "cosmetic spatula", "cosmetic spoon", "cotter-pin (Splint)" ]
-metal_kind_of_objects.each do |kind|
+
+glass_kind_of_objects = ["bangle", "bead", "figurine", "inlay", "vessel", "tesserae", "window pane"]
+                          
+frit_kind_of_objects = ["cylinder seal"]
+
+                          
+#metal_kind_of_objects.each do |kind|
+#  TermlistKindOfObject.create name: kind
+#end
+               
+stone_kind_of_objects.each do |kind|
   TermlistKindOfObject.create name: kind
 end
 
-# ToDo: Add real entries for specified kind of objects
-metal_kind_of_object_specifieds = [ "base","capital","column","manually operated mill","olynthus mill","bust","head","relief","statue", 
-                          "basin", "bowl", "censer", "mortar", "mortar bowl", "tripod bowl" ]
-metal_kind_of_object_specifieds.each do |kind|
-  TermlistKindOfObjectSpecified.create name: kind
+glass_kind_of_objects.each do |kind|
+  TermlistKindOfObject.create name: kind
 end
+
+frit_kind_of_objects.each do |kind|
+  TermlistKindOfObject.create name: kind
+end
+
+
+architectural_element_kind_specifieds = ["base", "capital", "column"]                                                
+mill_kind_specifieds = ["manually operated mill", "Olynthus mill"]
+sculpture_kind_specifieds = ["bust", "head", "relief", "statue"]
+vessel_kind_specifieds = ["basin", "bowl", "censer", "mortar", "mortar bowl", "tripod bowl"]
+bead_kind_specifieds = ["eye bead"]
+vessel_kind_specifieds = ["alabastron", "amphoriskos", "balsamarium", "bowl"," dish",
+"dropping vessel", "double balsamarium", "flask", "goblet", "jar", "jug", "lamp",
+"omphalos bowl", "plate"]
+
+specifieds = architectural_element_kind_specifieds + mill_kind_specifieds +
+             sculpture_kind_specifieds + vessel_kind_specifieds + bead_kind_specifieds +
+             vessel_kind_specifieds
+
+specifieds.each do |specified|
+TermlistKindOfObjectSpecified.create name: specified
+end
+                          
+#metal_kind_of_object_specifieds.each do |kind|
+#  TermlistKindOfObjectSpecified.create name: kind
+#end
 
 metal_productions = [ "annealing", "beating", "casting in a mould", "casting with lost wax technique", "cutting", "drawing", "forging", "hammering", "repousé", "riveting", "smelting", "soldering"]
 metal_productions.each do |production|
@@ -182,7 +225,12 @@ termlist_conservations.each do |conservation|
   TermlistConservation.create name: conservation
 end
 
-termlist_dating_period = ["Iron Age I B", "Iron Age I C", "Iron Age II C"]
+termlist_dating_period = ["Palaeolithic", "Mesolithic", "Neolithic", "Chalcolithic",
+                          "Bronze Age", "Early Bronze Age", "Middle Bronze Age",
+                          "Late Bronze Age", "Iron Age", "Early Iron Age",
+                          "Late Iron Age", "Hellenistic", "Nabataean", "Roman",
+                          "Byzantine", "Umayyad", "Abbasid", "Ayyubid", "Mamluk",
+                          "Ottoman", "Modern"]
 
 termlist_dating_period.each do |period|
   TermlistDatingPeriod.create name: period
