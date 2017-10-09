@@ -236,3 +236,12 @@ termlist_dating_period.each do |period|
   TermlistDatingPeriod.create name: period
 end
 
+
+termlist_dating_millennium = [ "10th mill. BC", "9th mill. BC", "8th mill. BC", 
+                               "7th mill. BC", "6th mill. BC", "5th mill. BC",
+                               "4th mill. BC", "3rd mill. BC", "2nd mill. BC",
+                               "1st mill. BC", "1st mill. AD", "2nd mill. AD"]
+
+termlist_dating_millennium.each do |millennium|
+  TermlistDatingMillennium.create name: millennium
+end
