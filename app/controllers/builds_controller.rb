@@ -6,7 +6,7 @@ class BuildsController < ApplicationController
         :step_color, :step_decoration, :step_inscription, 
         :step_measurements, :step_authenticity, :step_preservation, 
         :step_conservation, :step_dating, :step_remarks, 
-        :step_literatur, :step_confirm
+        :step_literature, :step_confirm
   
   def show
     @step = step
