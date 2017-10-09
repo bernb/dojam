@@ -81,7 +81,7 @@ mabre   =  TermlistMaterialSpecified.create name: "mabre"
 # vitreous
 glass   =  TermlistMaterialSpecified.create name: "glass"
 frit   =  TermlistMaterialSpecified.create name: "frit"
-egyption_blue   =  TermlistMaterialSpecified.create name: "egyption blue"
+egyptian_blue   =  TermlistMaterialSpecified.create name: "egyptian blue"
 
 ceramic.termlist_material_specifieds << khirbet_kerak_ware
 ceramic.termlist_material_specifieds << metal_ware
@@ -112,7 +112,7 @@ stone.termlist_material_specifieds << mabre
 
 vitreous.termlist_material_specifieds << glass
 vitreous.termlist_material_specifieds << frit
-vitreous.termlist_material_specifieds << egyption_blue
+vitreous.termlist_material_specifieds << egyptian_blue
 
 
 TermlistColor.create name: "grey"
