@@ -43,29 +43,77 @@ TermlistAcquisitionDeliveredBy.create name: "unknown"
 
 ceramic = TermlistMaterial.create name: "ceramic"
 metal = TermlistMaterial.create name: "metal"
-metal = TermlistMaterial.create name: "organic material"
+organic = TermlistMaterial.create name: "organic material"
 stone = TermlistMaterial.create name: "stone"
-metal = TermlistMaterial.create name: "vitreous material"
+vitreous = TermlistMaterial.create name: "vitreous material"
 
+# ceramics
+khirbet_kerak_ware   =  TermlistMaterialSpecified.create name: "khirbet kerak ware"
+metal_ware   =  TermlistMaterialSpecified.create name: "metal ware"
+porcelain   =  TermlistMaterialSpecified.create name: "porcelain"
+white_slip_ware   =  TermlistMaterialSpecified.create name: "white_slip_ware"
+terra_sigillata   =  TermlistMaterialSpecified.create name: "terra sigillata"
 
+# metal
 silver =  TermlistMaterialSpecified.create name: "silver"
 gold   =  TermlistMaterialSpecified.create name: "gold"
 iron   =  TermlistMaterialSpecified.create name: "iron"
 copper   =  TermlistMaterialSpecified.create name: "copper"
 lead   =  TermlistMaterialSpecified.create name: "lead"
 
+# organic
+amber   =  TermlistMaterialSpecified.create name: "amber"
+antler   =  TermlistMaterialSpecified.create name: "antler"
+bone_animal   =  TermlistMaterialSpecified.create name: "bone animal"
+bone_human   =  TermlistMaterialSpecified.create name: "bone human"
+charcoal   =  TermlistMaterialSpecified.create name: "charcoal"
+coral   =  TermlistMaterialSpecified.create name: "coral"
+hair   =  TermlistMaterialSpecified.create name: "hair"
+horn   =  TermlistMaterialSpecified.create name: "horn"
+
+#stone
 flint   =  TermlistMaterialSpecified.create name: "flint"
 carnelian   =  TermlistMaterialSpecified.create name: "carnelian"
 limestone   =  TermlistMaterialSpecified.create name: "limestone"
+basalt   =  TermlistMaterialSpecified.create name: "basalt"
+mabre   =  TermlistMaterialSpecified.create name: "mabre"
 
-stone.termlist_material_specifieds << flint
-stone.termlist_material_specifieds << carnelian
-stone.termlist_material_specifieds << limestone
+# vitreous
+glass   =  TermlistMaterialSpecified.create name: "glass"
+frit   =  TermlistMaterialSpecified.create name: "frit"
+egyption_blue   =  TermlistMaterialSpecified.create name: "egyption blue"
+
+ceramic.termlist_material_specifieds << khirbet_kerak_ware
+ceramic.termlist_material_specifieds << metal_ware
+ceramic.termlist_material_specifieds << porcelain
+ceramic.termlist_material_specifieds << white_slip_ware
+ceramic.termlist_material_specifieds << terra_sigillata
+
 metal.termlist_material_specifieds << gold
 metal.termlist_material_specifieds << silver
 metal.termlist_material_specifieds << iron
 metal.termlist_material_specifieds << copper
 metal.termlist_material_specifieds << lead
+
+organic.termlist_material_specifieds << amber
+organic.termlist_material_specifieds << antler
+organic.termlist_material_specifieds << bone_animal
+organic.termlist_material_specifieds << bone_human
+organic.termlist_material_specifieds << charcoal
+organic.termlist_material_specifieds << coral
+organic.termlist_material_specifieds << hair
+organic.termlist_material_specifieds << horn
+
+stone.termlist_material_specifieds << flint
+stone.termlist_material_specifieds << carnelian
+stone.termlist_material_specifieds << limestone
+stone.termlist_material_specifieds << basalt
+stone.termlist_material_specifieds << mabre
+
+vitreous.termlist_material_specifieds << glass
+vitreous.termlist_material_specifieds << frit
+vitreous.termlist_material_specifieds << egyption_blue
+
 
 TermlistColor.create name: "grey"
 TermlistColor.create name: "black"
@@ -99,17 +147,16 @@ ExcavationSite.create name: "Tell es-Sa’idiyeh",
                       termlist_excavation_site_kind: tomb
                       
 
-metal_kind_of_objects = [ "applicator","arrowhead","ax","balance weight","bangle","bead","bell","bracelet","brazier (Kohlenbecken)", 
-                          "brooch", "buckle", "button", "candelabra", "cannon", "chain", "chain armor (Kettenhemd)", "coin", 
-                          "compasses (Zirkel)", "cosmetic containers", "cosmetic spatula", "cosmetic spoon", "cotter-pin (Splint)" ]
+metal_kind_of_objects = [ "architectural element","arrowhead","ax","balance weight","bangle","bead","bell","bracelet","brazier", 
+                          "brooch", "buckle", "button", "candelabra", "cannon", "chain", "chain armor", "coin", 
+                          "compasses", "cosmetic containers", "cosmetic spatula", "cosmetic spoon", "cotter-pin (Splint)" ]
 metal_kind_of_objects.each do |kind|
   TermlistKindOfObject.create name: kind
 end
 
 # ToDo: Add real entries for specified kind of objects
-metal_kind_of_object_specifieds = [ "applicator","arrowhead","ax","balance weight","bangle","bead","bell","bracelet","brazier (Kohlenbecken)", 
-                          "brooch", "buckle", "button", "candelabra", "cannon", "chain", "chain armor (Kettenhemd)", "coin", 
-                          "compasses (Zirkel)", "cosmetic containers", "cosmetic spatula", "cosmetic spoon", "cotter-pin (Splint)" ]
+metal_kind_of_object_specifieds = [ "base","capital","column","manually operated mill","olynthus mill","bust","head","relief","statue", 
+                          "basin", "bowl", "censer", "mortar", "mortar bowl", "tripod bowl" ]
 metal_kind_of_object_specifieds.each do |kind|
   TermlistKindOfObjectSpecified.create name: kind
 end
