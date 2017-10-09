@@ -4,7 +4,7 @@
 <div class="col-md-3">
 <%= simple_form_for @museum_object, url: wizard_path do |f| %>
   <div id="excavation_sites">
-    <%= f.association :excavation_site %>
+    <%= f.association :excavation_site, label: 'site name' %>
     <% f.simple_fields_for :excavation_sites do |site| %>
       <%= render 'excavation_site_fields', f: site %>
     <% end %>
