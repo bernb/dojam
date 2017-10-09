@@ -2,7 +2,6 @@
 <%= render 'layouts/new_entry_progress_bar', state: @step %>
 <div class="row">
   <div class="col-md-2">
-    <h3>material</h3>
     <%= simple_form_for @museum_object, url: wizard_path do |f| %>
       <% @materials.each do |material| %>
         <label class="checkbox">
