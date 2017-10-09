@@ -120,3 +120,20 @@ metal_decorations = [ "chasing", "differential alloying", "engraving", "filigree
 metal_productions.each do |decoration|
   TermlistDecoration.create name: decoration
 end
+
+termlist_preservations = ["complete", "fragmentary"]
+termlist_preservations.each do |preservation|
+  TermlistPreservation.create name: preservation
+end
+
+termlist_conservations = ["no", "yes", "partially", "cleaned", "consolidated", "needed", "unknown"]
+termlist_conservations.each do |conservation|
+  TermlistConservation.create name: conservation
+end
+
+termlist_dating_period = ["Iron Age I B", "Iron Age I C", "Iron Age II C"]
+
+termlist_dating_period.each do |period|
+  TermlistDatingPeriod.create name: period
+end
+

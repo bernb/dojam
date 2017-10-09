@@ -10,8 +10,6 @@ def calc_progress_percentage state
       return 15
     when :step_material
       return 20
-    when :step_authenticity_and_priority
-      return 30
     when :step_material
       return 35
     when :step_material_specified
@@ -30,6 +28,8 @@ def calc_progress_percentage state
       return 70
     when :step_measurements
       return 75
+    when :step_authenticity
+      return 80
     when :step_confirm
       return 100
     else

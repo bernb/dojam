@@ -1,0 +1,2 @@
+class TermlistDatingPeriod < ApplicationRecord
+end

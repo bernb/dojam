@@ -1,0 +1,2 @@
+class TermlistPreservation < ApplicationRecord
+end
