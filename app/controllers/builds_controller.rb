@@ -37,6 +37,11 @@ class BuildsController < ApplicationController
       @kind_of_objects = TermlistKindOfObject.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
     end
     
+    if step == :step_kind_of_object_specified
+      kind = @museum_object.termlist_kind_of_object
+      @kind_of_object_specifieds = kind.termlist_kind_of_object_specifieds
+    end
+    
     render_wizard
   end
 
