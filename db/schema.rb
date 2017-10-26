@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026125708) do
+ActiveRecord::Schema.define(version: 20171026133427) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -89,12 +89,14 @@ ActiveRecord::Schema.define(version: 20171026125708) do
     t.text     "remarks"
     t.text     "literature"
     t.integer  "termlist_dating_millennium_id"
+    t.integer  "termlist_kind_of_object_id"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id"
     t.index ["termlist_acquisition_kind_id"], name: "index_museum_objects_on_termlist_acquisition_kind_id"
     t.index ["termlist_authenticity_id"], name: "index_museum_objects_on_termlist_authenticity_id"
     t.index ["termlist_dating_millennium_id"], name: "index_museum_objects_on_termlist_dating_millennium_id"
+    t.index ["termlist_kind_of_object_id"], name: "index_museum_objects_on_termlist_kind_of_object_id"
   end
 
   create_table "museums", force: :cascade do |t|

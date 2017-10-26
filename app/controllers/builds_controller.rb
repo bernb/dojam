@@ -33,7 +33,7 @@ class BuildsController < ApplicationController
     
     if step == :step_kind_of_object
       material_specifieds_ids = @museum_object.termlist_material_specifieds.ids
-      @kind_of_objects = TermlistKindOfObject.find_all_by_id material_specifieds_ids
+      @kind_of_objects = TermlistKindOfObject.where id: material_specifieds_ids
     end
     
     render_wizard
