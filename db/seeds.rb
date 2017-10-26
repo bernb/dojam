@@ -161,7 +161,7 @@ metal_kind_of_objects = [ "architectural element","arrowhead","ax","balance weig
                           "brooch", "buckle", "button", "candelabra", "cannon", "chain", "chain armor", "coin", 
                           "compasses", "cosmetic containers", "cosmetic spatula", "cosmetic spoon", "cotter-pin (Splint)" ]
 
-glass_kind_of_objects = ["bangle", "bead", "figurine", "inlay", "vessel", "tesserae", "window pane"]
+glass_kind_of_objects = ["architectural element", "jewelry", "vessel", "undetermined"]
                           
 frit_kind_of_objects = ["cylinder seal"]
 
@@ -175,7 +175,8 @@ stone_kind_of_objects.each do |kind|
 end
 
 glass_kind_of_objects.each do |kind|
-  TermlistKindOfObject.create name: kind
+  kind = TermlistKindOfObject.create name: kind
+  glass.termlist_kind_of_objects << kind
 end
 
 frit_kind_of_objects.each do |kind|
