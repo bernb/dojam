@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026133427) do
+ActiveRecord::Schema.define(version: 20171026150328) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -42,15 +42,6 @@ ActiveRecord::Schema.define(version: 20171026133427) do
     t.datetime "updated_at",                     null: false
     t.index ["museum_object_id"], name: "index_join_museum_object"
     t.index ["termlist_material_specified_id"], name: "index_join_material_specified"
-  end
-
-  create_table "join_table_museum_object_termlist_materials", force: :cascade do |t|
-    t.integer  "museum_object_id"
-    t.integer  "termlist_material_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.index ["museum_object_id"], name: "join_table_museum_object_id"
-    t.index ["termlist_material_id"], name: "join_table_termlist_material_id"
   end
 
   create_table "museum_objects", force: :cascade do |t|
@@ -90,6 +81,7 @@ ActiveRecord::Schema.define(version: 20171026133427) do
     t.text     "literature"
     t.integer  "termlist_dating_millennium_id"
     t.integer  "termlist_kind_of_object_id"
+    t.integer  "termlist_kind_of_object_specified_id"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id"
@@ -97,6 +89,7 @@ ActiveRecord::Schema.define(version: 20171026133427) do
     t.index ["termlist_authenticity_id"], name: "index_museum_objects_on_termlist_authenticity_id"
     t.index ["termlist_dating_millennium_id"], name: "index_museum_objects_on_termlist_dating_millennium_id"
     t.index ["termlist_kind_of_object_id"], name: "index_museum_objects_on_termlist_kind_of_object_id"
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_museum_objects_on_termlist_kind_of_object_specified_id"
   end
 
   create_table "museums", force: :cascade do |t|
@@ -178,8 +171,10 @@ ActiveRecord::Schema.define(version: 20171026133427) do
 
   create_table "termlist_kind_of_object_specifieds", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "termlist_kind_of_object_id"
+    t.index ["termlist_kind_of_object_id"], name: "index_kind_of_object_specifieds_on_kind_of_object_id"
   end
 
   create_table "termlist_kind_of_objects", force: :cascade do |t|

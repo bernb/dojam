@@ -80,8 +80,9 @@ mabre   =  TermlistMaterialSpecified.create name: "mabre"
 
 # vitreous
 glass   =  TermlistMaterialSpecified.create name: "glass"
-frit   =  TermlistMaterialSpecified.create name: "frit"
+frit   =  TermlistMaterialSpecified.create name: "quartz frit"
 egyptian_blue   =  TermlistMaterialSpecified.create name: "Egyptian blue"
+undetermined   =  TermlistMaterialSpecified.create name: "undetermined"
 
 ceramic.termlist_material_specifieds << khirbet_kerak_ware
 ceramic.termlist_material_specifieds << metal_ware
@@ -113,6 +114,7 @@ stone.termlist_material_specifieds << mabre
 vitreous.termlist_material_specifieds << glass
 vitreous.termlist_material_specifieds << frit
 vitreous.termlist_material_specifieds << egyptian_blue
+vitreous.termlist_material_specifieds << undetermined
 
 
 TermlistColor.create name: "grey"
@@ -184,7 +186,7 @@ frit_kind_of_objects.each do |kind|
 end
 
 
-architectural_element_kind_specifieds = ["base", "capital", "column"]                                                
+architectural_element_kind_specifieds = ["tesserae", "window pane", "undetermined"]                                                
 mill_kind_specifieds = ["manually operated mill", "Olynthus mill"]
 sculpture_kind_specifieds = ["bust", "head", "relief", "statue"]
 vessel_kind_specifieds = ["basin", "bowl", "censer", "mortar", "mortar bowl", "tripod bowl"]
@@ -192,14 +194,27 @@ bead_kind_specifieds = ["eye bead"]
 vessel_kind_specifieds = ["alabastron", "amphoriskos", "balsamarium", "bowl"," dish",
 "dropping vessel", "double balsamarium", "flask", "goblet", "jar", "jug", "lamp",
 "omphalos bowl", "plate"]
+jewelry_kind_specifieds = ["bangle", "bead", "pendant", "undetermined"]
 
 specifieds = architectural_element_kind_specifieds + mill_kind_specifieds +
              sculpture_kind_specifieds + vessel_kind_specifieds + bead_kind_specifieds +
              vessel_kind_specifieds
-
-specifieds.each do |specified|
-TermlistKindOfObjectSpecified.create name: specified
+             
+jewelry = TermlistKindOfObject.where(name: "jewelry").first
+jewelry_kind_specifieds.each do |kind|
+  kind_of_object = TermlistKindOfObjectSpecified.create name: kind
+  jewelry.termlist_kind_of_object_specifieds << kind_of_object
 end
+            
+architectural_element = TermlistKindOfObject.where(name: "architectural element").first
+architectural_element_kind_specifieds.each do |kind|
+  kind_spec = TermlistKindOfObjectSpecified.create name: kind
+  architectural_element.termlist_kind_of_object << kind_spec
+end
+
+#specifieds.each do |specified|
+#  TermlistKindOfObjectSpecified.create name: specified
+#end
                           
 #metal_kind_of_object_specifieds.each do |kind|
 #  TermlistKindOfObjectSpecified.create name: kind
