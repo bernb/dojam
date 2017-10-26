@@ -31,6 +31,11 @@ class BuildsController < ApplicationController
       @materials = TermlistMaterial.where id: session[:material_ids]
     end
     
+    if step == :step_kind_of_object
+      material_specifieds_ids = @museum_object.termlist_material_specifieds.ids
+      @kind_of_objects = TermlistKindOfObject.find_all_by_id material_specifieds_ids
+    end
+    
     render_wizard
   end
 
