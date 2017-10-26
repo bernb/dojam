@@ -32,8 +32,9 @@ class BuildsController < ApplicationController
     end
     
     if step == :step_kind_of_object
-      material_specifieds_ids = @museum_object.termlist_material_specifieds.ids
-      @kind_of_objects = TermlistKindOfObject.where id: material_specifieds_ids
+      material_specifieds_ids = @museum_object.termlist_material_specifieds.ids # get ids for choosen spec. materials
+      # after that get kind of objects that belongs to the choosen spec. materials
+      @kind_of_objects = TermlistKindOfObject.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
     end
     
     render_wizard
@@ -104,7 +105,7 @@ class BuildsController < ApplicationController
                                           :termlist_acquisition_kind_id, :termlist_acquisition_delivered_by_id, :acquisition_deliverer_name, :acquisition_date,
                                           :finding_context, :finding_remarks, :termlist_authenticity_id, :priority, :priority_determined_by,
                                           :inscription_decoration, :inscription_letters, :inscription_text, :inscription_translation, 
-                                          :excavation_site_id, 
+                                          :excavation_site_id, :termlist_material_specified_ids, :termlist_kind_of_object_id,
                                           termlist_material_specified_ids: [], 
                                           termlist_color_ids: [],                                   
                                           excavation_site_attributes: [:id, :_destroy] 
