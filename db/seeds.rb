@@ -172,9 +172,9 @@ frit_kind_of_objects = ["cylinder seal"]
 #  TermlistKindOfObject.create name: kind
 #end
                
-stone_kind_of_objects.each do |kind|
-  TermlistKindOfObject.create name: kind
-end
+#stone_kind_of_objects.each do |kind|
+#  TermlistKindOfObject.create name: kind
+#end
 
 glass_kind_of_objects.each do |kind|
   kind = TermlistKindOfObject.create name: kind
@@ -209,7 +209,7 @@ end
 architectural_element = TermlistKindOfObject.where(name: "architectural element").first
 architectural_element_kind_specifieds.each do |kind|
   kind_spec = TermlistKindOfObjectSpecified.create name: kind
-  architectural_element.termlist_kind_of_object << kind_spec
+  architectural_element.termlist_kind_of_object_specifieds << kind_spec
 end
 
 #specifieds.each do |specified|
