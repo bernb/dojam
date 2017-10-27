@@ -4,7 +4,6 @@
   <div class="col-md-2">
     <%= simple_form_for @museum_object, url: wizard_path do |f| %>
       <%= f.association :termlist_kind_of_object, collection: @kind_of_objects, label: "", as: :collection_select, include_blank: false  %>
-      <% select_tag "kind_of_object", options_from_collection_for_select(TermlistKindOfObject.all, "id", "name"), include_blank: false, class: "form-control" %>
       <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
     <% end %>
   </div>
