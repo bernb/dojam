@@ -58,6 +58,7 @@ class BuildsController < ApplicationController
       material_specifieds_ids = @museum_object.termlist_material_specifieds.ids # get ids for choosen spec. materials
       # after that get productions that belongs to the choosen spec. materials
       @decorations = TermlistDecoration.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
+      @decoration_colors = TermlistDecorationColor.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
     end
     
     render_wizard
