@@ -117,9 +117,6 @@ vitreous.termlist_material_specifieds << egyptian_blue
 vitreous.termlist_material_specifieds << undetermined
 
 
-TermlistColor.create name: "grey"
-TermlistColor.create name: "black"
-TermlistColor.create name: "dark red"
 
 TermlistAuthenticity.create name: "archaeological object"
 TermlistAuthenticity.create name: "copy"
@@ -240,6 +237,13 @@ glass_productions = ["free-blown", "casting", "core-formed", "mold-blown", "mosa
 glass_productions.each do |production|
   p = TermlistProduction.create name: production
   glass.termlist_productions << p
+end
+
+glass_colors = ["colorless", "light yellow", "dark yellow", "light blue", "dark blue", "light turquoise", "dark turquoise", "red", "blue-green", "green-blue", "light green", "dark green", "violet", "light brown", "dark brown"]
+
+glass_colors.each do |color|
+  c = TermlistColor.create name: color
+  glass.termlist_colors << c
 end
 
 
