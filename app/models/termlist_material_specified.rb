@@ -5,4 +5,5 @@ class TermlistMaterialSpecified < ApplicationRecord
   has_many :termlist_kind_of_objects
   has_many :termlist_productions
   has_many :termlist_colors
+  has_many :termlist_decorations
 end

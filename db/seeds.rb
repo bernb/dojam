@@ -246,6 +246,14 @@ glass_colors.each do |color|
   glass.termlist_colors << c
 end
 
+glass_decorations = ["applying", "pinching", "pressing", "pulling", "painting", "applying", 
+                     "rolling-in", "cutting", "undetermined"]
+                     
+glass_decorations.each do |decoration|
+  d = TermlistDecoration.create name: decoration
+  glass.termlist_decorations << d
+end                   
+
 
 
 termlist_preservations = ["complete", "fragmentary"]

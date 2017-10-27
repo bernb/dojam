@@ -10,6 +10,7 @@ class MuseumObject < ApplicationRecord
   belongs_to :termlist_kind_of_object, required: false
   belongs_to :termlist_kind_of_object_specified, required: false
   belongs_to :termlist_production, required: false
+  belongs_to :termlist_decoration, required: false
   has_many :join_museum_object_material_specifieds
   has_many :termlist_material_specifieds, through: :join_museum_object_material_specifieds
   has_many :join_museum_object_colors
