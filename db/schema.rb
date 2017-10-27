@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027093812) do
+ActiveRecord::Schema.define(version: 20171027095418) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -83,12 +83,14 @@ ActiveRecord::Schema.define(version: 20171027093812) do
     t.integer  "termlist_kind_of_object_id"
     t.integer  "termlist_kind_of_object_specified_id"
     t.integer  "termlist_production_id"
+    t.integer  "termlist_decoration_id"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id"
     t.index ["termlist_acquisition_kind_id"], name: "index_museum_objects_on_termlist_acquisition_kind_id"
     t.index ["termlist_authenticity_id"], name: "index_museum_objects_on_termlist_authenticity_id"
     t.index ["termlist_dating_millennium_id"], name: "index_museum_objects_on_termlist_dating_millennium_id"
+    t.index ["termlist_decoration_id"], name: "index_museum_objects_on_termlist_decoration_id"
     t.index ["termlist_kind_of_object_id"], name: "index_museum_objects_on_termlist_kind_of_object_id"
     t.index ["termlist_kind_of_object_specified_id"], name: "index_museum_objects_on_termlist_kind_of_object_specified_id"
     t.index ["termlist_production_id"], name: "index_museum_objects_on_termlist_production_id"
@@ -163,8 +165,10 @@ ActiveRecord::Schema.define(version: 20171027093812) do
 
   create_table "termlist_decorations", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "termlist_material_specified_id"
+    t.index ["termlist_material_specified_id"], name: "index_termlist_decorations_on_termlist_material_specified_id"
   end
 
   create_table "termlist_excavation_site_kinds", force: :cascade do |t|
