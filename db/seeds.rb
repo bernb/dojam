@@ -189,16 +189,21 @@ end
 architectural_element_kind_specifieds = ["tesserae", "window pane", "undetermined"]                                                
 mill_kind_specifieds = ["manually operated mill", "Olynthus mill"]
 sculpture_kind_specifieds = ["bust", "head", "relief", "statue"]
-vessel_kind_specifieds = ["basin", "bowl", "censer", "mortar", "mortar bowl", "tripod bowl"]
 bead_kind_specifieds = ["eye bead"]
-vessel_kind_specifieds = ["alabastron", "amphoriskos", "balsamarium", "bowl"," dish",
-"dropping vessel", "double balsamarium", "flask", "goblet", "jar", "jug", "lamp",
-"omphalos bowl", "plate"]
+vessel_kind_specifieds = ["labastron", "balsamarium", "bowl", "dish", "double balsamarium",
+                          "flask", "goblet","jar", "jug", "lamp", "plate", "undetermined"]
 jewelry_kind_specifieds = ["bangle", "bead", "pendant", "undetermined"]
 
 specifieds = architectural_element_kind_specifieds + mill_kind_specifieds +
              sculpture_kind_specifieds + vessel_kind_specifieds + bead_kind_specifieds +
              vessel_kind_specifieds
+ 
+#ToDo: This is not the proper way to select the correct entry
+vessel = TermlistKindOfObject.where(name: "vessel").first
+vessel_kind_specifieds.each do |kind|
+  kind_of_object = TermlistKindOfObjectSpecified.create name: kind
+  vessel.termlist_kind_of_object_specifieds << kind_of_object
+end 
              
 jewelry = TermlistKindOfObject.where(name: "jewelry").first
 jewelry_kind_specifieds.each do |kind|
@@ -227,9 +232,17 @@ end
 
 metal_decorations = [ "chasing", "differential alloying", "engraving", "filigree", "gilding", "granulation", "inlay", "niello", "patination", "punching", "stamping", "plated"]
 
-metal_productions.each do |decoration|
-  TermlistDecoration.create name: decoration
+#metal_productions.each do |decoration|
+#  TermlistDecoration.create name: decoration
+#end
+
+glass_productions = ["free-blown", "casting", "core-formed", "mold-blown", "mosaicking", "undetermined"]
+glass_productions.each do |production|
+  p = TermlistProduction.create name: production
+  glass.termlist_productions << p
 end
+
+
 
 termlist_preservations = ["complete", "fragmentary"]
 termlist_preservations.each do |preservation|
