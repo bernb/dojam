@@ -61,6 +61,12 @@ class BuildsController < ApplicationController
       @decoration_colors = TermlistDecorationColor.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
     end
     
+    if step == :step_inscription
+      material_specifieds_ids = @museum_object.termlist_material_specifieds.ids # get ids for choosen spec. materials
+      # after that get productions that belongs to the choosen spec. materials
+      @inscription_letters = TermlistInscriptionLetter.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
+    end
+    
     render_wizard
   end
 

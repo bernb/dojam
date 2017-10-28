@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027102248) do
+ActiveRecord::Schema.define(version: 20171028080756) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 20171027102248) do
     t.date     "acquisition_date"
     t.boolean  "is_finished",                          default: false
     t.string   "inscription_decoration"
-    t.string   "inscription_letters"
     t.string   "inscription_language"
     t.string   "inscription_text"
     t.string   "inscription_translation"
@@ -85,6 +84,7 @@ ActiveRecord::Schema.define(version: 20171027102248) do
     t.integer  "termlist_production_id"
     t.integer  "termlist_decoration_id"
     t.integer  "termlist_decoration_color_id"
+    t.integer  "termlist_inscription_letter_id"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20171027102248) do
     t.index ["termlist_dating_millennium_id"], name: "index_museum_objects_on_termlist_dating_millennium_id"
     t.index ["termlist_decoration_color_id"], name: "index_museum_objects_on_termlist_decoration_color_id"
     t.index ["termlist_decoration_id"], name: "index_museum_objects_on_termlist_decoration_id"
+    t.index ["termlist_inscription_letter_id"], name: "index_museum_objects_on_termlist_inscription_letter_id"
     t.index ["termlist_kind_of_object_id"], name: "index_museum_objects_on_termlist_kind_of_object_id"
     t.index ["termlist_kind_of_object_specified_id"], name: "index_museum_objects_on_termlist_kind_of_object_specified_id"
     t.index ["termlist_production_id"], name: "index_museum_objects_on_termlist_production_id"
@@ -185,6 +186,14 @@ ActiveRecord::Schema.define(version: 20171027102248) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "termlist_inscription_letters", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "termlist_material_specified_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["termlist_material_specified_id"], name: "index_inscription_letters_on_material_specified_id"
   end
 
   create_table "termlist_kind_of_object_specifieds", force: :cascade do |t|
