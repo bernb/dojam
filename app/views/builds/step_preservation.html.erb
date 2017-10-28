@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-2">
     <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-      <%= select_tag "production", options_from_collection_for_select(TermlistPreservation.all, "id", "name"), include_blank: false, class: "form-control" %>
+      <%= f.association :termlist_preservation_state, collection: @termlist_preservation_state, label: false, as: :collection_select, include_blank: false  %>
       <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
     <% end %>
   </div>

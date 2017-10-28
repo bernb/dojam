@@ -145,6 +145,18 @@ ExcavationSite.create name: "Tell es-Sa’idiyeh",
                       coordinates_mega: "E 35.57650, N 32.26870",
                       termlist_excavation_site_kind: tomb
                       
+                      
+vitreous_material_preservation_states = ["corroded", "iridescent", "bottom", "complete", "complete profile", 
+                                         "foot", "fragmentary", "handle", "handle-to-wall", "rim", "rim-to-wall", "stem", "wall-to-bottom"]
+                                         
+vitreous_material_preservation_states.each do |state|
+  s = TermlistPreservationState.create name: state
+  vitreous.termlist_preservation_states << s
+end                                         
+                      
+                      
+                      
+                      
 stone_kind_of_objects = 
               ["architectural element","balance weight", "bead",
                "cylinder seal", "cosmetic palette", "finger ring", "gravestone",
