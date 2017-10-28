@@ -270,6 +270,13 @@ glass_inscription_letters.each do |letters|
   glass.termlist_inscription_letters << l
 end
 
+glass_inscription_languages = ["Arabic", "undetermined"]
+
+glass_inscription_languages.each do |lang|
+  l = TermlistInscriptionLanguage.create name: lang
+  glass.termlist_inscription_languages << l
+end
+
 
 termlist_preservations = ["complete", "fragmentary"]
 termlist_preservations.each do |preservation|
