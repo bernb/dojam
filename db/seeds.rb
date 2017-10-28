@@ -263,6 +263,13 @@ glass_decoration_color.each do |dec_color|
   glass.termlist_decoration_colors << d
 end
 
+glass_inscription_letters = ["Arabic", "Kufic", "undetermined"]
+
+glass_inscription_letters.each do |letters|
+  l = TermlistInscriptionLetter.create name: letters
+  glass.termlist_inscription_letters << l
+end
+
 
 termlist_preservations = ["complete", "fragmentary"]
 termlist_preservations.each do |preservation|
