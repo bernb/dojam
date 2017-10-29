@@ -70,17 +70,9 @@ class BuildsController < ApplicationController
     
     if step == :step_preservation
       material_specifieds_ids = @museum_object.termlist_material_specifieds.ids
-      material_specifieds = @museum_object.termlist_material_specifieds
-      material_ids = []
-      material_specifieds.each do |spec_material|
-        material_ids << spec_material.termlist_material.id
-      end
-      
-      
-      #materials = TermlistMaterial.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
-      
-      #materials_ids = materials.ids
-      #@termlist_preservation_state = TermlistPreservationState.joins(:termlist_material).where termlist_material: {id: material_ids}
+      materials = TermlistMaterial.joins(:termlist_material_specifieds).where termlist_material_specifieds: {id: material_specifieds_ids}
+      material_ids = materials.ids
+      @termlist_preservation_state = TermlistPreservationState.joins(:termlist_material).where termlist_materials: {id: material_ids}
     end
     
     render_wizard
