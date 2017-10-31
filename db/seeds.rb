@@ -55,12 +55,80 @@ white_slip_ware   =  TermlistMaterialSpecified.create name: "white_slip_ware"
 terra_sigillata   =  TermlistMaterialSpecified.create name: "terra sigillata"
 
 # metal
-silver =  TermlistMaterialSpecified.create name: "silver"
-gold   =  TermlistMaterialSpecified.create name: "gold"
-iron   =  TermlistMaterialSpecified.create name: "iron"
-copper   =  TermlistMaterialSpecified.create name: "copper"
-lead   =  TermlistMaterialSpecified.create name: "lead"
+#silver =  TermlistMaterialSpecified.create name: "silver"
+#gold   =  TermlistMaterialSpecified.create name: "gold"
+#iron   =  TermlistMaterialSpecified.create name: "iron"
+#copper   =  TermlistMaterialSpecified.create name: "copper"
+#lead   =  TermlistMaterialSpecified.create name: "lead"
 
+#####################################
+
+metal_material_specifieds = ["brass", "bronze", "copper", "gold", "iron", "lead", "silver", "steel", "tin", "undetermined"]
+metal_material_specifieds.each do |material|
+  m = TermlistMaterialSpecified.create name: material
+  metal.termlist_material_specifieds << m
+end
+
+bronze_kind_of_object = ["applicator", "arrowhead", "ax", "balance weight", "bell", "brazier", "cannon", "chain armor", 
+                         "coin", "cosmetic spatula", "cosmetic spoon", "dagger", "jewelry", "kohl stick", "kohl tube", "mirror", 
+                         "nail", "needle", "pin", "spearhead", "sculpture", "sword", "vessel"]
+                         
+bronze = TermlistMaterialSpecified.where(name: "bronze").first                         
+bronze_kind_of_object.each do |kind|
+  k = TermlistKindOfObject.create name: kind
+  bronze.termlist_kind_of_objects << k
+end 
+
+jewelry_bronze = TermlistKindOfObject.joins(:termlist_material_specified).where(name: "jewelry", termlist_material_specifieds: {name: "bronze"}).first
+jewelry_kind_of_object_specifieds = ["bangle", "bracelet", "hair pin"]    
+jewelry_kind_of_object_specifieds.each do |kind|
+  k = TermlistKindOfObjectSpecified.create name: kind
+  jewelry_bronze.termlist_kind_of_object_specifieds << k
+end    
+
+sculpture_bronze = TermlistKindOfObject.joins(:termlist_material_specified).where(name: "sculpture", termlist_material_specifieds: {name: "bronze"}).first
+statuette = TermlistKindOfObjectSpecified.create name: "statuette"              
+sculpture_bronze.termlist_kind_of_object_specifieds << statuette
+
+vessel_bronze = TermlistKindOfObject.joins(:termlist_material_specified).where(name: "vessel", termlist_material_specifieds: {name: "bronze"}).first
+vessel_kind_of_object_specifieds = ["bowl", "censer", "cosmetic containers"]
+vessel_kind_of_object_specifieds.each do |kind|
+  k = TermlistKindOfObjectSpecified.create name: kind
+  vessel_bronze.termlist_kind_of_object_specifieds << k
+end
+
+gold = TermlistMaterialSpecified.where(name: "gold").first
+gold_kind_of_objects = ["coin", "jewelry"]
+gold_kind_of_objects.each do |kind|
+  k = TermlistKindOfObject.create name: kind
+  gold.termlist_kind_of_objects << k
+end
+
+
+jewelry_gold = TermlistKindOfObject.joins(:termlist_material_specified).where(name: "jewelry", termlist_material_specifieds: {name: "gold"}).first
+jewelry_gold_koos = ["bangle", "earring", "finger ring", "pendant"]
+jewelry_gold_koos.each do |kind|
+  k = TermlistKindOfObjectSpecified.create name: kind
+  jewelry_gold.termlist_kind_of_object_specifieds << k
+end
+
+silver = TermlistMaterialSpecified.where(name: "silver").first
+silver_koos = ["coin", "jewelry"]
+silver_koos.each do |kind|
+  k = TermlistKindOfObject.create name: kind
+  silver.termlist_kind_of_objects << k
+end
+metal_productions = ["annealing", "beating", "casting in a mould", "casting with lost wax technique", "cutting", "drawing", "forging", 
+                     "hammering", "repoussé", "riveting", "smelting", "soldering", "undetermined"]
+metals = TermlistMaterialSpecified.joins(:termlist_material).where termlist_materials: {name: "metal"}
+metals.each do |metal|
+  metal_productions.each do |production|
+    p = TermlistProduction.create name: production
+    metal.termlist_productions << p
+  end
+end
+
+####################################
 # organic
 amber   =  TermlistMaterialSpecified.create name: "amber"
 antler   =  TermlistMaterialSpecified.create name: "antler"
@@ -90,11 +158,11 @@ ceramic.termlist_material_specifieds << porcelain
 ceramic.termlist_material_specifieds << white_slip_ware
 ceramic.termlist_material_specifieds << terra_sigillata
 
-metal.termlist_material_specifieds << gold
-metal.termlist_material_specifieds << silver
-metal.termlist_material_specifieds << iron
-metal.termlist_material_specifieds << copper
-metal.termlist_material_specifieds << lead
+#metal.termlist_material_specifieds << gold
+#metal.termlist_material_specifieds << silver
+#metal.termlist_material_specifieds << iron
+#metal.termlist_material_specifieds << copper
+#metal.termlist_material_specifieds << lead
 
 organic.termlist_material_specifieds << amber
 organic.termlist_material_specifieds << antler
