@@ -234,6 +234,61 @@ end
 #  TermlistKindOfObjectSpecified.create name: kind
 #end
 
+
+
+
+frit_productions = ["mold made", "undetermined"]
+
+frit_productions.each do |production|
+  p = TermlistProduction.create name: production
+  frit.termlist_productions << p
+end
+
+frit_colors = ["beige", "grey", "white", "undetermined"]
+
+frit_colors.each do |color|
+  c = TermlistColor.create name: color
+  frit.termlist_colors << c
+end
+
+frit_decorations = ["cutting", "drilling", "glazing", "painting", "undetermined"]
+
+frit_decorations.each do |decoration|
+  d = TermlistDecoration.create name: decoration
+  frit.termlist_decorations << d
+end
+
+frit_decoration_colors = ["turquoise", "white", "none", "undetermined"]
+
+frit_decoration_colors.each do |deco_color|
+  d = TermlistDecorationColor.create name: deco_color
+  frit.termlist_decoration_colors << d
+end
+
+frit_inscription_letter = ["Arabic", "Kufic", "undetermined"]
+
+frit_inscription_letter.each do |inscription|
+  i = TermlistInscriptionLetter.create name: inscription
+  frit.termlist_inscription_letters << i
+end
+
+frit_inscription_languages = ["Arabic", "undetermined"]
+
+frit_inscription_languages.each do |inscription|
+  i = TermlistInscriptionLanguage.create name: inscription
+  frit.termlist_inscription_languages << i
+end
+
+frit_preservation_states = ["corroded", "iridescent", "bottom", "complete", "complete profile", "foot", 
+                            "fragmentary", "handle", "handle-to-wall", "rim", "rim-to-wall", "stem", "wall-to-bottom"]
+                            
+#frit_preservation_states.each do |state|
+#  s = TermlistPreservationState.create name: state
+#  frit.termlist_preservation_states << s
+#end  
+
+                          
+
 metal_productions = [ "annealing", "beating", "casting in a mould", "casting with lost wax technique", "cutting", "drawing", "forging", "hammering", "repousé", "riveting", "smelting", "soldering"]
 metal_productions.each do |production|
   TermlistProduction.create name: production
@@ -244,6 +299,56 @@ metal_decorations = [ "chasing", "differential alloying", "engraving", "filigree
 #metal_productions.each do |decoration|
 #  TermlistDecoration.create name: decoration
 #end
+
+egyptian_blue_kind_of_objects = ["jewelry", "vessel", "undetermined"]
+
+#egyptian_blue_kind_of_objects.each do |kind|
+#  k = TermlistKindOfObject.create name: kind
+#  egyptian_blue.termlist_kind_of_objects << k
+#end
+
+jewelry_blue = TermlistKindOfObject.create name: "jewelry"
+egyptian_blue.termlist_kind_of_objects << jewelry_blue
+
+e_vessel = TermlistKindOfObject.create name: "vessel"
+egyptian_blue.termlist_kind_of_objects << e_vessel
+
+u_blue = TermlistKindOfObject.create name: "undetermined"
+egyptian_blue.termlist_kind_of_objects << u_blue
+
+
+kind_of_object_jewelry_blues = ["pendant", "undetermined"]
+kind_of_object_jewelry_blues.each do |kind|
+  s = TermlistKindOfObjectSpecified.create name: kind
+  jewelry_blue.termlist_kind_of_object_specifieds << s
+end
+
+s = TermlistKindOfObjectSpecified.create name: "undetermined"
+e_vessel.termlist_kind_of_object_specifieds << s
+
+mold = TermlistProduction.create name: "mold-made"
+undetermined = TermlistProduction.create name: "undetermined"
+egyptian_blue.termlist_productions << mold
+egyptian_blue.termlist_productions << undetermined
+
+lblue = TermlistColor.create name: "light blue"
+dblue = TermlistColor.create name: "dark blue"
+
+egyptian_blue.termlist_colors << lblue
+egyptian_blue.termlist_colors << dblue
+
+e_decorations = ["cutting", "drilling", "glazing", "painting", "undetermined"]
+
+e_decorations.each do |deco|
+  d = TermlistDecoration.create name: deco
+  egyptian_blue.termlist_decorations << d
+end
+
+deco_color = TermlistDecorationColor.create name: "none"
+egyptian_blue.termlist_decoration_colors << deco_color
+
+
+###################################
 
 glass_productions = ["free-blown", "casting", "core-formed", "mold-blown", "mosaicking", "undetermined"]
 glass_productions.each do |production|
