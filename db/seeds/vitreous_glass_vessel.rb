@@ -1,6 +1,6 @@
 id = ENV.fetch("id")
 
-jewelry = TermlistKindOfObject.where(name: "vessel")
+vessel = TermlistKindOfObject.where(name: "vessel")
                               .where(termlist_material_specified: TermlistMaterialSpecified
                                 .where(id: id))
                               .first

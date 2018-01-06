@@ -1,32 +1,5 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
 museum = Museum.create name: "JAM", prefix: "J"
-
-storages = []
-
-('A'..'D').each do |n|
-  storage = Storage.create name: "Hall " + n.to_s
-  storages.push storage
-end
-
-storages.each do |storage|
-  (1..30).each do |n|
-  letter = storage.name[-1] # counts backwards the string thus gets the last char
-  location = StorageLocation.create name: "showcase " + letter + n.to_s
-  storage.storage_locations << location
-  end
-end
-
-museum.storages << storages
-
-museum.save!
-
 
 TermlistAcquisitionKind.create name: "chance find"
 TermlistAcquisitionKind.create name: "confiscation"
@@ -41,8 +14,11 @@ TermlistAcquisitionDeliveredBy.create name: "seller"
 TermlistAcquisitionDeliveredBy.create name: "institution"
 TermlistAcquisitionDeliveredBy.create name: "unknown"
 
-
-### Materials ###
+TermlistAuthenticity.create name: "archaeological object"
+TermlistAuthenticity.create name: "copy"
+TermlistAuthenticity.create name: "forgery"
+TermlistAuthenticity.create name: "unspecific"
+TermlistAuthenticity.create name: "unknown"
 
 ceramic = TermlistMaterial.create name: "ceramic"
 metal = TermlistMaterial.create name: "metal"
@@ -50,43 +26,6 @@ organic = TermlistMaterial.create name: "organic material"
 stone = TermlistMaterial.create name: "stone"
 vitreous = TermlistMaterial.create name: "vitreous material"
 
-require "#{Rails.root}/db/seeds/vitreous.rb"
-require "#{Rails.root}/db/seeds/ceramic.rb"
-require "#{Rails.root}/db/seeds/metal.rb"
-
-
-### Material Specified ###
-
-# ceramic
-
-# metal
-
-
-# organic
-organic_material_specifieds = ["amber", "antler", "bone animal", "bone human", "charcoal", "coral", "hair", "horn"]
-organic_material_specifieds.each do |material|
-  m = TermlistMaterialSpecified.create name: material
-  organic.termlist_material_specifieds << m
-end
-
-# stone
-stone_material_specifieds = ["flint", "carnelian", "limestone", "basalt", "mabre"]
-stone_material_specifieds.each do |material|
-  m = TermlistMaterialSpecified.create name: material
-  stone.termlist_material_specifieds << m
-end
-                                    
-
-
-
-
-
-
-TermlistAuthenticity.create name: "archaeological object"
-TermlistAuthenticity.create name: "copy"
-TermlistAuthenticity.create name: "forgery"
-TermlistAuthenticity.create name: "unspecific"
-TermlistAuthenticity.create name: "unknown"
 
 tomb = TermlistExcavationSiteKind.create name: "tomb"
 settlement = TermlistExcavationSiteKind.create name: "settlement"
@@ -130,13 +69,6 @@ stone_kind_of_objects =
                "stelae", "tile", "tool", "unworked stone", "upper grinding stone",
                "vessel", "whetstone", "undetermined" ]
 
-
-# Contains WRONG ENTRIES!
-metal_kind_of_objects = [ "architectural element","arrowhead","ax","balance weight","bangle","bead","bell","bracelet","brazier", 
-                          "brooch", "buckle", "button", "candelabra", "cannon", "chain", "chain armor", "coin", 
-                          "compasses", "cosmetic containers", "cosmetic spatula", "cosmetic spoon", "cotter-pin (Splint)" ]
-
-
                           
 frit_kind_of_objects = ["cylinder seal"]
 
@@ -149,17 +81,7 @@ end
 mill_kind_specifieds = ["manually operated mill", "Olynthus mill"]
 sculpture_kind_specifieds = ["bust", "head", "relief", "statue"]
 bead_kind_specifieds = ["eye bead"]
-
-specifieds = architectural_element_kind_specifieds + mill_kind_specifieds +
-             sculpture_kind_specifieds + vessel_kind_specifieds + bead_kind_specifieds +
-             vessel_kind_specifieds
  
-#ToDo: This is not the proper way to select the correct entry
-vessel = TermlistKindOfObject.where(name: "vessel").first
-vessel_kind_specifieds.each do |kind|
-  kind_of_object = TermlistKindOfObjectSpecified.create name: kind
-  vessel.termlist_kind_of_object_specifieds << kind_of_object
-end 
             
           
 frit_preservation_states = ["corroded", "iridescent", "bottom", "complete", "complete profile", "foot", 
@@ -171,7 +93,7 @@ frit_preservation_states = ["corroded", "iridescent", "bottom", "complete", "com
 #end  
 
                           
-
+=begin
 
 jewelry_blue = TermlistKindOfObject.create name: "jewelry"
 egyptian_blue.termlist_kind_of_objects << jewelry_blue
@@ -216,6 +138,7 @@ egyptian_blue.termlist_decoration_colors << deco_color
 
 ###################################
 
+=end
 
 
 
@@ -249,3 +172,10 @@ termlist_dating_millennium = [ "10th mill. BC", "9th mill. BC", "8th mill. BC",
 termlist_dating_millennium.each do |millennium|
   TermlistDatingMillennium.create name: millennium
 end
+
+require "#{Rails.root}/db/seeds/vitreous.rb"
+require "#{Rails.root}/db/seeds/ceramic.rb"
+require "#{Rails.root}/db/seeds/metal.rb"
+require "#{Rails.root}/db/seeds/organic.rb"
+require "#{Rails.root}/db/seeds/stone.rb"
+require "#{Rails.root}/db/seeds/storages.rb"
