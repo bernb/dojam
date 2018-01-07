@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  termlist_material: one
+  termlist_kind_of_object_specified: one
 
 two:
   name: MyString
-  termlist_material: two
+  termlist_kind_of_object_specified: two
