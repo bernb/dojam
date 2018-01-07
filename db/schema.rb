@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180106200449) do
+ActiveRecord::Schema.define(version: 20180107202417) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -85,7 +85,9 @@ ActiveRecord::Schema.define(version: 20180106200449) do
     t.integer  "termlist_decoration_color_id"
     t.integer  "termlist_inscription_letter_id"
     t.integer  "termlist_inscription_language_id"
-    t.integer  "termlist_preservation_state_id"
+    t.integer  "termlist_decoration_technique_id"
+    t.integer  "termlist_preservation_material_id"
+    t.integer  "termlist_preservation_object_id"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id"
@@ -94,11 +96,13 @@ ActiveRecord::Schema.define(version: 20180106200449) do
     t.index ["termlist_dating_millennium_id"], name: "index_museum_objects_on_termlist_dating_millennium_id"
     t.index ["termlist_decoration_color_id"], name: "index_museum_objects_on_termlist_decoration_color_id"
     t.index ["termlist_decoration_id"], name: "index_museum_objects_on_termlist_decoration_id"
+    t.index ["termlist_decoration_technique_id"], name: "index_museum_objects_on_termlist_decoration_technique_id"
     t.index ["termlist_inscription_language_id"], name: "index_museum_objects_on_termlist_inscription_language_id"
     t.index ["termlist_inscription_letter_id"], name: "index_museum_objects_on_termlist_inscription_letter_id"
     t.index ["termlist_kind_of_object_id"], name: "index_museum_objects_on_termlist_kind_of_object_id"
     t.index ["termlist_kind_of_object_specified_id"], name: "index_museum_objects_on_termlist_kind_of_object_specified_id"
-    t.index ["termlist_preservation_state_id"], name: "index_museum_objects_on_termlist_preservation_state_id"
+    t.index ["termlist_preservation_material_id"], name: "index_museum_objects_on_termlist_preservation_material_id"
+    t.index ["termlist_preservation_object_id"], name: "index_museum_objects_on_termlist_preservation_object_id"
     t.index ["termlist_production_id"], name: "index_museum_objects_on_termlist_production_id"
   end
 
@@ -171,10 +175,18 @@ ActiveRecord::Schema.define(version: 20180106200449) do
 
   create_table "termlist_decoration_colors", force: :cascade do |t|
     t.string   "name"
-    t.integer  "termlist_material_specified_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.index ["termlist_material_specified_id"], name: "index_decoration_colors_on_material_specified_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "termlist_kind_of_object_specified_id"
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_decoration_color_on_kind_of_object_specified"
+  end
+
+  create_table "termlist_decoration_techniques", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "termlist_kind_of_object_specified_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_decoration_technique_on_museum_objects"
   end
 
   create_table "termlist_decorations", force: :cascade do |t|
@@ -237,12 +249,20 @@ ActiveRecord::Schema.define(version: 20180106200449) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "termlist_preservation_states", force: :cascade do |t|
+  create_table "termlist_preservation_materials", force: :cascade do |t|
     t.string   "name"
-    t.integer  "termlist_material_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.index ["termlist_material_id"], name: "index_termlist_preservation_states_on_termlist_material_id"
+    t.integer  "termlist_kind_of_object_specified_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["termlist_kind_of_object_specified_id"], name: "preservation_materials_on_kind_of_object_specified"
+  end
+
+  create_table "termlist_preservation_objects", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "termlist_kind_of_object_specified_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_preservation_object+_on_kind_of_object"
   end
 
   create_table "termlist_preservations", force: :cascade do |t|
