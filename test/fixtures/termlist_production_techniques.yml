@@ -2,6 +2,8 @@
 
 one:
   name: MyString
+  termlist_kind_of_object_specified: one
 
 two:
   name: MyString
+  termlist_kind_of_object_specified: two

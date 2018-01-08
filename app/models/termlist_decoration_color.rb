@@ -1,4 +1,4 @@
 class TermlistDecorationColor < ApplicationRecord
-  belongs_to :termlist_material_specified
+  belongs_to :termlist_kind_of_object_specified
   has_many :museum_objects
 end
