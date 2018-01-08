@@ -9,7 +9,7 @@ class MuseumObject < ApplicationRecord
   belongs_to :termlist_dating_millennium, required: false
   belongs_to :termlist_kind_of_object, required: false
   belongs_to :termlist_kind_of_object_specified, required: false
-  belongs_to :termlist_production, required: false
+  belongs_to :termlist_production_technique, required: false
   belongs_to :termlist_decoration_technique, required: false
   belongs_to :termlist_decoration_color, required: false
   belongs_to :termlist_decoration, required: false
