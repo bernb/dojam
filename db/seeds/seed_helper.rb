@@ -1,6 +1,10 @@
 class SeedHelper
 
-  def self.build_material_related_seed materialname, material_specifieds, kind_of_objects
+  def self.build_material_related_seed material_hash
+  
+    materialname = material_hash[:material_name]
+    material_specifieds = material_hash[:material_specifieds]
+    kind_of_objects = material_hash[:kind_of_objects]
     material = TermlistMaterial.create name: materialname
     
     # We build the seed recursive from material specified over kind of object
