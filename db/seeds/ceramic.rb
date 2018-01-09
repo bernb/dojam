@@ -1,6 +1,8 @@
-ceramic = TermlistMaterial.where(name: "ceramic").first
+materialname = "ceramic"
 
-ceramic_material_specifieds = [
+material = TermlistMaterial.where(name: materialname).first
+
+material_specifieds = [
   "African Red Slip Ware (ARSW)", 
   "Cypriote Base-Ring-Ware",
   "Chocolate-on-White Ware",
@@ -16,7 +18,7 @@ ceramic_material_specifieds = [
   "White Slip Ware",
   "undetermined"]
 
-ceramic_kind_of_objects = [
+kind_of_objects = [
   {"architectural element": 
     ["floor tile", 
      "roof tile", 
@@ -78,14 +80,3 @@ ceramic_kind_of_objects = [
     "twin-cup",
     "unguentarium"]}
   ]
-
-ceramic_material_specifieds.each do |material_specified|
-  m = TermlistMaterialSpecified.create name: material_specified
-  ceramic_kind_of_objects.each do |kind_of_object|
-    if kind_ob_object.class == Hash
-    # ToDo: Implement
-    end
-    m << k
-  end
-  ceramic.termlist_material_specifieds << m
-end
