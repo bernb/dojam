@@ -1,6 +1,7 @@
 class SeedHelper
 
   # ToDo: Optimize as this is way too slow
+  # If more properties gets added, consider using metaprogramming to recursive add all propertiy data
   def self.build_material_related_seed material_hash
   
     materialname = material_hash[:material_name]
