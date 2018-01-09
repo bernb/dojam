@@ -1,5 +1,6 @@
 class SeedHelper
 
+  # ToDo: Optimize as this is way too slow
   def self.build_material_related_seed material_hash
   
     materialname = material_hash[:material_name]
@@ -7,6 +8,17 @@ class SeedHelper
     kind_of_objects = material_hash[:kind_of_objects]
     material = TermlistMaterial.create name: materialname
     
+    ### Pre-Build all properties except above defined ones ###
+    production_techniques = material_hash[:production_techniques]
+    
+    @production_technique_objects = []
+    production_techniques.each do |production_technique|
+      p = TermlistProductionTechnique.create name: production_technique
+      @production_technique_objects << p
+    end
+    
+    
+    # ToDo: Refactor and split into smaller units
     # We build the seed recursive from material specified over kind of object
     # to kind of object specified
     # We assume identical entries for all specified materials, but kind of objects
@@ -33,11 +45,26 @@ class SeedHelper
         # always add undetermined entry
         k_specified = TermlistKindOfObjectSpecified.create name: "undetermined"
         k.termlist_kind_of_object_specifieds << k_specified
+        add_all_properties k.termlist_kind_of_object_specifieds
         m.termlist_kind_of_objects << k
       end # kind of object loop
       material.termlist_material_specifieds << m
     end # material loop
   
   end # method
-
+  
+  private
+  
+  def self.add_all_properties kind_of_object_specifieds # Parameter is a valid active records object
+    kind_of_object_specifieds.each do |kind_of_object_specified|
+      add_production_techniques kind_of_object_specified
+    end
+  end
+  
+  def self.add_production_techniques kind_of_object_specified
+    @production_technique_objects.each do |production_technique|
+      kind_of_object_specified.termlist_production_techniques << production_technique
+    end
+  end
+  
 end

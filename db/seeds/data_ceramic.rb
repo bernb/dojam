@@ -80,5 +80,20 @@ $ceramic_data = {
       "twin-cup",
       "unguentarium"]
     } # kind of object specifieds hash
-  ] # kind of object array
+  ], # kind of object array
+  production_techniques: [
+    "annealing",
+    "beating",
+    "casting in a mould",
+    "casting with lost wax technique",
+    "cutting",
+    "drawing",
+    "forging",
+    "hammering",
+    "repoussé",
+    "riveting",
+    "smelting",
+    "soldering",
+    "undetermined",
+  ]
 } # hash
