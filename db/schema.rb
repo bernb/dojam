@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180109173327) do
+ActiveRecord::Schema.define(version: 20180109173708) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -223,6 +223,15 @@ ActiveRecord::Schema.define(version: 20180109173327) do
     t.datetime "updated_at",                 null: false
     t.integer  "termlist_kind_of_object_id"
     t.index ["termlist_kind_of_object_id"], name: "index_kind_of_object_specifieds_on_kind_of_object_id"
+  end
+
+  create_table "termlist_kind_of_object_specifieds_decorations", force: :cascade do |t|
+    t.integer  "termlist_kind_of_object_specified_id"
+    t.integer  "termlist_decoration_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["termlist_decoration_id"], name: "index_join_table_on_decoration"
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_join_table_on_kind_of_object_specified"
   end
 
   create_table "termlist_kind_of_object_specifieds_production_techniques", id: false, force: :cascade do |t|

@@ -10,6 +10,14 @@ class SeedHelper
     
     ### Pre-Build all properties except above defined ones ###
     production_techniques = material_hash[:production_techniques]
+    decorations = material_hash[:decorations]
+    
+    @decoration_objects = []
+    decorations.each do |decoration|
+      d = TermlistDecoration.where(name: decoration).first
+      d ||= TermlistDecoration.create name: decoration
+      @decoration_objects << d
+    end
     
     @production_technique_objects = []
     production_techniques.each do |production_technique|
@@ -59,6 +67,13 @@ class SeedHelper
   def self.add_all_properties kind_of_object_specifieds # Parameter is a valid active records object
     kind_of_object_specifieds.each do |kind_of_object_specified|
       add_production_techniques kind_of_object_specified
+      add_decorations kind_of_object_specified
+    end
+  end
+  
+  def self.add_decorations kind_of_object_specified
+    @decoration_objects.each do |decoration|
+      kind_of_object_specified.termlist_decorations << decoration
     end
   end
   

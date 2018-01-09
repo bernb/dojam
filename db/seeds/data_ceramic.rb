@@ -95,5 +95,11 @@ $ceramic_data = {
     "smelting",
     "soldering",
     "undetermined",
+  ],
+  
+  decorations: [
+    "figurativ",
+    "geometric",
+    "relief"
   ]
 } # hash
