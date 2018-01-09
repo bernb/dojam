@@ -1,4 +1,5 @@
 class TermlistDecoration < ApplicationRecord
   has_many :museum_objects
-  belongs_to :termlist_kind_of_object_specified
+  has_many :termlist_kind_of_object_specifieds_decorations
+  has_many :termlist_kind_of_object_specified, through: :termlist_kind_of_object_specifieds_decorations
 end
