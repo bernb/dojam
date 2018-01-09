@@ -47,7 +47,18 @@ ExcavationSite.create name: "Tell es-Sa’idiyeh",
                       site_number_expedition: "",
                       coordinates_mega: "E 35.57650, N 32.26870",
                       termlist_excavation_site_kind: tomb
-                      
+ 
+ 
+
+#require "#{Rails.root}/db/seeds/vitreous.rb"
+require "#{Rails.root}/db/seeds/ceramic.rb"
+#require "#{Rails.root}/db/seeds/metal.rb"
+#require "#{Rails.root}/db/seeds/organic.rb"
+#require "#{Rails.root}/db/seeds/stone.rb"
+require "#{Rails.root}/db/seeds/storages.rb"
+ 
+ 
+=begin                    
                       
 vitreous_material_preservation_states = ["corroded", "iridescent", "bottom", "complete", "complete profile", 
                                          "foot", "fragmentary", "handle", "handle-to-wall", "rim", "rim-to-wall", "stem", "wall-to-bottom"]
@@ -138,7 +149,7 @@ egyptian_blue.termlist_decoration_colors << deco_color
 
 ###################################
 
-=end
+
 
 
 
@@ -173,9 +184,4 @@ termlist_dating_millennium.each do |millennium|
   TermlistDatingMillennium.create name: millennium
 end
 
-require "#{Rails.root}/db/seeds/vitreous.rb"
-require "#{Rails.root}/db/seeds/ceramic.rb"
-require "#{Rails.root}/db/seeds/metal.rb"
-require "#{Rails.root}/db/seeds/organic.rb"
-require "#{Rails.root}/db/seeds/stone.rb"
-require "#{Rails.root}/db/seeds/storages.rb"
+=end
