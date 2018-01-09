@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180109170554) do
+ActiveRecord::Schema.define(version: 20180109173327) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -191,10 +191,8 @@ ActiveRecord::Schema.define(version: 20180109170554) do
 
   create_table "termlist_decorations", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.integer  "termlist_kind_of_object_specified_id"
-    t.index ["termlist_kind_of_object_specified_id"], name: "decorations_on_kind_of_object_specified_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "termlist_excavation_site_kinds", force: :cascade do |t|
