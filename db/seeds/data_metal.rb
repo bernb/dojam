@@ -52,5 +52,19 @@ $metal_data = {
         "bowl",
         "censer",
         "cosmetic containers"]}
+  ],
+  decorations: [
+    "chasing",
+    "differential alloying",
+    "engraving",
+    "filigree",
+    "gilding",
+    "granulation",
+    "inlay",
+    "niello",
+    "patination",
+    "punching",
+    "stamping",
+    "plated"
   ]
 }
