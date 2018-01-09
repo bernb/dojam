@@ -1,3 +1,15 @@
+require "#{Rails.root}/db/seeds/seed_helper.rb"
+
+
+# We seperate data from actual creating
+# data files are supposed to return two arrays named:
+# materialname_material_specifieds and materialname_kind_of_objects
+require "#{Rails.root}/db/seeds/data_material.rb"
+
+#SeedHelper.build_material_related_seed "ceramic", 
+#                                        $ceramic_material_specifieds, 
+#                                        $ceramic_kind_of_objects
+SeedHelper.build_material_related_seed $metal_data
 
 museum = Museum.create name: "JAM", prefix: "J"
 
@@ -49,12 +61,6 @@ ExcavationSite.create name: "Tell es-Sa’idiyeh",
                       termlist_excavation_site_kind: tomb
  
  
-
-#require "#{Rails.root}/db/seeds/vitreous.rb"
-require "#{Rails.root}/db/seeds/ceramic.rb"
-#require "#{Rails.root}/db/seeds/metal.rb"
-#require "#{Rails.root}/db/seeds/organic.rb"
-#require "#{Rails.root}/db/seeds/stone.rb"
 require "#{Rails.root}/db/seeds/storages.rb"
  
  
