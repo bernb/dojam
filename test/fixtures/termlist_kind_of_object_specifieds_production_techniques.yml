@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  termlist_kind_of_object: one
+  termlist_production_technique: one
+
+two:
+  termlist_kind_of_object: two
+  termlist_production_technique: two

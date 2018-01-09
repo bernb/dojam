@@ -13,7 +13,8 @@ class SeedHelper
     
     @production_technique_objects = []
     production_techniques.each do |production_technique|
-      p = TermlistProductionTechnique.create name: production_technique
+      p = TermlistProductionTechnique.where(name: production_technique).first
+      p ||= TermlistProductionTechnique.create name: production_technique
       @production_technique_objects << p
     end
     
