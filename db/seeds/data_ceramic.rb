@@ -137,5 +137,22 @@ $ceramic_data = {
     "sgraffito",
     "slipped",
     "undetermined"
+  ],
+  preservation_materials: [
+    "corroded",
+    "sintered"
+  ],
+  preservation_objects: [
+    "base",
+    "body",
+    "body-to-bottom",
+    "complete",
+    "complete profile",
+    "foot",
+    "fragment",
+    "handle",
+    "handle-to-body",
+    "rim",
+    "rim-to-body"
   ]
 } # hash

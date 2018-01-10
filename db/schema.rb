@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180110161920) do
+ActiveRecord::Schema.define(version: 20180110170045) do
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -264,6 +264,15 @@ ActiveRecord::Schema.define(version: 20180110161920) do
     t.index ["termlist_preservation_material_id"], name: "index_join_table_koos_pres_materials_on_pres_material_id"
   end
 
+  create_table "termlist_kind_of_object_specifieds_preservation_objects", force: :cascade do |t|
+    t.integer  "termlist_kind_of_object_specified_id"
+    t.integer  "termlist_preservation_object_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_koos_preservation_objects_on_koos_id"
+    t.index ["termlist_preservation_object_id"], name: "index_koos_preservation_objects_on_preservation_material_id"
+  end
+
   create_table "termlist_kind_of_object_specifieds_production_techniques", id: false, force: :cascade do |t|
     t.integer "termlist_production_technique_id",     null: false
     t.integer "termlist_kind_of_object_specified_id", null: false
@@ -299,10 +308,8 @@ ActiveRecord::Schema.define(version: 20180110161920) do
 
   create_table "termlist_preservation_objects", force: :cascade do |t|
     t.string   "name"
-    t.integer  "termlist_kind_of_object_specified_id"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.index ["termlist_kind_of_object_specified_id"], name: "index_preservation_object+_on_kind_of_object"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "termlist_preservations", force: :cascade do |t|

@@ -1,4 +1,5 @@
 class TermlistPreservationObject < ApplicationRecord
-  belongs_to :termlist_kind_of_object_specified
+  has_many :termlist_kind_of_object_specifieds_preservation_objects
+  has_many :termlist_kind_of_object_specifieds, through: :termlist_kind_of_object_specifieds_preservation_objects
   has_many :museum_objects
 end

@@ -11,4 +11,8 @@ class TermlistKindOfObjectSpecified < ApplicationRecord
   has_many :termlist_decoration_colors, through: :termlist_kind_of_object_specifieds_decoration_color
   has_many :termlist_kind_of_object_specifieds_decoration_techniques
   has_many :termlist_decoration_techniques, through: :termlist_kind_of_object_specifieds_decoration_techniques
+  has_many :termlist_kind_of_object_specifieds_preservation_materials
+  has_many :termlist_preservation_materials, through: :termlist_kind_of_object_specifieds_preservation_materials
+  has_many :termlist_kind_of_object_specifieds_preservation_objects
+  has_many :termlist_preservation_objects, through: :termlist_kind_of_object_specifieds_preservation_objects
 end

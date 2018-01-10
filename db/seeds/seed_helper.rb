@@ -15,6 +15,22 @@ class SeedHelper
     colors = material_hash[:colors]
     decoration_colors = material_hash[:decoration_colors]
     decoration_techniques = material_hash[:decoration_techniques]
+    preservation_materials = material_hash[:preservation_materials]
+    preservation_objects = material_hash[:preservation_objects]
+    
+    @preservation_objects = []
+    preservation_objects.each do |preservation_object|
+      p = TermlistPreservationObject.where(name: preservation_object).first
+      p ||= TermlistPreservationObject.create name: preservation_object
+      @preservation_objects << p
+    end
+    
+    @preservation_materials = []
+    preservation_materials.each do |preservation_material|
+      p = TermlistPreservationMaterial.where(name: preservation_material).first
+      p ||= TermlistPreservationMaterial.create name: preservation_material
+      @preservation_materials << p
+    end
     
     @decoration_techniques = []
     decoration_techniques.each do |decoration_technique|
@@ -96,6 +112,20 @@ class SeedHelper
       add_colors kind_of_object_specified
       add_decoration_colors kind_of_object_specified
       add_decoration_techniques kind_of_object_specified
+      add_preservation_materials kind_of_object_specified
+      add_preservation_objects kind_of_object_specified
+    end
+  end
+  
+  def self.add_preservation_objects kind_of_object_specified
+    @preservation_objects.each do |preservation_object|
+      kind_of_object_specified.termlist_preservation_objects << preservation_object
+    end
+  end
+  
+  def self.add_preservation_materials kind_of_object_specified
+    @preservation_materials.each do |preservation_material|
+      kind_of_object_specified.termlist_preservation_materials << preservation_material
     end
   end
   
