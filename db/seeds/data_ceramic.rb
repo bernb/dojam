@@ -101,5 +101,41 @@ $ceramic_data = {
     "figurativ",
     "geometric",
     "relief"
+  ],
+  colors: [
+    "beige",
+    "black",
+    "brown",
+    "buff",
+    "pink",
+    "red"
+  ], 
+  decoration_colors: [
+    "beige",
+    "black",
+    "blue",
+    "brown",
+    "buff",
+    "grey",
+    "green",
+    "pink",
+    "purple",
+    "red",
+    "white",
+    "yellow"
+  ], 
+  decoration_techniques: [
+    "applied",
+    "burnished",
+    "combed",
+    "glazed",
+    "impressed",
+    "incised",
+    "painted",
+    "ribbed",
+    "rouletted",
+    "sgraffito",
+    "slipped",
+    "undetermined"
   ]
 } # hash

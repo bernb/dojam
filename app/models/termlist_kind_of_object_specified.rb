@@ -5,4 +5,10 @@ class TermlistKindOfObjectSpecified < ApplicationRecord
   has_many :termlist_production_techniques, through: :termlist_kind_of_object_specifieds_production_techniques
   has_many :termlist_kind_of_object_specifieds_decorations
   has_many :termlist_decorations, through: :termlist_kind_of_object_specifieds_decorations
+  has_many :termlist_kind_of_object_specifieds_color
+  has_many :termlist_colors, through: :termlist_kind_of_object_specifieds_color
+  has_many :termlist_kind_of_object_specifieds_decoration_color
+  has_many :termlist_decoration_colors, through: :termlist_kind_of_object_specifieds_decoration_color
+  has_many :termlist_kind_of_object_specifieds_decoration_techniques
+  has_many :termlist_decoration_techniques, through: :termlist_kind_of_object_specifieds_decoration_techniques
 end

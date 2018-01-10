@@ -12,6 +12,30 @@ class SeedHelper
     ### Pre-Build all properties except above defined ones ###
     production_techniques = material_hash[:production_techniques]
     decorations = material_hash[:decorations]
+    colors = material_hash[:colors]
+    decoration_colors = material_hash[:decoration_colors]
+    decoration_techniques = material_hash[:decoration_techniques]
+    
+    @decoration_techniques = []
+    decoration_techniques.each do |decoration_technique|
+      d = TermlistDecorationTechnique.where(name: decoration_technique).first
+      d ||= TermlistDecorationTechnique.create name: decoration_technique
+      @decoration_techniques << d
+    end
+    
+    @decoration_colors = []
+    decoration_colors.each do |decoration_color|
+      d = TermlistDecorationColor.where(name: decoration_color).first
+      d ||= TermlistDecorationColor.create name: decoration_color
+      @decoration_colors << d
+    end
+    
+    @color_objects = []
+    colors.each do |color|
+      c = TermlistColor.where(name: color).first
+      c ||= TermlistColor.create name: color
+      @color_objects << c
+    end
     
     @decoration_objects = []
     decorations.each do |decoration|
@@ -69,6 +93,27 @@ class SeedHelper
     kind_of_object_specifieds.each do |kind_of_object_specified|
       add_production_techniques kind_of_object_specified
       add_decorations kind_of_object_specified
+      add_colors kind_of_object_specified
+      add_decoration_colors kind_of_object_specified
+      add_decoration_techniques kind_of_object_specified
+    end
+  end
+  
+  def self.add_decoration_techniques kind_of_object_specified
+    @decoration_techniques.each do |decoration_technique|
+      kind_of_object_specified.termlist_decoration_techniques << decoration_technique
+    end
+  end
+  
+  def self.add_decoration_colors kind_of_object_specified
+    @decoration_colors.each do |decoration_color|
+      kind_of_object_specified.termlist_decoration_colors << decoration_color
+    end
+  end
+  
+  def self.add_colors kind_of_object_specified
+    @color_objects.each do |color|
+      kind_of_object_specified.termlist_colors << color
     end
   end
   
