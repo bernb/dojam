@@ -53,6 +53,20 @@ $metal_data = {
         "censer",
         "cosmetic containers"]}
   ],
+  production_techniques: [
+    "annealing",
+    "beating",
+    "casting in a mould",
+    "casting with lost wax technique",
+    "cutting",
+    "drawing",
+    "forging",
+    "hammering",
+    "repoussé",
+    "riveting",
+    "smelting",
+    "soldering"
+  ],
   decorations: [
     "chasing",
     "differential alloying",
@@ -66,5 +80,21 @@ $metal_data = {
     "punching",
     "stamping",
     "plated"
+  ],
+  preservation_materials: [
+    "corroded"
+  ],
+  preservation_objects: [
+    "bottom",
+    "complete",
+    "complete profile",
+    "foot",
+    "fragment",
+    "handle",
+    "handle-to-wall",
+    "rim",
+    "rim-to-wall",
+    "stem",
+    "wall-to-bottom"
   ]
 }

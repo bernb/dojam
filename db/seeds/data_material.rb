@@ -1,2 +1,5 @@
 require "#{Rails.root}/db/seeds/data_ceramic.rb"
 require "#{Rails.root}/db/seeds/data_metal.rb"
+require "#{Rails.root}/db/seeds/data_organic.rb"
+require "#{Rails.root}/db/seeds/data_stone.rb"
+require "#{Rails.root}/db/seeds/data_vitreous.rb"
