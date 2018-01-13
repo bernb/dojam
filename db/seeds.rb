@@ -7,10 +7,10 @@ require "#{Rails.root}/db/seeds/seed_helper.rb"
 require "#{Rails.root}/db/seeds/data_material.rb"
 
 SeedHelper.build_material_related_seed $ceramic_data
-SeedHelper.build_material_related_seed $metal_data
-SeedHelper.build_material_related_seed $organic_data
-SeedHelper.build_material_related_seed $stone_data
-SeedHelper.build_material_related_seed $vitreous_data
+#SeedHelper.build_material_related_seed $metal_data
+#SeedHelper.build_material_related_seed $organic_data
+#SeedHelper.build_material_related_seed $stone_data
+#SeedHelper.build_material_related_seed $vitreous_data
 
 museum = Museum.create name: "JAM", prefix: "J"
 
