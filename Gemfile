@@ -56,6 +56,9 @@ gem 'jbuilder', '~> 2.5'
 # postgres
 gem 'pg'
 
+# batch import
+gem 'activerecord-import'
+
 # makes credential in config/application.yml available for rail (added to .gitignore)
 gem "figaro"
 
