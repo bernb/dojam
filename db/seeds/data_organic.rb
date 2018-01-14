@@ -38,5 +38,11 @@ $organic_data = {
     "drilling",
     "weaving",
     "unworked"
-  ]
+  ],
+  decorations: [],
+  colors: [],
+  decoration_colors: [],
+  decoration_techniques: [],
+  preservation_materials: [],
+  preservation_objects: []
 }

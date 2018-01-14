@@ -4,10 +4,12 @@ class SeedHelper
   # If more properties gets added, consider using metaprogramming to recursive add all propertiy data
   def self.build_material_related_seed material_hash
   
+    @debug_index = 0
+  
     materialname = material_hash[:material_name]
     material_specifieds = material_hash[:material_specifieds]
     kind_of_objects = material_hash[:kind_of_objects]
-    material = TermlistMaterial.create name: materialname
+    material = TermlistMaterial.new name: materialname
     
     ### Pre-Build all properties except above defined ones ###
     production_techniques = material_hash[:production_techniques]
@@ -18,65 +20,65 @@ class SeedHelper
     preservation_materials = material_hash[:preservation_materials]
     preservation_objects = material_hash[:preservation_objects]
     
-    @preservation_objects = []
+    @preservation_object_ids = []
     preservation_objects.each do |preservation_object|
       p = TermlistPreservationObject.where(name: preservation_object).first
       p ||= TermlistPreservationObject.create name: preservation_object
-      @preservation_objects << p
+      @preservation_object_ids << p.id
     end
     
-    @preservation_materials = []
+    @preservation_material_ids = []
     preservation_materials.each do |preservation_material|
       p = TermlistPreservationMaterial.where(name: preservation_material).first
       p ||= TermlistPreservationMaterial.create name: preservation_material
-      @preservation_materials << p
+      @preservation_material_ids << p.id
     end
     
-    @decoration_techniques = []
+    @decoration_techniques_ids = []
     decoration_techniques.each do |decoration_technique|
       d = TermlistDecorationTechnique.where(name: decoration_technique).first
       d ||= TermlistDecorationTechnique.create name: decoration_technique
-      @decoration_techniques << d
+      @decoration_techniques_ids << d.id
     end
     
-    @decoration_colors = []
+    @decoration_colors_ids = []
     decoration_colors.each do |decoration_color|
       d = TermlistDecorationColor.where(name: decoration_color).first
       d ||= TermlistDecorationColor.create name: decoration_color
-      @decoration_colors << d
+      @decoration_colors_ids << d.id
     end
     
-    @color_objects = []
+    @color_object_ids = []
     colors.each do |color|
       c = TermlistColor.where(name: color).first
       c ||= TermlistColor.create name: color
-      @color_objects << c
+      @color_object_ids << c.id
     end
     
-    @decoration_objects = []
+    @decoration_object_ids = []
     decorations.each do |decoration|
       d = TermlistDecoration.where(name: decoration).first
       d ||= TermlistDecoration.create name: decoration
-      @decoration_objects << d
+      @decoration_object_ids << d.id
     end
     
-    @production_technique_objects = []
+    @production_technique_object_ids = []
     production_techniques.each do |production_technique|
       p = TermlistProductionTechnique.where(name: production_technique).first
       p ||= TermlistProductionTechnique.create name: production_technique
-      @production_technique_objects << p
+      @production_technique_object_ids << p.id
     end
     
-    
+    kind_of_object_specified_ids = []
     # ToDo: Refactor and split into smaller units
     # We build the seed recursive from material specified over kind of object
     # to kind of object specified
     # We assume identical entries for all specified materials, but kind of objects
     # have their own set of specified kinds
     material_specifieds.each do |material_specified|
-      m = TermlistMaterialSpecified.create name: material_specified
+      m = material.termlist_material_specifieds.build name: material_specified
       kind_of_objects.each do |kind_of_object|
-        k = TermlistKindOfObject.new
+        k = m.termlist_kind_of_objects.build
         kind_of_object_name = nil
         # We assume a certain data structure with hashes if specified kind of object
         # is present it is given as a single hash with an array value
@@ -84,78 +86,55 @@ class SeedHelper
         if kind_of_object.class == Hash
           kind_of_object_name = kind_of_object.keys[0] # single key hashes
           kind_of_object[kind_of_object_name].each do |kind_specified|
-            k_specified = TermlistKindOfObjectSpecified.create name: kind_specified
-            k.termlist_kind_of_object_specifieds << k_specified
+            k_specified = k.termlist_kind_of_object_specifieds.build name: kind_specified
           end
         else
           kind_of_object_name = kind_of_object  
         end
         k.name = kind_of_object_name
-        k.save!
         # always add undetermined entry
-        k_specified = TermlistKindOfObjectSpecified.create name: "undetermined"
-        k.termlist_kind_of_object_specifieds << k_specified
-        add_all_properties k.termlist_kind_of_object_specifieds
-        m.termlist_kind_of_objects << k
+        k.termlist_kind_of_object_specifieds.build name: "undetermined"
       end # kind of object loop
-      material.termlist_material_specifieds << m
     end # material loop
-  
+    
+    material.save # saves recursive efficiently by default
+    kind_of_object_specified_ids = material.termlist_kind_of_object_specifieds.ids  
+    generate_join_tables kind_of_object_specified_ids
+    
   end # method
   
   private
   
-  def self.add_all_properties kind_of_object_specifieds # Parameter is a valid active records object
-    kind_of_object_specifieds.each do |kind_of_object_specified|
-      add_production_techniques kind_of_object_specified
-      add_decorations kind_of_object_specified
-      add_colors kind_of_object_specified
-      add_decoration_colors kind_of_object_specified
-      add_decoration_techniques kind_of_object_specified
-      add_preservation_materials kind_of_object_specified
-      add_preservation_objects kind_of_object_specified
-    end
+  def self.generate_join_tables kind_of_object_specified_ids
+    execute_transaction kind_of_object_specified_ids, 
+                        @preservation_object_ids, 
+                        "termlist_kind_of_object_specifieds_preservation_objects", 
+                        "termlist_preservation_object_id"
   end
   
-  def self.add_preservation_objects kind_of_object_specified
-    @preservation_objects.each do |preservation_object|
-      kind_of_object_specified.termlist_preservation_objects << preservation_object
-    end
-  end
-  
-  def self.add_preservation_materials kind_of_object_specified
-    @preservation_materials.each do |preservation_material|
-      kind_of_object_specified.termlist_preservation_materials << preservation_material
-    end
-  end
-  
-  def self.add_decoration_techniques kind_of_object_specified
-    @decoration_techniques.each do |decoration_technique|
-      kind_of_object_specified.termlist_decoration_techniques << decoration_technique
-    end
-  end
-  
-  def self.add_decoration_colors kind_of_object_specified
-    @decoration_colors.each do |decoration_color|
-      kind_of_object_specified.termlist_decoration_colors << decoration_color
-    end
-  end
-  
-  def self.add_colors kind_of_object_specified
-    @color_objects.each do |color|
-      kind_of_object_specified.termlist_colors << color
-    end
-  end
-  
-  def self.add_decorations kind_of_object_specified
-    @decoration_objects.each do |decoration|
-      kind_of_object_specified.termlist_decorations << decoration
-    end
-  end
-  
-  def self.add_production_techniques kind_of_object_specified
-    @production_technique_objects.each do |production_technique|
-      kind_of_object_specified.termlist_production_techniques << production_technique
+  def self.execute_transaction kind_of_object_specified_ids, property_ids, join_table_name, property_column_name
+    koos_ids = kind_of_object_specified_ids.map{|e| "(#{e})"}.join(',') # Generate format "(1), (2), (3),..." as needed for sql insert
+    timestamp = DateTime.current.to_s
+    pres_object_ids = property_ids.map{|e| "(#{e}, '#{timestamp}', '#{timestamp}')"}.join(',')
+    sql_query = 
+    "
+      DROP TABLE IF EXISTS koos_temp;
+      DROP TABLE IF EXISTS props_temp;
+      CREATE TABLE koos_temp (koos_ids INT);
+      CREATE TABLE props_temp (prop_ids INT, created_at timestamp, updated_at timestamp);
+      
+      INSERT INTO koos_temp VALUES #{koos_ids};
+      
+      INSERT INTO props_temp VALUES #{pres_object_ids};
+      INSERT INTO #{join_table_name} (termlist_kind_of_object_specified_id, #{property_column_name}, created_at, updated_at) 
+        SELECT koos_ids, prop_ids, created_at, updated_at FROM koos_temp CROSS JOIN props_temp;
+
+      DROP TABLE koos_temp;
+      DROP TABLE props_temp;
+    "
+    # Create a tmp table and use cross join = cartesian product on it
+    ActiveRecord::Base.transaction do # We do not want the temp table to stick around
+      ActiveRecord::Base.connection.execute(sql_query)
     end
   end
   
