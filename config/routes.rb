@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # Helper actions for ajax call to get correct storage(_location)s for selected museum/storage
   get 'builds/storagess', to: "builds#storages"
   get 'builds/storage_locations', to: "builds#storage_locations"
+  get 'builds/excavation_site_kinds', to: "builds#excavation_site_kinds"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

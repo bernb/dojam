@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115134534) do
+ActiveRecord::Schema.define(version: 20180115154457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -194,10 +194,18 @@ ActiveRecord::Schema.define(version: 20180115134534) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "termlist_excavation_site_kinds", force: :cascade do |t|
+  create_table "termlist_excavation_site_categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "termlist_excavation_site_kinds", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "termlist_excavation_site_category_id"
+    t.index ["termlist_excavation_site_category_id"], name: "index_ex_site_kinds_on_ex_site_category_id", using: :btree
   end
 
   create_table "termlist_inscription_languages", force: :cascade do |t|
@@ -260,7 +268,7 @@ ActiveRecord::Schema.define(version: 20180115134534) do
     t.index ["termlist_kind_of_object_specified_id"], name: "index_join_table_on_kind_of_object_specified", using: :btree
   end
 
-  create_table "termlist_kind_of_object_specifieds_preservation_materials", id: :integer, default: -> { "nextval('termlist_kind_of_object_specifieds_preservation_material_id_seq'::regclass)" }, force: :cascade do |t|
+  create_table "termlist_kind_of_object_specifieds_preservation_materials", force: :cascade do |t|
     t.integer  "termlist_kind_of_object_specified_id"
     t.integer  "termlist_preservation_material_id"
     t.datetime "created_at",                           null: false
@@ -330,5 +338,4 @@ ActiveRecord::Schema.define(version: 20180115134534) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
 end

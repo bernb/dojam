@@ -27,6 +27,12 @@ class BuildsController < ApplicationController
       @selected_storage = @storages.first
     end
     
+    if step == :step_provenance
+      @excavation_site_categories = TermlistExcavationSiteCategory.all
+      @selected_excavation_site_category = TermlistExcavationSiteCategory.first
+      @excavation_site_kinds = @selected_excavation_site_category.termlist_excavation_site_kinds
+    end
+    
     if step == :step_material_specified
       @materials = TermlistMaterial.where id: session[:material_ids]
     end
@@ -107,6 +113,15 @@ class BuildsController < ApplicationController
       render_wizard
     end
     
+  end
+  
+  def excavation_site_kinds
+    respond_to do |format|
+      format.js {
+        excavation_site_category = TermlistExcavationSiteCategory.find params[:excavation_site_category_id]
+        @excavation_site_kinds = excavation_site_category.termlist_excavation_site_kinds
+      }
+    end
   end
   
   def storages

@@ -1,3 +1,3 @@
 class TermlistExcavationSiteKind < ApplicationRecord
-  has_many :excavation_sites
+  belongs_to :termlist_excavation_site_category
 end

@@ -10,28 +10,23 @@ storages << storageB
 storages << storageC
 
 
-storageA.each do |storage|
-  (1..28).each do |n|
-  letter = storage.name[-1] # counts backwards the string thus gets the last char
+(1..28).each do |n|
+  letter = storageA.name[-1] # counts backwards the string thus gets the last char
   location = StorageLocation.create name: "showcase " + letter + n.to_s
-  storage.storage_locations << location
-  end
+  storageA.storage_locations << location
 end
 
-storageB.each do |storage|
-  (1..5).each do |n|
-  letter = storage.name[-1] # counts backwards the string thus gets the last char
+
+(1..5).each do |n|
+  letter = storageB.name[-1] # counts backwards the string thus gets the last char
   location = StorageLocation.create name: "showcase " + letter + n.to_s
-  storage.storage_locations << location
-  end
+  storageB.storage_locations << location
 end
 
-storageA.each do |storage|
-  (1..11).each do |n|
-  letter = storage.name[-1] # counts backwards the string thus gets the last char
+(1..11).each do |n|
+  letter = storageC.name[-1] # counts backwards the string thus gets the last char
   location = StorageLocation.create name: "showcase " + letter + n.to_s
-  storage.storage_locations << location
-  end
+  storageC.storage_locations << location
 end
 
 
