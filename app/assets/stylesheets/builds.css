@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#museum_object_termlist_material_specified_ids {
+  min-width: 300px;
+}
+
 .bar-step {
     position:absolute;
     margin-top:-20px;
