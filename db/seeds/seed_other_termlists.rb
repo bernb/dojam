@@ -3,6 +3,7 @@ TermlistAcquisitionKind.create name: "confiscation"
 TermlistAcquisitionKind.create name: "excavation"
 TermlistAcquisitionKind.create name: "gift"
 TermlistAcquisitionKind.create name: "purchase"
+TermlistAcquisitionKind.create name: "archaeological survey"
 TermlistAcquisitionKind.create name: "unknown"
 
 TermlistAcquisitionDeliveredBy.create name: "excavator"
