@@ -85,7 +85,7 @@ class BuildsController < ApplicationController
   def update
     @museum_object = MuseumObject.find params[:museum_object_id]
     @museum_object.update_attributes museum_object_params unless not params.key? :museum_object # see at params method below
-    if step = :step_material
+    if step == :step_material
       session[:material_ids] = params[:material_ids]
     end
     render_wizard @museum_object # does also attempt to save and renders same view again if fails
