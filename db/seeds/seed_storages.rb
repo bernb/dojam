@@ -2,7 +2,7 @@ museum = Museum.where(name: "JAM").first
 
 storages = []
 
-('A'..'D').each do |n|
+('A'..'C').each do |n|
   storage = Storage.create name: "Hall " + n.to_s
   storages.push storage
 end
