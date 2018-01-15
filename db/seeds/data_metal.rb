@@ -1,7 +1,7 @@
 $metal_data = {
   
   material_name: "metal",
-
+  
   material_specifieds: [
     "brass",
     "bronze",
@@ -96,5 +96,8 @@ $metal_data = {
     "rim-to-wall",
     "stem",
     "wall-to-bottom"
-  ]
+  ],
+  colors: [],
+  decoration_colors: [],
+  decoration_techniques: []
 }

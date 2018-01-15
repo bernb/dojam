@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180110170045) do
+ActiveRecord::Schema.define(version: 20180115084756) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "excavation_site_kind_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.index ["excavation_site_kind_id"], name: "index_excavation_sites_on_excavation_site_kind_id"
+    t.index ["excavation_site_kind_id"], name: "index_excavation_sites_on_excavation_site_kind_id", using: :btree
   end
 
   create_table "join_museum_object_colors", force: :cascade do |t|
@@ -31,8 +34,8 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "museum_object_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.index ["museum_object_id"], name: "index_join_museum_object_colors_on_museum_object_id"
-    t.index ["termlist_color_id"], name: "index_join_museum_object_colors_on_termlist_color_id"
+    t.index ["museum_object_id"], name: "index_join_museum_object_colors_on_museum_object_id", using: :btree
+    t.index ["termlist_color_id"], name: "index_join_museum_object_colors_on_termlist_color_id", using: :btree
   end
 
   create_table "join_museum_object_material_specifieds", force: :cascade do |t|
@@ -40,8 +43,8 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "termlist_material_specified_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.index ["museum_object_id"], name: "index_join_museum_object"
-    t.index ["termlist_material_specified_id"], name: "index_join_material_specified"
+    t.index ["museum_object_id"], name: "index_join_museum_object", using: :btree
+    t.index ["termlist_material_specified_id"], name: "index_join_material_specified", using: :btree
   end
 
   create_table "museum_objects", force: :cascade do |t|
@@ -88,22 +91,22 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "termlist_preservation_material_id"
     t.integer  "termlist_preservation_object_id"
     t.integer  "termlist_production_techniques_id"
-    t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
-    t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
-    t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id"
-    t.index ["termlist_acquisition_kind_id"], name: "index_museum_objects_on_termlist_acquisition_kind_id"
-    t.index ["termlist_authenticity_id"], name: "index_museum_objects_on_termlist_authenticity_id"
-    t.index ["termlist_dating_millennium_id"], name: "index_museum_objects_on_termlist_dating_millennium_id"
-    t.index ["termlist_decoration_color_id"], name: "index_museum_objects_on_termlist_decoration_color_id"
-    t.index ["termlist_decoration_id"], name: "index_museum_objects_on_termlist_decoration_id"
-    t.index ["termlist_decoration_technique_id"], name: "index_museum_objects_on_termlist_decoration_technique_id"
-    t.index ["termlist_inscription_language_id"], name: "index_museum_objects_on_termlist_inscription_language_id"
-    t.index ["termlist_inscription_letter_id"], name: "index_museum_objects_on_termlist_inscription_letter_id"
-    t.index ["termlist_kind_of_object_id"], name: "index_museum_objects_on_termlist_kind_of_object_id"
-    t.index ["termlist_kind_of_object_specified_id"], name: "index_museum_objects_on_termlist_kind_of_object_specified_id"
-    t.index ["termlist_preservation_material_id"], name: "index_museum_objects_on_termlist_preservation_material_id"
-    t.index ["termlist_preservation_object_id"], name: "index_museum_objects_on_termlist_preservation_object_id"
-    t.index ["termlist_production_techniques_id"], name: "index_museum_objects_on_termlist_production_techniques_id"
+    t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id", using: :btree
+    t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id", using: :btree
+    t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id", using: :btree
+    t.index ["termlist_acquisition_kind_id"], name: "index_museum_objects_on_termlist_acquisition_kind_id", using: :btree
+    t.index ["termlist_authenticity_id"], name: "index_museum_objects_on_termlist_authenticity_id", using: :btree
+    t.index ["termlist_dating_millennium_id"], name: "index_museum_objects_on_termlist_dating_millennium_id", using: :btree
+    t.index ["termlist_decoration_color_id"], name: "index_museum_objects_on_termlist_decoration_color_id", using: :btree
+    t.index ["termlist_decoration_id"], name: "index_museum_objects_on_termlist_decoration_id", using: :btree
+    t.index ["termlist_decoration_technique_id"], name: "index_museum_objects_on_termlist_decoration_technique_id", using: :btree
+    t.index ["termlist_inscription_language_id"], name: "index_museum_objects_on_termlist_inscription_language_id", using: :btree
+    t.index ["termlist_inscription_letter_id"], name: "index_museum_objects_on_termlist_inscription_letter_id", using: :btree
+    t.index ["termlist_kind_of_object_id"], name: "index_museum_objects_on_termlist_kind_of_object_id", using: :btree
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_museum_objects_on_termlist_kind_of_object_specified_id", using: :btree
+    t.index ["termlist_preservation_material_id"], name: "index_museum_objects_on_termlist_preservation_material_id", using: :btree
+    t.index ["termlist_preservation_object_id"], name: "index_museum_objects_on_termlist_preservation_object_id", using: :btree
+    t.index ["termlist_production_techniques_id"], name: "index_museum_objects_on_termlist_production_techniques_id", using: :btree
   end
 
   create_table "museums", force: :cascade do |t|
@@ -118,7 +121,7 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "storage_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["storage_id"], name: "index_storage_locations_on_storage_id"
+    t.index ["storage_id"], name: "index_storage_locations_on_storage_id", using: :btree
   end
 
   create_table "storages", force: :cascade do |t|
@@ -126,7 +129,7 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "museum_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["museum_id"], name: "index_storages_on_museum_id"
+    t.index ["museum_id"], name: "index_storages_on_museum_id", using: :btree
   end
 
   create_table "termlist_acquisition_delivered_bies", force: :cascade do |t|
@@ -200,7 +203,7 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "termlist_material_specified_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.index ["termlist_material_specified_id"], name: "index_inscription_languages_on_material_specified_id"
+    t.index ["termlist_material_specified_id"], name: "index_inscription_languages_on_material_specified_id", using: :btree
   end
 
   create_table "termlist_inscription_letters", force: :cascade do |t|
@@ -208,7 +211,7 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "termlist_material_specified_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.index ["termlist_material_specified_id"], name: "index_inscription_letters_on_material_specified_id"
+    t.index ["termlist_material_specified_id"], name: "index_inscription_letters_on_material_specified_id", using: :btree
   end
 
   create_table "termlist_kind_of_object_specifieds", force: :cascade do |t|
@@ -216,7 +219,7 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "termlist_kind_of_object_id"
-    t.index ["termlist_kind_of_object_id"], name: "index_kind_of_object_specifieds_on_kind_of_object_id"
+    t.index ["termlist_kind_of_object_id"], name: "index_kind_of_object_specifieds_on_kind_of_object_id", using: :btree
   end
 
   create_table "termlist_kind_of_object_specifieds_colors", force: :cascade do |t|
@@ -224,8 +227,8 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "termlist_kind_of_object_specified_id"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
-    t.index ["termlist_color_id"], name: "index_kind_of_object_specifieds_colors_on_color_id"
-    t.index ["termlist_kind_of_object_specified_id"], name: "index_kind_of_object_spec_colors_on_kind_of_object_spec_id"
+    t.index ["termlist_color_id"], name: "index_kind_of_object_specifieds_colors_on_color_id", using: :btree
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_kind_of_object_spec_colors_on_kind_of_object_spec_id", using: :btree
   end
 
   create_table "termlist_kind_of_object_specifieds_decoration_colors", force: :cascade do |t|
@@ -233,8 +236,8 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.integer  "termlist_decoration_color_id"
-    t.index ["termlist_decoration_color_id"], name: "index_join_table_on_termlist_decoration_color_id"
-    t.index ["termlist_kind_of_object_specified_id"], name: "index_join_table_on_kind_of_object_spec_id"
+    t.index ["termlist_decoration_color_id"], name: "index_join_table_on_termlist_decoration_color_id", using: :btree
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_join_table_on_kind_of_object_spec_id", using: :btree
   end
 
   create_table "termlist_kind_of_object_specifieds_decoration_techniques", force: :cascade do |t|
@@ -242,8 +245,8 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "termlist_decoration_technique_id"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
-    t.index ["termlist_decoration_technique_id"], name: "index_join_table_on_termlist_decoration_technique_id"
-    t.index ["termlist_kind_of_object_specified_id"], name: "index_join_table_on_termlist_kind_of_object_specified_id"
+    t.index ["termlist_decoration_technique_id"], name: "index_join_table_on_termlist_decoration_technique_id", using: :btree
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_join_table_on_termlist_kind_of_object_specified_id", using: :btree
   end
 
   create_table "termlist_kind_of_object_specifieds_decorations", force: :cascade do |t|
@@ -251,8 +254,8 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "termlist_decoration_id"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
-    t.index ["termlist_decoration_id"], name: "index_join_table_on_decoration"
-    t.index ["termlist_kind_of_object_specified_id"], name: "index_join_table_on_kind_of_object_specified"
+    t.index ["termlist_decoration_id"], name: "index_join_table_on_decoration", using: :btree
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_join_table_on_kind_of_object_specified", using: :btree
   end
 
   create_table "termlist_kind_of_object_specifieds_preservation_materials", force: :cascade do |t|
@@ -260,8 +263,8 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "termlist_preservation_material_id"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
-    t.index ["termlist_kind_of_object_specified_id"], name: "index_join_table_koos_preservation_materials_on_koos_id"
-    t.index ["termlist_preservation_material_id"], name: "index_join_table_koos_pres_materials_on_pres_material_id"
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_join_table_koos_preservation_materials_on_koos_id", using: :btree
+    t.index ["termlist_preservation_material_id"], name: "index_join_table_koos_pres_materials_on_pres_material_id", using: :btree
   end
 
   create_table "termlist_kind_of_object_specifieds_preservation_objects", force: :cascade do |t|
@@ -269,13 +272,15 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "termlist_preservation_object_id"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
-    t.index ["termlist_kind_of_object_specified_id"], name: "index_koos_preservation_objects_on_koos_id"
-    t.index ["termlist_preservation_object_id"], name: "index_koos_preservation_objects_on_preservation_material_id"
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_koos_preservation_objects_on_koos_id", using: :btree
+    t.index ["termlist_preservation_object_id"], name: "index_koos_preservation_objects_on_preservation_material_id", using: :btree
   end
 
   create_table "termlist_kind_of_object_specifieds_production_techniques", id: false, force: :cascade do |t|
-    t.integer "termlist_production_technique_id",     null: false
-    t.integer "termlist_kind_of_object_specified_id", null: false
+    t.integer  "termlist_production_technique_id",     null: false
+    t.integer  "termlist_kind_of_object_specified_id", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "termlist_kind_of_objects", force: :cascade do |t|
@@ -283,7 +288,7 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "termlist_material_specified_id"
-    t.index ["termlist_material_specified_id"], name: "index_kind_of_objects_on_material_specified_id"
+    t.index ["termlist_material_specified_id"], name: "index_kind_of_objects_on_material_specified_id", using: :btree
   end
 
   create_table "termlist_material_specifieds", force: :cascade do |t|
@@ -291,7 +296,7 @@ ActiveRecord::Schema.define(version: 20180110170045) do
     t.integer  "termlist_material_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
-    t.index ["termlist_material_id"], name: "index_termlist_material_specifieds_on_termlist_material_id"
+    t.index ["termlist_material_id"], name: "index_termlist_material_specifieds_on_termlist_material_id", using: :btree
   end
 
   create_table "termlist_materials", force: :cascade do |t|
