@@ -132,10 +132,13 @@ $stone_data = {
     "red",
     "black"
   ],
-  preservation_object: [
+  preservation_objects: [
     "fragmentary",
     "almost complete",
     "complete"
-  ]
+  ],
+  
+  decorations: [],
+  preservation_materials: []
 
 }

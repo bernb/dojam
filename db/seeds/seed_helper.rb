@@ -7,6 +7,7 @@ class SeedHelper
     @debug_index = 0
   
     materialname = material_hash[:material_name]
+    puts "Importing #{materialname}"
     material_specifieds = material_hash[:material_specifieds]
     kind_of_objects = material_hash[:kind_of_objects]
     material = TermlistMaterial.new name: materialname
@@ -34,18 +35,18 @@ class SeedHelper
       @preservation_material_ids << p.id
     end
     
-    @decoration_techniques_ids = []
+    @decoration_technique_ids = []
     decoration_techniques.each do |decoration_technique|
       d = TermlistDecorationTechnique.where(name: decoration_technique).first
       d ||= TermlistDecorationTechnique.create name: decoration_technique
-      @decoration_techniques_ids << d.id
+      @decoration_technique_ids << d.id
     end
     
-    @decoration_colors_ids = []
+    @decoration_color_ids = []
     decoration_colors.each do |decoration_color|
       d = TermlistDecorationColor.where(name: decoration_color).first
       d ||= TermlistDecorationColor.create name: decoration_color
-      @decoration_colors_ids << d.id
+      @decoration_color_ids << d.id
     end
     
     @color_object_ids = []
@@ -107,15 +108,50 @@ class SeedHelper
   
   def self.generate_join_tables kind_of_object_specified_ids
     execute_transaction kind_of_object_specified_ids, 
+                       @production_technique_object_ids, 
+                        "termlist_kind_of_object_specifieds_production_techniques", 
+                        "termlist_production_technique_id"
+                        
+    execute_transaction kind_of_object_specified_ids, 
+                        @decoration_object_ids, 
+                        "termlist_kind_of_object_specifieds_decorations", 
+                        "termlist_decoration_id"
+  
+    execute_transaction kind_of_object_specified_ids, 
+                        @color_object_ids, 
+                        "termlist_kind_of_object_specifieds_colors", 
+                        "termlist_color_id"
+                        
+    execute_transaction kind_of_object_specified_ids, 
+                        @decoration_color_ids, 
+                        "termlist_kind_of_object_specifieds_decoration_colors", 
+                        "termlist_decoration_color_id"
+    
+    execute_transaction kind_of_object_specified_ids, 
+                        @decoration_technique_ids, 
+                        "termlist_kind_of_object_specifieds_decoration_techniques", 
+                        "termlist_decoration_technique_id"
+                        
+    execute_transaction kind_of_object_specified_ids, 
+                        @preservation_material_ids, 
+                        "termlist_kind_of_object_specifieds_preservation_materials", 
+                        "termlist_preservation_material_id"
+                        
+    execute_transaction kind_of_object_specified_ids, 
                         @preservation_object_ids, 
                         "termlist_kind_of_object_specifieds_preservation_objects", 
                         "termlist_preservation_object_id"
   end
   
   def self.execute_transaction kind_of_object_specified_ids, property_ids, join_table_name, property_column_name
+    if property_ids.empty?
+      puts "  Warning: No entries to insert for #{property_column_name}"
+      return
+    end
     koos_ids = kind_of_object_specified_ids.map{|e| "(#{e})"}.join(',') # Generate format "(1), (2), (3),..." as needed for sql insert
     timestamp = DateTime.current.to_s
     pres_object_ids = property_ids.map{|e| "(#{e}, '#{timestamp}', '#{timestamp}')"}.join(',')
+    # Create a tmp table and use cross join = cartesian product on it
     sql_query = 
     "
       DROP TABLE IF EXISTS koos_temp;
@@ -132,7 +168,6 @@ class SeedHelper
       DROP TABLE koos_temp;
       DROP TABLE props_temp;
     "
-    # Create a tmp table and use cross join = cartesian product on it
     ActiveRecord::Base.transaction do # We do not want the temp table to stick around
       ActiveRecord::Base.connection.execute(sql_query)
     end
