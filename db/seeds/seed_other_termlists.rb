@@ -1,0 +1,21 @@
+TermlistAcquisitionKind.create name: "chance find"
+TermlistAcquisitionKind.create name: "confiscation"
+TermlistAcquisitionKind.create name: "excavation"
+TermlistAcquisitionKind.create name: "gift"
+TermlistAcquisitionKind.create name: "purchase"
+TermlistAcquisitionKind.create name: "unknown"
+
+TermlistAcquisitionDeliveredBy.create name: "excavator"
+TermlistAcquisitionDeliveredBy.create name: "donor"
+TermlistAcquisitionDeliveredBy.create name: "seller"
+TermlistAcquisitionDeliveredBy.create name: "institution"
+TermlistAcquisitionDeliveredBy.create name: "unknown"
+
+TermlistAuthenticity.create name: "archaeological object"
+TermlistAuthenticity.create name: "copy"
+TermlistAuthenticity.create name: "forgery"
+TermlistAuthenticity.create name: "unspecific"
+TermlistAuthenticity.create name: "unknown"
+
+tomb = TermlistExcavationSiteKind.create name: "tomb"
+settlement = TermlistExcavationSiteKind.create name: "settlement"
