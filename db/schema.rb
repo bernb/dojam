@@ -10,23 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115125722) do
+ActiveRecord::Schema.define(version: 20180115134534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "excavation_sites", force: :cascade do |t|
     t.string   "name"
-    t.string   "name_mega_jordan"
-    t.string   "name_expedition"
-    t.integer  "site_number_mega"
-    t.integer  "site_number_jadis"
-    t.integer  "site_number_expedition"
-    t.string   "coordinates_mega"
-    t.integer  "excavation_site_kind_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.index ["excavation_site_kind_id"], name: "index_excavation_sites_on_excavation_site_kind_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "join_museum_object_colors", force: :cascade do |t|
@@ -93,7 +85,15 @@ ActiveRecord::Schema.define(version: 20180115125722) do
     t.integer  "termlist_production_techniques_id"
     t.boolean  "is_acquisition_date_exact"
     t.string   "acquisition_document_number"
+    t.string   "name_mega_jordan"
+    t.string   "name_expedition"
+    t.string   "site_number_mega"
+    t.string   "site_number_jadis"
+    t.string   "site_number_expedition"
+    t.string   "coordinates_mega"
+    t.integer  "excavation_site_kind_id"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id", using: :btree
+    t.index ["excavation_site_kind_id"], name: "index_museum_objects_on_excavation_site_kind_id", using: :btree
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id", using: :btree
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id", using: :btree
     t.index ["termlist_acquisition_kind_id"], name: "index_museum_objects_on_termlist_acquisition_kind_id", using: :btree
