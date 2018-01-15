@@ -1,6 +1,7 @@
 require "#{Rails.root}/db/seeds/seed_museums.rb"
 require "#{Rails.root}/db/seeds/seed_materials.rb"
 require "#{Rails.root}/db/seeds/seed_storages.rb"
+require "#{Rails.root}/db/seeds/seed_sites.rb"
 require "#{Rails.root}/db/seeds/seed_other_termlists.rb"
 
  
