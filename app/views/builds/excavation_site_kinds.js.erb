@@ -1,0 +1,6 @@
+$('#excavation_site_kind_selection').empty();
+$('#excavation_site_kind_selection').append( $('<option>select the excavation site kind</option>'));
+<% @excavation_site_kinds.each do |s| %>
+  $('#excavation_site_kind_selection').append($('<option value="<%= s.id %>"><%= s.name %></option>'));
+<% end %>
+$('#excavation_site_kind_selection').find("option").eq(0).remove();

@@ -5,12 +5,13 @@
 <%= simple_form_for @museum_object, url: wizard_path do |f| %>
   <div id="excavation_sites">
     <%= f.association :excavation_site, label: 'site name', include_blank: false %>
-    <% f.simple_fields_for :excavation_sites do |site| %>
-      <%= render 'excavation_site_fields', f: site %>
-    <% end %>
-    <div class="links">
-      <% link_to_add_association 'new excavation', f, :excavation_site %>
-    </div>
+    <%= f.input :name_expedition, label: 'other site name' %>
+    <%= f.input :site_number_mega, label: "site number according to MEGA" %>
+    <%= f.input :site_number_expedition, label: "site number according to expedition" %>
+    <%= f.input :coordinates_mega, label: "coordinates of site according to MEGA" %>
+    <%= f.label "", "kind of site" %>
+    <%= collection_select(:termlist_excavation_site_category, :termlist_excavation_site_category_id, @excavation_site_categories, :id, :name, {selected: @selected_excavation_site_category.id}, {id: "excavation_site_category_selection", class: "form-control select required"}) %>
+    <%= f.collection_select(:excavation_site_kind_id, @excavation_site_kinds, :id, :name,{}, {id: "excavation_site_kind_selection", class: "form-control select required"}) %>
   </div>
   <%= f.input :finding_context, label: "finding context specified" %>
   <%= f.input :finding_remarks, label: "remarks" %>

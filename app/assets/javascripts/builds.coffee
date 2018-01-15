@@ -26,6 +26,12 @@ ready = ->
       dataType: "script"
       data:
         museum_id: $('.museum_selection option:selected').val()
-        
+  $("#excavation_site_category_selection").on "change", ->
+    $.ajax
+      url: "/builds/excavation_site_kinds"
+      type: "GET"
+      dataType: "script"
+      data:
+        excavation_site_category_id: $('#excavation_site_category_selection option:selected').val()
 $(document).ready(ready)
 $(document).on('turbolinks:load', ready)
