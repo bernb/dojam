@@ -1,4 +1,5 @@
 class TermlistInscriptionLetter < ApplicationRecord
-  belongs_to :termlist_material_specified
   has_many :museum_objects
+  has_many :termlist_kind_of_object_specifieds_inscription_letters
+  has_many :termlist_kind_of_object_specifieds, through: :termlist_kind_of_object_specifieds_inscription_letters
 end

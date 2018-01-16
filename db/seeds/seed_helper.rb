@@ -20,6 +20,23 @@ class SeedHelper
     decoration_techniques = material_hash[:decoration_techniques]
     preservation_materials = material_hash[:preservation_materials]
     preservation_objects = material_hash[:preservation_objects]
+    inscription_languages = material_hash[:inscription_languages]
+    inscription_letters = material_hash[:inscription_letters]
+    
+    
+    @inscription_letter_ids =  []
+    inscription_letters.each do |inscription_letter|
+      l = TermlistInscriptionLetter.where(name: inscription_letter).first
+      l ||= TermlistInscriptionLetter.create name: inscription_letter
+      @inscription_letter_ids << l.id
+    end
+    
+    @inscription_language_ids =  []
+    inscription_languages.each do |inscription_language|
+      i = TermlistInscriptionLanguage.where(name: inscription_language).first
+      i ||= TermlistInscriptionLanguage.create name: inscription_language
+      @inscription_language_ids << i.id
+    end
     
     @preservation_object_ids = []
     preservation_objects.each do |preservation_object|
@@ -141,6 +158,16 @@ class SeedHelper
                         @preservation_object_ids, 
                         "termlist_kind_of_object_specifieds_preservation_objects", 
                         "termlist_preservation_object_id"
+                        
+    execute_transaction kind_of_object_specified_ids, 
+                        @inscription_language_ids, 
+                        "termlist_kind_of_object_specifieds_inscription_languages", 
+                        "termlist_inscription_language_id"
+                        
+    execute_transaction kind_of_object_specified_ids, 
+                        @inscription_letter_ids, 
+                        "termlist_kind_of_object_specifieds_inscription_letters", 
+                        "termlist_inscription_letter_id"
   end
   
   def self.execute_transaction kind_of_object_specified_ids, property_ids, join_table_name, property_column_name

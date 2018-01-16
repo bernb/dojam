@@ -120,5 +120,29 @@ $vitreous_data = {
     "rim-to-wall",
     "stem",
     "wall-to-bottom"
+  ],
+  inscription_languages: [
+    "Arabic",
+    "Aramaic",
+    "Greek",
+    "Kufic",
+    "Latin",
+    "Nabataean",
+    "Turkish",
+    "Safaitic",
+    "Thamudic",
+    "unspecified/unknown"
+  ],
+  inscription_letters: [
+    "Arabic",
+    "Aramaic",
+    "Greek",
+    "Kufic",
+    "Latin",
+    "Nabataean",
+    "Turkish",
+    "Safaitic",
+    "Thamudic",
+    "unspecified/unknown"
   ] 
 }

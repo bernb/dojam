@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180116123941) do
+ActiveRecord::Schema.define(version: 20180116131744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -210,18 +210,14 @@ ActiveRecord::Schema.define(version: 20180116123941) do
 
   create_table "termlist_inscription_languages", force: :cascade do |t|
     t.string   "name"
-    t.integer  "termlist_material_specified_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.index ["termlist_material_specified_id"], name: "index_inscription_languages_on_material_specified_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "termlist_inscription_letters", force: :cascade do |t|
     t.string   "name"
-    t.integer  "termlist_material_specified_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.index ["termlist_material_specified_id"], name: "index_inscription_letters_on_material_specified_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "termlist_kind_of_object_specifieds", force: :cascade do |t|
@@ -268,7 +264,25 @@ ActiveRecord::Schema.define(version: 20180116123941) do
     t.index ["termlist_kind_of_object_specified_id"], name: "index_join_table_on_kind_of_object_specified", using: :btree
   end
 
-  create_table "termlist_kind_of_object_specifieds_preservation_materials", id: :integer, default: -> { "nextval('termlist_kind_of_object_specifieds_preservation_material_id_seq'::regclass)" }, force: :cascade do |t|
+  create_table "termlist_kind_of_object_specifieds_inscription_languages", force: :cascade do |t|
+    t.integer  "termlist_kind_of_object_specified_id"
+    t.integer  "termlist_inscription_language_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["termlist_inscription_language_id"], name: "index_koos_inscription_languages_on_inscription_language_id", using: :btree
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_koos_inscription_languages_on_koos_id", using: :btree
+  end
+
+  create_table "termlist_kind_of_object_specifieds_inscription_letters", force: :cascade do |t|
+    t.integer  "termlist_kind_of_object_specified_id"
+    t.integer  "termlist_inscription_letter_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["termlist_inscription_letter_id"], name: "index_koos_inscription_letters_on_inscription_letter_id", using: :btree
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_koos_inscription_letters_on_koos_id", using: :btree
+  end
+
+  create_table "termlist_kind_of_object_specifieds_preservation_materials", force: :cascade do |t|
     t.integer  "termlist_kind_of_object_specified_id"
     t.integer  "termlist_preservation_material_id"
     t.datetime "created_at",                           null: false
@@ -340,4 +354,8 @@ ActiveRecord::Schema.define(version: 20180116123941) do
   end
 
   add_foreign_key "museum_objects", "termlist_production_techniques"
+  add_foreign_key "termlist_kind_of_object_specifieds_inscription_languages", "termlist_inscription_languages"
+  add_foreign_key "termlist_kind_of_object_specifieds_inscription_languages", "termlist_kind_of_object_specifieds"
+  add_foreign_key "termlist_kind_of_object_specifieds_inscription_letters", "termlist_inscription_letters"
+  add_foreign_key "termlist_kind_of_object_specifieds_inscription_letters", "termlist_kind_of_object_specifieds"
 end
