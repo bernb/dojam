@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-2">
     <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-      <%= f.association :termlist_production_technique, collection: @production_technique, label: "", as: :collection_select, include_blank: false  %>
+      <%= f.association :termlist_production_technique, collection: @production_techniques, label: "", as: :collection_select, include_blank: false  %>
       <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
     <% end %>
   </div>

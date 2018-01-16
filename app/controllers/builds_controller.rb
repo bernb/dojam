@@ -51,7 +51,8 @@ class BuildsController < ApplicationController
     if step == :step_production
       kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
       # after that get productions that belongs to the choosen spec. materials
-      @production_techniques = TermlistProductionTechnique.joins(:termlist_kind_of_object_specified).where termlist_kind_of_object_specified: {id: kind_of_object_specified_id}
+      kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
+      @production_techniques = kind_specified.termlist_production_techniques
     end
     
     if step == :step_color
