@@ -50,27 +50,30 @@ class BuildsController < ApplicationController
     
     if step == :step_production
       kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
-      # after that get productions that belongs to the choosen spec. materials
+      # after that get productions that belongs to the choosen specific kind of object
       kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
       @production_techniques = kind_specified.termlist_production_techniques
     end
     
     if step == :step_color
-      material_specifieds_ids = @museum_object.termlist_material_specifieds.ids # get ids for choosen spec. materials
-      # after that get productions that belongs to the choosen spec. materials
-      @colors = TermlistColor.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
+      kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
+      # after that get productions that belongs to the choosen specific kind of object
+      kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
+      @colors = kind_specified.termlist_colors
     end
     
     if step == :step_decoration
-      material_specifieds_ids = @museum_object.termlist_material_specifieds.ids # get ids for choosen spec. materials
-      # after that get productions that belongs to the choosen spec. materials
-      @decorations = TermlistDecoration.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
-      @decoration_colors = TermlistDecorationColor.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
+      kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
+      # after that get productions that belongs to the choosen specific kind of object
+      kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
+      @decorations = kind_specified.termlist_decorations
+      @decoration_colors = kind_specified.termlist_decoration_colors
     end
     
     if step == :step_inscription
-      material_specifieds_ids = @museum_object.termlist_material_specifieds.ids # get ids for choosen spec. materials
-      # after that get productions that belongs to the choosen spec. materials
+      kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
+      # after that get productions that belongs to the choosen specific kind of object
+      kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
       @inscription_letters = TermlistInscriptionLetter.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
       @inscription_language = TermlistInscriptionLanguage.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
     end
