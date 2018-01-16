@@ -4,11 +4,7 @@
   <div class="col-md-2">
     <%= simple_form_for @museum_object, url: wizard_path do |f| %>
       <% @materials.each do |m| %>
-        <% if not m.name == "vitreous material" %>
-          <%= f.association :termlist_material_specifieds, collection: m.termlist_material_specifieds, label: m.name,  include_blank: false  %>
-        <% else %>
-          <%= f.association :termlist_material_specifieds, collection: m.termlist_material_specifieds, label: m.name, as: :collection_select, include_blank: false  %>
-        <% end %>
+        <%= f.association :termlist_material_specifieds, collection: m.termlist_material_specifieds, label: m.name,  include_blank: false  %>
       <% end %>
       <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
     <% end %>
