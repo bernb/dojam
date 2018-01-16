@@ -154,5 +154,29 @@ $ceramic_data = {
     "handle-to-body",
     "rim",
     "rim-to-body"
+  ],
+  inscription_languages: [
+    "Arabic",
+    "Aramaic",
+    "Greek",
+    "Kufic",
+    "Latin",
+    "Nabataean",
+    "Turkish",
+    "Safaitic",
+    "Thamudic",
+    "unspecified/unknown"
+  ],
+  inscription_letters: [
+    "Arabic",
+    "Aramaic",
+    "Greek",
+    "Kufic",
+    "Latin",
+    "Nabataean",
+    "Turkish",
+    "Safaitic",
+    "Thamudic",
+    "unspecified/unknown"
   ]
 } # hash
