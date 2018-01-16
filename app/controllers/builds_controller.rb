@@ -74,8 +74,8 @@ class BuildsController < ApplicationController
       kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
       # after that get productions that belongs to the choosen specific kind of object
       kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
-      @inscription_letters = TermlistInscriptionLetter.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
-      @inscription_language = TermlistInscriptionLanguage.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
+      @inscription_letters = kind_specified.termlist_inscription_letters
+      @inscription_language = kind_specified.termlist_inscription_languages
     end
     
     if step == :step_preservation
