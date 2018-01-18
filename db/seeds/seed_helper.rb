@@ -1,5 +1,24 @@
 class SeedHelper
 
+  def self.build_dating_related_seed material_hash
+    periods = material_hash[:periods]
+    
+    @period_ids = []
+    periods.each do |period|
+      p = TermlistDatingPeriod.where(name: period).first
+      p ||= TermlistDatingPeriod.create name: period
+      @period_ids << p.id
+    end
+    
+    kind_of_object_specified_ids = TermlistKindOfObjectSpecified.all.ids
+    
+    execute_transaction kind_of_object_specified_ids, 
+                        @period_ids, 
+                        "termlist_kind_of_object_specifieds_dating_periods", 
+                        "termlist_dating_periods_id"
+  
+  end
+
   # ToDo: Optimize as this is way too slow
   # If more properties gets added, consider using metaprogramming to recursive add all propertiy data
   def self.build_material_related_seed material_hash

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180116131744) do
+ActiveRecord::Schema.define(version: 20180118134959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -237,6 +237,15 @@ ActiveRecord::Schema.define(version: 20180116131744) do
     t.index ["termlist_kind_of_object_specified_id"], name: "index_kind_of_object_spec_colors_on_kind_of_object_spec_id", using: :btree
   end
 
+  create_table "termlist_kind_of_object_specifieds_dating_periods", force: :cascade do |t|
+    t.integer  "termlist_kind_of_object_specified_id"
+    t.integer  "termlist_dating_periods_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["termlist_dating_periods_id"], name: "index_koos_dating_periods_on_termlist_dating_periods_id", using: :btree
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_koos_dating_periods_on_koos_id", using: :btree
+  end
+
   create_table "termlist_kind_of_object_specifieds_decoration_colors", force: :cascade do |t|
     t.integer  "termlist_kind_of_object_specified_id"
     t.datetime "created_at",                           null: false
@@ -282,7 +291,7 @@ ActiveRecord::Schema.define(version: 20180116131744) do
     t.index ["termlist_kind_of_object_specified_id"], name: "index_koos_inscription_letters_on_koos_id", using: :btree
   end
 
-  create_table "termlist_kind_of_object_specifieds_preservation_materials", force: :cascade do |t|
+  create_table "termlist_kind_of_object_specifieds_preservation_materials", id: :integer, default: -> { "nextval('termlist_kind_of_object_specifieds_preservation_material_id_seq'::regclass)" }, force: :cascade do |t|
     t.integer  "termlist_kind_of_object_specified_id"
     t.integer  "termlist_preservation_material_id"
     t.datetime "created_at",                           null: false
@@ -354,6 +363,8 @@ ActiveRecord::Schema.define(version: 20180116131744) do
   end
 
   add_foreign_key "museum_objects", "termlist_production_techniques"
+  add_foreign_key "termlist_kind_of_object_specifieds_dating_periods", "termlist_dating_periods", column: "termlist_dating_periods_id"
+  add_foreign_key "termlist_kind_of_object_specifieds_dating_periods", "termlist_kind_of_object_specifieds"
   add_foreign_key "termlist_kind_of_object_specifieds_inscription_languages", "termlist_inscription_languages"
   add_foreign_key "termlist_kind_of_object_specifieds_inscription_languages", "termlist_kind_of_object_specifieds"
   add_foreign_key "termlist_kind_of_object_specifieds_inscription_letters", "termlist_inscription_letters"
