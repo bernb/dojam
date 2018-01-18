@@ -79,10 +79,11 @@ class BuildsController < ApplicationController
     end
     
     if step == :step_preservation
-      material_specifieds_ids = @museum_object.termlist_material_specifieds.ids
-      materials = TermlistMaterial.joins(:termlist_material_specifieds).where termlist_material_specifieds: {id: material_specifieds_ids}
-      material_ids = materials.ids
-      @termlist_preservation_state = TermlistPreservationState.joins(:termlist_material).where termlist_materials: {id: material_ids}
+      kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
+      # after that get productions that belongs to the choosen specific kind of object
+      kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
+      @preservation_materials = kind_specified.termlist_preservation_materials
+      @preservation_objects = kind_specified.termlist_preservation_objects
     end
     
     render_wizard
