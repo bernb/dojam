@@ -19,4 +19,6 @@ class TermlistKindOfObjectSpecified < ApplicationRecord
   has_many :termlist_inscription_languages, -> { order(name: :asc) }, through: :termlist_kind_of_object_specifieds_inscription_languages
   has_many :termlist_kind_of_object_specifieds_inscription_letters
   has_many :termlist_inscription_letters, -> { order(name: :asc) }, through: :termlist_kind_of_object_specifieds_inscription_letters
+  has_many :termlist_kind_of_object_specifieds_dating_periods
+  has_many :termlist_dating_periods, -> { order(name: :asc) }, through: :termlist_kind_of_object_specifieds_dating_periods
 end
