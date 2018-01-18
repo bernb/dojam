@@ -13,11 +13,11 @@ class BuildsController < ApplicationController
     @museum_object = MuseumObject.find params[:museum_object_id]
     
     if step == :step_material
-      @materials = TermlistMaterial.all
+      @materials = TermlistMaterial.all.order name: :asc
     end
     
     if step == :step_color
-      @colors = TermlistColor.all
+      @colors = TermlistColor.all.order name: :asc
     end
     
     if step == :step_museum
@@ -28,13 +28,13 @@ class BuildsController < ApplicationController
     end
     
     if step == :step_provenance
-      @excavation_site_categories = TermlistExcavationSiteCategory.all
+      @excavation_site_categories = TermlistExcavationSiteCategory.all.order name: :asc
       @selected_excavation_site_category = TermlistExcavationSiteCategory.first
       @excavation_site_kinds = @selected_excavation_site_category.termlist_excavation_site_kinds
     end
     
     if step == :step_material_specified
-      @materials = TermlistMaterial.where id: session[:material_ids]
+      @materials = TermlistMaterial.where(id: session[:material_ids]).order name: :asc
     end
     
     if step == :step_kind_of_object

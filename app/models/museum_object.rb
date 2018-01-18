@@ -1,10 +1,10 @@
 class MuseumObject < ApplicationRecord
   include SearchCop
 
-  belongs_to :excavation_site, required: false # do not require for now while in early dev state
+  belongs_to :excavation_site, -> { order(name: :asc) }, required: false # do not require for now while in early dev state
   belongs_to :storage_location, required: false
-  belongs_to :termlist_acquisition_delivered_by, required: false
-  belongs_to :termlist_acquisition_kind, required: false
+  belongs_to :termlist_acquisition_delivered_by, -> { order(name: :asc) }, required: false
+  belongs_to :termlist_acquisition_kind, -> { order(name: :asc) }, required: false
   belongs_to :termlist_authenticity, required: false
   belongs_to :termlist_dating_millennium, required: false
   belongs_to :termlist_kind_of_object, required: false
