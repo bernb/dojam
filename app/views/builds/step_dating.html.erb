@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-2">
     <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-      <%= select_tag "dating_period", options_from_collection_for_select(TermlistDatingPeriod.all, "id", "name"), include_blank: false, class: "form-control" %>
+      <%= f.association :termlist_dating_period, collection: @dating_periods, label: "dating period", include_blank: false, class: "form-control" %>
       <%= select_tag "dating_millennium", options_from_collection_for_select(TermlistDatingMillennium.all, "id", "name"), include_blank: false, class: "form-control" %>
       <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
     <% end %>

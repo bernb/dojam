@@ -86,6 +86,13 @@ class BuildsController < ApplicationController
       @preservation_objects = kind_specified.termlist_preservation_objects
     end
     
+    if step == :step_dating
+      kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
+      # after that get productions that belongs to the choosen specific kind of object
+      kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
+      @dating_periods = kind_specified.termlist_dating_periods
+    end
+    
     render_wizard
   end
 

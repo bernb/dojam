@@ -7,6 +7,7 @@ class MuseumObject < ApplicationRecord
   belongs_to :termlist_acquisition_kind, -> { order(name: :asc) }, required: false
   belongs_to :termlist_authenticity, required: false
   belongs_to :termlist_dating_millennium, required: false
+  belongs_to :termlist_dating_period, required: false
   belongs_to :termlist_kind_of_object, required: false
   belongs_to :termlist_kind_of_object_specified, required: false
   belongs_to :termlist_production_technique, required: false
