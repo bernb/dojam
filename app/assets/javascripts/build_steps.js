@@ -35,6 +35,16 @@ ready = function() {
     }
   });
   
+  var dating_centuries_checkbox = $('#optional_termlist_dating_centuries_checkbox');
+  var dating_centuries_selection = dating_centuries_checkbox.next().next();
+  dating_centuries_checkbox.change(function() {
+    if(this.checked) {
+      dating_centuries_selection.show();
+    } else {
+      dating_centuries_selection.hide();
+    }
+  });
+  
   
 };
 
