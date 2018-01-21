@@ -5,10 +5,10 @@
     <%= simple_form_for @museum_object, url: wizard_path do |f| %>
       <%= check_box_tag :optional_termlist_dating_period_checkbox %>
       <%= f.label :termlist_dating_period, "dating period" %>
-      <%= f.association :termlist_dating_period, collection: @dating_periods, label: false, include_blank: false, class: "form-control" %>
-      <%= check_box_tag :optional_termlist_dating_millenium_checkbox %>
-      <%= f.label :termlist_dating_millenium, "dating millenium" %>
-      <%= f.association :termlist_dating_millennium, collection: @dating_millennia, label: false, include_blank: false, class: "form-control" %>
+      <%= f.association :termlist_dating_period, collection: @dating_periods, label: false, include_blank: true, class: "form-control" %>
+      <%= check_box_tag :optional_termlist_dating_millennium_checkbox %>
+      <%= f.label :termlist_dating_millennium, "dating millennium" %>
+      <%= f.association :termlist_dating_millennium, collection: @dating_millennia, label: false, include_blank: true, class: "form-control" %>
       <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
     <% end %>
   </div>
