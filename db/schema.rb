@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120125942) do
+ActiveRecord::Schema.define(version: 20180121153125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -239,6 +239,15 @@ ActiveRecord::Schema.define(version: 20180120125942) do
     t.index ["termlist_kind_of_object_specified_id"], name: "index_kind_of_object_spec_colors_on_kind_of_object_spec_id", using: :btree
   end
 
+  create_table "termlist_kind_of_object_specifieds_dating_millennia", force: :cascade do |t|
+    t.integer  "termlist_kind_of_object_specified_id"
+    t.integer  "termlist_dating_millennium_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["termlist_dating_millennium_id"], name: "index_koos_dating_millennia_on_termlist_dating_millennium_id", using: :btree
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_koos_dating_millennia_on_koos_id", using: :btree
+  end
+
   create_table "termlist_kind_of_object_specifieds_dating_periods", force: :cascade do |t|
     t.integer  "termlist_kind_of_object_specified_id"
     t.integer  "termlist_dating_period_id"
@@ -366,6 +375,8 @@ ActiveRecord::Schema.define(version: 20180120125942) do
 
   add_foreign_key "museum_objects", "termlist_dating_periods"
   add_foreign_key "museum_objects", "termlist_production_techniques"
+  add_foreign_key "termlist_kind_of_object_specifieds_dating_millennia", "termlist_dating_millennia"
+  add_foreign_key "termlist_kind_of_object_specifieds_dating_millennia", "termlist_kind_of_object_specifieds"
   add_foreign_key "termlist_kind_of_object_specifieds_dating_periods", "termlist_dating_periods"
   add_foreign_key "termlist_kind_of_object_specifieds_dating_periods", "termlist_kind_of_object_specifieds"
   add_foreign_key "termlist_kind_of_object_specifieds_inscription_languages", "termlist_inscription_languages"

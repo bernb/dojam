@@ -91,6 +91,7 @@ class BuildsController < ApplicationController
       # after that get productions that belongs to the choosen specific kind of object
       kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
       @dating_periods = kind_specified.termlist_dating_periods
+      @dating_millennia = kind_specified.termlist_dating_millennia
     end
     
     render_wizard

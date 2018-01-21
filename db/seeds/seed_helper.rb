@@ -2,6 +2,7 @@ class SeedHelper
 
   def self.build_dating_related_seed material_hash
     periods = material_hash[:periods]
+    millennia = material_hash[:millennia]
     
     @period_ids = []
     periods.each do |period|
@@ -10,12 +11,23 @@ class SeedHelper
       @period_ids << p.id
     end
     
+    @millennium_ids = []
+    millennia.each do |millennium|
+      m = TermlistDatingMillennium.where(name: millennium).first
+      m ||= TermlistDatingMillennium.create name: millennium
+      @millennium_ids << m.id
+    end
+    
     kind_of_object_specified_ids = TermlistKindOfObjectSpecified.all.ids
     
     execute_transaction kind_of_object_specified_ids, 
                         @period_ids, 
                         "termlist_kind_of_object_specifieds_dating_periods", 
-                        "termlist_dating_periods_id"
+                        "termlist_dating_period_id"
+    execute_transaction kind_of_object_specified_ids, 
+                        @millennium_ids, 
+                        "termlist_kind_of_object_specifieds_dating_millennia", 
+                        "termlist_dating_millennium_id"
   
   end
 
