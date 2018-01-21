@@ -9,7 +9,7 @@
       <%= check_box_tag :optional_termlist_dating_millennium_checkbox %>
       <%= f.label :termlist_dating_millennium, "dating millennium" %>
       <%= f.association :termlist_dating_millennium, collection: @dating_millennia, label: false, include_blank: true, class: "form-control" %>
-      <%= check_box_tag :optional_termlist_dating_century_checkbox %>
+      <%= check_box_tag :optional_termlist_dating_centuries_checkbox %>
       <%= f.label :termlist_dating_centuries, "dating centuries" %>
       <%= f.association :termlist_dating_centuries, collection: @dating_centuries, label: false, class: "form-control" %>
       <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
