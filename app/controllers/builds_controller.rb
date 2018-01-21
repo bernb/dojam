@@ -92,6 +92,7 @@ class BuildsController < ApplicationController
       kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
       @dating_periods = kind_specified.termlist_dating_periods
       @dating_millennia = kind_specified.termlist_dating_millennia
+      @dating_centuries = kind_specified.termlist_dating_centuries
     end
     
     render_wizard

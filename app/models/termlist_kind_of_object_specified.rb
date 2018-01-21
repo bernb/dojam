@@ -23,4 +23,6 @@ class TermlistKindOfObjectSpecified < ApplicationRecord
   has_many :termlist_dating_periods, -> { order(name: :asc) }, through: :termlist_kind_of_object_specifieds_dating_periods
   has_many :termlist_kind_of_object_specifieds_dating_millennia
   has_many :termlist_dating_millennia, -> { order(name: :asc) }, through: :termlist_kind_of_object_specifieds_dating_millennia
+  has_many :termlist_kind_of_object_specifieds_dating_centuries
+  has_many :termlist_dating_centuries, through: :termlist_kind_of_object_specifieds_dating_centuries
 end

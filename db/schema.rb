@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180121153125) do
+ActiveRecord::Schema.define(version: 20180121164408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 20180121153125) do
     t.datetime "updated_at",        null: false
     t.index ["museum_object_id"], name: "index_join_museum_object_colors_on_museum_object_id", using: :btree
     t.index ["termlist_color_id"], name: "index_join_museum_object_colors_on_termlist_color_id", using: :btree
+  end
+
+  create_table "join_museum_object_dating_centuries", force: :cascade do |t|
+    t.integer  "museum_object_id"
+    t.integer  "termlist_dating_century_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["museum_object_id"], name: "index_join_museum_object_dating_centuries_on_museum_object_id", using: :btree
+    t.index ["termlist_dating_century_id"], name: "index_join_mo_dating_centuries_on_dating_century_id", using: :btree
   end
 
   create_table "join_museum_object_material_specifieds", force: :cascade do |t|
@@ -166,6 +175,12 @@ ActiveRecord::Schema.define(version: 20180121153125) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "termlist_dating_centuries", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "termlist_dating_millennia", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -237,6 +252,15 @@ ActiveRecord::Schema.define(version: 20180121153125) do
     t.datetime "updated_at",                           null: false
     t.index ["termlist_color_id"], name: "index_kind_of_object_specifieds_colors_on_color_id", using: :btree
     t.index ["termlist_kind_of_object_specified_id"], name: "index_kind_of_object_spec_colors_on_kind_of_object_spec_id", using: :btree
+  end
+
+  create_table "termlist_kind_of_object_specifieds_dating_centuries", force: :cascade do |t|
+    t.integer  "termlist_dating_century_id"
+    t.integer  "termlist_kind_of_object_specified_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["termlist_dating_century_id"], name: "index_tkoos_dating_centuries_on_dating_century_id", using: :btree
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_koos_dating_centuries_on_koos_id", using: :btree
   end
 
   create_table "termlist_kind_of_object_specifieds_dating_millennia", force: :cascade do |t|
@@ -373,8 +397,12 @@ ActiveRecord::Schema.define(version: 20180121153125) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "join_museum_object_dating_centuries", "museum_objects"
+  add_foreign_key "join_museum_object_dating_centuries", "termlist_dating_centuries"
   add_foreign_key "museum_objects", "termlist_dating_periods"
   add_foreign_key "museum_objects", "termlist_production_techniques"
+  add_foreign_key "termlist_kind_of_object_specifieds_dating_centuries", "termlist_dating_centuries"
+  add_foreign_key "termlist_kind_of_object_specifieds_dating_centuries", "termlist_kind_of_object_specifieds"
   add_foreign_key "termlist_kind_of_object_specifieds_dating_millennia", "termlist_dating_millennia"
   add_foreign_key "termlist_kind_of_object_specifieds_dating_millennia", "termlist_kind_of_object_specifieds"
   add_foreign_key "termlist_kind_of_object_specifieds_dating_periods", "termlist_dating_periods"
