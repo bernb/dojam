@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180121164408) do
+ActiveRecord::Schema.define(version: 20180122084626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,11 +99,10 @@ ActiveRecord::Schema.define(version: 20180121164408) do
     t.string   "site_number_jadis"
     t.string   "site_number_expedition"
     t.string   "coordinates_mega"
-    t.integer  "excavation_site_kind_id"
     t.integer  "termlist_production_technique_id"
     t.integer  "termlist_dating_period_id"
+    t.integer  "termlist_excavation_site_kind_id"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id", using: :btree
-    t.index ["excavation_site_kind_id"], name: "index_museum_objects_on_excavation_site_kind_id", using: :btree
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id", using: :btree
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id", using: :btree
     t.index ["termlist_acquisition_kind_id"], name: "index_museum_objects_on_termlist_acquisition_kind_id", using: :btree
@@ -113,6 +112,7 @@ ActiveRecord::Schema.define(version: 20180121164408) do
     t.index ["termlist_decoration_color_id"], name: "index_museum_objects_on_termlist_decoration_color_id", using: :btree
     t.index ["termlist_decoration_id"], name: "index_museum_objects_on_termlist_decoration_id", using: :btree
     t.index ["termlist_decoration_technique_id"], name: "index_museum_objects_on_termlist_decoration_technique_id", using: :btree
+    t.index ["termlist_excavation_site_kind_id"], name: "index_museum_objects_on_termlist_excavation_site_kind_id", using: :btree
     t.index ["termlist_inscription_language_id"], name: "index_museum_objects_on_termlist_inscription_language_id", using: :btree
     t.index ["termlist_inscription_letter_id"], name: "index_museum_objects_on_termlist_inscription_letter_id", using: :btree
     t.index ["termlist_kind_of_object_id"], name: "index_museum_objects_on_termlist_kind_of_object_id", using: :btree
@@ -400,6 +400,7 @@ ActiveRecord::Schema.define(version: 20180121164408) do
   add_foreign_key "join_museum_object_dating_centuries", "museum_objects"
   add_foreign_key "join_museum_object_dating_centuries", "termlist_dating_centuries"
   add_foreign_key "museum_objects", "termlist_dating_periods"
+  add_foreign_key "museum_objects", "termlist_excavation_site_kinds"
   add_foreign_key "museum_objects", "termlist_production_techniques"
   add_foreign_key "termlist_kind_of_object_specifieds_dating_centuries", "termlist_dating_centuries"
   add_foreign_key "termlist_kind_of_object_specifieds_dating_centuries", "termlist_kind_of_object_specifieds"
