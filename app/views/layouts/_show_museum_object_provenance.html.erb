@@ -1,41 +1,29 @@
 <div class="hidden museum_object_page museum_object_provenance">
   <h2>provenance</h2>
   <dl class="dl-horizontal">
-    <dt>kind of site</dt>
+    <dt>site name</dt>
     <dd><%= @museum_object&.excavation_site&.name %></dd>
     
-    <dt>finding context</dt>
-    <dd><%= @museum_object&.finding_context %></dd>
+    <dt>other site name</dt>
+    <dd><%= @museum_object&.name_expedition %></dd>
     
-    <dt>acquisition date</dt>
-    <dd><%= @museum_object&.acquisition_date %></dd>
+    <dt>site number (MEGA)</dt>
+    <dd><%= @museum_object&.site_number_mega %></dd>
+    
+    <dt>site number (expedition)</dt>
+    <dd><%= @museum_object&.site_number_expedition %></dd>
   </dl>
   
   <div class="row">
   <div class="col-md-4">
     <h3>site name</h3>
     <dl class="dl-horizontal">
-      <dt>inv. book</dt>
-      <dd><%= @museum_object&.excavation_site&.name %></dd>
-      
-      <dt>MEGA Jordan</dt>
-      <dd><%= @museum_object&.excavation_site&.name_mega_jordan %></dd>
-      
-      <dt>expedition</dt>
-      <dd><%= @museum_object&.excavation_site&.name_expedition %></dd>
     </dl>
   </div>
   <div class="col-md-4">
     <h3>site number</h3>
     <dl class="dl-horizontal">
-      <dt>MEGA Jordan</dt>
-      <dd><%= @museum_object&.excavation_site&.site_number_mega %></dd>
-      
-      <dt>JADIS</dt>
-      <dd><%= @museum_object&.excavation_site&.site_number_jadis %></dd>
-      
-      <dt>expedition</dt>
-      <dd><%= @museum_object&.excavation_site&.site_number_expedition %></dd>
+     
     </dl>
   </div>
 </div>

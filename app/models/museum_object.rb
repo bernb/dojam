@@ -18,6 +18,7 @@ class MuseumObject < ApplicationRecord
   belongs_to :termlist_preservation_object, required: false
   belongs_to :termlist_inscription_letter, required: false
   belongs_to :termlist_inscription_language, required: false
+  belongs_to :termlist_excavation_site_kind, required: false
   has_many :join_museum_object_material_specifieds
   has_many :termlist_material_specifieds, through: :join_museum_object_material_specifieds
   has_many :join_museum_object_colors
