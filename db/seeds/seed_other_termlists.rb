@@ -17,6 +17,3 @@ TermlistAuthenticity.create name: "copy"
 TermlistAuthenticity.create name: "forgery"
 TermlistAuthenticity.create name: "unspecific"
 TermlistAuthenticity.create name: "unknown"
-
-tomb = TermlistExcavationSiteKind.create name: "tomb"
-settlement = TermlistExcavationSiteKind.create name: "settlement"

@@ -11,7 +11,7 @@
     <%= f.input :coordinates_mega, label: "coordinates of site according to MEGA" %>
     <%= f.label "", "kind of site" %>
     <%= collection_select(:termlist_excavation_site_category, :termlist_excavation_site_category_id, @excavation_site_categories, :id, :name, {selected: @selected_excavation_site_category.id}, {id: "excavation_site_category_selection", class: "form-control select required"}) %>
-    <%= f.collection_select(:excavation_site_kind_id, @excavation_site_kinds, :id, :name,{}, {id: "excavation_site_kind_selection", class: "form-control select required"}) %>
+    <%= f.collection_select(:termlist_excavation_site_kind_id, @excavation_site_kinds, :id, :name,{}, {id: "excavation_site_kind_selection", class: "form-control select required"}) %>
   </div>
   <%= f.input :finding_context, label: "finding context specified" %>
   <%= f.input :finding_remarks, label: "remarks" %>
