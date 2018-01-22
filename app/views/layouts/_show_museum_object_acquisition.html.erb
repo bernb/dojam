@@ -7,7 +7,17 @@
     <dt>delivered by</dt>  
     <dd><%= @museum_object&.termlist_acquisition_delivered_by&.name %></dd>
     
+    <dt>name of deliverer</dt>  
+    <dd><%= @museum_object&.acquisition_deliverer_name %></dd>
+    
     <dt>acquisition date</dt>
-    <dd><%= @museum_object&.acquisition_date %></dd>
+    <% if @museum_object&.is_acquisition_date_exact %>
+      <dd><%= @museum_object&.acquisition_date %></dd>
+    <% else %>
+      <dd><%= @museum_object&.acquisition_date.strftime('%Y') %></dd>
+    <% end %>
+    
+    <dt>number of acquisition document</dt>  
+    <dd><%= @museum_object&.acquisition_document_number %></dd>
   </dl>
 </div>
