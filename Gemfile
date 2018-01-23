@@ -9,7 +9,8 @@ end
 gem 'search_cop'
 
 # read env variables from serverfile as puma doesnt load env variables itself
-gem 'dotenv-rails', :require => 'dotenv/rails-now'
+# we switch to canonical config file secrets.yml
+#gem 'dotenv-rails', :require => 'dotenv/rails-now'
 
 # bootstrap 3 for use with simple_form
 gem 'bootstrap-sass'
