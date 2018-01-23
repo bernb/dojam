@@ -326,7 +326,7 @@ ActiveRecord::Schema.define(version: 20180122084626) do
     t.index ["termlist_kind_of_object_specified_id"], name: "index_koos_inscription_letters_on_koos_id", using: :btree
   end
 
-  create_table "termlist_kind_of_object_specifieds_preservation_materials", id: :integer, default: -> { "nextval('termlist_kind_of_object_specifieds_preservation_material_id_seq'::regclass)" }, force: :cascade do |t|
+  create_table "termlist_kind_of_object_specifieds_preservation_materials", force: :cascade do |t|
     t.integer  "termlist_kind_of_object_specified_id"
     t.integer  "termlist_preservation_material_id"
     t.datetime "created_at",                           null: false
