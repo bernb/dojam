@@ -174,7 +174,8 @@ class BuildsController < ApplicationController
                                           :inscription_decoration, :inscription_letters, :inscription_text, :inscription_translation, 
                                           :excavation_site_id, :termlist_material_specified_ids, :termlist_kind_of_object_id, :termlist_kind_of_object_specified_id,
                                           :is_acquisition_date_exact, :acquisition_document_number, :name_expedition, :site_number_mega, :site_number_expedition,
-                                          :coordinates_mega, :termlist_excavation_site_kind_id,
+                                          :coordinates_mega, :termlist_excavation_site_kind_id, :termlist_dating_period_id, :termlist_dating_millennium_id,
+                                          termlist_dating_century_ids: [],
                                           termlist_material_specified_ids: [], 
                                           termlist_color_ids: [],                                   
                                           excavation_site_attributes: [:id, :_destroy] 
