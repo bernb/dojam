@@ -11,6 +11,9 @@ gem 'search_cop'
 # file attachment. Rails 5.2 will have ActiveStorage as an alternative
 gem 'carrierwave', '~> 1.0'
 
+# used by carrierwave to create thumbnail
+gem 'mini_magick'
+
 # read env variables from serverfile as puma doesnt load env variables itself
 # we switch to canonical config file secrets.yml
 #gem 'dotenv-rails', :require => 'dotenv/rails-now'
