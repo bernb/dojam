@@ -1,0 +1,21 @@
+<div class="hidden museum_object_page museum_object_material">
+  <h2>material</h2>
+  <dl class="dl-horizontal">
+    <dt>material</dt>
+    <% @museum_object&.termlist_material_specifieds.each do |m| %>
+      <dd><%= m.termlist_material&.name %>: <%= m.name %></dd>
+    <% end %>
+    
+    <dt>kind of object</dt>
+    <dd><%= @museum_object&.termlist_kind_of_object.name %>: <%= @museum_object&.termlist_kind_of_object_specified.name %>
+    
+    <dt>colors</dt>  
+    <% @museum_object&.termlist_colors.each do |m| %>
+      <dd><%= m&.name %></dd>
+    <% end %>
+    
+    <dt>production technique</dt>  
+    <dd> <%= @museum_object&.termlist_production_technique&.name %> </dd>
+    
+  </dl>
+</div>

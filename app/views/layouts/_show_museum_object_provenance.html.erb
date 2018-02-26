@@ -17,20 +17,13 @@
     <dd><%= @museum_object&.coordinates_mega %></dd>
     
     <dt>kind of site</dt>
-    <dd><%= @museum_object&.coordinates_mega %></dd>
+    <dd><%= @museum_object&.termlist_excavation_site_kind.name %>:
+        <%= @museum_object&.termlist_excavation_site_kind&.termlist_excavation_site_category&.name %></dd>
+    <dt>finding context</dt>
+    <dd><%= @museum_object&.finding_context %>
+    
+    <dt>remarks</dt>
+    <dd><%= @museum_object&.finding_remarks %>
   </dl>
-  
-  <div class="row">
-  <div class="col-md-4">
-    <h3>site name</h3>
-    <dl class="dl-horizontal">
-    </dl>
-  </div>
-  <div class="col-md-4">
-    <h3>site number</h3>
-    <dl class="dl-horizontal">
-     
-    </dl>
-  </div>
-</div>
+
 </div>
