@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122084626) do
+ActiveRecord::Schema.define(version: 20180226134311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,8 @@ ActiveRecord::Schema.define(version: 20180122084626) do
     t.integer  "termlist_production_technique_id"
     t.integer  "termlist_dating_period_id"
     t.integer  "termlist_excavation_site_kind_id"
+    t.date     "dating_timespan_begin"
+    t.date     "dating_timespan_end"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id", using: :btree
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id", using: :btree
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id", using: :btree
@@ -326,7 +328,7 @@ ActiveRecord::Schema.define(version: 20180122084626) do
     t.index ["termlist_kind_of_object_specified_id"], name: "index_koos_inscription_letters_on_koos_id", using: :btree
   end
 
-  create_table "termlist_kind_of_object_specifieds_preservation_materials", force: :cascade do |t|
+  create_table "termlist_kind_of_object_specifieds_preservation_materials", id: :integer, default: -> { "nextval('termlist_kind_of_object_specifieds_preservation_material_id_seq'::regclass)" }, force: :cascade do |t|
     t.integer  "termlist_kind_of_object_specified_id"
     t.integer  "termlist_preservation_material_id"
     t.datetime "created_at",                           null: false

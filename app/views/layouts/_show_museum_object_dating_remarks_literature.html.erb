@@ -7,6 +7,9 @@
     <dt>millennium</dt>
       <dd><%= @museum_object&.termlist_dating_millennium&.name %></dd>
       
+      <dt>years</dt>
+      <dd><%= @museum_object&.dating_timespan_begin %> - <%= @museum_object&.dating_timespan_end %></dd>
+      
     <dt>centuries</dt>
       <% @museum_object&.termlist_dating_centuries.each do |c| %>
         <dd><%= c&.name %></dd>

@@ -4,14 +4,34 @@
   <div class="col-md-2">
     <%= simple_form_for @museum_object, url: wizard_path do |f| %>
       <%= check_box_tag :optional_termlist_dating_period_checkbox %>
-      <%= f.label :termlist_dating_period, "dating period" %></p>
+      <%= f.label :termlist_dating_period, "period" %></p>
       <%= f.association :termlist_dating_period, collection: @dating_periods, label: false, include_blank: true, class: "form-control" %>
+      
       <%= check_box_tag :optional_termlist_dating_millennium_checkbox %>
-      <%= f.label :termlist_dating_millennium, "dating millennium" %></p>
+      <%= f.label :termlist_dating_millennium, "millennium" %></p>
       <%= f.association :termlist_dating_millennium, collection: @dating_millennia, label: false, include_blank: true, class: "form-control" %>
+      
       <%= check_box_tag :optional_termlist_dating_centuries_checkbox %>
-      <%= f.label :termlist_dating_centuries, "dating centuries" %></p>
+      <%= f.label :termlist_dating_centuries, "centuries" %></p>
       <%= f.association :termlist_dating_centuries, collection: @dating_centuries, label: false, class: "form-control" %>
+      
+      <%= check_box_tag :optional_termlist_dating_timespan_checkbox %>
+      <%= f.label :dating_timespan, "timespan" %></p>
+      <%= f.label :hint_iso8601, "2 BC = -0001" %>
+      <%= f.input :dating_timespan_begin, label: "begin",
+                   discard_day: true, 
+                   discard_month: true,
+                   as: :string,
+                   placeholder: "YYYY-01-01",
+                   class: "form-control" %>
+      <%= f.input :dating_timespan_end, label: "end",
+                   discard_day: true, 
+                   discard_month: true,
+                   as: :string,
+                   placeholder: "YYYY-01-01",
+                   class: "form-control" %>
+      
+      
       <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
     <% end %>
   </div>
