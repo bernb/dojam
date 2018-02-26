@@ -8,6 +8,9 @@ end
 # Simpliest fulltext search
 gem 'search_cop'
 
+# file attachment. Rails 5.2 will have ActiveStorage as an alternative
+gem 'carrierwave', '~> 1.0'
+
 # read env variables from serverfile as puma doesnt load env variables itself
 # we switch to canonical config file secrets.yml
 #gem 'dotenv-rails', :require => 'dotenv/rails-now'
@@ -26,7 +29,7 @@ gem 'cocoon'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.6'
+gem 'rails', '~> 5.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
