@@ -5,6 +5,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   
   version :thumb do
     process resize_to_fit: [300,200]
+    process convert: 'png'
   end
 
   # Choose what kind of storage to use for this uploader:
