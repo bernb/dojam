@@ -40,6 +40,8 @@ def calc_progress_percentage state
       return 95
     when :step_literature
       return 95
+    when :step_images_upload
+      return 98
     when :step_confirm
       return 100
     else
