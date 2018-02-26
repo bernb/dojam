@@ -5,6 +5,11 @@
   <div class="col"><%= render 'layouts/show_museum_object_material'%></div>
   <div class="col"><%= render 'layouts/show_museum_object_decoration_inscription'%></div>
   <div class="col"><%= render 'layouts/show_museum_object_measurements'%></div>
+  <div class="col"><%= render 'layouts/show_museum_object_authenticity'%></div>
+  <div class="col"><%= render 'layouts/show_museum_object_preservation_conservation'%></div>
+  <div class="col"><%= render 'layouts/show_museum_object_dating_remarks_literature'%></div>
+
+
 </div>
 
 <div class="row"">
@@ -14,4 +19,8 @@
   <%= link_to "material", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_material" %>
   <%= link_to "decoration/inscription", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_decoration_inscription" %>
   <%= link_to "measurements", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_measurements" %>
+  <%= link_to "authenticity", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_authenticity" %>
+  <%= link_to "preservation/conservation", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_preservation_conservation" %>
+  <%= link_to "dating/remarks/literature", 'javascript:void(0)', class: "btn museum_object_page_button", id: "museum_object_dating_remarks_literature" %>
+  
 </div>
