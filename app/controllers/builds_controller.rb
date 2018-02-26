@@ -5,7 +5,7 @@ class BuildsController < ApplicationController
         :step_kind_of_object, :step_kind_of_object_specified, :step_production, 
         :step_color, :step_decoration, :step_inscription, 
         :step_measurements, :step_authenticity, :step_preservation, 
-        :step_conservation, :step_dating, :step_remarks, 
+        :step_conservation, :step_dating, :step_remarks, :step_images_upload, 
         :step_literature, :step_confirm
   
   def show
@@ -180,6 +180,7 @@ class BuildsController < ApplicationController
                                           :remaining_length, :remaining_width, :remaining_height, :remaining_opening_dm, :remaining_bottom_dm, :remaining_weight_in_gram,
                                           :termlist_preservation_material_id, :termlist_preservation_object_id, :description_conservation,
                                           :remarks, :literature, :dating_timespan_begin, :dating_timespan_end,
+                                          images: [],
                                           termlist_dating_century_ids: [],
                                           termlist_material_specified_ids: [], 
                                           termlist_color_ids: [],                                   
