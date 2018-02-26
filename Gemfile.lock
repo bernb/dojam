@@ -66,6 +66,10 @@ GEM
       capistrano (~> 3.7)
       capistrano-bundler
       puma (~> 3.4)
+    carrierwave (1.2.2)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     choice (0.2.0)
     cocoon (1.2.10)
     coffee-rails (4.2.2)
@@ -218,6 +222,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capistrano3-puma
+  carrierwave (~> 1.0)
   cocoon
   coffee-rails (~> 4.2)
   figaro
@@ -226,7 +231,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   pg
   puma (~> 3.0)
-  rails (~> 5.0.6)
+  rails (~> 5.0)
   rails-erd
   sass-rails (~> 5.0)
   search_cop

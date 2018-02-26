@@ -1,6 +1,7 @@
 class MuseumObject < ApplicationRecord
   include SearchCop
 
+  mount_uploaders :images, ImageUploader
   belongs_to :excavation_site, -> { order(name: :asc) }, required: false # do not require for now while in early dev state
   belongs_to :storage_location, required: false
   belongs_to :termlist_acquisition_delivered_by, -> { order(name: :asc) }, required: false

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180226134311) do
+ActiveRecord::Schema.define(version: 20180226161638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20180226134311) do
     t.integer  "termlist_excavation_site_kind_id"
     t.date     "dating_timespan_begin"
     t.date     "dating_timespan_end"
+    t.json     "images"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id", using: :btree
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id", using: :btree
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id", using: :btree
