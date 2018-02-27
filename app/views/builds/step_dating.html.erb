@@ -32,7 +32,9 @@
                    class: "form-control" %>
       
       
-      <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
+      <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
+      <%= link_to "back", previous_wizard_path, class: "btn" %> 
+      <%= link_to "finish", wizard_path(:step_confirm), class: "btn" %>
     <% end %>
   </div>
 </div>

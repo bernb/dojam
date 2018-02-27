@@ -10,8 +10,8 @@
   <%= f.input :is_acquisition_date_exact, label: "month/day specified" %>
   <%= f.input :acquisition_document_number, label: "number of acquisition document" %>
   
-  <%= f.submit "next step", class: "btn btn-primary" %>
+  <%= f.submit "next step", class: "btn btn-primary" %><p>
+  <%= link_to "finish", wizard_path(:step_confirm), class: "btn" %>
   
 <% end %>
-<%= link_to "Finish", wizard_path(:step_confirm) %>
 </div>

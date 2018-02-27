@@ -4,7 +4,9 @@
   <div class="col-md-2">
     <%= simple_form_for @museum_object, url: wizard_path do |f| %>
       <%= f.association :termlist_production_technique, collection: @production_techniques, label: "", as: :collection_select, include_blank: false  %>
-      <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
+      <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
+      <%= link_to "back", previous_wizard_path, class: "btn" %> 
+      <%= link_to "finish", wizard_path(:step_confirm), class: "btn" %>
     <% end %>
   </div>
 </div>
