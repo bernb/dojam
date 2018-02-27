@@ -14,8 +14,10 @@
   <%= f.input :amount, label: "amount of objects", input_html: {value: f.object.amount || '1'} %>
   
   <div class="submit">
-  <%= f.submit "next step", class: "btn btn-primary" %>
+    <%= f.submit "next step", class: "btn btn-primary" %>
   </div>
+  <%= link_to "back", previous_wizard_path, class: "btn" %> 
+  <%= link_to "finish", wizard_path(:step_confirm), class: "btn" %>
   
 <% end %>
 </div>

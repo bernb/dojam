@@ -7,7 +7,9 @@
       <%= f.association :termlist_decoration, collection: @decorations, label: false, as: :collection_select, include_blank: false %>
       <div><strong> color </strong></div>
       <%= f.association :termlist_decoration_color, collection: @decoration_colors, label: false, as: :collection_select, include_blank: false  %>
-      <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
+      <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
+      <%= link_to "back", previous_wizard_path, class: "btn" %> 
+      <%= link_to "finish", wizard_path(:step_confirm), class: "btn" %>
     <% end %>
   </div>
 </div>
