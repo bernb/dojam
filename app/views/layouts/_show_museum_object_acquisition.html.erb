@@ -14,7 +14,7 @@
     <% if @museum_object&.is_acquisition_date_exact %>
       <dd><%= @museum_object&.acquisition_date %></dd>
     <% else %>
-      <dd><%= @museum_object&.acquisition_date.strftime('%Y') %></dd>
+      <dd><%= @museum_object&.acquisition_date&.strftime('%Y') %></dd>
     <% end %>
     
     <dt>number of acquisition document</dt>  

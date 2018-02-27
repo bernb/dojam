@@ -7,7 +7,7 @@
     <% end %>
     
     <dt>kind of object</dt>
-    <dd><%= @museum_object&.termlist_kind_of_object.name %>: <%= @museum_object&.termlist_kind_of_object_specified.name %>
+    <dd><%= @museum_object&.termlist_kind_of_object&.name %>: <%= @museum_object&.termlist_kind_of_object_specified&.name %>
     
     <dt>colors</dt>  
     <% @museum_object&.termlist_colors.each do |m| %>

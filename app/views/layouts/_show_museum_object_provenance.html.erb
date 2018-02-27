@@ -17,7 +17,7 @@
     <dd><%= @museum_object&.coordinates_mega %></dd>
     
     <dt>kind of site</dt>
-    <dd><%= @museum_object&.termlist_excavation_site_kind.name %>:
+    <dd><%= @museum_object&.termlist_excavation_site_kind&.name %>:
         <%= @museum_object&.termlist_excavation_site_kind&.termlist_excavation_site_category&.name %></dd>
     <dt>finding context</dt>
     <dd><%= @museum_object&.finding_context %>
