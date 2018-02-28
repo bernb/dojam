@@ -6,7 +6,7 @@
       <%= f.file_field :images, multiple: true %></p>
       <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
       <%= link_to "back", previous_wizard_path, class: "btn" %> 
-      <%= link_to "finish", wizard_path(:step_confirm), class: "btn" %>
+      <%= f.button :button, "finish", type: "submit", name: "finish", value: "true" %>
     <% end %>
   </div>
 </div>

@@ -108,6 +108,10 @@ class BuildsController < ApplicationController
     if step == :step_material
       session[:material_ids] = params[:material_ids]
     end
+    if params[:finish] == "true" # gets set by second submit button
+      @museum_object.save
+      jump_to(:step_confirm)
+    end
     render_wizard @museum_object # does also attempt to save and renders same view again if fails
   end
   

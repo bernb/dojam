@@ -7,7 +7,7 @@
       <%= f.association :termlist_kind_of_object_specified, collection: @kind_of_object_specifieds, label: "", as: :collection_select, include_blank: false  %>
       <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
       <%= link_to "back", previous_wizard_path, class: "btn" %> 
-      <%= link_to "finish", wizard_path(:step_confirm), class: "btn" %>
+      <%= f.button :button, "finish", type: "submit", name: "finish", value: "true" %>
     <% end %>
   </div>
 </div>
