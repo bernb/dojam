@@ -1,5 +1,6 @@
 <div class="hidden museum_object_page museum_object_dating_remarks_literature">
   <h2>dating/remarks/literature</h2>
+  <%= link_to "edit", wizard_path(:step_dating) %>
   <dl class="dl-horizontal">
     <dt>period</dt>
       <dd><%= @museum_object&.termlist_dating_period&.name %></dd>

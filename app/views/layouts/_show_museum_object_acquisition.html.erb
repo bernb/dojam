@@ -1,5 +1,6 @@
 <div class="hidden museum_object_page museum_object_acquisition">
   <h2>acquisition</h2>
+  <%= link_to "edit", wizard_path(:step_acquisition) %>
   <dl class="dl-horizontal">
     <dt>kind of acquisition</dt>
     <dd><%= @museum_object&.termlist_acquisition_kind&.name %></dd>
