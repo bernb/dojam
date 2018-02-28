@@ -16,8 +16,8 @@
   <div class="submit">
     <%= f.submit "next step", class: "btn btn-primary" %>
   </div>
-  <%= link_to "back", previous_wizard_path, class: "btn" %> 
-  <%= link_to "finish", wizard_path(:step_confirm), class: "btn" %>
+  <%= link_to "back", root_path, class: "btn" %> 
+  <%= f.button :button, "finish", type: "submit", name: "finish", value: "true" %>
   
 <% end %>
 </div>
