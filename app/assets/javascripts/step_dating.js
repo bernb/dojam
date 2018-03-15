@@ -3,11 +3,11 @@ var site_name = "step_dating";
 
 ready = function() {
   if($(document.body).hasClass(site_name)){
-  site_specific_js();
+  step_dating_js();
   }
 };
 
-function site_specific_js() {
+function step_dating_js() {
     // ToDo: More robust selector instead of double next()
   // ToDo: Generalize by using a general selector as shown below and then
   //       iterate all matching to get the wanted behaviour for all

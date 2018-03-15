@@ -24,7 +24,7 @@ class BuildsController < ApplicationController
       @museums = Museum.where name: "JAM" # we restrict to the JAM museum for now
       @storages = @museums.first.storages
       @storage_locations = @storages.first.storage_locations
-      @selected_storage = @storages.first
+      #@selected_storage = @storages.first
     end
     
     if step == :step_provenance

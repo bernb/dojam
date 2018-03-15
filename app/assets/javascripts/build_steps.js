@@ -4,7 +4,7 @@ var site_name = ".builds .show";
 
 ready = function() {
   if($(document.body).is(site_name)){
-  site_specific_js();
+  //step_show_js();
   }
 };
 
