@@ -10,7 +10,18 @@ ready = function() {
 };
 
 function step_museum_js() {
-  alert('works');
+  $('.storage_location_selection').prop('selectedIndex', 0);
+  if($('.storage_selection').val() == "") {
+    $('.storage_location_selection').prop('disabled', true);
+  }
+  $('.storage_selection').change(function() {
+      if($('.storage_selection').val() == "") {
+        $('.storage_location_selection').prop('disabled', true);
+        $('.storage_location_selection').empty();
+      } else {
+        $('.storage_location_selection').prop('disabled', false);
+      }
+    });
 }
 
 $(document).ready(ready);
