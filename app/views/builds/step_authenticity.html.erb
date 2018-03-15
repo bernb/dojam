@@ -3,8 +3,8 @@
 
 <div class="col-md-3">
 <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-  <%= f.association :termlist_authenticity, label: "authenticity", include_blank: false %>
-  <%= f.input :priority, collection: 1..5, label: "priority", include_blank: false %>
+  <%= f.association :termlist_authenticity, label: "authenticity", include_blank: true %>
+  <%= f.input :priority, collection: 1..5, label: "priority", include_blank: true %>
   <%= f.input :priority_determined_by, label: "priority determined by" %>
   
   <div class="submit">
