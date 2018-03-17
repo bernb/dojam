@@ -1,7 +1,7 @@
 var ready;
-var site_name = "step_dating";
 
 ready = function() {
+  var site_name = "step_dating";
   if($(document.body).hasClass(site_name)){
   step_dating_js();
   }
