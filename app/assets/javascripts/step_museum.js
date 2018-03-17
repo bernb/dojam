@@ -1,9 +1,8 @@
 // shows how to apply a controller-action combination
 var ready;
-var site_name = ".step_museum"; 
-
 
 ready = function() {
+  var site_name = ".step_museum"; 
   if($(document.body).is(site_name)){
     step_museum_js();
   }
