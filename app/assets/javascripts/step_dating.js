@@ -37,18 +37,21 @@ function step_dating_js() {
     dating_period_selection.show();
   } else {
     dating_period_selection.hide();
+    dating_period_selection.children().val("");
   }
   
   if(dating_millennium_checkbox.get(0).checked) {
     dating_millennium_selection.show();
   } else {
     dating_millennium_selection.hide();
+    dating_millennium_selection.children().val("");
   }
   
   if(dating_centuries_checkbox.get(0).checked) {
     dating_centuries_selection.show();
   } else {
     dating_centuries_selection.hide();
+    dating_centuries_selection.children().val("");
   }
   
   
@@ -56,6 +59,7 @@ function step_dating_js() {
     if(this.checked) {
       dating_period_selection.show();
     } else {
+      dating_period_selection.children().val("");
       dating_period_selection.hide();
     }
   });
@@ -66,6 +70,7 @@ function step_dating_js() {
       dating_millennium_selection.show();
     } else {
       dating_millennium_selection.hide();
+      dating_millennium_selection.children().val("");
     }
   });
   
@@ -74,6 +79,7 @@ function step_dating_js() {
       dating_centuries_selection.show();
     } else {
       dating_centuries_selection.hide();
+      dating_centuries_selection.children().val("");
     }
   });
   
