@@ -17,20 +17,21 @@
       
       <%= check_box_tag :optional_termlist_dating_timespan_checkbox %>
       <%= f.label :dating_timespan, "timespan" %></p>
-      <%= f.label :hint_iso8601, "2 BC = -0001" %>
-      <%= f.input :dating_timespan_begin, label: "begin",
-                   discard_day: true, 
-                   discard_month: true,
-                   as: :string,
-                   placeholder: "YYYY-01-01",
-                   class: "form-control" %>
-      <%= f.input :dating_timespan_end, label: "end",
-                   discard_day: true, 
-                   discard_month: true,
-                   as: :string,
-                   placeholder: "YYYY-01-01",
-                   class: "form-control" %>
-      
+      <div id="step_dating_timespan_fields">
+        <%= f.label :hint_iso8601, "2 BC = -0001" %>
+        <%= f.input :dating_timespan_begin, label: "begin",
+                     discard_day: true, 
+                     discard_month: true,
+                     as: :string,
+                     placeholder: "YYYY-01-01",
+                     class: "form-control dating_timespan_begin_input" %>
+        <%= f.input :dating_timespan_end, label: "end",
+                     discard_day: true, 
+                     discard_month: true,
+                     as: :string,
+                     placeholder: "YYYY-01-01",
+                     class: "form-control dating_timespan_begin_input" %>
+      </div>
       
       <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
       <%= link_to "back", previous_wizard_path, class: "btn" %> 
