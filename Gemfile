@@ -22,7 +22,7 @@ gem 'mini_magick'
 gem 'bootstrap-sass'
 
 # will be initialized with bootstrap support
-gem 'simple_form'
+gem 'simple_form', '~> 4.0', git: 'git://github.com/plataformatec/simple_form.git'
 
 # creates multistep forms for models
 gem 'wicked'
