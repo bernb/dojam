@@ -12,11 +12,7 @@
     <dd><%= @museum_object&.acquisition_deliverer_name %></dd>
     
     <dt>acquisition date</dt>
-    <% if @museum_object&.is_acquisition_date_exact %>
-      <dd><%= @museum_object&.acquisition_date %></dd>
-    <% else %>
-      <dd><%= @museum_object&.acquisition_date&.strftime('%Y') %></dd>
-    <% end %>
+    <dd><%= @museum_object&.acquisition_date %></dd>
     
     <dt>number of acquisition document</dt>  
     <dd><%= @museum_object&.acquisition_document_number %></dd>
