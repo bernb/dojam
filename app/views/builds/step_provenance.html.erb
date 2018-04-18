@@ -1,26 +1,17 @@
-<%= render 'layouts/title', title_name: "add new object" %>
-<%= render 'layouts/new_entry_progress_bar', state: @step %>
-
-<div class="col-md-3">
-<%= simple_form_for @museum_object, url: wizard_path do |f| %>
-  <div id="excavation_sites">
-    <%= f.association :excavation_site, label: 'site name', include_blank: true  %>
-    <%= f.input :name_expedition, label: 'other site name' %>
-    <%= f.input :site_number_mega, label: "site number according to MEGA" %>
-    <%= f.input :site_number_expedition, label: "site number according to expedition" %>
-    <%= f.input :coordinates_mega, label: "coordinates of site according to MEGA" %>
-    <%= f.label "", "kind of site" %>
-    <%= collection_select(:termlist_excavation_site_category, :termlist_excavation_site_category_id, @excavation_site_categories, :id, :name, {selected: @selected_excavation_site_category.id}, {id: "excavation_site_category_selection", class: "form-control select required"}) %>
-    <%= f.collection_select(:termlist_excavation_site_kind_id, @excavation_site_kinds, :id, :name,{}, {id: "excavation_site_kind_selection", class: "form-control select required"}) %>
-  </div>
-  <%= f.input :finding_context, label: "finding context specified" %>
-  <%= f.input :finding_remarks, label: "remarks" %>
-  
-  <div class="submit">
+<%= render "layouts/build_steps_layout", step_name: @step do %>
+  <%= simple_form_for @museum_object, url: wizard_path do |f| %>
+    <div id="excavation_sites">
+      <%= f.association :excavation_site, label: 'site name', include_blank: true  %>
+      <%= f.input :name_expedition, label: 'other site name' %>
+      <%= f.input :site_number_mega, label: "site number according to MEGA" %>
+      <%= f.input :site_number_expedition, label: "site number according to expedition" %>
+      <%= f.input :coordinates_mega, label: "coordinates of site according to MEGA" %>
+      <%= f.label "", "kind of site" %>
+      <%= collection_select(:termlist_excavation_site_category, :termlist_excavation_site_category_id, @excavation_site_categories, :id, :name, {selected: @selected_excavation_site_category.id}, {id: "excavation_site_category_selection", class: "form-control select required"}) %>
+      <%= f.collection_select(:termlist_excavation_site_kind_id, @excavation_site_kinds, :id, :name,{}, {id: "excavation_site_kind_selection", class: "form-control select required"}) %>
+    </div>
+    <%= f.input :finding_context, label: "finding context specified" %>
+    <%= f.input :finding_remarks, label: "remarks" %>
     <%= f.submit "next step", class: "btn btn-primary" %>
-  </div>
-  <%= link_to "back", previous_wizard_path, class: "btn" %> 
-  <%= f.button :button, "finish", type: "submit", name: "finish", value: "true" %>
-  
+  <% end %>
 <% end %>
-</div>

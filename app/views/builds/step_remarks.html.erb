@@ -1,13 +1,7 @@
-<%= render 'layouts/title', title_name: "add new object" %>
-<%= render 'layouts/new_entry_progress_bar', state: @step %>
-<div class="row">
-  <div class="col-md-2">
-    <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-      <%= f.input :remarks, label: 'description' %>
-      <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
-      <%= link_to "back", wizard_path(previous_wizard_path), class: "btn" %> 
-      <%= f.button :button, "finish", type: "submit", name: "finish", value: "true" %>
-    <% end %>
-  </div>
-</div>
+<%= render "layouts/build_steps_layout", step_name: @step do %>
+  <%= simple_form_for @museum_object, url: wizard_path do |f| %>
+    <%= f.input :remarks, label: 'description' %>
+    <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
+  <% end %>
+<% end %>
 

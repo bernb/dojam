@@ -1,17 +1,10 @@
-<%= render 'layouts/title', title_name: "add new object" %>
-<%= render 'layouts/new_entry_progress_bar', state: @step %>
-
-<div class="col-md-3">
-<%= simple_form_for @museum_object, url: wizard_path, method: 'put' do |f| %>
-  <%= f.association :termlist_acquisition_kind, label: "kind of acquisition", include_blank: true %>
-  <%= f.association :termlist_acquisition_delivered_by, label: "delivered by", include_blank: true %>
-  <%= f.input :acquisition_deliverer_name, label: "name of deliverer" %>
-  <%= f.input :acquisition_date, include_blank: true, label: "date of acquisition", as: :date, start_year: Date.new(1900).year %>
-  <%= f.input :acquisition_document_number, label: "number of acquisition document" %>
-  
-  <%= f.submit "next step", class: "btn btn-primary" %><p>
-  <%= link_to "back", previous_wizard_path, class: "btn" %> 
-  <%= f.button :button, "finish", type: "submit", name: "finish", value: "true" %>
-  
+<%= render "layouts/build_steps_layout", step_name: @step, object: @museum_object, wizard_path: wizard_path do %>
+  <%= simple_form_for @museum_object, url: wizard_path, method: 'put' do |f| %>
+    <%= f.association :termlist_acquisition_kind, label: "kind of acquisition", include_blank: true %>
+    <%= f.association :termlist_acquisition_delivered_by, label: "delivered by", include_blank: true %>
+    <%= f.input :acquisition_deliverer_name, label: "name of deliverer" %>
+    <%= f.input :acquisition_date, include_blank: true, label: "date of acquisition", as: :date, start_year: Date.new(1900).year %>
+    <%= f.input :acquisition_document_number, label: "number of acquisition document" %>
+    <%= f.submit "next step", class: "btn btn-primary" %>
+  <% end %>
 <% end %>
-</div>
