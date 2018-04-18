@@ -1,19 +1,10 @@
-<%= render 'layouts/title', title_name: "add new object" %>
-<%= render 'layouts/new_entry_progress_bar', state: @step %>
-
-<div class="col-md-3">
-<%= simple_form_for @museum_object, url: wizard_path do |f| %>
-  <% f.input :inscription_decoration, label: "decoration/inscription" %>
-  <%= f.association :termlist_inscription_letter, collection: @inscription_letters, label: "letters of inscription", as: :collection_select, include_blank: true  %>
-  <%= f.association :termlist_inscription_language, collection: @inscription_language, label: "language of inscription", as: :collection_select, include_blank: true  %>
-  <%= f.input :inscription_text, label: "text of inscription" %>
-  <%= f.input :inscription_translation, label: "translation of inscription" %>
-  
-  <div class="submit">
-  <%= f.submit "next step", class: "btn btn-primary" %>
-  </div>
-  <%= link_to "back", previous_wizard_path, class: "btn" %> 
-  <%= f.button :button, "finish", type: "submit", name: "finish", value: "true" %>
-  
+<%= render "layouts/build_steps_layout", step_name: @step do %>
+  <%= simple_form_for @museum_object, url: wizard_path do |f| %>
+    <% f.input :inscription_decoration, label: "decoration/inscription" %>
+    <%= f.association :termlist_inscription_letter, collection: @inscription_letters, label: "letters of inscription", as: :collection_select, include_blank: true  %>
+    <%= f.association :termlist_inscription_language, collection: @inscription_language, label: "language of inscription", as: :collection_select, include_blank: true  %>
+    <%= f.input :inscription_text, label: "text of inscription" %>
+    <%= f.input :inscription_translation, label: "translation of inscription" %>
+    <%= f.submit "next step", class: "btn btn-primary" %>
+  <% end %>
 <% end %>
-</div>

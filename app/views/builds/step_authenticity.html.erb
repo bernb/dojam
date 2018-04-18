@@ -1,17 +1,8 @@
-<%= render 'layouts/title', title_name: "add new object" %>
-<%= render 'layouts/new_entry_progress_bar', state: @step %>
-
-<div class="col-md-3">
-<%= simple_form_for @museum_object, url: wizard_path do |f| %>
-  <%= f.association :termlist_authenticity, label: "authenticity", include_blank: true %>
-  <%= f.input :priority, collection: 1..5, label: "priority", include_blank: true %>
-  <%= f.input :priority_determined_by, label: "priority determined by" %>
-  
-  <div class="submit">
-  <%= f.submit "next step", class: "btn btn-primary" %>
-  </div>
-  <%= link_to "back", previous_wizard_path, class: "btn" %> 
-  <%= f.button :button, "finish", type: "submit", name: "finish", value: "true" %>
-  
+<%= render "layouts/build_steps_layout", step_name: @step do %>
+  <%= simple_form_for @museum_object, url: wizard_path do |f| %>
+    <%= f.association :termlist_authenticity, label: "authenticity", include_blank: true %>
+    <%= f.input :priority, collection: 1..5, label: "priority", include_blank: true %>
+    <%= f.input :priority_determined_by, label: "priority determined by" %>
+    <%= f.submit "next step", class: "btn btn-primary" %>
+  <% end %>
 <% end %>
-</div>

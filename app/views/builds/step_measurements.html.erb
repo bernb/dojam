@@ -1,7 +1,4 @@
-<%= render 'layouts/title', title_name: "add new object" %>
-<%= render 'layouts/new_entry_progress_bar', state: @step %>
-
-<div class="col-md-3">
+<%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
     <%= f.input :remaining_length, as: :string, label: "length" %>
     <%= f.input :remaining_width, as: :string, label: "width" %>
@@ -9,10 +6,6 @@
     <%= f.input :remaining_opening_dm, as: :string, label: "opening dm" %>
     <%= f.input :remaining_bottom_dm, as: :string, label: "bottom dm" %>
     <%= f.input :remaining_weight_in_gram, as: :string, label: "weight in gram" %>
-    <div class="submit">
-      <%= f.submit "next step", class: "btn btn-primary" %>
-  </div>
-      <%= link_to "back", previous_wizard_path, class: "btn" %> 
-      <%= f.button :button, "finish", type: "submit", name: "finish", value: "true" %>
+    <%= f.submit "next step", class: "btn btn-primary" %>
   <% end %>
-</div>
+<% end %>

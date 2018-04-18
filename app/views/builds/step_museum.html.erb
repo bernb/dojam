@@ -1,23 +1,15 @@
-<%= render 'layouts/title', title_name: "add new object" %>
-<%= render 'layouts/new_entry_progress_bar', state: @step %>
-<div class="col-md-3">
-<%= simple_form_for @museum_object, url: wizard_path, method: :put do |f| %>
-  <%= label_tag "", "museum" %>
-  <%= collection_select(:museum, :museum_id, @museums, :id, :name, {}, {class: "museum_selection form-control select required disabled"}) %>
-  <%= label_tag "", "storage location" %>
-  <%= collection_select(:storage, :storage_id, @storages, :id, :name, {include_blank: true}, {class: "storage_selection form-control select required"}) %>
-  <%= label_tag "", "detailed location" %>
-  <%= f.collection_select(:storage_location_id, @storage_locations, :id, :name,{include_blank: true}, {class: "storage_location_selection form-control select required"}) %>
-  <%= f.input :inv_number, label: "inventory number of museum", as: :string %>
-  <%= f.input :inv_extension, label: "extension of inventory number", as: :string %>
-  <%= f.input :inv_numberdoa, label: "other inventory number", as: :string %>
-  <%= f.input :amount, label: "number of objects", input_html: {value: f.object.amount || '1'} %>
-  
-  <div class="submit">
-    <%= f.submit "next step", class: "btn btn-primary" %>
-  </div>
-  <%= link_to "back", root_path, class: "btn" %> 
-  <%= f.button :button, "finish", type: "submit", name: "finish", value: "true" %>
-  
+<%= render "layouts/build_steps_layout", step_name: @step do %>
+  <%= simple_form_for @museum_object, url: wizard_path, method: :put do |f| %>
+    <%= label_tag "", "museum" %>
+    <%= collection_select(:museum, :museum_id, @museums, :id, :name, {}, {class: "museum_selection form-control select required disabled"}) %>
+    <%= label_tag "", "storage location" %>
+    <%= collection_select(:storage, :storage_id, @storages, :id, :name, {include_blank: true}, {class: "storage_selection form-control select required"}) %>
+    <%= label_tag "", "detailed location" %>
+    <%= f.collection_select(:storage_location_id, @storage_locations, :id, :name,{include_blank: true}, {class: "storage_location_selection form-control select required"}) %>
+    <%= f.input :inv_number, label: "inventory number of museum", as: :string %>
+    <%= f.input :inv_extension, label: "extension of inventory number", as: :string %>
+    <%= f.input :inv_numberdoa, label: "other inventory number", as: :string %>
+    <%= f.input :amount, label: "number of objects", input_html: {value: f.object.amount || '1'} %>
+    <%= f.submit "next step", class: "btn btn-primary" %> 
+  <% end %>
 <% end %>
-</div>
