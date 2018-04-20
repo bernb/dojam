@@ -1,13 +1,11 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class = "nav navbar-nav">
-        <li><%= link_to "Menu", root_path %></li>
-        <li><p class="navbar-text">Welcome back, <a class="navbar-link" href="#">Jutta Häser</a></p></li>
-      </ul>
-      <ul class = "nav navbar-nav navbar-right">
-        <li><a class="nav-link  navbar-right" href="#">Logout</a></li>
-      </ul>
-    </div>
-  </div>
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <%= image_tag "DOJAM_Logo.png" %>
+  </a>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
+  </ul>
+  <ul class="navbar-nav">
+    <li class="nav-item"><span class="navbar-text">Welcome back, Jutta Häser</span></li>
+  </ul>
 </nav>
