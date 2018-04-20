@@ -55,14 +55,15 @@ GEM
     airbrussh (1.3.0)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (9.0.0)
-    autoprefixer-rails (8.2.0)
+    autoprefixer-rails (8.3.0)
       execjs
     bindex (0.5.0)
     bootsnap (1.3.0)
       msgpack (~> 1.0)
-    bootstrap-sass (3.3.7)
-      autoprefixer-rails (>= 5.2.1)
-      sass (>= 3.3.4)
+    bootstrap (4.1.0)
+      autoprefixer-rails (>= 6.0.3)
+      popper_js (>= 1.12.9, < 2)
+      sass (>= 3.5.2)
     builder (3.2.3)
     byebug (10.0.2)
     capistrano (3.10.1)
@@ -140,6 +141,7 @@ GEM
       mini_portile2 (~> 2.3.0)
     pg (1.0.0)
     polyglot (0.3.5)
+    popper_js (1.12.9)
     puma (3.11.4)
     rack (2.0.4)
     rack-test (1.0.0)
@@ -236,7 +238,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-import
   bootsnap
-  bootstrap-sass
+  bootstrap
   byebug
   capistrano
   capistrano-bundler
@@ -259,6 +261,7 @@ DEPENDENCIES
   simple_form (~> 4.0)!
   spring
   spring-watcher-listen (~> 2.0.0)
+  sprockets-rails
   sqlite3
   turbolinks (~> 5)
   tzinfo-data

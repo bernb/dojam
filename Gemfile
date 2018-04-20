@@ -19,7 +19,12 @@ gem 'mini_magick'
 #gem 'dotenv-rails', :require => 'dotenv/rails-now'
 
 # bootstrap 3 for use with simple_form
-gem 'bootstrap-sass'
+# now using bootstrap 4 as simple_form 4 supports it now
+#gem 'bootstrap-sass'
+
+# needed by bootstrap gem
+gem 'sprockets-rails'
+gem 'bootstrap'
 
 # will be initialized with bootstrap support
 gem 'simple_form', '~> 4.0', git: 'git://github.com/plataformatec/simple_form.git'
