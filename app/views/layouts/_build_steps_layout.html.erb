@@ -1,8 +1,13 @@
 <%= render 'layouts/title', title_name: "add new object" %>
-<%= render 'layouts/new_entry_progress_bar', state: step_name %>
-
-<div class="col-md-4">
-  <%= yield %>
-  <%= link_to "back", previous_wizard_path, class: "btn" %> 
-  <%= link_to "skip and finish", wizard_path(:step_confirm), class: "btn" %> 
+<div class="row">
+  <div class="col">
+    <%= render 'layouts/new_entry_progress_bar', state: step_name %>
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col-4">
+    <%= yield %>
+    <%= link_to "back", previous_wizard_path, class: "btn" %> 
+    <%= link_to "skip and finish", wizard_path(:step_confirm), class: "btn" %> 
+  </div>
 </div>

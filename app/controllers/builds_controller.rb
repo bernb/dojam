@@ -9,6 +9,8 @@ class BuildsController < ApplicationController
         :step_literature, :step_confirm
   
   def show
+  
+    @building = true # used for progress bar in application layout for now
     @step = step
     @museum_object = MuseumObject.find params[:museum_object_id]
     
