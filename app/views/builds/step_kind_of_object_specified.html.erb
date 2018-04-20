@@ -2,7 +2,7 @@
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
     <% select_tag "kind_of_object_specified", options_from_collection_for_select(TermlistKindOfObjectSpecified.all, "id", "name"), include_blank: true, class: "form-control" %>
     <%= f.association :termlist_kind_of_object_specified, collection: @kind_of_object_specifieds, label: false, as: :collection_select, include_blank: true  %>
-    <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
+    <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>
 

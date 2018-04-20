@@ -3,6 +3,6 @@
     <%= f.association :termlist_authenticity, label: "authenticity", include_blank: true %>
     <%= f.input :priority, collection: 1..5, label: "priority", include_blank: true %>
     <%= f.input :priority_determined_by, label: "priority determined by" %>
-    <%= f.submit "next step", class: "btn btn-primary" %>
+    <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>

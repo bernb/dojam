@@ -1,6 +1,6 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
       <%= f.association :termlist_colors, collection: @colors, label: "", as: :check_boxes, include_blank: false  %>
-      <%= f.submit "next step", method: :get, class: "btn btn-primary" %>
+      <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>

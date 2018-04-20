@@ -3,7 +3,7 @@
       <% @materials.each do |m| %>
         <%= f.association :termlist_material_specifieds, collection: m.termlist_material_specifieds.order(name: :asc), label: m.name,  include_blank: false  %>
       <% end %>
-      <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
+      <%= f.button :submit, "next step" %>
     <% end %>
 <% end %>
 
