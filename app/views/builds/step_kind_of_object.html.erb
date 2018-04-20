@@ -1,7 +1,7 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
     <%= f.association :termlist_kind_of_object, collection: @kind_of_objects, label: false, as: :collection_select, include_blank: true, :label_method => lambda { |kind| "#{kind.name} | #{kind.termlist_material_specified.name}"}  %>
-    <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
+    <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>
 

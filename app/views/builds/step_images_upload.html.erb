@@ -1,7 +1,7 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
     <%= f.file_field :images, multiple: true %></p>
-    <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
+    <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>
 

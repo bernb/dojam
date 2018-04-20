@@ -2,6 +2,6 @@
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
     <%= f.association :termlist_preservation_material, collection: @preservation_materials, label: "preservation of material", as: :collection_select, include_blank: true  %>
      <%= f.association :termlist_preservation_object, collection: @preservation_objects, label: "preservation of object", as: :collection_select, include_blank: true  %>
-    <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
+    <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>

@@ -10,6 +10,6 @@
     <%= f.input :inv_extension, label: "extension of inventory number", as: :string %>
     <%= f.input :inv_numberdoa, label: "other inventory number", as: :string %>
     <%= f.input :amount, label: "number of objects", input_html: {value: f.object.amount || '1'} %>
-    <%= f.submit "next step", class: "btn btn-primary" %> 
+    <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>

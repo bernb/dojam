@@ -4,7 +4,7 @@
     <%= f.association :termlist_decoration, collection: @decorations, label: false, as: :collection_select, include_blank: true %>
     <div><strong> color </strong></div>
     <%= f.association :termlist_decoration_color, collection: @decoration_colors, label: false, as: :collection_select, include_blank: true  %>
-    <%= f.submit "next step", method: :get, class: "btn btn-primary" %></p>
+    <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>
 
