@@ -2,10 +2,13 @@
   <%= simple_form_for @museum_object, url: wizard_path, method: :put do |f| %>
     <% label_tag "", "museum" %>
     <%= collection_select(:museum, :museum_id, @museums, :id, :name, {}, {class: "museum_selection form-control select required disabled"}) %>
+    </p>
     <%= label_tag "", "storage location" %>
     <%= collection_select(:storage, :storage_id, @storages, :id, :name, {include_blank: true}, {class: "storage_selection form-control select required"}) %>
+    </p>
     <%= label_tag "", "detailed location" %>
     <%= f.collection_select(:storage_location_id, @storage_locations, :id, :name,{include_blank: true}, {class: "storage_location_selection form-control select required"}) %>
+    </p>
     <%= f.input :inv_number, label: "inventory number of museum", as: :string %>
     <%= f.input :inv_extension, label: "extension of inventory number", as: :string %>
     <%= f.input :inv_numberdoa, label: "other inventory number", as: :string %>
