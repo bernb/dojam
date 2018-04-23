@@ -30,11 +30,20 @@ class MuseumObject < ApplicationRecord
   delegate :museum, to: :storage_location
   delegate :storage, to: :storage_location
   
+  after_save :set_is_used
+  
   
   search_scope :search do
     attributes :inv_number, :inv_numberdoa, :finding_context, :finding_remarks
     attributes :description_authenticities_name, :description_conservation, :description_preservation_state_name
     attributes :acquisition_deliverer_name
+  end
+  
+  def set_is_used
+    self.is_used = true
+    MuseumObject.skip_callback(:save, :after, :set_is_used)
+    self.save!
+    MuseumObject.set_callback(:save, :after, :set_is_used)
   end
   
 end
