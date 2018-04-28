@@ -9,7 +9,87 @@ class BuildsController < ApplicationController
         :step_literature, :step_confirm
   
   def show
+    set_variables_for step   
+    render_wizard
+  end
+
+  def new
+    redirect_to wizard_path steps.first
+  end
   
+  def update
+    @museum_object = MuseumObject.find params[:museum_object_id]
+    @museum_object.assign_attributes museum_object_params unless not params.key? :museum_object # see at params method below
+    if step == :step_material
+      session[:material_ids] = params[:material_ids]
+    end
+    if @museum_object.save
+      if params[:finish] == "true"
+        jump_to(:step_confirm)
+      end
+    else
+      set_variables_for step
+    end
+    render_wizard @museum_object # does also attempt to save and renders same view again if fails
+  end
+  
+  def create
+    museum_object = MuseumObject.find params[:museum_object_id]
+    museum_object.is_finished = true
+    if museum_object.save
+      flash[:success] = "Object saved in database"
+      redirect_to root_path
+    else
+      flash[:danger] = Hash.new
+      flash[:danger][:not_saved] = "Could not save object."
+      museum_object.errors.full_messages.each_with_index do |message, i|
+        flash[:danger][i] = message
+      end
+      museum_object.is_finished = false
+      render_wizard
+    end
+    
+  end
+  
+  def excavation_site_kinds
+    respond_to do |format|
+      format.js {
+        excavation_site_category = TermlistExcavationSiteCategory.find params[:excavation_site_category_id]
+        @excavation_site_kinds = excavation_site_category.termlist_excavation_site_kinds
+      }
+    end
+  end
+  
+  def storages
+    respond_to do |format|
+      format.js {
+        museum = Museum.find params[:museum_id]
+        @storages = museum.storages
+      }
+    end
+  end
+  
+  def storage_locations
+    respond_to do |format|
+      format.js {
+        storage = Storage.find params[:storage_id]
+        @storage_locations = storage.storage_locations
+      }
+    end
+  end
+  
+  def museum_prefix
+    respond_to do |format|
+      format.js {
+        museum = Museum.find params[:museum]
+        @prefix = museum.prefix
+      }
+    end
+  end
+  
+  private
+  
+  def set_variables_for step
     @building = true # used for progress bar in application layout for now
     @step = step
     @museum_object = MuseumObject.find params[:museum_object_id]
@@ -96,82 +176,9 @@ class BuildsController < ApplicationController
       @dating_millennia = kind_specified.termlist_dating_millennia
       @dating_centuries = kind_specified.termlist_dating_centuries
     end
-    
-    render_wizard
-  end
-
-  def new
-    redirect_to wizard_path steps.first
   end
   
-  def update
-    @museum_object = MuseumObject.find params[:museum_object_id]
-    @museum_object.update_attributes museum_object_params unless not params.key? :museum_object # see at params method below
-    if step == :step_material
-      session[:material_ids] = params[:material_ids]
-    end
-    if params[:finish] == "true" # gets set by second submit button
-      @museum_object.save
-      jump_to(:step_confirm)
-    end
-    render_wizard @museum_object # does also attempt to save and renders same view again if fails
-  end
   
-  def create
-    museum_object = MuseumObject.find params[:museum_object_id]
-    museum_object.is_finished = true
-    if museum_object.save
-      flash[:success] = "Object saved in database"
-      redirect_to root_path
-    else
-      flash[:danger] = Hash.new
-      flash[:danger][:not_saved] = "Could not save object."
-      museum_object.errors.full_messages.each_with_index do |message, i|
-        flash[:danger][i] = message
-      end
-      museum_object.is_finished = false
-      render_wizard
-    end
-    
-  end
-  
-  def excavation_site_kinds
-    respond_to do |format|
-      format.js {
-        excavation_site_category = TermlistExcavationSiteCategory.find params[:excavation_site_category_id]
-        @excavation_site_kinds = excavation_site_category.termlist_excavation_site_kinds
-      }
-    end
-  end
-  
-  def storages
-    respond_to do |format|
-      format.js {
-        museum = Museum.find params[:museum_id]
-        @storages = museum.storages
-      }
-    end
-  end
-  
-  def storage_locations
-    respond_to do |format|
-      format.js {
-        storage = Storage.find params[:storage_id]
-        @storage_locations = storage.storage_locations
-      }
-    end
-  end
-  
-  def museum_prefix
-    respond_to do |format|
-      format.js {
-        museum = Museum.find params[:museum]
-        @prefix = museum.prefix
-      }
-    end
-  end
-  
-  private
   def museum_object_params
     if params.key? :museum_object # Used for forms that do not directly belong to model (like material) ToDo: Check for a cleaner way
       params.require(:museum_object).permit :inv_number, :inv_extension, :inv_numberdoa, :amount, :storage_location_id,
