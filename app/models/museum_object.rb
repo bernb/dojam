@@ -1,9 +1,10 @@
 class MuseumObject < ApplicationRecord
   include SearchCop
+  validates_with MuseumObjectValidator
 
   mount_uploaders :images, ImageUploader
   belongs_to :excavation_site, -> { order(name: :asc) }, required: false # do not require for now while in early dev state
-  belongs_to :storage_location
+  belongs_to :storage_location, required: false
   belongs_to :termlist_acquisition_delivered_by, -> { order(name: :asc) }, required: false
   belongs_to :termlist_acquisition_kind, -> { order(name: :asc) }, required: false
   belongs_to :termlist_authenticity, required: false
@@ -30,7 +31,7 @@ class MuseumObject < ApplicationRecord
   delegate :museum, to: :storage_location
   delegate :storage, to: :storage_location
   
-  after_save :set_is_used
+  before_update :set_is_used
   
   
   search_scope :search do
@@ -41,9 +42,9 @@ class MuseumObject < ApplicationRecord
   
   def set_is_used
     self.is_used = true
-    MuseumObject.skip_callback(:save, :after, :set_is_used)
+    MuseumObject.skip_callback(:update, :before, :set_is_used)
     self.save!
-    MuseumObject.set_callback(:save, :after, :set_is_used)
+    MuseumObject.set_callback(:update, :before, :set_is_used)
   end
   
 end
