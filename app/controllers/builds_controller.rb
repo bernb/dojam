@@ -9,6 +9,7 @@ class BuildsController < ApplicationController
         :step_literature, :step_confirm
   
   def show
+    @museum_object = MuseumObject.find params[:museum_object_id]
     set_variables_for step   
     render_wizard
   end
@@ -23,8 +24,9 @@ class BuildsController < ApplicationController
     if step == :step_material
       session[:material_ids] = params[:material_ids]
     end
-    if @museum_object.save
+    if @museum_object.valid?
       if params[:finish] == "true"
+        @museum_object.save
         jump_to(:step_confirm)
       end
     else
@@ -94,7 +96,6 @@ class BuildsController < ApplicationController
   def set_variables_for step
     @building = true # used for progress bar in application layout for now
     @step = step
-    @museum_object = MuseumObject.find params[:museum_object_id]
     
     if step == :step_material
       @materials = TermlistMaterial.all.order name: :asc
