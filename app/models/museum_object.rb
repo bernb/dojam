@@ -1,6 +1,7 @@
 class MuseumObject < ApplicationRecord
   include SearchCop
   validates_with MuseumObjectValidator
+  #validates :inv_extension, numericality: {only_integer: true, allow_nil: true}
 
   mount_uploaders :images, ImageUploader
   belongs_to :excavation_site, -> { order(name: :asc) }, required: false # do not require for now while in early dev state
