@@ -31,7 +31,7 @@ class MuseumObject < ApplicationRecord
   delegate :museum, to: :storage_location
   delegate :storage, to: :storage_location
   
-  before_update :set_is_used
+  before_validation :set_is_used
   
   
   search_scope :search do
@@ -39,12 +39,12 @@ class MuseumObject < ApplicationRecord
     attributes :description_authenticities_name, :description_conservation, :description_preservation_state_name
     attributes :acquisition_deliverer_name
   end
-  
+
+  # is_used activates validations, supposed to get set after first save
+  # as wickeg gem needs a valid/created entry to work
+  # note that is_set will also reroll if validation fails  
   def set_is_used
-    self.is_used = true
-    MuseumObject.skip_callback(:update, :before, :set_is_used)
-    self.save!
-    MuseumObject.set_callback(:update, :before, :set_is_used)
+    self.is_used = true unless self.new_record?
   end
   
 end
