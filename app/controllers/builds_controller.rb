@@ -72,8 +72,10 @@ class BuildsController < ApplicationController
   def storage_locations
     respond_to do |format|
       format.js {
-        storage = Storage.find params[:storage_id]
-        @storage_locations = storage.storage_locations
+        if params[:storage_id] != ""
+          storage = Storage.find params[:storage_id]
+          @storage_locations = storage.storage_locations
+        end
       }
     end
   end
