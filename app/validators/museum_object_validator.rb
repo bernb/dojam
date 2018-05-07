@@ -26,7 +26,6 @@ class MuseumObjectValidator < ActiveModel::Validator
     check_not_empty record, :inventory_number, record.inv_number
     check_not_empty record, :inventory_extension, record.inv_extension
     check_is_number record, :inventory_extension, record.read_attribute_before_type_cast(:inv_extension)
-    #check_not_empty record, :other_inventory_number, record.inv_numberdoa
     check_not_empty record, :amount, record.amount
   end
   
