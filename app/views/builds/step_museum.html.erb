@@ -1,3 +1,6 @@
+<script>
+  var initial_storage_id = "<%= @museum_object&.storage_location&.storage&.id %>";
+</script>
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path, method: :put do |f| %>
     <% label_tag "", "museum" %>
