@@ -4,16 +4,20 @@ class MuseumObjectValidator < ActiveModel::Validator
       return
     end
     if record.storage_location.nil?
-      record.errors[:storage_location] << "Storage Location " + assoc_missing_string
+      record.errors.add :storage_location, assoc_missing
     end
     if record.inv_number == ""
-      record.errors[:storage_location] << "Inventory number " + assoc_missing_string
+      record.errors.add :inventory_number, req_is_empty
     end
   end
   
   private
-  def assoc_missing_string
+  def assoc_missing
     "must be selected."
+  end
+  
+  def req_is_empty
+    "must not be empty"
   end
 
 end
