@@ -29,7 +29,7 @@ class BuildsController < ApplicationController
     
     if step == :step_material
       if params[:material_ids].blank?
-        flash[:warning] = "Material must be selected"
+        flash.now[:warning] = "material must be selected"
         allow_next_step = false
       else
         session[:material_ids] = params[:material_ids]
