@@ -34,3 +34,7 @@
 .help-block {
   display: none
 }
+
+span.checkbox {
+  display: block;
+}
