@@ -27,6 +27,20 @@ class MuseumObjectValidator < ActiveModel::Validator
         validate_step_kind_of_object_specified_for record
       when "step_production"
         validate_step_production_for record
+      when "step_color"
+        validate_step_color_for record
+      when "step_decoration"
+        validate_step_decoration_for record
+      when "step_inscription"
+        validate_step_inscription_for record
+      when "step_measurements"
+        validate_step_measurements_for record
+      when "step_authenticity"
+        validate_step_authenticity_for record
+      when "step_preservation"
+        validate_step_authenticity_for record
+      when "step_conservation"
+        validate_step_conservation_for record
       else
         can_not_validate record
     end
@@ -73,6 +87,42 @@ class MuseumObjectValidator < ActiveModel::Validator
   
   def validate_step_production_for record
     check_assoc_exists record, :production_technique, record.termlist_production_technique
+  end
+  
+  def validate_step_color_for record
+    check_assoc_exists record, :color, record.termlist_colors
+  end
+  
+  def validate_step_decoration_for record
+    check_assoc_exists record, :decoration_technique, record.termlist_decoration
+    check_assoc_exists record, :decoration_color, record.termlist_decoration_color
+  end
+  
+  def validate_step_inscription_for record
+    check_assoc_exists record, :letters_of_inscription, record.termlist_inscription_letter
+    check_assoc_exists record, :language_of_inscription, record.termlist_inscription_language
+    check_not_empty record, :text_of_inscription, record.inscription_text
+    check_not_empty record, :text_of_inscription, record.inscription_text
+    check_not_empty record, :translation_of_inscription, record.inscription_translation
+  end
+  
+  def validate_step_measurements_for record
+  
+  end
+  
+  def validate_step_authenticity_for record
+    check_assoc_exists record, :authenticity, record.termlist_authenticity
+    check_assoc_exists record, :priority, record.priority
+    check_not_empty record, :priority_determined_by, record.priority_determined_by
+  end
+  
+  def validate_step_authenticity_for record
+    check_assoc_exists record, :preservation_of_material, record.termlist_preservation_material
+    check_assoc_exists record, :preservation_of_object, record.termlist_preservation_object
+  end
+  
+  def validate_step_conservation_for record
+  
   end
   
   
