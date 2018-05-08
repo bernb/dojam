@@ -19,6 +19,7 @@ ready = ->
       dataType: "script"
       data:
         storage_id: $('.storage_selection option:selected').val()
+        museum_object_id: $(".edit_museum_object").attr('id').match(/\d+/)
   $(".museum_selection").on "change", ->
     $.ajax
       url: "/builds/museum_prefix"

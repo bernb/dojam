@@ -21,6 +21,9 @@ class BuildsController < ApplicationController
   def update
     @museum_object = MuseumObject.find params[:museum_object_id]
     @museum_object.assign_attributes museum_object_params unless not params.key? :museum_object # see at params method below
+    if step == :step_acquisition
+      handle_fuzzy_date params[:museum_object]
+    end
     if step == :step_material
       session[:material_ids] = params[:material_ids]
     end
@@ -93,9 +96,36 @@ class BuildsController < ApplicationController
   
   private
   
+  def handle_fuzzy_date museum_params
+    year = museum_params["acquisition_date(1i)"]
+    month = museum_params["acquisition_date(2i)"]
+    day = museum_params["acquisition_date(3i)"]
+    # If no year or no valid combination is given return and let it handle by validator
+    if year.blank?
+      return
+    end
+    if day.present? && month.blank?
+      return
+    end
+    
+    date = nil
+    if day.present?
+      @museum_object.assign_attributes acquisition_date_precision: 1
+      date = year + "-" + month + "-" + day
+    elsif month.present?
+      @museum_object.assign_attributes acquisition_date_precision: 2
+      date = year + "-" + month + "-" + "01"
+    else
+      @museum_object.assign_attributes acquisition_date_precision: 3
+      date = year + "-" + "01" + "-" + "01"
+    end
+    @museum_object.assign_attributes acquisition_date: date
+  end
+  
   def set_variables_for step
     @building = true # used for progress bar in application layout for now
     @step = step
+    @museum_object.update_attribute :current_build_step, step
     
     if step == :step_material
       @materials = TermlistMaterial.all.order name: :asc
