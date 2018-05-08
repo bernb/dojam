@@ -23,6 +23,7 @@ class MuseumObject < ApplicationRecord
   belongs_to :termlist_excavation_site_kind, required: false
   has_many :join_museum_object_material_specifieds
   has_many :termlist_material_specifieds, through: :join_museum_object_material_specifieds
+  has_many :termlist_materials, -> { distinct }, through: :termlist_material_specifieds
   has_many :join_museum_object_colors
   has_many :termlist_colors, through: :join_museum_object_colors
   has_many :join_museum_object_dating_centuries
@@ -46,5 +47,10 @@ class MuseumObject < ApplicationRecord
   def set_is_used
     self.is_used = true unless self.new_record?
   end
+  
+  def termlist_material_specifieds_for material
+     TermlistMaterialSpecified.where(termlist_material: material).joins(:museum_objects).where(museum_objects: {id: self.id})
+  end
+  
   
 end
