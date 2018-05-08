@@ -43,6 +43,8 @@ class MuseumObjectValidator < ActiveModel::Validator
         validate_step_conservation_for record
       when "step_dating"
         validate_step_dating_for record
+      when "step_remarks"
+        validate_step_remarks_for record
       else
         can_not_validate record
     end
@@ -128,6 +130,10 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def validate_step_dating_for record
+  
+  end
+  
+  def validate_step_remarks_for record
   
   end
   
