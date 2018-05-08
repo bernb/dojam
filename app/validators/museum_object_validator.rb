@@ -21,6 +21,12 @@ class MuseumObjectValidator < ActiveModel::Validator
         validate_step_material_for record
       when "step_material_specified"
         validate_step_material_specified_for record
+      when "step_kind_of_object"
+        validate_step_kind_of_object_for record
+      when "step_kind_of_object_specified"
+        validate_step_kind_of_object_specified_for record
+      when "step_production"
+        validate_step_production_for record
       else
         can_not_validate record
     end
@@ -55,6 +61,18 @@ class MuseumObjectValidator < ActiveModel::Validator
   
   def validate_step_material_specified_for record
     check_assoc_exists record, :material_specified, record.termlist_material_specifieds
+  end
+  
+  def validate_step_kind_of_object_for record
+    check_assoc_exists record, :kind_of_object, record.termlist_kind_of_object
+  end
+  
+  def validate_step_kind_of_object_specified_for record
+    check_assoc_exists record, :kind_of_object_specified, record.termlist_kind_of_object_specified
+  end
+  
+  def validate_step_production_for record
+    check_assoc_exists record, :production_technique, record.termlist_production_technique
   end
   
   

@@ -29,3 +29,8 @@
     float: right;
     margin-left: 5px;   
 }
+
+// We omit for now until client side feedback is implemented completely
+.help-block {
+  display: none
+}
