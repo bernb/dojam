@@ -71,6 +71,17 @@ class BuildsController < ApplicationController
     
   end
   
+  def kind_of_objects_for_spec_material
+    respond_to do |format|
+      format.js {
+        material_specified = TermlistMaterialSpecified.find(
+                               params[:selected_material_specified_id])
+        @kind_of_objects = TermlistKindOfObject.where( 
+                             termlist_material_specified: material_specified)
+      }
+    end
+  end
+  
   def excavation_site_kinds
     respond_to do |format|
       format.js {
@@ -122,7 +133,6 @@ class BuildsController < ApplicationController
     if day.present? && month.blank?
       return
     end
-    
     date = nil
     if day.present?
       @museum_object.assign_attributes acquisition_date_precision: 1
@@ -170,7 +180,8 @@ class BuildsController < ApplicationController
     if step == :step_kind_of_object
       material_specifieds_ids = @museum_object.termlist_material_specifieds.ids # get ids for choosen spec. materials
       # after that get kind of objects that belongs to the choosen spec. materials
-      @kind_of_objects = TermlistKindOfObject.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
+      #@kind_of_objects = TermlistKindOfObject.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
+      @kind_of_objects = [] # note that nil results in 'Yes/No' selection in view..
     end
     
     if step == :step_kind_of_object_specified
@@ -246,9 +257,7 @@ class BuildsController < ApplicationController
                                           termlist_material_specified_ids: [], 
                                           termlist_color_ids: [],                                   
                                           excavation_site_attributes: [:id, :_destroy] 
-  end
-                                          
-                                    
+    end                                
   end
   
 end

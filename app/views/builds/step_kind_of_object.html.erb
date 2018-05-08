@@ -1,6 +1,22 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-    <%= f.association :termlist_kind_of_object, collection: @kind_of_objects, label: false, as: :collection_select, include_blank: true, :label_method => lambda { |kind| "#{kind.name} | #{kind.termlist_material_specified.name}"}  %>
+    <h4>primary material</h4>
+      <% @museum_object.termlist_materials.each do |material| %>
+        <div><%= material.name %></div>
+        <ul class="list-group">
+          <% @museum_object.termlist_material_specifieds_for(material).each do |spec_material| %>
+            <li class="list-group-item">
+              <label>
+                <%= radio_button_tag "main_spec_material", spec_material.id %>
+                <%= spec_material.name %>
+              </label>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+      </br>
+    <h4>kind of object</h4>
+    <%= f.association :termlist_kind_of_object, collection: @kind_of_objects, label: false, as: :collection_select, include_blank: true  %>
     <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>
