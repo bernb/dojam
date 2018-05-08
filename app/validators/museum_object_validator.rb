@@ -19,6 +19,8 @@ class MuseumObjectValidator < ActiveModel::Validator
         validate_step_provenance_for record
       when "step_material"
         validate_step_material_for record
+      when "step_material_specified"
+        validate_step_material_specified_for record
       else
         can_not_validate record
     end
@@ -48,6 +50,10 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def validate_step_material_for record
+    # This is done in controller as material itself is not saved in db
+  end
+  
+  def validate_step_material_specified_for record
   
   end
   
@@ -56,7 +62,7 @@ class MuseumObjectValidator < ActiveModel::Validator
   
   
   def can_not_validate record
-    record.errors.add :base, "Critical: Can not determine current step for validation."
+    record.errors.add :critical, "error: Can not determine current step for validation."
   end
   
   def check_not_empty record, field_name, value
