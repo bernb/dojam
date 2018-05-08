@@ -15,6 +15,10 @@ class MuseumObjectValidator < ActiveModel::Validator
         validate_step_museum_for record
       when "step_acquisition"
         validate_step_acquisition_for record
+      when "step_provenance"
+        validate_step_provenance_for record
+      when "step_material"
+        validate_step_material_for record
       else
         can_not_validate record
     end
@@ -39,7 +43,13 @@ class MuseumObjectValidator < ActiveModel::Validator
     check_not_empty record, :number_of_acquisition_document, record.acquisition_document_number
   end
   
+  def validate_step_provenance_for record
   
+  end
+  
+  def validate_step_material_for record
+  
+  end
   
   
   

@@ -21,13 +21,22 @@ class BuildsController < ApplicationController
   def update
     @museum_object = MuseumObject.find params[:museum_object_id]
     @museum_object.assign_attributes museum_object_params unless not params.key? :museum_object # see at params method below
+    allow_next_step = true
+    
     if step == :step_acquisition
       handle_fuzzy_date params[:museum_object]
     end
+    
     if step == :step_material
-      session[:material_ids] = params[:material_ids]
+      if params[:material_ids].blank?
+        flash[:warning] = "Material must be selected"
+        allow_next_step = false
+      else
+        session[:material_ids] = params[:material_ids]
+      end
     end
-    if @museum_object.valid?
+    
+    if @museum_object.valid? && allow_next_step
       if params[:finish] == "true"
         @museum_object.save
         jump_to(:step_confirm)
@@ -35,7 +44,13 @@ class BuildsController < ApplicationController
     else
       set_variables_for step
     end
-    render_wizard @museum_object # does also attempt to save and renders same view again if fails
+    
+    if allow_next_step
+      render_wizard @museum_object # does also attempt to save and renders same view again if fails
+    else
+      render_wizard
+    end
+    
   end
   
   def create

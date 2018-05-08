@@ -9,6 +9,6 @@
 <% end %>
 <% unless @museum_object.nil? %>
   <% @museum_object.errors.each do |field, error| %>
-    <div class="alert alert-danger"><%= field.to_s.humanize capitalize: false %> <%= error %></div>
+    <div class="alert alert-warning"><%= field.to_s.humanize capitalize: false %> <%= error %></div>
   <% end %>
 <% end %>
