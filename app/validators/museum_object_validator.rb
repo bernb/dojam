@@ -54,7 +54,7 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def validate_step_material_specified_for record
-  
+    check_assoc_exists record, :material_specified, record.termlist_material_specifieds
   end
   
   
@@ -78,9 +78,12 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def check_assoc_exists record, field_name, value
-    if value.nil?
+    # nil if belongs_to missing
+    # blank if has_many missing
+    if value.nil? || value.blank?
       record.errors.add field_name, "must be selected."
     end
+
   end
   
 
