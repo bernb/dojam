@@ -49,6 +49,25 @@ class MuseumObjectValidator < ActiveModel::Validator
         validate_step_images_upload_for record
       when "step_literature"
         validate_step_literature_for record
+      when "step_confirm"
+        validate_step_museum_for record
+        validate_step_acquisition_for record
+        validate_step_provenance_for record
+        validate_step_material_for record
+        validate_step_material_specified_for record
+        validate_step_kind_of_object_for record
+        validate_step_kind_of_object_specified_for record
+        validate_step_production_for record
+        validate_step_color_for record
+        validate_step_decoration_for record
+        validate_step_inscription_for record
+        validate_step_measurements_for record
+        validate_step_authenticity_for record
+        validate_step_conservation_for record
+        validate_step_dating_for record
+        validate_step_remarks_for record
+        validate_step_images_upload_for record
+        validate_step_literature_for record
       else
         can_not_validate record
     end
