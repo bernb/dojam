@@ -2,23 +2,59 @@
   <h2>measurements</h2>
   <%= link_to "edit", wizard_path(:step_measurements) %>
   <dl class="dl-horizontal">
-    <dt>remaining length</dt>
-      <dd><%= @museum_object&.remaining_length %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>remaining length</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.remaining_length %></dd>
+      </div>
+    </div>
       
-    <dt>remaining width</dt>
-      <dd><%= @museum_object&.remaining_width %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>remaining width</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.remaining_width %></dd>
+      </div>
+    </div>
       
-    <dt>remaining height</dt>
-      <dd><%= @museum_object&.remaining_height %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>remaining height</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.remaining_height %></dd>
+      </div>
+    </div>
       
-      <dt>remaining opening dm</dt>
-      <dd><%= @museum_object&.remaining_opening_dm %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>remaining opening dm</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.remaining_opening_dm %></dd>
+      </div>
+    </div>
       
-      <dt>remaining bottom dm</dt>
-      <dd><%= @museum_object&.remaining_bottom_dm %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>remaining bottom dm</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.remaining_bottom_dm %></dd>
+      </div>
+    </div>
       
-      <dt>remaining weight (gram)</dt>
-      <dd><%= @museum_object&.remaining_weight_in_gram %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>remaining weight (gram)</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.remaining_weight_in_gram %></dd>
+      </div>
+    </div>
     
   </dl>
 </div>

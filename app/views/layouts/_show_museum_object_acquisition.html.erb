@@ -2,19 +2,49 @@
   <h2>acquisition</h2>
   <%= link_to "edit", wizard_path(:step_acquisition) %>
   <dl class="dl-horizontal">
-    <dt>kind of acquisition</dt>
-    <dd><%= @museum_object&.termlist_acquisition_kind&.name %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>kind of acquisition</dt>
+      </div>
+    <div class="col">
+        <dd><%= @museum_object&.termlist_acquisition_kind&.name %></dd>
+      </div>
+    </div>
     
-    <dt>delivered by</dt>  
-    <dd><%= @museum_object&.termlist_acquisition_delivered_by&.name %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>delivered by</dt>
+      </div>  
+      <div class="col">
+        <dd><%= @museum_object&.termlist_acquisition_delivered_by&.name %></dd>
+      </div>
+    </div>
     
-    <dt>name of deliverer</dt>  
-    <dd><%= @museum_object&.acquisition_deliverer_name %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>name of deliverer</dt>
+      </div>  
+      <div class="col">
+        <dd><%= @museum_object&.acquisition_deliverer_name %></dd>
+      </div>
+    </div>
     
-    <dt>acquisition date</dt>
-    <dd><%= @museum_object&.acquisition_date %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>acquisition date</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.acquisition_date %></dd>
+      </div>
+    </div>
     
-    <dt>number of acquisition document</dt>  
-    <dd><%= @museum_object&.acquisition_document_number %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>number of acquisition document</dt>
+      </div>  
+      <div class="col">
+        <dd><%= @museum_object&.acquisition_document_number %></dd>
+      </div>
+    </div>
   </dl>
 </div>

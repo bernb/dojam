@@ -3,15 +3,32 @@
   <%= link_to "edit", wizard_path(:step_preservation) %>
   <dl class="dl-horizontal">
   
-    <dt>preservation (material)</dt>
-      <dd><%= @museum_object&.termlist_preservation_material&.name %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>preservation (material)</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.termlist_preservation_material&.name %></dd>
+      </div>
+    </div>
       
-    <dt>preservation (object)</dt>
-      <dd><%= @museum_object&.termlist_preservation_object&.name %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>preservation (object)</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.termlist_preservation_object&.name %></dd>
+      </div>
+    </div>
       
-    <dt>conservation</dt>
-      <dd><%= @museum_object&.description_conservation %></dd>
-      
+    <div class="row">
+      <div class="col-3">
+        <dt>conservation</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.description_conservation %></dd>
+      </div>
+    </div> 
     
   </dl>
 </div>

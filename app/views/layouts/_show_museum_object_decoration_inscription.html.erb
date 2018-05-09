@@ -2,23 +2,59 @@
   <h2>decoration/inscription</h2>
   <%= link_to "edit", wizard_path(:step_decoration) %>
   <dl class="dl-horizontal">
-    <dt>technique</dt>
-      <dd><%= @museum_object.termlist_decoration&.name %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>technique</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object.termlist_decoration&.name %></dd>
+      </div>
+    </div>
       
-    <dt>color</dt>
-      <dd><%= @museum_object.termlist_decoration_color&.name %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>color</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object.termlist_decoration_color&.name %></dd>
+      </div>
+    </div>
       
-    <dt>letters of inscription</dt>
-      <dd><%= @museum_object.termlist_inscription_letter&.name %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>letters of inscription</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object.termlist_inscription_letter&.name %></dd>
+      </div>
+    </div>
       
-      <dt>language of inscription</dt>
-      <dd><%= @museum_object.termlist_inscription_language&.name %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>language of inscription</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object.termlist_inscription_language&.name %></dd>
+      </div>
+    </div>
       
-      <dt>inscription text</dt>
-      <dd><%= @museum_object.inscription_text %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>inscription text</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object.inscription_text %></dd>
+      </div>
+    </div>
       
-      <dt>inscription translation</dt>
-      <dd><%= @museum_object.inscription_translation %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>inscription translation</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object.inscription_translation %></dd>
+      </div>
+    </div>
     
   </dl>
 </div>
