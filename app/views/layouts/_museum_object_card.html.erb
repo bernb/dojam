@@ -1,5 +1,7 @@
 <div class="card" style="width: 18rem;">
-  <%= image_tag @museum_object&.main_image&.variant(resize: "250x250"), class: "card-img-top" %>
+  <% unless @museum_object&.main_image&.attachment.nil? %>
+    <%= image_tag @museum_object&.main_image&.variant(resize: "250x250"), class: "card-img-top" %>
+  <% end %>
   <div class="card-body">
     <h5 class="card-title"><%= @museum_object&.inv_number %></h5>
     <p class="card-text">
