@@ -1,2 +1,9 @@
 <%= render 'layouts/title', title_name: 'Search results' %>
-<%= render 'layouts/search_results_table' %>
+<% render 'layouts/search_results_table' %>
+<div class="row equal">
+  <% @museum_objects.each do |object| %>
+    <div class="col">
+        <%= render 'layouts/museum_object_card', museum_object: object %>
+    </div>
+  <% end %>
+</div>
