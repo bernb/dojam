@@ -8,8 +8,10 @@ end
 # Simpliest fulltext search
 gem 'search_cop'
 
-# used by carrierwave to create thumbnail
+# used by active storage to create thumbnail
 gem 'mini_magick'
+
+gem "image_processing"
 
 # read env variables from serverfile as puma doesnt load env variables itself
 # we switch to canonical config file secrets.yml

@@ -37,9 +37,19 @@ class MuseumObject < ApplicationRecord
   
   
   search_scope :search do
-    attributes :inv_number, :inv_numberdoa, :finding_context, :finding_remarks
-    attributes :description_authenticities_name, :description_conservation, :description_preservation_state_name
-    attributes :acquisition_deliverer_name
+    attributes :inv_number, :inv_extension, :inv_numberdoa, :termlist_acquisition_delivered_by_id, :acquisition_deliverer_name, :acquisition_date,
+                                          :finding_context, :finding_remarks, :termlist_authenticity_id, :priority, :priority_determined_by,
+                                          :inscription_decoration, :inscription_text, :inscription_translation, 
+                                          :excavation_site_id, :termlist_kind_of_object_id, :termlist_kind_of_object_specified_id,
+                                          :acquisition_document_number, :name_expedition, :site_number_mega, :site_number_expedition,
+                                          :coordinates_mega, :termlist_excavation_site_kind_id, :termlist_dating_period_id, :termlist_dating_millennium_id,
+                                          :termlist_production_technique_id, :termlist_decoration_id, :termlist_decoration_color_id,
+                                          :termlist_inscription_letter_id, :termlist_inscription_language_id,
+                                          :remaining_length, :remaining_width, :remaining_height, :remaining_opening_dm, :remaining_bottom_dm, :remaining_weight_in_gram,
+                                          :termlist_preservation_material_id, :termlist_preservation_object_id, :description_conservation,
+                                          :remarks, :literature, :dating_timespan_begin, :dating_timespan_end
+    attributes storage_location: "storage_location.name"
+                                          
   end
 
   # is_used activates validations, supposed to get set after first save
