@@ -45,6 +45,10 @@ class MuseumObjectValidator < ActiveModel::Validator
         validate_step_dating_for record
       when "step_remarks"
         validate_step_remarks_for record
+      when "step_images_upload"
+        validate_step_images_upload_for record
+      when "step_literature"
+        validate_step_literature_for record
       else
         can_not_validate record
     end
@@ -135,6 +139,14 @@ class MuseumObjectValidator < ActiveModel::Validator
   
   def validate_step_remarks_for record
   
+  end
+  
+  def validate_step_images_upload_for record
+    check_assoc_exists record, :main_image, record.main_image
+  end
+  
+  def validate_step_literature_for record
+    
   end
   
   

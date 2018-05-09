@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require cocoon
+//= require activestorage
 //= require_tree .

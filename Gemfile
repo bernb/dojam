@@ -8,9 +8,6 @@ end
 # Simpliest fulltext search
 gem 'search_cop'
 
-# file attachment. Rails 5.2 will have ActiveStorage as an alternative
-gem 'carrierwave', '~> 1.0'
-
 # used by carrierwave to create thumbnail
 gem 'mini_magick'
 
