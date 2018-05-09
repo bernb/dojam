@@ -12,7 +12,7 @@
   </div>
   <div class="col-auto">
     <% unless @museum_object&.termlist_kind_of_object.nil? %>
-      <%= render "layouts/museum_object_card" %>
+      <%= render "layouts/museum_object_card", museum_object: @museum_object %>
     <% end %>
   </div>
 </div>
