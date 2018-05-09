@@ -41,4 +41,8 @@ span.checkbox {
 
 .spacer {
      margin-bottom: 20px !important;
- }
+}
+
+.hidden {
+  display: none;
+}
