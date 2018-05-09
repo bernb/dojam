@@ -5,8 +5,8 @@
     <% @museum_object&.images.each do |image| %>
       <div class="col-md-4">
         <div class="thumbnail">
-          <a href="<%= image.url %>">
-          <%= image_tag image.thumb.url %>
+          <a href="<%= url_for(image) %>">
+          <%= image_tag url_for(image) %>
         </div>
       </div>
     <% end %>

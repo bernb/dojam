@@ -81,10 +81,6 @@ GEM
       capistrano (~> 3.7)
       capistrano-bundler
       puma (~> 3.4)
-    carrierwave (1.2.2)
-      activemodel (>= 4.0.0)
-      activesupport (>= 4.0.0)
-      mime-types (>= 1.16)
     choice (0.2.0)
     cocoon (1.2.11)
     coffee-rails (4.2.2)
@@ -123,9 +119,6 @@ GEM
     marcel (0.3.2)
       mimemagic (~> 0.3.2)
     method_source (0.9.0)
-    mime-types (3.1)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2016.0521)
     mimemagic (0.3.2)
     mini_magick (4.8.0)
     mini_mime (1.0.0)
@@ -244,7 +237,6 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capistrano3-puma
-  carrierwave (~> 1.0)
   cocoon
   coffee-rails (~> 4.2)
   figaro

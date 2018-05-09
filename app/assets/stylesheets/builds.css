@@ -32,9 +32,13 @@
 
 // We omit for now until client side feedback is implemented completely
 .help-block {
-  display: none
+  display: none;
 }
 
 span.checkbox {
   display: block;
 }
+
+.spacer {
+     margin-bottom: 20px !important;
+ }
