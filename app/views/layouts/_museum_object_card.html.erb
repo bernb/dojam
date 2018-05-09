@@ -1,0 +1,33 @@
+<div class="card" style="width: 18rem;">
+  <%= image_tag @museum_object&.main_image&.variant(resize: "250x250"), class: "card-img-top" %>
+  <div class="card-body">
+    <h5 class="card-title"><%= @museum_object&.inv_number %></h5>
+    <p class="card-text">
+      <dl class="row">
+        <dt class="col-sm-6">
+          location
+        </dt>
+        <dd class="col-sm-6">
+          <%= @museum_object&.storage_location&.name %>
+        </dd>
+        
+        <dt class="col-sm-6">
+          material
+        </dt>
+        <dd class="col-sm-6">
+          <% @museum_object&.termlist_materials.each do |material| %>      
+            <%= material&.name %><p>
+          <% end %>
+        </dd>
+        
+        <dt class="col-sm-6">
+          kind of object
+        </dt>
+        <dd class="col-sm-6">
+          <%= @museum_object&.termlist_kind_of_object&.name %>
+        </dd>
+        
+      </dl>
+    </p>
+  </div>
+</div>
