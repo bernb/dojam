@@ -41,8 +41,15 @@ class BuildsController < ApplicationController
         @museum_object.save
         jump_to(:step_confirm)
       end
+      
+      if step == :step_confirm
+        flash[:success] = "object saved in database"
+      end
     else
       set_variables_for step
+      if step == :step_confirm
+        flash.now[:danger] = "could not save object"
+      end
     end
     
     if allow_next_step
