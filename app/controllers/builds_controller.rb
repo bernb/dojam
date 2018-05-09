@@ -10,8 +10,8 @@ class BuildsController < ApplicationController
   
   def show
     @museum_object = MuseumObject.find params[:museum_object_id]
-    set_variables_for step   
-    render_wizard
+    set_variables_for step 
+      render_wizard
   end
 
   def new

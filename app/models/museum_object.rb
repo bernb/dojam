@@ -30,8 +30,8 @@ class MuseumObject < ApplicationRecord
   has_many :join_museum_object_dating_centuries
   has_many :termlist_dating_centuries, through: :join_museum_object_dating_centuries
   accepts_nested_attributes_for :excavation_site, reject_if: :all_blank, allow_destroy: true
-  delegate :museum, to: :storage_location
-  delegate :storage, to: :storage_location
+  delegate :museum, to: :storage_location, allow_nil: true
+  delegate :storage, to: :storage_location, allow_nil: true
   
   before_validation :set_is_used
   
