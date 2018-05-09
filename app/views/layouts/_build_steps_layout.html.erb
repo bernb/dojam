@@ -11,6 +11,8 @@
     <%= link_to "skip and finish", wizard_path(:step_confirm), class: "btn" %> 
   </div>
   <div class="col-auto">
-    <%= render "layouts/museum_object_card" %>
+    <% unless @museum_object&.termlist_kind_of_object.nil? %>
+      <%= render "layouts/museum_object_card" %>
+    <% end %>
   </div>
 </div>

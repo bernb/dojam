@@ -62,7 +62,7 @@ class BuildsController < ApplicationController
   
   def create
     museum_object = MuseumObject.find params[:museum_object_id]
-    museum_object.is_finished = true
+    museum_object.is_finished = false
     if museum_object.save
       flash[:success] = "Object saved in database"
       redirect_to root_path
@@ -157,7 +157,7 @@ class BuildsController < ApplicationController
   def set_variables_for step
     @building = true # used for progress bar in application layout for now
     @step = step
-    @museum_object.update_attribute :current_build_step, step
+    @museum_object.update_column :current_build_step, step
     
     if step == :step_material
       @materials = TermlistMaterial.all.order name: :asc
@@ -258,7 +258,7 @@ class BuildsController < ApplicationController
                                           :termlist_inscription_letter_id, :termlist_inscription_language_id,
                                           :remaining_length, :remaining_width, :remaining_height, :remaining_opening_dm, :remaining_bottom_dm, :remaining_weight_in_gram,
                                           :termlist_preservation_material_id, :termlist_preservation_object_id, :description_conservation,
-                                          :remarks, :literature, :dating_timespan_begin, :dating_timespan_end, :main_image,
+                                          :remarks, :literature, :dating_timespan_begin, :dating_timespan_end, :main_image, :is_finished,
                                           images: [],
                                           termlist_dating_century_ids: [],
                                           termlist_material_specified_ids: [], 
