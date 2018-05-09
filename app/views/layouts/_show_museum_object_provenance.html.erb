@@ -2,29 +2,79 @@
   <h2>provenance</h2>
   <%= link_to "edit", wizard_path(:step_provenance) %>
   <dl class="dl-horizontal">
-    <dt>site name</dt>
-    <dd><%= @museum_object&.excavation_site&.name %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>site name</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.excavation_site&.name %></dd>
+      </div>
+    </div>
     
-    <dt>other site name</dt>
-    <dd><%= @museum_object&.name_expedition %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>other site name</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.name_expedition %></dd>
+      </div>
+    </div>
     
-    <dt>site number (MEGA)</dt>
-    <dd><%= @museum_object&.site_number_mega %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>site number (MEGA)</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.site_number_mega %></dd>
+      </div>
+    </div>
     
-    <dt>site number (expedition)</dt>
-    <dd><%= @museum_object&.site_number_expedition %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>site number (expedition)</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.site_number_expedition %></dd>
+      </div>
+    </div>
     
-    <dt>coordinates (MEGA)</dt>
-    <dd><%= @museum_object&.coordinates_mega %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>coordinates (MEGA)</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.coordinates_mega %></dd>
+      </div>
+    </div>
     
-    <dt>kind of site</dt>
-    <dd><%= @museum_object&.termlist_excavation_site_kind&.name %>:
-        <%= @museum_object&.termlist_excavation_site_kind&.termlist_excavation_site_category&.name %></dd>
-    <dt>finding context</dt>
-    <dd><%= @museum_object&.finding_context %>
+    <div class="row">
+      <div class="col-3">
+        <dt>kind of site</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.termlist_excavation_site_kind&.name %>:
+            <%= @museum_object&.termlist_excavation_site_kind&.termlist_excavation_site_category&.name %>
+        </dd>
+      </div>
+    </div>
     
-    <dt>remarks</dt>
-    <dd><%= @museum_object&.finding_remarks %>
+    <div class="row">
+      <div class="col-3">
+        <dt>finding context</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.finding_context %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-3">
+        <dt>remarks</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.finding_remarks %>
+      </div>
+    </div>
   </dl>
 
 </div>

@@ -3,17 +3,41 @@
   <%= link_to "edit", wizard_path(:step_authenticity) %>
   <dl class="dl-horizontal">
   
-    <dt>authenticity</dt>
-      <dd><%= @museum_object&.termlist_authenticity&.name %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>authenticity</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.termlist_authenticity&.name %></dd>
+      </div>
+    </div>
       
-    <dt>priority</dt>
-      <dd><%= @museum_object&.priority %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>priority</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.priority %></dd>
+      </div>
+    </div>
       
-    <dt>priority determined by</dt>
-      <dd><%= @museum_object&.priority_determined_by %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>priority determined by</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.priority_determined_by %></dd>
+      </div>
+    </div>
       
-    <dt>remaining height</dt>
-      <dd><%= @museum_object&.remaining_height %></dd>
+    <div class="row">
+      <div class="col-3">
+        <dt>remaining height</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.remaining_height %></dd>
+      </div>
+    </div>
     
   </dl>
 </div>
