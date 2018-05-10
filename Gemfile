@@ -21,6 +21,9 @@ gem "image_processing"
 # now using bootstrap 4 as simple_form 4 supports it now
 #gem 'bootstrap-sass'
 
+# helps with decorators
+gem 'draper'
+
 # needed by bootstrap gem
 gem 'sprockets-rails'
 gem 'bootstrap'
