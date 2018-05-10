@@ -59,12 +59,17 @@ class MuseumObject < ApplicationRecord
     self.is_used = true unless self.new_record?
   end
   
+  # Returns associated material specifieds only for given material
   def termlist_material_specifieds_for material
      TermlistMaterialSpecified.where(termlist_material: material).joins(:museum_objects).where(museum_objects: {id: self.id})
   end
   
   def card
     MuseumCardDecorator.new(self)
+  end
+  
+  def has_material? material
+    self.termlist_materials.ids.include? material.id
   end
   
   

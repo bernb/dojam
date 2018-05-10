@@ -2,7 +2,7 @@
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
     <% @materials.each do |material| %>
       <div class="form-check">
-        <%= check_box_tag 'material_ids[]', material.id %>
+        <%= check_box_tag 'material_ids[]', material.id, @museum_object.has_material?(material) %>
         <label class="form-check-label">
           <%= material.name %>
         </label>
