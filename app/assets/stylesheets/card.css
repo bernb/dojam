@@ -1,4 +1,9 @@
 .card {
   width: 18rem !important;
-  height: 36rem !important;
+  height: 25rem !important;
+}
+
+.card-img-dummy{
+  height: 200px;
+  background-color: grey;
 }
