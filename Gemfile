@@ -96,6 +96,12 @@ group :development do
   gem 'capistrano-bundler' # for bundle install task
   gem 'capistrano-rails' # migrate and compile asset tasks
   gem 'capistrano3-puma' # puma tasks
+  gem 'scout_apm' # used for profiling
+  gem 'rack-mini-profiler' # also profiling
+  gem 'memory_profiler' # For memory profiling used by rack-mini-profiler
+  # For call-stack profiling flamegraphs used by rack-mini-profiler
+  gem 'flamegraph'
+  gem 'stackprof'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
