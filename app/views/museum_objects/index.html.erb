@@ -3,7 +3,7 @@
 <div class="row equal">
   <% @museum_cards.each do |object| %>
     <div class="col">
-        <%= render 'layouts/museum_object_card', museum_card: object %>
+        <%= render 'layouts/museum_object_card', museum_card: object, variant: @variant %>
     </div>
   <% end %>
 </div>
