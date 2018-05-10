@@ -2,10 +2,11 @@ class MuseumObjectsController < ApplicationController
   
   def index
   if params.has_key? :search_query
-    @museum_objects = MuseumObject.search "#{params[:search_query]}"
+    museum_objects = MuseumObject.search "#{params[:search_query]}"
   else
-    @musem_objects = MuseumObject.find :all, limit: 100
+    musem_objects = MuseumObject.find :all, limit: 100
   end
+  @museum_cards = MuseumCardDecorator.decorate_collection(museum_objects)
   
   end
 

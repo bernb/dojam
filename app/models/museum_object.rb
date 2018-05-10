@@ -63,5 +63,9 @@ class MuseumObject < ApplicationRecord
      TermlistMaterialSpecified.where(termlist_material: material).joins(:museum_objects).where(museum_objects: {id: self.id})
   end
   
+  def card
+    MuseumCardDecorator.new(self)
+  end
+  
   
 end
