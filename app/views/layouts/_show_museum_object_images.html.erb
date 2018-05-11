@@ -9,14 +9,6 @@
     <% end %>
   </div>
   <div class="row">
-    <% @museum_object&.images.each do |image| %>
-      <div class="col-md-4">
-        <div class="thumbnail">
-          <a href="<%= url_for(image) %>" target="_blank">
-            <%= image_tag image.variant(resize: "250x250"), class: "img-thumbnail" %>
-          </a>
-        </div>
-      </div>
-    <% end %>
+    <%= render "layouts/image_list", images: @museum_object&.images || {} %>
   </div>
 </div>
