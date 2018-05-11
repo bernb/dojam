@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     post 'builds/step_confirm', to: 'builds#create'
   end
   
+  delete 'image_list/:id/image/:image_id', to: 'museum_object_image_lists#delete_image', as: 'delete_image'
+  
+  
   # Helper actions for ajax call to find correct action
   get 'builds/storagess', to: "builds#storages"
   get 'builds/storage_locations', to: "builds#storage_locations"
