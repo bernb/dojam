@@ -1,20 +1,26 @@
 class TermlistsController < ApplicationController
   def index
     if not params.key? :termlist_name
-      termlist_name = "museum" # ToDo: Do something smarter in that case
+      flash[:danger] = "no termlist name given"
+      redirect_to root_path
     else
-      termlist_name = params[:museum]
+      termlist_name = params[:termlist_name]
     end
     
     @title = termlist_name
     
-    case termlist_name
-    when "museum"
-      @objects = Museum.all  
-    end
+    table_string = termlist_name.gsub("_"," ").titleize.gsub(" ","").singularize
+    
+    @objects = table_string.constantize.all
   end
   
   def choose
+    @termlists = get_termlist_names_from ActiveRecord::Base.connection.tables
+  end
   
+  private
+  
+  def get_termlist_names_from tables_array
+    tables_array.select {|element| element.start_with? "termlist_"}
   end
 end
