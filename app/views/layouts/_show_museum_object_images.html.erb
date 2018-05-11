@@ -2,13 +2,13 @@
   <h2>images</h2>
   <%= link_to "edit", wizard_path(:step_images_upload) %>
   <div class="row">
-    <% unless @museum_object&.main_image.attachment.nil? %>
-      <a href="<%= url_for(@museum_object&.main_image) %>" target="_blank">
-        <%= image_tag @museum_object&.main_image.variant(resize: "250x250"), class: "img-thumbnail" %>
+    <% unless @museum_object&.images.main&.attachment.nil? %>
+      <a href="<%= url_for(@museum_object&.images.main) %>" target="_blank">
+        <%= image_tag @museum_object&.images.main.variant(resize: "250x250"), class: "img-thumbnail" %>
       </a>
     <% end %>
   </div>
   <div class="row">
-    <%= render "layouts/image_list", images: @museum_object&.images || {} %>
+    <%= render "layouts/image_list", images: @museum_object&.images&.list || {} %>
   </div>
 </div>

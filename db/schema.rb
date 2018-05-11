@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_09_065934) do
+ActiveRecord::Schema.define(version: 2018_05_11_115605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,20 @@ ActiveRecord::Schema.define(version: 2018_05_09_065934) do
     t.datetime "updated_at", null: false
     t.index ["museum_object_id"], name: "index_join_museum_object"
     t.index ["termlist_material_specified_id"], name: "index_join_material_specified"
+  end
+
+  create_table "museum_object_image_lists", force: :cascade do |t|
+    t.bigint "museum_object_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["museum_object_id"], name: "index_museum_object_image_lists_on_museum_object_id"
+  end
+
+  create_table "museum_object_images", force: :cascade do |t|
+    t.bigint "museum_object_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["museum_object_id"], name: "index_museum_object_images_on_museum_object_id"
   end
 
   create_table "museum_objects", id: :serial, force: :cascade do |t|
@@ -425,6 +439,8 @@ ActiveRecord::Schema.define(version: 2018_05_09_065934) do
 
   add_foreign_key "join_museum_object_dating_centuries", "museum_objects"
   add_foreign_key "join_museum_object_dating_centuries", "termlist_dating_centuries"
+  add_foreign_key "museum_object_image_lists", "museum_objects"
+  add_foreign_key "museum_object_images", "museum_objects"
   add_foreign_key "museum_objects", "termlist_dating_periods"
   add_foreign_key "museum_objects", "termlist_excavation_site_kinds"
   add_foreign_key "museum_objects", "termlist_production_techniques"

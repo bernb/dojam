@@ -161,7 +161,7 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def validate_step_images_upload_for record
-    check_assoc_exists record, :main_image, record.main_image
+    check_assoc_exists record, :main_image, record.images.main
   end
   
   def validate_step_literature_for record

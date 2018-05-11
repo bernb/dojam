@@ -248,6 +248,11 @@ class BuildsController < ApplicationController
       @dating_millennia = kind_specified.termlist_dating_millennia
       @dating_centuries = kind_specified.termlist_dating_centuries
     end
+    
+    if step == :step_images_upload
+      @museum_object.images ||= MuseumObjectImageList.new
+    end
+    
   end
   
   
@@ -269,7 +274,8 @@ class BuildsController < ApplicationController
                                           termlist_dating_century_ids: [],
                                           termlist_material_specified_ids: [], 
                                           termlist_color_ids: [],                                   
-                                          excavation_site_attributes: [:id, :_destroy] 
+                                          excavation_site_attributes: [:id, :_destroy],
+                                          images_attributes: [:id, :main, list: []]
     end                                
   end
   
