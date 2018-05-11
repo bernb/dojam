@@ -7,7 +7,9 @@ class BuildsController < ApplicationController
         :step_measurements, :step_authenticity, :step_preservation, 
         :step_conservation, :step_dating, :step_remarks, :step_images_upload, 
         :step_literature, :step_confirm
-  
+  # ToDo: Use step-dependent routing to achieve one action per step
+  # See: https://stackoverflow.com/a/27508206/1638910
+  # Remember DRY and refactor step symbols into one single place then
   def show
     @museum_object = MuseumObject.find params[:museum_object_id]
     set_variables_for step 
