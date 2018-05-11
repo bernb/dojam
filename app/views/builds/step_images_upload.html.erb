@@ -2,7 +2,7 @@
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
     <%= f.label "", "main image" %>
     <%= f.file_field :main_image, multiple: false, class: "spacer"%>
-    <%= f.label "", "more images" %>
+    <%= f.label "", "add more images" %>
     <%= f.file_field :images, multiple: true, class: "spacer" %>
     <%= f.button :submit, "next step" %>
   <% end %>
