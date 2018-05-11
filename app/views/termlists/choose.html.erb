@@ -4,9 +4,15 @@
     <th>Name</th>
   </tr>
   <tr>
-    <td><%= link_to "Museum", termlists_index_path, termlist_name: "museum", class: "btn btn-link" %></td>
+    <td><%= link_to "Museum", termlists_index_path, termlist_name: "museum" %></td>
   </tr>
-  <tr>
-    <td><% link_to "Acquisition","", class: "btn btn-link" %></td>
-  </tr>
+  <% @termlists&.each do |termlist| %>
+    <% fullname = termlist.clone; %>
+    <% termlist.slice!("termlist_"); %>
+    <% unless fullname.start_with? "termlist_kind_of_object_specifieds" %>
+      <tr>
+        <td><%= link_to termlist.humanize(capitalize: false).singularize, termlists_index_path(termlist_name: fullname) %></td>
+      </tr>
+    <% end %>
+  <% end %>
 </table>
