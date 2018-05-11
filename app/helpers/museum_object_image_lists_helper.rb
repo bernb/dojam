@@ -1,0 +1,2 @@
+module MuseumObjectImageListsHelper
+end

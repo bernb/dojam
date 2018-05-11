@@ -1,9 +1,14 @@
-<% images.each do |image| %>
-  <div class="col-md-4">
-    <div class="card">
-      <a href="<%= url_for(image) %>" target="_blank">
-        <%= image_tag image.variant(resize: "250x250"), class: "card-img-top" %>
-      </a>
-    </div> <%# card %>
-  </div>
+<% unless images.nil? %>
+  <% images&.list&.each do |image| %>
+    <div class="col-md-4">
+      <div class="card">
+        <a href="<%= url_for(image) %>" target="_blank">
+          <%= image_tag image.variant(resize: "250x250"), class: "card-img-top" %>
+        </a>
+        <div class="card-body">
+          <%= link_to "remove", delete_image_path(images.id, image.id), method: :delete, confirm: "Delete image?" %>
+        </div>
+      </div> <%# card %>
+    </div>
+  <% end %>
 <% end %>
