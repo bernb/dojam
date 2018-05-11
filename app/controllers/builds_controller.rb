@@ -11,7 +11,7 @@ class BuildsController < ApplicationController
   def show
     @museum_object = MuseumObject.find params[:museum_object_id]
     set_variables_for step 
-      render_wizard
+    render_wizard
   end
 
   def new
@@ -170,8 +170,12 @@ class BuildsController < ApplicationController
     if step == :step_museum
       @museums = Museum.where name: "JAM" # we restrict to the JAM museum for now
       @storages = @museums.first.storages
-      @storage_locations = @storages.first.storage_locations
-      #@selected_storage = @storages.first
+      # set correct collections if view gets rendered again (i.e. validation error or jump to view for edit)
+      # first look if param exist, which means view got just rendered again with a storage choosen by user
+      # which is default behaviour for input fields related to the object
+      # if no user choice found look if object has storage location defined
+      @selected_storage_id = params.dig(:storage, :storage_id) || @museum_object&.storage_location&.storage&.id || ""
+      @storage_locations = @storages.find_by(id: @selected_storage_id)&.storage_locations || {}
     end
     
     if step == :step_provenance
