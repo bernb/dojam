@@ -7,8 +7,8 @@
 # Ignore bundler config.
 /.bundle
 
-# upload directory contains images of museum objects
-/public/uploads
+# directory contains images of museum objects
+/storage
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

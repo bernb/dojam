@@ -2,8 +2,8 @@ class MuseumObject < ApplicationRecord
   include SearchCop
   validates_with MuseumObjectValidator
 
-  has_one_attached :main_image
-  has_many_attached :images
+  has_one :images, class_name: "MuseumObjectImageList", dependent: :destroy
+  accepts_nested_attributes_for :images
   belongs_to :excavation_site, -> { order(name: :asc) }, required: false # do not require for now while in early dev state
   belongs_to :storage_location, required: false
   belongs_to :termlist_acquisition_delivered_by, -> { order(name: :asc) }, required: false

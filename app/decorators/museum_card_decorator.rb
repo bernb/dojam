@@ -4,10 +4,10 @@ class MuseumCardDecorator < Draper::Decorator
 
   def top_image
     html = ""
-    if self&.main_image&.attachment.nil?
+    if self&.images&.main&.attachment.nil?
       html = "<div class=\"card-img-dummy\"></div>"
     else
-      html = self.h.image_tag self&.main_image, class: "card-img-top"
+      html = self.h.image_tag self.images.main, class: "card-img-top"
     end
     
     return helpers.sanitize html
