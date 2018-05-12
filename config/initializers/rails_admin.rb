@@ -13,7 +13,14 @@ RailsAdmin.config do |config|
       "TermlistKindOfObjectSpecifiedsDatingMillennium",
       "TermlistKindOfObjectSpecifiedsDatingPeriod",
       "TermlistKindOfObjectSpecifiedsDecoration",
-      "TermlistKindOfObjectSpecifiedsDecorationColor"
+      "TermlistKindOfObjectSpecifiedsDecorationColor",
+      "TermlistKindOfObjectSpecifiedsDatingCentury",
+      "TermlistKindOfObjectSpecifiedsDecorationTechnique",
+      "TermlistKindOfObjectSpecifiedsInscriptionLanguage",
+      "TermlistKindOfObjectSpecifiedsInscriptionLetter",
+      "TermlistKindOfObjectSpecifiedsPreservationMaterial",
+      "TermlistKindOfObjectSpecifiedsPreservationObject",
+      "TermlistKindOfObjectSpecifiedsProductionTechnique"
     ]
 
   config.excluded_models |= hiding_models
