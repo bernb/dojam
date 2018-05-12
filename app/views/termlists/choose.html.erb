@@ -11,7 +11,7 @@
     <% termlist.slice!("termlist_"); %>
     <% unless fullname.start_with? "termlist_kind_of_object_specifieds" %>
       <tr>
-        <td><%= link_to termlist.humanize(capitalize: false).singularize, termlists_index_path(termlist_name: fullname) %></td>
+        <td><%= link_to termlist.humanize(capitalize: false).singularize, termlists_index_path(termlist_name: fullname, nice_name: termlist) %></td>
       </tr>
     <% end %>
   <% end %>
