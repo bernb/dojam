@@ -1,4 +1,43 @@
 RailsAdmin.config do |config|
+  
+  # We hide join tables from has_many through, as
+  # using inverse_of in model or in config.model did
+  # not work as expected.
+  hiding_models = 
+    [
+      "JoinMuseumObjectColor", 
+      "JoinMuseumObjectDatingCentury",
+      "JoinMuseumObjectMaterialSpecified",
+      "TermlistKindOfObjectSpecifiedsColor",
+      "TermlistKindOfObjectSpecifiedsDatingCenturie",
+      "TermlistKindOfObjectSpecifiedsDatingMillennium",
+      "TermlistKindOfObjectSpecifiedsDatingPeriod",
+      "TermlistKindOfObjectSpecifiedsDecoration",
+      "TermlistKindOfObjectSpecifiedsDecorationColor"
+    ]
+
+  config.excluded_models |= hiding_models
+  
+    # This did not hide the join tables as intended
+    # note that include_all_fields must be added if used
+    # config.model TermlistColor do
+    #   include_all_fields
+    #   field :museum_objects do
+    #     inverse_of :termlist_colors
+    #   end
+    # end
+  
+    
+  # not working unfortunately
+  config.model TermlistColor do
+    create do
+      include_all_fields
+      field :museum_objects do
+        form_value = MuseumObject.first
+      end
+    end
+  end
+
 
   ### Popular gems integration
 
@@ -38,4 +77,5 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+  
 end
