@@ -25,7 +25,7 @@ class MuseumObject < ApplicationRecord
   has_many :join_museum_object_material_specifieds
   has_many :termlist_material_specifieds, through: :join_museum_object_material_specifieds
   has_many :termlist_materials, -> { distinct }, through: :termlist_material_specifieds
-  has_many :join_museum_object_colors
+  has_many :join_museum_object_colors, inverse_of: :museum_object
   has_many :termlist_colors, through: :join_museum_object_colors
   has_many :join_museum_object_dating_centuries
   has_many :termlist_dating_centuries, through: :join_museum_object_dating_centuries

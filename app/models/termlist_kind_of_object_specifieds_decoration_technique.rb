@@ -1,4 +1,4 @@
 class TermlistKindOfObjectSpecifiedsDecorationTechnique < ApplicationRecord
-  belongs_to :termlist_kind_of_object_specified
-  belongs_to :termlist_decoration_technique
+  belongs_to :termlist_kind_of_object_specified, inverse_of: :termlist_kind_of_object_specifieds_decoration_techniques
+  belongs_to :termlist_decoration_technique, inverse_of: :termlist_kind_of_object_specifieds_decoration_techniques
 end

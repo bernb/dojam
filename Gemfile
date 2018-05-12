@@ -109,3 +109,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Use of rails_admin for more technical administrations
 gem 'rails_admin', '~> 1.3'
+gem "rails_admin_simple_has_many" # Alternative widget to select has_many
