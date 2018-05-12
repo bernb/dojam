@@ -1,5 +1,5 @@
 class TermlistInscriptionLanguage < ApplicationRecord
-  has_many :termlist_kind_of_object_specifieds_termlist_inscription_languages
-  has_many :termlist_kind_of_object_specifieds, through: :termlist_kind_of_object_specifieds_termlist_inscription_languages
+  has_many :termlist_kind_of_object_specifieds_inscription_languages
+  has_many :termlist_kind_of_object_specifieds, through: :termlist_kind_of_object_specifieds_inscription_languages
   has_many :museum_objects
 end
