@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_12_135207) do
+ActiveRecord::Schema.define(version: 2018_05_12_140320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -384,7 +384,7 @@ ActiveRecord::Schema.define(version: 2018_05_12_135207) do
     t.index ["termlist_preservation_object_id"], name: "index_koos_preservation_objects_on_preservation_material_id"
   end
 
-  create_table "termlist_kind_of_object_specifieds_production_techniques", id: false, force: :cascade do |t|
+  create_table "termlist_kind_of_object_specifieds_production_techniques", force: :cascade do |t|
     t.integer "termlist_production_technique_id", null: false
     t.integer "termlist_kind_of_object_specified_id", null: false
     t.datetime "created_at", null: false
