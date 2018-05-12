@@ -165,10 +165,6 @@ class BuildsController < ApplicationController
       @materials = TermlistMaterial.all.order name: :asc
     end
     
-    if step == :step_color
-      @colors = TermlistColor.all.order name: :asc
-    end
-    
     if step == :step_museum
       @museums = Museum.where name: "JAM" # we restrict to the JAM museum for now
       @storages = @museums.first.storages
