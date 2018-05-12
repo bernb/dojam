@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'termlists/index'
   get 'termlists/choose'
   get 'termlists/show'
