@@ -7,7 +7,7 @@ class TermlistsController < ApplicationController
       termlist_name = params[:termlist_name]
     end
     
-    @title = termlist_name
+    @title = params[:nice_name]
     
     table_string = termlist_name.gsub("_"," ").titleize.gsub(" ","").singularize
     
