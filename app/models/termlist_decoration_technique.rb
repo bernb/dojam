@@ -1,5 +1,5 @@
 class TermlistDecorationTechnique < ApplicationRecord
-  has_many :termlist_kind_of_object_specifieds_decoration_techniquess
-  has_many :termlist_kind_of_objects, through: :termlist_kind_of_object_specifieds_decoration_techniques
+  has_many :termlist_kind_of_object_specifieds_decoration_techniques
+  has_many :termlist_kind_of_object_specifieds, through: :termlist_kind_of_object_specifieds_decoration_techniques
   has_many :museum_objects
 end

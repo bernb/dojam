@@ -1,5 +1,5 @@
 class TermlistPreservationMaterial < ApplicationRecord
   has_many :termlist_kind_of_object_specifieds_preservation_materials
-  has_many :termlist_preservation_materials, through: :termlist_kind_of_object_specifieds_preservation_materials
+  has_many :termlist_kind_of_object_specifieds, through: :termlist_kind_of_object_specifieds_preservation_materials
   has_many :museum_objects
 end
