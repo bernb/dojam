@@ -78,6 +78,8 @@ gem 'activerecord-import'
 # makes credential in config/application.yml available for rail (added to .gitignore)
 gem "figaro"
 
+gem 'acts_as_list'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
