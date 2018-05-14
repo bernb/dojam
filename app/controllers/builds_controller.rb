@@ -266,7 +266,7 @@ class BuildsController < ApplicationController
                                           :termlist_inscription_letter_id, :termlist_inscription_language_id, :munsell_color,
                                           :remaining_length, :remaining_width, :remaining_height, :remaining_opening_dm, :remaining_bottom_dm, :remaining_weight_in_gram,
                                           :termlist_preservation_material_id, :termlist_preservation_object_id, :description_conservation,
-                                          :remarks, :literature, :dating_timespan_begin, :dating_timespan_end, :main_image, :is_finished,
+                                          :remarks, :literature, :dating_timespan_begin, :dating_timespan_end, :main_image, :is_finished, :needs_conservation, :needs_cleaning,
                                           :site_number_jadis, :coordinates_mega_long, :coordinates_mega_lat,
                                           images: [],
                                           termlist_dating_century_ids: [],
