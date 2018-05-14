@@ -195,7 +195,7 @@ class BuildsController < ApplicationController
     
     if step == :step_kind_of_object_specified
       kind = @museum_object.termlist_kind_of_object
-      @kind_of_object_specifieds = kind.termlist_kind_of_object_specifieds
+      @kind_of_object_specifieds = kind&.termlist_kind_of_object_specifieds
     end
     
     if step == :step_production
