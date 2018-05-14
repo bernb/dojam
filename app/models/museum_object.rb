@@ -37,18 +37,43 @@ class MuseumObject < ApplicationRecord
   
   
   search_scope :search do
-    attributes :inv_number, :inv_extension, :inv_numberdoa, :termlist_acquisition_delivered_by_id, :acquisition_deliverer_name, :acquisition_date,
-                                          :finding_context, :finding_remarks, :termlist_authenticity_id, :priority, :priority_determined_by,
-                                          :inscription_decoration, :inscription_text, :inscription_translation, 
-                                          :excavation_site_id, :termlist_kind_of_object_id, :termlist_kind_of_object_specified_id,
-                                          :acquisition_document_number, :name_expedition, :site_number_mega, :site_number_expedition,
-                                          :coordinates_mega, :termlist_excavation_site_kind_id, :termlist_dating_period_id, :termlist_dating_millennium_id,
-                                          :termlist_production_technique_id, :termlist_decoration_id, :termlist_decoration_color_id,
-                                          :termlist_inscription_letter_id, :termlist_inscription_language_id,
-                                          :remaining_length, :remaining_width, :remaining_height, :remaining_opening_dm, :remaining_bottom_dm, :remaining_weight_in_gram,
-                                          :termlist_preservation_material_id, :termlist_preservation_object_id, :description_conservation,
-                                          :remarks, :literature, :dating_timespan_begin, :dating_timespan_end
+    attributes :inv_number, 
+               :inv_extension, 
+               :inv_numberdoa, 
+               :acquisition_deliverer_name, 
+               :acquisition_date,
+               :finding_context, 
+               :finding_remarks, 
+               :priority, 
+               :priority_determined_by,
+               :inscription_decoration, 
+               :inscription_text, 
+               :inscription_translation, 
+               :acquisition_document_number, 
+               :name_expedition, 
+               :site_number_mega, 
+               :site_number_expedition,
+               :description_conservation,
+               :remarks, 
+               :literature
     attributes storage_location: "storage_location.name"
+    attributes termlist_preservation_material: "termlist_preservation_material.name"
+    attributes termlist_excavation_site_kind: "termlist_excavation_site_kind.name"
+    attributes termlist_authenticity: "termlist_authenticity.name"
+    attributes termlist_preservation_object: "termlist_preservation_object.name"
+    attributes termlist_inscription_language: "termlist_inscription_language.name"
+    attributes termlist_kind_of_object: "termlist_kind_of_object.name"
+    attributes termlist_kind_of_object_specified: "termlist_kind_of_object_specified.name"
+    attributes termlist_decoration: "termlist_decoration.name"
+    attributes termlist_acquisition_delivered_by: "termlist_acquisition_delivered_by.name"
+    attributes termlist_dating_millennium: "termlist_dating_millennium.name"
+    attributes termlist_production_technique: "termlist_production_technique.name"
+    attributes termlist_decoration_color: "termlist_decoration_color.name"
+    attributes termlist_inscription_letter: "termlist_inscription_letter.name"
+    attributes termlist_inscription_language: "termlist_inscription_language.name"
+    attributes excavation_site: "excavation_site.name"
+    attributes termlist_material: "termlist_materials.name"
+    
                                           
   end
 
