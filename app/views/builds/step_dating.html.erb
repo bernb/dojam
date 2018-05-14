@@ -10,9 +10,7 @@
                      discard_day: true, 
                      discard_month: true,
                      as: :string, value: f.object&.dating_timespan_begin&.strftime("%Y"), class: "form-control col" %>
-        <%= select_tag :dating_timespan_begin_BCAD,
-                       "<option>BC</option><option>AD</option>".html_safe,
-                       class: "form-control select col-5" %>
+        <%= f.input_field :is_dating_timespan_begin_BC, as: :select, :collection => [['BC',true],['AD',false]], class: "form-control select col-5" %>
       </div>
       <span class="form-control-static col-0">_</span>
       <div class="input-group col">
@@ -20,9 +18,7 @@
                      discard_day: true, 
                      discard_month: true,
                      as: :string, value: f.object&.dating_timespan_end&.strftime("%Y"), class: "form-control col"%>
-        <%= select_tag :dating_timespan_begin_BCAD,
-                       "<option>BC</option><option>AD</option>".html_safe,
-                       class: "form-control select col-5" %>
+        <%= f.input_field :is_dating_timespan_end_BC, as: :select, :collection => [['BC',true],['AD',false]], class: "form-control select col-5" %>
       </div>
     </div>
     
