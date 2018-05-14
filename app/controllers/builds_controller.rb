@@ -12,6 +12,10 @@ class BuildsController < ApplicationController
   # Remember DRY and refactor step symbols into one single place then
   def show
     @museum_object = MuseumObject.find(params[:museum_object_id]).decorate
+    if past_step?(:step_kind_of_object_specified) && @museum_object.termlist_kind_of_object.nil?
+      flash[:warning] = "Please select material and kind of object first"
+      jump_to :step_material
+    end
     set_variables_for step 
     render_wizard
   end
