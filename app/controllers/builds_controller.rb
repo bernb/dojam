@@ -21,7 +21,7 @@ class BuildsController < ApplicationController
   end
   
   def update
-    @museum_object = MuseumObject.find params[:museum_object_id]
+    @museum_object = MuseumObject.find(params[:museum_object_id]).decorate
     # Used i.e. in step_dating where only year is entered as string, which would result in nil without transformation
     transform_string_years_to_dates
     @museum_object.assign_attributes museum_object_params unless not params.key? :museum_object # see at params method below
