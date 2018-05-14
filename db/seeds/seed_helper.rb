@@ -6,23 +6,23 @@ class SeedHelper
     centuries = material_hash[:centuries]
     
     @period_ids = []
-    periods.each do |period|
+    periods.each.with_index(1) do |period, index|
       p = TermlistDatingPeriod.where(name: period).first
-      p ||= TermlistDatingPeriod.create name: period
+      p ||= TermlistDatingPeriod.create name: period, position: index
       @period_ids << p.id
     end
     
     @millennium_ids = []
-    millennia.each do |millennium|
+    millennia.each.with_index(1) do |millennium, index|
       m = TermlistDatingMillennium.where(name: millennium).first
-      m ||= TermlistDatingMillennium.create name: millennium
+      m ||= TermlistDatingMillennium.create name: millennium, position: index
       @millennium_ids << m.id
     end
     
     @century_ids = []
-    centuries.each do |century|
+    centuries.each.with_index(1) do |century, index|
       c = TermlistDatingCentury.where(name: century).first
-      c ||= TermlistDatingCentury.create name: century
+      c ||= TermlistDatingCentury.create name: century, position: index
       @century_ids << c.id
     end
     
