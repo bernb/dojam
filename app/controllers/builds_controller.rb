@@ -22,6 +22,8 @@ class BuildsController < ApplicationController
   
   def update
     @museum_object = MuseumObject.find params[:museum_object_id]
+    # Used i.e. in step_dating where only year is entered as string, which would result in nil without transformation
+    transform_string_years_to_dates
     @museum_object.assign_attributes museum_object_params unless not params.key? :museum_object # see at params method below
     allow_next_step = true
     
@@ -250,6 +252,16 @@ class BuildsController < ApplicationController
       @museum_object.images ||= MuseumObjectImageList.new
     end
     
+  end
+  
+  def transform_string_years_to_dates
+    if params.dig :museum_object, :dating_timespan_begin
+      params[:museum_object][:dating_timespan_begin] = Date.new(params[:museum_object][:dating_timespan_begin].to_i,1,1)
+    end
+    
+    if params.dig :museum_object, :dating_timespan_end
+      params[:museum_object][:dating_timespan_end] = Date.new(params[:museum_object][:dating_timespan_end].to_i,1,1)
+    end
   end
   
   

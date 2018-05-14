@@ -9,7 +9,7 @@
         <%= f.input_field :dating_timespan_begin, label: false,
                      discard_day: true, 
                      discard_month: true,
-                     as: :string, class: "form-control col" %>
+                     as: :string, value: f.object&.dating_timespan_begin&.strftime("%Y"), class: "form-control col" %>
         <%= select_tag :dating_timespan_begin_BCAD,
                        "<option>BC</option><option>AD</option>".html_safe,
                        class: "form-control select col-5" %>
@@ -19,7 +19,7 @@
         <%= f.input_field :dating_timespan_end, label: false,
                      discard_day: true, 
                      discard_month: true,
-                     as: :string, class: "form-control col"%>
+                     as: :string, value: f.object&.dating_timespan_end&.strftime("%Y"), class: "form-control col"%>
         <%= select_tag :dating_timespan_begin_BCAD,
                        "<option>BC</option><option>AD</option>".html_safe,
                        class: "form-control select col-5" %>
