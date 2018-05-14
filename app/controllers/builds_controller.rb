@@ -11,7 +11,7 @@ class BuildsController < ApplicationController
   # See: https://stackoverflow.com/a/27508206/1638910
   # Remember DRY and refactor step symbols into one single place then
   def show
-    @museum_object = MuseumObject.find params[:museum_object_id]
+    @museum_object = MuseumObject.find(params[:museum_object_id]).decorate
     set_variables_for step 
     render_wizard
   end
