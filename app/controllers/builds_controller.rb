@@ -216,8 +216,9 @@ class BuildsController < ApplicationController
       kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
       # after that get productions that belongs to the choosen specific kind of object
       kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
-      @decorations = kind_specified.termlist_decorations
+      @decoration_techniques = kind_specified.termlist_decoration_techniques
       @decoration_colors = kind_specified.termlist_decoration_colors
+      @decoration_styles = kind_specified.termlist_decorations
     end
     
     if step == :step_inscription
@@ -261,8 +262,8 @@ class BuildsController < ApplicationController
                                           :excavation_site_id, :termlist_material_specified_ids, :termlist_kind_of_object_id, :termlist_kind_of_object_specified_id,
                                           :is_acquisition_date_exact, :acquisition_document_number, :name_expedition, :site_number_mega, :site_number_expedition,
                                           :coordinates_mega, :termlist_excavation_site_kind_id, :termlist_dating_period_id, :termlist_dating_millennium_id,
-                                          :termlist_production_technique_id, :termlist_decoration_id, :termlist_decoration_color_id,
-                                          :termlist_inscription_letter_id, :termlist_inscription_language_id,
+                                          :termlist_production_technique_id, :termlist_decoration_id, :termlist_decoration_color_id, :termlist_decoration_technique_id,
+                                          :termlist_inscription_letter_id, :termlist_inscription_language_id, :munsell_color,
                                           :remaining_length, :remaining_width, :remaining_height, :remaining_opening_dm, :remaining_bottom_dm, :remaining_weight_in_gram,
                                           :termlist_preservation_material_id, :termlist_preservation_object_id, :description_conservation,
                                           :remarks, :literature, :dating_timespan_begin, :dating_timespan_end, :main_image, :is_finished,

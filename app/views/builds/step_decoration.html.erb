@@ -1,9 +1,9 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-    <div><strong> technique </strong></div>
-    <%= f.association :termlist_decoration, collection: @decorations, label: false, as: :collection_select, include_blank: true %>
-    <div><strong> color </strong></div>
-    <%= f.association :termlist_decoration_color, collection: @decoration_colors, label: false, as: :collection_select, include_blank: true  %>
+    <%= f.association :termlist_decoration, collection: @decoration_styles, label: "style", as: :collection_select, include_blank: true %>
+    <%= f.association :termlist_decoration_technique, collection: @decoration_techniques, label: "technique", as: :collection_select, include_blank: true %>
+    <%= f.association :termlist_decoration_color, collection: @decoration_colors, label: "color", as: :collection_select, include_blank: true  %>
+    <%= f.input :munsell_color, label: "Munsell color" %>
     <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>
