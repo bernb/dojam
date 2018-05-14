@@ -2,7 +2,7 @@
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
     <div id="excavation_sites">
       <%= f.association :excavation_site, label: 'site name', include_blank: true  %>
-      <%= f.input :name_expedition, label: 'other site name' %>
+      <%= f.input :name_expedition, label: 'other site name(s)' %>
       <%= f.input :site_number_mega, label: "site number according to MEGA" %>
       <%= f.input :site_number_expedition, label: "site number according to expedition" %>
       <%= f.input :coordinates_mega, label: "coordinates of site according to MEGA" %>
