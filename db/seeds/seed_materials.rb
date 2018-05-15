@@ -1,7 +1,7 @@
 # We seperate data from actual creating
 # data files are supposed to return two arrays named:
 # materialname_material_specifieds and materialname_kind_of_objects
-require "#{Rails.root}/db/seeds/data_material.rb"
+require "#{Rails.root}/db/seeds/data/data_material.rb"
 require "#{Rails.root}/db/seeds/seed_helper.rb"
 
 #SeedHelper.build_material_related_seed $test_data
