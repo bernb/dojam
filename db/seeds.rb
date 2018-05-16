@@ -4,7 +4,9 @@ require "#{Rails.root}/db/seeds/seed_storages.rb"
 require "#{Rails.root}/db/seeds/seed_sites.rb"
 require "#{Rails.root}/db/seeds/seed_dating.rb"
 require "#{Rails.root}/db/seeds/seed_other_termlists.rb"
-
+if Rails.env.development?
+  require "#{Rails.root}/db/seeds/museum_object_generator.rb"
+end
  
  
 =begin                    
