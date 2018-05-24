@@ -1,0 +1,158 @@
+---
+10th cent. BC:
+  id: 1
+  name: 10th cent. BC
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &1 2018-05-24 12:17:22.553388000 Z
+    zone: &2 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: *1
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &3 2018-05-24 12:17:22.553388000 Z
+    zone: *2
+    time: *3
+  position: 1
+9th cent. BC:
+  id: 2
+  name: 9th cent. BC
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &4 2018-05-24 12:17:22.569076000 Z
+    zone: *2
+    time: *4
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &5 2018-05-24 12:17:22.569076000 Z
+    zone: *2
+    time: *5
+  position: 2
+8th cent. BC:
+  id: 3
+  name: 8th cent. BC
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &6 2018-05-24 12:17:22.585105000 Z
+    zone: *2
+    time: *6
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &7 2018-05-24 12:17:22.585105000 Z
+    zone: *2
+    time: *7
+  position: 3
+7th cent. BC:
+  id: 4
+  name: 7th cent. BC
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &8 2018-05-24 12:17:22.602388000 Z
+    zone: *2
+    time: *8
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &9 2018-05-24 12:17:22.602388000 Z
+    zone: *2
+    time: *9
+  position: 4
+6th cent. BC:
+  id: 5
+  name: 6th cent. BC
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &10 2018-05-24 12:17:22.613427000 Z
+    zone: *2
+    time: *10
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &11 2018-05-24 12:17:22.613427000 Z
+    zone: *2
+    time: *11
+  position: 5
+5th cent. BC:
+  id: 6
+  name: 5th cent. BC
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &12 2018-05-24 12:17:22.622981000 Z
+    zone: *2
+    time: *12
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &13 2018-05-24 12:17:22.622981000 Z
+    zone: *2
+    time: *13
+  position: 6
+4th cent. BC:
+  id: 7
+  name: 4th cent. BC
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &14 2018-05-24 12:17:22.633864000 Z
+    zone: *2
+    time: *14
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &15 2018-05-24 12:17:22.633864000 Z
+    zone: *2
+    time: *15
+  position: 7
+3rd cent. BC:
+  id: 8
+  name: 3rd cent. BC
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &16 2018-05-24 12:17:22.644700000 Z
+    zone: *2
+    time: *16
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &17 2018-05-24 12:17:22.644700000 Z
+    zone: *2
+    time: *17
+  position: 8
+2nd cent. BC:
+  id: 9
+  name: 2nd cent. BC
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &18 2018-05-24 12:17:22.661260000 Z
+    zone: *2
+    time: *18
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &19 2018-05-24 12:17:22.661260000 Z
+    zone: *2
+    time: *19
+  position: 9
+1st cent. BC:
+  id: 10
+  name: 1st cent. BC
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &20 2018-05-24 12:17:22.671856000 Z
+    zone: *2
+    time: *20
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &21 2018-05-24 12:17:22.671856000 Z
+    zone: *2
+    time: *21
+  position: 10
+1st cent. AD:
+  id: 11
+  name: 1st cent. AD
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &22 2018-05-24 12:17:22.685406000 Z
+    zone: *2
+    time: *22
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &23 2018-05-24 12:17:22.685406000 Z
+    zone: *2
+    time: *23
+  position: 11
+2nd cent. AD:
+  id: 12
+  name: 2nd cent. AD
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &24 2018-05-24 12:17:22.705201000 Z
+    zone: *2
+    time: *24
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &25 2018-05-24 12:17:22.705201000 Z
+    zone: *2
+    time: *25
+  position: 12
+3rd cent. AD:
+  id: 13
+  name: 3rd cent. AD
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &26 2018-05-24 12:17:22.727911000 Z
+    zone: *2
+    time: *26
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &27 2018-05-24 12:17:22.727911000 Z
+    zone: *2
+    time: *27
+  position: 13

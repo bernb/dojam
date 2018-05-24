@@ -1,0 +1,57 @@
+---
+archaeological object:
+  id: 6
+  name: archaeological object
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &1 2018-05-24 12:18:29.701841000 Z
+    zone: &2 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: *1
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &3 2018-05-24 12:18:29.701841000 Z
+    zone: *2
+    time: *3
+copy:
+  id: 7
+  name: copy
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &4 2018-05-24 12:18:29.718203000 Z
+    zone: *2
+    time: *4
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &5 2018-05-24 12:18:29.718203000 Z
+    zone: *2
+    time: *5
+forgery:
+  id: 8
+  name: forgery
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &6 2018-05-24 12:18:29.731379000 Z
+    zone: *2
+    time: *6
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &7 2018-05-24 12:18:29.731379000 Z
+    zone: *2
+    time: *7
+unspecific:
+  id: 9
+  name: unspecific
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &8 2018-05-24 12:18:29.743321000 Z
+    zone: *2
+    time: *8
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &9 2018-05-24 12:18:29.743321000 Z
+    zone: *2
+    time: *9
+unknown:
+  id: 10
+  name: unknown
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &10 2018-05-24 12:18:29.754290000 Z
+    zone: *2
+    time: *10
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &11 2018-05-24 12:18:29.754290000 Z
+    zone: *2
+    time: *11
