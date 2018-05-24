@@ -1,0 +1,758 @@
+---
+Paleolithic, Lower:
+  id: 1
+  name: Paleolithic, Lower
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &1 2018-05-24 12:17:21.526047000 Z
+    zone: &2 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: *1
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &3 2018-05-24 12:17:21.526047000 Z
+    zone: *2
+    time: *3
+  position: 1
+Paleolithic, Middle:
+  id: 2
+  name: Paleolithic, Middle
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &4 2018-05-24 12:17:21.534942000 Z
+    zone: *2
+    time: *4
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &5 2018-05-24 12:17:21.534942000 Z
+    zone: *2
+    time: *5
+  position: 2
+Paleolithic, Upper:
+  id: 3
+  name: Paleolithic, Upper
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &6 2018-05-24 12:17:21.545443000 Z
+    zone: *2
+    time: *6
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &7 2018-05-24 12:17:21.545443000 Z
+    zone: *2
+    time: *7
+  position: 3
+Paleolithic, Unspecified:
+  id: 4
+  name: Paleolithic, Unspecified
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &8 2018-05-24 12:17:21.556094000 Z
+    zone: *2
+    time: *8
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &9 2018-05-24 12:17:21.556094000 Z
+    zone: *2
+    time: *9
+  position: 4
+Epi-Paleolithic:
+  id: 5
+  name: Epi-Paleolithic
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &10 2018-05-24 12:17:21.567524000 Z
+    zone: *2
+    time: *10
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &11 2018-05-24 12:17:21.567524000 Z
+    zone: *2
+    time: *11
+  position: 5
+Kebaran:
+  id: 6
+  name: Kebaran
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &12 2018-05-24 12:17:21.578100000 Z
+    zone: *2
+    time: *12
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &13 2018-05-24 12:17:21.578100000 Z
+    zone: *2
+    time: *13
+  position: 6
+Natufian:
+  id: 7
+  name: Natufian
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &14 2018-05-24 12:17:21.588569000 Z
+    zone: *2
+    time: *14
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &15 2018-05-24 12:17:21.588569000 Z
+    zone: *2
+    time: *15
+  position: 7
+Neolithic, Pre-Pottery:
+  id: 8
+  name: Neolithic, Pre-Pottery
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &16 2018-05-24 12:17:21.600178000 Z
+    zone: *2
+    time: *16
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &17 2018-05-24 12:17:21.600178000 Z
+    zone: *2
+    time: *17
+  position: 8
+Neolithic, Pre-Pottery A:
+  id: 9
+  name: Neolithic, Pre-Pottery A
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &18 2018-05-24 12:17:21.610384000 Z
+    zone: *2
+    time: *18
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &19 2018-05-24 12:17:21.610384000 Z
+    zone: *2
+    time: *19
+  position: 9
+Neolithic, Pre-Pottery B:
+  id: 10
+  name: Neolithic, Pre-Pottery B
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &20 2018-05-24 12:17:21.620806000 Z
+    zone: *2
+    time: *20
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &21 2018-05-24 12:17:21.620806000 Z
+    zone: *2
+    time: *21
+  position: 10
+Neolithic, Pre-Pottery C:
+  id: 11
+  name: Neolithic, Pre-Pottery C
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &22 2018-05-24 12:17:21.636558000 Z
+    zone: *2
+    time: *22
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &23 2018-05-24 12:17:21.636558000 Z
+    zone: *2
+    time: *23
+  position: 11
+Neolithic, Pottery:
+  id: 12
+  name: Neolithic, Pottery
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &24 2018-05-24 12:17:21.651284000 Z
+    zone: *2
+    time: *24
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &25 2018-05-24 12:17:21.651284000 Z
+    zone: *2
+    time: *25
+  position: 12
+Neolithic, Pottery A (Yarmoukian):
+  id: 13
+  name: Neolithic, Pottery A (Yarmoukian)
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &26 2018-05-24 12:17:21.662372000 Z
+    zone: *2
+    time: *26
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &27 2018-05-24 12:17:21.662372000 Z
+    zone: *2
+    time: *27
+  position: 13
+Neolithic, Pottery B:
+  id: 14
+  name: Neolithic, Pottery B
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &28 2018-05-24 12:17:21.683367000 Z
+    zone: *2
+    time: *28
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &29 2018-05-24 12:17:21.683367000 Z
+    zone: *2
+    time: *29
+  position: 14
+Neolithic, Unspecified:
+  id: 15
+  name: Neolithic, Unspecified
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &30 2018-05-24 12:17:21.699879000 Z
+    zone: *2
+    time: *30
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &31 2018-05-24 12:17:21.699879000 Z
+    zone: *2
+    time: *31
+  position: 15
+Calcolithic, Early:
+  id: 16
+  name: Calcolithic, Early
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &32 2018-05-24 12:17:21.712444000 Z
+    zone: *2
+    time: *32
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &33 2018-05-24 12:17:21.712444000 Z
+    zone: *2
+    time: *33
+  position: 16
+Calcolithic, Late:
+  id: 17
+  name: Calcolithic, Late
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &34 2018-05-24 12:17:21.722810000 Z
+    zone: *2
+    time: *34
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &35 2018-05-24 12:17:21.722810000 Z
+    zone: *2
+    time: *35
+  position: 17
+Calcolithic, Unspecified:
+  id: 18
+  name: Calcolithic, Unspecified
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &36 2018-05-24 12:17:21.732991000 Z
+    zone: *2
+    time: *36
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &37 2018-05-24 12:17:21.732991000 Z
+    zone: *2
+    time: *37
+  position: 18
+Early Bronze I:
+  id: 19
+  name: Early Bronze I
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &38 2018-05-24 12:17:21.744264000 Z
+    zone: *2
+    time: *38
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &39 2018-05-24 12:17:21.744264000 Z
+    zone: *2
+    time: *39
+  position: 19
+Early Bronze II:
+  id: 20
+  name: Early Bronze II
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &40 2018-05-24 12:17:21.756176000 Z
+    zone: *2
+    time: *40
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &41 2018-05-24 12:17:21.756176000 Z
+    zone: *2
+    time: *41
+  position: 20
+Early Bronze II-III:
+  id: 21
+  name: Early Bronze II-III
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &42 2018-05-24 12:17:21.767027000 Z
+    zone: *2
+    time: *42
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &43 2018-05-24 12:17:21.767027000 Z
+    zone: *2
+    time: *43
+  position: 21
+Early Bronze III:
+  id: 22
+  name: Early Bronze III
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &44 2018-05-24 12:17:21.783160000 Z
+    zone: *2
+    time: *44
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &45 2018-05-24 12:17:21.783160000 Z
+    zone: *2
+    time: *45
+  position: 22
+Early Bronze IV (EB-MB):
+  id: 23
+  name: Early Bronze IV (EB-MB)
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &46 2018-05-24 12:17:21.795375000 Z
+    zone: *2
+    time: *46
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &47 2018-05-24 12:17:21.795375000 Z
+    zone: *2
+    time: *47
+  position: 23
+Early Bronze, Unspecified:
+  id: 24
+  name: Early Bronze, Unspecified
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &48 2018-05-24 12:17:21.806905000 Z
+    zone: *2
+    time: *48
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &49 2018-05-24 12:17:21.806905000 Z
+    zone: *2
+    time: *49
+  position: 24
+Middle Bronze II:
+  id: 25
+  name: Middle Bronze II
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &50 2018-05-24 12:17:21.821761000 Z
+    zone: *2
+    time: *50
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &51 2018-05-24 12:17:21.821761000 Z
+    zone: *2
+    time: *51
+  position: 25
+Middle Bronze IIa:
+  id: 26
+  name: Middle Bronze IIa
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &52 2018-05-24 12:17:21.834897000 Z
+    zone: *2
+    time: *52
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &53 2018-05-24 12:17:21.834897000 Z
+    zone: *2
+    time: *53
+  position: 26
+Middle Bronze IIB-c:
+  id: 27
+  name: Middle Bronze IIB-c
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &54 2018-05-24 12:17:21.849588000 Z
+    zone: *2
+    time: *54
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &55 2018-05-24 12:17:21.849588000 Z
+    zone: *2
+    time: *55
+  position: 27
+Middle Bronze, Unspecified:
+  id: 28
+  name: Middle Bronze, Unspecified
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &56 2018-05-24 12:17:21.869739000 Z
+    zone: *2
+    time: *56
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &57 2018-05-24 12:17:21.869739000 Z
+    zone: *2
+    time: *57
+  position: 28
+Late Bronze I:
+  id: 29
+  name: Late Bronze I
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &58 2018-05-24 12:17:21.880163000 Z
+    zone: *2
+    time: *58
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &59 2018-05-24 12:17:21.880163000 Z
+    zone: *2
+    time: *59
+  position: 29
+Late Bronze IIa-b:
+  id: 30
+  name: Late Bronze IIa-b
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &60 2018-05-24 12:17:21.890051000 Z
+    zone: *2
+    time: *60
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &61 2018-05-24 12:17:21.890051000 Z
+    zone: *2
+    time: *61
+  position: 30
+Late Bronze, Unspecified:
+  id: 31
+  name: Late Bronze, Unspecified
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &62 2018-05-24 12:17:21.902077000 Z
+    zone: *2
+    time: *62
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &63 2018-05-24 12:17:21.902077000 Z
+    zone: *2
+    time: *63
+  position: 31
+Iron Age I:
+  id: 32
+  name: Iron Age I
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &64 2018-05-24 12:17:21.929463000 Z
+    zone: *2
+    time: *64
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &65 2018-05-24 12:17:21.929463000 Z
+    zone: *2
+    time: *65
+  position: 32
+Iron Age IIa-b:
+  id: 33
+  name: Iron Age IIa-b
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &66 2018-05-24 12:17:21.951022000 Z
+    zone: *2
+    time: *66
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &67 2018-05-24 12:17:21.951022000 Z
+    zone: *2
+    time: *67
+  position: 33
+Iron Age IIc:
+  id: 34
+  name: Iron Age IIc
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &68 2018-05-24 12:17:21.961979000 Z
+    zone: *2
+    time: *68
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &69 2018-05-24 12:17:21.961979000 Z
+    zone: *2
+    time: *69
+  position: 34
+Iron Age III (Persian):
+  id: 35
+  name: Iron Age III (Persian)
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &70 2018-05-24 12:17:21.973837000 Z
+    zone: *2
+    time: *70
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &71 2018-05-24 12:17:21.973837000 Z
+    zone: *2
+    time: *71
+  position: 35
+Iron Age, Unspecified:
+  id: 36
+  name: Iron Age, Unspecified
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &72 2018-05-24 12:17:21.991222000 Z
+    zone: *2
+    time: *72
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &73 2018-05-24 12:17:21.991222000 Z
+    zone: *2
+    time: *73
+  position: 36
+Hellenistic, Early:
+  id: 37
+  name: Hellenistic, Early
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &74 2018-05-24 12:17:22.008635000 Z
+    zone: *2
+    time: *74
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &75 2018-05-24 12:17:22.008635000 Z
+    zone: *2
+    time: *75
+  position: 37
+Hellenistic, Middle:
+  id: 38
+  name: Hellenistic, Middle
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &76 2018-05-24 12:17:22.018464000 Z
+    zone: *2
+    time: *76
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &77 2018-05-24 12:17:22.018464000 Z
+    zone: *2
+    time: *77
+  position: 38
+Hellenistic, Late:
+  id: 39
+  name: Hellenistic, Late
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &78 2018-05-24 12:17:22.029495000 Z
+    zone: *2
+    time: *78
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &79 2018-05-24 12:17:22.029495000 Z
+    zone: *2
+    time: *79
+  position: 39
+Hellenstic, Unspecified:
+  id: 40
+  name: Hellenstic, Unspecified
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &80 2018-05-24 12:17:22.040507000 Z
+    zone: *2
+    time: *80
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &81 2018-05-24 12:17:22.040507000 Z
+    zone: *2
+    time: *81
+  position: 40
+Nabataean, Early:
+  id: 41
+  name: Nabataean, Early
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &82 2018-05-24 12:17:22.056777000 Z
+    zone: *2
+    time: *82
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &83 2018-05-24 12:17:22.056777000 Z
+    zone: *2
+    time: *83
+  position: 41
+Nabataean, Middle:
+  id: 42
+  name: Nabataean, Middle
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &84 2018-05-24 12:17:22.081361000 Z
+    zone: *2
+    time: *84
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &85 2018-05-24 12:17:22.081361000 Z
+    zone: *2
+    time: *85
+  position: 42
+Nabataean, Late:
+  id: 43
+  name: Nabataean, Late
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &86 2018-05-24 12:17:22.097227000 Z
+    zone: *2
+    time: *86
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &87 2018-05-24 12:17:22.097227000 Z
+    zone: *2
+    time: *87
+  position: 43
+Nabataean, Unspecified:
+  id: 44
+  name: Nabataean, Unspecified
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &88 2018-05-24 12:17:22.111003000 Z
+    zone: *2
+    time: *88
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &89 2018-05-24 12:17:22.111003000 Z
+    zone: *2
+    time: *89
+  position: 44
+Roman, Early:
+  id: 45
+  name: Roman, Early
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &90 2018-05-24 12:17:22.122887000 Z
+    zone: *2
+    time: *90
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &91 2018-05-24 12:17:22.122887000 Z
+    zone: *2
+    time: *91
+  position: 45
+Roman, Late:
+  id: 46
+  name: Roman, Late
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &92 2018-05-24 12:17:22.132863000 Z
+    zone: *2
+    time: *92
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &93 2018-05-24 12:17:22.132863000 Z
+    zone: *2
+    time: *93
+  position: 46
+Roman, Unspecified:
+  id: 47
+  name: Roman, Unspecified
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &94 2018-05-24 12:17:22.143436000 Z
+    zone: *2
+    time: *94
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &95 2018-05-24 12:17:22.143436000 Z
+    zone: *2
+    time: *95
+  position: 47
+Byzantine, Early:
+  id: 48
+  name: Byzantine, Early
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &96 2018-05-24 12:17:22.154758000 Z
+    zone: *2
+    time: *96
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &97 2018-05-24 12:17:22.154758000 Z
+    zone: *2
+    time: *97
+  position: 48
+Byzantine, Late:
+  id: 49
+  name: Byzantine, Late
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &98 2018-05-24 12:17:22.165686000 Z
+    zone: *2
+    time: *98
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &99 2018-05-24 12:17:22.165686000 Z
+    zone: *2
+    time: *99
+  position: 49
+Byzantine, Unspecified:
+  id: 50
+  name: Byzantine, Unspecified
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &100 2018-05-24 12:17:22.182108000 Z
+    zone: *2
+    time: *100
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &101 2018-05-24 12:17:22.182108000 Z
+    zone: *2
+    time: *101
+  position: 50
+Islamic, Umayyad:
+  id: 51
+  name: Islamic, Umayyad
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &102 2018-05-24 12:17:22.197453000 Z
+    zone: *2
+    time: *102
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &103 2018-05-24 12:17:22.197453000 Z
+    zone: *2
+    time: *103
+  position: 51
+Islamic, Abbasid:
+  id: 52
+  name: Islamic, Abbasid
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &104 2018-05-24 12:17:22.215554000 Z
+    zone: *2
+    time: *104
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &105 2018-05-24 12:17:22.215554000 Z
+    zone: *2
+    time: *105
+  position: 52
+Islamic, Fatimid:
+  id: 53
+  name: Islamic, Fatimid
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &106 2018-05-24 12:17:22.231354000 Z
+    zone: *2
+    time: *106
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &107 2018-05-24 12:17:22.231354000 Z
+    zone: *2
+    time: *107
+  position: 53
+Islamic, Ayyubid:
+  id: 54
+  name: Islamic, Ayyubid
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &108 2018-05-24 12:17:22.246835000 Z
+    zone: *2
+    time: *108
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &109 2018-05-24 12:17:22.246835000 Z
+    zone: *2
+    time: *109
+  position: 54
+Islamic, Mamluk:
+  id: 55
+  name: Islamic, Mamluk
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &110 2018-05-24 12:17:22.256708000 Z
+    zone: *2
+    time: *110
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &111 2018-05-24 12:17:22.256708000 Z
+    zone: *2
+    time: *111
+  position: 55
+Islamic, Unspecified:
+  id: 56
+  name: Islamic, Unspecified
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &112 2018-05-24 12:17:22.270545000 Z
+    zone: *2
+    time: *112
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &113 2018-05-24 12:17:22.270545000 Z
+    zone: *2
+    time: *113
+  position: 56
+Crusader:
+  id: 57
+  name: Crusader
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &114 2018-05-24 12:17:22.287118000 Z
+    zone: *2
+    time: *114
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &115 2018-05-24 12:17:22.287118000 Z
+    zone: *2
+    time: *115
+  position: 57
+Ottoman, Early:
+  id: 58
+  name: Ottoman, Early
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &116 2018-05-24 12:17:22.301647000 Z
+    zone: *2
+    time: *116
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &117 2018-05-24 12:17:22.301647000 Z
+    zone: *2
+    time: *117
+  position: 58
+Ottoman, Late:
+  id: 59
+  name: Ottoman, Late
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &118 2018-05-24 12:17:22.312371000 Z
+    zone: *2
+    time: *118
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &119 2018-05-24 12:17:22.312371000 Z
+    zone: *2
+    time: *119
+  position: 59
+Ottoman, Unspecified:
+  id: 60
+  name: Ottoman, Unspecified
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &120 2018-05-24 12:17:22.323131000 Z
+    zone: *2
+    time: *120
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &121 2018-05-24 12:17:22.323131000 Z
+    zone: *2
+    time: *121
+  position: 60
+Modern (1915-1950):
+  id: 61
+  name: Modern (1915-1950)
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &122 2018-05-24 12:17:22.338991000 Z
+    zone: *2
+    time: *122
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &123 2018-05-24 12:17:22.338991000 Z
+    zone: *2
+    time: *123
+  position: 61
+Hashemite:
+  id: 62
+  name: Hashemite
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &124 2018-05-24 12:17:22.357016000 Z
+    zone: *2
+    time: *124
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &125 2018-05-24 12:17:22.357016000 Z
+    zone: *2
+    time: *125
+  position: 62
+unspecified/unknown period:
+  id: 63
+  name: unspecified/unknown period
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &126 2018-05-24 12:17:22.368316000 Z
+    zone: *2
+    time: *126
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &127 2018-05-24 12:17:22.368316000 Z
+    zone: *2
+    time: *127
+  position: 63
