@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  termlist_kind_of_object_specified: one
-  termlist_preservation_object: one
-
-two:
-  termlist_kind_of_object_specified: two
-  termlist_preservation_object: two

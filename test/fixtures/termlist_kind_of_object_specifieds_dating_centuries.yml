@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  termlist_dating_century: one
-  termlist_kind_of_object_specifieds: one
-
-two:
-  termlist_dating_century: two
-  termlist_kind_of_object_specifieds: two
