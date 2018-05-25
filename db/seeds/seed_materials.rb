@@ -9,5 +9,5 @@ require "#{Rails.root}/db/seeds/seed_helper.rb"
 #SeedHelper.build_material_related_seed $metal_data
 #SeedHelper.build_material_related_seed $organic_data
 #SeedHelper.build_material_related_seed $stone_data
-SeedHelper.build_material_related_seed $vitreous_data
-SeedHelper.build_material_related_seed $ceramic_data
+#SeedHelper.build_material_related_seed $vitreous_data
+#SeedHelper.build_material_related_seed $ceramic_data
