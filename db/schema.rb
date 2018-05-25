@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_25_160929) do
+ActiveRecord::Schema.define(version: 2018_05_25_183442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2018_05_25_160929) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "colors_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_color_id"
+    t.bigint "termlist_kind_of_object_specified_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["termlist_color_id"], name: "index_colors_koo_specs_on_termlist_color_id"
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_colors_koo_specs_on_termlist_kind_of_object_specified_id"
   end
 
   create_table "excavation_sites", id: :serial, force: :cascade do |t|
@@ -85,6 +94,15 @@ ActiveRecord::Schema.define(version: 2018_05_25_160929) do
     t.datetime "updated_at", null: false
     t.index ["termlist_kind_of_object_id"], name: "index_material_specifieds_koos_on_kind_of_object_id"
     t.index ["termlist_material_specified_id"], name: "index_material_specifieds_koos_on_material_specified_id"
+  end
+
+  create_table "material_specifieds_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_material_specified_id"
+    t.bigint "termlist_kind_of_object_specified_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["termlist_kind_of_object_specified_id"], name: "index_material_specifieds_koo_specs_on_koos_id"
+    t.index ["termlist_material_specified_id"], name: "index_material_specifieds_koo_specs_on_material_specified_id"
   end
 
   create_table "museum_object_image_lists", force: :cascade do |t|
@@ -461,12 +479,16 @@ ActiveRecord::Schema.define(version: 2018_05_25_160929) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "colors_koo_specs", "termlist_colors"
+  add_foreign_key "colors_koo_specs", "termlist_kind_of_object_specifieds"
   add_foreign_key "join_museum_object_dating_centuries", "museum_objects"
   add_foreign_key "join_museum_object_dating_centuries", "termlist_dating_centuries"
   add_foreign_key "material_specifieds_kind_of_object_specifieds", "termlist_kind_of_object_specifieds"
   add_foreign_key "material_specifieds_kind_of_object_specifieds", "termlist_material_specifieds"
   add_foreign_key "material_specifieds_kind_of_objects", "termlist_kind_of_objects"
   add_foreign_key "material_specifieds_kind_of_objects", "termlist_material_specifieds"
+  add_foreign_key "material_specifieds_koo_specs", "termlist_kind_of_object_specifieds"
+  add_foreign_key "material_specifieds_koo_specs", "termlist_material_specifieds"
   add_foreign_key "museum_object_image_lists", "museum_objects"
   add_foreign_key "museum_object_images", "museum_objects"
   add_foreign_key "museum_objects", "termlist_dating_periods"
