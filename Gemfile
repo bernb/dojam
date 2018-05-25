@@ -29,7 +29,7 @@ gem 'sprockets-rails'
 gem 'bootstrap'
 
 # will be initialized with bootstrap support
-gem 'simple_form', '~> 4.0', git: 'git://github.com/plataformatec/simple_form.git'
+gem 'simple_form', '~> 4.0'
 
 # creates multistep forms for models
 gem 'wicked'
