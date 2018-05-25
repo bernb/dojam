@@ -9,7 +9,7 @@ class MaterialSpecifiedsKindOfObjectSpecified < ApplicationRecord
   has_many :termlist_colors, -> { order(name: :asc) }, through: :termlist_kind_of_object_specifieds_color
   has_many :termlist_kind_of_object_specifieds_decoration_color
   has_many :termlist_decoration_colors, -> { order(name: :asc) }, through: :termlist_kind_of_object_specifieds_decoration_color
-  has_many :termlist_kind_of_object_specifieds_decoration_techniques, inverse_of: :termlist_kind_of_object_specified
+  has_many :termlist_kind_of_object_specifieds_decoration_techniques, inverse_of: :material_specifieds_kind_of_object_specified
   has_many :termlist_decoration_techniques, -> { order(name: :asc) }, through: :termlist_kind_of_object_specifieds_decoration_techniques
   has_many :termlist_kind_of_object_specifieds_preservation_materials
   has_many :termlist_preservation_materials, -> { order(name: :asc) }, through: :termlist_kind_of_object_specifieds_preservation_materials
