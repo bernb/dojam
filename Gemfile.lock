@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/plataformatec/simple_form.git
-  revision: 9d8b99b3b74710568248934af28f3e37885ff3a6
-  specs:
-    simple_form (4.0.0)
-      actionpack (>= 5.0)
-      activemodel (>= 5.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -258,6 +250,9 @@ GEM
     scout_apm (2.4.11)
     search_cop (1.0.9)
       treetop
+    simple_form (4.0.1)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -334,7 +329,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   scout_apm
   search_cop
-  simple_form (~> 4.0)!
+  simple_form (~> 4.0)
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets-rails
