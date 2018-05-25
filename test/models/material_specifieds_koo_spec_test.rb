@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MaterialSpecifiedsKindOfObjectSpecifiedTest < ActiveSupport::TestCase
+class MaterialSpecifiedsKooSpecTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
