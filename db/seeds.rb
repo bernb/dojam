@@ -35,8 +35,9 @@ data[:material_specifieds].each  do |ms_name|
 			# Thus we create a dummy koo specified with the same name as the koo
 			# to ensure 1..* relationship, as the join table between ms and koos
 			# is the entry point for all other properties, a koos must always be present
-#		koos = TermlistKindOfObjectSpecified.find_by(name: koo_name) || TermlistKindOfObjectSpecified.create(name: koo_name)
-#		koo = TermlistKindOfObject.find_by(name: koo_name) || TermlistKindOfObject.create(name: koo_name)
+	  	koos = TermlistKindOfObjectSpecified.find_by(name: koo_name) || TermlistKindOfObjectSpecified.create(name: koo_name)
+	  	koo = TermlistKindOfObject.find_by(name: koo_name) || TermlistKindOfObject.create(name: koo_name)
+			koo.termlist_kind_of_object_specifieds << koos
 		end # if not hash
 	end # each kind of object
 end # each material specified
