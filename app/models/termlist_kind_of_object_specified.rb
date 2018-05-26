@@ -11,5 +11,16 @@ class TermlistKindOfObjectSpecified < ApplicationRecord
 		end
 	end
 	has_many :colors_ms_koo_specs, through: :material_specifieds_koo_specs
-	has_many :termlist_colors, through: :colors_ms_koo_specs
+  has_many :termlist_colors, through: :colors_ms_koo_specs
+
+	def insert_properties property_name, properties
+		prop_method = property_name.to_s + "<<"
+		# Better safe than sorry: We are very restrictive when using send
+		return nil unless /termlist_[a-z]+/.match?(prop_method) && self.props.respond_to?(prop_method.to_s)
+		self.props.each do |join_entry|
+			join_entry.send prop_method, properties
+		end
+	end
+
+
 end

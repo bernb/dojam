@@ -22,7 +22,7 @@ end
 def import_colors data, koos 
 	data.each do |color_name|
 		color = TermlistColor.find_or_create_by(name: color_name) 
-		koos.props.each.termlist_colors << color
+		koos.insert_properties :termlist_colors, color
 	end
 end
 
