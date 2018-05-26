@@ -4,6 +4,8 @@ class TermlistKindOfObjectSpecified < ApplicationRecord
   has_many :museum_objects
 	has_many :material_specifieds_koo_specs
 	has_many :termlist_material_specifieds, through: :material_specifieds_koo_specs do
+		# We enforce uniqueness of join table on database level
+		# So we avoid UniquenessViolation by altering the often used shovel operator
 		def << (value)
 			super value unless self.include? value
 		end
