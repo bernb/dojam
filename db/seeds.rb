@@ -16,7 +16,16 @@ def import_material data
 		ms = material.termlist_material_specifieds.create name: ms_name
 		puts "Importing kind of object data..."
 		import_kind_of_objects data[:kind_of_objects], ms
+		import_colors data[:colors], ms
 	end # each material specified
+end
+
+def import_colors data, material_specified
+	data.each do |color_name|
+		color = TermlistColor.find_by(name: color_name) 
+		color ||= TermlistColor.create(name: color_name)
+		material_specified.termlist_color << color
+	end
 end
 
 def import_kind_of_objects kind_of_objects, material_specified
