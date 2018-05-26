@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ColorsKooSpecTest < ActiveSupport::TestCase
+class ColorsMsKooSpecTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

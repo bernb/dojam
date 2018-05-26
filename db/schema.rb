@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_25_183442) do
+ActiveRecord::Schema.define(version: 2018_05_26_191733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2018_05_25_183442) do
     t.datetime "updated_at", null: false
     t.index ["termlist_color_id"], name: "index_colors_koo_specs_on_termlist_color_id"
     t.index ["termlist_kind_of_object_specified_id"], name: "index_colors_koo_specs_on_termlist_kind_of_object_specified_id"
+  end
+
+  create_table "colors_ms_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_color_id"
+    t.bigint "material_specifieds_koo_spec_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_specifieds_koo_spec_id"], name: "index_colors_ms_koo_specs_on_material_specifieds_koo_spec_id"
+    t.index ["termlist_color_id"], name: "index_colors_ms_koo_specs_on_termlist_color_id"
   end
 
   create_table "excavation_sites", id: :serial, force: :cascade do |t|
@@ -102,6 +111,7 @@ ActiveRecord::Schema.define(version: 2018_05_25_183442) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["termlist_kind_of_object_specified_id"], name: "index_material_specifieds_koo_specs_on_koos_id"
+    t.index ["termlist_material_specified_id", "termlist_kind_of_object_specified_id"], name: "index_ms_koo_specs_on_ms_id_and_koos_id", unique: true
     t.index ["termlist_material_specified_id"], name: "index_material_specifieds_koo_specs_on_material_specified_id"
   end
 
@@ -481,6 +491,8 @@ ActiveRecord::Schema.define(version: 2018_05_25_183442) do
 
   add_foreign_key "colors_koo_specs", "termlist_colors"
   add_foreign_key "colors_koo_specs", "termlist_kind_of_object_specifieds"
+  add_foreign_key "colors_ms_koo_specs", "material_specifieds_koo_specs"
+  add_foreign_key "colors_ms_koo_specs", "termlist_colors"
   add_foreign_key "join_museum_object_dating_centuries", "museum_objects"
   add_foreign_key "join_museum_object_dating_centuries", "termlist_dating_centuries"
   add_foreign_key "material_specifieds_kind_of_object_specifieds", "termlist_kind_of_object_specifieds"
