@@ -8,15 +8,19 @@ if Rails.env.development?
 # require "#{Rails.root}/db/seeds/museum_object_generator.rb"
 end
 
-data = $ceramic_data
- 
-puts "*** Material: " + data[:material_name] + "***"
-material = TermlistMaterial.create name: data[:material_name]
-data[:material_specifieds].each  do |ms_name|
-	puts "*** Material specified: " + ms_name + "***"
-	ms = material.termlist_material_specifieds.create name: ms_name
-	puts "Importing kind of object data..."
-	data[:kind_of_objects].each do |koo_name|
+def import_material data 
+	puts "*** Material: " + data[:material_name] + "***"
+	material = TermlistMaterial.create name: data[:material_name]
+	data[:material_specifieds].each  do |ms_name|
+		puts "*** Material specified: " + ms_name + "***"
+		ms = material.termlist_material_specifieds.create name: ms_name
+		puts "Importing kind of object data..."
+		import_kind_of_objects data[:kind_of_objects], ms
+	end # each material specified
+end
+
+def import_kind_of_objects kind_of_objects, material_specified
+	kind_of_objects.each do |koo_name|
 		# if entry is hash, kind of object specifieds are present
 		if koo_name.is_a? Hash
 			# Look if koo with same name already exists, otherwise create
@@ -27,21 +31,23 @@ data[:material_specifieds].each  do |ms_name|
 			koo_name.values[0].each do |koos_name|
 				koos = TermlistKindOfObjectSpecified.find_by(name: koos_name) || TermlistKindOfObjectSpecified.create(name: koos_name)
 				# Insert accordingly: |ms|---<|koos|>---|koo|
-			  koo.termlist_kind_of_object_specifieds << koos
-				ms.termlist_kind_of_object_specifieds << koos
+				koo.termlist_kind_of_object_specifieds << koos
+				material_specified.termlist_kind_of_object_specifieds << koos
 			end # koos	
 		else # if not hash
 			# If not a hash, no koo specified were defined
 			# Thus we create a dummy koo specified with the same name as the koo
 			# to ensure 1..* relationship, as the join table between ms and koos
 			# is the entry point for all other properties, a koos must always be present
-	  	koos = TermlistKindOfObjectSpecified.find_by(name: koo_name) || TermlistKindOfObjectSpecified.create(name: koo_name)
-	  	koo = TermlistKindOfObject.find_by(name: koo_name) || TermlistKindOfObject.create(name: koo_name)
+			koos = TermlistKindOfObjectSpecified.find_by(name: koo_name) || TermlistKindOfObjectSpecified.create(name: koo_name)
+			koo = TermlistKindOfObject.find_by(name: koo_name) || TermlistKindOfObject.create(name: koo_name)
 			koo.termlist_kind_of_object_specifieds << koos
 		end # if not hash
 	end # each kind of object
-end # each material specified
+end
  
+import_material $ceramic_data 
+
 =begin                    
 
 termlist_preservations = ["complete", "fragmentary"]
