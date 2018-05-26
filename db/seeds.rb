@@ -50,6 +50,7 @@ def import_kind_of_objects data, material_specified
 			koos = TermlistKindOfObjectSpecified.find_or_create_by(name: koo_name)
 			koo = TermlistKindOfObject.find_or_create_by(name: koo_name)
 			koo.termlist_kind_of_object_specifieds << koos
+			material_specified.termlist_kind_of_object_specifieds << koos
 		end # if not hash
 	end # each kind of object
 end
