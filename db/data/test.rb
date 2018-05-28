@@ -1,32 +1,26 @@
+# test data, using ceramic as fundament
 $test_data = {
-  
-  material_name: "DEBUG material",
 
-  material_specifieds: ('material_spec001'..'material_spec010').to_a,
-  
+  material_name: "ceramic",
+
+  material_specifieds: [
+    "pseudo-celadon",
+    "Terra Sigillata (TS)",
+    "White Slip Ware",
+    ],
+
   kind_of_objects: [
-    {"koo1": ('koos001'..'koos010').to_a},
-    "koo2",
-    {"koo3": [
-      "S31",
-      "S32",
-      "S33"
-    ]}
-  ],
+    {"architectural element": 
+      ["floor tile", 
+       "roof tile", 
+       "water pipe"]},
+    "coffin",
+    "coffin lid",
+  ], # kind of object array
   production_techniques: [
     "annealing",
     "beating",
     "casting in a mould",
-    "casting with lost wax technique",
-    "cutting",
-    "drawing",
-    "forging",
-    "hammering",
-    "repoussé",
-    "riveting",
-    "smelting",
-    "soldering",
-    "undetermined",
   ],
   
   decorations: [
@@ -38,37 +32,16 @@ $test_data = {
     "beige",
     "black",
     "brown",
-    "buff",
-    "pink",
-    "red"
   ], 
   decoration_colors: [
     "beige",
     "black",
-    "blue",
-    "brown",
-    "buff",
-    "grey",
-    "green",
-    "pink",
-    "purple",
-    "red",
-    "white",
     "yellow"
   ], 
   decoration_techniques: [
     "applied",
     "burnished",
     "combed",
-    "glazed",
-    "impressed",
-    "incised",
-    "painted",
-    "ribbed",
-    "rouletted",
-    "sgraffito",
-    "slipped",
-    "undetermined"
   ],
   preservation_materials: [
     "corroded",
@@ -78,13 +51,15 @@ $test_data = {
     "base",
     "body",
     "body-to-bottom",
-    "complete",
-    "complete profile",
-    "foot",
-    "fragment",
-    "handle",
-    "handle-to-body",
-    "rim",
-    "rim-to-body"
+  ],
+  inscription_languages: [
+    "Arabic",
+    "Aramaic",
+    "Greek",
+  ],
+  inscription_letters: [
+    "Arabic",
+    "Aramaic",
+    "Greek",
   ]
 } # hash

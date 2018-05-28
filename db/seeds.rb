@@ -1,4 +1,4 @@
-require "#{Rails.root}/db/data/ceramic.rb"
+require "#{Rails.root}/db/data/test.rb"
 require "#{Rails.root}/db/data/sites.rb"
 # require "#{Rails.root}/db/seeds/seed_dating.rb"
 if Rails.env.development?
@@ -82,7 +82,7 @@ end
 
 def import_material data 
 	puts "*** Material: " + data[:material_name] + "***"
-	material = TermlistMaterial.find_or_create_by(name: "data[:material_name]")
+	material = TermlistMaterial.find_or_create_by(name: data[:material_name])
 	data[:material_specifieds].each  do |ms_name|
 		puts "*** Material specified: " + ms_name + "***"
 		ms = material.termlist_material_specifieds.find_or_create_by(name: ms_name)
@@ -127,39 +127,5 @@ def import_kind_of_objects data, material_specified
 	end # each kind of object
 end
  
-import_material $ceramic_data 
+import_material $test_data 
 
-=begin                    
-
-termlist_preservations = ["complete", "fragmentary"]
-termlist_preservations.each do |preservation|
-  TermlistPreservation.find_or_create_by name: preservation
-end
-
-termlist_conservations = ["no", "yes", "partially", "cleaned", "consolidated", "needed", "unknown"]
-termlist_conservations.each do |conservation|
-  TermlistConservation.find_or_create_by name: conservation
-end
-
-termlist_dating_period = ["Palaeolithic", "Mesolithic", "Neolithic", "Chalcolithic",
-                          "Bronze Age", "Early Bronze Age", "Middle Bronze Age",
-                          "Late Bronze Age", "Iron Age", "Early Iron Age",
-                          "Late Iron Age", "Hellenistic", "Nabataean", "Roman",
-                          "Byzantine", "Umayyad", "Abbasid", "Ayyubid", "Mamluk",
-                          "Ottoman", "Modern"]
-
-termlist_dating_period.each do |period|
-  TermlistDatingPeriod.find_or_create_by name: period
-end
-
-
-termlist_dating_millennium = [ "10th mill. BC", "9th mill. BC", "8th mill. BC", 
-                               "7th mill. BC", "6th mill. BC", "5th mill. BC",
-                               "4th mill. BC", "3rd mill. BC", "2nd mill. BC",
-                               "1st mill. BC", "1st mill. AD", "2nd mill. AD"]
-
-termlist_dating_millennium.each do |millennium|
-  TermlistDatingMillennium.find_or_create_by name: millennium
-end
-
-=end
