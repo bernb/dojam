@@ -1,11 +1,46 @@
 # require "#{Rails.root}/db/seeds/seed_museums.rb"
- require "#{Rails.root}/db/seeds/seed_materials.rb"
+require "#{Rails.root}/db/seeds/seed_materials.rb"
+require "#{Rails.root}/db/seeds/data/data_sites.rb"
 # require "#{Rails.root}/db/seeds/seed_storages.rb"
-# require "#{Rails.root}/db/seeds/seed_sites.rb"
 # require "#{Rails.root}/db/seeds/seed_dating.rb"
-# require "#{Rails.root}/db/seeds/seed_other_termlists.rb"
 if Rails.env.development?
 # require "#{Rails.root}/db/seeds/museum_object_generator.rb"
+end
+
+museum = Museum.create name: "JAM", prefix: "J"
+
+TermlistAcquisitionKind.create name: "chance find"
+TermlistAcquisitionKind.create name: "confiscation"
+TermlistAcquisitionKind.create name: "excavation"
+TermlistAcquisitionKind.create name: "gift"
+TermlistAcquisitionKind.create name: "purchase"
+TermlistAcquisitionKind.create name: "archaeological survey"
+TermlistAcquisitionKind.create name: "unknown"
+
+TermlistAcquisitionDeliveredBy.create name: "excavator"
+TermlistAcquisitionDeliveredBy.create name: "donor"
+TermlistAcquisitionDeliveredBy.create name: "seller"
+TermlistAcquisitionDeliveredBy.create name: "institution"
+TermlistAcquisitionDeliveredBy.create name: "unknown"
+
+TermlistAuthenticity.create name: "archaeological object"
+TermlistAuthenticity.create name: "copy"
+TermlistAuthenticity.create name: "forgery"
+TermlistAuthenticity.create name: "unspecific"
+TermlistAuthenticity.create name: "unknown"
+
+$excavation_site_names.each do |sitename|
+  ExcavationSite.create name: sitename
+end
+
+$site_kinds.each do |category_name, kinds_array|
+  category = TermlistExcavationSiteCategory.create name: category_name
+  kinds_array.each do |site_kind_name|
+    site_kind = TermlistExcavationSiteKind.create name: site_kind_name
+    category.termlist_excavation_site_kinds << site_kind
+  end
+  site_kind = TermlistExcavationSiteKind.create name: "Unspecific/Unknown"
+  category.termlist_excavation_site_kinds << site_kind
 end
 
 def import_material data 
