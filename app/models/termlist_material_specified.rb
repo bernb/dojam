@@ -8,6 +8,6 @@ class TermlistMaterialSpecified < ApplicationRecord
 			super value unless self.include? value
 		end
 	end
-	has_many :termlist_kind_of_objects, through: :termlist_kind_of_object_specifieds
+	has_many :termlist_kind_of_objects, -> { distinct }, through: :termlist_kind_of_object_specifieds
 
 end
