@@ -93,8 +93,7 @@ class BuildsController < ApplicationController
       format.js {
         material_specified = TermlistMaterialSpecified.find(
                                params[:selected_material_specified_id])
-        @kind_of_objects = TermlistKindOfObject.where( 
-                             termlist_material_specified: material_specified)
+				@kind_of_objects = material_specified.termlist_kind_of_objects
       }
     end
   end
