@@ -109,7 +109,7 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def validate_step_kind_of_object_specified_for record
-    check_assoc_exists record, :kind_of_object_specified, record.termlist_kind_of_object_specified
+  # check_assoc_exists record, :kind_of_object_specified, record.termlist_kind_of_object_specified
   end
   
   def validate_step_production_for record
