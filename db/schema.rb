@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_26_191733) do
+ActiveRecord::Schema.define(version: 2018_05_29_152959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,15 @@ ActiveRecord::Schema.define(version: 2018_05_26_191733) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "prefix"
+  end
+
+  create_table "prod_techs_ms_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_production_technique_id"
+    t.bigint "material_specifieds_koo_spec_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_specifieds_koo_spec_id"], name: "index_prod_techs_ms_koo_specs_on_ms_koo_spec_id"
+    t.index ["termlist_production_technique_id"], name: "index_prod_techs_ms_koo_specs_on_prod_tech_id"
   end
 
   create_table "storage_locations", id: :serial, force: :cascade do |t|
@@ -473,6 +482,8 @@ ActiveRecord::Schema.define(version: 2018_05_26_191733) do
   add_foreign_key "museum_objects", "termlist_dating_periods"
   add_foreign_key "museum_objects", "termlist_excavation_site_kinds"
   add_foreign_key "museum_objects", "termlist_production_techniques"
+  add_foreign_key "prod_techs_ms_koo_specs", "material_specifieds_koo_specs"
+  add_foreign_key "prod_techs_ms_koo_specs", "termlist_production_techniques"
   add_foreign_key "termlist_kind_of_object_specifieds_dating_centuries", "termlist_dating_centuries"
   add_foreign_key "termlist_kind_of_object_specifieds_dating_centuries", "termlist_kind_of_object_specifieds"
   add_foreign_key "termlist_kind_of_object_specifieds_dating_millennia", "termlist_dating_millennia"
