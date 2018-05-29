@@ -16,7 +16,7 @@
       <% end %>
       </br>
     <h4>kind of object</h4>
-		<%= f.association :termlist_kind_of_object, collection: @kind_of_objects, label: false, as: :collection_select, include_blank: true, required: true   %>
+		<%= f.association :termlist_kind_of_object, collection: @kind_of_objects, label: false, as: :termlist_select, include_blank: true, required: true   %>
     <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>
