@@ -1,4 +1,9 @@
-require "#{Rails.root}/db/data/test.rb"
+require "#{Rails.root}/db/data/ceramic.rb"
+require "#{Rails.root}/db/data/metal.rb"
+require "#{Rails.root}/db/data/organic.rb"
+require "#{Rails.root}/db/data/stone.rb"
+require "#{Rails.root}/db/data/vitreous.rb"
+require "#{Rails.root}/db/data/dating.rb"
 require "#{Rails.root}/db/data/sites.rb"
 # require "#{Rails.root}/db/seeds/seed_dating.rb"
 if Rails.env.development?
@@ -83,18 +88,22 @@ end
 def import_material data 
 	puts "*** Material: " + data[:material_name] + "***"
 	material = TermlistMaterial.find_or_create_by(name: data[:material_name])
-	data[:material_specifieds].each  do |ms_name|
-		puts "*** Material specified: " + ms_name + "***"
+	count = data[:material_specifieds].count
+	data[:material_specifieds].each.with_index(1)  do |ms_name, index|
+		puts "*** Material specified: " + ms_name + " (" + index.to_s + "/" + count.to_s + ") ***"
 		ms = material.termlist_material_specifieds.find_or_create_by(name: ms_name)
 		puts "Importing kind of object data..."
 		import_kind_of_objects data, ms
 	end # each material specified
 end
 
-def import_colors data, koos 
-	data.each do |color_name|
-		color = TermlistColor.find_or_create_by(name: color_name) 
-		koos.insert_properties :termlist_colors, color
+def import_properties class_name, data, koos 
+	data.each do |prop_name|
+		# As this is only for initlal seeding we are
+		# sloppy here and just call with given class_name
+		prop = Object.const_get(class_name).find_or_create_by(name: prop_name) 
+		method_symbol = class_name.underscore.pluralize.to_sym
+		koos.insert_properties method_symbol, prop
 	end
 end
 
@@ -112,7 +121,12 @@ def import_kind_of_objects data, material_specified
 				# Insert accordingly: |ms|---<|koos|>---|koo|
 				koo.termlist_kind_of_object_specifieds << koos
 				material_specified.termlist_kind_of_object_specifieds << koos
-				import_colors data[:colors], koos
+				# Iterate over all hashes/properties, but
+				# exclude material and kind related stuff
+				rejects = lambda {|h| h.to_s.starts_with?("kind") || h.to_s.starts_with?("material")}
+				data.keys.reject(&rejects).each do |prop_name|
+					import_properties "Termlist" + prop_name.to_s.camelize.singularize, data[prop_name], koos
+				end
 			end # koos	
 		else # if not hash
 			# If not a hash, no koo specified were defined
@@ -127,5 +141,9 @@ def import_kind_of_objects data, material_specified
 	end # each kind of object
 end
  
-import_material $test_data 
+import_material $ceramic_data 
+import_material $metal_data 
+import_material $organic_data
+import_material $stone_data
+import_material $vitreous_data
 
