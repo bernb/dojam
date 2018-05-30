@@ -12,14 +12,8 @@ class BuildsController < ApplicationController
   # Remember DRY and refactor step symbols into one single place then
   def show
     @museum_object = MuseumObject.find(params[:museum_object_id]).decorate
-    if past_step?(:step_kind_of_object_specified) && @museum_object.termlist_kind_of_object_specified.nil? && step != :step_confirm
-      flash[:warning] = "Please select material and kind of object first"
-      jump_to :step_material
-      set_variables_for :step_material
-    else
-      set_variables_for step
-    end
-      render_wizard
+    set_variables_for step
+    render_wizard
   end
 
   def new
@@ -206,10 +200,7 @@ class BuildsController < ApplicationController
     end
     
     if step == :step_production
-      kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
-      # after that get productions that belongs to the choosen specific kind of object
-      kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
-      @production_techniques = kind_specified.termlist_production_techniques
+			@production_techniques = @museum_object.test
     end
     
     if step == :step_color

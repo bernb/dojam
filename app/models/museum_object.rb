@@ -6,7 +6,7 @@ class MuseumObject < ApplicationRecord
   accepts_nested_attributes_for :images
   belongs_to :excavation_site, -> { order(name: :asc) }, required: false # do not require for now while in early dev state
   belongs_to :storage_location, required: false
-  belongs_to :termlist_acquisition_delivered_by, -> { order(name: :asc) }, required: false
+  belongs_to :termlist_acquisition_delivered_by, -> { ormer(name: :asc) }, required: false
   belongs_to :termlist_acquisition_kind, -> { order(name: :asc) }, required: false
   belongs_to :termlist_authenticity, required: false
   belongs_to :termlist_dating_millennium, required: false
@@ -24,11 +24,21 @@ class MuseumObject < ApplicationRecord
   belongs_to :termlist_excavation_site_kind, required: false
   has_many :join_museum_object_material_specifieds
   has_many :termlist_material_specifieds, through: :join_museum_object_material_specifieds
+	has_many :material_specifieds_koo_specs, -> (me) {
+		if me.termlist_kind_of_object_specified.present?
+			puts "TRIGGERED *****"
+			joins(:termlist_kind_of_object_specifieds)
+				where(termlist_kind_of_object_specified: me.termlist_kind_of_object_specified)
+		elsif me.termlist_kind_of_object.present?
+			self.joins(termlist_kind_of_object_specified: :termlist_kind_of_object).where(termlist_kind_of_objects: {id: me.termlist_kind_of_object.id})
+		end
+	}, through: :termlist_material_specifieds
   has_many :termlist_materials, -> { distinct }, through: :termlist_material_specifieds
   has_many :join_museum_object_colors, inverse_of: :museum_object
   has_many :termlist_colors, through: :join_museum_object_colors
   has_many :join_museum_object_dating_centuries
   has_many :termlist_dating_centuries, through: :join_museum_object_dating_centuries
+	has_many :possible_production
   accepts_nested_attributes_for :excavation_site, reject_if: :all_blank, allow_destroy: true
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true
@@ -76,6 +86,15 @@ class MuseumObject < ApplicationRecord
     
                                           
   end
+
+	def props
+		if self.termlist_kind_of_object_specified.present?
+			temp_props = self.termlist_kind_of_object_specified.props
+		else
+			temp_props = self.termlist_kind_of_object.props
+		end
+		return temp_props.where(termlist_material_specified: self.termlist_material_specifieds)
+	end
 
   # is_used activates validations, supposed to get set after first save
   # as wickeg gem needs a valid/created entry to work
