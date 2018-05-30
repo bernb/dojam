@@ -1,5 +1,6 @@
 class TermlistProductionTechnique < ApplicationRecord
-  has_many :termlist_kind_of_object_specifieds_production_techniques
-  has_many :termlist_kind_of_object_specifieds, through: :termlist_kind_of_object_specifieds_production_techniques
+	has_many :prod_techs_ms_koo_specs
+	has_many :material_specifieds_koo_specs, through: :prod_techs_ms_koo_specs
   has_many :museum_objects
+	include PropsAssociations
 end
