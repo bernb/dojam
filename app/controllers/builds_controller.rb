@@ -200,7 +200,7 @@ class BuildsController < ApplicationController
     end
     
     if step == :step_production
-			@production_techniques = @museum_object.test
+			@production_techniques = @museum_object.possible_production_techniques
     end
     
     if step == :step_color
