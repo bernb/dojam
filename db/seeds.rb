@@ -97,13 +97,15 @@ def import_material data
 	end # each material specified
 end
 
-def import_properties class_name, data, koos 
+def import_properties class_name, data, koos, ms 
 	data.each do |prop_name|
 		# As this is only for initlal seeding we are
 		# sloppy here and just call with given class_name
+		# find or create concrete property like a production technique or color
 		prop = Object.const_get(class_name).find_or_create_by(name: prop_name) 
+		# creates ':colors' from 'TermlistColor'
 		method_symbol = class_name.underscore.pluralize.to_sym
-		koos.insert_properties method_symbol, prop
+		PropsSetter.call property: prop, property_name: method_symbol, koos: koos, material_specified: ms
 	end
 end
 
@@ -125,7 +127,7 @@ def import_kind_of_objects data, material_specified
 				# exclude material and kind related stuff
 				rejects = lambda {|h| h.to_s.starts_with?("kind") || h.to_s.starts_with?("material")}
 				data.keys.reject(&rejects).each do |prop_name|
-					import_properties "Termlist" + prop_name.to_s.camelize.singularize, data[prop_name], koos
+					import_properties "Termlist" + prop_name.to_s.camelize.singularize, data[prop_name], koos, material_specified
 				end
 			end # koos	
 		else # if not hash

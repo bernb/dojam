@@ -10,7 +10,7 @@ class TermlistMaterialSpecified < ApplicationRecord
 		end
 	end
 	has_many :termlist_kind_of_objects, -> { distinct }, through: :termlist_kind_of_object_specifieds
-	has_many :prod_techs_ms_koo_specs, through: :props
+	has_many :prod_techs_ms_koo_specs, through: :material_specifieds_koo_specs
 	has_many :termlist_production_techniques, through: :prod_techs_ms_koo_specs
 
 end
