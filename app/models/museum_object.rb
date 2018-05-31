@@ -6,7 +6,7 @@ class MuseumObject < ApplicationRecord
   accepts_nested_attributes_for :images
   belongs_to :excavation_site, -> { order(name: :asc) }, required: false # do not require for now while in early dev state
   belongs_to :storage_location, required: false
-  belongs_to :termlist_acquisition_delivered_by, -> { ormer(name: :asc) }, required: false
+  belongs_to :termlist_acquisition_delivered_by, -> { order(name: :asc) }, required: false
   belongs_to :termlist_acquisition_kind, -> { order(name: :asc) }, required: false
   belongs_to :termlist_authenticity, required: false
   belongs_to :termlist_dating_millennium, required: false
