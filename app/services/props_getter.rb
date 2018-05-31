@@ -11,7 +11,17 @@ class PropsGetter
 			# Just to make the query a bit more clear
 			m_spec_id = termlist_material_specified.id
 			koo_id = termlist_kind_of_object.id
-			class_name.joins(material_specifieds_koo_specs: [{termlist_kind_of_object_specified: :termlist_kind_of_object}, {termlist_material_specified: :termlist_material}]).where(material_specifieds_koo_specs: {termlist_kind_of_object_specifieds: {termlist_kind_of_objects: {id: koo_id}}}).where(material_specifieds_koo_specs: {termlist_material_specifieds: {id: m_spec_id}}).distinct
+			class_name.joins(material_specifieds_koo_specs: 
+											 [{termlist_kind_of_object_specified: :termlist_kind_of_object}, 
+												{termlist_material_specified: :termlist_material}])
+				.where(material_specifieds_koo_specs: 
+								{termlist_kind_of_object_specifieds: 
+									{termlist_kind_of_objects: 
+										{id: koo_id}}})
+				.where(material_specifieds_koo_specs: 
+					{termlist_material_specifieds: 
+						{id: m_spec_id}})
+				.distinct
 		end
 	end
 end

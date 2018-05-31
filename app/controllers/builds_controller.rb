@@ -200,7 +200,7 @@ class BuildsController < ApplicationController
     end
     
     if step == :step_production
-			@production_techniques = @museum_object.possible_production_techniques
+			@production_techniques = @museum_object.get_possible_props_for "TermlistProductionTechnique"
     end
     
     if step == :step_color
