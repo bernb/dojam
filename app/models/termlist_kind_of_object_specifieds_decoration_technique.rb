@@ -1,4 +1,0 @@
-class TermlistKindOfObjectSpecifiedsDecorationTechnique < ApplicationRecord
-  belongs_to :material_specifieds_koo_spec
-  belongs_to :termlist_decoration_technique
-end
