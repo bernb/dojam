@@ -87,13 +87,13 @@ $site_kinds.each do |category_name, kinds_array|
 end
 
 def import_material data 
-	puts "*** Material: " + data[:material_name] + "***"
+	Rails.logger.info "*** Material: " + data[:material_name] + "***"
 	material = TermlistMaterial.find_or_create_by(name: data[:material_name])
 	count = data[:material_specifieds].count
 	data[:material_specifieds].each.with_index(1)  do |ms_name, index|
-		puts "*** Material specified: " + ms_name + " (" + index.to_s + "/" + count.to_s + ") ***"
+		Rails.logger.info "*** Material specified: " + ms_name + " (" + index.to_s + "/" + count.to_s + ") ***"
 		ms = material.termlist_material_specifieds.find_or_create_by(name: ms_name)
-		puts "Importing kind of object data..."
+		Rails.logger.info "Importing kind of object data..."
 		import_kind_of_objects data, ms
 	end # each material specified
 end
