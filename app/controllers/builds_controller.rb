@@ -131,6 +131,14 @@ class BuildsController < ApplicationController
   end
   
   private
+
+	def step_decoration_vars
+  	@decoration_techniques = @museum_object.get_possible_props_for "TermlistDecorationTechnique"
+    @decoration_colors = @museum_object.get_possible_props_for "TermlistDecorationColor"
+
+    @decoration_styles = @museum_object.get_possible_props_for "TermlistDecoration"
+
+	end
   
   def handle_fuzzy_date museum_params
     year = museum_params["acquisition_date(1i)"]
@@ -161,6 +169,7 @@ class BuildsController < ApplicationController
     @building = true # used for progress bar in application layout for now
     @step = step
     @museum_object.update_column :current_build_step, step
+		self.send(step.to_s + "_vars") if /step_[a-z_]+/.match?(step)
     
     if step == :step_material
       @materials = TermlistMaterial.all.order name: :asc
@@ -211,12 +220,6 @@ class BuildsController < ApplicationController
     end
     
     if step == :step_decoration
-      kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
-      # after that get productions that belongs to the choosen specific kind of object
-      kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
-      @decoration_techniques = kind_specified.termlist_decoration_techniques
-      @decoration_colors = kind_specified.termlist_decoration_colors
-      @decoration_styles = kind_specified.termlist_decorations
     end
     
     if step == :step_inscription
