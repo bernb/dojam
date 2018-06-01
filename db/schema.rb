@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_29_152959) do
+ActiveRecord::Schema.define(version: 2018_06_01_115400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,10 +45,64 @@ ActiveRecord::Schema.define(version: 2018_05_29_152959) do
     t.index ["termlist_color_id"], name: "index_colors_ms_koo_specs_on_termlist_color_id"
   end
 
+  create_table "dating_centuries_ms_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_dating_century_id"
+    t.bigint "material_specifieds_koo_spec_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_specifieds_koo_spec_id"], name: "index_dating_centuries_ms_koo_specs_on_ms_koo_spec_id"
+    t.index ["termlist_dating_century_id"], name: "index_dating_centuries_ms_koo_specs_on_dating_century_id"
+  end
+
+  create_table "decoration_colors_ms_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_decoration_color_id"
+    t.bigint "material_specifieds_koo_spec_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_specifieds_koo_spec_id"], name: "index_deco_colors_ms_koo_specs_on_ms_koo_spec_id"
+    t.index ["termlist_decoration_color_id"], name: "index_deco_colors_ms_koo_specs_on_deco_color_id"
+  end
+
+  create_table "decoration_techniques_ms_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_decoration_technique_id"
+    t.bigint "material_specifieds_koo_spec_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_specifieds_koo_spec_id"], name: "index_deco_techs_ms_koo_specs_on_ms_koo_spec_id"
+    t.index ["termlist_decoration_technique_id"], name: "index_deco_techs_ms_koo_specs_on_decoration_technique_id"
+  end
+
+  create_table "decorations_ms_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_decoration_id"
+    t.bigint "material_specifieds_koo_spec_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_specifieds_koo_spec_id"], name: "index_decorations_ms_koo_specs_on_ms_koo_spec_id"
+    t.index ["termlist_decoration_id"], name: "index_decorations_ms_koo_specs_on_decoration_id"
+  end
+
   create_table "excavation_sites", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "inscription_languages_ms_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_inscription_language_id"
+    t.bigint "material_specifieds_koo_spec_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_specifieds_koo_spec_id"], name: "index_inscription_langs_ms_koo_specs_on_ms_koo_spec_id"
+    t.index ["termlist_inscription_language_id"], name: "index_inscription_langs_ms_koo_specs_on_inscription_lang_id"
+  end
+
+  create_table "inscription_letters_ms_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_inscription_letter_id"
+    t.bigint "material_specifieds_koo_spec_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_specifieds_koo_spec_id"], name: "index_inscription_letters_ms_koo_specs_on_ms_koo_spec_id"
+    t.index ["termlist_inscription_letter_id"], name: "index_inscription_letters_ms_koo_specs_on_inscription_letter_id"
   end
 
   create_table "join_museum_object_colors", id: :serial, force: :cascade do |t|
@@ -193,6 +247,24 @@ ActiveRecord::Schema.define(version: 2018_05_29_152959) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "prefix"
+  end
+
+  create_table "preservation_materials_ms_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_preservation_material_id"
+    t.bigint "material_specifieds_koo_spec_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_specifieds_koo_spec_id"], name: "index_preservation_m_ms_koo_specs_on_ms_koo_specs_id"
+    t.index ["termlist_preservation_material_id"], name: "index_preservation_m_ms_koo_specs_on_preservation_m_id"
+  end
+
+  create_table "preservation_objects_ms_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_preservation_object_id"
+    t.bigint "material_specifieds_koo_spec_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_specifieds_koo_spec_id"], name: "index_pres_objects_ms_koo_specs_ms_koo_specs_id"
+    t.index ["termlist_preservation_object_id"], name: "index_pres_objects_ms_koo_specs_on_pres_object_id"
   end
 
   create_table "prod_techs_ms_koo_specs", force: :cascade do |t|
@@ -473,6 +545,18 @@ ActiveRecord::Schema.define(version: 2018_05_29_152959) do
 
   add_foreign_key "colors_ms_koo_specs", "material_specifieds_koo_specs"
   add_foreign_key "colors_ms_koo_specs", "termlist_colors"
+  add_foreign_key "dating_centuries_ms_koo_specs", "material_specifieds_koo_specs"
+  add_foreign_key "dating_centuries_ms_koo_specs", "termlist_dating_centuries"
+  add_foreign_key "decoration_colors_ms_koo_specs", "material_specifieds_koo_specs"
+  add_foreign_key "decoration_colors_ms_koo_specs", "termlist_decoration_colors"
+  add_foreign_key "decoration_techniques_ms_koo_specs", "material_specifieds_koo_specs"
+  add_foreign_key "decoration_techniques_ms_koo_specs", "termlist_decoration_techniques"
+  add_foreign_key "decorations_ms_koo_specs", "material_specifieds_koo_specs"
+  add_foreign_key "decorations_ms_koo_specs", "termlist_decorations"
+  add_foreign_key "inscription_languages_ms_koo_specs", "material_specifieds_koo_specs"
+  add_foreign_key "inscription_languages_ms_koo_specs", "termlist_inscription_languages"
+  add_foreign_key "inscription_letters_ms_koo_specs", "material_specifieds_koo_specs"
+  add_foreign_key "inscription_letters_ms_koo_specs", "termlist_inscription_letters"
   add_foreign_key "join_museum_object_dating_centuries", "museum_objects"
   add_foreign_key "join_museum_object_dating_centuries", "termlist_dating_centuries"
   add_foreign_key "material_specifieds_koo_specs", "termlist_kind_of_object_specifieds"
@@ -482,6 +566,10 @@ ActiveRecord::Schema.define(version: 2018_05_29_152959) do
   add_foreign_key "museum_objects", "termlist_dating_periods"
   add_foreign_key "museum_objects", "termlist_excavation_site_kinds"
   add_foreign_key "museum_objects", "termlist_production_techniques"
+  add_foreign_key "preservation_materials_ms_koo_specs", "material_specifieds_koo_specs"
+  add_foreign_key "preservation_materials_ms_koo_specs", "termlist_preservation_materials"
+  add_foreign_key "preservation_objects_ms_koo_specs", "material_specifieds_koo_specs"
+  add_foreign_key "preservation_objects_ms_koo_specs", "termlist_preservation_objects"
   add_foreign_key "prod_techs_ms_koo_specs", "material_specifieds_koo_specs"
   add_foreign_key "prod_techs_ms_koo_specs", "termlist_production_techniques"
   add_foreign_key "termlist_kind_of_object_specifieds_dating_centuries", "termlist_dating_centuries"
