@@ -1,5 +1,6 @@
 class TermlistPreservationMaterial < ApplicationRecord
-  has_many :termlist_kind_of_object_specifieds_preservation_materials
-  has_many :termlist_kind_of_object_specifieds, through: :termlist_kind_of_object_specifieds_preservation_materials
   has_many :museum_objects
+	has_many :preservation_materials_ms_koo_specs
+	has_many :material_specifieds_koo_specs, through: :preservation_materials_ms_koo_specs
+	include PropsAssociations
 end
