@@ -7,7 +7,7 @@
           <% @museum_object.termlist_material_specifieds_for(material).each do |spec_material| %>
             <li class="list-group-item">
               <label>
-                <%= f.radio_button :main_material_specified_id,  spec_material.id %>
+                <%= f.radio_button :termlist_material_specified_id,  spec_material.id %>
                 <%= spec_material.name %>
               </label>
             </li>
