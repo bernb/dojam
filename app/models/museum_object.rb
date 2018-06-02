@@ -24,16 +24,10 @@ class MuseumObject < ApplicationRecord
   belongs_to :termlist_excavation_site_kind, required: false
   has_many :join_museum_object_material_specifieds
   has_many :termlist_material_specifieds, through: :join_museum_object_material_specifieds
-	# While the correct thought, due a bug in Rails 5.1 joins for the scoped do not
-	# carry over a nested has_many call, so this can't be used to get properties
-#	has_many :material_specifieds_koo_specs, -> (me) {
-#		if me.termlist_kind_of_object_specified.present?
-#			joins(:termlist_kind_of_object_specifieds)
-#				where(termlist_kind_of_object_specified: me.termlist_kind_of_object_specified)
-#		elsif me.termlist_kind_of_object.present?
-#			self.joins(termlist_kind_of_object_specified: :termlist_kind_of_object).where(termlist_kind_of_objects: {id: me.termlist_kind_of_object.id})
-#		end
-#	}, through: :termlist_material_specifieds
+	has_many :material_specifieds_koo_specs, ->(me){
+		joins(:termlist_kind_of_object_specified).where(material_specifieds_koo_specs:{termlist_kind_of_object_specified: me.termlist_kind_of_object_specified}) unless me.termlist_kind_of_object_specified.blank?}, 
+	through: :termlist_kind_of_object
+	has_many :termlist_production_techniques, through: :material_specifieds_koo_specs
   has_many :termlist_materials, -> { distinct }, through: :termlist_material_specifieds
   has_many :join_museum_object_colors, inverse_of: :museum_object
   has_many :termlist_colors, through: :join_museum_object_colors
