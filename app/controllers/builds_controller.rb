@@ -289,6 +289,7 @@ class BuildsController < ApplicationController
                                           :termlist_preservation_material_id, :termlist_preservation_object_id, :description_conservation,
                                           :remarks, :literature, :dating_timespan_begin, :dating_timespan_end, :main_image, :is_finished, :needs_conservation, :needs_cleaning,
                                           :site_number_jadis, :coordinates_mega_long, :coordinates_mega_lat, :is_dating_timespan_end_BC, :is_dating_timespan_begin_BC,
+																					:main_material_specified_id,
                                           images: [],
                                           termlist_dating_century_ids: [],
                                           termlist_material_specified_ids: [], 
