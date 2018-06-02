@@ -11,6 +11,12 @@ class MaterialSpecifiedsKooSpec < ApplicationRecord
 	has_many :dating_centuries_ms_koo_specs
 	has_many :termlist_dating_centuries, through: :dating_centuries_ms_koo_specs
 
+	has_many :dating_millennia_ms_koo_specs
+	has_many :termlist_dating_millennia, through: :dating_millennia_ms_koo_specs
+
+	has_many :dating_periods_ms_koo_specs
+	has_many :termlist_dating_periods, through: :dating_periods_ms_koo_specs
+
 	has_many :decoration_colors_ms_koo_specs
 	has_many :termlist_decoration_colors, through: :decoration_colors_ms_koo_specs
 
