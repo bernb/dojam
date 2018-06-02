@@ -210,6 +210,19 @@ class BuildsController < ApplicationController
     @dating_centuries = @museum_object.get_possible_props_for "TermlistDatingCentury"
 	end
 
+	def step_remarks_vars
+	end
+
+	def step_images_upload_vars
+    @museum_object.images ||= MuseumObjectImageList.new
+	end
+
+	def step_literature_vars
+	end
+
+	def step_confirm_vars
+	end
+
   def handle_fuzzy_date museum_params
     year = museum_params["acquisition_date(1i)"]
     month = museum_params["acquisition_date(2i)"]
@@ -247,13 +260,6 @@ class BuildsController < ApplicationController
 		variable_name = "termlist_" + step.to_s.split("_", 2).second
 		variable_name = variable_name.pluralize
 		self.send(step.to_s + "_vars")
-    
-    if step == :step_dating
-    end
-    
-    if step == :step_images_upload
-      @museum_object.images ||= MuseumObjectImageList.new
-    end
     
   end
   
