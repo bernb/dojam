@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_01_115400) do
+ActiveRecord::Schema.define(version: 2018_06_02_140523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,24 @@ ActiveRecord::Schema.define(version: 2018_06_01_115400) do
     t.datetime "updated_at", null: false
     t.index ["material_specifieds_koo_spec_id"], name: "index_dating_centuries_ms_koo_specs_on_ms_koo_spec_id"
     t.index ["termlist_dating_century_id"], name: "index_dating_centuries_ms_koo_specs_on_dating_century_id"
+  end
+
+  create_table "dating_millennia_ms_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_dating_millennium_id"
+    t.bigint "material_specifieds_koo_spec_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_specifieds_koo_spec_id"], name: "index_dating_millennia_ms_koo_specs_on_ms_koo_spec_id"
+    t.index ["termlist_dating_millennium_id"], name: "index_dating_millennia_ms_koo_specs_on_dating_millennium_id"
+  end
+
+  create_table "dating_periods_ms_koo_specs", force: :cascade do |t|
+    t.bigint "termlist_dating_period_id"
+    t.bigint "material_specifieds_koo_spec_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_specifieds_koo_spec_id"], name: "index_dating_periods_ms_koo_specs_on_ms_koo_spec_id"
+    t.index ["termlist_dating_period_id"], name: "index_dating_periods_ms_koo_specs_on_dating_period_koo_spec_id"
   end
 
   create_table "decoration_colors_ms_koo_specs", force: :cascade do |t|
@@ -547,6 +565,10 @@ ActiveRecord::Schema.define(version: 2018_06_01_115400) do
   add_foreign_key "colors_ms_koo_specs", "termlist_colors"
   add_foreign_key "dating_centuries_ms_koo_specs", "material_specifieds_koo_specs"
   add_foreign_key "dating_centuries_ms_koo_specs", "termlist_dating_centuries"
+  add_foreign_key "dating_millennia_ms_koo_specs", "material_specifieds_koo_specs"
+  add_foreign_key "dating_millennia_ms_koo_specs", "termlist_dating_millennia"
+  add_foreign_key "dating_periods_ms_koo_specs", "material_specifieds_koo_specs"
+  add_foreign_key "dating_periods_ms_koo_specs", "termlist_dating_periods"
   add_foreign_key "decoration_colors_ms_koo_specs", "material_specifieds_koo_specs"
   add_foreign_key "decoration_colors_ms_koo_specs", "termlist_decoration_colors"
   add_foreign_key "decoration_techniques_ms_koo_specs", "material_specifieds_koo_specs"

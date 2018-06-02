@@ -132,14 +132,84 @@ class BuildsController < ApplicationController
   
   private
 
+	def step_acquisition_vars
+	end
+
 	def step_decoration_vars
   	@decoration_techniques = @museum_object.get_possible_props_for "TermlistDecorationTechnique"
     @decoration_colors = @museum_object.get_possible_props_for "TermlistDecorationColor"
-
     @decoration_styles = @museum_object.get_possible_props_for "TermlistDecoration"
-
 	end
-  
+
+	def step_material_vars
+    @materials = TermlistMaterial.all.order name: :asc
+	end
+
+	def step_museum_vars
+    @museums = Museum.where name: "JAM" # we restrict to the JAM museum for now
+    @storages = @museums.first.storages
+    # set correct collections if view gets rendered again (i.e. validation error or jump to view for edit)
+    # first look if param exist, which means view got just rendered again with a storage choosen by user
+    # which is default behaviour for input fields related to the object
+    # if no user choice found look if object has storage location defined
+    @selected_storage_id = params.dig(:storage, :storage_id) || @museum_object&.storage_location&.storage&.id || ""
+    @storage_locations = @storages.find_by(id: @selected_storage_id)&.storage_locations || {}
+	end
+
+	def step_provenance_vars
+    @excavation_site_categories = TermlistExcavationSiteCategory.all.order name: :asc
+    @selected_excavation_site_category = TermlistExcavationSiteCategory.first
+    @excavation_site_kinds = @selected_excavation_site_category.termlist_excavation_site_kinds
+	end
+
+	def step_material_specified_vars
+    @materials = TermlistMaterial.where(id: session[:material_ids]).order name: :asc
+	end
+
+	def step_kind_of_object_vars
+    material_specifieds_ids = @museum_object.termlist_material_specifieds.ids # get ids for choosen spec. materials
+    @kind_of_objects = [] # note that nil results in 'Yes/No' selection in view..
+	end
+
+	def step_kind_of_object_specified_vars
+    kind = @museum_object.termlist_kind_of_object
+    @kind_of_object_specifieds = kind&.termlist_kind_of_object_specifieds
+		@kind_of_object_speicifieds = [] if @kind_of_object_specifieds.blank?
+	end
+
+	def step_color_vars
+		@colors = @museum_object.get_possible_props_for "TermlistColor"
+	end
+
+	def step_production_vars
+	  @production_techniques = @museum_object.get_possible_props_for "TermlistProductionTechnique"
+	end
+
+	def step_measurements_vars
+	end
+
+	def step_inscription_vars
+		@inscription_letters = @museum_object.get_possible_props_for "TermlistInscriptionLetter"
+		@inscription_language = @museum_object.get_possible_props_for "TermlistInscriptionLanguage"
+	end
+
+	def step_preservation_vars
+    @preservation_materials = @museum_object.get_possible_props_for "TermlistPreservationMaterial"
+    @preservation_objects = @museum_object.get_possible_props_for "TermlistPreservationObject"
+	end
+
+	def step_conservation_vars
+	end
+
+	def step_authenticity_vars
+	end
+
+	def step_dating_vars
+    @dating_periods = @museum_object.get_possible_props_for "TermlistDatingPeriod"
+    @dating_millennia = @museum_object.get_possible_props_for "TermlistDatingMillennium"
+    @dating_centuries = @museum_object.get_possible_props_for "TermlistDatingCentury"
+	end
+
   def handle_fuzzy_date museum_params
     year = museum_params["acquisition_date(1i)"]
     month = museum_params["acquisition_date(2i)"]
@@ -166,85 +236,19 @@ class BuildsController < ApplicationController
   end
   
   def set_variables_for step
+		return nil unless /step_[a-z_]+/.match?(step)
     @building = true # used for progress bar in application layout for now
-    @step = step
+    @step = step # also used for partials like progress bar
     @museum_object.update_column :current_build_step, step
-		self.send(step.to_s + "_vars") if /step_[a-z_]+/.match?(step)
-    
-    if step == :step_material
-      @materials = TermlistMaterial.all.order name: :asc
-    end
-    
-    if step == :step_museum
-      @museums = Museum.where name: "JAM" # we restrict to the JAM museum for now
-      @storages = @museums.first.storages
-      # set correct collections if view gets rendered again (i.e. validation error or jump to view for edit)
-      # first look if param exist, which means view got just rendered again with a storage choosen by user
-      # which is default behaviour for input fields related to the object
-      # if no user choice found look if object has storage location defined
-      @selected_storage_id = params.dig(:storage, :storage_id) || @museum_object&.storage_location&.storage&.id || ""
-      @storage_locations = @storages.find_by(id: @selected_storage_id)&.storage_locations || {}
-    end
-    
-    if step == :step_provenance
-      @excavation_site_categories = TermlistExcavationSiteCategory.all.order name: :asc
-      @selected_excavation_site_category = TermlistExcavationSiteCategory.first
-      @excavation_site_kinds = @selected_excavation_site_category.termlist_excavation_site_kinds
-    end
-    
-    if step == :step_material_specified
-      @materials = TermlistMaterial.where(id: session[:material_ids]).order name: :asc
-    end
-    
-    if step == :step_kind_of_object
-      material_specifieds_ids = @museum_object.termlist_material_specifieds.ids # get ids for choosen spec. materials
-      # after that get kind of objects that belongs to the choosen spec. materials
-      #@kind_of_objects = TermlistKindOfObject.joins(:termlist_material_specified).where termlist_material_specifieds: {id: material_specifieds_ids}
-      @kind_of_objects = [] # note that nil results in 'Yes/No' selection in view..
-    end
-    
-    if step == :step_kind_of_object_specified
-      kind = @museum_object.termlist_kind_of_object
-      @kind_of_object_specifieds = kind&.termlist_kind_of_object_specifieds
-    end
-    
-    if step == :step_production
-			@production_techniques = @museum_object.get_possible_props_for "TermlistProductionTechnique"
-    end
-    
-    if step == :step_color
-      kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
-      # after that get productions that belongs to the choosen specific kind of object
-      kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
-      @colors = kind_specified.termlist_colors
-    end
-    
-    if step == :step_decoration
-    end
-    
-    if step == :step_inscription
-      kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
-      # after that get productions that belongs to the choosen specific kind of object
-      kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
-      @inscription_letters = kind_specified.termlist_inscription_letters
-      @inscription_language = kind_specified.termlist_inscription_languages
-    end
-    
-    if step == :step_preservation
-      kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
-      # after that get productions that belongs to the choosen specific kind of object
-      kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
-      @preservation_materials = kind_specified.termlist_preservation_materials
-      @preservation_objects = kind_specified.termlist_preservation_objects
-    end
+
+		# We are bit lazy/clever here:
+		# If check if we can deduce the needed collection from the step name
+		# otherwise call the related private method
+		variable_name = "termlist_" + step.to_s.split("_", 2).second
+		variable_name = variable_name.pluralize
+		self.send(step.to_s + "_vars")
     
     if step == :step_dating
-      kind_of_object_specified_id = @museum_object.termlist_kind_of_object_specified.id # get ids for choosen spec. materials
-      # after that get productions that belongs to the choosen specific kind of object
-      kind_specified = TermlistKindOfObjectSpecified.find kind_of_object_specified_id
-      @dating_periods = kind_specified.termlist_dating_periods
-      @dating_millennia = kind_specified.termlist_dating_millennia
-      @dating_centuries = kind_specified.termlist_dating_centuries
     end
     
     if step == :step_images_upload

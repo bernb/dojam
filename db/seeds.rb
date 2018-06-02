@@ -86,6 +86,28 @@ $site_kinds.each do |category_name, kinds_array|
   category.termlist_excavation_site_kinds << site_kind
 end
 
+
+# ************************************
+# Data to be added for all koos/ms ***
+# ***********************************
+def import_other_data
+	MaterialSpecifiedsKooSpec.all.each do |mskoo|
+		$data_dating[:periods].each do |period|
+		p =	TermlistDatingPeriod.find_or_create_by(name: period)
+		mskoo.termlist_dating_periods.find_by(name: p.name) || mskoo.termlist_dating_periods << p
+		end
+		$data_dating[:millennia].each do |millennium|
+			m = TermlistDatingMillennium.find_or_create_by(name: millennium)
+			mskoo.termlist_dating_millennia.find_by(name: m.name) || mskoo.termlist_dating_millennia << m
+		end
+		$data_dating[:centuries].each do |century|
+			c = TermlistDatingCentury.find_or_create_by(name: century)
+			mskoo.termlist_dating_centuries.find_by(name: c.name) || mskoo.termlist_dating_centuries << c
+		end
+	end
+end
+
+
 def import_material data 
 	Rails.logger.info "*** Material: " + data[:material_name] + "***"
 	material = TermlistMaterial.find_or_create_by(name: data[:material_name])
@@ -149,4 +171,4 @@ import_material $test_data
 # import_material $organic_data
 # import_material $stone_data
 # import_material $vitreous_data
-
+import_other_data

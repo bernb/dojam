@@ -88,6 +88,11 @@ class MuseumObject < ApplicationRecord
   end
 
 	def get_possible_props_for property_name
+		Rails.logger.debug "Call PropsGetter with: "
+		Rails.logger.debug "termlist_material_specified: " + (self.termlist_material_specifieds&.first&.name || "nil")
+		Rails.logger.debug "termlist_kind_of_object_specified: " + (self.termlist_kind_of_object_specified&.name || "nil")
+		Rails.logger.debug "termlist_kind_of_object: " + (self.termlist_kind_of_object&.name || "nil")
+		Rails.logger.debug "property_name: " + (property_name&.to_s || "nil")
 		PropsGetter.call termlist_material_specified: self.termlist_material_specifieds.first, termlist_kind_of_object_specified: self.termlist_kind_of_object_specified, termlist_kind_of_object: self.termlist_kind_of_object, property_name: property_name
 	end
 
