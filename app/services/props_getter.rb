@@ -6,9 +6,12 @@ class PropsGetter
 		if termlist_material_specified.present? && termlist_kind_of_object_specified.present?
 			koos_id = termlist_kind_of_object_specified.id
 			m_spec_id = termlist_material_specified.id
+			Rails.logger.debug "**** Props getter: ms/koos selection ****"
+			Rails.logger.debug "class_name: " + class_name.to_s
+			Rails.logger.debug "koos_id: " + koos_id.to_s
+			Rails.logger.debug "m_spec_id: " + m_spec_id.to_s
 			class_name.joins(material_specifieds_koo_specs: 
-											 [:termlist_kind_of_object_specified,  
-												{termlist_material_specified: :termlist_material}])
+											 [:termlist_kind_of_object_specified, :termlist_material_specified])
 				.where(material_specifieds_koo_specs: 
 								{termlist_kind_of_object_specifieds: 
 										{id: koos_id}})
@@ -17,6 +20,7 @@ class PropsGetter
 						{id: m_spec_id}})
 				.distinct
 		elsif termlist_material_specified.present? && termlist_kind_of_object.present?
+			Rails.logger.debug "**** Props getter: ms/koo selection ****"
 			# Just to make the query a bit more clear
 			m_spec_id = termlist_material_specified.id
 			koo_id = termlist_kind_of_object.id
