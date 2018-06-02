@@ -26,8 +26,16 @@ class MuseumObject < ApplicationRecord
   has_many :join_museum_object_material_specifieds
   has_many :termlist_material_specifieds, through: :join_museum_object_material_specifieds
 	has_many :material_specifieds_koo_specs, ->(me){
-		joins(:termlist_kind_of_object_specified).where(material_specifieds_koo_specs:{termlist_kind_of_object_specified: me.termlist_kind_of_object_specified}) unless me.termlist_kind_of_object_specified.blank?}, 
-	through: :termlist_kind_of_object
+		if me.termlist_kind_of_object_specified.present? 
+			where(material_specifieds_koo_specs: 
+						{termlist_kind_of_object_specified: me.termlist_kind_of_object_specified}) 
+		elsif me.termlist_kind_of_object.present? 
+			joins(:termlist_kind_of_object_specifieds)
+				.where(material_specifieds_koo_specs: 
+								{termlist_kind_of_object_specified: 
+				 {termlist_kind_of_object: me.termlist_kind_of_object}})
+		end},
+		through: :main_material_specified
 	has_many :termlist_production_techniques, through: :material_specifieds_koo_specs
   has_many :termlist_materials, -> { distinct }, through: :termlist_material_specifieds
   has_many :join_museum_object_colors, inverse_of: :museum_object
