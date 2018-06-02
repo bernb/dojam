@@ -5,7 +5,7 @@ require "#{Rails.root}/db/data/stone.rb"
 require "#{Rails.root}/db/data/vitreous.rb"
 require "#{Rails.root}/db/data/dating.rb"
 require "#{Rails.root}/db/data/sites.rb"
-require "#{Rails.root}/db/data/test.rb"
+require "#{Rails.root}/db/data/material_test.rb"
 # require "#{Rails.root}/db/seeds/seed_dating.rb"
 if Rails.env.development?
 # require "#{Rails.root}/db/seeds/museum_object_generator.rb"
@@ -89,7 +89,7 @@ end
 
 # ************************************
 # Data to be added for all koos/ms ***
-# ***********************************
+# ************************************
 def import_other_data
 	MaterialSpecifiedsKooSpec.all.each do |mskoo|
 		$data_dating[:periods].each do |period|
@@ -166,9 +166,8 @@ def import_kind_of_objects data, material_specified
 	end # each kind of object
 end
  
-import_material $test_data 
-# import_material $metal_data 
-# import_material $organic_data
-# import_material $stone_data
-# import_material $vitreous_data
+import_material $metal_data 
+import_material $organic_data
+import_material $stone_data
+import_material $vitreous_data
 import_other_data
