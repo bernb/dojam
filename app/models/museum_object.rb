@@ -25,17 +25,19 @@ class MuseumObject < ApplicationRecord
 	belongs_to :main_material_specified, class_name: "TermlistMaterialSpecified", foreign_key: "termlist_material_specified_id", required: false
   has_many :join_museum_object_material_specifieds
   has_many :termlist_material_specifieds, through: :join_museum_object_material_specifieds
+	# This returns the single entry for the ms/koos (or ms/koo) combination
 	has_many :material_specifieds_koo_specs, ->(me){
 		if me.termlist_kind_of_object_specified.present? 
 			where(material_specifieds_koo_specs: 
 						{termlist_kind_of_object_specified: me.termlist_kind_of_object_specified}) 
 		elsif me.termlist_kind_of_object.present? 
-			joins(:termlist_kind_of_object_specifieds)
+			joins(:termlist_kind_of_object_specified)
 				.where(material_specifieds_koo_specs: 
-								{termlist_kind_of_object_specified: 
+								{termlist_kind_of_object_specifieds: 
 				 {termlist_kind_of_object: me.termlist_kind_of_object}})
 		end},
 		through: :main_material_specified
+	has_many :possible_production_techniques, through: :material_specifieds_koo_specs, source: :termlist_production_techniques
 	has_many :termlist_production_techniques, through: :material_specifieds_koo_specs
   has_many :termlist_materials, -> { distinct }, through: :termlist_material_specifieds
   has_many :join_museum_object_colors, inverse_of: :museum_object
