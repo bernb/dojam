@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_02_173750) do
+ActiveRecord::Schema.define(version: 2018_06_02_212646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,7 +240,10 @@ ActiveRecord::Schema.define(version: 2018_06_02_173750) do
     t.boolean "needs_conservation"
     t.boolean "is_dating_timespan_begin_BC"
     t.boolean "is_dating_timespan_end_BC"
+    t.bigint "main_material_specified_id"
+    t.bigint "termlist_material_specified_id"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
+    t.index ["main_material_specified_id"], name: "index_museum_objects_on_main_material_specified_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
     t.index ["termlist_acquisition_delivered_by_id"], name: "index_museum_objects_on_termlist_acquisition_delivered_by_id"
     t.index ["termlist_acquisition_kind_id"], name: "index_museum_objects_on_termlist_acquisition_kind_id"
@@ -255,6 +258,7 @@ ActiveRecord::Schema.define(version: 2018_06_02_173750) do
     t.index ["termlist_inscription_letter_id"], name: "index_museum_objects_on_termlist_inscription_letter_id"
     t.index ["termlist_kind_of_object_id"], name: "index_museum_objects_on_termlist_kind_of_object_id"
     t.index ["termlist_kind_of_object_specified_id"], name: "index_museum_objects_on_termlist_kind_of_object_specified_id"
+    t.index ["termlist_material_specified_id"], name: "index_museum_objects_on_termlist_material_specified_id"
     t.index ["termlist_preservation_material_id"], name: "index_museum_objects_on_termlist_preservation_material_id"
     t.index ["termlist_preservation_object_id"], name: "index_museum_objects_on_termlist_preservation_object_id"
     t.index ["termlist_production_technique_id"], name: "index_museum_objects_on_termlist_production_technique_id"
@@ -587,6 +591,8 @@ ActiveRecord::Schema.define(version: 2018_06_02_173750) do
   add_foreign_key "museum_object_images", "museum_objects"
   add_foreign_key "museum_objects", "termlist_dating_periods"
   add_foreign_key "museum_objects", "termlist_excavation_site_kinds"
+  add_foreign_key "museum_objects", "termlist_material_specifieds"
+  add_foreign_key "museum_objects", "termlist_material_specifieds", column: "main_material_specified_id"
   add_foreign_key "museum_objects", "termlist_production_techniques"
   add_foreign_key "preservation_materials_ms_koo_specs", "material_specifieds_koo_specs"
   add_foreign_key "preservation_materials_ms_koo_specs", "termlist_preservation_materials"
