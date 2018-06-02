@@ -105,7 +105,6 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def validate_step_kind_of_object_for record
-    check_assoc_exists record, :kind_of_object, record.termlist_kind_of_object
   end
   
   def validate_step_kind_of_object_specified_for record
@@ -113,24 +112,15 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def validate_step_production_for record
-    check_assoc_exists record, :production_technique, record.termlist_production_technique
   end
   
   def validate_step_color_for record
-    check_assoc_exists record, :color, record.termlist_colors
   end
   
   def validate_step_decoration_for record
-    check_assoc_exists record, :decoration_technique, record.termlist_decoration
-    check_assoc_exists record, :decoration_color, record.termlist_decoration_color
   end
   
   def validate_step_inscription_for record
-    check_assoc_exists record, :letters_of_inscription, record.termlist_inscription_letter
-    check_assoc_exists record, :language_of_inscription, record.termlist_inscription_language
-    check_not_empty record, :text_of_inscription, record.inscription_text
-    check_not_empty record, :text_of_inscription, record.inscription_text
-    check_not_empty record, :translation_of_inscription, record.inscription_translation
   end
   
   def validate_step_measurements_for record
@@ -149,15 +139,12 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def validate_step_conservation_for record
-  
   end
   
   def validate_step_dating_for record
-  
   end
   
   def validate_step_remarks_for record
-  
   end
   
   def validate_step_images_upload_for record
@@ -165,7 +152,6 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def validate_step_literature_for record
-    
   end
   
   
