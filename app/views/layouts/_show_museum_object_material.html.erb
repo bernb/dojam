@@ -9,7 +9,7 @@
       <div class="col">
         <% @museum_object&.termlist_material_specifieds.each do |m| %>
           <div class="">
-            <dd><%= m.name %> (<%= m.termlist_material&.name %>)</dd>
+						<dd><%= m.termlist_material&.name %> (<%= m.name %>)</dd>
           </div>
         <% end %>
       </div>

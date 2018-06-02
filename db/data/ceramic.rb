@@ -82,19 +82,9 @@ $ceramic_data = {
     } # kind of object specifieds hash
   ], # kind of object array
   production_techniques: [
-    "annealing",
-    "beating",
-    "casting in a mould",
-    "casting with lost wax technique",
-    "cutting",
-    "drawing",
-    "forging",
-    "hammering",
-    "repoussé",
-    "riveting",
-    "smelting",
-    "soldering",
-    "undetermined",
+		"hand-made",
+		"wheel-mande",
+		"mould-made"
   ],
   
   decorations: [
@@ -139,7 +129,6 @@ $ceramic_data = {
     "undetermined"
   ],
   preservation_materials: [
-    "corroded",
     "sintered"
   ],
   preservation_objects: [

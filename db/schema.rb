@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_02_140523) do
+ActiveRecord::Schema.define(version: 2018_06_02_173750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,12 +199,12 @@ ActiveRecord::Schema.define(version: 2018_06_02_140523) do
     t.integer "termlist_authenticity_id"
     t.integer "priority"
     t.string "priority_determined_by"
-    t.float "remaining_length"
-    t.float "remaining_width"
-    t.float "remaining_height"
-    t.float "remaining_opening_dm"
-    t.float "remaining_bottom_dm"
-    t.float "remaining_weight_in_gram"
+    t.float "max_length"
+    t.float "max_width"
+    t.float "height"
+    t.float "opening_dm"
+    t.float "bottom_dm"
+    t.float "weight_in_gram"
     t.text "remarks"
     t.text "literature"
     t.integer "termlist_dating_millennium_id"
