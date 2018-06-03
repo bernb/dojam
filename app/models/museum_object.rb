@@ -22,6 +22,7 @@ class MuseumObject < ApplicationRecord
   belongs_to :termlist_inscription_letter, required: false
   belongs_to :termlist_inscription_language, required: false
   belongs_to :termlist_excavation_site_kind, required: false
+	belongs_to :termlist_priority, required: false
 	belongs_to :main_material_specified, class_name: "TermlistMaterialSpecified", foreign_key: "termlist_material_specified_id", required: false
   has_many :join_museum_object_material_specifieds
   has_many :termlist_material_specifieds, through: :join_museum_object_material_specifieds

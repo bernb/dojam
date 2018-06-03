@@ -1,7 +1,7 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
-  <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-    <%= f.association :termlist_dating_period, collection: @dating_periods, label: "period", include_blank: true, class: "form-control" %>
-    <%= f.association :termlist_dating_millennium, collection: @dating_millennia, label: "millennium", include_blank: true, class: "form-control" %>
+	<%= simple_form_for @museum_object, data:{parsley_validate:""}, url: wizard_path do |f| %>
+    <%= f.association :termlist_dating_period, collection: @dating_periods, as: :termlist_select, label: "period", include_blank: true, required: true, class: "form-control" %>
+    <%= f.association :termlist_dating_millennium, collection: @dating_millennia, as: :termlist_select, label: "millennium", include_blank: true, required: true, class: "form-control" %>
     <%= f.association :termlist_dating_centuries, collection: @dating_centuries, label: "centuries", class: "form-control" %>
     <%= f.label "", "timespan" %>
     <div class="form-group row">

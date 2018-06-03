@@ -38,7 +38,7 @@ class MuseumObjectValidator < ActiveModel::Validator
       when "step_authenticity"
         validate_step_authenticity_for record
       when "step_preservation"
-        validate_step_authenticity_for record
+        validate_step_preservation_for record
       when "step_conservation"
         validate_step_conservation_for record
       when "step_dating"
@@ -121,17 +121,12 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def validate_step_measurements_for record
-  
   end
+
+	def validate_step_preservation_for record
+	end
   
   def validate_step_authenticity_for record
-    check_assoc_exists record, :authenticity, record.termlist_authenticity
-    check_assoc_exists record, :priority, record.priority
-    check_not_empty record, :priority_determined_by, record.priority_determined_by
-  end
-  
-  def validate_step_authenticity_for record
-    check_assoc_exists record, :preservation_of_object, record.termlist_preservation_object
   end
   
   def validate_step_conservation_for record
