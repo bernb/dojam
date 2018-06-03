@@ -173,7 +173,8 @@ class BuildsController < ApplicationController
 
 	def step_kind_of_object_specified_vars
     kind = @museum_object.termlist_kind_of_object
-    @kind_of_object_specifieds = kind&.termlist_kind_of_object_specifieds
+		ms_koo_specs = @museum_object.main_material_specified.termlist_kind_of_object_specifieds
+		@kind_of_object_specifieds = kind&.termlist_kind_of_object_specifieds.merge(ms_koo_specs)
 		@kind_of_object_speicifieds = [] if @kind_of_object_specifieds.blank?
 	end
 

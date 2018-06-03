@@ -98,7 +98,7 @@ class MuseumObject < ApplicationRecord
 		Rails.logger.debug "termlist_kind_of_object_specified: " + (self.termlist_kind_of_object_specified&.name || "nil")
 		Rails.logger.debug "termlist_kind_of_object: " + (self.termlist_kind_of_object&.name || "nil")
 		Rails.logger.debug "property_name: " + (property_name&.to_s || "nil")
-		PropsGetter.call termlist_material_specified: self.termlist_material_specifieds.first, termlist_kind_of_object_specified: self.termlist_kind_of_object_specified, termlist_kind_of_object: self.termlist_kind_of_object, property_name: property_name
+		PropsGetter.call termlist_material_specified: self.main_material_specified, termlist_kind_of_object_specified: self.termlist_kind_of_object_specified, termlist_kind_of_object: self.termlist_kind_of_object, property_name: property_name
 	end
 
   # is_used activates validations, supposed to get set after first save
