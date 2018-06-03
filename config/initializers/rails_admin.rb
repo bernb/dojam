@@ -56,6 +56,28 @@ RailsAdmin.config do |config|
     #end
   end
   
+	config.model MaterialSpecifiedsKooSpec do
+		list do
+			items_per_page 200
+		#	filters [:termlist_materials, :termlist_material_specified, :termlist_kind_of_objects, :termlist_kind_of_object_specified]
+		 #	field :termlist_materials do
+		 #		filterable true
+		 #	end
+		 #	field :termlist_kind_of_objects do
+		 #		filterable true
+		 #	end
+		 #	field :termlist_material_specified do
+		 #		filterable true
+		 #	end
+		 #	field :termlist_kind_of_object_specified do
+		 #		filterable true
+		 #	end
+			def form_value
+				"test"
+			end
+		end
+	end
+
   config.model Museum do
     navigation_label "Museum"
   end
@@ -173,6 +195,7 @@ RailsAdmin.config do |config|
   # rails_admin will look for inv_number on models
   # i.e. museum_objects for naming
   config.label_methods << :inv_number
+	config.label_methods << :description
 
 
   ### Popular gems integration
