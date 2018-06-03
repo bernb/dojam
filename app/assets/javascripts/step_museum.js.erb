@@ -10,11 +10,10 @@ ready = function() {
 
 function step_museum_js() {
   $('.storage_selection').val(initial_storage_id); // var gets set in view
-  $('.storage_selection').change(function() {
+  $(document).on('change', '.storage_selection', function() {
       if($('.storage_selection').val() == "") {
       }
     });
 }
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
+$(document).on('turbolinks:load', ready);
