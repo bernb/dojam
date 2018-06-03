@@ -2,6 +2,9 @@ class MaterialSpecifiedsKooSpec < ApplicationRecord
   belongs_to :termlist_material_specified
   belongs_to :termlist_kind_of_object_specified
 
+	has_many :termlist_materials, through: :termlist_material_specified
+	has_many :termlist_kind_of_objects, through: :termlist_kind_of_object_specified
+
 	has_many :colors_ms_koo_specs
 	has_many :termlist_colors, through: :colors_ms_koo_specs
 
@@ -39,4 +42,8 @@ class MaterialSpecifiedsKooSpec < ApplicationRecord
 
 	has_many :preservation_objects_ms_koo_specs
 	has_many :termlist_preservation_objects, through: :preservation_objects_ms_koo_specs
+
+	def description
+		self.termlist_material_specified.termlist_material.name + " -> " + self.termlist_material_specified.name + " | " + self.termlist_kind_of_object_specified.termlist_kind_of_object.name + " -> " + self.termlist_kind_of_object_specified.name
+	end
 end
