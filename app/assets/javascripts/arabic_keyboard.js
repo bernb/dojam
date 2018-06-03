@@ -480,13 +480,15 @@
     };
   }
 
-
+	/* For Rails, we have put everything  into turbolinks:load event already */
+	/* So we just call the builder */
   /* ***** Attach this script to the onload event ******************** */
-  if (window.addEventListener) {
-    window.addEventListener('load', VKI_buildKeyboardInputs, false); 
-  } else if (window.attachEvent)
-    window.attachEvent('onload', VKI_buildKeyboardInputs);
+//  if (window.addEventListener) {
+//    window.addEventListener('load', VKI_buildKeyboardInputs, false); 
+//  } else if (window.attachEvent)
+//    window.attachEvent('onload', VKI_buildKeyboardInputs);
 
+		VKI_buildKeyboardInputs();
 
   function VKI_findPos(obj) {
     var curleft = curtop = 0;

@@ -34,5 +34,5 @@ ready = ->
       dataType: "script"
       data:
         excavation_site_category_id: $('#excavation_site_category_selection option:selected').val()
-$(document).ready(ready)
+
 $(document).on('turbolinks:load', ready)
