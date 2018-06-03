@@ -24,6 +24,10 @@ class BuildsController < ApplicationController
     @museum_object = MuseumObject.find(params[:museum_object_id]).decorate
     # Used i.e. in step_dating where only year is entered as string, which would result in nil without transformation
     transform_string_years_to_dates
+		# We use nil Values for termlist_selection undetermined.
+		# Empty values are used for empty fields which allow client side
+		# enforcment of user choosing a termlist or undetermined
+		replace_nil_values_with_empty
     @museum_object.assign_attributes museum_object_params unless not params.key? :museum_object # see at params method below
     allow_next_step = true
     
@@ -131,6 +135,14 @@ class BuildsController < ApplicationController
   end
   
   private
+
+	def replace_nil_values_with_empty
+		params[:museum_object].each do |key, value|
+			if value=="nil"
+				params[:museum_object][key] = ""
+			end
+		end
+	end
 
 	def step_acquisition_vars
 	end
@@ -290,7 +302,7 @@ class BuildsController < ApplicationController
                                           :termlist_preservation_material_id, :termlist_preservation_object_id, :description_conservation,
                                           :remarks, :literature, :dating_timespan_begin, :dating_timespan_end, :main_image, :is_finished, :needs_conservation, :needs_cleaning,
                                           :site_number_jadis, :coordinates_mega_long, :coordinates_mega_lat, :is_dating_timespan_end_BC, :is_dating_timespan_begin_BC,
-																					:termlist_material_specified_id,
+																					:termlist_material_specified_id, :termlist_priority_id,
                                           images: [],
                                           termlist_dating_century_ids: [],
                                           termlist_material_specified_ids: [], 

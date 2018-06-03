@@ -1,6 +1,37 @@
 Rails.application.routes.draw do
   
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  namespace :admin do
+      resources :museum_objects
+      resources :excavation_sites
+      resources :material_specifieds_koo_specs
+      resources :museums
+      resources :storages
+      resources :storage_locations
+      resources :termlist_acquisition_delivered_bies
+      resources :termlist_acquisition_kinds
+      resources :termlist_authenticities
+      resources :termlist_colors
+      resources :termlist_conservations
+      resources :termlist_dating_centuries
+      resources :termlist_dating_millennia
+      resources :termlist_dating_periods
+      resources :termlist_decorations
+      resources :termlist_decoration_colors
+      resources :termlist_decoration_techniques
+      resources :termlist_excavation_site_categories
+      resources :termlist_excavation_site_kinds
+      resources :termlist_inscription_languages
+      resources :termlist_inscription_letters
+      resources :termlist_kind_of_objects
+      resources :termlist_kind_of_object_specifieds
+      resources :termlist_materials
+      resources :termlist_material_specifieds
+      resources :termlist_preservation_materials
+      resources :termlist_preservation_objects
+      resources :termlist_production_techniques
+
+      root to: "museum_objects#index"
+    end
   get 'termlists/index'
   get 'termlists/choose'
   get 'termlists/show'

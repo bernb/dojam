@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_02_212646) do
+ActiveRecord::Schema.define(version: 2018_06_03_143629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,7 +197,6 @@ ActiveRecord::Schema.define(version: 2018_06_02_212646) do
     t.string "inscription_text"
     t.string "inscription_translation"
     t.integer "termlist_authenticity_id"
-    t.integer "priority"
     t.string "priority_determined_by"
     t.float "max_length"
     t.float "max_width"
@@ -242,6 +241,7 @@ ActiveRecord::Schema.define(version: 2018_06_02_212646) do
     t.boolean "is_dating_timespan_end_BC"
     t.bigint "main_material_specified_id"
     t.bigint "termlist_material_specified_id"
+    t.bigint "termlist_priority_id"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["main_material_specified_id"], name: "index_museum_objects_on_main_material_specified_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
@@ -261,6 +261,7 @@ ActiveRecord::Schema.define(version: 2018_06_02_212646) do
     t.index ["termlist_material_specified_id"], name: "index_museum_objects_on_termlist_material_specified_id"
     t.index ["termlist_preservation_material_id"], name: "index_museum_objects_on_termlist_preservation_material_id"
     t.index ["termlist_preservation_object_id"], name: "index_museum_objects_on_termlist_preservation_object_id"
+    t.index ["termlist_priority_id"], name: "index_museum_objects_on_termlist_priority_id"
     t.index ["termlist_production_technique_id"], name: "index_museum_objects_on_termlist_production_technique_id"
   end
 
@@ -559,6 +560,12 @@ ActiveRecord::Schema.define(version: 2018_06_02_212646) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "termlist_priorities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "termlist_production_techniques", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -593,6 +600,7 @@ ActiveRecord::Schema.define(version: 2018_06_02_212646) do
   add_foreign_key "museum_objects", "termlist_excavation_site_kinds"
   add_foreign_key "museum_objects", "termlist_material_specifieds"
   add_foreign_key "museum_objects", "termlist_material_specifieds", column: "main_material_specified_id"
+  add_foreign_key "museum_objects", "termlist_priorities"
   add_foreign_key "museum_objects", "termlist_production_techniques"
   add_foreign_key "preservation_materials_ms_koo_specs", "material_specifieds_koo_specs"
   add_foreign_key "preservation_materials_ms_koo_specs", "termlist_preservation_materials"
