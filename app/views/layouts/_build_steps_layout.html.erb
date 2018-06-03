@@ -12,13 +12,13 @@
   </div>
   <div class="col-auto">
     <div class="row">
+      <input type="text" id="arabic_keyboard" value=""  dir="rtl" class="keyboardInput"> 
+      <%= stylesheet_link_tag("arabic_keyboard") %> 
+    </div>
+    <div class="row">
       <% unless @museum_object&.termlist_kind_of_object.nil? %>
         <%= render "layouts/museum_object_card", museum_card: @museum_object.card, variant: @variant %>
       <% end %>
-    </div>
-    <div class="row">
-      <input type="text" id="arabic_keyboard" value=""  dir="rtl" class="keyboardInput"> 
-      <%= stylesheet_link_tag("arabic_keyboard") %> 
     </div>
   </div>
 </div>
