@@ -1,5 +1,14 @@
 class PropsSetter
 	def self.call property_name:, property:, koos:, material_specified:
+		# Method accepts arrays as well as objects for koos and material_specified
+		# Check if array and remove empty entries, so that [""] becomes [] i.e. empty
+		if koos.is_a? Array
+			koos = koos.reject{|k| k.empty?}
+		end
+		if material_specified.is_a? Array
+			material_specified = material_specified.reject{|m| m.empty?}
+		end
+
 		prop_method = property_name.to_s 
 		Rails.logger.debug "Called for prop method " + prop_method
 		# Better safe than sorry: We are very restrictive when using send
