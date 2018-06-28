@@ -14,7 +14,16 @@ class PropsSetter
 		# Better safe than sorry: We are very restrictive when using send
 		# We assume at least one single MaterialSpecifiedsKooSpec entry
 		return nil unless /termlist_[a-z_]+/.match?(prop_method) && MaterialSpecifiedsKooSpec.first.respond_to?(prop_method.to_s)
-		props = MaterialSpecifiedsKooSpec.where(termlist_kind_of_object_specified: koos).where(termlist_material_specified: material_specified)
+		props = [] # Initialize empty to do nothing if neither koos nor material_specified is given
+		if koos.present?
+			props = MaterialSpecifiedsKooSpec.where(termlist_kind_of_object_specified: koos)
+			if material_specified.present?
+				props = props.where(termlist_material_specified: material_specified)
+			end
+		elsif material_specified.present?
+			props = MaterialSpecifiedsKooSpec.where(termlist_material_specified: material_specified)
+		end
+
 		props.each do |join_entry|
 			# only add if association does not exist already
 			Rails.logger.debug "**********"
