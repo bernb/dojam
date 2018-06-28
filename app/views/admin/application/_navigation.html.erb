@@ -8,9 +8,10 @@ as defined by the routes in the `admin/` namespace
 %>
 
 <nav class="navigation" role="navigation">
-	<%= link_to "materials", "/admin/termlist_material_specifieds" %>
+	<%# link_to "materials", "/admin/termlist_material_specifieds" %>
   <% Administrate::Namespace.new(namespace).resources.each do |resource| %>
-		<% if resource.to_s.starts_with?("termlist_") && !resource.to_s.include?("kind") && !resource.to_s.include?("material") %>
+		<%# if resource.to_s.starts_with?("termlist_") && !resource.to_s.include?("kind") && !resource.to_s.include?("material") %>
+		<% if resource.to_s.starts_with?("termlist_color") %>
 	    <%= link_to(
 	      resource.to_s.split("_",2).second,
 	      [namespace, resource_index_route_key(resource)],

@@ -8,10 +8,7 @@ class TermlistColorDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    join_museum_object_colors: Field::HasMany,
     museum_objects: Field::HasMany,
-    colors_ms_koo_specs: Field::HasMany,
-    material_specifieds_koo_specs: Field::HasMany,
     termlist_kind_of_object_specifieds: Field::HasMany,
     termlist_material_specifieds: Field::HasMany,
     id: Field::Number,
@@ -26,10 +23,11 @@ class TermlistColorDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :join_museum_object_colors,
+		:id,
+		:name,
     :museum_objects,
-    :colors_ms_koo_specs,
-    :material_specifieds_koo_specs,
+		:created_at,
+		:updated_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
