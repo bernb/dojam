@@ -8,7 +8,10 @@ class TermlistColorDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+    join_museum_object_colors: Field::HasMany,
     museum_objects: Field::HasMany,
+    colors_ms_koo_specs: Field::HasMany,
+    material_specifieds_koo_specs: Field::HasMany,
     termlist_kind_of_object_specifieds: Field::HasMany,
     termlist_material_specifieds: Field::HasMany,
     id: Field::Number,
@@ -33,10 +36,7 @@ class TermlistColorDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :join_museum_object_colors,
     :museum_objects,
-    :colors_ms_koo_specs,
-    :material_specifieds_koo_specs,
     :termlist_kind_of_object_specifieds,
     :termlist_material_specifieds,
     :id,
@@ -49,10 +49,7 @@ class TermlistColorDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :join_museum_object_colors,
     :museum_objects,
-    :colors_ms_koo_specs,
-    :material_specifieds_koo_specs,
     :termlist_kind_of_object_specifieds,
     :termlist_material_specifieds,
     :name,
@@ -61,7 +58,7 @@ class TermlistColorDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how termlist colors are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(termlist_color)
-  #   "TermlistColor ##{termlist_color.id}"
-  # end
+   def display_resource(termlist_color)
+     "color #{termlist_color.name}"
+   end
 end
