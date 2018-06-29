@@ -33,7 +33,7 @@ and renders all form fields for a resource's editable attributes.
     </div>
   <% end %>
 
-	<%= hidden_field_tag :selected_materials %>
+	<%= hidden_field_tag :selected_materials, value="[]" %>
 	<%= hidden_field_tag :selected_material_specifieds %>
 	<%= hidden_field_tag :selected_kind_of_objects %>
 	<%= hidden_field_tag :selected_kind_of_object_specifieds %>
