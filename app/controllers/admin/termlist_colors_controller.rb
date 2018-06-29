@@ -10,6 +10,11 @@ module Admin
     #     per(10)
     # end
 
+		def new
+			@materials = TermlistMaterial.all
+			super
+		end
+
 		def create
 			@resource = TermlistColor.create(name: params[:termlist_color][:name])
 			flash[:success] = "Created successfully."
