@@ -33,14 +33,38 @@ and renders all form fields for a resource's editable attributes.
     </div>
   <% end %>
 
-			<a class="btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-				Link with href
-			</a>
-
-			<div class="collapse" id="collapseExample">
-					some material	
+	<%= hidden_field_tag :selected_materials %>
+	<%= hidden_field_tag :selected_material_specifieds %>
+	<%= hidden_field_tag :selected_kind_of_objects %>
+	<%= hidden_field_tag :selected_kind_of_object_specifieds %>
+	<% @materials.each do |material| %>
+		<div class="row">
+			<div class="col-1">
+				<a class="btn" data-toggle="collapse" href="#collapse-material-<%= material.id %>" role="button" aria-expanded="false" aria-controls="collapse-material-<%= material.id %>">
+					*
+				</a>
+			</div>
+				<div class="col-2 material_termlist_select btn btn-light" data-level="material" data-termlist-id="<%= material.id %>" data-selected="false">
+					<div><%= material.name %></div>
 				</div>
-
+		</div>
+		<div class="row collapse" id="collapse-material-<%= material.id %>">
+			<% material.termlist_material_specifieds.each do |material_spec| %>
+				<div class="row">
+					<div class="col-1">
+					</div>
+					<div class="col-1">
+						<a class="btn" data-toggle="collapse" href="#collapse-material-specified-<%= material_spec.id %>" role="button" aria-expanded="false" aria-controls="collapse-material-specified-<%= material_spec.id %>">
+							*
+						</a>
+					</div>
+					<div class="col-2 material_specified_termlist_select btn btn-light" data-level="material_specified" data-termlist-id="<%= material_spec.id %>" data-selected="false">
+							<div><%= material_spec.name %></div>
+						</div>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
 
   <% page.attributes.each do |attribute| -%>
     <div class="field-unit field-unit--<%= attribute.html_class %>">
