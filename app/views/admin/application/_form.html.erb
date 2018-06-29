@@ -33,6 +33,14 @@ and renders all form fields for a resource's editable attributes.
     </div>
   <% end %>
 
+			<a class="btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+				Link with href
+			</a>
+
+			<div class="collapse" id="collapseExample">
+					some material	
+				</div>
+
 
   <% page.attributes.each do |attribute| -%>
     <div class="field-unit field-unit--<%= attribute.html_class %>">

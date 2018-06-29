@@ -1,0 +1,9 @@
+//= require jquery3
+//= require jquery_ujs
+//= require selectize
+//= require moment
+//= require datetime_picker
+//= require popper
+//= require bootstrap
+//= require bootstrap-sprockets
+//= require_tree .
