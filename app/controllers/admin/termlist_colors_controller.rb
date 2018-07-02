@@ -15,15 +15,15 @@ module Admin
 			super
 		end
 
-		def create
-			@resource = TermlistColor.create(name: params[:termlist_color][:name])
-			flash[:success] = "Created successfully."
-			PropsSetter.call property_name: :termlist_colors, 
-											 property: @resource, 
-											 koos: params[:termlist_color][:termlist_kind_of_object_specified_ids], 
-											 material_specified: params[:termlist_color][:termlist_material_specified_ids]
-			redirect_to :admin_termlist_colors
-		end
+	#	def create
+	#		@resource = TermlistColor.create(name: params[:termlist_color][:name])
+	#		flash[:success] = "Created successfully."
+	#		PropsSetter.call property_name: :termlist_colors, 
+	#										 property: @resource, 
+	#										 koos: params[:termlist_color][:termlist_kind_of_object_specified_ids], 
+	#										 material_specified: params[:termlist_color][:termlist_material_specified_ids]
+	#		redirect_to :admin_termlist_colors
+	#	end
 
     # Define a custom finder by overriding the `find_resource` method:
     # def find_resource(param)
