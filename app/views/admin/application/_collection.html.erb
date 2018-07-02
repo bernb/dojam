@@ -81,7 +81,8 @@ to display a collection of resources in an HTML table.
           ) if show_action? :edit, resource%></td>
         <% end %>
 
-        <% if valid_action? :destroy, collection_presenter.resource_name %>
+        <%# if valid_action? :destroy, collection_presenter.resource_name %>
+				<% if false %>
           <td><%= link_to(
             t("administrate.actions.destroy"),
             [namespace, resource],
