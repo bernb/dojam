@@ -36,11 +36,9 @@ class TermlistColorDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :museum_objects,
-    :termlist_kind_of_object_specifieds,
-    :termlist_material_specifieds,
     :id,
     :name,
+    :museum_objects,
     :created_at,
     :updated_at,
   ].freeze
@@ -49,9 +47,6 @@ class TermlistColorDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :museum_objects,
-    :termlist_kind_of_object_specifieds,
-    :termlist_material_specifieds,
     :name,
   ].freeze
 
