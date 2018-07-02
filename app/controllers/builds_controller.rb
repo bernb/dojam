@@ -137,7 +137,7 @@ class BuildsController < ApplicationController
   private
 
 	def replace_nil_values_with_empty
-		params[:museum_object].each do |key, value|
+		params[:museum_object]&.each do |key, value|
 			if value=="nil"
 				params[:museum_object][key] = ""
 			end
