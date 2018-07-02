@@ -38,7 +38,6 @@ class TermlistColorDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :name,
-    :museum_objects,
     :created_at,
     :updated_at,
   ].freeze
