@@ -29,34 +29,27 @@ class TermlistMaterialDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :termlist_material_specifieds,
-    :termlist_kind_of_objects,
-    :termlist_kind_of_object_specifieds,
-    :termlist_production_techniques,
+		:id,
+		:name,
+    :termlist_material_specifieds
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :termlist_material_specifieds,
-    :termlist_kind_of_objects,
-    :termlist_kind_of_object_specifieds,
-    :termlist_production_techniques,
     :id,
     :name,
+    :termlist_material_specifieds,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :termlist_material_specifieds,
-    :termlist_kind_of_objects,
-    :termlist_kind_of_object_specifieds,
-    :termlist_production_techniques,
     :name,
+    :termlist_material_specifieds
   ].freeze
 
   # Overwrite this method to customize how termlist materials are displayed
