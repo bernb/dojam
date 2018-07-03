@@ -3,4 +3,5 @@ class TermlistPreservationObject < ApplicationRecord
 	has_many :preservation_objects_ms_koo_specs
 	has_many :material_specifieds_koo_specs, through: :preservation_objects_ms_koo_specs
 	include PropsAssociations
+  include AddToAllOnCreate
 end
