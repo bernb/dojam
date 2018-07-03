@@ -32,40 +32,27 @@ class TermlistKindOfObjectDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
+		:id,
+		:name,
     :museum_objects,
-    :termlist_kind_of_object_specifieds,
-    :all_koos,
-    :material_specifieds_koo_specs,
+		:termlist_material_specifieds
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :museum_objects,
-    :termlist_kind_of_object_specifieds,
-    :all_koos,
-    :material_specifieds_koo_specs,
-    :termlist_material_specifieds,
-    :termlist_materials,
     :id,
     :name,
+		:termlist_kind_of_object_specifieds,
     :created_at,
     :updated_at,
-    :termlist_material_specified_id,
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :museum_objects,
-    :termlist_kind_of_object_specifieds,
-    :all_koos,
-    :material_specifieds_koo_specs,
-    :termlist_material_specifieds,
-    :termlist_materials,
     :name,
-    :termlist_material_specified_id,
   ].freeze
 
   # Overwrite this method to customize how termlist kind of objects are displayed
