@@ -21,18 +21,18 @@ class TermlistExcavationSiteCategoryDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :termlist_excavation_site_kinds,
     :id,
     :name,
+    :termlist_excavation_site_kinds,
     :created_at,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :termlist_excavation_site_kinds,
     :id,
     :name,
+    :termlist_excavation_site_kinds,
     :created_at,
     :updated_at,
   ].freeze
@@ -41,14 +41,14 @@ class TermlistExcavationSiteCategoryDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :termlist_excavation_site_kinds,
     :name,
+    :termlist_excavation_site_kinds,
   ].freeze
 
   # Overwrite this method to customize how termlist excavation site categories are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(termlist_excavation_site_category)
-  #   "TermlistExcavationSiteCategory ##{termlist_excavation_site_category.id}"
-  # end
+   def display_resource(termlist_excavation_site_category)
+     "#{termlist_excavation_site_category.name}"
+   end
 end
