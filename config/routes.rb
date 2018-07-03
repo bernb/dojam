@@ -30,7 +30,7 @@ Rails.application.routes.draw do
       resources :termlist_preservation_objects
       resources :termlist_production_techniques
 
-      root to: "museum_objects#index"
+      root to: "termlist_colors#index"
     end
   get 'termlists/index'
   get 'termlists/choose'

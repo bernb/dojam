@@ -4,5 +4,6 @@ class TermlistColor < ApplicationRecord
   has_many :colors_ms_koo_specs
   has_many :material_specifieds_koo_specs, through: :colors_ms_koo_specs
 	include PropsAssociations
-	include AddToAllOnCreate
+  include AddToAllOnCreate
+  include AddToAllOnCreate
 end 
