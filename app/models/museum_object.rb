@@ -102,9 +102,11 @@ class MuseumObject < ApplicationRecord
 				date_parse_string += "-" + self.acquisition_day.to_s
 				Date.parse(date_parse_string).strftime("%Y-%m-%d")
 			else
-				Date.parse(date_parse_string).strftime("%Y-%m")
+				date_parse_string += "-01"
+				Date.parse(date_parse_string).strftime("%b %Y")
 			end
 		else
+			date_parse_string += "-01-01"
 			Date.parse(date_parse_string).strftime("%Y")
 		end
 	end
