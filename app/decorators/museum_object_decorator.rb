@@ -1,6 +1,15 @@
 class MuseumObjectDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
+
+	def full_inv_number
+		return "" unless self.inv_number.present?
+		if self.inv_extension.blank?
+			self.inv_number
+		else
+			self.inv_number.to_s + "-" + self.inv_extension.to_s
+		end
+	end
   
   def dating_timespan
     timespan_begin_suffix = is_dating_timespan_begin_BC? ? " BC" : " AD"
