@@ -86,6 +86,7 @@ class MuseumObjectValidator < ActiveModel::Validator
   def validate_step_acquisition_for record
     check_assoc_exists record, :kind_of_acquisition, record.termlist_acquisition_kind
     check_assoc_exists record, :delivered_by, record.termlist_acquisition_delivered_by
+		check_date_consistency record, record.acquisition_year, record.acquisition_month, record.acquisition_day
     check_not_empty record, :deliverer_name, record.acquisition_deliverer_name
     check_not_empty record, :acquisition_year, record.acquisition_year
   end
@@ -148,6 +149,16 @@ class MuseumObjectValidator < ActiveModel::Validator
   
   
   
+
+  def check_date_consistency record, year, month, day 
+		if year.blank? && (month.present? || day.present?)
+			record.errors.add :date_of_acquisition, "error: Can not save acquisition month or day without year."
+		end
+
+		if month.blank? && day.present?
+			record.errors.add :date_of_acquisition, "error: Can not save acquisition day without month."
+		end
+  end
   
   def can_not_validate record
     record.errors.add :critical, "error: Can not determine current step for validation."
