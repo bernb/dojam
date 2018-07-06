@@ -183,6 +183,7 @@ $excavation_site_names = [
   "Jabal al-Jufah",
   "Jabal al-Husain",
   "Jabal 'Amman",
+	"Jarash",
   "Halqa",
   "Khirbat at-Tannu",
   "Duthan",
@@ -206,5 +207,6 @@ $excavation_site_names = [
   "Quzilfah",
   "Nablus",
   "Na'ur",
-  "Wadi as-Sir"
+  "Wadi as-Sir",
+	"unknown"
 ]
