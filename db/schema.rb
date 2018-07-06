@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_03_143629) do
+ActiveRecord::Schema.define(version: 2018_07_06_141138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,7 +191,6 @@ ActiveRecord::Schema.define(version: 2018_06_03_143629) do
     t.integer "termlist_acquisition_delivered_by_id"
     t.integer "termlist_acquisition_kind_id"
     t.integer "excavation_site_id"
-    t.date "acquisition_date"
     t.boolean "is_finished", default: false
     t.string "inscription_decoration"
     t.string "inscription_text"
@@ -242,6 +241,9 @@ ActiveRecord::Schema.define(version: 2018_06_03_143629) do
     t.bigint "main_material_specified_id"
     t.bigint "termlist_material_specified_id"
     t.bigint "termlist_priority_id"
+    t.integer "acquisition_year"
+    t.integer "acquisition_month"
+    t.integer "acquisition_day"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["main_material_specified_id"], name: "index_museum_objects_on_main_material_specified_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"

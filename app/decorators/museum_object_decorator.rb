@@ -2,6 +2,9 @@ class MuseumObjectDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
 
+	def show_acquisition_date
+	end
+
 	def full_inv_number
 		return "" unless self.inv_number.present?
 		if self.inv_extension.blank?

@@ -3,7 +3,24 @@
     <%= f.association :termlist_acquisition_kind, label: "kind of acquisition", include_blank: true %>
     <%= f.association :termlist_acquisition_delivered_by, label: "delivered by", include_blank: true %>
     <%= f.input :acquisition_deliverer_name, label: "name of deliverer" %>
-    <%= f.input :acquisition_date, include_blank: true, label: "date of acquisition", as: :date, start_year: Date.new(1900).year, end_year: Date.today.year %>
+		<%= f.label false, "date of acquisition" %>
+		<div class="row no-gutters">
+			<div class="col">
+				<%= f.input :acquisition_year, include_blank: true, label: false, collection: 1900..Date.today.year %>
+			</div>
+			<div class="col-md-auto">
+				_
+			</div>
+			<div class="col">
+				<%= f.input :acquisition_month, include_blank: true, label: false, collection: 1..12 %>
+			</div>
+			<div class="col-md-auto">
+				_
+			</div>
+			<div class="col">
+				<%= f.input :acquisition_day, include_blank: true, label: false, collection: 1..31 %>
+			</div>
+		</div>
     <%= f.input :acquisition_document_number, label: "number of acquisition document" %>
     <%= f.button :submit, "next step" %>
   <% end %>

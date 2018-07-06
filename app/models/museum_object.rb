@@ -93,6 +93,23 @@ class MuseumObject < ApplicationRecord
                                           
   end
 
+	def acquisition_date
+		return nil unless self.acquisition_year.present?
+		date_parse_string = self.acquisition_year.to_s
+		if self.acquisition_month.present?
+			date_parse_string += "-" + self.acquisition_month.to_s
+			if self.acquisition_day.present?
+				date_parse_string += "-" + self.acquisition_day.to_s
+				Date.parse(date_parse_string).strftime("%Y-%m-%d")
+			else
+				Date.parse(date_parse_string).strftime("%Y-%m")
+			end
+		else
+			Date.parse(date_parse_string).strftime("%Y")
+		end
+	end
+
+
 	def get_possible_props_for property_name
 		Rails.logger.debug "Call PropsGetter with: "
 		Rails.logger.debug "termlist_material_specified: " + (self.termlist_material_specifieds&.first&.name || "nil")
