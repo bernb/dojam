@@ -70,16 +70,6 @@ $site_kinds = {
     "Quarry",
     "Smelting Site/Slag Heap"
   ],
-  "Inscription": [
-    "Inscription, Arabic",
-    "Inscription, Aramaic",
-    "Inscription, Greek",
-    "Inscription, Kufic",
-    "Inscription, Latin",
-    "Inscription, Natabaean",
-    "Inscription, Turkish",
-    "Inscription, Thamudic"
-  ],
   "General": [
     "Baths",
     "Bridge",
