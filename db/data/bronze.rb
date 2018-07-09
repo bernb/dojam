@@ -42,6 +42,7 @@ $metal_data = {
     {"vessel": [
         "bowl",
         "censer",
+				"oil lamp",
         "cosmetic container"]},
     "undetermined"
   ],
