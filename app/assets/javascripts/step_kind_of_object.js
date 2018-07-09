@@ -20,7 +20,7 @@ ready = function() {
 
 function step_kind_of_object_js() {
 	get_kind_of_object_list();
-  $('input[name=museum_object\\[termlist_material_specified_id\\]]').change(get_kind_of_object_list());
+  $('input[name=museum_object\\[termlist_material_specified_id\\]]').change(get_kind_of_object_list);
 }
 
 $(document).on('turbolinks:load', ready);
