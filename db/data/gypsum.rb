@@ -10,7 +10,8 @@ $stone_data = {
       "cylindrical jar",
       "juglet",
       "bowl"
-  ]},
+		]}
+	],
   production_techniques: [
     "chiseling",
     "pecking",
@@ -41,7 +42,7 @@ $stone_data = {
     "handle",
     "handle and wall",
     "rim",
-    "rim and wall"
+    "rim and wall",
     "wall"
   ],
   preservation_materials: [

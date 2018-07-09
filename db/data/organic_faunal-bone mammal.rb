@@ -6,7 +6,7 @@ $organic_data = {
     "bone (mammal)",
 ],
    kind_of_objects: [
-    {"artifact"  [
+    {"artifact": [
       "bangle",
       "bead",
       "handle",
@@ -20,9 +20,10 @@ $organic_data = {
      "articulated bones",
      "single bone/s",
      "humerus",
-     "tibia",
-     "femur",
-     "undetermined",
-     "unspecified"
-   ]}
+		 "tibia",
+		 "femur",
+		 "undetermined",
+		 "unspecified"
+	 ]}
+	]
 }

@@ -37,7 +37,8 @@ $stone_data = {
       "mortar bowl",
       "plate",
       "tripod bowl with elaborated legs"
-    ]},
+    ]}
+	],
   production_techniques: [
     "chiseling",
     "pecking",
@@ -67,7 +68,7 @@ $stone_data = {
     "handle",
     "handle and wall",
     "rim",
-    "rim and wall"
+    "rim and wall",
     "wall"
   ],
   preservation_materials: [
