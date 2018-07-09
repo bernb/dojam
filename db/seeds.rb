@@ -1,16 +1,4 @@
-require "#{Rails.root}/db/data/ceramic.rb"
-require "#{Rails.root}/db/data/metal.rb"
-require "#{Rails.root}/db/data/organic.rb"
-require "#{Rails.root}/db/data/stone.rb"
-require "#{Rails.root}/db/data/vitreous.rb"
-require "#{Rails.root}/db/data/dating.rb"
-require "#{Rails.root}/db/data/sites.rb"
-require "#{Rails.root}/db/data/material_test.rb"
-# require "#{Rails.root}/db/seeds/seed_dating.rb"
-if Rails.env.development?
-# require "#{Rails.root}/db/seeds/museum_object_generator.rb"
-end
-
+Dir["#{Rails.root}/db/data/*.rb"].reject{|file| file.include? "test"}.each {|file| require file}
 
 # ***************************
 # *** museum and storages ***
@@ -109,6 +97,11 @@ end
 
 
 def import_material data 
+	if data[:material_name].empty?
+		Rails.logger.error "*** No material given with data hash. ***"
+		Rails.logger.error "Given data hash: " + data.to_s
+		return
+	end
 	Rails.logger.info "*** Material: " + data[:material_name] + "***"
 	material = TermlistMaterial.find_or_create_by(name: data[:material_name])
 	count = data[:material_specifieds].count
@@ -166,8 +159,8 @@ def import_kind_of_objects data, material_specified
 	end # each kind of object
 end
  
-import_material $metal_data 
-import_material $organic_data
-import_material $stone_data
-import_material $vitreous_data
+global_variables.select{|var| var.to_s.ends_with? "_data"}
+								.reject{|var| var.to_s.include? "test"}
+								.each{|material_data| import_material eval(material_data.to_s)}
+
 import_other_data
