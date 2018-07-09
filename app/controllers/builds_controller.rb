@@ -89,13 +89,15 @@ class BuildsController < ApplicationController
   def kind_of_objects_for_spec_material
     respond_to do |format|
       format.js {
-        material_specified = TermlistMaterialSpecified.find(
-                               params[:selected_material_specified_id])
-				@kind_of_objects = material_specified.termlist_kind_of_objects
-				museum_object = MuseumObject.find params[:museum_object_id]
-				# Used to select the correct entry if one was choosen before
-				@choosen_kind_of_object_id = museum_object.termlist_kind_of_object&.id
-				puts "ID = " + @choosen_kind_of_object_id.to_s
+				# Check for parameter as it does not exist on first visit
+				if params[:selected_material_specified_id].present?
+					material_specified = TermlistMaterialSpecified.find(
+						params[:selected_material_specified_id])
+					@kind_of_objects = material_specified.termlist_kind_of_objects
+					museum_object = MuseumObject.find params[:museum_object_id]
+					# Used to select the correct entry if one was choosen before
+					@choosen_kind_of_object_id = museum_object.termlist_kind_of_object&.id
+				end
       }
     end
   end
