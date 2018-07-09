@@ -57,7 +57,7 @@ $metal_data = {
     "granulation",
     "inlay",
     "niello",
-    "plating"
+    "plating",
     "punching",
     "soldering",
     "stamping",
