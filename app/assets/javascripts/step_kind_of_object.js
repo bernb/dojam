@@ -4,7 +4,10 @@ function get_kind_of_object_list() {
 	$.ajax({
 		url: "/builds/kind_of_objects_for_spec_material",
 		type: "GET",
-		data: {selected_material_specified_id: $('input[name=museum_object\\[termlist_material_specified_id\\]]:checked').val()}
+		data: {
+			selected_material_specified_id: $('input[name=museum_object\\[termlist_material_specified_id\\]]:checked').val(),
+			museum_object_id: window.location.href.split('/')[4]
+		}
 	});
 }
 

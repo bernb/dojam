@@ -7,3 +7,6 @@ $('#museum_object_termlist_kind_of_object_id').append(
                                                     <%= kind.name %> \
                                                   </option>'));
 <% end %>
+<% if @choosen_kind_of_object_id.present? %>
+		$('#museum_object_termlist_kind_of_object_id').val(<%= @choosen_kind_of_object_id %>);
+<% end %>
