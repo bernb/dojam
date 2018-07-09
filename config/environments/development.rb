@@ -1,5 +1,8 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+	
+	# Seperate SQL Logs as it tends to be too many lines to be really useful for debuggung
+	ActiveRecord::Base.logger = Logger.new('log/development_sql.log')
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
