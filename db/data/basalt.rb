@@ -49,11 +49,13 @@ $stone_data = {
     "dark grey"
   ],
   decoration_techniques: [
-    "engraving"
+    "engraving",
+		"none"
   ],
   decoration_styles: [
     "figurative",
-    "geometrical"
+    "geometrical",
+		"none"
   ],
   decoration_colors: [
     "none"

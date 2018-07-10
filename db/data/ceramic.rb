@@ -90,7 +90,8 @@ $ceramic_data = {
   decorations: [
     "figurativ",
     "geometric",
-    "relief"
+    "relief",
+		"none"
   ],
   colors: [
     "beige",
@@ -112,7 +113,8 @@ $ceramic_data = {
     "purple",
     "red",
     "white",
-    "yellow"
+    "yellow",
+		"none"
   ], 
   decoration_techniques: [
     "applied",
@@ -126,7 +128,8 @@ $ceramic_data = {
     "rouletted",
     "sgraffito",
     "slipped",
-    "undetermined"
+    "undetermined",
+		"none"
   ],
   preservation_materials: [
     "sintered"
@@ -154,7 +157,8 @@ $ceramic_data = {
     "Turkish",
     "Safaitic",
     "Thamudic",
-    "unspecified/unknown"
+    "unspecified/unknown",
+		"none"
   ],
   inscription_letters: [
     "Arabic",
@@ -166,6 +170,7 @@ $ceramic_data = {
     "Turkish",
     "Safaitic",
     "Thamudic",
-    "unspecified/unknown"
+    "unspecified/unknown",
+		"none"
   ]
 } # hash

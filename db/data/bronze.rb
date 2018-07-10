@@ -62,16 +62,19 @@ $metal_data = {
     "punching",
     "soldering",
     "stamping",
-    "undetermined"
+    "undetermined",
+		"none"
   ],
    decoration_styles: [
     "figurative",
-    "geometric"
+    "geometric",
+		"none"
   ],
    decoration_color: [
     "black",
     "gold",
-    "silver"
+    "silver",
+		"none"
   ],
     preservation_objects: [
     "bottom",

@@ -41,15 +41,18 @@ $stone_data = {
 	decoration_technique: [
 		"engraving",
 		"painting",
-		"relief"
+		"relief",
+		"none"
 	],
 	decoration_style: [
 		"figurative",
-		"geometrical"
+		"geometrical",
+		"none"
 	],
 	decoration_color: [
 		"red",
-		"black"
+		"black",
+		"none"
 	],
 	preservation_object: [
 		"bottom",

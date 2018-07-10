@@ -16,18 +16,21 @@ $stone_data = {
 		"chiseling",
 		"pecking",
 		"polishing",
-		"smoothing"
+		"smoothing",
+		"none"
 	],
 	colors: [
 		"beige",
 		"white"
 	],
 	decoration_techniques: [
-		"engraving"
+		"engraving",
+		"none"
 	],
 	decoration_styles: [
 		"figurative",
-		"geometrical"
+		"geometrical",
+		"none"
 	],
 	decoration_colors: [
 		"none"

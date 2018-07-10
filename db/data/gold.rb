@@ -32,15 +32,18 @@ $metal_data = {
 		"soldering",
 		"stamping",
 		"wire woven",
-		"undetermined"
+		"undetermined",
+		"none"
 	],
 	decoration_styles: [
 		"figurative",
 		"geometrical",
-		"undetermined"
+		"undetermined",
+		"none"
 	],
 	decoration_colors: [
-		"gold-colored"
+		"gold-colored",
+		"none"
 	],
 	preservation_objects: [
 		"complete",

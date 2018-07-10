@@ -81,7 +81,8 @@ $metal_data = {
     "patination",
     "punching",
     "stamping",
-    "plated"
+    "plated",
+		"none"
   ],
   preservation_materials: [
     "corroded"
@@ -100,6 +101,6 @@ $metal_data = {
     "wall-to-bottom"
   ],
   colors: [],
-  decoration_colors: [],
-  decoration_techniques: []
+  decoration_colors: ["none"],
+  decoration_techniques: ["none"]
 }
