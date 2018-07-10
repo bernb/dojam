@@ -69,7 +69,7 @@ $metal_data = {
 		"wire drawing",
     "soldering"
   ],
-  decorations: [
+  decoration_techniques: [
     "chasing",
     "differential alloying",
     "engraving",
@@ -102,5 +102,5 @@ $metal_data = {
   ],
   colors: [],
   decoration_colors: ["none"],
-  decoration_techniques: ["none"]
+  decorations: ["none"]
 }
