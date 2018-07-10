@@ -2,7 +2,7 @@ $stone_data = {
 
 	material_name: "stone/mineral",
 
-	material_specified: [
+	material_specifieds: [
 		"limestone"
 	],
 	kind_of_object: [ 
