@@ -75,6 +75,15 @@ $site_kinds.each do |category_name, kinds_array|
 end
 
 
+# ******************
+# *** Priorities ***
+# ******************
+TermlistPriority.find_or_create_by(name: "1")
+TermlistPriority.find_or_create_by(name: "2")
+TermlistPriority.find_or_create_by(name: "3")
+TermlistPriority.find_or_create_by(name: "4")
+TermlistPriority.find_or_create_by(name: "5")
+
 # ************************************
 # Data to be added for all koos/ms ***
 # ************************************
