@@ -35,7 +35,7 @@ $metal_data = {
 		"undetermined",
 		"none"
 	],
-	decoration_styles: [
+	decorations: [
 		"figurative",
 		"geometrical",
 		"undetermined",

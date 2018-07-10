@@ -39,7 +39,7 @@ $stone_data = {
   decoration_techniques: [
     "none"
   ],
-  decoration_styles: [
+  decorations: [
     "none",
   ],
   decoration_colors: [

@@ -29,7 +29,7 @@ $stone_data = {
 		"engraving",
 		"none"
 	],
-	decoration_styles: [
+	decorations: [
 		"figurative",
 		"geometrical",
 		"none"
