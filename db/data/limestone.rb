@@ -5,7 +5,7 @@ $stone_data = {
 	material_specifieds: [
 		"limestone"
 	],
-	kind_of_object: [ 
+	kind_of_objects: [ 
 		"altar",
 		{"architectural element": [
 			"architrav",
@@ -29,32 +29,32 @@ $stone_data = {
 			"censer"
 		]}
 	],
-	production_technique: [
+	production_techniques: [
 		"chiseling",
 		"drilling",
 		"pecking",
 		"smoothing"
 	],
-	color: [
+	colors: [
 		"pale brown",
 	],
-	decoration_technique: [
+	decoration_techniques: [
 		"engraving",
 		"painting",
 		"relief",
 		"none"
 	],
-	decoration_style: [
+	decoration_styles: [
 		"figurative",
 		"geometrical",
 		"none"
 	],
-	decoration_color: [
+	decoration_colors: [
 		"red",
 		"black",
 		"none"
 	],
-	preservation_object: [
+	preservation_objects: [
 		"bottom",
 		"complete",
 		"complete profile",
@@ -65,7 +65,7 @@ $stone_data = {
 		"wall",
 		"wall to bottom"
 	],
-	preservation_material: [
+	preservation_materials: [
 		"sintered"
 	]
 }

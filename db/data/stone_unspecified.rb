@@ -5,7 +5,7 @@ $stone_data = {
 	material_specifieds: [
 		"unspecified"
 	],
-	kind_of_object: [
+	kind_of_objects: [
 		{"architectural element": [
 			"base",
 			"column",
@@ -71,14 +71,14 @@ $stone_data = {
 			"tripod bowl"
 		]}
 	],
-	production_technique: [
+	production_techniques: [
 		"cutting",
 		"drilling",
 		"pecking",
 		"polishing",
 		"smoothing"
 	],
-	color: [
+	colors: [
 		"beige",
 		"black",
 		"brown",
@@ -89,20 +89,20 @@ $stone_data = {
 		"violet",
 		"yellow"
 	],
-	decoration_technique: [
+	decoration_techniques: [
 		"engraving",
 		"painting"
 	],
-	decoration_style: [
+	decoration_styles: [
 		"figurativ",
 		"geometrical"
 	],
-	decoration_color: [
+	decoration_colors: [
 		"black",
 		"red",
 		"white"
 	],
-	preservation_object: [
+	preservation_objects: [
 		"bottom",
 		"complete",
 		"complete profile",
@@ -111,7 +111,7 @@ $stone_data = {
 		"rim",
 		"wall"
 	],
-	preservation_material: [
+	preservation_materials: [
 		"sintered"
 	]
 }

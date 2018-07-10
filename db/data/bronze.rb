@@ -70,7 +70,7 @@ $metal_data = {
     "geometric",
 		"none"
   ],
-   decoration_color: [
+   decoration_colors: [
     "black",
     "gold",
     "silver",
@@ -89,10 +89,7 @@ $metal_data = {
     "stem",
     "wall-to-bottom"
   ],
-   preservation_materials: [
-    "corroded"
-  ],
-  preservation_material: [
+  preservation_materials: [
     "corroded"
   ]
 }

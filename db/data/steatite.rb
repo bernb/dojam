@@ -22,7 +22,7 @@ $stone_data = {
 		"pecking",
 		"polishing",
 	],
-	color: [
+	colors: [
 		"light grey",
 		"dark grey"
 	],
