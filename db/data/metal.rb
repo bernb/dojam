@@ -64,7 +64,9 @@ $metal_data = {
     "hammering",
     "repoussé",
     "riveting",
+		"rolling",
     "smelting",
+		"wire drawing",
     "soldering"
   ],
   decorations: [
