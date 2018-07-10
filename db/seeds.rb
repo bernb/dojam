@@ -81,8 +81,8 @@ end
 def import_other_data
 	MaterialSpecifiedsKooSpec.all.each do |mskoo|
 		$data_dating[:periods].each do |period|
-		p =	TermlistDatingPeriod.find_or_create_by(name: period)
-		mskoo.termlist_dating_periods.find_by(name: p.name) || mskoo.termlist_dating_periods << p
+			p =	TermlistDatingPeriod.find_or_create_by(name: period)
+			mskoo.termlist_dating_periods.find_by(name: p.name) || mskoo.termlist_dating_periods << p
 		end
 		$data_dating[:millennia].each do |millennium|
 			m = TermlistDatingMillennium.find_or_create_by(name: millennium)
@@ -92,6 +92,17 @@ def import_other_data
 			c = TermlistDatingCentury.find_or_create_by(name: century)
 			mskoo.termlist_dating_centuries.find_by(name: c.name) || mskoo.termlist_dating_centuries << c
 		end
+		deco_color = TermlistDecorationColor.find_or_create_by(name: "none")
+		deco_technique = TermlistDecorationTechnique.find_or_create_by(name: "none")
+		deco_style = TermlistDecoration.find_or_create_by(name: "none")
+		inscr_lang = TermlistInscriptionLanguage.find_or_create_by(name: "none")
+		inscr_letter = TermlistInscriptionLetter.find_or_create_by(name: "none")
+
+		mskoo.termlist_decoration_colors << deco_color
+		mskoo.termlist_decoration_techniques << deco_technique
+		mskoo.termlist_decorations << deco_style
+		mskoo.termlist_inscription_languages << inscr_lang
+		mskoo.termlist_inscription_letters << inscr_letter
 	end
 end
 
