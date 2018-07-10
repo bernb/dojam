@@ -26,7 +26,8 @@ $test_data = {
   decorations: [
     "figurativ",
     "geometric",
-    "relief"
+    "relief",
+		"none"
   ],
   colors: [
     "beige",
@@ -36,12 +37,14 @@ $test_data = {
   decoration_colors: [
     "beige",
     "black",
-    "yellow"
+    "yellow",
+		"none"
   ], 
   decoration_techniques: [
     "applied",
     "burnished",
     "combed",
+		"none"
   ],
   preservation_materials: [
     "corroded",
@@ -56,10 +59,12 @@ $test_data = {
     "Arabic",
     "Aramaic",
     "Greek",
+		"none"
   ],
   inscription_letters: [
     "Arabic",
     "Aramaic",
     "Greek",
+		"none"
   ]
 } # hash

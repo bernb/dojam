@@ -28,14 +28,17 @@ $metal_data = {
     "geometrical" 
   ],
   decorations_techniques: [
-    "engraving"
+    "engraving",
+		"none"
   ],
   decorations_styles: [
     "figurative",
-    "geometrical"
+    "geometrical",
+		"none"
   ],
   decoration_colors: [
-    "black"
+    "black",
+		"none"
   ],  
   preservation_objects: [
     "complete",

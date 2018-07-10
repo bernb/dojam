@@ -23,11 +23,13 @@ $stone_data = {
     "white"
    ],
   decoration_techniques: [
-    "engraving"
+    "engraving",
+		"none"
   ],
   decoration_styles: [
     "figurative",
-    "geometrical"
+    "geometrical",
+		"none"
   ],
   decoration_colors: [
     "none"
