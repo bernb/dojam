@@ -4,6 +4,11 @@
     <%= f.association :termlist_acquisition_delivered_by, label: "delivered by", include_blank: true %>
     <%= f.input :acquisition_deliverer_name, label: "name of deliverer" %>
 		<%= f.label false, "date of acquisition" %>
+		<div class="row">
+			<div class="col">
+				<%= f.input :acquisition_date_unknown, as: :boolean, label: "unknown" %>
+			</div>
+		</div>
 		<div class="row no-gutters">
 			<div class="col">
 				<%= f.input :acquisition_year, include_blank: true, label: false, collection: 1900..Date.today.year %>

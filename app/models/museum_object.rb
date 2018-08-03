@@ -111,6 +111,18 @@ class MuseumObject < ApplicationRecord
 		end
 	end
 
+	def acquisition_date_unknown
+		return self.acquisition_year.blank? && self.acquisition_month.blank? && acquisition_day.blank?
+	end
+
+	def acquisition_date_unknown=(val)
+		if val == "1" || val == true
+			self.acquisition_year = nil
+			self.acquisition_month = nil
+			self.acquisition_day = nil
+		end
+	end
+
 
 	def get_possible_props_for property_name
 		Rails.logger.debug "Call PropsGetter with: "
