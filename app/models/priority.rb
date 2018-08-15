@@ -1,0 +1,2 @@
+class Priority < Termlist
+end

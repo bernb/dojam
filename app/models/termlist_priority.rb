@@ -1,2 +1,0 @@
-class TermlistPriority < ApplicationRecord
-end
