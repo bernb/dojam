@@ -1,2 +1,0 @@
-class TermlistConservation < ApplicationRecord
-end

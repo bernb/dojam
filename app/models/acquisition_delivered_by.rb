@@ -1,0 +1,2 @@
+class AcquisitionDeliveredBy < Termlist
+end
