@@ -1,0 +1,2 @@
+class InscriptionLetter < Termlist
+end

@@ -1,0 +1,2 @@
+class ProductionTechnique < Termlist
+end
