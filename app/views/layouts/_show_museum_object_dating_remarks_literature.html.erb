@@ -7,7 +7,7 @@
         <dt>period</dt>
       </div>
       <div class="col">
-        <dd><%= @museum_object&.termlist_dating_period&.name %></dd>
+        <dd><%= @museum_object&.dating_period&.name %></dd>
       </div>
     </div>
       
@@ -16,7 +16,7 @@
         <dt>millennium</dt>
       </div>
       <div class="col">
-        <dd><%= @museum_object&.termlist_dating_millennium&.name %></dd>
+        <dd><%= @museum_object&.dating_millennium&.name %></dd>
       </div>
     </div>
       
@@ -33,7 +33,7 @@
       <div class="col-3">
         <dt>centuries</dt>
       </div>
-      <% @museum_object&.termlist_dating_centuries.each do |c| %>
+      <% @museum_object&.dating_centuries.each do |c| %>
         <div class="col">
           <dd><%= c&.name %></dd>
         </div>

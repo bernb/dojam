@@ -1,13 +1,13 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
 	<%= simple_form_for @museum_object, data: {parsley_validate: ""}, url: wizard_path do |f| %>
     <h4>primary material</h4>
-      <% @museum_object.termlist_materials.each do |material| %>
+      <% @museum_object.materials.each do |material| %>
         <div><%= material.name %></div>
         <ul class="list-group">
-          <% @museum_object.termlist_material_specifieds_for(material).each do |spec_material| %>
+          <% @museum_object.material_specifieds_for(material).each do |spec_material| %>
             <li class="list-group-item">
               <label>
-                <%= f.radio_button :termlist_material_specified_id,  spec_material.id %>
+                <%= f.radio_button :material_specified_id,  spec_material.id %>
                 <%= spec_material.name %>
               </label>
             </li>
@@ -16,7 +16,7 @@
       <% end %>
       </br>
     <h4>kind of object</h4>
-		<%= f.association :termlist_kind_of_object, collection: @kind_of_objects, label: false, as: :collection_select, include_blank: true, required: true   %>
+		<%= f.association :kind_of_object, collection: @kind_of_objects, label: false, as: :collection_select, include_blank: true, required: true   %>
     <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>

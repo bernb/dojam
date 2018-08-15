@@ -1,7 +1,7 @@
 <%= render "layouts/build_steps_layout", step_name: @step, object: @museum_object, wizard_path: wizard_path do %>
   <%= simple_form_for @museum_object, url: wizard_path, method: 'put' do |f| %>
-    <%= f.association :termlist_acquisition_kind, label: "kind of acquisition", include_blank: true %>
-    <%= f.association :termlist_acquisition_delivered_by, label: "delivered by", include_blank: true %>
+    <%= f.association :acquisition_kind, label: "kind of acquisition", include_blank: true %>
+    <%= f.association :acquisition_delivered_by, label: "delivered by", include_blank: true %>
     <%= f.input :acquisition_deliverer_name, label: "name of deliverer" %>
 		<%= f.label false, "date of acquisition" %>
 		<div class="row">
