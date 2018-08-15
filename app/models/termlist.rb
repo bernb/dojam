@@ -7,6 +7,20 @@ class Termlist < ApplicationRecord
 		5
 	end
 
+	def direct_childs
+		path = "/\\d{1,}" * (self.depth - 1)
+		path = path + "/" + self.id.to_s + "/\\d{1,}"
+		puts path
+		paths = Path.where("path SIMILAR TO ?", path)
+		termlist_ids = []
+		puts paths.count
+		paths.each do |path|
+			termlist_ids << path.path.split("/")[self.depth+1]
+		end
+		puts termlist_ids
+		Termlist.find termlist_ids
+	end
+
 	# Will create a path for all paths of given object
 	def attach_child object
 		if self.depth == object.depth - 1

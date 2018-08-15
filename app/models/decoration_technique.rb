@@ -1,0 +1,2 @@
+class DecorationTechnique < Termlist
+end

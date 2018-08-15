@@ -7,7 +7,7 @@ class PathGetter
 				if kind_of_object.present?
 					path = path + "/" + kind_of_object.id.to_s
 					if kind_of_object_specified.present?
-						path = path + "/" + kind_of_object_specified
+						path = path + "/" + kind_of_object_specified.id.to_s
 					end
 				end
 			end
