@@ -4,6 +4,6 @@ class Material < Termlist
 	end
 
 	def material_specifieds
-		direct_childs
+		direct_children
 	end
 end

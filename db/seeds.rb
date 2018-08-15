@@ -1,4 +1,5 @@
-Dir["#{Rails.root}/db/data/*.rb"].reject{|file| file.include? "test"}.each {|file| require file}
+#Dir["#{Rails.root}/db/data/*.rb"].reject{|file| file.include? "test"}.each {|file| require file}
+require "#{Rails.root}/db/data/material_test.rb"
 
 # ***************************
 # *** museum and storages ***
@@ -124,7 +125,7 @@ def import_material data
 	end
 	path = "/"
 	material = Material.find_or_create_by(name: data[:material_name])
-	data[:material_specifieds].each.with_index(1)  do |ms_name, index|
+	data[:material_specifieds].each do |ms_name|
 		material_specified = MaterialSpecified.create name: ms_name
 		material.attach_child material_specified
 	data[:kind_of_objects].each do |koo_name|
@@ -160,5 +161,6 @@ global_variables.select{|var| var.to_s.ends_with? "_data"}
 								.reject{|var| var.to_s.include? "test"}
 								.each do |material_data|
 	Rails.logger.info "Importing variable " + material_data.to_s
-	import_material eval(material_data.to_s)
+	#import_material eval(material_data.to_s)
 end
+import_material $test_data
