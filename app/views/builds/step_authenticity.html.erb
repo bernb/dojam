@@ -1,7 +1,7 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
 	<%= simple_form_for @museum_object, data:{parsley_validate:""}, url: wizard_path do |f| %>
-    <%= f.association :termlist_authenticity, label: "authenticity", as: :termlist_select, include_blank: true, required: true %>
-    <%= f.association :termlist_priority, label: "priority", as: :termlist_select, include_blank: true, required: true %>
+    <%= f.association :authenticity, label: "authenticity", as: :select, include_blank: true, required: true %>
+    <%= f.association :priority, label: "priority", as: :select, include_blank: true, required: true %>
     <%= f.input :priority_determined_by, label: "priority determined by" %>
     <%= f.button :submit, "next step" %>
   <% end %>
