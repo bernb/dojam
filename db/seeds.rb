@@ -133,7 +133,7 @@ def import_material data
 		if koo_name.is_a? Hash
 			koo = KindOfObject.find_or_create_by name: koo_name.keys[0].to_s
 			material_specified.attach_child koo
-			koo_name.values[0].each do |koos_name|
+			koo_name.values.each do |koos_name|
 				koos = KindOfObjectSpecified.find_or_create_by name: koos_name
 				koo.attach_child koos
 				path = PathGetter.call material: material, material_specified: material_specified, kind_of_object: koo, kind_of_object_specified: koos

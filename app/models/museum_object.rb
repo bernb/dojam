@@ -8,23 +8,22 @@ class MuseumObject < ApplicationRecord
   belongs_to :storage_location, required: false
   belongs_to :acquisition_delivered_by, -> { order(name: :asc) }, required: false
   belongs_to :acquisition_kind, -> { order(name: :asc) }, required: false
-  belongs_to :termlist_authenticity, required: false
-  belongs_to :termlist_dating_millennium, required: false
-  belongs_to :termlist_dating_period, required: false
-  belongs_to :termlist_kind_of_object, required: false
-  belongs_to :termlist_kind_of_object_specified, required: false
-  belongs_to :termlist_production_technique, required: false
-  belongs_to :termlist_decoration_technique, required: false
-  belongs_to :termlist_decoration_color, required: false
-  belongs_to :termlist_decoration, required: false
-  belongs_to :termlist_preservation_material, required: false
-  belongs_to :termlist_preservation_object, required: false
-  belongs_to :termlist_inscription_letter, required: false
-  belongs_to :termlist_inscription_language, required: false
-  belongs_to :termlist_excavation_site_kind, required: false
-	belongs_to :termlist_priority, required: false
-	belongs_to :main_material_specified, class_name: "TermlistMaterialSpecified", foreign_key: "termlist_material_specified_id", required: false
-  has_many :join_museum_object_material_specifieds
+  belongs_to :authenticity, required: false
+  belongs_to :dating_millennium, required: false
+  belongs_to :dating_period, required: false
+  belongs_to :kind_of_object, required: false
+  belongs_to :kind_of_object_specified, required: false
+  belongs_to :production_technique, required: false
+  belongs_to :decoration_technique, required: false
+  belongs_to :decoration_color, required: false
+  belongs_to :decoration, required: false
+  belongs_to :preservation_material, required: false
+  belongs_to :preservation_object, required: false
+  belongs_to :inscription_letter, required: false
+  belongs_to :inscription_language, required: false
+  belongs_to :excavation_site_kind, required: false
+	belongs_to :priority, required: false
+	belongs_to :main_material_specified, class_name: "MaterialSpecified", foreign_key: "material_specified_id", required: false
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true
   
@@ -98,7 +97,7 @@ class MuseumObject < ApplicationRecord
   end
   
   def has_material? material
-    self.termlist_materials.ids.include? material.id
+    self.materials.ids.include? material.id
   end
   
   
