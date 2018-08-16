@@ -15,7 +15,7 @@ class MuseumCardDecorator < Draper::Decorator
   
   def list_materials
     list = ""
-    self&.termlist_materials.each do |material|
+    self&.materials.each do |material|
       list << material.name << "<p>"
     end
     

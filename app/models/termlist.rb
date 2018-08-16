@@ -8,16 +8,18 @@ class Termlist < ApplicationRecord
 		5
 	end
 
-	def direct_children
-		path = "/\\d{1,}" * (self.depth - 1)
-		path = path + "/" + self.id.to_s + "/\\d{1,}"
-		paths = Path.where("path SIMILAR TO ?", path)
-		termlist_ids = []
-		paths.each do |path|
-			termlist_ids << path.path.split("/")[self.depth+1]
-		end
-		Termlist.find termlist_ids
-	end
+	# Following searches for i.e. /__/__/23/__
+	# No use for now, but stays for now for future reference if needed
+#	def direct_children
+#		path = "/\\d{1,}" * (self.depth - 1)
+#		path = path + "/" + self.id.to_s + "/\\d{1,}"
+#		paths = Path.where("path SIMILAR TO ?", path)
+#		termlist_ids = []
+#		paths.each do |path|
+#			termlist_ids << path.path.split("/")[self.depth+1]
+#		end
+#		Termlist.find termlist_ids
+#	end
 
 	# Will create a path for all paths of given object
 	def attach_child object
