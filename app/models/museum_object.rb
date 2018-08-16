@@ -23,11 +23,14 @@ class MuseumObject < ApplicationRecord
   belongs_to :inscription_language, required: false
   belongs_to :excavation_site_kind, required: false
 	belongs_to :priority, required: false
-	has_many :material_museum_objects
-	has_many :material_specified_museum_objects
-	has_many :materials, through: :material_museum_objects
-	has_many :material_specifieds, through: :material_specified_museum_objects
-	belongs_to :main_material_specified, class_name: "MaterialSpecified", foreign_key: "material_specified_id", required: false
+#	has_many :material_museum_objects
+#	has_many :material_specified_museum_objects
+#	has_many :materials, through: :material_museum_objects
+#	has_many :material_specifieds, through: :material_specified_museum_objects
+#	belongs_to :main_material_specified, class_name: "MaterialSpecified", foreign_key: "material_specified_id", required: false
+	has_many :museum_object_paths
+	has_many :paths, through: :museum_object_paths
+	belongs_to :main_path, class_name: "Path", required: false
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true
   
@@ -58,6 +61,34 @@ class MuseumObject < ApplicationRecord
     
                                           
   end
+
+	def materials
+		self.paths_objects_for 1
+	end
+
+	def materials=(material_object_ids)
+		paths = []
+		material_objects = Material.find material_object_ids
+		material_objects.each do |object|
+			path = Path.find_in_depth_one object.id
+			paths << path
+		end
+		self.paths = paths
+	end
+
+	def material_specifieds
+		self.paths_objects_for 2
+	end
+
+	def material_specifieds=(material_specified_object_ids)
+		paths = []
+		material_specified_objects = MaterialSpecified.find material_specified_object_ids
+		material_specified_objects.each do |object|
+			path = Path.find_in_depth_two object.id
+			paths << path
+		end
+		self.paths = paths
+	end
 
 	def acquisition_date
 		return nil unless self.acquisition_year.present?
@@ -103,6 +134,16 @@ class MuseumObject < ApplicationRecord
   def has_material? material
     self.materials.ids.include? material.id
   end
+
+	private
+
+	def paths_objects_for depth
+		objects = []
+		self.paths.each do |path|
+			objects << path.objects[depth] unless path.objects[depth].blank?
+		end
+		return objects
+	end
   
   
 end
