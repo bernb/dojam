@@ -301,7 +301,7 @@ class BuildsController < ApplicationController
                                           :excavation_site_id, :material_specified_ids, :kind_of_object_id, :kind_of_object_specified_id,
                                           :is_acquisition_date_exact, :acquisition_document_number, :name_expedition, :site_number_mega, :site_number_expedition,
                                           :coordinates_mega, :excavation_site_kind_id, :dating_period_id, :dating_millennium_id,
-                                          :production_technique_id, :decoration_id, :decoration_color_id, :decoration_technique_id,
+                                          :production_technique_id, :decoration_style_id, :decoration_color_id, :decoration_technique_id,
                                           :inscription_letter_id, :inscription_language_id, :munsell_color,
                                           :remaining_length, :remaining_width, :remaining_height, :remaining_opening_dm, :remaining_bottom_dm, :remaining_weight_in_gram,
                                           :preservation_material_id, :preservation_object_id, :description_conservation,
