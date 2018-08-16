@@ -24,7 +24,7 @@ class BuildsController < ApplicationController
     @museum_object = MuseumObject.find(params[:museum_object_id]).decorate
     # Used i.e. in step_dating where only year is entered as string, which would result in nil without transformation
     transform_string_years_to_dates
-		# We use nil Values for termlist_selection undetermined.
+		# We use nil Values for selection undetermined.
 		# Empty values are used for empty fields which allow client side
 		# enforcment of user choosing a termlist or undetermined
 		replace_nil_values_with_empty
@@ -36,12 +36,6 @@ class BuildsController < ApplicationController
     end
     
     if step == :step_material
-      if params[:material_ids].blank?
-        flash.now[:warning] = "material must be selected"
-        allow_next_step = false
-      else
-        session[:material_ids] = params[:material_ids]
-      end
     end
     
     if @museum_object.valid? && allow_next_step
@@ -91,12 +85,12 @@ class BuildsController < ApplicationController
       format.js {
 				# Check for parameter as it does not exist on first visit
 				if params[:selected_material_specified_id].present?
-					material_specified = TermlistMaterialSpecified.find(
+					material_specified = MaterialSpecified.find(
 						params[:selected_material_specified_id])
-					@kind_of_objects = material_specified.termlist_kind_of_objects
+					@kind_of_objects = material_specified.kind_of_objects
 					museum_object = MuseumObject.find params[:museum_object_id]
 					# Used to select the correct entry if one was choosen before
-					@choosen_kind_of_object_id = museum_object.termlist_kind_of_object&.id
+					@choosen_kind_of_object_id = museum_object.kind_of_object&.id
 				end
       }
     end
@@ -105,8 +99,8 @@ class BuildsController < ApplicationController
   def excavation_site_kinds
     respond_to do |format|
       format.js {
-        excavation_site_category = TermlistExcavationSiteCategory.find params[:excavation_site_category_id]
-        @excavation_site_kinds = excavation_site_category.termlist_excavation_site_kinds
+        excavation_site_category = ExcavationSiteCategory.find params[:excavation_site_category_id]
+        @excavation_site_kinds = excavation_site_category.excavation_site_kinds
       }
     end
   end
@@ -154,13 +148,13 @@ class BuildsController < ApplicationController
 	end
 
 	def step_decoration_vars
-  	@decoration_techniques = @museum_object.get_possible_props_for "TermlistDecorationTechnique"
-    @decoration_colors = @museum_object.get_possible_props_for "TermlistDecorationColor"
-    @decoration_styles = @museum_object.get_possible_props_for "TermlistDecoration"
+  	@decoration_techniques = @museum_object.get_possible_props_for "DecorationTechnique"
+    @decoration_colors = @museum_object.get_possible_props_for "DecorationColor"
+    @decoration_styles = @museum_object.get_possible_props_for "Decoration"
 	end
 
 	def step_material_vars
-    @materials = TermlistMaterial.all.order name: :asc
+    @materials = Material.all.order name: :asc
 	end
 
 	def step_museum_vars
@@ -175,46 +169,46 @@ class BuildsController < ApplicationController
 	end
 
 	def step_provenance_vars
-    @excavation_site_categories = TermlistExcavationSiteCategory.all.order name: :asc
-    @selected_excavation_site_category = TermlistExcavationSiteCategory.first
-    @excavation_site_kinds = @selected_excavation_site_category.termlist_excavation_site_kinds
+    @excavation_site_categories = ExcavationSiteCategory.all.order name: :asc
+    @selected_excavation_site_category = ExcavationSiteCategory.first
+    @excavation_site_kinds = @selected_excavation_site_category.excavation_site_kinds
 	end
 
 	def step_material_specified_vars
-    @materials = TermlistMaterial.where(id: session[:material_ids]).order name: :asc
+    @materials = Material.where(id: session[:material_ids]).order name: :asc
 	end
 
 	def step_kind_of_object_vars
-    material_specifieds_ids = @museum_object.termlist_material_specifieds.ids # get ids for choosen spec. materials
+    material_specifieds_ids = @museum_object.material_specifieds.ids # get ids for choosen spec. materials
     @kind_of_objects = [] # note that nil results in 'Yes/No' selection in view..
 	end
 
 	def step_kind_of_object_specified_vars
-    kind = @museum_object.termlist_kind_of_object
-		ms_koo_specs = @museum_object.main_material_specified.termlist_kind_of_object_specifieds
-		@kind_of_object_specifieds = kind&.termlist_kind_of_object_specifieds.merge(ms_koo_specs)
+    kind = @museum_object.kind_of_object
+		ms_koo_specs = @museum_object.main_material_specified.kind_of_object_specifieds
+		@kind_of_object_specifieds = kind&.kind_of_object_specifieds.merge(ms_koo_specs)
 		@kind_of_object_speicifieds = [] if @kind_of_object_specifieds.blank?
 	end
 
 	def step_color_vars
-		@colors = @museum_object.get_possible_props_for "TermlistColor"
+		@colors = @museum_object.get_possible_props_for "Color"
 	end
 
 	def step_production_vars
-	  @production_techniques = @museum_object.get_possible_props_for "TermlistProductionTechnique"
+	  @production_techniques = @museum_object.get_possible_props_for "ProductionTechnique"
 	end
 
 	def step_measurements_vars
 	end
 
 	def step_inscription_vars
-		@inscription_letters = @museum_object.get_possible_props_for "TermlistInscriptionLetter"
-		@inscription_language = @museum_object.get_possible_props_for "TermlistInscriptionLanguage"
+		@inscription_letters = @museum_object.get_possible_props_for "InscriptionLetter"
+		@inscription_language = @museum_object.get_possible_props_for "InscriptionLanguage"
 	end
 
 	def step_preservation_vars
-    @preservation_materials = @museum_object.get_possible_props_for "TermlistPreservationMaterial"
-    @preservation_objects = @museum_object.get_possible_props_for "TermlistPreservationObject"
+    @preservation_materials = @museum_object.get_possible_props_for "PreservationMaterial"
+    @preservation_objects = @museum_object.get_possible_props_for "PreservationObject"
 	end
 
 	def step_conservation_vars
@@ -224,9 +218,9 @@ class BuildsController < ApplicationController
 	end
 
 	def step_dating_vars
-    @dating_periods = @museum_object.get_possible_props_for "TermlistDatingPeriod"
-    @dating_millennia = @museum_object.get_possible_props_for "TermlistDatingMillennium"
-    @dating_centuries = @museum_object.get_possible_props_for "TermlistDatingCentury"
+    @dating_periods = @museum_object.get_possible_props_for "DatingPeriod"
+    @dating_millennia = @museum_object.get_possible_props_for "DatingMillennium"
+    @dating_centuries = @museum_object.get_possible_props_for "DatingCentury"
 	end
 
 	def step_remarks_vars
@@ -276,7 +270,7 @@ class BuildsController < ApplicationController
 		# We are bit lazy/clever here:
 		# If check if we can deduce the needed collection from the step name
 		# otherwise call the related private method
-		variable_name = "termlist_" + step.to_s.split("_", 2).second
+		variable_name = "" + step.to_s.split("_", 2).second
 		variable_name = variable_name.pluralize
 		self.send(step.to_s + "_vars")
     
@@ -295,27 +289,28 @@ class BuildsController < ApplicationController
   
   def museum_object_params
     if params.key? :museum_object # Used for forms that do not directly belong to model (like material) ToDo: Check for a cleaner way
-      params.require(:museum_object).permit :inv_number, :inv_extension, :inv_numberdoa, :amount, :storage_location_id,
-                                          :termlist_acquisition_kind_id, :termlist_acquisition_delivered_by_id, :acquisition_deliverer_name, :acquisition_date,
-                                          :finding_context, :finding_remarks, :termlist_authenticity_id, :priority, :priority_determined_by,
+      params.require(:museum_object).permit :inv_number, :inv_extension, :inv_numberdoa, :amount, :storage_location_id, 
+                                          :acquisition_kind_id, :acquisition_delivered_by_id, :acquisition_deliverer_name, :acquisition_date,
+                                          :finding_context, :finding_remarks, :authenticity_id, :priority, :priority_determined_by,
                                           :inscription_decoration, :inscription_letters, :inscription_text, :inscription_translation, 
-                                          :excavation_site_id, :termlist_material_specified_ids, :termlist_kind_of_object_id, :termlist_kind_of_object_specified_id,
+                                          :excavation_site_id, :material_specified_ids, :kind_of_object_id, :kind_of_object_specified_id,
                                           :is_acquisition_date_exact, :acquisition_document_number, :name_expedition, :site_number_mega, :site_number_expedition,
-                                          :coordinates_mega, :termlist_excavation_site_kind_id, :termlist_dating_period_id, :termlist_dating_millennium_id,
-                                          :termlist_production_technique_id, :termlist_decoration_id, :termlist_decoration_color_id, :termlist_decoration_technique_id,
-                                          :termlist_inscription_letter_id, :termlist_inscription_language_id, :munsell_color,
+                                          :coordinates_mega, :excavation_site_kind_id, :dating_period_id, :dating_millennium_id,
+                                          :production_technique_id, :decoration_id, :decoration_color_id, :decoration_technique_id,
+                                          :inscription_letter_id, :inscription_language_id, :munsell_color,
                                           :remaining_length, :remaining_width, :remaining_height, :remaining_opening_dm, :remaining_bottom_dm, :remaining_weight_in_gram,
-                                          :termlist_preservation_material_id, :termlist_preservation_object_id, :description_conservation,
+                                          :preservation_material_id, :preservation_object_id, :description_conservation,
                                           :remarks, :literature, :dating_timespan_begin, :dating_timespan_end, :main_image, :is_finished, :needs_conservation, :needs_cleaning,
                                           :site_number_jadis, :coordinates_mega_long, :coordinates_mega_lat, :is_dating_timespan_end_BC, :is_dating_timespan_begin_BC,
-																					:termlist_material_specified_id, :termlist_priority_id,
+																					:material_specified_id, :priority_id,
 																					:acquisition_year, :acquisition_month, :acquisition_day, :acquisition_date_unknown,
                                           images: [],
-                                          termlist_dating_century_ids: [],
-                                          termlist_material_specified_ids: [], 
-                                          termlist_color_ids: [],                                   
+                                          dating_century_ids: [],
+                                          material_specified_ids: [], 
+                                          color_ids: [],                                   
                                           excavation_site_attributes: [:id, :_destroy],
-                                          images_attributes: [:id, :main, list: []]
+                                          images_attributes: [:id, :main, list: []],
+																					material_ids: []
     end                                
   end
   

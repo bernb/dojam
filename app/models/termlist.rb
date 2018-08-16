@@ -1,4 +1,5 @@
 class Termlist < ApplicationRecord
+	default_scope {order(name: :asc)}
 	after_save :add_default_path_for_roots, on: :create
 	has_many :termlist_paths
 	has_many :paths, through: :termlist_paths

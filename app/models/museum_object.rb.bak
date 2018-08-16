@@ -23,10 +23,6 @@ class MuseumObject < ApplicationRecord
   belongs_to :inscription_language, required: false
   belongs_to :excavation_site_kind, required: false
 	belongs_to :priority, required: false
-	has_many :material_museum_objects
-	has_many :material_specified_museum_objects
-	has_many :materials, through: :material_museum_objects
-	has_many :material_specifieds, through: :material_specified_museum_objects
 	belongs_to :main_material_specified, class_name: "MaterialSpecified", foreign_key: "material_specified_id", required: false
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true

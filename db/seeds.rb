@@ -1,4 +1,4 @@
-#Dir["#{Rails.root}/db/data/*.rb"].reject{|file| file.include? "test"}.each {|file| require file}
+Dir["#{Rails.root}/db/data/*.rb"].reject{|file| file.include? "test"}.each {|file| require file}
 require "#{Rails.root}/db/data/material_test.rb"
 
 # ***************************
@@ -61,19 +61,19 @@ museum.save!
 # ***************************************
 # *** excavation sites and site kinds ***
 # ***************************************
-#$excavation_site_names.each do |sitename|
-#  ExcavationSite.find_or_create_by name: sitename
-#end
-#
-#$site_kinds.each do |category_name, kinds_array|
-#  category = ExcavationSiteCategory.find_or_create_by name: category_name
-#  kinds_array.each do |site_kind_name|
-#    site_kind = ExcavationSiteKind.find_or_create_by name: site_kind_name
-#    category.termlist_excavation_site_kinds << site_kind
-#  end
-#  site_kind = ExcavationSiteKind.find_or_create_by name: "Unspecific/Unknown"
-#  category.termlist_excavation_site_kinds << site_kind
-#end
+$excavation_site_names.each do |sitename|
+  ExcavationSite.find_or_create_by name: sitename
+end
+
+$site_kinds.each do |category_name, kinds_array|
+  category = ExcavationSiteCategory.find_or_create_by name: category_name
+  kinds_array.each do |site_kind_name|
+    site_kind = ExcavationSiteKind.find_or_create_by name: site_kind_name
+    category.excavation_site_kinds << site_kind
+  end
+  site_kind = ExcavationSiteKind.find_or_create_by name: "Unspecific/Unknown"
+  category.excavation_site_kinds << site_kind
+end
 
 
 # ******************
@@ -92,15 +92,15 @@ def import_other_data
 #	MaterialSpecifiedsKooSpec.all.each do |mskoo|
 #		$data_dating[:periods].each do |period|
 #			p =	DatingPeriod.find_or_create_by(name: period)
-#			mskoo.termlist_dating_periods.find_by(name: p.name) || mskoo.termlist_dating_periods << p
+#			mskoo.dating_periods.find_by(name: p.name) || mskoo.dating_periods << p
 #		end
 #		$data_dating[:millennia].each do |millennium|
 #			m = DatingMillennium.find_or_create_by(name: millennium)
-#			mskoo.termlist_dating_millennia.find_by(name: m.name) || mskoo.termlist_dating_millennia << m
+#			mskoo.dating_millennia.find_by(name: m.name) || mskoo.dating_millennia << m
 #		end
 #		$data_dating[:centuries].each do |century|
 #			c = DatingCentury.find_or_create_by(name: century)
-#			mskoo.termlist_dating_centuries.find_by(name: c.name) || mskoo.termlist_dating_centuries << c
+#			mskoo.dating_centuries.find_by(name: c.name) || mskoo.dating_centuries << c
 #		end
 #		deco_color = DecorationColor.find_or_create_by(name: "none")
 #		deco_technique = DecorationTechnique.find_or_create_by(name: "none")
@@ -108,11 +108,11 @@ def import_other_data
 #		inscr_lang = InscriptionLanguage.find_or_create_by(name: "none")
 #		inscr_letter = InscriptionLetter.find_or_create_by(name: "none")
 #
-#		mskoo.termlist_decoration_colors << deco_color
-#		mskoo.termlist_decoration_techniques << deco_technique
-#		mskoo.termlist_decorations << deco_style
-#		mskoo.termlist_inscription_languages << inscr_lang
-#		mskoo.termlist_inscription_letters << inscr_letter
+#		mskoo.decoration_colors << deco_color
+#		mskoo.decoration_techniques << deco_technique
+#		mskoo.decorations << deco_style
+#		mskoo.inscription_languages << inscr_lang
+#		mskoo.inscription_letters << inscr_letter
 #	end
 end
 
@@ -126,7 +126,7 @@ def import_material data
 	path = "/"
 	material = Material.find_or_create_by(name: data[:material_name])
 	data[:material_specifieds].each do |ms_name|
-		material_specified = MaterialSpecified.create name: ms_name
+		material_specified = MaterialSpecified.find_or_create_by name: ms_name
 		material.attach_child material_specified
 	data[:kind_of_objects].each do |koo_name|
 		# if entry is hash, kind of object specifieds are present

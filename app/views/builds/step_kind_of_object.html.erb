@@ -4,7 +4,7 @@
       <% @museum_object.materials.each do |material| %>
         <div><%= material.name %></div>
         <ul class="list-group">
-          <% @museum_object.material_specifieds_for(material).each do |spec_material| %>
+          <% material.material_specifieds.each do |spec_material| %>
             <li class="list-group-item">
               <label>
                 <%= f.radio_button :material_specified_id,  spec_material.id %>
