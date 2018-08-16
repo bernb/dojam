@@ -99,7 +99,6 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def validate_step_material_specified_for record
-    check_assoc_exists record, :material_specified, record.material_specifieds
   end
   
   def validate_step_kind_of_object_for record

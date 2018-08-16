@@ -306,11 +306,11 @@ class BuildsController < ApplicationController
 																					:acquisition_year, :acquisition_month, :acquisition_day, :acquisition_date_unknown,
                                           images: [],
                                           dating_century_ids: [],
-                                          material_specified_ids: [], 
                                           color_ids: [],                                   
                                           excavation_site_attributes: [:id, :_destroy],
                                           images_attributes: [:id, :main, list: []],
-																					material_ids: []
+																					material_ids: [],
+																					material_specified_ids: []
     end                                
   end
   
