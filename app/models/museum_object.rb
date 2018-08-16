@@ -100,9 +100,15 @@ class MuseumObject < ApplicationRecord
 		self.main_path&.objects&.[](1)
 	end
 
-	def main_material_specified=(main_material_specified)
+	def set_main_material_specified=(main_material_specified)
 		path = Path.find_in_depth_two(main_material_specified.id).first
-		self.main_path = path
+		# Workaround for the fact that ms and koo get saved parallel i.e. overwriting each other
+		self.main_path = path 
+	end
+
+	# Dirty workaround to get correct values for edit form
+	# and also never actually save, but set it before in ajax call in custom method
+	def main_material_specified=(main_material_specified)
 	end
 
 	def main_material_specified_id

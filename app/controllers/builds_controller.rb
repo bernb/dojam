@@ -30,7 +30,7 @@ class BuildsController < ApplicationController
 		replace_nil_values_with_empty
     @museum_object.assign_attributes museum_object_params unless not params.key? :museum_object # see at params method below
     allow_next_step = true
-    
+
     if step == :step_acquisition
       handle_fuzzy_date params[:museum_object]
     end
@@ -89,6 +89,8 @@ class BuildsController < ApplicationController
 						params[:selected_material_specified_id])
 					@kind_of_objects = material_specified.kind_of_objects
 					museum_object = MuseumObject.find params[:museum_object_id]
+					museum_object.set_main_material_specified = material_specified
+					museum_object.save
 					# Used to select the correct entry if one was choosen before
 					@choosen_kind_of_object_id = museum_object.kind_of_object&.id
 				end
