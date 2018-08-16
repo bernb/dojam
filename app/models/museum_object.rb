@@ -89,16 +89,28 @@ class MuseumObject < ApplicationRecord
 		paths_objects_for 2
 	end
 
-	def material_specifieds=(material_specified_object_ids)
+	def material_specifieds=(material_specified_objects)
 		paths = []
-		material_specified_object_ids = material_specified_object_ids.reject{|m| m.blank?}
-		material_specified_objects = MaterialSpecified.find material_specified_object_ids
 		material_specified_objects.each do |object|
 			path = Path.find_in_depth_two object.id
 			paths << path
 		end
 		self.paths.clear
 		self.paths << paths
+	end
+
+	def material_specified_ids
+		ids = []
+		material_specifieds.each do |material_specified|
+			ids << material_specified.id
+		end
+		return ids
+	end
+
+	def material_specified_ids=(material_specified_object_ids)
+		material_specified_object_ids = material_specified_object_ids.reject{|m| m.blank?}
+		material_specified_objects = MaterialSpecified.find material_specified_object_ids
+		self.material_specifieds = material_specified_objects
 	end
 
 	def acquisition_date
@@ -154,7 +166,7 @@ class MuseumObject < ApplicationRecord
 			# Lowest depth is 1, but first array element at 0
 			objects << path.objects[depth-1] unless path.objects[depth-1].blank?
 		end
-		return objects
+		return objects.uniq
 	end
   
   
