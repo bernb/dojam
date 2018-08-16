@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_15_104006) do
+ActiveRecord::Schema.define(version: 2018_08_16_093706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,24 @@ ActiveRecord::Schema.define(version: 2018_08_15_104006) do
     t.index ["termlist_material_specified_id"], name: "index_join_material_specified"
   end
 
+  create_table "material_museum_objects", force: :cascade do |t|
+    t.bigint "material_id"
+    t.bigint "museum_object_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_material_museum_objects_on_material_id"
+    t.index ["museum_object_id"], name: "index_material_museum_objects_on_museum_object_id"
+  end
+
+  create_table "material_specified_museum_objects", force: :cascade do |t|
+    t.bigint "material_specified_id"
+    t.bigint "museum_object_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_specified_id"], name: "index_ms_museum_objects_on_ms_id"
+    t.index ["museum_object_id"], name: "index_material_specified_museum_objects_on_museum_object_id"
+  end
+
   create_table "material_specifieds_koo_specs", force: :cascade do |t|
     t.bigint "termlist_material_specified_id"
     t.bigint "termlist_kind_of_object_specified_id"
@@ -244,6 +262,10 @@ ActiveRecord::Schema.define(version: 2018_08_15_104006) do
     t.integer "acquisition_year"
     t.integer "acquisition_month"
     t.integer "acquisition_day"
+    t.integer "acquisition_kind_id"
+    t.integer "acquisition_delivered_by_id"
+    t.integer "excavation_site_kind_id"
+    t.integer "kind_of_object_id"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["main_material_specified_id"], name: "index_museum_objects_on_main_material_specified_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
@@ -594,6 +616,7 @@ ActiveRecord::Schema.define(version: 2018_08_15_104006) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "excavation_site_category_id"
   end
 
   add_foreign_key "colors_ms_koo_specs", "material_specifieds_koo_specs"
@@ -616,6 +639,10 @@ ActiveRecord::Schema.define(version: 2018_08_15_104006) do
   add_foreign_key "inscription_letters_ms_koo_specs", "termlist_inscription_letters"
   add_foreign_key "join_museum_object_dating_centuries", "museum_objects"
   add_foreign_key "join_museum_object_dating_centuries", "termlist_dating_centuries"
+  add_foreign_key "material_museum_objects", "museum_objects"
+  add_foreign_key "material_museum_objects", "termlists", column: "material_id"
+  add_foreign_key "material_specified_museum_objects", "museum_objects"
+  add_foreign_key "material_specified_museum_objects", "termlists", column: "material_specified_id"
   add_foreign_key "material_specifieds_koo_specs", "termlist_kind_of_object_specifieds"
   add_foreign_key "material_specifieds_koo_specs", "termlist_material_specifieds"
   add_foreign_key "museum_object_image_lists", "museum_objects"
@@ -626,6 +653,10 @@ ActiveRecord::Schema.define(version: 2018_08_15_104006) do
   add_foreign_key "museum_objects", "termlist_material_specifieds", column: "main_material_specified_id"
   add_foreign_key "museum_objects", "termlist_priorities"
   add_foreign_key "museum_objects", "termlist_production_techniques"
+  add_foreign_key "museum_objects", "termlists", column: "acquisition_delivered_by_id"
+  add_foreign_key "museum_objects", "termlists", column: "acquisition_kind_id"
+  add_foreign_key "museum_objects", "termlists", column: "excavation_site_kind_id"
+  add_foreign_key "museum_objects", "termlists", column: "kind_of_object_id"
   add_foreign_key "preservation_materials_ms_koo_specs", "material_specifieds_koo_specs"
   add_foreign_key "preservation_materials_ms_koo_specs", "termlist_preservation_materials"
   add_foreign_key "preservation_objects_ms_koo_specs", "material_specifieds_koo_specs"
@@ -644,4 +675,5 @@ ActiveRecord::Schema.define(version: 2018_08_15_104006) do
   add_foreign_key "termlist_kind_of_object_specifieds_inscription_letters", "termlist_kind_of_object_specifieds"
   add_foreign_key "termlist_paths", "paths"
   add_foreign_key "termlist_paths", "termlists"
+  add_foreign_key "termlists", "termlists", column: "excavation_site_category_id"
 end

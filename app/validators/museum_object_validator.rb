@@ -84,8 +84,8 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def validate_step_acquisition_for record
-    check_assoc_exists record, :kind_of_acquisition, record.termlist_acquisition_kind
-    check_assoc_exists record, :delivered_by, record.termlist_acquisition_delivered_by
+    check_assoc_exists record, :kind_of_acquisition, record.acquisition_kind
+    check_assoc_exists record, :delivered_by, record.acquisition_delivered_by
 		check_date_consistency record, record.acquisition_year, record.acquisition_month, record.acquisition_day
     check_not_empty record, :deliverer_name, record.acquisition_deliverer_name
   end
@@ -99,7 +99,7 @@ class MuseumObjectValidator < ActiveModel::Validator
   end
   
   def validate_step_material_specified_for record
-    check_assoc_exists record, :material_specified, record.termlist_material_specifieds
+    check_assoc_exists record, :material_specified, record.material_specifieds
   end
   
   def validate_step_kind_of_object_for record
