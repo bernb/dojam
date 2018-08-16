@@ -11,8 +11,6 @@ class MuseumObject < ApplicationRecord
   belongs_to :authenticity, required: false
   belongs_to :dating_millennium, required: false
   belongs_to :dating_period, required: false
-  belongs_to :kind_of_object, required: false
-  belongs_to :kind_of_object_specified, required: false
   belongs_to :production_technique, required: false
   belongs_to :decoration_technique, required: false
   belongs_to :decoration_color, required: false
@@ -56,6 +54,67 @@ class MuseumObject < ApplicationRecord
     
                                           
   end
+
+	def kind_of_object_specified
+		self.main_path&.objects&.[](3)
+	end
+
+	def kind_of_object_specified_id
+		self.kind_of_object_specified&.id
+	end
+
+	def kind_of_object_specified=(kind_of_object_specified)
+		path_name = self.kind_of_object.paths.first.path + "/" + kind_of_object_specified&.id&.to_s
+		path = Path.find_by path: path_name
+		self.main_path = path
+		self.save
+	end
+
+	def kind_of_object_specified_id=(kind_of_object_specified_id)
+		kind_of_object_specified = KindOfObjectSpecified.find kind_of_object_specified_id
+		self.kind_of_object_specified = kind_of_object_specified
+	end
+
+	def kind_of_object
+		self.main_path&.objects&.[](2)
+	end
+
+	def kind_of_object_id
+		self.kind_of_object&.id
+	end
+
+	def kind_of_object=(kind_of_object)
+		path_name = self.main_material_specified.paths.first.path + "/" + kind_of_object&.id&.to_s
+		path = Path.find_by path: path_name
+		self.main_path = path
+		self.save
+	end
+
+	def kind_of_object_id=(kind_of_object_id)
+		kind_of_object = KindOfObject.find kind_of_object_id
+		self.kind_of_object = kind_of_object
+	end
+
+	def main_material_specified
+		# Note there is the safe navigation version of objects[2]
+		self.main_path&.objects&.[](1)
+	end
+
+	def main_material_specified=(main_material_specified)
+		path = Path.find_in_depth_two(main_material_specified.id).first
+		self.main_path = path
+	end
+
+	def main_material_specified_id
+		main_material_specified&.id
+	end
+
+	def main_material_specified_id=(main_material_specified_id)
+		# Don't do anything right now as at the moment we save material_specified always together with kind_of_object
+		# As they both set main_path, they overwrite each other if set in parallel
+		#main_material_specified = MaterialSpecified.find main_material_specified_id
+		#self.main_material_specified = main_material_specified
+	end
 
 	def materials
 		paths_objects_for 1

@@ -4,6 +4,10 @@ class MaterialSpecified < Termlist
 	end
 
 	def kind_of_objects
-		direct_children
+		kind_of_objects = []
+		self.paths.first.direct_children.each do |child|
+			kind_of_objects << child.objects[2]
+		end
+		return kind_of_objects
 	end
 end

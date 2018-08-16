@@ -179,15 +179,17 @@ class BuildsController < ApplicationController
 	end
 
 	def step_kind_of_object_vars
-    material_specifieds_ids = @museum_object.material_specifieds.ids # get ids for choosen spec. materials
+    material_specifieds_ids = @museum_object.material_specified_ids # get ids for choosen spec. materials
     @kind_of_objects = [] # note that nil results in 'Yes/No' selection in view..
 	end
 
 	def step_kind_of_object_specified_vars
-    kind = @museum_object.kind_of_object
-		ms_koo_specs = @museum_object.main_material_specified.kind_of_object_specifieds
-		@kind_of_object_specifieds = kind&.kind_of_object_specifieds.merge(ms_koo_specs)
-		@kind_of_object_speicifieds = [] if @kind_of_object_specifieds.blank?
+		main_path = @museum_object&.main_path
+		children = main_path.direct_children
+		@kind_of_object_specifieds = []
+		children.each do |child|
+			@kind_of_object_specifieds << child.objects[3]
+		end
 	end
 
 	def step_color_vars
@@ -302,7 +304,7 @@ class BuildsController < ApplicationController
                                           :preservation_material_id, :preservation_object_id, :description_conservation,
                                           :remarks, :literature, :dating_timespan_begin, :dating_timespan_end, :main_image, :is_finished, :needs_conservation, :needs_cleaning,
                                           :site_number_jadis, :coordinates_mega_long, :coordinates_mega_lat, :is_dating_timespan_end_BC, :is_dating_timespan_begin_BC,
-																					:material_specified_id, :priority_id,
+																					:material_specified_id, :priority_id, :main_material_specified_id,
 																					:acquisition_year, :acquisition_month, :acquisition_day, :acquisition_date_unknown,
                                           images: [],
                                           dating_century_ids: [],
