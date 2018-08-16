@@ -1,6 +1,7 @@
 class Path < ApplicationRecord
 	has_many :termlist_paths
 	has_many :termlists, through: :termlist_paths
+	has_many :production_techniques, ->{where(type: "ProductionTechnique").distinct}, through: :termlist_paths, source: :termlist
 	scope :find_in_depth_one, ->(id){where("path = ?", "/#{id}")}
 	# Note that we assume a 1:n association between depth one and two thus the following always returns a single entry
 	scope :find_in_depth_two, ->(id){where("path SIMILAR TO ?", "/\\d{1,}/#{id}")}

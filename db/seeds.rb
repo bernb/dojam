@@ -116,6 +116,16 @@ def import_other_data
 #	end
 end
 
+def build_termlists data, path
+	data.keys.reject{|var| var.to_s.starts_with?("material") || var.to_s.starts_with?("kind_of_object")}.each do |termlist|
+		classname = termlist.to_s.classify.constantize
+		data[termlist].each do |name|
+			t = classname.find_or_create_by name: name
+			p = Path.find_or_create_by path: path
+			t.paths << p
+		end
+	end
+end
 
 def import_material data 
 	if data[:material_name].empty?
@@ -137,21 +147,15 @@ def import_material data
 				koos = KindOfObjectSpecified.find_or_create_by name: koos_name
 				koo.attach_child koos
 				path = PathGetter.call material: material, material_specified: material_specified, kind_of_object: koo, kind_of_object_specified: koos
+				build_termlists data, path
 			end # koos	
 		else # if not hash
 			koo = KindOfObject.find_or_create_by name: koo_name
 			material_specified.attach_child koo
 			path = PathGetter.call material: material, material_specified: material_specified, kind_of_object: koo
+			build_termlists data, path
 		end # if not hash
 
-		data.keys.reject{|var| var.to_s.starts_with?("material") || var.to_s.starts_with?("kind_of_object")}.each do |termlist|
-			classname = termlist.to_s.classify.constantize
-			data[termlist].each do |name|
-				t = classname.find_or_create_by name: name
-				p = Path.find_or_create_by path: path
-				t.paths << p
-			end
-		end
 
 	end # each kind of object
 	end # each material specified
