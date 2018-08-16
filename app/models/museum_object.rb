@@ -55,6 +55,11 @@ class MuseumObject < ApplicationRecord
                                           
   end
 
+	# We do not use path scopes as this way we avoid boiler plate code for every single property/scope
+	def get_possible_props_for classname
+		self.main_path.termlists.where(type: classname)
+	end
+
 	def kind_of_object_specified
 		self.main_path&.objects&.[](3)
 	end
