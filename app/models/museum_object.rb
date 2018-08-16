@@ -14,7 +14,7 @@ class MuseumObject < ApplicationRecord
   belongs_to :production_technique, required: false
   belongs_to :decoration_technique, required: false
   belongs_to :decoration_color, required: false
-  belongs_to :decoration, required: false
+  belongs_to :decoration_style, required: false
   belongs_to :preservation_material, required: false
   belongs_to :preservation_object, required: false
   belongs_to :inscription_letter, required: false
@@ -23,6 +23,8 @@ class MuseumObject < ApplicationRecord
 	belongs_to :priority, required: false
 	has_many :museum_object_paths
 	has_many :paths, through: :museum_object_paths
+	has_many :color_museum_objects
+	has_many :colors, through: :color_museum_objects
 	belongs_to :main_path, class_name: "Path", required: false
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true
@@ -57,7 +59,7 @@ class MuseumObject < ApplicationRecord
 
 	# We do not use path scopes as this way we avoid boiler plate code for every single property/scope
 	def get_possible_props_for classname
-		self.main_path.termlists.where(type: classname)
+		self.main_path.termlists.where(type: classname).distinct
 	end
 
 	def kind_of_object_specified

@@ -1,6 +1,6 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
 	<%= simple_form_for @museum_object, data:{parsley_validate:""}, url: wizard_path do |f| %>
-    <%= f.association :decoration, collection: @decoration_styles, label: "style", as: :select, include_blank: true, required: true %>
+    <%= f.association :decoration_style, collection: @decoration_styles, label: "style", as: :select, include_blank: true, required: true %>
     <%= f.association :decoration_technique, collection: @decoration_techniques, label: "technique", as: :select, include_blank: true, required: true %>
     <%= f.association :decoration_color, collection: @decoration_colors, label: "color", as: :select, include_blank: true, required: true  %>
     <%= f.input :munsell_color, label: "Munsell color" %>
