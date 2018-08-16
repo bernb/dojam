@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_16_122832) do
+ActiveRecord::Schema.define(version: 2018_08_16_132732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,6 +190,15 @@ ActiveRecord::Schema.define(version: 2018_08_16_122832) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["museum_object_id"], name: "index_museum_object_images_on_museum_object_id"
+  end
+
+  create_table "museum_object_paths", force: :cascade do |t|
+    t.bigint "museum_object_id"
+    t.bigint "path_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["museum_object_id"], name: "index_museum_object_paths_on_museum_object_id"
+    t.index ["path_id"], name: "index_museum_object_paths_on_path_id"
   end
 
   create_table "museum_objects", id: :serial, force: :cascade do |t|
@@ -648,6 +657,8 @@ ActiveRecord::Schema.define(version: 2018_08_16_122832) do
   add_foreign_key "material_specifieds_koo_specs", "termlist_material_specifieds"
   add_foreign_key "museum_object_image_lists", "museum_objects"
   add_foreign_key "museum_object_images", "museum_objects"
+  add_foreign_key "museum_object_paths", "museum_objects"
+  add_foreign_key "museum_object_paths", "paths"
   add_foreign_key "museum_objects", "paths", column: "main_path_id"
   add_foreign_key "museum_objects", "termlist_dating_periods"
   add_foreign_key "museum_objects", "termlist_excavation_site_kinds"
