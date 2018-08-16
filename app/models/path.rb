@@ -5,6 +5,19 @@ class Path < ApplicationRecord
 	# Note that we assume a 1:n association between depth one and two thus the following always returns a single entry
 	scope :find_in_depth_two, ->(id){where("path SIMILAR TO ?", "/\\d{1,}/#{id}")}
 
+	def down_to_depth target_depth
+		if target_depth >= self.depth
+			return self
+		end
+		pathname = self.path
+		regexp_str = "\/\\d{1,}" * target_depth 
+		puts regexp_str
+		regexp = Regexp.new regexp_str
+		pathname = pathname[regexp]
+		puts pathname
+		Path.find_by path: pathname
+	end
+
 	def depth
 		self.path.split("/").drop(1).length
 	end
