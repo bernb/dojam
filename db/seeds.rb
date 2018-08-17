@@ -165,6 +165,6 @@ global_variables.select{|var| var.to_s.ends_with? "_data"}
 								.reject{|var| var.to_s.include? "test"}
 								.each do |material_data|
 	Rails.logger.info "Importing variable " + material_data.to_s
-	#import_material eval(material_data.to_s)
+	import_material eval(material_data.to_s)
 end
-import_material $test_data
+#import_material $test_data
