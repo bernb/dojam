@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_16_234713) do
+ActiveRecord::Schema.define(version: 2018_08_17_001412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -290,6 +290,17 @@ ActiveRecord::Schema.define(version: 2018_08_16_234713) do
     t.integer "decoration_style_id"
     t.integer "decoration_technique_id"
     t.integer "decoration_color_id"
+    t.integer "inscription_letter_id"
+    t.integer "inscription_language_id"
+    t.integer "preservation_material_id"
+    t.integer "preservation_object_id"
+    t.integer "authenticity_id"
+    t.integer "priority_id"
+    t.integer "dating_period_id"
+    t.integer "dating_millennium_begin_id"
+    t.integer "dating_millennium_end_id"
+    t.boolean "is_dating_millennium_begin_bc"
+    t.boolean "is_dating_millennium_end_bc"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["main_material_specified_id"], name: "index_museum_objects_on_main_material_specified_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
@@ -684,11 +695,20 @@ ActiveRecord::Schema.define(version: 2018_08_16_234713) do
   add_foreign_key "museum_objects", "termlist_production_techniques"
   add_foreign_key "museum_objects", "termlists", column: "acquisition_delivered_by_id"
   add_foreign_key "museum_objects", "termlists", column: "acquisition_kind_id"
+  add_foreign_key "museum_objects", "termlists", column: "authenticity_id"
+  add_foreign_key "museum_objects", "termlists", column: "dating_millennium_begin_id"
+  add_foreign_key "museum_objects", "termlists", column: "dating_millennium_end_id"
+  add_foreign_key "museum_objects", "termlists", column: "dating_period_id"
   add_foreign_key "museum_objects", "termlists", column: "decoration_color_id"
   add_foreign_key "museum_objects", "termlists", column: "decoration_style_id"
   add_foreign_key "museum_objects", "termlists", column: "decoration_technique_id"
   add_foreign_key "museum_objects", "termlists", column: "excavation_site_kind_id"
+  add_foreign_key "museum_objects", "termlists", column: "inscription_language_id"
+  add_foreign_key "museum_objects", "termlists", column: "inscription_letter_id"
   add_foreign_key "museum_objects", "termlists", column: "kind_of_object_id"
+  add_foreign_key "museum_objects", "termlists", column: "preservation_material_id"
+  add_foreign_key "museum_objects", "termlists", column: "preservation_object_id"
+  add_foreign_key "museum_objects", "termlists", column: "priority_id"
   add_foreign_key "museum_objects", "termlists", column: "production_technique_id"
   add_foreign_key "preservation_materials_ms_koo_specs", "material_specifieds_koo_specs"
   add_foreign_key "preservation_materials_ms_koo_specs", "termlist_preservation_materials"
