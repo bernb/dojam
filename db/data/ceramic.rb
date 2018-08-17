@@ -15,8 +15,8 @@ $ceramic_data = {
     "porcelain",
     "pseudo-celadon",
     "Terra Sigillata (TS)",
-    "White Slip Ware",
-    "undetermined"],
+    "White Slip Ware"
+    ],
 
   kind_of_objects: [
     {"architectural element": 
@@ -128,7 +128,6 @@ $ceramic_data = {
     "rouletted",
     "sgraffito",
     "slipped",
-    "undetermined",
 		"none"
   ],
   preservation_materials: [

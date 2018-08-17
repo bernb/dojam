@@ -13,14 +13,12 @@ $organic_data = {
 			"hair pin",
 			"needle",
 			"pin",
-			"undetermined"
 		]},
 		{"skeletal remains": [
 			"complete skeleton",
 			"articulated bones",
 			"single bone/s",
 			"humerus",
-			"undetermined",
 			"unspecified"
 		]}
 	]

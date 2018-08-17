@@ -15,7 +15,6 @@ $stone_data = {
     "Safaitic",
     "Thamudic",
     "undeciphered",
-    "undetermined"
   ],
   language: [
     "Ammonite",
@@ -29,5 +28,4 @@ $stone_data = {
     "Nabataean",
     "Safaitic",
     "Thamudic",
-    "undetermined",
   ]}

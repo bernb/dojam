@@ -18,12 +18,10 @@ $metal_data = {
 		"casting in a mould",
 		"casting with lost wax technique",
 		"drawing",
-		"hammering",
-		"undetermined"
+		"hammering"
 	],
 	colors: [
-		"gold-colored",
-		"undetermined"
+		"gold-colored"
 	],
 	decorations_techniques: [
 		"engraving",
@@ -32,13 +30,11 @@ $metal_data = {
 		"soldering",
 		"stamping",
 		"wire woven",
-		"undetermined",
 		"none"
 	],
 	decorations: [
 		"figurative",
 		"geometrical",
-		"undetermined",
 		"none"
 	],
 	decoration_colors: [
@@ -50,7 +46,6 @@ $metal_data = {
 		"fragmentary"
 	],
 	preservation_materials: [
-		"oxidized",
-		"undetermined"
+		"oxidized"
 	]
 }
