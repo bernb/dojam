@@ -8,7 +8,6 @@ $organic_data = {
 	kind_of_objects: [
 		{"artifact": [
 			"plastered skull",
-			"undetermined"
 		]},
 		{"skeletal remains": [
 			"complete skeleton",
@@ -17,7 +16,6 @@ $organic_data = {
 			"humerus",
 			"tibia",
 			"femur",
-			"undetermined",
 			"unspecified"
 		]}
 	]

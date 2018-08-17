@@ -15,8 +15,7 @@ $organic_data = {
   kind_of_objects: [
     {"artifact": [
       "busket",
-      "textile",
-      "undetermined"]},
+      "textile"]},
     {"unworked": [
       "charcoal",
       "seed"]}

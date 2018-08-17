@@ -6,10 +6,7 @@ $organic_data = {
 		"tooth",
 	],
 	kind_of_objects: [
-		{"artifact": [
-			"undetermined"
-		]},
-		"unworked remains": [
-		]
+		"artifact",
+		"unworked remains"
 	]
 }

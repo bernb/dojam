@@ -11,8 +11,7 @@ $metal_data = {
     "lead",
     "silver",
     "steel",
-    "tin",
-    "undetermined"
+    "tin"
   ],
 
   kind_of_objects: [

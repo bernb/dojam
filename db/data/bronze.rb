@@ -44,7 +44,6 @@ $metal_data = {
         "censer",
 				"oil lamp",
         "cosmetic container"]},
-    "undetermined"
   ],
   production_techniques: [
     "casting in a mould",
@@ -62,7 +61,6 @@ $metal_data = {
     "punching",
     "soldering",
     "stamping",
-    "undetermined",
 		"none"
   ],
    decorations: [

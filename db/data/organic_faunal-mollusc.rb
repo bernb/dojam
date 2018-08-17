@@ -8,13 +8,11 @@ $organic_data = {
 	kind_of_objects: [
 		{"artifact": [
 			"bead",
-			"lid",
-			"undetermined"
+			"lid"
 		]},
 		{"unworked remains": [
 		"seashell",
 		"snail shell",
-		"undetermined",
 		"unspecified"
 		]}
 	]
