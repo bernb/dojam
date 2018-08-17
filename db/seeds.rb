@@ -124,6 +124,9 @@ def build_termlists data, path
 			t = classname.find_or_create_by name: name
 			t.paths << p
 		end
+		# Create undetermined entry by default
+		undetermined_entry = classname.find_or_create_by name: "undetermined"
+		undetermined_entry.paths << p
 	end
 end
 
