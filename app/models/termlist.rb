@@ -33,7 +33,7 @@ class Termlist < ApplicationRecord
 
 	def add_path path
 		if path.is_a? String
-			p = Path.create path: path
+			p = Path.find_or_create_by path: path
 			self.paths << p
 		elsif path.is_a? Path
 			self.paths << p

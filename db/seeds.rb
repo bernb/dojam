@@ -117,11 +117,11 @@ def import_other_data
 end
 
 def build_termlists data, path
+	p = Path.find_or_create_by path: path
 	data.keys.reject{|var| var.to_s.starts_with?("material") || var.to_s.starts_with?("kind_of_object")}.each do |termlist|
 		classname = termlist.to_s.classify.constantize
 		data[termlist].each do |name|
 			t = classname.find_or_create_by name: name
-			p = Path.find_or_create_by path: path
 			t.paths << p
 		end
 	end

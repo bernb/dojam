@@ -9,7 +9,8 @@ class MuseumObject < ApplicationRecord
   belongs_to :acquisition_delivered_by, -> { order(name: :asc) }, required: false
   belongs_to :acquisition_kind, -> { order(name: :asc) }, required: false
   belongs_to :authenticity, required: false
-  belongs_to :dating_millennium, required: false
+  belongs_to :dating_millennium_begin, required: false
+  belongs_to :dating_millennium_end, required: false
   belongs_to :dating_period, required: false
   belongs_to :production_technique, required: false
   belongs_to :decoration_technique, required: false
