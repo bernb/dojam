@@ -85,35 +85,19 @@ Priority.find_or_create_by(name: "3")
 Priority.find_or_create_by(name: "4")
 Priority.find_or_create_by(name: "5")
 
-# ************************************
-# Data to be added for all koos/ms ***
-# ************************************
-def import_other_data
-#	MaterialSpecifiedsKooSpec.all.each do |mskoo|
-#		$data_dating[:periods].each do |period|
-#			p =	DatingPeriod.find_or_create_by(name: period)
-#			mskoo.dating_periods.find_by(name: p.name) || mskoo.dating_periods << p
-#		end
-#		$data_dating[:millennia].each do |millennium|
-#			m = DatingMillennium.find_or_create_by(name: millennium)
-#			mskoo.dating_millennia.find_by(name: m.name) || mskoo.dating_millennia << m
-#		end
-#		$data_dating[:centuries].each do |century|
-#			c = DatingCentury.find_or_create_by(name: century)
-#			mskoo.dating_centuries.find_by(name: c.name) || mskoo.dating_centuries << c
-#		end
-#		deco_color = DecorationColor.find_or_create_by(name: "none")
-#		deco_technique = DecorationTechnique.find_or_create_by(name: "none")
-#		deco_style = Decoration.find_or_create_by(name: "none")
-#		inscr_lang = InscriptionLanguage.find_or_create_by(name: "none")
-#		inscr_letter = InscriptionLetter.find_or_create_by(name: "none")
-#
-#		mskoo.decoration_colors << deco_color
-#		mskoo.decoration_techniques << deco_technique
-#		mskoo.decorations << deco_style
-#		mskoo.inscription_languages << inscr_lang
-#		mskoo.inscription_letters << inscr_letter
-#	end
+# *******************
+# *** Dating data ***
+# *******************
+def import_dating_data
+	$data_dating[:periods].each do |period|
+		p =	DatingPeriod.find_or_create_by(name: period)
+	end
+	$data_dating[:millennia].each do |millennium|
+		m = DatingMillennium.find_or_create_by(name: millennium)
+	end
+	$data_dating[:centuries].each do |century|
+		c = DatingCentury.find_or_create_by(name: century)
+	end
 end
 
 def termlist_names data
@@ -183,6 +167,7 @@ global_variables.select{|var| var.to_s.ends_with? "_data"}
 								.reject{|var| var.to_s.include? "test"}
 								.each do |material_data|
 	Rails.logger.info "Importing variable " + material_data.to_s
-	import_material eval(material_data.to_s)
+#	import_material eval(material_data.to_s)
+	import_dating_data
 end
 #import_material $test_data

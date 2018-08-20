@@ -62,7 +62,8 @@ $data_dating = {
     "Ottoman, Unspecified",
     "Modern (1915-1950)",
     "Hashemite",
-    "unspecified/unknown period"
+    "unspecified/unknown period",
+		"undetermined"
   ],
   
   millennia: [
