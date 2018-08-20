@@ -16,7 +16,7 @@
         <dt>millennium</dt>
       </div>
       <div class="col">
-        <dd><%= @museum_object&.dating_millennium&.name %></dd>
+        <dd><%= @museum_object&.dating_millennium_begin&.name %> - <%= @museum_object&.dating_millennium_end&.name %></dd>
       </div>
     </div>
       
@@ -33,11 +33,7 @@
       <div class="col-3">
         <dt>centuries</dt>
       </div>
-      <% @museum_object&.dating_centuries.each do |c| %>
-        <div class="col">
-          <dd><%= c&.name %></dd>
-        </div>
-      <% end %>
+			<dd><%= @museum_object&.millennium_timespan %> </dd>
     </div>
       
     <div class="row">

@@ -307,7 +307,7 @@ class BuildsController < ApplicationController
                                           :preservation_material_id, :preservation_object_id, :description_conservation,
                                           :remarks, :literature, :dating_timespan_begin, :dating_timespan_end, :main_image, :is_finished, :needs_conservation, :needs_cleaning,
                                           :site_number_jadis, :coordinates_mega_long, :coordinates_mega_lat, :is_dating_timespan_end_BC, :is_dating_timespan_begin_BC,
-																					:material_specified_id, :priority_id, :main_material_specified_id, :dating_millennium_begin, :dating_millennium_end,
+																					:material_specified_id, :priority_id, :main_material_specified_id, :dating_millennium_begin_id, :dating_millennium_end_id,
 																					:acquisition_year, :acquisition_month, :acquisition_day, :acquisition_date_unknown,
                                           images: [],
                                           dating_century_ids: [],

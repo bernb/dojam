@@ -10,6 +10,16 @@ class MuseumObjectDecorator < Draper::Decorator
 			self.inv_number.to_s + "-" + self.inv_extension.to_s
 		end
 	end
+
+	def name
+		full_inv_number
+	end
+
+	def millennium_timespan
+		if self.dating_millennium_begin.present? && self.dating_millennium_end.present?
+			self.dating_millennium_begin.name + " - " + self.dating_millennium_end.name
+		end
+	end
   
   def dating_timespan
     timespan_begin_suffix = is_dating_timespan_begin_BC? ? " BC" : " AD"
