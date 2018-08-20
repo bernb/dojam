@@ -60,11 +60,11 @@ class MuseumObject < ApplicationRecord
 
 	# We do not use path scopes as this way we avoid boiler plate code for every single property/scope
 	def get_possible_props_for classname
-		termlists = self.main_path.termlists.where(type: classname).distinct
+		termlist_ids = self.main_path.termlists.where(type: classname).ids
 		# We merge by hand here so we do not neccessarily need to add the undetermined entries to every single possible path
-		# Note as we call distinct in the end there will be no harm if termlists already contains the default undetermined entry
-		undetermined_entry = Termlist.where(type: classname).and(Termlist.where(name: "undetermined"))
-		termlists.or(undetermined_entry).distinct
+		# We use the plus operation on the result sets to achieve the correct sorting
+		undetermined_entry_id = Termlist.where(type: classname).where(name: "undetermined").ids
+		Termlist.find(termlist_ids) + Termlist.find(undetermined_entry_id)
 	end
 
 	def kind_of_object_specified
