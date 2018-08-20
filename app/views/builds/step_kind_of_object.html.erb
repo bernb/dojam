@@ -5,12 +5,14 @@
         <div><%= material.name %></div>
         <ul class="list-group">
           <% material.material_specifieds.each do |spec_material| %>
-            <li class="list-group-item">
-              <label>
-                <%= f.radio_button :main_material_specified_id,  spec_material.id %>
-                <%= spec_material.name %>
-              </label>
-            </li>
+						<% if spec_material.in? @museum_object.material_specifieds %>
+							<li class="list-group-item">
+								<label>
+									<%= f.radio_button :main_material_specified_id,  spec_material.id %>
+									<%= spec_material.name %>
+								</label>
+							</li>
+							<% end # if spec_material in museum_object ms %>
           <% end %>
         </ul>
       <% end %>
