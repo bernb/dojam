@@ -4,12 +4,12 @@
 		<%= f.label  "", "millennium" %>
 		<div class="form-group row">
 			<div class="input-group col">
-				<%= f.input_field :dating_millennium_begin, collection: @dating_millennia, as: :select, label: false, include_blank: true, required: true, class: "form-control col" %>
+				<%= f.association :dating_millennium_begin, collection: @dating_millennia, as: :select, label: false, include_blank: true, required: true, class: "form-control col", html: {type: "number"} %>
 				<% f.input_field :is_dating_millennium_begin_bc, as: :select, :collection => [['BC', true], ['AD', false]], class: "form-control select col-5" %>
 			</div>
 			<span class="form-control-static col-0">_</span>
 			<div class="input-group col">
-				<%= f.input_field :dating_millennium_end, collection: @dating_millennia, as: :select, label: false, include_blank: true, required: true, class: "form-control col" %>
+				<%= f.association :dating_millennium_end, collection: @dating_millennia, as: :select, label: false, include_blank: true, required: true, class: "form-control col" %>
 				<% f.input_field :is_dating_millennium_end_bc, as: :select, :collection => [['BC', true], ['AD', false]], class: "form-control select col-5" %>
 			</div>
 		</div>
