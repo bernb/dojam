@@ -116,17 +116,23 @@ def import_other_data
 #	end
 end
 
+def termlist_names data
+	data.keys.reject{|var| var.to_s.starts_with?("material") || var.to_s.starts_with?("kind_of_object")}
+end
+
 def build_termlists data, path
 	p = Path.find_or_create_by path: path
-	data.keys.reject{|var| var.to_s.starts_with?("material") || var.to_s.starts_with?("kind_of_object")}.each do |termlist|
+	termlist_names(data).each do |termlist|
 		classname = termlist.to_s.classify.constantize
 		data[termlist].each do |name|
 			t = classname.find_or_create_by name: name
 			t.paths << p
 		end
 		# Create undetermined entry by default
-		undetermined_entry = classname.find_or_create_by name: "undetermined"
-		undetermined_entry.paths << p
+		# This was too slow and made termlist_paths table 2,5 the size it was so we now
+		# merge undetermined entries within the museum_object model when getting possible properties
+		# undetermined_entry = classname.find_or_create_by name: "undetermined"
+		# undetermined_entry.paths << p
 	end
 end
 
@@ -162,6 +168,15 @@ def import_material data
 
 	end # each kind of object
 	end # each material specified
+
+	# We create undetermined entries by default without saving all paths in termlist_paths
+	# As this made the table size much bigger and was slow to seed
+	termlist_names(data).each do |termlist|
+		classname = termlist.to_s.classify.constantize
+		data[termlist].each do |name|
+		classname.find_or_create_by name: "undetermined"
+		end
+	end
 end
  
 global_variables.select{|var| var.to_s.ends_with? "_data"}
