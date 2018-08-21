@@ -30,6 +30,22 @@ function dating_period_checkbox_logic() {
 	});
 }
 
+function dating_century_checkbox_logic() {
+	century_checkbox = $('#museum_object_is_dating_century_unknown');
+	century_checkbox_state = century_checkbox.is(':checked');
+	$('#museum_object_dating_century_begin_id').prop('disabled', century_checkbox_state);
+	$('#museum_object_dating_century_end_id').prop('disabled', century_checkbox_state);
+	century_checkbox.change(function() {
+		century_dropdown_begin = $('#museum_object_dating_century_begin_id');
+		century_dropdown_begin.val("");
+		century_dropdown_begin.prop('disabled', $(this).is(':checked'));
+
+		century_dropdown_end = $('#museum_object_dating_century_end_id');
+		century_dropdown_end.val("");
+		century_dropdown_end.prop('disabled', $(this).is(':checked'));
+	});
+}
+
 function dating_millennium_checkbox_logic() {
 	millennium_checkbox = $('#museum_object_is_dating_millennium_unknown');
 	millennium_checkbox_state = millennium_checkbox.is(':checked');
@@ -77,6 +93,7 @@ function dating_timespan_checkbox_logic() {
 function step_dating_js() {
 	dating_period_checkbox_logic();
 	dating_millennium_checkbox_logic();
+	dating_century_checkbox_logic();
 	dating_timespan_checkbox_logic();
 }
 
