@@ -7,7 +7,7 @@
         <dt>period</dt>
       </div>
       <div class="col">
-        <dd><%= @museum_object&.dating_period&.name %></dd>
+        <dd><%= @museum_object&.dating_period_decorated %></dd>
       </div>
     </div>
       
@@ -16,7 +16,7 @@
         <dt>millennium</dt>
       </div>
       <div class="col">
-        <dd><%= @museum_object&.dating_millennium_begin&.name %> - <%= @museum_object&.dating_millennium_end&.name %></dd>
+				<dd><%= @museum_object&.dating_millennium %>
       </div>
     </div>
       
@@ -33,7 +33,7 @@
       <div class="col-3">
         <dt>centuries</dt>
       </div>
-			<dd><%= @museum_object&.millennium_timespan %> </dd>
+			<dd><%= @museum_object&.dating_century %> </dd>
     </div>
       
     <div class="row">

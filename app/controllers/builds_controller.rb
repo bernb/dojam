@@ -310,6 +310,8 @@ class BuildsController < ApplicationController
                                           :site_number_jadis, :coordinates_mega_long, :coordinates_mega_lat, :is_dating_timespan_end_BC, :is_dating_timespan_begin_BC,
 																					:material_specified_id, :priority_id, :main_material_specified_id, :dating_millennium_begin_id, :dating_millennium_end_id,
 																					:acquisition_year, :acquisition_month, :acquisition_day, :acquisition_date_unknown,
+																					:is_dating_period_unknown, :is_dating_millennium_unknown, :dating_century_begin_id, :dating_century_end_id,
+																				 	:is_dating_century_unknown, :is_dating_timespan_unknown,
                                           images: [],
                                           dating_century_ids: [],
                                           color_ids: [],                                   
