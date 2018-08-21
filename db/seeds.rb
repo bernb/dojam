@@ -100,8 +100,12 @@ def import_dating_data
 	end
 end
 
-def termlist_names data
-	data.keys.reject{|var| var.to_s.starts_with?("material") || var.to_s.starts_with?("kind_of_object")}
+def termlist_names data, all = false
+	if all
+		data.keys
+	else
+		data.keys.reject{|var| var.to_s.starts_with?("material") || var.to_s.starts_with?("kind_of_object")}
+	end
 end
 
 def build_termlists data, path
@@ -115,8 +119,8 @@ def build_termlists data, path
 		# Create undetermined entry by default
 		# This was too slow and made termlist_paths table 2,5 the size it was so we now
 		# merge undetermined entries within the museum_object model when getting possible properties
-		# undetermined_entry = classname.find_or_create_by name: "undetermined"
-		# undetermined_entry.paths << p
+		 undetermined_entry = classname.find_or_create_by name: "undetermined"
+		 undetermined_entry.paths << p
 	end
 end
 
@@ -131,43 +135,49 @@ def import_material data
 	data[:material_specifieds].each do |ms_name|
 		material_specified = MaterialSpecified.find_or_create_by name: ms_name
 		material.attach_child material_specified
-	data[:kind_of_objects].each do |koo_name|
-		# if entry is hash, kind of object specifieds are present
-		if koo_name.is_a? Hash
-			koo = KindOfObject.find_or_create_by name: koo_name.keys[0].to_s
-			material_specified.attach_child koo
-			koo_name.values[0].each do |koos_name|
-				koos = KindOfObjectSpecified.find_or_create_by name: koos_name
-				koo.attach_child koos
-				path = PathGetter.call material: material, material_specified: material_specified, kind_of_object: koo, kind_of_object_specified: koos
+		data[:kind_of_objects].each do |koo_name|
+			# if entry is hash, kind of object specifieds are present
+			if koo_name.is_a? Hash
+				koo = KindOfObject.find_or_create_by name: koo_name.keys[0].to_s
+				material_specified.attach_child koo
+				koo_name.values[0].each do |koos_name|
+					koos = KindOfObjectSpecified.find_or_create_by name: koos_name
+					koo.attach_child koos
+					path = PathGetter.call material: material, material_specified: material_specified, kind_of_object: koo, kind_of_object_specified: koos
+					build_termlists data, path
+				end # koos	
+			else # if not hash
+				koo = KindOfObject.find_or_create_by name: koo_name
+				material_specified.attach_child koo
+				path = PathGetter.call material: material, material_specified: material_specified, kind_of_object: koo
 				build_termlists data, path
-			end # koos	
-		else # if not hash
-			koo = KindOfObject.find_or_create_by name: koo_name
-			material_specified.attach_child koo
-			path = PathGetter.call material: material, material_specified: material_specified, kind_of_object: koo
-			build_termlists data, path
-		end # if not hash
+			end # if not hash
+			undetermined_koos = KindOfObjectSpecified.find_or_create_by name: "undetermined"
+			koo.attach_child undetermined_koos
 
-
-	end # each kind of object
+		end # each kind of object
 	end # each material specified
 
 	# We create undetermined entries by default without saving all paths in termlist_paths
 	# As this made the table size much bigger and was slow to seed
-	termlist_names(data).each do |termlist|
-		classname = termlist.to_s.classify.constantize
-		data[termlist].each do |name|
-		classname.find_or_create_by name: "undetermined"
-		end
-	end
+	# This created some problems i.e. setting main_path to nil
+	# if kind of object specified was choosen undetermined
+	#	termlist_names(data).each do |termlist|
+	#		classname = termlist.to_s.classify.constantize
+	#		data[termlist].each do |name|
+	#		classname.find_or_create_by name: "undetermined"
+	#		end
+	#		# Above lines did not cover koos edge case
+	#		KindOfObjectSpecified.find_or_create_by name: "undetermined"
+	#	end
+
 end
  
 global_variables.select{|var| var.to_s.ends_with? "_data"}
 								.reject{|var| var.to_s.include? "test"}
 								.each do |material_data|
 	Rails.logger.info "Importing variable " + material_data.to_s
-#	import_material eval(material_data.to_s)
+	import_material eval(material_data.to_s)
 	import_dating_data
 end
 #import_material $test_data

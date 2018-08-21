@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_20_123137) do
+ActiveRecord::Schema.define(version: 2018_08_21_122147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -303,6 +303,12 @@ ActiveRecord::Schema.define(version: 2018_08_20_123137) do
     t.boolean "is_dating_millennium_end_bc"
     t.boolean "is_dating_century_begin_bc"
     t.boolean "is_dating_century_end_bc"
+    t.boolean "is_dating_period_unknown"
+    t.boolean "is_dating_millennium_unknown"
+    t.boolean "is_dating_century_unknown"
+    t.boolean "is_dating_timespan_unknown"
+    t.integer "dating_century_begin_id"
+    t.integer "dating_century_end_id"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["main_material_specified_id"], name: "index_museum_objects_on_main_material_specified_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
@@ -699,6 +705,8 @@ ActiveRecord::Schema.define(version: 2018_08_20_123137) do
   add_foreign_key "museum_objects", "termlists", column: "acquisition_delivered_by_id"
   add_foreign_key "museum_objects", "termlists", column: "acquisition_kind_id"
   add_foreign_key "museum_objects", "termlists", column: "authenticity_id"
+  add_foreign_key "museum_objects", "termlists", column: "dating_century_begin_id"
+  add_foreign_key "museum_objects", "termlists", column: "dating_century_end_id"
   add_foreign_key "museum_objects", "termlists", column: "dating_millennium_begin_id"
   add_foreign_key "museum_objects", "termlists", column: "dating_millennium_end_id"
   add_foreign_key "museum_objects", "termlists", column: "dating_period_id"
