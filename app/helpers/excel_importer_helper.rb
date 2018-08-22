@@ -49,7 +49,20 @@ module ExcelImporterHelper
 		attributes[:needs_conservation] = "conservation needed"
 		attributes[:is_dating_timespan_begin_BC] = "timespan begin"
 		attributes[:is_dating_timespan_end_BC] = "timespan end"
-		attributes[:main_material_specified_id] = "material_specified
+		attributes[:main_material_specified_id] = "material_specified"
+		attributes[:acquisition_year] = "date of acquisition"
+		attributes[:acquisition_month] = "date of acquisition"
+		attributes[:acquisition_day] = "date of acquisition"
+		attributes[:acquisition_kind_id] = "kind of acquisition"
+		attributes[:acquisition_delivered_by] = "name of deliverer"
+		attributes[:excavation_site_kind_id] = "kind of site"
+		attributes[:kind_of_object_id] = "kind of object"
+		attributes[:kind_of_object_specified_id] = "kind of object specified"
+		attributes[:production_technique_id] = "production technique"
+		attributes[:decoration_style_id] = "decoration style"
+		attributes[:decoration_technique_id] = "decoration technique"
+		attributes[:decoration_color_id] = "decoration_color_id"
+		attributes[:inscription_letter_id] = "letters of inscription"
 
 
 		xlsx = Roo::Spreadsheet.open(file)
