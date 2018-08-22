@@ -21,6 +21,15 @@ gem "image_processing"
 # now using bootstrap 4 as simple_form 4 supports it now
 #gem 'bootstrap-sass'
 
+# Reads Excel files
+gem "roo", "~> 2.7.0"
+
+# Show hashes nicely with ap method
+gem "awesome_print"
+
+# Used i.e. by importer to match columns to attributes
+gem "fuzzy_match"
+
 # helps with decorators
 gem 'draper'
 
