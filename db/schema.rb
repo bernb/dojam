@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_23_122733) do
+ActiveRecord::Schema.define(version: 2018_08_23_130822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -288,6 +288,7 @@ ActiveRecord::Schema.define(version: 2018_08_23_122733) do
     t.boolean "is_dating_timespan_unknown"
     t.integer "dating_century_begin_id"
     t.integer "dating_century_end_id"
+    t.text "description"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["main_material_specified_id"], name: "index_museum_objects_on_main_material_specified_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"
