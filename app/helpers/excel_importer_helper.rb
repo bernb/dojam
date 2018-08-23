@@ -13,10 +13,11 @@ module ExcelImporterHelper
 			logger.tagged("Line #{i.to_s}"){logger.debug "Setting #{termlist_class.to_s} to #{termlist_value}"}
 			object.send(termlist + "=", found_termlist)
 		else
-			logger.tagged("Line #{i.to_s}"){logger.warn "#{termlist_value} is not a known termlist value"}
+			logger.tagged("Line #{i.to_s}"){logger.warn "#{termlist_value} is not a known termlist value for #{termlist}"}
 		end
-	rescue NameError
-		logger.tagged("Line #{i.to_s}"){logger.debug "#{termlist.camelcase} not a real termlist name. Skipping..."}
+	rescue NameError => e
+		#logger.tagged("Line #{i.to_s}"){logger.debug "#{termlist.camelcase} not a real termlist name Skipping..."}
+		logger.tagged("Line #{i.to_s}"){logger.debug e}
 		return
 	end
 
@@ -35,8 +36,8 @@ module ExcelImporterHelper
 		attributes[:finding_remarks] = "remarks"
 		attributes[:description_conservation] = "preservation/conservation remarks"
 		attributes[:acquisition_deliverer_name] = "delivered by"
-		attributes[:storage_location_id] = "storage location"
-		attributes[:storage_general_location_dummy] = "detailed location"
+		attributes[:storage_location_id] = "detailed location"
+		attributes[:storage_general_location_dummy] = "storage location"
 		attributes[:excavation_site_id] = "site name"
 		attributes[:inscription_decoration] = nil
 		attributes[:inscription_text] = "text of inscription"
@@ -107,6 +108,7 @@ module ExcelImporterHelper
 
 		atomic_attributes = [:description, :name_expedition, :inscription_decoration, :inv_number, :inv_extension, :inv_numberdoa, :amount, :finding_context, :finding_remarks, :description_conservation, :acquisition_deliverer_name, :inscription_text, :inscription_translation, :priority_determined_by, :max_length, :max_width, :height, :opening_dm, :bottom_dm, :weight_in_gram, :remarks, :literature, :acquisition_document_number, :name_mega_jordan, :name_expedition, :site_number_mega, :site_number_jadis, :site_number_expedition, :munsell_color]
 
+
 		xlsx = Roo::Spreadsheet.open(file)
 		default_sheet = nil
 		xlsx.sheets.each do |sheet|
@@ -165,10 +167,10 @@ module ExcelImporterHelper
 
 			row.keys.each do |key|
 				if MuseumObject.method_defined?(key) && !key.to_s.ends_with?("_id") && atomic_attributes.include?(key)
-					logger.tagged("Line #{i.to_s}"){logger.debug "Setting #{key.to_s} = #{row[key].to_s}"}
+					#logger.tagged("Line #{i.to_s}"){logger.debug "Setting #{key.to_s} = #{row[key].to_s}"}
 					object.send(key.to_s+"=", row[key])
 				elsif key.to_s.ends_with?("_id") && !key.to_s.starts_with?("dating") && MuseumObject.method_defined?(key)
-					set_association object: object, column: key, termlist_value: row[key], current_line: i
+					set_association object: object, column: key, termlist_value: row[key], current_line: i unless row[key].blank?
 				end
 			end # row.keys.each
 
