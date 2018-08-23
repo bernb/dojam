@@ -86,7 +86,7 @@ module ExcelImporterHelper
 		attributes[:description] = "description"
 		attributes[:name_expedition] = "other site name"
 
-		ap attributes
+		atomic_attributes = [:description, :name_expedition, :inscription_decoration, :inv_number, :inv_extension, :inv_numberdoa, :amount, :finding_context, :finding_remarks, :description_conservation, :acquisition_deliverer_name, :inscription_text, :inscription_translation, :priority_determined_by, :max_length, :max_width, :height, :opening_dm, :bottom_dm, :weight_in_gram, :remarks, :literature, :acquisition_document_number, :name_mega_jordan, :name_expedition, :site_number_mega, :site_number_jadis, :site_number_expedition, :munsell_color]
 
 		xlsx = Roo::Spreadsheet.open(file)
 		default_sheet = nil
@@ -121,12 +121,43 @@ module ExcelImporterHelper
 		end
 
 		i = 0
+		logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
 		xlsx.each(attributes) do |row|
 			i+=1
-			Rails.logger.info "Importing line #{i.to_s}..." if i % 100 == 0
-			row.keys.each do |key|
+			if i % 100 != 0
+				next
 			end
-		end
+
+			if row[:inv_number].blank?
+				logger.tagged("Line #{i.to_s}"){logger.warning "Can not import without inventory number. Skipping..."}
+				next
+			end
+			sherdname = row[:inv_number]
+			sherdname = sherdname + "-" + row[:inv_extension] unless row[:inv_extension].blank?
+			logger.tagged("Line #{i.to_s}"){logger.info "Importing #{sherdname} from file"}
+
+			object = MuseumObject.where(inv_number: row[:inv_number]).where(inv_extension: row[:inv_extension]).first
+			if object.present?
+				logger.tagged("Line #{i.to_s}"){logger.info "Found in database, updating entry"}
+			else
+				logger.tagged("Line #{i.to_s}"){logger.info "Create new entry"}
+				object = MuseumObject.new(inv_number: row[:inv_number], inv_extension: row[:inv_extension])
+			end
+
+			row.keys.each do |key|
+				if MuseumObject.method_defined?(key) && !key.to_s.ends_with?("_id") && atomic_attributes.include?(key)
+					logger.tagged("Line #{i.to_s}"){logger.debug "Setting #{key.to_s} = #{row[key].to_s}"}
+					object.send(key.to_s+"=", row[key])
+				end
+			end # row.keys.each
+
+			if object.save 
+				logger.tagged("Line #{i.to_s}"){logger.debug "Saved with id #{object.id}"}
+			else
+				logger.tagged("Line #{i.to_s}"){logger.error "Could not save object: #{object.errors.full_messages}"}
+			end
+
+		end # xlsx.each
 	end
 
 end
