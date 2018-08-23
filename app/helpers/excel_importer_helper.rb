@@ -63,6 +63,23 @@ module ExcelImporterHelper
 		attributes[:decoration_technique_id] = "decoration technique"
 		attributes[:decoration_color_id] = "decoration_color_id"
 		attributes[:inscription_letter_id] = "letters of inscription"
+		attributes[:inscription_language_id] = "language of inscription"
+		attributes[:preservation_material_id] = "preservation of material"
+		attributes[:preservation_object_id] = "preservation of object"
+		attributes[:authenticity_id] = "authenticity"
+		attributes[:priority_id] = "priority"
+		attributes[:dating_period_id] = "period"
+		attributes[:dating_millennium_begin_id] = "millennium"
+		attributes[:dating_millennium_end_id] = "millennium"
+		attributes[:is_dating_millennium_begin_bc] = "millennium"
+		attributes[:is_dating_millennium_end_bc] = "millennium"
+		attributes[:is_dating_century_begin_bc] = "century"
+		attributes[:is_dating_century_end_bc] = "century"
+		attributes[:is_dating_period_unknown] = "period"
+		attributes[:is_dating_timespan_unknown] = "timespan"
+		attributes[:dating_century_begin_id] = "century"
+		attributes[:dating_century_end_id] = "century"
+
 
 
 		xlsx = Roo::Spreadsheet.open(file)
@@ -80,15 +97,6 @@ module ExcelImporterHelper
 			xlsx.default_sheet = default_sheet
 		end
 		Rails.logger.info "Trying to match columns..."
-		# Iterate through first row and find matches for attributes
-#		xlsx.first.each do |column|
-#			mathed_columns = xlsx.first
-#			# First check simplest case: column matches perfectly the attribute
-#			if attributes.has_key? column || attributes.has_key?(column.parameterize(separator: '_'))
-#				attributes[column] = column
-#			end
-#
-#		end
 		ap(attributes)
 	end
 
