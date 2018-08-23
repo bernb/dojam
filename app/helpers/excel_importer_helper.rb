@@ -1,6 +1,25 @@
 module ExcelImporterHelper
 	require 'roo'
 
+	def set_association object:, column:, termlist_value:, current_line:
+		i = current_line
+		logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+		termlist = column.to_s
+		termlist.slice!("_id")
+
+		termlist_class = termlist.camelcase.constantize
+		found_termlist = termlist_class.find_by(name: termlist_value)
+		if found_termlist.present?
+			logger.tagged("Line #{i.to_s}"){logger.debug "Setting #{termlist_class.to_s} to #{termlist_value}"}
+			object.send(termlist + "=", found_termlist)
+		else
+			logger.tagged("Line #{i.to_s}"){logger.warn "#{termlist_value} is not a known termlist value"}
+		end
+	rescue NameError
+		logger.tagged("Line #{i.to_s}"){logger.debug "#{termlist.camelcase} not a real termlist name. Skipping..."}
+		return
+	end
+
 	def import_excel_from_file file
 
 		attributes = {}
@@ -148,6 +167,8 @@ module ExcelImporterHelper
 				if MuseumObject.method_defined?(key) && !key.to_s.ends_with?("_id") && atomic_attributes.include?(key)
 					logger.tagged("Line #{i.to_s}"){logger.debug "Setting #{key.to_s} = #{row[key].to_s}"}
 					object.send(key.to_s+"=", row[key])
+				elsif key.to_s.ends_with?("_id") && !key.to_s.starts_with?("dating") && MuseumObject.method_defined?(key)
+					set_association object: object, column: key, termlist_value: row[key], current_line: i
 				end
 			end # row.keys.each
 
