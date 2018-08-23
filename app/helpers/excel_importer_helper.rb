@@ -110,13 +110,22 @@ module ExcelImporterHelper
 			attribute_column_name = attributes[attribute_name]
 			if !xlsx.row(1).include? attribute_column_name
 				Rails.logger.warn "Could not find column for attribute #{attribute_name}"
-				Rails.logger.warn "  Was looking for: #{attribute_column_name}"
+				Rails.logger.warn "Was looking for: #{attribute_column_name}"
+				attributes.delete(attribute_name)
 			else
 				unused_columns.delete(attribute_column_name)
 			end
 		end
 		if unused_columns.present?
 			Rails.logger.warn "Unused columns: #{unused_columns.inspect}"
+		end
+
+		i = 0
+		xlsx.each(attributes) do |row|
+			i+=1
+			Rails.logger.info "Importing line #{i.to_s}..." if i % 100 == 0
+			row.keys.each do |key|
+			end
 		end
 	end
 
