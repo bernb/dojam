@@ -4,9 +4,9 @@ module ExcelImporterHelper
 	def import_excel_from_file file
 
 		attributes = {}
-		MuseumObject.columns.each do |column|
-			attributes[column.name.to_sym] = nil
-		end	
+		#		MuseumObject.columns.each do |column|
+		#			attributes[column.name.to_sym] = nil
+		#		end	
 
 		attributes[:inv_number] = "inventory number of museum"
 		attributes[:inv_extension] = "extension of inventory number"
@@ -47,7 +47,7 @@ module ExcelImporterHelper
 		attributes[:needs_conservation] = "conservation needed"
 		attributes[:is_dating_timespan_begin_BC] = "timespan begin"
 		attributes[:is_dating_timespan_end_BC] = "timespan end"
-		attributes[:main_material_specified_id] = "material_specified"
+		attributes[:main_material_specified_id] = "material specified"
 		attributes[:acquisition_year] = "date of acquisition"
 		attributes[:acquisition_month] = "date of acquisition"
 		attributes[:acquisition_day] = "date of acquisition"
@@ -59,7 +59,7 @@ module ExcelImporterHelper
 		attributes[:production_technique_id] = "production technique"
 		attributes[:decoration_style_id] = "decoration style"
 		attributes[:decoration_technique_id] = "decoration technique"
-		attributes[:decoration_color_id] = "decoration_color_id"
+		attributes[:decoration_color_id] = "decoration color"
 		attributes[:inscription_letter_id] = "letters of inscription"
 		attributes[:inscription_language_id] = "language of inscription"
 		attributes[:preservation_material_id] = "preservation of material"
@@ -78,10 +78,15 @@ module ExcelImporterHelper
 		attributes[:is_dating_century_unknown] = "century"
 		attributes[:dating_century_begin_id] = "century"
 		attributes[:dating_century_end_id] = "century"
-		attributes[:is_dating_timespan_unknown] = "timespan"
+		attributes[:is_dating_timespan_unknown] = "timespan begin"
 		attributes[:main_path_id] = "kind of object specified"
+		attributes[:inscription_decoration] = "decoration of inscription"
+		attributes[:material] = "material"
+		attributes[:color_id] = "color"
+		attributes[:description] = "description"
+		attributes[:name_expedition] = "other site name"
 
-
+		ap attributes
 
 		xlsx = Roo::Spreadsheet.open(file)
 		default_sheet = nil
@@ -90,6 +95,7 @@ module ExcelImporterHelper
 				default_sheet = sheet
 			end
 		end
+
 		if default_sheet.blank?
 			Rails.logger.error "Could not find an 'import' sheet. Aborting"
 			return
@@ -97,8 +103,21 @@ module ExcelImporterHelper
 			Rails.logger.info "Using sheet for import: #{default_sheet}"
 			xlsx.default_sheet = default_sheet
 		end
+
 		Rails.logger.info "Trying to match columns..."
-		ap(attributes)
+		unused_columns = xlsx.row(1).deep_dup
+		attributes.keys.each do |attribute_name|
+			attribute_column_name = attributes[attribute_name]
+			if !xlsx.row(1).include? attribute_column_name
+				Rails.logger.warn "Could not find column for attribute #{attribute_name}"
+				Rails.logger.warn "  Was looking for: #{attribute_column_name}"
+			else
+				unused_columns.delete(attribute_column_name)
+			end
+		end
+		if unused_columns.present?
+			Rails.logger.warn "Unused columns: #{unused_columns.inspect}"
+		end
 	end
 
 end
