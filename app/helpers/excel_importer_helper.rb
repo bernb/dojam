@@ -5,7 +5,7 @@ module ExcelImporterHelper
 
 		attributes = {}
 		MuseumObject.columns.each do |column|
-			attributes[column.name] = nil
+			attributes[column.name.to_sym] = nil
 		end	
 
 		attributes[:inv_number] = "inventory number of museum"
@@ -14,13 +14,11 @@ module ExcelImporterHelper
 		attributes[:amount] = "number of objects"
 		attributes[:finding_context] = "finding context specified"
 		attributes[:finding_remarks] = "remarks"
-		attributes[:description_authenticities_name] = nil
-		attributes[:description_conservation] = nil
-		attributes[:description_preservation_state_name] = nil
+		attributes[:description_conservation] = "preservation/conservation remarks"
 		attributes[:acquisition_deliverer_name] = "delivered by"
 		attributes[:storage_location_id] = "storage location"
 		attributes[:storage_general_location_dummy] = "detailed location"
-		attributes[:excavation_site_id] = nil
+		attributes[:excavation_site_id] = "site name"
 		attributes[:inscription_decoration] = nil
 		attributes[:inscription_text] = "text of inscription"
 		attributes[:inscription_translation] = "translation of inscription"
