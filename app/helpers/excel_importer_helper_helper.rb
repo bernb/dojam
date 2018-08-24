@@ -112,20 +112,51 @@ module ExcelImporterHelperHelper
 												 :site_number_expedition,
 												 :munsell_color]
 
+
+	def search_for_possible_props object, termlist_class, termlist_value
+		# As of writing this, get_possible_props returns an array instead of a relation
+		# because of ordering problems, so we need to retrieve the correct element this way
+		found_termlist = object.get_possible_props_for(termlist_class.to_s)
+		index = found_termlist&.index{|t| t.name == termlist_value}
+		if index.present?
+			found_termlist = found_termlist[index]
+		else
+			found_termlist = nil
+		end
+		return found_termlist
+	end
+
 	def set_association object:, column:, termlist_value:, current_line:
 		i = current_line
 		logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
 		termlist = column.to_s
 		termlist.slice!("_id")
-
 		termlist_class = termlist.camelcase.constantize
-		found_termlist = termlist_class.find_by(name: termlist_value)
+
+		found_termlist = search_for_possible_props object, termlist_class, termlist_value
+
 		if found_termlist.present?
 			logger.tagged("Row #{i.to_s}"){logger.debug "Setting #{termlist_class.to_s} to #{termlist_value}"}
 			object.send(termlist + "=", found_termlist)
-		else
-			logger.tagged("Row #{i.to_s}"){logger.warn "#{termlist_value} is not a known termlist value for #{termlist}"}
+			return
 		end
+
+		# Find out if the term actual exists
+		# and add the corresponding path if a match is found
+		found_termlist = termlist_class.find_by(name: termlist_value)
+		if found_termlist.present? # If we found one in the more general query
+			# We check for existing paths as we have termlists that allow any path
+			# which is not yet explicitly implemented
+			if found_termlist.paths.present? 
+				logger.tagged("Row #{i.to_s}"){logger.warn "#{termlist_value} is not a valid termlist value for #{object.main_path.named_path}"}
+				logger.tagged("Row #{i.to_s}"){logger.warn "Adding above termlist now for #{object.main_path.named_path}"}
+				found_termlist.path << object.main_path
+			else
+				logger.tagged("Row #{i.to_s}"){logger.debug "Setting #{termlist_class.to_s} to #{termlist_value}"}
+			end # if has paths
+			object.send(termlist + "=", found_termlist)
+		end # if termlist name found in Database
+
 	rescue NameError => e
 		#logger.tagged("Row #{i.to_s}"){logger.debug "#{termlist.camelcase} not a real termlist name Skipping..."}
 		logger.tagged("Row #{i.to_s}"){logger.debug e}
