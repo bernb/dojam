@@ -149,8 +149,8 @@ module ExcelImporterHelperHelper
 			# which is not yet explicitly implemented
 			if found_termlist.paths.present? 
 				logger.tagged("Row #{i.to_s}"){logger.warn "#{termlist_value} is not a valid termlist value for #{object.main_path.named_path}"}
-				logger.tagged("Row #{i.to_s}"){logger.warn "Adding above termlist now for #{object.main_path.named_path}"}
-				found_termlist.path << object.main_path
+				logger.tagged("Row #{i.to_s}"){logger.warn "Adding #{termlist_value} now for #{object.main_path.named_path}"}
+				found_termlist.paths << object.main_path
 			else
 				logger.tagged("Row #{i.to_s}"){logger.debug "Setting #{termlist_class.to_s} to #{termlist_value}"}
 			end # if has paths
@@ -210,12 +210,23 @@ module ExcelImporterHelperHelper
 		MuseumObject.method_defined?(key) && !key.to_s.ends_with?("_id") && @@atomic_attributes.include?(key)
 	end
 
-	def is_regular_termlist key, used_attributes = nil
-		key.to_s.ends_with?("_id") && !key.to_s.starts_with?("dating") && MuseumObject.method_defined?(key)
+	def is_regular_termlist key
+		!is_complex_termlist key
 	end
 
 	def is_complex_termlist key
-		key.to_s.include?("kind_of") || key.to_s.include?("material") || key.to_s.include?("dating")
+		array = [:needs_cleaning, :needs_conservation, :storage_location, :excavation_site]
+		MuseumObject.method_defined?(key) && (
+			array.include?(key.to_s) ||
+			key.to_s.include?("kind_of") ||
+			key.to_s.include?("material") ||
+			key.to_s.include?("dating") ||
+			key.to_s.include?("path") ||
+			key.to_s.include?("dummy") ||
+			key.to_s.include?("storage") ||
+			key.to_s.starts_with?("dating") ||
+			!key.to_s.ends_with?("_id")
+		)
 	end
 
 	def build_sherdname row
@@ -223,6 +234,14 @@ module ExcelImporterHelperHelper
 		sherdname + "-" + row[:inv_extension].to_s unless row[:inv_extension].blank?
 	end
 
+	def set_boolean_for object, attribute, attr_value
+		if attr_value == "yes" || attr_value == "Yes" || attr_value == "YES"
+			value = true
+		else
+			value = false
+		end
+		object.send(attribute.to_s+"=", value)
+	end
 
 
 end
