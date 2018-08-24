@@ -79,7 +79,10 @@ module ExcelImporterHelper
 				elsif is_regular_termlist key
 					set_association object: object, column: key, termlist_value: row[key], current_line: i unless row[key].blank?
 				elsif is_complex_termlist key
-					next
+					case key
+					when :needs_cleaning, :needs_conservation
+						set_boolean_for object, key, row[key]
+					end
 				end
 			end # row.keys.each
 
