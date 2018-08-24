@@ -6,6 +6,14 @@ class Path < ApplicationRecord
 	# Note that we assume a 1:n association between depth one and two thus the following always returns a single entry
 	scope :find_in_depth_two, ->(id){where("path SIMILAR TO ?", "/\\d{1,}/#{id}")}
 
+	def self.find_by_material_related material, material_specified, kind_of_object, kind_of_object_specified
+		if material.blank? || material_specified.blank? || kind_of_object.blank? || kind_of_object_specified.blank?
+			return nil
+		end
+		path_string = "/" + material.id.to_s + "/" + material_specified.id.to_s + "/" + kind_of_object.id.to_s + "/" + kind_of_object_specified.id.to_s
+		Path.find_by(path: path_string)
+	end
+
 	def down_to_depth target_depth
 		if target_depth >= self.depth
 			return self
