@@ -21,6 +21,62 @@ module ExcelImporterHelper
 		return
 	end
 
+	def assign_material_related_termlists row
+		if row[:material].blank?
+			logger.tagged("Line #{i.to_s}"){logger.error "No material given. Skipping this row..."}
+			return
+		end
+
+		if row[:material_material].blank?
+			logger.tagged("Line #{i.to_s}"){logger.error "No material specified given. Skipping this row..."}
+			return
+		end
+
+		if row[:kind_of_object].blank?
+			logger.tagged("Line #{i.to_s}"){logger.error "No kind of object given. Skipping this row..."}
+			return
+		end
+
+		if row[:kind_of_object_specified].blank?
+			logger.tagged("Line #{i.to_s}"){logger.error "No kind of object specified given. Skipping this row..."}
+			return
+		end
+
+		material = Material.find_by name: row[:material]
+		material_specified = MaterialSpecified.find_by name: row[:material_specified]
+		kind_of_object = KindOfObject.find_by name: row[:kind_of_object]
+		kind_of_object_specified = KindOfObjectSpecified.find_by name: row[:kind_of_object_specified]
+		if material.blank? 
+			logger.tagged("Line #{i.to_s}"){logger.error "Unknown material #{row[:material]}. Skipping this row..."}
+		end
+		if material_specified.blank? 
+			logger.tagged("Line #{i.to_s}"){logger.error "Unknown material specified #{row[:material_specified]}. Skipping this row..."}
+		end
+		if kind_of_object.blank? 
+			logger.tagged("Line #{i.to_s}"){logger.error "Unknown kind of object #{row[:kind_of_object]}. Skipping this row..."}
+		end
+		if kind_of_object_specified.blank? 
+			logger.tagged("Line #{i.to_s}"){logger.error "Unknown kind of object specified #{row[:kind_of_object_specified]}. Skipping this row..."}
+		end
+		return material, material_specified, kind_of_object, kind_of_object_specified
+	end
+
+
+	def is_simple_attribute key
+		MuseumObject.method_defined?(key) && !key.to_s.ends_with?("_id") && atomic_attributes.include?(key)
+	end
+
+	def is_regular_termlist key, used_attributes = nil
+		key.to_s.ends_with?("_id") && !key.to_s.starts_with?("dating") && MuseumObject.method_defined?(key)
+	end
+
+	def build_sherdname row
+		sherdname = row[:inv_number].to_s
+		sherdname + "-" + row[:inv_extension].to_s unless row[:inv_extension].blank?
+	end
+
+
+
 	def import_excel_from_file file
 
 		attributes = {}
@@ -143,18 +199,19 @@ module ExcelImporterHelper
 
 		i = 0
 		logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+
+		# Note that this is a roo specific method each(), unfortunately we can't use any of
+		# the many variants ruby gives us for arrays or ranges, like skipping the first and alike
 		xlsx.each(attributes) do |row|
 			i+=1
-			if i % 100 != 0
-				next
-			end
+			if i==1 then next end
 
 			if row[:inv_number].blank?
 				logger.tagged("Line #{i.to_s}"){logger.warning "Can not import without inventory number. Skipping..."}
 				next
 			end
-			sherdname = row[:inv_number]
-			sherdname = sherdname + "-" + row[:inv_extension] unless row[:inv_extension].blank?
+
+			sherdname = build_sherdname row
 			logger.tagged("Line #{i.to_s}"){logger.info "Importing #{sherdname} from file"}
 
 			object = MuseumObject.where(inv_number: row[:inv_number]).where(inv_extension: row[:inv_extension]).first
@@ -165,11 +222,16 @@ module ExcelImporterHelper
 				object = MuseumObject.new(inv_number: row[:inv_number], inv_extension: row[:inv_extension])
 			end
 
+
+			material, material_specified, kind_of_object, kind_of_object_specified = assign_material_related_termlists row
+			if material.blank? || material_specified.blank? || kind_of_object.blank? || kind_of_object_specified.blank?
+				next
+			end
+
 			row.keys.each do |key|
-				if MuseumObject.method_defined?(key) && !key.to_s.ends_with?("_id") && atomic_attributes.include?(key)
-					#logger.tagged("Line #{i.to_s}"){logger.debug "Setting #{key.to_s} = #{row[key].to_s}"}
+				if is_simple_attribute key
 					object.send(key.to_s+"=", row[key])
-				elsif key.to_s.ends_with?("_id") && !key.to_s.starts_with?("dating") && MuseumObject.method_defined?(key)
+				elsif is_regular_termlist key
 					set_association object: object, column: key, termlist_value: row[key], current_line: i unless row[key].blank?
 				end
 			end # row.keys.each
