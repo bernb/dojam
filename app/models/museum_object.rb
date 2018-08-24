@@ -107,6 +107,11 @@ class MuseumObject < ApplicationRecord
 		self.kind_of_object = kind_of_object
 	end
 
+	def main_material
+		# Note there is the safe navigation version of objects[2]
+		self.main_path&.objects&.[](0)
+	end
+
 	def main_material_specified
 		# Note there is the safe navigation version of objects[2]
 		self.main_path&.objects&.[](1)
