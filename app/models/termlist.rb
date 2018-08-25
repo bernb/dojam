@@ -8,6 +8,12 @@ class Termlist < ApplicationRecord
 		5
 	end
 
+	# Some termlists do no actually have any paths,
+	# those are valid choices for all of them
+	def is_independent_of_paths
+		false
+	end
+
 	# Following searches for i.e. /__/__/23/__
 	# No use for now, but stays for now for future reference if needed
 #	def direct_children
