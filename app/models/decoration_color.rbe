@@ -1,2 +1,0 @@
-class DecorationColor < Termlist
-end
