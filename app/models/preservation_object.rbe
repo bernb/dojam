@@ -1,0 +1,2 @@
+class PreservationObject < Termlist
+end

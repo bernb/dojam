@@ -10,7 +10,7 @@ class Termlist < ApplicationRecord
 
 	# Some termlists do no actually have any paths,
 	# those are valid choices for all of them
-	def self.is_independent_of_paths
+	def is_independent_of_paths
 		false
 	end
 

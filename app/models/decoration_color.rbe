@@ -1,0 +1,2 @@
+class DecorationColor < Termlist
+end

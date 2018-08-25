@@ -1,0 +1,2 @@
+class PreservationMaterial < Termlist
+end

@@ -1,0 +1,2 @@
+class Decoration < Termlist
+end
