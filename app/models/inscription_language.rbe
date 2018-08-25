@@ -1,0 +1,2 @@
+class InscriptionLanguage < Termlist
+end
