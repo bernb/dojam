@@ -45,7 +45,7 @@ module ExcelImporterHelper
 			if i==1 then next end
 
 			if row[:inv_number].blank?
-				logger.tagged("Row #{i.to_s}"){logger.warning "Can not import without inventory number. Skipping..."}
+				logger.tagged("Row #{i.to_s}"){logger.warn "Can not import without inventory number. Skipping..."}
 				next
 			end
 
@@ -56,7 +56,7 @@ module ExcelImporterHelper
 			if object.present?
 				logger.tagged("Row #{i.to_s}"){logger.info "Found in database, updating entry"}
 			else
-				logger.tagged("Row #{i.to_s}"){logger.info "Create new entry"}
+				logger.tagged("Row #{i.to_s}"){logger.info "Creating new entry"}
 				object = MuseumObject.new(inv_number: row[:inv_number], inv_extension: row[:inv_extension])
 			end
 
@@ -74,11 +74,12 @@ module ExcelImporterHelper
 			object.main_path = path
 
 			row.keys.each do |key|
+				puts "Current key: #{key.to_s}"
 				if is_simple_attribute key
 					object.send(key.to_s+"=", row[key])
 				elsif is_regular_termlist key
 					set_association object: object, column: key, termlist_value: row[key], current_line: i unless row[key].blank?
-				elsif is_complex_termlist key
+				elsif is_complex_attribute key
 					case key
 					when :needs_cleaning, :needs_conservation
 						set_boolean_for object, key, row[key]
