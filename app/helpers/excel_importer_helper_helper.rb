@@ -118,7 +118,7 @@ module ExcelImporterHelperHelper
 		# As of writing this, get_possible_props returns an array instead of a relation
 		# because of ordering problems, so we need to retrieve the correct element this way
 		found_termlist = object.get_possible_props_for(termlist_class.to_s)
-		index = found_termlist&.index{|t| t.name == termlist_value}
+		index = found_termlist&.index{|t| t.name == termlist_value.to_s}
 		if index.present?
 			found_termlist = found_termlist[index]
 		else
