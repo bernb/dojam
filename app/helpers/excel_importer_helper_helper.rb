@@ -2,7 +2,7 @@ module ExcelImporterHelperHelper
 
 		@@attributes = {}
 		@@attributes[:storage_general_location] = "storage location"
-		@@attributes[:storage_location_id] = "detailed location"
+		@@attributes[:storage_location] = "detailed location"
 		@@attributes[:inv_number] = "inventory number of museum"
 		@@attributes[:inv_extension] = "extension of inventory number"
 		@@attributes[:inv_numberdoa] = "other inventory number"
@@ -74,6 +74,45 @@ module ExcelImporterHelperHelper
 		@@attributes[:name_expedition] = "site name"
 		@@attributes[:inscription_decoration] = "decoration of inscription"
 
+	def set_museum_properties object, row
+		object.inv_number = row[:inv_number]
+		object.inv_extension = row[:inv_extension]
+		object.storage_location = StorageLocation.find_by name: row[:storage_location]
+		object.storage_location.blank?
+		object.errors[:base] << "Could not find storage location \"#{row[:storage_location]}\""
+		object.amount = row[:amount]
+		object.save
+	end
+
+	def set_main_path object, row
+		material, material_specified, kind_of_object, kind_of_object_specified = assign_material_related_termlists row
+
+		if material.blank?
+			object.errors[:base] << "Could not find material \"#{row[:main_material]}\""
+			return
+		end
+		if material_specified.blank?
+			object.errors[:base] << "Could not find specified material \"#{row[:main_material_specified]}\""
+			return
+		end
+		if kind_of_object.blank?
+			object.errors[:base] << "Could not find kind of object \"#{row[:kind_of_object]}\""
+			return
+		end
+		if kind_of_object_specified.blank?
+			object.errors[:base] << "Could not find specified kind of object \"#{row[:kind_of_object_specified]}\""
+			return
+		end
+
+		path = Path.find_by_material_related material, material_specified, kind_of_object, kind_of_object_specified
+		if path.blank?
+			object.errors[:base] << "Material / kind of object combination not found."
+			return
+		end
+
+		object.main_path = path
+	end
+
 
 	def search_for_possible_props object, termlist_class, termlist_value
 		# As of writing this, get_possible_props returns an array instead of a relation
@@ -105,45 +144,15 @@ module ExcelImporterHelperHelper
 		end
 	end
 
-	def assign_material_related_termlists row, current_line
-		i = current_line
-		logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
-		if row[:main_material].blank?
-			logger.tagged("Row #{i.to_s}"){logger.error "No material given. Skipping this row..."}
-			return
-		end
-
-		if row[:main_material_specified].blank?
-			logger.tagged("Row #{i.to_s}"){logger.error "No material specified given. Skipping this row..."}
-			return
-		end
-
-		if row[:kind_of_object].blank?
-			logger.tagged("Row #{i.to_s}"){logger.error "No kind of object given. Skipping this row..."}
-			return
-		end
-
-		if row[:kind_of_object_specified].blank?
-			logger.tagged("Row #{i.to_s}"){logger.error "No kind of object specified given. Skipping this row..."}
-			return
+	def assign_material_related_termlists row, current_line = nil
+		if row[:main_material].blank? || row[:main_material_specified].blank? || row[:kind_of_object].blank? || row[:kind_of_object].blank? || row[:kind_of_object_specified].blank?
+			return false
 		end
 
 		material = Material.find_by name: row[:main_material]
 		material_specified = MaterialSpecified.find_by name: row[:main_material_specified]
 		kind_of_object = KindOfObject.find_by name: row[:kind_of_object]
 		kind_of_object_specified = KindOfObjectSpecified.find_by name: row[:kind_of_object_specified]
-		if material.blank? 
-			logger.tagged("Row #{i.to_s}"){logger.error "Unknown material #{row[:main_material]}. Skipping this row..."}
-		end
-		if material_specified.blank? 
-			logger.tagged("Row #{i.to_s}"){logger.error "Unknown material specified #{row[:main_material_specified]}. Skipping this row..."}
-		end
-		if kind_of_object.blank? 
-			logger.tagged("Row #{i.to_s}"){logger.error "Unknown kind of object #{row[:kind_of_object]}. Skipping this row..."}
-		end
-		if kind_of_object_specified.blank? 
-			logger.tagged("Row #{i.to_s}"){logger.error "Unknown kind of object specified #{row[:kind_of_object_specified]}. Skipping this row..."}
-		end
 		return material, material_specified, kind_of_object, kind_of_object_specified
 	end
 
