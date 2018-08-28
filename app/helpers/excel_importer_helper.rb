@@ -44,10 +44,12 @@ module ExcelImporterHelper
 			i+=1
 			if i==1 then next end
 
+
 			if row[:inv_number].blank?
 				logger.tagged("Row #{i.to_s}"){logger.warn "Can not import without inventory number. Skipping..."}
 				next
 			end
+
 
 			sherdname = build_sherdname row
 			logger.tagged("Row #{i.to_s}"){logger.info "Importing #{sherdname} from file"}
@@ -60,21 +62,31 @@ module ExcelImporterHelper
 				object = MuseumObject.new(inv_number: row[:inv_number], inv_extension: row[:inv_extension])
 			end
 
-
-			material, material_specified, kind_of_object, kind_of_object_specified = assign_material_related_termlists row, i
-			if material.blank? || material_specified.blank? || kind_of_object.blank? || kind_of_object_specified.blank?
+			# Set museum related properties like storage location or
+			# inventory number
+			set_museum_properties object, row
+			if object.errors.size > 0
+				logger.tagged("Row #{i.to_s}"){logger.warn "Could not save object:"}
+				object.errors.full_messages.each do |message|
+					logger.tagged("Row #{i.to_s}"){logger.warn message}
+				end
 				next
 			end
-			path = Path.find_by_material_related material, material_specified, kind_of_object, kind_of_object_specified
-			if path.blank?
-				logger.tagged("Row #{i.to_s}"){logger.warning "Could not find path /#{material.name}/#{material.specified.name}/#{kind_of_object.name}/#{kind_of_object_specified.name}. Skipping row..."}
+
+
+			# Try to assign a main_path
+			set_main_path object, row
+			if object.errors.size > 0
+				object.errors.full_messages.each do |message|
+					logger.tagged("Row #{i.to_s}"){logger.warn message}
+				end
+				logger.tagged("Row #{i.to_s}"){logger.warn "Skipping termlists..."}
 				next
 			end
 
-			object.main_path = path
 
 			row.keys.each do |key|
-				puts "Current key: #{key.to_s}"
+				#puts "Current key: #{key.to_s}"
 				if is_simple_attribute key
 					object.send(key.to_s+"=", row[key])
 				elsif is_regular_termlist key

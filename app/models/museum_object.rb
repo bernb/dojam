@@ -60,10 +60,15 @@ class MuseumObject < ApplicationRecord
 
 	# We do not use path scopes as this way we avoid boiler plate code for every single property/scope
 	def get_possible_props_for classname
-		return nil unless classname.constantize < Termlist
+		if !(classname.constantize < Termlist) && classname != "ExcavationSite"
+			return nil
+		end
 		if classname.constantize.is_independent_of_paths
 			# We cast to array to achieve consistency, see below for more information
 			return classname.constantize.all.to_a
+		end
+		if self.main_path.blank?
+			return nil
 		end
 		termlist_ids = self.main_path.termlists.where(type: classname).ids
 		# We merge by hand here so we do not neccessarily need to add the undetermined entries to every single possible path
