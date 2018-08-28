@@ -66,7 +66,7 @@ module ExcelImporterHelper
 			# inventory number
 			set_museum_properties object, row
 			if object.errors.size > 0
-				logger.tagged("Row #{i.to_s}"){logger.warn "Could not save object:"}
+				logger.tagged("Row #{i.to_s}", "Warning"){logger.warn "Could not save object:"}
 				object.errors.full_messages.each do |message|
 					logger.tagged("Row #{i.to_s}"){logger.warn message}
 				end
