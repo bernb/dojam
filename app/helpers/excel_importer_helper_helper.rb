@@ -84,10 +84,7 @@ module ExcelImporterHelperHelper
 		object.save
 	end
 
-	def set_millennium_data object:, value: 
-		mil_begin_term = nil
-		mil_end_term = nil
-
+	def resolve_range_entries value
 		if value.blank?
 			return
 		end
@@ -95,29 +92,39 @@ module ExcelImporterHelperHelper
 			split_value = value.split("-")
 			# If entry does not contain exactly one dash, something went wrong
 			if split_value.size != 2
-				object.errors[:base] << "Malformed entry for millennia data"
 				return
 			end
-			mil_begin = split_value[0]
-			mil_end = split_value[1]
-			# If mil_begin contains AD or BC we assume a correct termlist name
+			range_begin = split_value[0]
+			range_end = split_value[1]
+			# If range_begin contains AD or BC we assume a correct termlist name
 		  # Otherwise we determine a short hand version like '5th' and determine
-			# BC/AD from mil_end
-			if mil_begin.include?("BC") || mil_begin.include?("AD")
-				mil_begin_term = DatingMillennium.find_by(name: mil_begin)
-			elsif mil_end.include?("BC")
-				mil_begin_term = DatingMillennium.where("name LIKE ?", "%#{mil_begin}%BC").first
-			elsif mil_end.include?("AD")
-				mil_begin_term = DatingMillennium.where("name LIKE ?", "%#{mil_begin}%AD").first
+			# BC/AD from range_end
+			if range_begin.include?("BC") || range_begin.include?("AD")
+			elsif range_end.include?("BC")
+				range_begin = range_begin + "%BC"
+			elsif range_end.include?("AD")
+				range_begin = range_begin + "%AD"
 			end
-			mil_end_term = DatingMillennium.find_by(name: mil_end)
 		else # value not include "-"
-			mil_term = DatingMillennium.find_by(name: value)
-			mil_begin_term = mil_term
-			mil_end_term = mil_term
+			range_begin = value
+			range_end = value
 		end
+		return range_begin, range_end
+	end
+
+	def set_millennium_data object:, value: 
+		mil_begin, mil_end = resolve_range_entries value
+		mil_begin_term = DatingMillennium.where("name LIKE ?", mil_begin).first
+		mil_end_term = DatingMillennium.where("name LIKE ?", mil_end).first
+
+		if mil_begin_term.blank?
+			object.errors[:base] << "Could not find #{mil_begin} for DatingMillennium"
+		elsif mil_end_term.blank?
+			object.errors[:base] << "Could not find #{mil_end} for DatingMillennium"
+		else
 			object.dating_millennium_begin = mil_begin_term
 			object.dating_millennium_end = mil_end_term
+		end
 	end
 
 	def set_main_path object, row
