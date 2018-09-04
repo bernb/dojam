@@ -84,6 +84,42 @@ module ExcelImporterHelperHelper
 		object.save
 	end
 
+	def set_millennium_data object:, value: 
+		mil_begin_term = nil
+		mil_end_term = nil
+
+		if value.blank?
+			return
+		end
+		if value.include?("-")
+			split_value = value.split("-")
+			# If entry does not contain exactly one dash, something went wrong
+			if split_value.size != 2
+				object.errors[:base] << "Malformed entry for millennia data"
+				return
+			end
+			mil_begin = split_value[0]
+			mil_end = split_value[1]
+			# If mil_begin contains AD or BC we assume a correct termlist name
+		  # Otherwise we determine a short hand version like '5th' and determine
+			# BC/AD from mil_end
+			if mil_begin.include?("BC") || mil_begin.include?("AD")
+				mil_begin_term = DatingMillennium.find_by(name: mil_begin)
+			elsif mil_end.include?("BC")
+				mil_begin_term = DatingMillennium.where("name LIKE ?", "%#{mil_begin}%BC").first
+			elsif mil_end.include?("AD")
+				mil_begin_term = DatingMillennium.where("name LIKE ?", "%#{mil_begin}%AD").first
+			end
+			mil_end_term = DatingMillennium.find_by(name: mil_end)
+		else # value not include "-"
+			mil_term = DatingMillennium.find_by(name: value)
+			mil_begin_term = mil_term
+			mil_end_term = mil_term
+		end
+			object.dating_millennium_begin = mil_begin_term
+			object.dating_millennium_end = mil_end_term
+	end
+
 	def set_main_path object, row
 		material, material_specified, kind_of_object, kind_of_object_specified = assign_material_related_termlists row
 

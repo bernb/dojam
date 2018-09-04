@@ -95,6 +95,10 @@ module ExcelImporterHelper
 					case key
 					when :needs_cleaning, :needs_conservation
 						set_boolean_for object, key, row[key]
+					when :dating_period
+						set_association object: object, column: :dating_period_id, termlist_value: row[key], current_line: i unless row[key].blank?
+					when :dating_millennium
+						set_millennium_data object: object, value: row[key]
 					end
 				end
 			end # row.keys.each
