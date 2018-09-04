@@ -103,6 +103,12 @@ module ExcelImporterHelper
 				end
 			end # row.keys.each
 
+			if object.errors.size > 0
+				object.errors.full_messages.each do |message|
+					logger.tagged("Row #{i.to_s}"){logger.warn message}
+				end
+			end
+
 			if object.save 
 				logger.tagged("Row #{i.to_s}"){logger.debug "Saved with id #{object.id}"}
 			else
