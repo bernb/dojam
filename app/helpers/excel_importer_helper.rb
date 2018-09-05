@@ -99,6 +99,10 @@ module ExcelImporterHelper
 						set_association object: object, column: :dating_period_id, termlist_value: row[key], current_line: i unless row[key].blank?
 					when :dating_millennium
 						set_millennium_data object: object, value: row[key]
+					when :dating_century
+						set_century_data object: object, value: row[key]
+					when :dating_timespan_begin
+						set_timespan_data object: object, begin_value: row[key], end_value: row[:dating_timespan_end]
 					end
 				end
 			end # row.keys.each
