@@ -75,13 +75,14 @@ module ExcelImporterHelperHelper
 		@@attributes[:inscription_decoration] = "decoration of inscription"
 
 	def set_museum_properties object, row
+		object.storage_location = StorageLocation.find_by name: row[:storage_location]
+		if object.storage_location.blank?
+			object.errors[:base] << "Could not find storage location \"#{row[:storage_location]}\""
+			return
+		end
 		object.inv_number = row[:inv_number]
 		object.inv_extension = row[:inv_extension]
-		object.storage_location = StorageLocation.find_by name: row[:storage_location]
-		object.storage_location.blank?
-		object.errors[:base] << "Could not find storage location \"#{row[:storage_location]}\""
 		object.amount = row[:amount]
-		object.save
 	end
 
 	def resolve_range_entries value

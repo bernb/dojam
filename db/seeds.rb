@@ -36,6 +36,9 @@ storages << storageB
 storages << storageC
 
 
+free_standing = StorageLocation.find_or_create_by name: "free-standing"
+storageA.storage_locations << free_standing
+
 (1..28).each do |n|
   letter = storageA.name[-1] # counts backwards the string thus gets the last char
   location = StorageLocation.find_or_create_by name: "showcase " + letter + n.to_s
