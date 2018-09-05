@@ -22,6 +22,9 @@ module ExcelImporterHelper
 		Rails.logger.info "Trying to match columns..."
 		unused_columns = xlsx.row(1).deep_dup
 		@@attributes.keys.each do |attribute_name|
+			if attribute_name == :name_expedition
+				#debugger
+			end
 			attribute_column_name = @@attributes[attribute_name]
 			if !xlsx.row(1).include? attribute_column_name
 				Rails.logger.warn "Could not find column for attribute #{attribute_name}"
@@ -33,6 +36,7 @@ module ExcelImporterHelper
 		end
 		if unused_columns.present?
 			Rails.logger.warn "Unused columns: #{unused_columns.inspect}"
+			Rails.logger.info "Note that columns \"museum\" and \"kind of site\" are dependent on other columns and thus the information will be retrieved from those columns"
 		end
 
 		i = 0
