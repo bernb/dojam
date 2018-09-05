@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_25_152459) do
+ActiveRecord::Schema.define(version: 2018_09_05_120304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -278,10 +278,6 @@ ActiveRecord::Schema.define(version: 2018_08_25_152459) do
     t.integer "dating_period_id"
     t.integer "dating_millennium_begin_id"
     t.integer "dating_millennium_end_id"
-    t.boolean "is_dating_millennium_begin_bc"
-    t.boolean "is_dating_millennium_end_bc"
-    t.boolean "is_dating_century_begin_bc"
-    t.boolean "is_dating_century_end_bc"
     t.boolean "is_dating_period_unknown"
     t.boolean "is_dating_millennium_unknown"
     t.boolean "is_dating_century_unknown"
