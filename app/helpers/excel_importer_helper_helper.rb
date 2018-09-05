@@ -115,12 +115,19 @@ module ExcelImporterHelperHelper
 	def set_timespan_data object:, begin_value:, end_value: 
 		timespan_begin = nil
 		timespan_end = nil
+		object.is_dating_timespan_unknown = true
+
 		if end_value.present?
 			timespan_begin = begin_value
 			timespan_end = end_value
 		else
 			timespan_begin, timespan_end = resolve_range_entries begin_value
 		end
+
+		if timespan_begin.blank? || timespan_end.blank?
+			return
+		end
+
 		if timespan_begin.include?("BC")
 			object.is_dating_timespan_begin_BC = true
 		elsif timespan_begin.include?("AD")
@@ -129,6 +136,7 @@ module ExcelImporterHelperHelper
 			object.errors[:base] << "Malformed timespan information"
 			return
 		end
+
 		if timespan_end.include?("BC")
 			object.is_dating_timespan_end_BC = true
 		elsif timespan_end.include?("AD")
@@ -137,17 +145,20 @@ module ExcelImporterHelperHelper
 			object.errors[:base] << "Malformed timespan information"
 			return
 		end
+
 		timespan_begin = timespan_begin.split(" ")[0]
 		timespan_end = timespan_end.split(" ")[0]
 		if timespan_begin.match(/\A\d+\z/).blank? || timespan_end.match(/\A\d+\z/).blank?
 			object.errors[:base] << "Malformed timespan information"
 			return
 		end
+		object.is_dating_timespan_unknown = false
 		object.dating_timespan_begin = Date.new timespan_begin.to_i
 		object.dating_timespan_end = Date.new timespan_end.to_i
 	end
 
 	def set_century_data object:, value: 
+		object.is_dating_century_unknown = true
 		cent_begin, cent_end = resolve_range_entries value
 		cent_begin_term = DatingCentury.where("name LIKE ?", cent_begin).first
 		cent_end_term = DatingCentury.where("name LIKE ?", cent_end).first
@@ -159,10 +170,12 @@ module ExcelImporterHelperHelper
 		else
 			object.dating_century_begin = cent_begin_term
 			object.dating_century_end = cent_end_term
+			object.is_dating_century_unknown = false
 		end
 	end
 
 	def set_millennium_data object:, value: 
+		object.is_dating_millennium_unknown = true
 		mil_begin, mil_end = resolve_range_entries value
 		mil_begin_term = DatingMillennium.where("name LIKE ?", mil_begin).first
 		mil_end_term = DatingMillennium.where("name LIKE ?", mil_end).first
@@ -172,6 +185,7 @@ module ExcelImporterHelperHelper
 		elsif mil_end_term.blank?
 			object.errors[:base] << "Could not find #{mil_end} for DatingMillennium"
 		else
+			object.is_dating_millennium_unknown = false
 			object.dating_millennium_begin = mil_begin_term
 			object.dating_millennium_end = mil_end_term
 		end
@@ -222,7 +236,6 @@ module ExcelImporterHelperHelper
 
 	def set_association object:, column:, termlist_value:, current_line:
 		i = current_line
-		logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
 		termlist = column.to_s
 		termlist.slice!("_id")
 		termlist_class = termlist.camelcase.constantize
@@ -230,10 +243,9 @@ module ExcelImporterHelperHelper
 		found_termlist = search_for_possible_props object, termlist_class, termlist_value
 
 		if found_termlist.present?
-			logger.tagged("Row #{i.to_s}"){logger.debug "Setting #{termlist_class.to_s} to #{termlist_value}"}
 			object.send(termlist + "=", found_termlist)
 		else
-			logger.tagged("Row #{i.to_s}"){logger.warn "Could not find #{termlist_value} for #{termlist_class.to_s}"}
+			object.errors[:base] << "Could not find #{termlist_value} for #{termlist_class.to_s}"
 		end
 	end
 
@@ -270,7 +282,6 @@ module ExcelImporterHelperHelper
 
 	def build_sherdname row
 		sherdname = row[:inv_number].to_s
-		puts row[:inv_extension]
 		if row[:inv_extension].present?
 		 sherdname = sherdname + "-" + row[:inv_extension].to_s 
 		end

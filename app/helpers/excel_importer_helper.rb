@@ -86,7 +86,6 @@ module ExcelImporterHelper
 
 
 			row.keys.each do |key|
-				#puts "Current key: #{key.to_s}"
 				if is_simple_attribute key
 					object.send(key.to_s+"=", row[key])
 				elsif is_regular_termlist key
@@ -97,6 +96,11 @@ module ExcelImporterHelper
 						set_boolean_for object, key, row[key]
 					when :dating_period
 						set_association object: object, column: :dating_period_id, termlist_value: row[key], current_line: i unless row[key].blank?
+						if object.dating_period.present?
+							object.is_dating_period_unknown = false
+						else
+							object.is_dating_period_unknown = true
+						end
 					when :dating_millennium
 						set_millennium_data object: object, value: row[key]
 					when :dating_century
@@ -111,6 +115,9 @@ module ExcelImporterHelper
 				object.errors.full_messages.each do |message|
 					logger.tagged("Row #{i.to_s}"){logger.warn message}
 				end
+				logger.tagged("Row #{i.to_s}"){logger.warn "Setting unfinished flag for this object"}
+			else
+				object.is_finished = true
 			end
 
 			if object.save 
