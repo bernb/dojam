@@ -112,6 +112,56 @@ module ExcelImporterHelperHelper
 		return range_begin, range_end
 	end
 
+	def set_timespan_data object:, begin_value:, end_value: 
+		timespan_begin = nil
+		timespan_end = nil
+		if end_value.present?
+			timespan_begin = begin_value
+			timespan_end = end_value
+		else
+			timespan_begin, timespan_end = resolve_range_entries begin_value
+		end
+		if timespan_begin.include?("BC")
+			object.is_dating_timespan_begin_BC = true
+		elsif timespan_begin.include?("AD")
+			object.is_dating_timespan_begin_BC = false
+		else
+			object.errors[:base] << "Malformed timespan information"
+			return
+		end
+		if timespan_end.include?("BC")
+			object.is_dating_timespan_end_BC = true
+		elsif timespan_end.include?("AD")
+			object.is_dating_timespan_end_BC = false
+		else
+			object.errors[:base] << "Malformed timespan information"
+			return
+		end
+		timespan_begin = timespan_begin.split(" ")[0]
+		timespan_end = timespan_end.split(" ")[0]
+		if timespan_begin.match(/\A\d+\z/).blank? || timespan_end.match(/\A\d+\z/).blank?
+			object.errors[:base] << "Malformed timespan information"
+			return
+		end
+		object.dating_timespan_begin = Date.new timespan_begin.to_i
+		object.dating_timespan_end = Date.new timespan_end.to_i
+	end
+
+	def set_century_data object:, value: 
+		cent_begin, cent_end = resolve_range_entries value
+		cent_begin_term = DatingCentury.where("name LIKE ?", cent_begin).first
+		cent_end_term = DatingCentury.where("name LIKE ?", cent_end).first
+
+		if cent_begin_term.blank?
+			object.errors[:base] << "Could not find #{cent_begin} for DatingCentury"
+		elsif cent_end_term.blank?
+			object.errors[:base] << "Could not find #{cent_end} for DatingCentury"
+		else
+			object.dating_century_begin = cent_begin_term
+			object.dating_century_end = cent_end_term
+		end
+	end
+
 	def set_millennium_data object:, value: 
 		mil_begin, mil_end = resolve_range_entries value
 		mil_begin_term = DatingMillennium.where("name LIKE ?", mil_begin).first
@@ -220,7 +270,10 @@ module ExcelImporterHelperHelper
 
 	def build_sherdname row
 		sherdname = row[:inv_number].to_s
-		sherdname + "-" + row[:inv_extension].to_s unless row[:inv_extension].blank?
+		puts row[:inv_extension]
+		if row[:inv_extension].present?
+		 sherdname = sherdname + "-" + row[:inv_extension].to_s 
+		end
 		return sherdname
 	end
 
