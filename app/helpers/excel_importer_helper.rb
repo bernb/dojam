@@ -111,8 +111,33 @@ module ExcelImporterHelper
 						set_century_data object: object, value: row[key]
 					when :dating_timespan_begin
 						set_timespan_data object: object, begin_value: row[key], end_value: row[:dating_timespan_end]
-					end
-				end
+					when :colors
+						colors = split_entry row[key]
+						colors.each do |color|
+							set_association object: object, column: :color, termlist_value: color, current_line: i unless color.blank?
+						end
+					when :secondary_material
+						if row[key].present?
+							material = Material.find_by name: row[key]
+							if material.blank?
+								object.errors[:base] << "Could not find secondary material #{row[key]}"
+							else
+								# Right now materials (specified) has kind of weird interface
+								object.materials = [material]
+							end
+						end # row[key] present
+					when :main_material_specified
+						if row[key].include?(',')
+							ms_name = split_entry(row[key])[1]
+							ms = MaterialSpecified.find_by name: ms_name
+							if ms.blank?
+								object.errors[:base] << "Could not find secondary material specified #{ms_name}"
+							else 
+								object.material_specifieds = [ms]
+							end
+						end # row[:main_material_specified] include ','
+					end # case key
+				end # complex attribute
 			end # row.keys.each
 
 			if object.errors.size > 0
