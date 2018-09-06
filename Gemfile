@@ -114,6 +114,7 @@ group :development do
   # For call-stack profiling flamegraphs used by rack-mini-profiler
   gem 'flamegraph'
   gem 'stackprof'
+	gem 'ruby-prof'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
