@@ -27,7 +27,7 @@ module ExcelImporterHelperHelper
 		@@attributes[:finding_remarks] = "remarks provenance"
 
 		@@attributes[:main_material] = "primary material"
-		@@attributes[:main_materials] = "secondary material"
+		@@attributes[:secondary_material] = "secondary material"
 		@@attributes[:main_material_specified] = "material specified"
 		@@attributes[:kind_of_object] = "kind of object"
 		@@attributes[:kind_of_object_specified] = "kind of object specified"
@@ -82,6 +82,11 @@ module ExcelImporterHelperHelper
 		object.inv_number = row[:inv_number]
 		object.inv_extension = row[:inv_extension]
 		object.amount = row[:amount]
+	end
+
+	def split_entry value
+		value_array = value.split(',')
+		value_array.each(&:strip!)
 	end
 
 	def resolve_range_entries value
@@ -255,7 +260,12 @@ module ExcelImporterHelperHelper
 		end
 
 		material = Material.find_by name: row[:main_material]
-		material_specified = MaterialSpecified.find_by name: row[:main_material_specified]
+		if row[:main_material_specified].include?(',')
+			ms_string = split_entry(row[:main_material_specified])[0]
+		else
+			ms_string = row[:main_material_specified]
+		end
+		material_specified = MaterialSpecified.find_by name: ms_string
 		kind_of_object = KindOfObject.find_by name: row[:kind_of_object]
 		kind_of_object_specified = KindOfObjectSpecified.find_by name: row[:kind_of_object_specified]
 		return material, material_specified, kind_of_object, kind_of_object_specified
