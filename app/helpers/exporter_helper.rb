@@ -3,6 +3,7 @@ module ExporterHelper
 
 	def self.call material
 		h = Hash.new
+		general_terms = Hash.new
 		h[:material] = material.name
 		material_specified_ids = material.paths.first.direct_children.map(&:ids).map(&:second)
 		material_specifieds = MaterialSpecified.find(material_specified_ids)
@@ -19,8 +20,25 @@ module ExporterHelper
 			end
 		end
 
+		# Build termlists now
+		m_id = material.id
+		ms_id = material_specified_ids.first
+		koo_id = kind_of_objects.first.id
+		termlist_names = Termlist.all.map(&:type).uniq
+		termlist_names.each do |termlist_name|
+			termlist = termlist_name.constantize
+			if !termlist.is_independent_of_paths
+				terms = termlist.joins(:paths).where("paths.path LIKE ?", "/#{m_id}/#{ms_id}/#{koo_id}%").where("name != ?", "undetermined").uniq
+				h[termlist_name] = terms.map(&:name) unless terms.empty?
+			else
+				general_terms[termlist_name] = termlist.all.map(&:name)
+			end
+		end
 
+		# We produce one wrong entry with the sql queries
+		h.delete("KindOfObject")
 
+		ap general_terms
 		ap h
 	end
 
