@@ -17,6 +17,7 @@ def new_import material_hash
 	termlist_paths = []
 	endpoint_paths = []
 
+
 	material = Material.find_or_create_by name: material_hash[:material_name]
 	path = Path.find_or_create_by path:  "/#{material.id.to_s}"
 	termlist_paths << [material.id, path.id]
@@ -58,6 +59,9 @@ def new_import material_hash
 		new_termlist_ids = new_termlists.map(&:id)
 		endpoint_paths.map{|p| new_termlists.map{|t| termlist_paths << [t.id, p.id]}}
 	end
+
+	Rails.logger.info " Import #{termlist_paths.size} paths now"
+	TermlistPath.import termlist_paths_columns, termlist_paths, validate: false
 end
 
 
@@ -119,6 +123,7 @@ def import_material data
 
 end
  
+Rails.logger.info "*** Starting termlist import ***"
 global_variables.select{|var| var.to_s.ends_with? "_data"}
 								.reject{|var| var.to_s.include? "test"}
 								.each do |material_data|
@@ -128,4 +133,5 @@ global_variables.select{|var| var.to_s.ends_with? "_data"}
 #	import_material eval(material_data.to_s)
 #	import_dating_data
 end
- import_material $test_data
+Rails.logger.info "*** Finished termlist import ***"
+# import_material $test_data
