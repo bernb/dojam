@@ -1,4 +1,4 @@
-$stone_data = {
+$flint_data = {
 
   material_name: "stone/mineral",
 

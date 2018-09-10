@@ -1,4 +1,4 @@
-$metal_data = {
+$iron_data = {
   
   material_name: "metal",
   
@@ -27,11 +27,11 @@ $metal_data = {
     "brown",
     "geometrical" 
   ],
-  decorations_techniques: [
+  decoration_techniques: [
     "engraving",
 		"none"
   ],
-  decorations_styles: [
+  decoration: [
     "figurative",
     "geometrical",
 		"none"

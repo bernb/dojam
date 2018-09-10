@@ -1,4 +1,4 @@
-$stone_data = {
+$data_languages = {
 
   inscriptions: "inscriptions",
 

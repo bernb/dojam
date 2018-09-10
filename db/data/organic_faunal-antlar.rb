@@ -1,4 +1,4 @@
-$organic_data = {
+$faunal_data = {
 
 	material_name: "organic material (faunal)",
 
@@ -6,8 +6,7 @@ $organic_data = {
 		"antlar"
 	],
 	kind_of_objects: [
-		"artifact"
-	],
-	"unworked remains": [
+		"artifact",
+		"unworked remains"
 	]
 }
