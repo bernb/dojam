@@ -1,4 +1,4 @@
-$metal_data = {
+$gold_data = {
 
 	material_name: "metal",
 
@@ -23,7 +23,7 @@ $metal_data = {
 	colors: [
 		"gold-colored"
 	],
-	decorations_techniques: [
+	decoration_techniques: [
 		"engraving",
 		"granulation",
 		"inlay",

@@ -1,4 +1,4 @@
-$metal_data = {
+$bronze_data = {
   
   material_name: "metal",
   

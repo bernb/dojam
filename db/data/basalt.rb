@@ -1,4 +1,4 @@
-$stone_data = {
+$basalt_data = {
 
   material_name: "stone/mineral",
 

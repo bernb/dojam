@@ -1,4 +1,4 @@
-$stone_data = {
+$stone_unspecified_data = {
 
 	material_name: "stone/mineral",
 

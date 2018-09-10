@@ -1,4 +1,4 @@
-$stone_data = {
+$marble_data = {
 
 	material_name: "stone/mineral",
 
