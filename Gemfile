@@ -87,6 +87,8 @@ gem 'activerecord-import'
 # makes credential in config/application.yml available for rail (added to .gitignore)
 gem "figaro"
 
+gem 'activerecord-import'
+
 gem 'acts_as_list'
 
 group :development, :test do
