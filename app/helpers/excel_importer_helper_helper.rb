@@ -73,6 +73,7 @@ module ExcelImporterHelperHelper
 		@@attributes[:name_mega_jordan] = "site name according to MEGA"
 		@@attributes[:inscription_decoration] = "decoration of inscription"
 
+
 	def set_museum_properties object, row
 		object.storage_location = StorageLocation.find_by name: row[:storage_location]
 		if object.storage_location.blank?
@@ -82,6 +83,14 @@ module ExcelImporterHelperHelper
 		object.inv_number = row[:inv_number]
 		object.inv_extension = row[:inv_extension]
 		object.amount = row[:amount]
+	end
+
+	def add_termlist_not_found_error object:, value:, termlist_name:, with_path: false
+		if with_path == false
+			object.errors[:base] << "Could not find #{value} in #{termlist_name}"
+		else
+			object.errors[:base] << "Could not find #{value} as valid valid #{termlist_name} value for #{object.main_path.named_path}"
+		end
 	end
 
 	def split_entry value
@@ -237,6 +246,18 @@ module ExcelImporterHelperHelper
 			found_termlist = nil
 		end
 		return found_termlist
+	end
+
+	def set_color object:, values:
+		colors = []
+		values.each do |color_name|
+			color = search_for_possible_props object, Color, color_name
+			if color.blank?
+				add_termlist_not_found_error object: object, value: color_name, termlist_name: "Color", with_path: true
+				next
+			end
+			object.colors << color
+		end
 	end
 
 	def set_association object:, column:, termlist_value:, current_line:
