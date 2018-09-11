@@ -2,6 +2,10 @@ class MuseumObjectDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
 
+	def coordinates_mega
+		"#{self.coordinates_mega_lat} lat; #{self.coordinates_mega_long} long"
+	end
+
 	def dating_millennium
 		if self.is_dating_millennium_unknown? || self.dating_millennium_begin.blank? || self.dating_millennium_begin.blank?
 			return "unknown"
