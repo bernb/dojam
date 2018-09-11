@@ -89,7 +89,7 @@ module ExcelImporterHelperHelper
 		if with_path == false
 			object.errors[:base] << "Could not find #{value} in #{termlist_name}"
 		else
-			object.errors[:base] << "Could not find #{value} as valid valid #{termlist_name} value for #{object.main_path.named_path}"
+			object.errors[:base] << "Could not find #{value} as valid #{termlist_name} value for #{object.main_path.named_path}"
 		end
 	end
 
