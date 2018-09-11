@@ -77,7 +77,7 @@ module ExcelImporterHelperHelper
 	def set_museum_properties object, row
 		object.storage_location = StorageLocation.find_by name: row[:storage_location]
 		if object.storage_location.blank?
-			object.errors[:base] << "Could not find storage location \"#{row[:storage_location]}\""
+			add_termlist_not_found_error object: object, value: row[:storage_location], termlist_name: "StorageLocation"
 			return
 		end
 		object.inv_number = row[:inv_number]
@@ -178,9 +178,9 @@ module ExcelImporterHelperHelper
 		cent_end_term = DatingCentury.where("name LIKE ?", cent_end).first
 
 		if cent_begin_term.blank?
-			object.errors[:base] << "Could not find #{cent_begin} for DatingCentury"
+			add_termlist_not_found_error object: object, value: cent_begin, termlist_name: "DatingCentury"
 		elsif cent_end_term.blank?
-			object.errors[:base] << "Could not find #{cent_end} for DatingCentury"
+			add_termlist_not_found_error object: object, value: cent_end, termlist_name: "DatingCentury"
 		else
 			object.dating_century_begin = cent_begin_term
 			object.dating_century_end = cent_end_term
@@ -195,9 +195,10 @@ module ExcelImporterHelperHelper
 		mil_end_term = DatingMillennium.where("name LIKE ?", mil_end).first
 
 		if mil_begin_term.blank?
-			object.errors[:base] << "Could not find #{mil_begin} for DatingMillennium"
+			add_termlist_not_found_error object: object, value: mil_begin, termlist_name:"DatingMillenniun"
+
 		elsif mil_end_term.blank?
-			object.errors[:base] << "Could not find #{mil_end} for DatingMillennium"
+			add_termlist_not_found_error object: object, value: mil_end, termlist_name: "DatingMillenniun"
 		else
 			object.is_dating_millennium_unknown = false
 			object.dating_millennium_begin = mil_begin_term
@@ -209,19 +210,19 @@ module ExcelImporterHelperHelper
 		material, material_specified, kind_of_object, kind_of_object_specified = assign_material_related_termlists row
 
 		if material.blank?
-			object.errors[:base] << "Could not find material \"#{row[:main_material]}\""
+			add_termlist_not_found_error object: object, value: row[:main_material], termlist_name: "Material"
 			return
 		end
 		if material_specified.blank?
-			object.errors[:base] << "Could not find specified material \"#{row[:main_material_specified]}\""
+			add_termlist_not_found_error object: object, value: row[:main_material_specified], termlist_name: "MaterialSpecified"
 			return
 		end
 		if kind_of_object.blank?
-			object.errors[:base] << "Could not find kind of object \"#{row[:kind_of_object]}\""
+			add_termlist_not_found_error object: object, value: row[:kind_of_object], termlist_name: "KindOfObject"
 			return
 		end
 		if kind_of_object_specified.blank?
-			object.errors[:base] << "Could not find specified kind of object \"#{row[:kind_of_object_specified]}\""
+			add_termlist_not_found_error object: object, value: row[:kind_of_object_specified], termlist_name: "KindOfObjectSpecified"
 			return
 		end
 
@@ -271,7 +272,7 @@ module ExcelImporterHelperHelper
 		if found_termlist.present?
 			object.send(termlist + "=", found_termlist)
 		else
-			object.errors[:base] << "Could not find #{termlist_value} for #{termlist_class.to_s}"
+			add_termlist_not_found_error object: object, value: termlist_value, termlist_name: termlist_class.to_s, with_path: true
 		end
 	end
 
