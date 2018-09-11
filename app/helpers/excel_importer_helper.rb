@@ -2,7 +2,7 @@ module ExcelImporterHelper
 	require 'roo'
 	include ExcelImporterHelperHelper
 
-	def import_excel_from_file file
+	def import_excel_from_file file, ignore_keys: nil
 		logger = ActiveSupport::TaggedLogging.new(Logger.new("#{Rails.root}/log/excel_importer.log"))
 		xlsx = Roo::Spreadsheet.open(file)
 		default_sheet = nil
@@ -10,6 +10,10 @@ module ExcelImporterHelper
 			if sheet.include? "import"
 				default_sheet = sheet
 			end
+		end
+
+		if ignore_keys.present?
+			@@attributes.reject!{|a| ignore_keys.include? a}
 		end
 
 		if default_sheet.blank?
