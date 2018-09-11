@@ -3,6 +3,7 @@ module ExcelImporterHelper
 	include ExcelImporterHelperHelper
 
 	def import_excel_from_file file
+		logger = ActiveSupport::TaggedLogging.new(Logger.new("#{Rails.root}/log/excel_importer.log"))
 		xlsx = Roo::Spreadsheet.open(file)
 		default_sheet = nil
 		xlsx.sheets.each do |sheet|
@@ -12,14 +13,14 @@ module ExcelImporterHelper
 		end
 
 		if default_sheet.blank?
-			Rails.logger.error "Could not find an 'import' sheet. Aborting"
+			logger.error "Could not find an 'import' sheet. Aborting"
 			return
 		else
-			Rails.logger.info "Using sheet for import: #{default_sheet}"
+			logger.info "Using sheet for import: #{default_sheet}"
 			xlsx.default_sheet = default_sheet
 		end
 
-		Rails.logger.info "Trying to match columns..."
+		logger.info "Trying to match columns..."
 		unused_columns = xlsx.row(1).deep_dup
 		@@attributes.keys.each do |attribute_name|
 			if attribute_name == :name_expedition
@@ -27,20 +28,19 @@ module ExcelImporterHelper
 			end
 			attribute_column_name = @@attributes[attribute_name]
 			if !xlsx.row(1).include? attribute_column_name
-				Rails.logger.warn "Could not find column for attribute #{attribute_name}"
-				Rails.logger.warn "Was looking for: #{attribute_column_name}"
+				logger.warn "Could not find column for attribute #{attribute_name}"
+				logger.warn "Was looking for: #{attribute_column_name}"
 				@@attributes.delete(attribute_name)
 			else
 				unused_columns.delete(attribute_column_name)
 			end
 		end
 		if unused_columns.present?
-			Rails.logger.warn "Unused columns: #{unused_columns.inspect}"
-			Rails.logger.info "Note that columns \"museum\" and \"kind of site\" are dependent on other columns and thus the information will be retrieved from those columns"
+			logger.warn "Unused columns: #{unused_columns.inspect}"
+			logger.info "Note that columns \"museum\" and \"kind of site\" are dependent on other columns and thus the information will be retrieved from those columns"
 		end
 
 		i = 0
-		logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
 
 		# Note that this is a roo specific method each(), unfortunately we can't use any of
 		# the many variants ruby gives us for arrays or ranges, like skipping the first and alike
