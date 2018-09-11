@@ -36,7 +36,7 @@ def new_import material_hash
 			koo_hash = kind_of_object_name
 			kind_of_object_name = koo_hash.keys.first
 			koo = KindOfObject.find_or_create_by name: kind_of_object_name
-			koo_hash.values[0].each do |koos_name|
+			koo_hash.values[0].push("undetermined").each do |koos_name|
 				koos = KindOfObjectSpecified.find_or_create_by name: koos_name
 				path_names = ms_ids.map{|ms_id| "/#{material.id}/#{ms_id.to_s}/#{koo.id.to_s}/#{koos.id.to_s}"}
 				paths = path_names.map{|p| Path.find_or_create_by path: p}
@@ -45,6 +45,11 @@ def new_import material_hash
 			end
 		else
 			koo = KindOfObject.find_or_create_by name: kind_of_object_name
+			path_names = ms_ids.map{|ms_id| "/#{material.id}/#{ms_id.to_s}/#{koo.id.to_s}"}
+			paths = path_names.map{|p| Path.find_or_create_by path: p}
+			endpoint_paths += paths
+			paths.each{|p| termlist_paths << [koo.id, p.id]}
+			undetermined = KindOfObject.find_or_create_by name: "undetermined"
 			path_names = ms_ids.map{|ms_id| "/#{material.id}/#{ms_id.to_s}/#{koo.id.to_s}"}
 			paths = path_names.map{|p| Path.find_or_create_by path: p}
 			endpoint_paths += paths
@@ -61,7 +66,9 @@ def new_import material_hash
 	end
 
 	Rails.logger.info " Import #{termlist_paths.size} paths now"
-	TermlistPath.import termlist_paths_columns, termlist_paths, validate: false
+	# Note for example path for metal (material) will show up several times if for example
+	# Two files specifying two material specified for metal exist
+	TermlistPath.import termlist_paths_columns, termlist_paths, validate: false, on_duplicate_key_ignore: true
 end
 
 
