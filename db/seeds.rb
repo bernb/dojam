@@ -71,64 +71,6 @@ def new_import material_hash
 	TermlistPath.import termlist_paths_columns, termlist_paths, validate: false, on_duplicate_key_ignore: true
 end
 
-
-
-
-def build_termlists data, path
-	p = Path.find_or_initialize_by path: path
-	termlist_names(data).each do |termlist|
-		classname = termlist.to_s.classify.constantize
-		data[termlist].each do |name|
-			t = classname.find_or_initialize_by name: name
-			t.paths << p
-		end
-		# Create undetermined entry by default
-		# This was too slow and made termlist_paths table 2,5 the size it was so we now
-		# merge undetermined entries within the museum_object model when getting possible properties
-		 undetermined_entry = classname.find_or_initialize_by name: "undetermined"
-		 undetermined_entry.paths << p
-	end
-end
-
-def import_material data 
-	if data[:material_name].empty?
-		Rails.logger.error "*** No material given with data hash. ***"
-		Rails.logger.error "Given data hash: " + data.to_s
-		return
-	end
-	paths = []
-	material = Material.find_or_initialize_by(name: data[:material_name])
-	# ToDo: Test if even needed at the moment
-	path = Path.find_or_initialize_by path: "/#{material.id}"
-	material.paths << path
-	data[:material_specifieds].each do |ms_name|
-		material_specified = MaterialSpecified.find_or_initialize_by name: ms_name
-		Path.find_or_initialize_by path: "/#{material.id}/#{material_specified.id}"
-		data[:kind_of_objects].each do |koo_name|
-			# if entry is hash, kind of object specifieds are present
-			if koo_name.is_a? Hash
-				koo = KindOfObject.find_or_initialize_by name: koo_name.keys[0].to_s
-				material_specified.attach_child koo
-				koo_name.values[0].each do |koos_name|
-					koos = KindOfObjectSpecified.find_or_initialize_by name: koos_name
-					# Note: here is the error, this iterates over ALL koo paths and attach /*/*/*/koos.id which is wrong
-					koo.attach_child koos
-					path = PathGetter.call material: material, material_specified: material_specified, kind_of_object: koo, kind_of_object_specified: koos
-					build_termlists data, path
-				end # koos	
-			else # if not hash
-				koo = KindOfObject.find_or_initialize_by name: koo_name
-				material_specified.attach_child koo
-				path = PathGetter.call material: material, material_specified: material_specified, kind_of_object: koo
-				build_termlists data, path
-			end # if not hash
-			undetermined_koos = KindOfObjectSpecified.find_or_initialize_by name: "undetermined"
-			koo.attach_child undetermined_koos
-
-		end # each kind of object
-	end # each material specified
-
-end
  
 Rails.logger.info "*** Starting termlist import ***"
 global_variables.select{|var| var.to_s.ends_with? "_data"}
@@ -137,8 +79,6 @@ global_variables.select{|var| var.to_s.ends_with? "_data"}
 	Rails.logger.info "Importing variable " + material_data.to_s
 	# Eval as material_data is given as a symbol
 	new_import eval(material_data.to_s)
-#	import_material eval(material_data.to_s)
-#	import_dating_data
 end
+import_dating_data
 Rails.logger.info "*** Finished termlist import ***"
-# import_material $test_data

@@ -113,9 +113,7 @@ module ExcelImporterHelper
 						set_timespan_data object: object, begin_value: row[key], end_value: row[:dating_timespan_end]
 					when :colors
 						colors = split_entry row[key]
-						colors.each do |color|
-							set_association object: object, column: :color, termlist_value: color, current_line: i unless color.blank?
-						end
+						set_color(object: object, values: colors) unless colors.blank?
 					when :secondary_material
 						if row[key].present?
 							material = Material.find_by name: row[key]
