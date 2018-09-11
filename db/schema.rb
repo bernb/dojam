@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_05_120304) do
+ActiveRecord::Schema.define(version: 2018_09_11_054325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -302,6 +302,7 @@ ActiveRecord::Schema.define(version: 2018_09_05_120304) do
     t.string "path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["path"], name: "index_paths_on_path", unique: true
   end
 
   create_table "preservation_materials_ms_koo_specs", force: :cascade do |t|
@@ -586,6 +587,7 @@ ActiveRecord::Schema.define(version: 2018_09_05_120304) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["path_id"], name: "index_termlist_paths_on_path_id"
+    t.index ["termlist_id", "path_id"], name: "index_termlist_paths_on_termlist_id_and_path_id", unique: true
     t.index ["termlist_id"], name: "index_termlist_paths_on_termlist_id"
   end
 
