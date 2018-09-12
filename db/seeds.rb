@@ -1,2 +1,2 @@
-require "#{Rails.root}/db/general.rb"
-require "#{Rails.root}/db/material.rb"
+require "#{Rails.root}/db/seeds/general.rb"
+require "#{Rails.root}/db/seeds/material.rb"
