@@ -92,10 +92,13 @@ module ExcelImporterHelper
 				next
 			end
 
-
 			row.keys.each do |key|
 				if is_simple_attribute key
-					object.send(key.to_s+"=", row[key])
+					if is_correct_format key, row[key]
+						object.send(key.to_s+"=", row[key])
+					else
+						object.errors[:base] << "Invalid format \"#{row[key]}\" for #{key}"
+					end
 				elsif is_regular_termlist key
 					set_association object: object, column: key, termlist_value: row[key], current_line: i unless row[key].blank?
 				elsif is_complex_attribute key

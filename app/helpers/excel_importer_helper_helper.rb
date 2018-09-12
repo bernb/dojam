@@ -293,6 +293,24 @@ module ExcelImporterHelperHelper
 		return material, material_specified, kind_of_object, kind_of_object_specified
 	end
 
+	def is_correct_format key, value
+		# Does not work as intended right now as
+		# roo converts number-like values into ruby Fixnum, 
+		# need a way to get unformatted value with current approach
+		return true
+		number_array = [
+			:max_length,
+			:max_width,
+			:height,
+			:opening_dm,
+			:bottom_dm,
+			:weight_in_gram
+		]
+		if number_array.include?(key)
+			return /^(\d{1,3}\.\d{1,2}|\d{1,3})$/.match? value
+		end
+		return true
+	end
 
 	def is_simple_attribute key
 		MuseumObject.method_defined?(key.to_s+"=") &&	!is_complex_attribute(key)
