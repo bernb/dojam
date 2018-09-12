@@ -1,4 +1,4 @@
-$silk_data = {
+$silk_material_data = {
 
 	material_name: "organic material (faunal)",
 

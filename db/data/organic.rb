@@ -1,4 +1,4 @@
-$organic_data = {
+$organic_material_data = {
   
   material_name: "organic material",
 

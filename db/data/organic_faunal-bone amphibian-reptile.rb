@@ -1,4 +1,4 @@
-$bone_data = {
+$bone_material_data = {
 
 	material_name: "organic material (faunal)",
 

@@ -1,4 +1,4 @@
-$calcite_data = {
+$calcite_material_data = {
 
 	material_name: "stone/mineral",
 

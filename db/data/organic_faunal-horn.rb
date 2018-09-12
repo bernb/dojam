@@ -1,4 +1,4 @@
-$horn_data = {
+$horn_material_data = {
 
 	material_name: "organic material (faunal)",
 

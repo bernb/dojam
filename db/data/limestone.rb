@@ -1,4 +1,4 @@
-$limestone_data = {
+$limestone_material_data = {
 
 	material_name: "stone/mineral",
 
