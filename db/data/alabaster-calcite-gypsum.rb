@@ -1,4 +1,4 @@
-$alabaster_c_data = {
+$alabaster_c_material_data = {
 
 	material_name: "stone/mineral",
 

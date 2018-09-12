@@ -1,84 +1,30 @@
 Dir["#{Rails.root}/db/data/*.rb"].reject{|file| file.include?("test") || file.include?("general") }.each {|file| require file}
-require "#{Rails.root}/db/data/general_data.rb"
-require "#{Rails.root}/db/data/material_test.rb"
+Dir["#{Rails.root}/db/data/general_terms/*.rb"].reject{|file| file.include?("test")}.each {|file| require file}
 
-
-def termlist_names data, all = false
-	if all
-		data.keys
-	else
-		data.keys.reject{|var| var.to_s.starts_with?("material") || var.to_s.starts_with?("kind_of_object")}
-	end
+# *** Import museum and storage data ***
+$museum_storage_data.keys.each do |museum_name|
+	data = $museum_storage_data[museum_name]
+	museum = Museum.find_or_create_by name: museum_name
+	museum.prefix = data[:prefix]
+	data[:storages].keys.each do |storage_name|
+		storage =	Storage.find_or_create_by name: storage_name, museum_id: museum.id
+		museum.storages << storage
+		data[:storages][storage_name].each do |storage_location_name|
+			storage_location = StorageLocation.find_or_create_by name: storage_location_name, storage_id: storage.id
+			storage.storage_locations << storage_location
+		end # storage locations
+		storage.save!
+	end # storages
+	museum.save!
 end
 
-
-def new_import material_hash
-	termlist_paths_columns = [:termlist_id, :path_id]
-	termlist_paths = []
-	endpoint_paths = []
-
-
-	material = Material.find_or_create_by name: material_hash[:material_name]
-	path = Path.find_or_create_by path:  "/#{material.id.to_s}"
-	termlist_paths << [material.id, path.id]
-
-	ms_ids = []
-	material_hash[:material_specifieds].each do |material_specified_name|
-		ms = MaterialSpecified.find_or_create_by name: material_specified_name
-		path = Path.find_or_create_by path: "/#{material.id.to_s}/#{ms.id.to_s}"
-		termlist_paths << [ms.id, path.id]
-		ms_ids << ms.id # Used in next step by kind of objects
-	end
-	
-	material_hash[:kind_of_objects].each do |kind_of_object_name|
-		koo_hash = nil
-		if kind_of_object_name.is_a? Hash
-			koo_hash = kind_of_object_name
-			kind_of_object_name = koo_hash.keys.first
-			koo = KindOfObject.find_or_create_by name: kind_of_object_name
-			koo_hash.values[0].push("undetermined").each do |koos_name|
-				koos = KindOfObjectSpecified.find_or_create_by name: koos_name
-				path_names = ms_ids.map{|ms_id| "/#{material.id}/#{ms_id.to_s}/#{koo.id.to_s}/#{koos.id.to_s}"}
-				paths = path_names.map{|p| Path.find_or_create_by path: p}
-				endpoint_paths += paths
-				paths.each{|p| termlist_paths << [koos.id, p.id]}
-			end
-		else
-			koo = KindOfObject.find_or_create_by name: kind_of_object_name
-			path_names = ms_ids.map{|ms_id| "/#{material.id}/#{ms_id.to_s}/#{koo.id.to_s}"}
-			paths = path_names.map{|p| Path.find_or_create_by path: p}
-			endpoint_paths += paths
-			paths.each{|p| termlist_paths << [koo.id, p.id]}
-			undetermined = KindOfObject.find_or_create_by name: "undetermined"
-			path_names = ms_ids.map{|ms_id| "/#{material.id}/#{ms_id.to_s}/#{koo.id.to_s}"}
-			paths = path_names.map{|p| Path.find_or_create_by path: p}
-			endpoint_paths += paths
-			paths.each{|p| termlist_paths << [koo.id, p.id]}
-		end
-	end
-
-	rejects = [:material_name, :material_specifieds, :kind_of_objects]
-	material_hash.keys.reject{|name| name.in?(rejects)}.each do |termlist_name|
-		termlist_class = termlist_name.to_s.camelize.singularize.constantize
-		new_termlists = material_hash[termlist_name].push("undetermined").map{|tname| termlist_class.find_or_create_by name: tname}
-		new_termlist_ids = new_termlists.map(&:id)
-		endpoint_paths.map{|p| new_termlists.map{|t| termlist_paths << [t.id, p.id]}}
-	end
-
-	Rails.logger.info " Import #{termlist_paths.size} paths now"
-	# Note for example path for metal (material) will show up several times if for example
-	# Two files specifying two material specified for metal exist
-	TermlistPath.import termlist_paths_columns, termlist_paths, validate: false, on_duplicate_key_ignore: true
-end
-
- 
 Rails.logger.info "*** Starting termlist import ***"
-global_variables.select{|var| var.to_s.ends_with? "_data"}
+global_variables.select{|var| var.to_s.ends_with? "_material_data"}
 								.reject{|var| var.to_s.include? "test"}
 								.each do |material_data|
 	Rails.logger.info "Importing variable " + material_data.to_s
 	# Eval as material_data is given as a symbol
-	new_import eval(material_data.to_s)
+#	material_import eval(material_data.to_s)
 end
-import_dating_data
+# import_dating_data
 Rails.logger.info "*** Finished termlist import ***"

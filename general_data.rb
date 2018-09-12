@@ -1,7 +1,6 @@
 # ***************************
 # *** museum and storages ***
 # ***************************
-museum = Museum.find_or_create_by name: "JAM", prefix: "J"
 
 AcquisitionKind.find_or_create_by name: "chance find"
 AcquisitionKind.find_or_create_by name: "confiscation"
@@ -23,40 +22,6 @@ Authenticity.find_or_create_by name: "forgery"
 Authenticity.find_or_create_by name: "unspecific"
 Authenticity.find_or_create_by name: "unknown"
 
-storages = []
-
-storageA = Storage.find_or_create_by name: "hall A"
-storageB = Storage.find_or_create_by name: "hall B"
-storageC = Storage.find_or_create_by name: "hall C"
-storages << storageA
-storages << storageB
-storages << storageC
-
-
-free_standing = StorageLocation.find_or_create_by name: "free-standing"
-storageA.storage_locations << free_standing
-
-(1..28).each do |n|
-  letter = storageA.name[-1] # counts backwards the string thus gets the last char
-  location = StorageLocation.find_or_create_by name: "showcase " + letter + n.to_s
-  storageA.storage_locations << location
-end
-
-
-(1..5).each do |n|
-  letter = storageB.name[-1] # counts backwards the string thus gets the last char
-  location = StorageLocation.find_or_create_by name: "showcase " + letter + n.to_s
-  storageB.storage_locations << location
-end
-
-(1..11).each do |n|
-  letter = storageC.name[-1] # counts backwards the string thus gets the last char
-  location = StorageLocation.find_or_create_by name: "showcase " + letter + n.to_s
-  storageC.storage_locations << location
-end
-
-museum.storages << storages
-museum.save!
 
 # ***************************************
 # *** excavation sites and site kinds ***

@@ -1,4 +1,4 @@
-$bone_bird_data = {
+$bone_bird_material_data = {
 
 	material_name: "organic material (faunal)",
 

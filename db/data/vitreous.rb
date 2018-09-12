@@ -1,4 +1,4 @@
-$vitreous_data = {
+$vitreous_material_data = {
 
   material_name: "vitreous material",
 
