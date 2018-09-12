@@ -2,6 +2,55 @@ class MuseumObjectDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
 
+	def max_length_decorated
+		if self.max_length.blank? 
+			"undetermined"
+		else
+			self.max_length
+		end
+	end
+
+	def max_width_decorated
+		if self.max_width.blank? 
+			"undetermined"
+		else
+			self.max_width
+		end
+		j
+	end
+
+	def height_decorated
+		if self.height.blank? 
+			"undetermined"
+		else
+			self.height
+		end
+	end
+
+	def opening_dm_decorated
+		if self.opening_dm.blank? 
+			"undetermined"
+		else
+			self.opening_dm
+		end
+	end
+	
+	def bottom_dm_decorated
+		if self.bottom_dm.blank? 
+			"undetermined"
+		else
+			self.bottom_dm
+		end
+	end
+
+	def weight_in_gram_decorated
+		if self.weight_in_gram.blank? 
+			"undetermined"
+		else
+			self.weight_in_gram
+		end
+	end
+
 	def coordinates_mega
 		"#{self.coordinates_mega_lat} lat; #{self.coordinates_mega_long} long"
 	end
