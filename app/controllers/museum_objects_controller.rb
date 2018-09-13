@@ -7,6 +7,7 @@ class MuseumObjectsController < ApplicationController
     musem_objects = MuseumObject.find :all, limit: 100
   end
   @museum_cards = MuseumCardDecorator.decorate_collection(museum_objects)
+	@museum_objects = museum_objects.map(&:decorate)
   # We use a hash to allow more complex variants later
   # But for now only the key is used by museum card decorator
   @variant = {"edit": nil}

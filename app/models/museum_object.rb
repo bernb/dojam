@@ -254,6 +254,7 @@ class MuseumObject < ApplicationRecord
 
 	def paths_objects_for depth
 		objects = []
+		objects << self.main_path.objects[depth-1] unless self.main_path.blank?
 		self.paths.each do |path|
 			# Lowest depth is 1, but first array element at 0
 			objects << path.objects[depth-1] unless path.objects[depth-1].blank?

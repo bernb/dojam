@@ -3,16 +3,16 @@
   <thead>
     <tr>
       <th>inv. no.</th>
-      <th>ext.</th>
-      <th>site name</th>
+      <th>materials</th>
+      <th>materials specified</th>
     </tr>
   </thead>
   <% @museum_objects.each do |o| %>
     <tbody>
       <tr class="search-result-row" data-link="<%= museum_object_path(o) %>">
-        <td><%= o.inv_number %></td>
-        <td><%= o.inv_extension %></td>
-        <td><%= o&.excavation_site&.name %></td>
+        <td><%= o.full_inv_number %></td>
+        <td><%= o.materials_decorated %></td>
+        <td><%= o.material_specifieds_decorated %></td>
       </tr>
     </tbody>
   <% end %>

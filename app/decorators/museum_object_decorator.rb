@@ -2,6 +2,29 @@ class MuseumObjectDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
 
+	def materials_decorated
+		decorate_named_list self.materials
+	end
+
+	def material_specifieds_decorated
+		decorate_named_list self.material_specifieds
+	end
+
+	def decorate_named_list list
+		returnstring = ""
+		if list.blank?
+			# Do nothing
+		elsif list.size == 1
+			returnstring = list.first.name
+		else
+			list.each do |entry|
+				returnstring += " #{entry.name},"
+			end
+		end
+		return returnstring.chomp(",")
+	end
+
+
 	def max_length_decorated
 		if self.max_length.blank? 
 			"undetermined"
