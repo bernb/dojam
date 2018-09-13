@@ -1,18 +1,26 @@
-<div class="col-md-4">
+<div class="col">
 <table class="table table-hover">
   <thead>
     <tr>
       <th>inv. no.</th>
+      <th>storage</th>
+      <th>detailed location</th>
       <th>materials</th>
       <th>materials specified</th>
+      <th>kind of object</th>
+      <th>kind of object specified</th>
     </tr>
   </thead>
   <% @museum_objects.each do |o| %>
     <tbody>
       <tr class="search-result-row" data-link="<%= museum_object_path(o) %>">
         <td><%= o.full_inv_number %></td>
+        <td><%= o.storage.name %></td>
+        <td><%= o.storage_location.name %></td>
         <td><%= o.materials_decorated %></td>
         <td><%= o.material_specifieds_decorated %></td>
+        <td><%= o.kind_of_object&.name %></td>
+        <td><%= o.kind_of_object_specified&.name %></td>
       </tr>
     </tbody>
   <% end %>
