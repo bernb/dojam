@@ -2,7 +2,7 @@
 
 <div class="col-md-3">
   <%= form_tag(museum_objects_path, method: "get") do %>
-    <%= label_tag(:search_query, "fulltext search") %>
+    <%= label_tag(:search_query, "inventory number") %>
     <%= text_field_tag :search_query %>
     <%= submit_tag "Search", class: "btn btn-primary" %>
   <% end %>
