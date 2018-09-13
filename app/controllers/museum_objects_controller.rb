@@ -15,7 +15,7 @@ class MuseumObjectsController < ApplicationController
   end
 
   def show
-    @museum_object = MuseumObject.find params[:id]
+		redirect_to museum_object_build_path params[:id], :step_confirm
   end
   
   def new
