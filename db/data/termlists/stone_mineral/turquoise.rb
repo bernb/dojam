@@ -1,4 +1,4 @@
-$agate_data = {
+$agate_material_data = {
 
 	material_name: "stone/mineral",
 
