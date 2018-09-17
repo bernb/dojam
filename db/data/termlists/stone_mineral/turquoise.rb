@@ -3,7 +3,7 @@ $turquoise_material_data = {
 	material_name: "stone/mineral",
 
 	material_specifieds: [
-		"lapislazuli"
+		"turquoise"
 	],
 	kind_of_objects: [
 		{"jewelry": [
