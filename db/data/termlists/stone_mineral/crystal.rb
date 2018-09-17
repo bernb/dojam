@@ -1,4 +1,4 @@
-$agate_material_data = {
+$crystal_material_data = {
 
 	material_name: "stone/mineral",
 

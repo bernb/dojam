@@ -1,4 +1,4 @@
-$agate_material_data = {
+$lapislazuli_material_data = {
 
 	material_name: "stone/mineral",
 
