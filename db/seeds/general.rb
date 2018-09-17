@@ -22,6 +22,7 @@ $general_terms_data.keys.each do |termlist_name|
 	classname = termlist_name.to_s.singularize.camelize.constantize
 	$general_terms_data[termlist_name].each do |name|
 		classname.find_or_create_by name: name
+		classname.find_or_create_by name: "undetermined"
 	end
 end
 
@@ -32,3 +33,7 @@ $site_kinds.each do |category_name, kinds_array|
     category.excavation_site_kinds << site_kind
   end
 end
+
+category = ExcavationSiteCategory.find_or_create_by name: "undetermined"
+site_kind = ExcavationSiteKind.find_or_create_by name: "undetermined"
+category.excavation_site_kinds << site_kind

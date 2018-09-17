@@ -41,6 +41,7 @@ $general_terms_data = {
     "Phoenician",
     "Safaitic",
     "Thamudic",
+		"none",
     "undetermined"
 	],
 	inscription_languages: [
@@ -55,6 +56,7 @@ $general_terms_data = {
     "Nabataean",
     "Safaitic",
     "Thamudic",
+		"none",
     "undetermined"
 	],
 	excavation_site: [
