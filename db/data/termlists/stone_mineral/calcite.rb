@@ -33,7 +33,7 @@ $calcite_material_data = {
                 "relief",
 		"none"
 	],
-	decoration_styles: [
+	decorations: [
 		"figurative",
 		"geometrical",
 		"none"

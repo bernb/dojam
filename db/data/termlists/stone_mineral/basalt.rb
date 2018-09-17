@@ -58,7 +58,7 @@ $basalt_material_data = {
     "none",
     "undetermined"
   ],
-  decoration_styles: [
+  decorations: [
     "figurative",
     "geometrical",
     "none",

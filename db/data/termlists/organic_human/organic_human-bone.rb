@@ -35,7 +35,7 @@ $bone_human_material_data = {
 		"none",
 		"undetermined"
 	],
-	decoration_styles: [
+	decorations: [
 		"figurative",
 		"none",
 		"undetermined"

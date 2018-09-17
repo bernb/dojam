@@ -82,7 +82,7 @@ $vitreous_material_data = {
 		"none",
 		"undetermined"
 	],
-	decoration_styles: [
+	decorations: [
 		"feather decoration",
 		"figurative",
 		"geometric",

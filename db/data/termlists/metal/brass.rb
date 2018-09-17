@@ -29,7 +29,7 @@ $metal_material_data = {
     "green",
               "undetermined"
   ],
-  decoration_styles: [
+  decorations: [
     "figurativ",
     "floral",
     "geometric",
