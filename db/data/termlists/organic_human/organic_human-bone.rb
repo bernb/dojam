@@ -11,54 +11,54 @@ $bone_human_data = {
 			"articulated bones",
 			"single bone/s",
 			"skull",
-			"undetermined"
-		]}
-	]
+			"undetermined"]
+		}
+	],
 	production_techniques: [
 		"cutting",
 		"piercing",
 		"polishing",
-		"smoothing"
-                "none",
-                "undetermined"
+		"smoothing",
+		"none",
+		"undetermined"
 	],
 	colors: [
 		"beige",
 		"brown",
 		"white",
-                "undetermined"
+		"undetermined"
 	],
 	decoration_techniques: [
 		"engraving",
-                "inlay",
-                "plastering",
-                "none",
+		"inlay",
+		"plastering",
+		"none",
 		"undetermined"
 	],
 	decoration_styles: [
 		"figurative",
 		"none",
-                "undetermined"
+		"undetermined"
 	],
 	decoration_colors: [
 		"black",
-                "white",
-                "none",
-                "undetermined"
+		"white",
+		"none",
+		"undetermined"
 	],
 	preservation_objects: [
 		"almost complete",
 		"complete",		
-                "fragment",
-                "undetermined"
+		"fragment",
+		"undetermined"
 	],
 	preservation_materials: [
 		"cracked",
-                "fair",
-                "flaked",
-                "good",
+		"fair",
+		"flaked",
+		"good",
 		"sintered",
-                "undetermined"
+		"undetermined"
 	]
 }
 
