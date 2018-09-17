@@ -94,6 +94,9 @@ module ExcelImporterHelperHelper
 	end
 
 	def split_entry value
+		if value.blank?
+			return nil
+		end
 		value_array = value.split(',')
 		value_array.each(&:strip!)
 	end
