@@ -1,4 +1,4 @@
-$ivory_data = {
+$ivory_material_data = {
 
 	material_name: "organic material (faunal)",
 

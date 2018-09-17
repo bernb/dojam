@@ -1,4 +1,4 @@
-$steatite_data = {
+$steatite_material_data = {
 
 	material_name: "stone/mineral",
 
