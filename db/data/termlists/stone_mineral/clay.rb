@@ -1,4 +1,4 @@
-$stone_unspecified_material_data = {
+$clay_material_data = {
 
 	material_name: "stone/mineral",
 

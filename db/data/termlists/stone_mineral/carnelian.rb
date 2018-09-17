@@ -1,4 +1,4 @@
-$agate_material_data = {
+$carnelian_material_data = {
 
 	material_name: "stone/mineral",
 

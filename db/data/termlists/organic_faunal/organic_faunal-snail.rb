@@ -1,4 +1,4 @@
-$mollusc_material_data = {
+$organic_faunal_snail_material_data = {
 
 	material_name: "organic material (faunal)",
 

@@ -1,4 +1,4 @@
-$faunal_material_data = {
+$faunal_antlar_material_data = {
 
 	material_name: "organic material (faunal)",
 
