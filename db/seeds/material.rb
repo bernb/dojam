@@ -1,4 +1,5 @@
-Dir["#{Rails.root}/db/data/*.rb"].reject{|file| file.include?("test") || file.include?("general") }.each {|file| require file}
+Dir["#{Rails.root}/db/data/termlists/**/*.rb"].reject{|file| file.include?("test") || file.include?("general") || File.directory?(file) }.each {|file| require file}
+require "#{Rails.root}/db/seed_helper.rb"
 
 Rails.logger.info "*** Starting material import ***"
 global_variables.select{|var| var.to_s.ends_with? "_material_data"}
