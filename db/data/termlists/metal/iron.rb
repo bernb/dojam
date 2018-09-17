@@ -47,7 +47,7 @@ $metal_material_data = {
 		"red",
 		"undetermined"
   ],
-	decoration_styles: [
+	decorations: [
 		"figurativ",
 		"floral",
 		"geometric",

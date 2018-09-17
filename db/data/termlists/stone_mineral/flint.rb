@@ -49,7 +49,7 @@ $flint_material_data = {
     "none",
     "undetermined"
   ],
-  decoration_styles: [
+  decorations: [
     "none",
     "undetermined"
   ],

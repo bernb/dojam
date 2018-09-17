@@ -96,7 +96,7 @@ $bronze_material_data = {
 		"none",
 		"undetermined"
 	],
-	decorations_styles: [
+	decorations: [
 		"figurative",
 		"floral",
 		"geometric",

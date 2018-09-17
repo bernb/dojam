@@ -24,7 +24,7 @@ $botanical_material_data = {
 		"black",
 		"undetermined"
 	],
-	decoration_styles: [
+	decorations: [
 		"cut",
 		"none",
 		"undetermined"

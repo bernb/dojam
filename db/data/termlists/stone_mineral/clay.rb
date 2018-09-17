@@ -29,7 +29,7 @@ $stone_unspecified_material_data = {
 		"none",
 		"undetermined"
 	],
-	decoration_styles: [
+	decorations: [
 		"figurativ",
 		"floral",
 		"geometrical",

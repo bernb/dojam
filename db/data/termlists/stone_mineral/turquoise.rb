@@ -24,7 +24,7 @@ $agate_material_data = {
 		"none",
 		"undetermined"
 	],
-	decoration_styles: [
+	decorations: [
 		"figurative",
 		"floral",
 		"geometrical",

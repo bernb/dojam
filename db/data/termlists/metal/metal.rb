@@ -108,7 +108,7 @@ $metal_material_data = {
     "silver colored",
 		"undetermined"
   ],
-  decoration_styles: [
+  decorations: [
     "figurativ",
     "floral",
     "geometric",
