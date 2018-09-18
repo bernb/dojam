@@ -18,6 +18,7 @@ def material_import material_hash
 	
 	material_hash[:kind_of_objects].push("undetermined").each do |kind_of_object_name|
 		koo_hash = nil
+		koo = nil
 		if kind_of_object_name.is_a? Hash
 			koo_hash = kind_of_object_name
 			kind_of_object_name = koo_hash.keys.first
@@ -31,16 +32,11 @@ def material_import material_hash
 			end
 		else
 			koo = KindOfObject.find_or_create_by name: kind_of_object_name
-			path_names = ms_ids.map{|ms_id| "/#{material.id}/#{ms_id.to_s}/#{koo.id.to_s}"}
-			paths = path_names.map{|p| Path.find_or_create_by path: p}
-			endpoint_paths += paths
-			paths.each{|p| termlist_paths << [koo.id, p.id]}
-			undetermined = KindOfObject.find_or_create_by name: "undetermined"
-			path_names = ms_ids.map{|ms_id| "/#{material.id}/#{ms_id.to_s}/#{koo.id.to_s}"}
-			paths = path_names.map{|p| Path.find_or_create_by path: p}
-			endpoint_paths += paths
-			paths.each{|p| termlist_paths << [koo.id, p.id]}
 		end
+		path_names = ms_ids.map{|ms_id| "/#{material.id}/#{ms_id.to_s}/#{koo.id.to_s}"}
+		paths = path_names.map{|p| Path.find_or_create_by path: p}
+		endpoint_paths += paths
+		paths.each{|p| termlist_paths << [koo.id, p.id]}
 	end
 
 	rejects = [:material_name, :material_specifieds, :kind_of_objects]
