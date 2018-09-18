@@ -28,11 +28,14 @@ end
 
 $site_kinds.each do |category_name, kinds_array|
   category = ExcavationSiteCategory.find_or_create_by name: category_name
-  kinds_array.each do |site_kind_name|
+	kinds_array.push("undetermined").each do |site_kind_name|
     site_kind = ExcavationSiteKind.find_or_create_by name: site_kind_name
     category.excavation_site_kinds << site_kind
   end
 end
+
+#ex_cat ExcavationSiteCategory.find_or_create_by name: "undetermined"
+
 
 category = ExcavationSiteCategory.find_or_create_by name: "undetermined"
 site_kind = ExcavationSiteKind.find_or_create_by name: "undetermined"
