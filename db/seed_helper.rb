@@ -17,26 +17,29 @@ def material_import material_hash
 	end
 	
 	material_hash[:kind_of_objects].push("undetermined").each do |kind_of_object_name|
-		koo_hash = nil
+		koo_hash = {}
 		koo = nil
 		if kind_of_object_name.is_a? Hash
 			koo_hash = kind_of_object_name
 			kind_of_object_name = koo_hash.keys.first
-			koo = KindOfObject.find_or_create_by name: kind_of_object_name
-			koo_hash.values[0].push("undetermined").each do |koos_name|
-				koos = KindOfObjectSpecified.find_or_create_by name: koos_name
-				path_names = ms_ids.map{|ms_id| "/#{material.id}/#{ms_id.to_s}/#{koo.id.to_s}/#{koos.id.to_s}"}
-				paths = path_names.map{|p| Path.find_or_create_by path: p}
-				endpoint_paths += paths
-				paths.each{|p| termlist_paths << [koos.id, p.id]}
-			end
 		else
-			koo = KindOfObject.find_or_create_by name: kind_of_object_name
+			# create dummy hash only containing a single key with an empty array, 
+			# where we will push the undetermined entry into later
+			koo_hash[kind_of_object_name] = []
 		end
+		koo = KindOfObject.find_or_create_by name: kind_of_object_name
 		path_names = ms_ids.map{|ms_id| "/#{material.id}/#{ms_id.to_s}/#{koo.id.to_s}"}
 		paths = path_names.map{|p| Path.find_or_create_by path: p}
 		endpoint_paths += paths
 		paths.each{|p| termlist_paths << [koo.id, p.id]}
+
+		koo_hash.values[0].push("undetermined").each do |koos_name|
+			koos = KindOfObjectSpecified.find_or_create_by name: koos_name
+			path_names = ms_ids.map{|ms_id| "/#{material.id}/#{ms_id.to_s}/#{koo.id.to_s}/#{koos.id.to_s}"}
+			paths = path_names.map{|p| Path.find_or_create_by path: p}
+			endpoint_paths += paths
+			paths.each{|p| termlist_paths << [koos.id, p.id]}
+		end
 	end
 
 	rejects = [:material_name, :material_specifieds, :kind_of_objects]
