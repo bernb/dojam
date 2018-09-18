@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_11_054325) do
+ActiveRecord::Schema.define(version: 2018_09_18_112310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,13 @@ ActiveRecord::Schema.define(version: 2018_09_11_054325) do
     t.datetime "updated_at", null: false
     t.index ["material_specifieds_koo_spec_id"], name: "index_decorations_ms_koo_specs_on_ms_koo_spec_id"
     t.index ["termlist_decoration_id"], name: "index_decorations_ms_koo_specs_on_decoration_id"
+  end
+
+  create_table "excavation_site_category_kinds", force: :cascade do |t|
+    t.integer "excavation_site_category_id"
+    t.integer "excavation_site_kind_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "excavation_sites", id: :serial, force: :cascade do |t|
@@ -620,7 +627,6 @@ ActiveRecord::Schema.define(version: 2018_09_11_054325) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "excavation_site_category_id"
     t.integer "position"
   end
 
@@ -640,6 +646,8 @@ ActiveRecord::Schema.define(version: 2018_09_11_054325) do
   add_foreign_key "decoration_techniques_ms_koo_specs", "termlist_decoration_techniques"
   add_foreign_key "decorations_ms_koo_specs", "material_specifieds_koo_specs"
   add_foreign_key "decorations_ms_koo_specs", "termlist_decorations"
+  add_foreign_key "excavation_site_category_kinds", "termlists", column: "excavation_site_category_id"
+  add_foreign_key "excavation_site_category_kinds", "termlists", column: "excavation_site_kind_id"
   add_foreign_key "inscription_languages_ms_koo_specs", "material_specifieds_koo_specs"
   add_foreign_key "inscription_languages_ms_koo_specs", "termlist_inscription_languages"
   add_foreign_key "inscription_letters_ms_koo_specs", "material_specifieds_koo_specs"
@@ -695,5 +703,4 @@ ActiveRecord::Schema.define(version: 2018_09_11_054325) do
   add_foreign_key "termlist_kind_of_object_specifieds_inscription_letters", "termlist_kind_of_object_specifieds"
   add_foreign_key "termlist_paths", "paths"
   add_foreign_key "termlist_paths", "termlists"
-  add_foreign_key "termlists", "termlists", column: "excavation_site_category_id"
 end
