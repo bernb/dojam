@@ -60,13 +60,13 @@ module ExcelImporterHelper
 
 
 			sherdname = build_sherdname row
-			logger.tagged("Row #{i.to_s}"){logger.info "Importing #{sherdname} from file"}
+			#logger.tagged("Row #{i.to_s}"){logger.info "Importing #{sherdname} from file"}
 
 			object = MuseumObject.where(inv_number: row[:inv_number]).where(inv_extension: row[:inv_extension]).first
 			if object.present?
-				logger.tagged("Row #{i.to_s}"){logger.info "Found in database, updating entry"}
+				#logger.tagged("Row #{i.to_s}"){logger.info "Found in database, updating entry"}
 			else
-				logger.tagged("Row #{i.to_s}"){logger.info "Creating new entry"}
+			#logger.tagged("Row #{i.to_s}"){logger.info "Creating new entry"}
 				object = MuseumObject.new(inv_number: row[:inv_number], inv_extension: row[:inv_extension])
 			end
 
@@ -74,7 +74,7 @@ module ExcelImporterHelper
 			# inventory number
 			set_museum_properties object, row
 			if object.errors.size > 0
-				logger.tagged("Row #{i.to_s}", "Warning"){logger.warn "Could not save object:"}
+				#logger.tagged("Row #{i.to_s}", "Warning"){logger.warn "Could not save object:"}
 				object.errors.full_messages.each do |message|
 					logger.tagged("Row #{i.to_s}"){logger.warn message}
 				end
@@ -106,7 +106,7 @@ module ExcelImporterHelper
 					when :needs_cleaning, :needs_conservation
 						set_boolean_for object, key, row[key]
 					when :dating_period
-						set_association object: object, column: :dating_period_id, termlist_value: row[key], current_line: i unless row[key].blank?
+						set_association object: object, column: :dating_period_id, termlist_value: row[key], current_line: i, with_path: false unless row[key].blank?
 						if object.dating_period.present?
 							object.is_dating_period_unknown = false
 						else
@@ -155,7 +155,7 @@ module ExcelImporterHelper
 			end
 
 			if object.save 
-				logger.tagged("Row #{i.to_s}"){logger.debug "Saved with id #{object.id}"}
+				#logger.tagged("Row #{i.to_s}"){logger.debug "Saved with id #{object.id}"}
 			else
 				logger.tagged("Row #{i.to_s}"){logger.error "Could not save object: #{object.errors.full_messages}"}
 			end
