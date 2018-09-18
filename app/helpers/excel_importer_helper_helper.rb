@@ -264,7 +264,7 @@ module ExcelImporterHelperHelper
 		end
 	end
 
-	def set_association object:, column:, termlist_value:, current_line:
+	def set_association object:, column:, termlist_value:, current_line:, with_path: true
 		i = current_line
 		termlist = column.to_s
 		termlist.slice!("_id")
@@ -275,7 +275,7 @@ module ExcelImporterHelperHelper
 		if found_termlist.present?
 			object.send(termlist + "=", found_termlist)
 		else
-			add_termlist_not_found_error object: object, value: termlist_value, termlist_name: termlist_class.to_s, with_path: true
+			add_termlist_not_found_error object: object, value: termlist_value, termlist_name: termlist_class.to_s, with_path: with_path
 		end
 	end
 
