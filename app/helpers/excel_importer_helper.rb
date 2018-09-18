@@ -88,7 +88,7 @@ module ExcelImporterHelper
 				object.errors.full_messages.each do |message|
 					logger.tagged("Row #{i.to_s}"){logger.warn message}
 				end
-				logger.tagged("Row #{i.to_s}"){logger.warn "Skipping termlists..."}
+				#logger.tagged("Row #{i.to_s}"){logger.warn "Skipping termlists..."}
 				next
 			end
 
@@ -149,7 +149,7 @@ module ExcelImporterHelper
 				object.errors.full_messages.each do |message|
 					logger.tagged("Row #{i.to_s}"){logger.warn message}
 				end
-				logger.tagged("Row #{i.to_s}"){logger.warn "Setting unfinished flag for this object"}
+				#logger.tagged("Row #{i.to_s}"){logger.warn "Setting unfinished flag for this object"}
 			else
 				object.is_finished = true
 			end
