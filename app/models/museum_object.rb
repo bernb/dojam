@@ -1,6 +1,7 @@
 class MuseumObject < ApplicationRecord
   include SearchCop
   validates_with MuseumObjectValidator
+	after_initialize :set_default_values
 
   has_one :images, class_name: "MuseumObjectImageList", dependent: :destroy
   accepts_nested_attributes_for :images
@@ -252,6 +253,27 @@ class MuseumObject < ApplicationRecord
   end
 
 	private
+
+	def set_default_values
+		termlist_names = [:excavation_site,
+										  :acquisition_kind,
+											:acquisition_delivered_by,
+											:excavation_site_kind,
+											:production_technique,
+											:decoration_technique,
+											:decoration_color,
+											:inscription_letter,
+											:inscription_language,
+											:preservation_material,
+											:preservation_object,
+											:authenticity,
+											:priority,
+		]
+		termlist_names.each do |termlist_name|
+			undetermined_entry = termlist_name.to_s.camelize.constantize.find_by(name: "undetermined")
+			self.send(termlist_name.to_s+"=", undetermined_entry) if self.send(termlist_name.to_s).blank?
+		end
+	end
 
 	def paths_objects_for depth
 		objects = []
