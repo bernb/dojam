@@ -8,51 +8,53 @@ $stone_unspecified_material_data = {
 	kind_of_objects: [
 		{"architectural element": [
 			"architectural sculpture",
+			"architrave",
 			"base",
 			"column",
-			"door hinge socket"]
-		},
+			"door hinge socket"
+		]},
+		"grave stone",
 		{"jewelry": [
 			"bead",
 			"cylinder seal",
 			"pendant",
 			"scarab",
-			"stamp seal"]
-		},
+			"stamp seal",
+		]},
 		{"mill": [
 			"Olynthus mill",
 			"hand-driven rotating mill",
 			"Pompeian mill",
-			"oil press"]
-		},
+			"oil press"
+		]},
 		{"sculpture": [
 			"bust",
 			"figurine",
 			"head",
 			"statue",
 			"stela",
-			"torso"]
-		},
+			"torso"
+		]},
 		{"tool": [
+			"ad-hoc-tool",
 			"blade",
 			"bladelet",
 			"burin",
 			"chip",
-			"chopper",
-			"cutting tool",
+			"chopper",     
 			"core",
+			"cutting tool",
 			"drill",
 			"flake",
-			"grave stone",
 			"harvesting knife",
 			"knife",
 			"large blade",
 			"loom weight",
 			"lower grinding stone",
 			"mace head",
+			"multifunctional tool",
 			"palette",
 			"pestle",
-			"polisher",
 			"projectile",
 			"quern",
 			"retouched flake",
@@ -60,8 +62,8 @@ $stone_unspecified_material_data = {
 			"scraper",
 			"sickle blade",
 			"spindle whorl",
-			"tabular scraper"]
-		},
+			"tabular scraper"
+		]},
 		{"vessel": [
 			"basin",
 			"beaker",
@@ -74,34 +76,37 @@ $stone_unspecified_material_data = {
 			"mortar",
 			"mortar bowl",
 			"plate",
-			"tripod bowl"]
-		}
+			"tripod bowl"
+		]},
 	],
 	production_techniques: [
 		"cutting",
 		"drilling",
+		"fettling",
 		"pecking",
 		"polishing",
-		"smoothing",
-		"undetermined"
+		"smoothing"
 	],
 	colors: [
 		"beige",
 		"black",
+		"blue",
 		"brown",
 		"green",
 		"grey",
 		"red",
-		"white",
 		"violet",
-		"yellow",
-		"undetermined"
+		"white",
+		"yellow"
 	],
 	decoration_techniques: [
 		"engraving",
-		"painting",
-		"none",
-		"undetermined"
+		"incision",
+		"painting"
+	],
+	decoration_colors: [
+		"red",
+		"black"
 	],
 	decorations: [
 		"figurativ",
@@ -110,14 +115,8 @@ $stone_unspecified_material_data = {
 		"none",
 		"undetermined"
 	],
-	decoration_colors: [
-		"black",
-		"red",
-		"white",
-		"none",
-		"undetermined"
-	],
 	preservation_objects: [
+		"almost complete",
 		"bottom",
 		"complete",
 		"complete profile",
@@ -130,6 +129,10 @@ $stone_unspecified_material_data = {
 	preservation_materials: [
 		"broken",
 		"chipped",
+		"cracked",
+		"discolored",
+		"fair",
+		"good",
 		"sintered",
 		"undetermined"
 	]

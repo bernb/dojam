@@ -20,6 +20,7 @@ $basalt_material_data = {
       "figurine, anthropomorphic",
       "figurine, zoomorphic",
       "head",
+      "statue",
       "stela"
     ]},
     {"tool": [
@@ -68,6 +69,7 @@ $basalt_material_data = {
     "none"
   ],
   preservation_objects: [
+    "almost complete",
     "bottom",
     "bottom and wall",
     "complete",

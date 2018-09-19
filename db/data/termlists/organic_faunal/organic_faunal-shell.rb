@@ -3,9 +3,12 @@ $organic_faunal_shell_material_data = {
 	material_name: "organic material (faunal)",
 
 	material_specifieds: [
-		"shell",
+		"shell"
 	],
 	kind_of_objects: [
+		{"container": [
+			"theriomorphic container"]
+		},
 		{"jewelry": [
 			"pendant",
 			"undetermined"]
@@ -17,6 +20,7 @@ $organic_faunal_shell_material_data = {
 	],
 	production_techniques: [
 		"cutting",
+		"drilling",
 		"piercing",
 		"polishing",
 		"smoothing",

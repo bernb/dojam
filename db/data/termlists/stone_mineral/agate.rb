@@ -45,7 +45,8 @@ $agate_material_data = {
 		"complete"
 	],
 	preservation_materials: [
-		"flaked",
+		"chipped",
+                "good",
 		"sintered"
 	]
 }

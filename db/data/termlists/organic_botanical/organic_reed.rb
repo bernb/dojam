@@ -3,18 +3,18 @@ $organic_wood_material_data = {
 	material_name: "organic material (botanical)",
 
 	material_specifieds: [
-		"wood"
+		"reed"
 	],
 	kind_of_objects: [
 		{"unworked object": [
-			"charcoal"]
+			"fibre"]
 		},
-		{"vessel": [
-			"box"]
+		{"container": [
+			"basket"]
 		}
 	],
 	production_techniques: [
-		"cut",
+		"basket-weaving",
 		"none",
 		"undetermined"
 	],
@@ -25,7 +25,6 @@ $organic_wood_material_data = {
 		"undetermined"
 	],
 	decorations: [
-		"cut",
 		"none",
 		"undetermined"
 	]

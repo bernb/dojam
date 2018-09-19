@@ -15,7 +15,7 @@ $iron_material_data = {
         "key",
         "knife",
         "pin",
-        "plow share",
+        "plowshare",
         "saw blade"]
 		},
 		{"weapon/armor": [
@@ -73,8 +73,10 @@ $iron_material_data = {
 		"none"
 	],
   preservation_materials: [
+    "chipped",
     "corroded",
-    "flaked"
+    "good",
+    "fair"
   ],
   preservation_objects: [
     "bottom",

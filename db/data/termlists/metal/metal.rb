@@ -128,8 +128,8 @@ $metal_material_data = {
     "punching",
     "stamping",
     "plated",
-	     "none",
-             "undetermined"
+		"none",
+		"undetermined"
   ],
   decoration_colors: [
     "black",
@@ -142,8 +142,10 @@ $metal_material_data = {
     "none"
   ],
   preservation_materials: [
+    "chipped",
     "corroded",
-    "flaked"
+    "good",
+    "fair"
   ],
   preservation_objects: [
     "bottom",

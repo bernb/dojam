@@ -104,13 +104,6 @@ module ExcelImporterHelper
 					case key
 					when :needs_cleaning, :needs_conservation
 						set_boolean_for object, key, row[key]
-					when :dating_period
-						set_association object: object, column: :dating_period_id, termlist_value: row[key], current_line: i, with_path: false unless row[key].blank?
-						if object.dating_period.present?
-							object.is_dating_period_unknown = false
-						else
-							object.is_dating_period_unknown = true
-						end
 					when :dating_millennium
 						set_millennium_data object: object, value: row[key]
 					when :dating_century
@@ -140,6 +133,9 @@ module ExcelImporterHelper
 								object.material_specifieds = [ms]
 							end
 						end # row[:main_material_specified] include ','
+					when :production_technique, :decoration_color, :decoration_technique, :dating_period
+						values = split_entry(row[key])
+						set_association object: object, column: key, termlist_value: values[0], current_line: i unless values[0].blank?
 					end # case key
 				end # complex attribute
 			end # row.keys.each

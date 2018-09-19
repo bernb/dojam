@@ -1,51 +1,26 @@
-$ivory_material_data = {
+$organic_faunal_shell_material_data = {
 
 	material_name: "organic material (faunal)",
 
 	material_specifieds: [
-		"ivory"
+		"pearl"
 	],
 	kind_of_objects: [
 		{"jewelry": [
-			"stamp seal",
-			"undetermined"]
-		},
-		{"tool": [
-			"palette",
-			"undetermined"]
-		},
-		{"vessel": [
-			"lid",
-			"plate",
-			"pyxis"]
-		},
+			"bead"
+		]}
 	],
 	production_techniques: [
-		"cutting",
-		"piercing",
-		"polishing",
-		"smoothing",
-		"undetermined"
+		"piercing"
 	],
 	colors: [
-		"beige",
-		"brown",
-                "white",
-		"yellow",
-		"undetermined"
+		"white"
 	],
 	decoration_techniques: [
-		"engraving",
-		"incrustation",
-		"inlay",
-		"plastering",
 		"none",
 		"undetermined"
 	],
 	decorations: [
-		"figurative",
-		"floral",
-		"geometrical",
 		"none",
 		"undetermined"
 	],
@@ -53,9 +28,9 @@ $ivory_material_data = {
 		"none"
 	],
 	preservation_materials: [
+		"chipped",
 		"cracked",
 		"fair",
-		"flaked",
 		"good",
 		"undetermined"
 	],

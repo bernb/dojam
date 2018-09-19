@@ -59,7 +59,7 @@ $alabaster_c_material_data = {
 	],
 	preservation_materials: [
 		"discolored",
-		"flaked",
+		"chipped",
 		"good",
 		"sintered"
 	]

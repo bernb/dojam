@@ -41,6 +41,7 @@ $flint_material_data = {
     "beige",
     "black",
     "brown",
+    "grey",
     "red",
     "white",
     "yellow"
@@ -63,6 +64,8 @@ $flint_material_data = {
     "complete"
   ],
   preservation_materials: [
+    "chipped",
+    "good",
     "sintered"
   ]
 }

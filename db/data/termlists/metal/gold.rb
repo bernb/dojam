@@ -76,7 +76,8 @@ $gold_material_data = {
   ],
   preservation_materials: [
     "corroded",
-    "flaked"
+    "flaked",
+    "good"
   ],
   preservation_objects: [
     "bottom",
