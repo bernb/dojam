@@ -23,6 +23,7 @@ class MuseumObject < ApplicationRecord
   belongs_to :inscription_letter, required: false
   belongs_to :inscription_language, required: false
   belongs_to :excavation_site_kind, required: false
+  belongs_to :excavation_site_category, required: false
 	belongs_to :priority, required: false
 	has_many :museum_object_paths
 	has_many :paths, through: :museum_object_paths
