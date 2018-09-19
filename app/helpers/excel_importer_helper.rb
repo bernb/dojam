@@ -41,7 +41,6 @@ module ExcelImporterHelper
 		end
 		if unused_columns.present?
 			logger.warn "Unused columns: #{unused_columns.inspect}"
-			logger.info "Note that columns \"museum\" and \"kind of site\" are dependent on other columns and thus the information will be retrieved from those columns"
 		end
 
 		i = 0

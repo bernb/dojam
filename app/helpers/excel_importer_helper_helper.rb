@@ -23,6 +23,7 @@ module ExcelImporterHelperHelper
 		@@attributes[:coordinates_mega_long] = "Long = E"
 		@@attributes[:coordinates_mega_lat] = "Lat = N"
 		@@attributes[:excavation_site_kind_id] = "kind of site specified"
+		@@attributes[:excavation_site_category_id] = "kind of site"
 		@@attributes[:finding_context] = "finding context specified"
 		@@attributes[:finding_remarks] = "remarks provenance"
 
