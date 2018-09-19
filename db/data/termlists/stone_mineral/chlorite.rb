@@ -52,6 +52,8 @@ $chlorite_material_data = {
 		"wall"
 	],
 	preservation_materials: [
-		"sintered"
+                "chipped",
+		"good",
+                "sintered"
 	]
 }

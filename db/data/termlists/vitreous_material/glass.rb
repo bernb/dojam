@@ -43,8 +43,8 @@ $glass_material_data = {
 			"kohl tube",
 			"lamp",
 			"plate",
-			"unguentarium",
-			"zoomorphic vessel"]
+			"theriomorphic vessel",
+			"unguentarium"]
 		}
 	],
 	production_techniques: [
@@ -66,35 +66,36 @@ $glass_material_data = {
 		"white",
 		"yellow",
 		"red",
-		"violet"
+		"violet",
+		"undetermined"
 	],
 	decoration_techniques: [
 		"applying",
 		"cutting",
+		"feather decoration",
 		"mosaic",
 		"painting",
 		"pinching",
 		"pressing",
 		"pulling",
 		"rolling-in",
+		"trail-wound",
+		"wheel-cutting",
 		"undetermined"
 	],
 	decoration_colors: [
-		"light yellow",
-		"dark yellow",
-		"light blue",
-		"dark blue",
-		"light turquoise",
-		"dark turquoise",
+		"blue",
+		"brown",
+		"colorless",
+		"green",
+		"grey",
 		"red",
-		"blue-green",
-		"green-blue",
-		"light green",
-		"dark green",
+		"turquoise",
 		"violet",
-		"light brown",
-		"dark brown",
-		"none",
+		"white",
+		"yellow",
+		"red",
+		"violet",
 		"undetermined"
 	],
 	decorations: [

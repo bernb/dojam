@@ -40,91 +40,100 @@ $stone_material_data = {
   ],
   kind_of_objects: [
     {"architectural element": [
+      "architectural sculpture",
+      "architrave",
       "base",
       "column",
       "door hinge socket"
     ]},
-    "core",
-    "flake",
     "grave stone",
     {"jewelry": [
       "bead",
+      "cylinder seal",
       "pendant",
       "scarab",
-      "cylinder seal"
+      "stamp seal",
     ]},
-    "loom weight",
-    "lower grinding stone",
-    "mace head",
     {"mill": [
       "Olynthus mill",
       "hand-driven rotating mill",
       "Pompeian mill",
       "oil press"
     ]},
-    "palette",
-    "pestle",
-    "quern",
-    "rubbing stone",
     {"sculpture": [
+      "bust",
       "figurine",
       "head",
       "statue",
+      "stela",
       "torso"
     ]},
-    "spindle whorl",
-    "tool",
+    {"tool": [
+      "ad-hoc-tool",
+      "blade",
+      "bladelet",
+      "burin",
+      "chip",
+      "chopper",      
+      "core",
+      "cutting tool",
+      "drill",
+      "flake",
+      "harvesting knife",
+      "knife",
+      "large blade",
+      "loom weight",
+      "lower grinding stone",
+      "mace head",
+      "multifunctional tool",
+      "palette",
+      "pestle",
+      "projectile",
+      "quern",
+      "retouched flake",
+      "rubbing stone",
+      "scraper",
+      "sickle blade",
+      "spindle whorl",
+      "tabular scraper"
+		]},
     {"vessel": [
-    "basin",
-    "basin",
-    "beaker",
-    "bowl",
-    "bowl zoomophic",
-    "cooking pot",
-    "cup",
-    "fenestrated-pedestalled bowl",
-    "lamp",
-    "mortar",
-    "mortar bowl",
-    "plate",
-    "tripod bowl"
+      "basin",
+      "beaker",
+      "bowl",
+      "bowl zoomophic",
+      "cooking pot",
+      "cup",
+      "fenestrated-pedestalled bowl",
+      "lamp",
+      "mortar",
+      "mortar bowl",
+      "plate",
+      "tripod bowl"
     ]},
-    "ad-hoc-tool",
-    "blade",
-    "bladelet",
-    "burin",
-    "chip",
-    "chopper",
-    "cutting tool",
-    "drill",
-    "harvesting knife",
-    "knife",
-    "large blade",
-    "multifunctional tool",
-    "projectile",
-    "retouched flake",
-    "scraper",
-    "sickle blade",
-    "stela",
-    "tabular scraper"
   ],
   production_techniques: [
     "cutting",
-    "drill-made",
+    "drilling",
     "fettling",
-    "picking",
+    "pecking",
     "polishing",
     "smoothing"
   ],
   colors: [
-    "white",
-    "dark grey",
-    "light grey",
+    "beige",
     "black",
+    "blue",
     "brown",
-    "red"
+    "green",
+    "grey",
+    "red",
+    "violet",
+    "white",
+    "yellow"
   ],
   decoration_techniques: [
+    "engraving",
     "incision",
     "painting"
   ],
@@ -132,13 +141,32 @@ $stone_material_data = {
     "red",
     "black"
   ],
-  preservation_objects: [
-    "fragmentary",
-    "almost complete",
-    "complete"
+  decorations: [
+    "figurativ",
+    "floral",
+    "geometric",
+    "none",
+    "undetermined"
   ],
-  
-  decorations: [],
-  preservation_materials: []
-
+  preservation_objects: [
+    "almost complete",
+    "bottom",
+    "complete",
+    "complete profile",
+    "fragmentary",
+    "handle",
+    "rim",
+    "wall",
+    "undetermined"
+  ],
+   preservation_materials: [
+    "broken",
+    "chipped",
+    "cracked",
+    "discolored",
+    "fair",
+    "good",
+    "sintered",
+    "undetermined"
+]
 }

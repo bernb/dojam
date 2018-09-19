@@ -27,6 +27,7 @@ $brass_material_data = {
     "copper colored",
     "golden",
     "green",
+    "red",
               "undetermined"
   ],
   decorations: [

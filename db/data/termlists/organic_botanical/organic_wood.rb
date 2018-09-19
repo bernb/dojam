@@ -3,7 +3,7 @@ $organic_wood_material_data = {
 	material_name: "organic material (botanical)",
 
 	material_specifieds: [
-		"wood unspecified"
+		"wood"
 	],
 	kind_of_objects: [
 		{"unworked object": [

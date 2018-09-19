@@ -18,7 +18,9 @@ $bone_undetermined_material_data = {
 			"undetermined"]
 		},
 		{"tool": [
-			"needle",
+			"awl",
+                        "comb",
+                        "needle",
 			"pin",
 			"weaving spatula",
 			"undetermined"]

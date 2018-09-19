@@ -50,6 +50,7 @@ module ExcelImporterHelperHelper
 		@@attributes[:opening_dm] = "opening dm"
 		@@attributes[:bottom_dm] = "bottom dm"
 		@@attributes[:weight_in_gram] = "weight in gram"
+		@@attributes[:thickness] = "thickness"
 		@@attributes[:preservation_material_id] = "preservation of material"
 		@@attributes[:preservation_object_id] = "preservation of object"
 		@@attributes[:description_conservation] = "preservation/conservation remarks"
@@ -321,11 +322,11 @@ module ExcelImporterHelperHelper
 	end
 
 	def is_regular_termlist key
-		MuseumObject.method_defined?(key.to_s+"=") && key.to_s.ends_with?("_id")
+		MuseumObject.method_defined?(key.to_s+"=") && key.to_s.ends_with?("_id") && !is_complex_attribute(key)
 	end
 
 	def is_complex_attribute key
-		array = [:needs_cleaning, :needs_conservation, :storage_location, :excavation_site, :colors]
+		array = [:needs_cleaning, :needs_conservation, :storage_location, :excavation_site, :colors, :production_technique_id, :decoration_color_id, :decoration_technique_id]
 			key.to_s.ends_with?("_id") ||
 			array.include?(key) ||
 			key.to_s.include?("kind_of") ||

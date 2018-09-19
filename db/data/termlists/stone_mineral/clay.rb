@@ -10,7 +10,7 @@ $clay_material_data = {
 			"brick"]
 		},
 		{"sculpture": [
-			"figurine zoomorphic"]
+			"figurine theriomorphic"]
 		},
 		{"tool": [
 			"loom weight"]
@@ -22,6 +22,7 @@ $clay_material_data = {
 	],
 	colors: [
 		"beige",
+                "black",
 		"brown"
 	],
 	decoration_techniques: [

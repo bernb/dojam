@@ -30,6 +30,7 @@ $ivory_material_data = {
 	colors: [
 		"beige",
 		"brown",
+                "white",
 		"yellow",
 		"undetermined"
 	],

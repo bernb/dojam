@@ -52,11 +52,14 @@ $limestone_material_data = {
 	colors: [
 		"beige",
 		"brown",
+                "red",
+                "white",
 		"undetermined"
 	],
 	decoration_techniques: [
 		"carving",
 		"engraving",
+                "incising",
 		"painting",
 		"relief",
 		"none",
@@ -76,10 +79,11 @@ $limestone_material_data = {
 		"undetermined"
 	],
 	preservation_objects: [
-		"bottom",
+		"almost complete",
+                "bottom",
 		"complete",
 		"complete profile",
-		"fragmentary",
+		"fragment",
 		"handle",
 		"rim",
 		"rim to wall",
@@ -89,7 +93,9 @@ $limestone_material_data = {
 	preservation_materials: [
 		"cracked",
 		"chipped",
+                "discolored",
 		"fair",
+                "good",
 		"sintered"
 	]
 }

@@ -9,6 +9,7 @@ $ceramic_material_data = {
 		"Cypriote Base-Ring-Ware",
 		"Chocolate-on-White Ware",
 		"Cypriote Red Slip Ware (CRSW)",
+                "Eastern Sigillata (ESA)",
 		"Eastern Terra Sigillata (ETS)",
 		"Khirbet Kerak Ware",
 		"Late Helladic (LH)",
@@ -35,10 +36,13 @@ $ceramic_material_data = {
 			"button",
 			"pendant"]
 		},
-		"knob",
-		"ostracon",
-		"sarcophagus",
-		{"sculpture": [
+                {"fitting": [
+		        "knob"]
+		},
+		{"sarcophagus": [
+                        "sarcophagus anthropoid"]
+		},
+                {"sculpture": [
 			"bust", 
 			"figurine anthropomorphic",
 			"figurine anthropomorphic-theriomorphic",
@@ -92,6 +96,7 @@ $ceramic_material_data = {
 			"lid",
 			"milk bowl",
 			"oil lamp",
+	        	"ostracon",
 			"pan",
 			"pilgrim flask",
 			"pithos",
@@ -107,12 +112,11 @@ $ceramic_material_data = {
 			"strainer",
 			"sugar bowl",
 			"table amphora",
-			"theomorphic vessel",
+			"theriomorphic vessel",
 			"tripod cup",
 			"twin-amphoriskos",
 			"twin-cup",
-			"unguentarium",
-			"zoomorphic vessel"]
+			"unguentarium"]
 		} # kind of object specifieds hash
 	], # kind of object array
 	production_techniques: [
@@ -131,6 +135,7 @@ $ceramic_material_data = {
 		"black",
 		"brown",
 		"buff",
+                "green",
 		"grey",
 		"pink",
 		"red",
@@ -159,6 +164,7 @@ $ceramic_material_data = {
 		"burnishing",
 		"carving",
 		"combing",
+                "engobe",
 		"glazing",
 		"grooving",
 		"inlay",
@@ -175,7 +181,7 @@ $ceramic_material_data = {
 	],
 	preservation_materials: [
 		"burnt",
-		"chracked",
+		"cracked",
 		"discolored",  
 		"good",
 		"fair",
@@ -194,5 +200,14 @@ $ceramic_material_data = {
 		"handle-to-body",
 		"rim",
 		"rim-to-body"
-	]
+	],
+	preservation_materials: [
+		"burnt",
+		"cracked",
+		"discolored",  
+		"good",
+		"fair",
+		"flaked",
+		"sintered"
+        ]
 } # hash

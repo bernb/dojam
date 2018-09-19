@@ -77,11 +77,22 @@ $bronze_material_data = {
 				}
 	],
 	production_techniques: [
-		"casting in a mould",
+		"casting",
+                "casting in a mould",
 		"casting with lost wax technique",
 		"hammering",
 		"undetermined"
-	],
+ 	],
+        colors: [
+ 	    "black",
+  	    "bronze colored",
+ 	    "brown",
+ 	    "copper colored",
+ 	    "golden",
+ 	    "green",
+            "red",
+		"undetermined"
+ 	],
 	decoration_techniques: [
 		"chasing",
 		"engraving",
@@ -127,7 +138,10 @@ $bronze_material_data = {
 		"undetermined"
 	],
 	preservation_materials: [
-		"corroded",
+                "chipped",
+                "corroded",
+                "fair",
+                "good",
 		"undetermined"
 	]
 }

@@ -51,11 +51,13 @@ $marble_material_data = {
 	preservation_objects: [
 		"almost complete",
                 "complete",
-		"fragmentary",
+		"fragment",
                 "undetermined"
 	],
 	preservation_materials: [
                 "chipped",
+                "discolered",
+                "good",
 		"sintered",
                 "undetermined"
 	]

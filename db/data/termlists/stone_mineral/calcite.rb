@@ -57,6 +57,8 @@ $calcite_material_data = {
 	preservation_materials: [
 		"chipped",
                 "cracked",
+                "discolored",
+                "good",
                 "sintered"
 	]
 }

@@ -51,12 +51,13 @@ $steatite_material_data = {
 		"undetermined"
 	],
 	preservation_objects: [
-		"bottom",
+		"almost complete",
+                "bottom",
 		"bottom and wall",
 		"complete",
 		"complete profile",
 		"foot",
-		"fragmentary",
+		"fragment",
 		"handle",
 		"handle and wall",
 		"rim",
@@ -66,6 +67,7 @@ $steatite_material_data = {
 	preservation_materials: [
 		"chipped",
 		"cracked",
+                "good",
 		"sintered",
 		"undetermined"
 	]
