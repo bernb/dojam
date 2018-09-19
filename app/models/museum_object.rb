@@ -268,6 +268,7 @@ class MuseumObject < ApplicationRecord
 											:preservation_object,
 											:authenticity,
 											:priority,
+											:dating_period,
 		]
 		termlist_names.each do |termlist_name|
 			undetermined_entry = termlist_name.to_s.camelize.constantize.find_by(name: "undetermined")
