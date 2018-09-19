@@ -66,15 +66,8 @@ module ExcelImporterHelperHelper
 		@@attributes[:dating_timespan_begin] = "timespan begin"
 		@@attributes[:dating_timespan_end] = "timespan end"
 
-		@@attributes[:description] = "description"
-		@@attributes[:remarks] = "remarks"
+		@@attributes[:remarks] = "description"
 		@@attributes[:literature] = "literature"
-
-		# Those are not found in latest reference excel sheet
-		@@attributes[:inscription_decoration] = nil
-		@@attributes[:name_mega_jordan] = "site name according to MEGA"
-		@@attributes[:inscription_decoration] = "decoration of inscription"
-
 
 	def set_museum_properties object, row
 		object.storage_location = StorageLocation.find_by name: row[:storage_location]
