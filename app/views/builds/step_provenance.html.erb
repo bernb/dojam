@@ -1,6 +1,6 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-    <%= f.association :excavation_site, label: 'site name', include_blank: true  %>
+    <%= f.association :excavation_site, label: 'site name', include_blank: false  %>
     <%= f.input :name_expedition, label: 'other site name(s)' %>
     <%= f.input :site_number_mega, label: "site number according to MEGA" %>
     <%= f.input :site_number_jadis, label: "site number according to JADIS" %>

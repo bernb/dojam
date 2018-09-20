@@ -1,7 +1,7 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
 	<%= simple_form_for @museum_object, data:{parsley_validate:""}, url: wizard_path do |f| %>
-    <%= f.association :preservation_material, collection: @preservation_materials, label: "preservation of material", as: :select, include_blank: true, required: true  %>
-     <%= f.association :preservation_object, collection: @preservation_objects, label: "preservation of object", as: :select, include_blank: true, required: true  %>
+    <%= f.association :preservation_material, collection: @preservation_materials, label: "preservation of material", as: :select, include_blank: false %>
+     <%= f.association :preservation_object, collection: @preservation_objects, label: "preservation of object", as: :select, include_blank: false %>
     <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>
