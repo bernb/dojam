@@ -87,7 +87,7 @@ class MuseumObjectValidator < ActiveModel::Validator
     check_assoc_exists record, :kind_of_acquisition, record.acquisition_kind
     check_assoc_exists record, :delivered_by, record.acquisition_delivered_by
 		check_date_consistency record, record.acquisition_year, record.acquisition_month, record.acquisition_day
-    check_not_empty record, :deliverer_name, record.acquisition_deliverer_name
+    #check_not_empty record, :deliverer_name, record.acquisition_deliverer_name
   end
   
   def validate_step_provenance_for record
