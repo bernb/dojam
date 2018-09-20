@@ -18,7 +18,7 @@ class MuseumObject < ApplicationRecord
   belongs_to :production_technique, required: false
   belongs_to :decoration_technique, required: false
   belongs_to :decoration_color, required: false
-  belongs_to :decoration, required: false, foreign_key: 'decoration_style_id'
+  belongs_to :decoration_style, required: false, class_name: "Decoration"
   belongs_to :preservation_material, required: false
   belongs_to :preservation_object, required: false
   belongs_to :inscription_letter, required: false
@@ -264,7 +264,7 @@ class MuseumObject < ApplicationRecord
 											:production_technique,
 											:decoration_technique,
 											:decoration_color,
-											:decoration,
+											:decoration_style,
 											:inscription_letter,
 											:inscription_language,
 											:preservation_material,
@@ -274,8 +274,13 @@ class MuseumObject < ApplicationRecord
 											:dating_period,
 		]
 		termlist_names.each do |termlist_name|
-			undetermined_entry = termlist_name.to_s.camelize.constantize.find_by(name: "undetermined")
-			self.send(termlist_name.to_s+"=", undetermined_entry) if self.send(termlist_name.to_s).blank?
+			if termlist_name == :decoration_style
+				undetermined_entry = Decoration.find_by(name: "undetermined")
+				self.send(termlist_name.to_s+"=", undetermined_entry) if self.send(termlist_name.to_s).blank?
+			else
+				undetermined_entry = termlist_name.to_s.camelize.constantize.find_by(name: "undetermined")
+				self.send(termlist_name.to_s+"=", undetermined_entry) if self.send(termlist_name.to_s).blank?
+			end
 		end
 	end
 
