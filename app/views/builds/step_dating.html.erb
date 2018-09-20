@@ -3,7 +3,7 @@
 		<%= f.label "", "period" %>
 		<div class="input-group row">
 			<div class="input-group col">
-				<%= f.association :dating_period, collection: @dating_periods, as: :select, label: false, include_blank: true, required: true %>
+				<%= f.association :dating_period, collection: @dating_periods, as: :select, label: false, include_blank: false %>
 				<% f.input :is_dating_period_unknown, label: "unknown" %>
 			</div>
 		</div>
@@ -11,11 +11,11 @@
 		<%= f.label  "", "millennium" %>
 		<div class="input-group row">
 			<div class="input-group col">
-				<%= f.association :dating_millennium_begin, collection: @dating_millennia, as: :select, label: false, include_blank: true, required: true, class: "form-control col", html: {type: "number"} %>
+				<%= f.association :dating_millennium_begin, collection: @dating_millennia, as: :select, label: false, include_blank: false, class: "form-control col", html: {type: "number"} %>
 			</div>
 			<span class="form-control-static col-0">_</span>
 			<div class="input-group col">
-				<%= f.association :dating_millennium_end, collection: @dating_millennia, as: :select, label: false, include_blank: true, required: true, class: "form-control col" %>
+				<%= f.association :dating_millennium_end, collection: @dating_millennia, as: :select, label: false, include_blank: false, class: "form-control col" %>
 			</div>
 		</div>
 		<% f.input :is_dating_millennium_unknown, label: "unknown" %>
@@ -23,11 +23,11 @@
 		<%= f.label  "", "century" %>
 		<div class="input-group row">
 			<div class="input-group col">
-				<%= f.association :dating_century_begin, collection: @dating_centuries, as: :select, label: false, include_blank: true, required: true, class: "form-control col", html: {type: "number"} %>
+				<%= f.association :dating_century_begin, collection: @dating_centuries, as: :select, label: false, include_blank: false, class: "form-control col", html: {type: "number"} %>
 			</div>
 			<span class="form-control-static col-0">_</span>
 			<div class="input-group col">
-				<%= f.association :dating_century_end, collection: @dating_centuries, as: :select, label: false, include_blank: true, required: true, class: "form-control col" %>
+				<%= f.association :dating_century_end, collection: @dating_centuries, as: :select, label: false, include_blank: false, class: "form-control col" %>
 			</div>
 		</div>
 		<% f.input :is_dating_century_unknown, label: "unknown" %>
@@ -39,7 +39,7 @@
 					discard_day: true, 
 					discard_month: true,
 					as: :string, value: f.object&.dating_timespan_begin&.strftime("%Y"), class: "form-control col" %>
-				<%= f.input_field :is_dating_timespan_begin_BC, as: :select, :collection => [['BC',true],['AD',false]], class: "form-control select col-5" %>
+				<%= f.input_field :is_dating_timespan_begin_BC, as: :select, :collection => [['BC',true],['AD',false]], include_blank: false, class: "form-control select col-5" %>
 			</div>
 			<span class="form-control-static col-0">_</span>
 			<div class="input-group col">
@@ -47,7 +47,7 @@
 					discard_day: true, 
 					discard_month: true,
 					as: :string, value: f.object&.dating_timespan_end&.strftime("%Y"), class: "form-control col"%>
-				<%= f.input_field :is_dating_timespan_end_BC, as: :select, :collection => [['BC',true],['AD',false]], class: "form-control select col-5" %>
+				<%= f.input_field :is_dating_timespan_end_BC, as: :select, :collection => [['BC',true],['AD',false]], include_blank: false, class: "form-control select col-5" %>
 			</div>
 		</div>
 		<% f.input :is_dating_timespan_unknown, label: "unknown" %>
