@@ -224,9 +224,9 @@ class BuildsController < ApplicationController
 	end
 
 	def step_dating_vars
-		@dating_periods = DatingPeriod.all
-		@dating_millennia = DatingMillennium.all
-		@dating_centuries = DatingCentury.all
+		@dating_periods = @museum_object.get_possible_props_for "DatingPeriod"
+		@dating_millennia = @museum_object.get_possible_props_for "DatingMillennium"
+		@dating_centuries = @museum_object.get_possible_props_for "DatingCentury"
 	end
 
 	def step_remarks_vars
