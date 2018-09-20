@@ -1,4 +1,4 @@
-$organic_wood_material_data = {
+$organic_reed_material_data = {
 
 	material_name: "organic material (botanical)",
 

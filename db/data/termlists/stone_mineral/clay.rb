@@ -10,7 +10,8 @@ $clay_material_data = {
 			"brick"]
 		},
 		{"sculpture": [
-			"figurine theriomorphic"]
+			"bust",
+                        "figurine theriomorphic"]
 		},
 		{"tool": [
 			"loom weight"]
