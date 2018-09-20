@@ -23,7 +23,8 @@ $iron_material_data = {
 			"arrowhead",     
 			"cannon",  
 			"chain armor",
-			"dagger", 
+			"dagger",
+                        "plate armor", 
 			"spearhead",
 			"sword",
 			"undetermined"]

@@ -7,11 +7,15 @@ $organic_wood_material_data = {
 	],
 	kind_of_objects: [
 		{"unworked object": [
-			"charcoal"]
-		},
+			"charcoal"
+		]},
+		{"jewelry": [
+			"button"    		
+		]},
 		{"vessel": [
-			"box"]
-		}
+			"box",
+			"juglet"
+		]}
 	],
 	production_techniques: [
 		"cut",

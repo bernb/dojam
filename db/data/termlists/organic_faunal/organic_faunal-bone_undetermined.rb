@@ -3,7 +3,7 @@ $bone_undetermined_material_data = {
 	material_name: "organic material (faunal)",
 
 	material_specifieds: [
-		"bone (undetermined)",
+		"bone",
 	],
 	kind_of_objects: [
 		{"fitting": [
@@ -15,6 +15,7 @@ $bone_undetermined_material_data = {
 			"bangle",
 			"bead",
 			"hair pin",
+                        "pendant",
 			"undetermined"]
 		},
 		{"tool": [

@@ -49,6 +49,7 @@ $general_terms_data = {
     "Arabic",
     "Aramaic",
     "Edomite",
+    "Egyptian",
     "Greek",
     "Hebrew",
     "Latin",

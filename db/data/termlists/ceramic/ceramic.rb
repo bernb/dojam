@@ -9,7 +9,7 @@ $ceramic_material_data = {
 		"Cypriote Base-Ring-Ware",
 		"Chocolate-on-White Ware",
 		"Cypriote Red Slip Ware (CRSW)",
-                "Eastern Sigillata (ESA)",
+                "Eastern Sigillata A (ESA)",
 		"Eastern Terra Sigillata (ETS)",
 		"Khirbet Kerak Ware",
 		"Late Helladic (LH)",
@@ -34,19 +34,23 @@ $ceramic_material_data = {
 		"inscribed tablet",
 		{"jewelry": [
 			"button",
-			"pendant"]
+			"pendant",
+                        "stamp seal"]
 		},
                 {"fitting": [
 		        "knob"]
 		},
 		{"sarcophagus": [
-                        "sarcophagus anthropoid"]
+                        "sarcophagus anthropoid",
+                        "sarcophagus lid"]
 		},
                 {"sculpture": [
-			"bust", 
+			"bust",
+                        "column", 
 			"figurine anthropomorphic",
 			"figurine anthropomorphic-theriomorphic",
 			"figurine theriomorphic",
+                        "head",
 			"mask"]
 		},
 		{"tool": [
@@ -200,14 +204,5 @@ $ceramic_material_data = {
 		"handle-to-body",
 		"rim",
 		"rim-to-body"
-	],
-	preservation_materials: [
-		"burnt",
-		"cracked",
-		"discolored",  
-		"good",
-		"fair",
-		"flaked",
-		"sintered"
-        ]
+	]
 } # hash

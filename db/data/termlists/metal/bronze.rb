@@ -63,7 +63,8 @@ $bronze_material_data = {
 					"oil lamp",
 					"platter",
 					"reliquary",
-					"situla"]
+					"situla",
+                                        "skewer"]
 				},
 				{"weapon/armor": [
 					"arrowhead",     

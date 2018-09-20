@@ -3,7 +3,7 @@ $organic_faunal_snail_material_data = {
 	material_name: "organic material (faunal)",
 
 	material_specifieds: [
-		"shell",
+		"snail",
 	],
 	kind_of_objects: [
 		{"jewelry": [
@@ -15,9 +15,10 @@ $organic_faunal_snail_material_data = {
 			"undetermined"]
 		},
 		{"vessel": [
-			"container, zoomorphic",
+			"container theriomorphic",
 			"undetermined"]
-		},
+                },
+		"unworked object"
 	],
 	production_techniques: [
 		"cutting",

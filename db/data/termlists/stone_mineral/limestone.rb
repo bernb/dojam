@@ -19,10 +19,11 @@ $limestone_material_data = {
 			"bangle",
 			"cylinder seal"]
 		},
+                "sarcophagus",
 		{"sculpture": [
 			"bust",
 			"figurine anthropomorphic",
-			"figurine zoomorphic",
+			"figurine theriomorphic",
 			"head",
 			"torso",
 			"statue",
@@ -51,6 +52,7 @@ $limestone_material_data = {
 	],
 	colors: [
 		"beige",
+                "black",
 		"brown",
                 "red",
                 "white",
