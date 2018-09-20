@@ -67,12 +67,13 @@ class MuseumObject < ApplicationRecord
 		end
 		if classname.constantize.is_independent_of_paths
 			# We cast to array to achieve consistency, see below for more information
-			return classname.constantize.all.to_a
+			termlist_ids = classname.constantize.where.not(name: "undetermined").ids
+		else
+			termlist_ids = self.main_path.termlists.where(type: classname).where.not(name: "undetermined").ids
 		end
 		if self.main_path.blank?
 			return nil
 		end
-		termlist_ids = self.main_path.termlists.where(type: classname).ids
 		# We merge by hand here so we do not neccessarily need to add the undetermined entries to every single possible path
 		# We use the plus operation on the result sets to achieve the correct sorting
 		undetermined_entry_id = Termlist.where(type: classname).where(name: "undetermined").ids
