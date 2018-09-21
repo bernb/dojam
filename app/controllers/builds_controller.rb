@@ -193,7 +193,7 @@ class BuildsController < ApplicationController
 			@kind_of_object_specifieds << child.objects[3]
 		end
 		@kind_of_object_specifieds = @kind_of_object_specifieds.uniq
-		@kind_of_object_specifieds= @museum_object.get_possible_props_for "KindOfObjectSpecified"
+		#@kind_of_object_specifieds= @museum_object.get_possible_props_for "KindOfObjectSpecified"
 	end
 
 	def step_color_vars
