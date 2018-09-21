@@ -92,7 +92,7 @@ class MuseumObject < ApplicationRecord
 	end
 
 	def kind_of_object_specified=(kind_of_object_specified)
-		path_name = self.kind_of_object.paths.first.path + "/" + kind_of_object_specified&.id&.to_s
+		path_name = self.main_path + "/" + kind_of_object_specified&.id&.to_s
 		path = Path.find_by path: path_name
 		self.main_path = path
 		self.save
