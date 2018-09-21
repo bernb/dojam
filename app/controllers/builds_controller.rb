@@ -172,7 +172,8 @@ class BuildsController < ApplicationController
 
 	def step_provenance_vars
     @excavation_site_categories = ExcavationSiteCategory.all.order name: :asc
-    @selected_excavation_site_category = ExcavationSiteCategory.first
+		@selected_excavation_site_category = @museum_object.excavation_site_category
+    @selected_excavation_site_category ||= ExcavationSiteCategory.first
     @excavation_site_kinds = @selected_excavation_site_category.excavation_site_kinds
 	end
 
