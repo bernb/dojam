@@ -299,7 +299,7 @@ class BuildsController < ApplicationController
                                           :acquisition_kind_id, :acquisition_delivered_by_id, :acquisition_deliverer_name, :acquisition_date,
                                           :finding_context, :finding_remarks, :authenticity_id, :priority, :priority_determined_by,
                                           :inscription_decoration, :inscription_letters, :inscription_text, :inscription_translation, 
-                                          :excavation_site_id, :material_specified_ids, :kind_of_object_id, :kind_of_object_specified_id,
+                                          :excavation_site_id, :excavation_site_category_id, :material_specified_ids, :kind_of_object_id, :kind_of_object_specified_id,
                                           :is_acquisition_date_exact, :acquisition_document_number, :name_expedition, :site_number_mega, :site_number_expedition,
                                           :coordinates_mega, :excavation_site_kind_id, :dating_period_id, :dating_millennium_id,
                                           :production_technique_id, :decoration_style_id, :decoration_color_id, :decoration_technique_id,
