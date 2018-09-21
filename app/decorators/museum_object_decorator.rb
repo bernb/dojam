@@ -79,31 +79,31 @@ class MuseumObjectDecorator < Draper::Decorator
 
 	def dating_millennium
 		if self.is_dating_millennium_unknown? || self.dating_millennium_begin.blank? || self.dating_millennium_begin.blank?
-			return "unknown"
+			return "undetermined"
 		else
 			if self.dating_millennium_begin&.id == self.dating_millennium_end&.id
 				return self.dating_millennium_begin&.name
 			else
-				return self.dating_millennium_begin&.name + " - " + self.dating_millennium_begin&.name
+				return self.dating_millennium_begin&.name + " - " + self.dating_millennium_end&.name
 			end
 		end
 	end
 
 	def dating_century
 		if self.is_dating_century_unknown? || self.dating_century_begin.blank? || self.dating_century_begin.blank?
-			return "unknown"
+			return "undetermined"
 		else
 			if self.dating_century_begin&.id == self.dating_century_end&.id
 				return self.dating_century_begin&.name
 			else
-				return self.dating_century_begin.name + " - " + self.dating_century_begin.name
+				return self.dating_century_begin.name + " - " + self.dating_century_end.name
 			end
 		end
 	end
 
 	def dating_period_decorated
 		if self.is_dating_period_unknown? || self.dating_period.blank?
-			return "unknown"
+			return "undetermined"
 		else
 			return self.dating_period.name
 		end
@@ -130,7 +130,7 @@ class MuseumObjectDecorator < Draper::Decorator
   
   def dating_timespan
 		if self.is_dating_timespan_unknown?
-			return "unknown"
+			return "undetermined"
 		end
     timespan_begin_suffix = is_dating_timespan_begin_BC? ? " BC" : " AD"
     timespan_end_suffix = is_dating_timespan_end_BC? ? " BC" : " AD"
