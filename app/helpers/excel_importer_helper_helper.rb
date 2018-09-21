@@ -36,7 +36,7 @@ module ExcelImporterHelperHelper
 		@@attributes[:production_technique_id] = "production technique"
 		@@attributes[:colors] = "color"
 		@@attributes[:munsell_color] = "Munsell color"
-		@@attributes[:decoration] = "decoration style"
+		@@attributes[:decoration_style_id] = "decoration style"
 		@@attributes[:decoration_technique_id] = "decoration technique"
 		@@attributes[:decoration_color_id] = "decoration color"
 		@@attributes[:inscription_letter_id] = "letters of inscription"
@@ -263,11 +263,18 @@ module ExcelImporterHelperHelper
 		i = current_line
 		termlist = column.to_s
 		termlist.slice!("_id")
+		if termlist == "decoration_style"
+			termlist = "decoration"
+		end
 		termlist_class = termlist.camelcase.constantize
 
 		found_termlist = search_for_possible_props object, termlist_class, termlist_value
+		puts "* column: #{column.to_s}; value: #{termlist_value}"
 
 		if found_termlist.present?
+			if termlist == "decoration"
+				termlist = "decoration_style"
+			end
 			object.send(termlist + "=", found_termlist)
 		else
 			add_termlist_not_found_error object: object, value: termlist_value, termlist_name: termlist_class.to_s, with_path: with_path
@@ -311,16 +318,15 @@ module ExcelImporterHelperHelper
 	end
 
 	def is_simple_attribute key
-		MuseumObject.method_defined?(key.to_s+"=") &&	!is_complex_attribute(key)
+		!is_complex_attribute(key) && !is_regular_termlist(key)
 	end
 
 	def is_regular_termlist key
-		MuseumObject.method_defined?(key.to_s+"=") && key.to_s.ends_with?("_id") && !is_complex_attribute(key)
+		key.to_s.ends_with?("_id") && !is_complex_attribute(key)
 	end
 
 	def is_complex_attribute key
 		array = [:needs_cleaning, :needs_conservation, :storage_location, :excavation_site, :colors, :production_technique_id, :decoration_color_id, :decoration_technique_id]
-			key.to_s.ends_with?("_id") ||
 			array.include?(key) ||
 			key.to_s.include?("kind_of") ||
 			key.to_s.include?("material") ||

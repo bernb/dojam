@@ -94,6 +94,7 @@ module ExcelImporterHelper
 			row.keys.each do |key|
 				if is_simple_attribute key
 					if is_correct_format key, row[key]
+						#puts "* simple attribte: #{key.to_s}"
 						object.send(key.to_s+"=", row[key])
 					else
 						object.errors[:base] << "Invalid format \"#{row[key]}\" for #{key}"
