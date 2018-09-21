@@ -17,6 +17,13 @@
         <dd class="col-sm-6">
           <%= museum_card.list_materials %>
         </dd>
+
+        <dt class="col-sm-6">
+          material specifieds
+        </dt>
+        <dd class="col-sm-6">
+          <%= museum_card.list_material_specifieds %>
+        </dd>
         
         <dt class="col-sm-6">
           kind of object
@@ -24,6 +31,14 @@
         <dd class="col-sm-6">
           <%= museum_card&.kind_of_object&.name %>
         </dd>
+				
+        <dt class="col-sm-6">
+          kind of object specified
+        </dt>
+        <dd class="col-sm-6">
+          <%= museum_card&.kind_of_object_specified&.name %>
+        </dd>
+
       </dl>
     </p>
     <%= museum_card.links variant %>

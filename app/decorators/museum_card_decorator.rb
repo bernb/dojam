@@ -21,6 +21,15 @@ class MuseumCardDecorator < Draper::Decorator
     
     return helpers.sanitize list
   end
+
+  def list_material_specifieds
+    list = ""
+    self&.material_specifieds.each do |ms|
+      list << ms.name << "<p>"
+    end
+    
+    return helpers.sanitize list
+  end
   
   def links variant
     links = ""
