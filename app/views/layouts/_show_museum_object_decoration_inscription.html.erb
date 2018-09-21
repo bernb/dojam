@@ -2,6 +2,16 @@
   <h2>decoration/inscription</h2>
   <%= link_to "edit", wizard_path(:step_decoration) %>
   <dl class="dl-horizontal">
+
+    <div class="row">
+      <div class="col-3">
+        <dt>style</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.decoration_style&.name %></dd>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-3">
         <dt>technique</dt>
