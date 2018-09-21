@@ -16,9 +16,9 @@
       <%= stylesheet_link_tag("arabic_keyboard") %> 
     </div>
     <div class="row">
-      <% unless @museum_object&.kind_of_object.nil? %>
+      <% #unless @museum_object&.kind_of_object.nil? %>
         <%= render "layouts/museum_object_card", museum_card: @museum_object.card, variant: @variant %>
-      <% end %>
+      <% #end %>
     </div>
   </div>
 </div>
