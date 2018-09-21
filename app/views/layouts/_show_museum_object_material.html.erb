@@ -29,7 +29,7 @@
         <dt>colors</dt>
       </div> 
       <div class="col"> 
-        <% @museum_object&.colors.each do |m| %>
+        <% @museum_object&.colors&.uniq.each do |m| %>
           <div class="">
             <dd><%= m&.name %></dd>
           </div>
