@@ -36,10 +36,6 @@ class Path < ApplicationRecord
 		return objects
 	end
 
-	def attach object
-		self.path + "/" + object.id.to_s
-	end
-
 	def named_path
 		named_path = ""
 		self.objects.each do |object|

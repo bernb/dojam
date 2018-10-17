@@ -18,7 +18,7 @@ class Termlist < ApplicationRecord
 	def attach_child object
 		if self.depth == object.depth - 1
 			self.paths.each do |path|
-				path = path.attach object
+				path = path.path + "/" + object.id.to_s
 				object.add_path path
 			end
 		end
