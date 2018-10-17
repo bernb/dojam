@@ -188,7 +188,7 @@ class BuildsController < ApplicationController
 
 	def step_kind_of_object_specified_vars
 		main_path = @museum_object&.main_path
-		children = main_path.down_to_depth(3).direct_children
+		children = main_path.parent.direct_children
 		@kind_of_object_specifieds = []
 		children.each do |child|
 			@kind_of_object_specifieds << child.objects[3]
