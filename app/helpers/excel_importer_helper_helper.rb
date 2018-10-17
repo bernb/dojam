@@ -224,7 +224,8 @@ module ExcelImporterHelperHelper
 			return
 		end
 
-		path = Path.find_by_material_related material, material_specified, kind_of_object, kind_of_object_specified
+		path_name = "/" + material.id.to_s + "/" + material_specified.id.to_s + "/" + kind_of_object.id.to_s + "/" + kind_of_object_specified.id.to_s
+		path = Path.find_by path: path_name
 		if path.blank?
 			object.errors[:base] << "Material / kind of object combination not found."
 			return
