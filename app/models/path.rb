@@ -2,6 +2,10 @@ class Path < ApplicationRecord
 	has_many :termlist_paths
 	has_many :termlists, through: :termlist_paths
 
+	def root?
+		self.parent.nil?
+	end
+
 	def depth
 		self.path.split("/").drop(1).length
 	end
