@@ -14,25 +14,6 @@ class Termlist < ApplicationRecord
 		false
 	end
 
-	# Will create a path for all paths of given object
-	def attach_child object
-		if self.depth == object.depth - 1
-			self.paths.each do |path|
-				path = path.path + "/" + object.id.to_s
-				object.add_path path
-			end
-		end
-	end
-
-	def add_path path
-		if path.is_a? String
-			p = Path.find_or_create_by path: path
-			self.paths << p
-		elsif path.is_a? Path
-			self.paths << p
-		end
-	end
-
 	private
 	def add_default_path_for_roots
 		if self.depth == 1
