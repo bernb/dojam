@@ -2,6 +2,15 @@ class Path < ApplicationRecord
 	has_many :termlist_paths
 	has_many :termlists, through: :termlist_paths
 
+	def parent
+		ids = self.ids[0...-1]
+		pathname = ""
+		ids.each do |id|
+			pathname += "/#{id}"
+		end
+		Path.find_by path: pathname
+	end
+
 	def down_to_depth target_depth
 		if target_depth >= self.depth
 			return self
