@@ -5,7 +5,7 @@ class MuseumObject < ApplicationRecord
 
   has_one :images, class_name: "MuseumObjectImageList", dependent: :destroy
   accepts_nested_attributes_for :images
-  belongs_to :excavation_site, -> { order(name: :asc) }, required: false # do not require for now while in early dev state
+  belongs_to :excavation_site, -> { order(name: :asc) }, required: false 
   belongs_to :storage_location, required: false
   belongs_to :acquisition_delivered_by, -> { order(name: :asc) }, required: false
   belongs_to :acquisition_kind, -> { order(name: :asc) }, required: false
