@@ -1,6 +1,7 @@
 class Path < ApplicationRecord
 	has_many :termlist_paths
 	has_many :termlists, through: :termlist_paths
+	scope :last_id, ->(id) {where "path like ?", "%/#{id}"}
 
 	def root?
 		self.parent.nil?
