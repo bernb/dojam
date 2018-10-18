@@ -60,27 +60,20 @@ class MuseumObject < ApplicationRecord
                                           
   end
 
-	# We do not use path scopes as this way we avoid boiler plate code for every single property/scope
 	def get_possible_props_for classname
 		if !(classname.constantize < Termlist) 
-			return nil
+			# ToDo: Throw error instead
+			return Termlist.none
 		end
+
 		if classname.constantize.is_independent_of_paths
-			# We cast to array to achieve consistency, see below for more information
-			termlist_ids = classname.constantize.where.not(name: "undetermined").ids
+			return classname.constantize.all
 		else
 			if self.main_path.blank?
-				return nil
+				return classname.constantize.none
 			end
-			termlist_ids = self.main_path.termlists.where(type: classname).where.not(name: "undetermined").ids
+			return self.main_path.termlists.where(type: classname)
 		end
-		# We merge by hand here so we do not neccessarily need to add the undetermined entries to every single possible path
-		# We use the plus operation on the result sets to achieve the correct sorting
-		undetermined_entry_id = Termlist.where(type: classname).where(name: "undetermined").ids
-			if classname == "Priority"
-				puts "undetermined_entry: #{undetermined_entry_id}"
-			end
-		Termlist.find(termlist_ids) + Termlist.find(undetermined_entry_id)
 	end
 
 	def kind_of_object_specified
