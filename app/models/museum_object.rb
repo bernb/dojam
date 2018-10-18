@@ -85,9 +85,20 @@ class MuseumObject < ApplicationRecord
 	end
 
 	def kind_of_object_specified=(kind_of_object_specified)
-		path_name = self.main_path.path + "/" + kind_of_object_specified&.id&.to_s
-		path = Path.find_by path: path_name
-		self.main_path = path
+		case self.main_path.depth
+		when 3
+			path = self.main_path
+		when 4
+			path = self.main_path.parent
+		else
+			# ToDo: Throw error instead
+			return nil
+		end
+
+		new_path = path.direct_children.last_id(kind_of_object_specified.id)
+
+		# ToDo: throw error instead
+		self.main_path = new_path unless new_path.blank?
 	end
 
 	def kind_of_object_specified_id=(kind_of_object_specified_id)
