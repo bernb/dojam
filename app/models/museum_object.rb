@@ -280,6 +280,9 @@ class MuseumObject < ApplicationRecord
 		end
 	end
 
+	# depth 1 = materials
+	# depth 2 = material specifieds
+	# merges objects of main_path with other (secendory) paths / materials
 	def paths_objects_for depth
 		objects = []
 		objects << self.main_path.objects[depth-1] unless self.main_path.blank?
