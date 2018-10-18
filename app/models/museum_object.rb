@@ -85,21 +85,11 @@ class MuseumObject < ApplicationRecord
 	end
 
 	def kind_of_object_specified=(kind_of_object_specified)
-		case self.main_path.depth
-		when 3
-			path = self.main_path
-		when 4
-			path = self.main_path.parent
-		else
-			# ToDo: Throw error instead
-			return nil
-		end
-
-		new_path = path.direct_children.last_id(kind_of_object_specified.id)
-
+		path = self.get_new_main_path_for(model: kind_of_object_specified)
 		# ToDo: throw error instead
-		self.main_path = new_path unless new_path.blank?
+		self.main_path = path unless path.blank?
 	end
+
 
 	def kind_of_object_specified_id=(kind_of_object_specified_id)
 		kind_of_object_specified = KindOfObjectSpecified.find kind_of_object_specified_id
@@ -301,6 +291,21 @@ class MuseumObject < ApplicationRecord
 		end
 		return objects.uniq
 	end
-  
-  
+
+	# Used to set new m/ms/koo/koos
+	# Allow redefining if it was already set or allows to extent path
+	# but will not allow to i.e. have one step skipped
+	def get_new_main_path_for(model:)
+		case self.main_path.depth
+		when model.depth-1
+			path = self.main_path
+		when model.depth
+			path = self.main_path.parent
+		else
+			# ToDo: Throw error instead
+			return nil
+		end
+		path.direct_children.last_id(model.id)
+	end
+
 end
