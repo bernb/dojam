@@ -105,9 +105,9 @@ class MuseumObject < ApplicationRecord
 	end
 
 	def kind_of_object=(kind_of_object)
-		path_name = self.main_material_specified.paths.first.path + "/" + kind_of_object&.id&.to_s
-		path = Path.find_by path: path_name
-		self.main_path = path
+		path = self.get_new_main_path_for(model: kind_of_object)
+		# ToDo: throw error instead
+		self.main_path = path unless path.blank?
 	end
 
 	def kind_of_object_id=(kind_of_object_id)
@@ -125,10 +125,11 @@ class MuseumObject < ApplicationRecord
 		self.main_path&.objects&.[](1)
 	end
 
+	# Workaround for the fact that ms and koo get saved parallel i.e. overwriting each other
 	def set_main_material_specified=(main_material_specified)
-		path = Path.find_in_depth_two(main_material_specified.id).first
-		# Workaround for the fact that ms and koo get saved parallel i.e. overwriting each other
-		self.main_path = path 
+		path = self.get_new_main_path_for(model: kind_of_object)
+		# ToDo: throw error instead
+		self.main_path = path unless path.blank?
 	end
 
 	# Dirty workaround to get correct values for edit form
