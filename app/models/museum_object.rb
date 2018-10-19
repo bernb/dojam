@@ -76,24 +76,25 @@ class MuseumObject < ApplicationRecord
 		end
 	end
 
-	def kind_of_object_specified
-		self.main_path&.objects&.[](3)
+	########################
+	# m/ms/koo/koos getter #
+	# ######################
+	def main_material
+		# Note there is the safe navigation version of objects[2]
+		self.main_path&.objects&.[](0)
 	end
 
-	def kind_of_object_specified_id
-		self.kind_of_object_specified&.id
+	def main_material_id
+		main_material_specified&.id
 	end
 
-	def kind_of_object_specified=(kind_of_object_specified)
-		path = self.get_new_main_path_for(model: kind_of_object_specified)
-		# ToDo: throw error instead
-		self.main_path = path unless path.blank?
+	def main_material_specified
+		# Note there is the safe navigation version of objects[2]
+		self.main_path&.objects&.[](1)
 	end
 
-
-	def kind_of_object_specified_id=(kind_of_object_specified_id)
-		kind_of_object_specified = KindOfObjectSpecified.find kind_of_object_specified_id
-		self.kind_of_object_specified = kind_of_object_specified
+	def main_material_specified_id
+		main_material_specified&.id
 	end
 
 	def kind_of_object
@@ -104,48 +105,12 @@ class MuseumObject < ApplicationRecord
 		self.kind_of_object&.id
 	end
 
-	def kind_of_object=(kind_of_object)
-		path = self.get_new_main_path_for(model: kind_of_object)
-		# ToDo: throw error instead
-		self.main_path = path unless path.blank?
+	def kind_of_object_specified
+		self.main_path&.objects&.[](3)
 	end
 
-	def kind_of_object_id=(kind_of_object_id)
-		kind_of_object = KindOfObject.find kind_of_object_id
-		self.kind_of_object = kind_of_object
-	end
-
-	def main_material
-		# Note there is the safe navigation version of objects[2]
-		self.main_path&.objects&.[](0)
-	end
-
-	def main_material_specified
-		# Note there is the safe navigation version of objects[2]
-		self.main_path&.objects&.[](1)
-	end
-
-	# Workaround for the fact that ms and koo get saved parallel i.e. overwriting each other
-	def set_main_material_specified=(main_material_specified)
-		path = self.get_new_main_path_for(model: kind_of_object)
-		# ToDo: throw error instead
-		self.main_path = path unless path.blank?
-	end
-
-	# Dirty workaround to get correct values for edit form
-	# and also never actually save, but set it before in ajax call in custom method
-	def main_material_specified=(main_material_specified)
-	end
-
-	def main_material_specified_id
-		main_material_specified&.id
-	end
-
-	def main_material_specified_id=(main_material_specified_id)
-		# Don't do anything right now as at the moment we save material_specified always together with kind_of_object
-		# As they both set main_path, they overwrite each other if set in parallel
-		#main_material_specified = MaterialSpecified.find main_material_specified_id
-		#self.main_material_specified = main_material_specified
+	def kind_of_object_specified_id
+		self.kind_of_object_specified&.id
 	end
 
 	def materials
@@ -160,12 +125,6 @@ class MuseumObject < ApplicationRecord
 		return ids
 	end
 
-	def material_ids=(material_object_ids)
-		material_object_ids = material_object_ids.reject{|m| m.blank?}
-		material_objects = Material.find material_object_ids
-		self.materials = material_objects
-	end
-
 	def materials=(material_objects)
 		paths = []
 		material_objects.each do |object|
@@ -174,6 +133,12 @@ class MuseumObject < ApplicationRecord
 		end
 		self.paths.clear
 		self.paths << paths
+	end
+
+	def material_ids=(material_object_ids)
+		material_object_ids = material_object_ids.reject{|m| m.blank?}
+		material_objects = Material.find material_object_ids
+		self.materials = material_objects
 	end
 
 	def material_specifieds
