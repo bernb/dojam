@@ -1,7 +1,7 @@
 class Termlist < ApplicationRecord
 	# See https://stackoverflow.com/questions/4088532/custom-order-by-explanation for explaination 
 	# how the first order parameter gets evaluated and why this works
-	default_scope {order("termlists.name = 'undetermined'", position: :asc, name: :asc)}
+	default_scope {order(Arel.sql("termlists.name = 'undetermined'"), position: :asc, name: :asc)}
 	after_save :add_default_path_for_roots, on: :create
 	has_many :termlist_paths
 	has_many :paths, through: :termlist_paths
