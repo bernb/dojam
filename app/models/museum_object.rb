@@ -258,20 +258,45 @@ class MuseumObject < ApplicationRecord
 		return objects.uniq
 	end
 
+	def main_path=(material: nil, material_specified: nil, kind_of_object: nil, kind_of_object_specified: nil)
+		# ToDo: Throw error instead of returning nil
+		# Map given parameter to an logical integer array with
+		# 1: parameter was given
+		# 0: parameter is blank
+		parameter_array = [material, material_specified, kind_of_object, kind_of_object_specified] 
+		logical_array = parameter_array.map(&:present?).map{|l| l ? 1 : 0}
+		parameters_are_consistent = logical_array.each_cons(2).all?{|left, right| left >= right}
+		if !parameters_are_consistent
+			return nil
+		end
+
+		path = parameter_array.reject(&:blank?).reduce(""){|path, object| path += "/" + object.id}
+
+	end
+
 	# Used to set new m/ms/koo/koos
 	# Allow redefining if it was already set or allows to extent path
 	# but will not allow to i.e. have one step skipped
-	def get_new_main_path_for(model:)
+	def attach_to_main_path(model:)
+		if self.main_path.blank? && model.depth == 1
+			self.main_path = Path.depth(1).last_id(model.id)
+			return
+		end
+		if self.main_path.blank? && model.depth > 1
+			# ToDo: Throw error instead
+			return nil
+		end
+
 		case self.main_path.depth
 		when model.depth-1
 			path = self.main_path
 		when model.depth
-			path = self.main_path.parent
+			path = self.main_path&.parent
 		else
 			# ToDo: Throw error instead
 			return nil
 		end
-		path.direct_children.last_id(model.id)
+		self.main_path = path.direct_children.last_id(model.id)
 	end
 
 end
