@@ -2,6 +2,7 @@ class Path < ApplicationRecord
 	has_many :termlist_paths
 	has_many :termlists, through: :termlist_paths
 	scope :last_id, ->(id) {where "path like ?", "%/#{id}"}
+	scope :depth, ->(depth) {where "path similar to ?", "/\\d{1,}" * depth}
 
 	def root?
 		self.parent.nil?

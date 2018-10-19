@@ -169,7 +169,7 @@ class MuseumObject < ApplicationRecord
 	def materials=(material_objects)
 		paths = []
 		material_objects.each do |object|
-			path = Path.find_in_depth_one object.id
+			path = Path.depth(1).last_id(object.id)
 			paths << path
 		end
 		self.paths.clear
@@ -183,7 +183,7 @@ class MuseumObject < ApplicationRecord
 	def material_specifieds=(material_specified_objects)
 		paths = []
 		material_specified_objects.each do |object|
-			path = Path.find_in_depth_two object.id
+			path = Path.depth(2).last_id(object.id)
 			paths << path
 		end
 		self.paths.clear
