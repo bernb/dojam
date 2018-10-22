@@ -12,7 +12,8 @@ $stone_unspecified_material_data = {
 			"base",
 			"column",
 			"door hinge socket"
-		]},
+		]
+		},
 		"grave stone",
 		{"jewelry": [
 			"bead",
@@ -20,13 +21,15 @@ $stone_unspecified_material_data = {
 			"pendant",
 			"scarab",
 			"stamp seal",
-		]},
+		]
+		},
 		{"mill": [
 			"Olynthus mill",
 			"hand-driven rotating mill",
 			"Pompeian mill",
 			"oil press"
-		]},
+		]
+		},
 		{"sculpture": [
 			"bust",
 			"figurine",
@@ -34,7 +37,8 @@ $stone_unspecified_material_data = {
 			"statue",
 			"stela",
 			"torso"
-		]},
+		]
+		},
 		{"tool": [
 			"ad-hoc-tool",
 			"blade",
@@ -63,7 +67,8 @@ $stone_unspecified_material_data = {
 			"sickle blade",
 			"spindle whorl",
 			"tabular scraper"
-		]},
+		]
+		},
 		{"vessel": [
 			"basin",
 			"beaker",
@@ -77,7 +82,8 @@ $stone_unspecified_material_data = {
 			"mortar bowl",
 			"plate",
 			"tripod bowl"
-		]},
+		]
+		},
 	],
 	production_techniques: [
 		"cutting",

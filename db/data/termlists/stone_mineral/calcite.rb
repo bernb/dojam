@@ -9,7 +9,7 @@ $calcite_material_data = {
 		{"vessel": [
 			"alabastron",
 			"amphora",
-                        "bottle",
+			"bottle",
 			"bowl",
 			"flask",
 			"jar",
@@ -20,17 +20,17 @@ $calcite_material_data = {
 		"chiseling",
 		"drilling",
 		"pecking",
-                "polishing",
+		"polishing",
 		"smoothing"
 	],
 	colors: [
 		"beige",
-                "white",
+		"white",
 		"yellow"
 	],
 	decoration_techniques: [
 		"engraving",
-                "relief",
+		"relief",
 		"none"
 	],
 	decorations: [
@@ -56,9 +56,9 @@ $calcite_material_data = {
 	],
 	preservation_materials: [
 		"chipped",
-                "cracked",
-                "discolored",
-                "good",
-                "sintered"
+		"cracked",
+		"discolored",
+		"good",
+		"sintered"
 	]
 }

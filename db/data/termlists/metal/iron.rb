@@ -1,22 +1,22 @@
 $iron_material_data = {
-  
-  material_name: "metal",
-  
-  material_specifieds: [
-    "iron",
-  ],
-  kind_of_objects: [
-    {"fitting": [
-        "nail",
-        "ring"]
+
+	material_name: "metal",
+
+	material_specifieds: [
+		"iron",
+	],
+	kind_of_objects: [
+		{"fitting": [
+			"nail",
+			"ring"]
 		},
-    {"tool": [
-        "axe",
-        "key",
-        "knife",
-        "pin",
-        "plowshare",
-        "saw blade"]
+		{"tool": [
+			"axe",
+			"key",
+			"knife",
+			"pin",
+			"plowshare",
+			"saw blade"]
 		},
 		{"weapon/armor": [
 			"axe",
@@ -24,30 +24,30 @@ $iron_material_data = {
 			"cannon",  
 			"chain armor",
 			"dagger",
-                        "plate armor", 
+			"plate armor", 
 			"spearhead",
 			"sword",
 			"undetermined"]
 		}
 	],
-  production_techniques: [
-    "beating",
-    "cutting",
-    "drawing",
-    "forging",
-    "hammering",
-    "riveting",
-    "wire drawing",
-    "soldering",
+	production_techniques: [
+		"beating",
+		"cutting",
+		"drawing",
+		"forging",
+		"hammering",
+		"riveting",
+		"wire drawing",
+		"soldering",
 		"undetermined"
-  ],
+	],
 	colors: [
 		"black",
 		"brown",
 		"green",
 		"red",
 		"undetermined"
-  ],
+	],
 	decorations: [
 		"figurativ",
 		"floral",
@@ -73,23 +73,23 @@ $iron_material_data = {
 		"silver colored",
 		"none"
 	],
-  preservation_materials: [
-    "chipped",
-    "corroded",
-    "good",
-    "fair"
-  ],
-  preservation_objects: [
-    "bottom",
-    "complete",
-    "complete profile",
-    "foot",
-    "fragment",
-    "handle",
-    "handle-to-wall",
-    "rim",
-    "rim-to-wall",
-    "stem",
-    "wall-to-bottom"
+	preservation_materials: [
+		"chipped",
+		"corroded",
+		"good",
+		"fair"
+	],
+	preservation_objects: [
+		"bottom",
+		"complete",
+		"complete profile",
+		"foot",
+		"fragment",
+		"handle",
+		"handle-to-wall",
+		"rim",
+		"rim-to-wall",
+		"stem",
+		"wall-to-bottom"
 	]
 }

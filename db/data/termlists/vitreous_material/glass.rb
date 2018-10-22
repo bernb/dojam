@@ -33,7 +33,7 @@ $glass_material_data = {
 			"alabastron",
 			"amphoriskos",
 			"balsamarium",
-                        "beaker",
+			"beaker",
 			"bowl",
 			"dish",
 			"double balsamarium",

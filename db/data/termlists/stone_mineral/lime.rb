@@ -24,7 +24,7 @@ $lime_material_data = {
 	colors: [
 		"beige",
 		"brown",
-                "white",
+		"white",
 		"undetermined"
 	],
 	decoration_techniques: [

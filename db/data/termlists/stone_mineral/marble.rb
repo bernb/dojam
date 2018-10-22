@@ -6,59 +6,62 @@ $marble_material_data = {
 		"marble"
 	],
 	kind_of_objects: [
-                {"architectural element": [
-                        "slab"]},
+		{"architectural element": [
+			"slab"]
+		},
 		{"sculpture": [
 			"bust",
 			"head",
-			"statue"]},
-                {"tool": [
-                        "mace head"]},
-	        {"vessel": [
-                        "reliquiar"]}
-        ],
+			"statue"]
+		},
+		{"tool": [
+			"mace head"]
+		},
+		{"vessel": [
+			"reliquiar"]}
+	],
 	production_techniques: [
 		"chiseling",
 		"pecking",
 		"polishing",
 		"smoothing",
 		"none",
-                "undetermined"
+		"undetermined"
 	],
 	colors: [
 		"beige",
-                "black",
-                "grey",
+		"black",
+		"grey",
 		"white",
-                "undetermined"
+		"undetermined"
 	],
 	decoration_techniques: [
 		"engraving",
 		"none",
-                "undetermined"
+		"undetermined"
 	],
 	decorations: [
 		"figurative",
-                "floral",
+		"floral",
 		"geometrical",
 		"none",
-                "undetermined"
+		"undetermined"
 	],
 	decoration_colors: [
 		"none",
-                "undetermined"
+		"undetermined"
 	],
 	preservation_objects: [
 		"almost complete",
-                "complete",
+		"complete",
 		"fragment",
-                "undetermined"
+		"undetermined"
 	],
 	preservation_materials: [
-                "chipped",
-                "discolered",
-                "good",
+		"chipped",
+		"discolered",
+		"good",
 		"sintered",
-                "undetermined"
+		"undetermined"
 	]
 }

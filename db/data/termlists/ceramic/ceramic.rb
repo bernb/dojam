@@ -9,7 +9,7 @@ $ceramic_material_data = {
 		"Cypriote Base-Ring-Ware",
 		"Chocolate-on-White Ware",
 		"Cypriote Red Slip Ware (CRSW)",
-                "Eastern Sigillata A (ESA)",
+		"Eastern Sigillata A (ESA)",
 		"Eastern Terra Sigillata (ETS)",
 		"Khirbet Kerak Ware",
 		"Late Helladic (LH)",
@@ -35,22 +35,22 @@ $ceramic_material_data = {
 		{"jewelry": [
 			"button",
 			"pendant",
-                        "stamp seal"]
+			"stamp seal"]
 		},
-                {"fitting": [
-		        "knob"]
+		{"fitting": [
+			"knob"]
 		},
 		{"sarcophagus": [
-                        "sarcophagus anthropoid",
-                        "sarcophagus lid"]
+			"sarcophagus anthropoid",
+			"sarcophagus lid"]
 		},
-                {"sculpture": [
+		{"sculpture": [
 			"bust",
-                        "column", 
+			"column", 
 			"figurine anthropomorphic",
 			"figurine anthropomorphic-theriomorphic",
 			"figurine theriomorphic",
-                        "head",
+			"head",
 			"mask"]
 		},
 		{"tool": [
@@ -100,7 +100,7 @@ $ceramic_material_data = {
 			"lid",
 			"milk bowl",
 			"oil lamp",
-	        	"ostracon",
+			"ostracon",
 			"pan",
 			"pilgrim flask",
 			"pithos",
@@ -139,7 +139,7 @@ $ceramic_material_data = {
 		"black",
 		"brown",
 		"buff",
-                "green",
+		"green",
 		"grey",
 		"pink",
 		"red",
@@ -168,7 +168,7 @@ $ceramic_material_data = {
 		"burnishing",
 		"carving",
 		"combing",
-                "engobe",
+		"engobe",
 		"glazing",
 		"grooving",
 		"inlay",

@@ -43,7 +43,7 @@ $carnelian_material_data = {
 	],
 	preservation_materials: [
 		"chipped",
-                "good",
+		"good",
 		"sintered"
 	]
 }

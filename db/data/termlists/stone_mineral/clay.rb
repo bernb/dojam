@@ -11,7 +11,7 @@ $clay_material_data = {
 		},
 		{"sculpture": [
 			"bust",
-                        "figurine theriomorphic"]
+			"figurine theriomorphic"]
 		},
 		{"tool": [
 			"loom weight"]
@@ -23,7 +23,7 @@ $clay_material_data = {
 	],
 	colors: [
 		"beige",
-                "black",
+		"black",
 		"brown"
 	],
 	decoration_techniques: [

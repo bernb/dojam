@@ -14,28 +14,28 @@ $onyx_material_data = {
 		"drilling",
 		"polishing",
 		"smoothing",
-                "undetermined"
+		"undetermined"
 	],
 	colors: [
 		"black",
 		"white",
-                "undetermined"
+		"undetermined"
 	],
 	decoration_techniques: [
 		"engraving",
 		"none",
-                "undetermined"
+		"undetermined"
 	],
 	decorations: [
 		"figurative",
-                "floral",
+		"floral",
 		"geometrical",
 		"none",
-                "undetermined"
+		"undetermined"
 	],
 	decoration_colors: [
 		"none",
-                "undetermined"
+		"undetermined"
 	],
 	preservation_objects: [
 		"fragmentary",
@@ -44,7 +44,7 @@ $onyx_material_data = {
 	],
 	preservation_materials: [
 		"chipped",
-                "good",
+		"good",
 		"sintered"
 	]
 }
