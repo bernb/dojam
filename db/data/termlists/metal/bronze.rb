@@ -11,89 +11,91 @@ $bronze_material_data = {
 			"applicator",
 			"cosmetic spatula",
 			"cosmetic spoon",
-			"kohl stick"]},
-			{"fitting": [
-				"cross",
-				"door knocker",
-				"handle",
-				"hook",
-				"ring"]},
-				{"jewelry": [
-					"anklet",
-					"bangle",
-					"belt-buckle",
-					"bracelet",
-					"chain",
-					"dress pin",
-					"earring",
-					"fibula",
-					"finger ring",
-					"hair pin",
-					"pendant",
-					"stamp seal"]
-				},
-				{"sculpture": [
-					"figurine"]
-				},
-				{"tool": [
-					"axe",
-					"balance weight",
-					"bell",
-					"door knocker",
-					"key",
-					"knife",
-					"mirror",
-					"needle",        
-					"pin",
-					"plow share",
-					"saw blade",
-					"shovel",
-					"skewer"]
-				},
-				{"vessel": [
-					"brazier",
-					"bottle",
-					"bowl",
-					"box",
-					"candle holder",
-					"censer",
-					"flask",
-					"juglet",
-					"kohl tube",
-					"oil lamp",
-					"platter",
-					"reliquary",
-					"situla",
-                                        "skewer"]
-				},
-				{"weapon/armor": [
-					"arrowhead",     
-					"axe",
-					"cannon",  
-					"chain armor",
-					"dagger", 
-					"spearhead",
-					"sword",
-					"undetermined"]
-				}
+			"kohl stick"]
+		},
+		{"fitting": [
+			"cross",
+			"door knocker",
+			"handle",
+			"hook",
+			"ring"]
+		},
+		{"jewelry": [
+			"anklet",
+			"bangle",
+			"belt-buckle",
+			"bracelet",
+			"chain",
+			"dress pin",
+			"earring",
+			"fibula",
+			"finger ring",
+			"hair pin",
+			"pendant",
+			"stamp seal"]
+		},
+		{"sculpture": [
+			"figurine"]
+		},
+		{"tool": [
+			"axe",
+			"balance weight",
+			"bell",
+			"door knocker",
+			"key",
+			"knife",
+			"mirror",
+			"needle",        
+			"pin",
+			"plow share",
+			"saw blade",
+			"shovel",
+			"skewer"]
+		},
+		{"vessel": [
+			"brazier",
+			"bottle",
+			"bowl",
+			"box",
+			"candle holder",
+			"censer",
+			"flask",
+			"juglet",
+			"kohl tube",
+			"oil lamp",
+			"platter",
+			"reliquary",
+			"situla",
+			"skewer"]
+		},
+		{"weapon/armor": [
+			"arrowhead",     
+			"axe",
+			"cannon",  
+			"chain armor",
+			"dagger", 
+			"spearhead",
+			"sword",
+			"undetermined"]
+		}
 	],
 	production_techniques: [
 		"casting",
-                "casting in a mould",
+		"casting in a mould",
 		"casting with lost wax technique",
 		"hammering",
 		"undetermined"
- 	],
-        colors: [
- 	    "black",
-  	    "bronze colored",
- 	    "brown",
- 	    "copper colored",
- 	    "golden",
- 	    "green",
-            "red",
+	],
+	colors: [
+		"black",
+		"bronze colored",
+		"brown",
+		"copper colored",
+		"golden",
+		"green",
+		"red",
 		"undetermined"
- 	],
+	],
 	decoration_techniques: [
 		"chasing",
 		"engraving",
@@ -139,10 +141,10 @@ $bronze_material_data = {
 		"undetermined"
 	],
 	preservation_materials: [
-                "chipped",
-                "corroded",
-                "fair",
-                "good",
+		"chipped",
+		"corroded",
+		"fair",
+		"good",
 		"undetermined"
 	]
 }

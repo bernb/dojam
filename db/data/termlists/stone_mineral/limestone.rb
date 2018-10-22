@@ -19,7 +19,7 @@ $limestone_material_data = {
 			"bangle",
 			"cylinder seal"]
 		},
-                "sarcophagus",
+		"sarcophagus",
 		{"sculpture": [
 			"bust",
 			"figurine anthropomorphic",
@@ -52,16 +52,16 @@ $limestone_material_data = {
 	],
 	colors: [
 		"beige",
-                "black",
+		"black",
 		"brown",
-                "red",
-                "white",
+		"red",
+		"white",
 		"undetermined"
 	],
 	decoration_techniques: [
 		"carving",
 		"engraving",
-                "incising",
+		"incising",
 		"painting",
 		"relief",
 		"none",
@@ -82,7 +82,7 @@ $limestone_material_data = {
 	],
 	preservation_objects: [
 		"almost complete",
-                "bottom",
+		"bottom",
 		"complete",
 		"complete profile",
 		"fragment",
@@ -95,9 +95,9 @@ $limestone_material_data = {
 	preservation_materials: [
 		"cracked",
 		"chipped",
-                "discolored",
+		"discolored",
 		"fair",
-                "good",
+		"good",
 		"sintered"
 	]
 }

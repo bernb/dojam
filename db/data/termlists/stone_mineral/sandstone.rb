@@ -79,7 +79,7 @@ $sandstone_material_data = {
 	],
 	preservation_objects: [
 		"almost complete",
-                "bottom",
+		"bottom",
 		"complete",
 		"complete profile",
 		"fragment",
@@ -93,7 +93,7 @@ $sandstone_material_data = {
 		"cracked",
 		"chipped",
 		"fair",
-                "good",
+		"good",
 		"sintered"
 	]
 }

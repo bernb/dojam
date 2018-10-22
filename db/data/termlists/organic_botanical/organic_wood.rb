@@ -8,10 +8,12 @@ $organic_wood_material_data = {
 	kind_of_objects: [
 		{"unworked object": [
 			"charcoal"
-		]},
+		]
+		},
 		{"jewelry": [
 			"button"    		
-		]},
+		]
+		},
 		{"vessel": [
 			"box",
 			"juglet"

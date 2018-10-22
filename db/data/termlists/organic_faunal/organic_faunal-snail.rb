@@ -17,7 +17,7 @@ $organic_faunal_snail_material_data = {
 		{"vessel": [
 			"container theriomorphic",
 			"undetermined"]
-                },
+		},
 		"unworked object"
 	],
 	production_techniques: [

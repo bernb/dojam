@@ -15,13 +15,13 @@ $bone_undetermined_material_data = {
 			"bangle",
 			"bead",
 			"hair pin",
-                        "pendant",
+			"pendant",
 			"undetermined"]
 		},
 		{"tool": [
 			"awl",
-                        "comb",
-                        "needle",
+			"comb",
+			"needle",
 			"pin",
 			"weaving spatula",
 			"undetermined"]

@@ -11,7 +11,8 @@ $chlorite_material_data = {
 		{"sculpture": [
 			"figurine, anthropomorphic",
 			"figurine, zoomorphic"
-		]},
+		]
+		},
 		{"vessel": [
 			"bowl",
 			"cooking pot"
@@ -52,8 +53,8 @@ $chlorite_material_data = {
 		"wall"
 	],
 	preservation_materials: [
-                "chipped",
+		"chipped",
 		"good",
-                "sintered"
+		"sintered"
 	]
 }

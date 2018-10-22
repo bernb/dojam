@@ -7,7 +7,7 @@ $carnelian_material_data = {
 	],
 	kind_of_objects: [
 		{"jewelry": [
-                        "scarab",
+			"scarab",
 			"stamp seal"
 		]}
 	],
@@ -19,13 +19,13 @@ $carnelian_material_data = {
 	],
 	colors: [
 		"beige",
-                "brown",
-                "green",
+		"brown",
+		"green",
 		"white",
 	],
 	decoration_techniques: [
 		"engraving",
-                "glazing",
+		"glazing",
 		"none"
 	],
 	decorations: [
@@ -43,8 +43,8 @@ $carnelian_material_data = {
 	],
 	preservation_materials: [
 		"chipped",
-                "good",
-                "fair",
+		"good",
+		"fair",
 		"sintered"
 	]
 }

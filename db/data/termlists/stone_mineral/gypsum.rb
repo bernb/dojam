@@ -7,19 +7,21 @@ $gypsum_material_data = {
 	],
 	kind_of_objects: [
 		{"sculpture": [
-			"figurine anthropomorphic"]},
-			{"tool": [
-				"mirror"]},
-				{"vessel": [
-					"alabastron",
-					"beaker",
-					"bowl",
-					"bowl four-legged",
-					"bottle",
-					"cylindrical jar",
-					"goblet",
-					"juglet",
-					"undetermined"]}
+			"figurine anthropomorphic"]
+		},
+		{"tool": [
+			"mirror"]
+		},
+		{"vessel": [
+			"alabastron",
+			"beaker",
+			"bowl",
+			"bowl four-legged",
+			"bottle",
+			"cylindrical jar",
+			"goblet",
+			"juglet",
+			"undetermined"]}
 	],
 	production_techniques: [
 		"chiseling",
@@ -53,7 +55,7 @@ $gypsum_material_data = {
 	],
 	preservation_objects: [
 		"almost complete",
-                "bottom",
+		"bottom",
 		"bottom and wall",
 		"complete",
 		"complete profile",
@@ -67,8 +69,8 @@ $gypsum_material_data = {
 	],
 	preservation_materials: [
 		"chipped",
-                "cracked",
-                "good",
+		"cracked",
+		"good",
 		"sintered"
 	]
 }
