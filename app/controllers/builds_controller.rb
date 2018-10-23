@@ -35,6 +35,21 @@ class BuildsController < ApplicationController
       handle_fuzzy_date params[:museum_object]
     end
 
+		if step == :step_material
+			# Check if now selected materials are consistent with main_material
+			# If selected materials do not match earlier selected main_material, delete main_path
+			main_material_id = @museum_object.main_material&.id
+			found = false
+			params[:museum_object][:material_ids].reject(&:blank?).each do |m_id|
+				if main_material_id.to_s == m_id
+					found = true
+				end
+			end
+			if !found
+				@museum_object.main_path = nil
+			end
+		end
+
 		if step == :step_kind_of_object
 			ms = MaterialSpecified.find params[:museum_object][:main_material_specified_id]
 			material = ms.material
