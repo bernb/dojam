@@ -191,13 +191,8 @@ class BuildsController < ApplicationController
 
 	def step_kind_of_object_specified_vars
 		main_path = @museum_object&.main_path
-		children = main_path.direct_children
-		@kind_of_object_specifieds = []
-		children.each do |child|
-			@kind_of_object_specifieds << child.objects[3]
-		end
-		@kind_of_object_specifieds = @kind_of_object_specifieds.uniq
-		#@kind_of_object_specifieds= @museum_object.get_possible_props_for "KindOfObjectSpecified"
+		kind_of_object = @museum_object.kind_of_object
+		@kind_of_object_specifieds = kind_of_object.kind_of_object_specifieds(material_specified: @museum_object.main_material_specified)
 	end
 
 	def step_color_vars
