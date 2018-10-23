@@ -34,9 +34,14 @@ class BuildsController < ApplicationController
     if step == :step_acquisition
       handle_fuzzy_date params[:museum_object]
     end
-    
-    if step == :step_material
-    end
+
+		if step == :step_kind_of_object
+			ms = MaterialSpecified.find params[:museum_object][:main_material_specified_id]
+			material = ms.material
+			@museum_object.main_material_id = material.id
+			@museum_object.main_material_specified_id = params[:museum_object][:main_material_specified_id]
+			@museum_object.kind_of_object_id = params[:museum_object][:kind_of_object_id]
+		end
     
     if @museum_object.valid? && allow_next_step
       if params[:finish] == "true"
@@ -186,7 +191,7 @@ class BuildsController < ApplicationController
 
 	def step_kind_of_object_specified_vars
 		main_path = @museum_object&.main_path
-		children = main_path.parent.direct_children
+		children = main_path.direct_children
 		@kind_of_object_specifieds = []
 		children.each do |child|
 			@kind_of_object_specifieds << child.objects[3]
@@ -298,7 +303,7 @@ class BuildsController < ApplicationController
                                           :acquisition_kind_id, :acquisition_delivered_by_id, :acquisition_deliverer_name, :acquisition_date,
                                           :finding_context, :finding_remarks, :authenticity_id, :priority, :priority_determined_by,
                                           :inscription_decoration, :inscription_letters, :inscription_text, :inscription_translation, 
-                                          :excavation_site_id, :excavation_site_category_id, :material_specified_ids, :kind_of_object_id, :kind_of_object_specified_id,
+                                          :excavation_site_id, :excavation_site_category_id, :material_specified_ids, :kind_of_object_specified_id,
                                           :is_acquisition_date_exact, :acquisition_document_number, :name_expedition, :site_number_mega, :site_number_expedition,
                                           :coordinates_mega, :excavation_site_kind_id, :dating_period_id, :dating_millennium_id,
                                           :production_technique_id, :decoration_style_id, :decoration_color_id, :decoration_technique_id,
@@ -307,7 +312,7 @@ class BuildsController < ApplicationController
                                           :preservation_material_id, :preservation_object_id, :description_conservation,
                                           :remarks, :literature, :dating_timespan_begin, :dating_timespan_end, :main_image, :is_finished, :needs_conservation, :needs_cleaning,
                                           :site_number_jadis, :coordinates_mega_long, :coordinates_mega_lat, :is_dating_timespan_end_BC, :is_dating_timespan_begin_BC,
-																					:material_specified_id, :priority_id, :main_material_specified_id, :dating_millennium_begin_id, :dating_millennium_end_id,
+																					:material_specified_id, :priority_id, :dating_millennium_begin_id, :dating_millennium_end_id,
 																					:acquisition_year, :acquisition_month, :acquisition_day, :acquisition_date_unknown,
 																					:is_dating_period_unknown, :is_dating_millennium_unknown, :dating_century_begin_id, :dating_century_end_id,
 																				 	:is_dating_century_unknown, :is_dating_timespan_unknown,

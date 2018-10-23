@@ -117,32 +117,48 @@ class MuseumObject < ApplicationRecord
 	# m/ms/koo/koos setter #
 	########################
 	
+	def main_material_id= m_id
+		path = Path.depth(1).last_id(m_id).first
+		self.main_path = path
+	end
+	
 	def main_material= material
-		path = Path.depth(1).last_id(material.id)
+		self.main_material_id = material.id
+	end
+
+	def main_material_specified_id= ms_id
+		m_id = self.main_path.objects[0].id.to_s
+		path = Path.find_by path: "/#{m_id}/#{ms_id.to_s}"
 		self.main_path = path
 	end
 
 	def main_material_specified= material_specified
-		m_id = self.main_path.objects[0].id.to_s
-		path = Path.find_by path: "/#{m_id}/#{material_specified.id}"
+		self.main_materal_specified_id = material_specified.id
+	end
+
+	def kind_of_object_id= koo_id
+		objects = self.main_path.objects
+		m_id = objects[0].id.to_s
+		ms_id = objects[1].id.to_s
+		path = Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id.to_s}"
 		self.main_path = path
 	end
 
 	def kind_of_object= kind_of_object
-		objects = self.main_path.objects
-		m_id = objects[0].id.to_s
-		ms_id = objects[1].id.to_s
-		path = Path.find_by path: "/#{m_id}/#{ms_id}/#{kind_of_object.id}"
-		self.main_path = path
+		self.kind_of_object_id = kind_of_object.id
 	end
 
-	def kind_of_object_specified= kind_of_object_specified
+	def kind_of_object_specified_id= koos_id
 		objects = self.main_path.objects
 		m_id = objects[0].id.to_s
 		ms_id = objects[1].id.to_s
 		koo_id = objects[2].id.to_s
-		path = Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id}/#{kind_of_object_specified.id}"
+		path = Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id}/#{koos_id.to_s}"
 		self.main_path = path
+	end
+
+	def kind_of_object_specified= kind_of_object_specified
+		self.kind_of_object_specified_id = kind_of_object_specified.id
 	end
 
 
