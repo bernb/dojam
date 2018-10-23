@@ -6,10 +6,10 @@ class Material < Termlist
 	end
 
 	def material_specifieds
-		material_specifieds = []
-		self.paths.first.direct_children.each do |child|
-			material_specifieds << child.objects[1]
-		end
+		# We query MaterialSpecified to get the default scope and therefore
+		# correct order of results
+		children_paths = self.paths.first.direct_children.map(&:path)
+		material_specifieds = MaterialSpecified.joins(:paths).where(paths: {path: children_paths}) 
 		return material_specifieds
 	end
 end
