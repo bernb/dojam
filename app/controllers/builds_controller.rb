@@ -174,7 +174,7 @@ class BuildsController < ApplicationController
 	end
 
 	def step_material_vars
-    @materials = Material.all.order name: :asc
+    @materials = Material.all
 	end
 
 	def step_museum_vars
@@ -189,14 +189,14 @@ class BuildsController < ApplicationController
 	end
 
 	def step_provenance_vars
-    @excavation_site_categories = ExcavationSiteCategory.all.order name: :asc
+    @excavation_site_categories = ExcavationSiteCategory.all
 		@selected_excavation_site_category = @museum_object.excavation_site_category
     @selected_excavation_site_category ||= ExcavationSiteCategory.first
     @excavation_site_kinds = @selected_excavation_site_category.excavation_site_kinds
 	end
 
 	def step_material_specified_vars
-    @materials = Material.where(id: session[:material_ids]).order name: :asc
+    @materials = Material.where(id: session[:material_ids])
 	end
 
 	def step_kind_of_object_vars
