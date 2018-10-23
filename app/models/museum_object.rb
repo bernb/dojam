@@ -136,7 +136,7 @@ class MuseumObject < ApplicationRecord
 		self.main_path = path
 	end
 
-	def kind_of_object_specified kind_of_object_specified
+	def kind_of_object_specified= kind_of_object_specified
 		objects = self.main_path.objects
 		m_id = objects[0].id.to_s
 		ms_id = objects[1].id.to_s
