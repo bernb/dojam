@@ -46,7 +46,7 @@ class BuildsController < ApplicationController
 				end
 			end
 			if !found
-				@museum_object.main_path = nil
+				@museum_object.main_path = Path.undetermined_path
 			end
 		end
 
