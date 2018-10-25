@@ -9,7 +9,7 @@ def material_import material_hash
 	termlist_paths << [material.id, path.id]
 
 	ms_ids = []
-	material_hash[:material_specifieds].each do |material_specified_name|
+	material_hash[:material_specifieds].push("undetermined").each do |material_specified_name|
 		ms = MaterialSpecified.find_or_create_by name: material_specified_name
 		path = Path.find_or_create_by path: "/#{material.id.to_s}/#{ms.id.to_s}"
 		termlist_paths << [ms.id, path.id]

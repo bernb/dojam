@@ -293,13 +293,6 @@ class MuseumObject < ApplicationRecord
 				self.send(termlist_name.to_s+"=", undetermined_entry) if self.send(termlist_name.to_s).blank?
 			end
 		end
-
-		m_id = Material.find_by(name: "undetermined").id.to_s
-		ms_id = MaterialSpecified.find_by(name: "undetermined").id.to_s
-		koo_id = KindOfObject.find_by(name: "undetermined").id.to_s
-		koos_id = KindOfObjectSpecified.find_by(name: "undetermined").id.to_s
-		undet_path = Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id}/#{koos_id}"
-		self.main_path = undet_path if self.main_path.blank?
 	end
 
 	# depth 1 = materials
