@@ -1,4 +1,4 @@
-def material_import material_hash
+def material_import material_hash, material_attributes
 	termlist_paths_columns = [:termlist_id, :path_id]
 	termlist_paths = []
 	endpoint_paths = []
@@ -43,9 +43,11 @@ def material_import material_hash
 	end
 
 	rejects = [:material_name, :material_specifieds, :kind_of_objects]
-	material_hash.keys.reject{|name| name.in?(rejects)}.each do |termlist_name|
+	material_attributes.reject{|name| name.in?(rejects)}.each do |termlist_name|
 		termlist_class = termlist_name.to_s.camelize.singularize.constantize
-		new_termlists = material_hash[termlist_name].push("undetermined").map{|tname| termlist_class.find_or_create_by name: tname}
+		attributes = []
+		attributes += material_hash[termlist_name] unless material_hash[termlist_name].blank?
+		new_termlists = attributes.push("undetermined").map{|tname| termlist_class.find_or_create_by name: tname}
 		new_termlist_ids = new_termlists.map(&:id)
 		endpoint_paths.map{|p| new_termlists.map{|t| termlist_paths << [t.id, p.id]}}
 	end
@@ -54,4 +56,19 @@ def material_import material_hash
 	# Note for example path for metal (material) will show up several times if for example
 	# Two files specifying two material specified for metal exist
 	TermlistPath.import termlist_paths_columns, termlist_paths, validate: false, on_duplicate_key_ignore: true
+end
+
+def global_material_variables_array
+	global_variables.select{|var| var.to_s.ends_with? "_material_data"}
+		.reject{|var| var.to_s.include? "test"}
+end
+
+
+def find_all_attributes
+	attributes = []
+	global_material_variables_array.each do |material_data|
+		material_variable = eval(material_data.to_s)
+		attributes += material_variable.keys
+	end
+	return attributes.uniq
 end
