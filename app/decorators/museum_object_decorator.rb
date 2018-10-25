@@ -13,7 +13,7 @@ class MuseumObjectDecorator < Draper::Decorator
 	def decorate_named_list list
 		returnstring = ""
 		if list.blank?
-			# Do nothing
+			returnstring = "undetermined"
 		elsif list.size == 1
 			returnstring = list.first.name
 		else
