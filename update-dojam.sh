@@ -41,7 +41,7 @@ fi
 # =================================================================
 echo "60"
 echo "# Post-Installation: Restart local server" 
-if ! service puma restart ; then
+if ! sudo /bin/systemctl restart puma ; then
 	exit 17
 fi
 
