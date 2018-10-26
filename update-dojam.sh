@@ -3,16 +3,10 @@
 
 (
 # =================================================================
+echo "10"
 echo "# Checking internet connection" 
 if ! ping -c1 google.com &>/dev/null ; then
 	exit 11
-fi
-
-# =================================================================
-echo "10"
-echo "# Checking connection to remote repository" 
-if ! git ls-remote ; then
-	exit 12
 fi
 
 # =================================================================
@@ -44,7 +38,6 @@ if ! rails db:migrate ; then
 	exit 16
 fi
 
-
 # =================================================================
 echo "60"
 echo "# Post-Installation: Restart local server" 
@@ -52,23 +45,29 @@ if ! service puma restart ; then
 	exit 17
 fi
 
+# =================================================================
+echo "70"
+echo "# Update complete. Starting DOJAM now" 
+google-chrome --kiosk localhost:22333
 
 ) |
 zenity --progress \
   --title="Updating DOJAM database..." \
   --percentage=0 \
   --auto-close \
-  --auto-kill
+  --auto-kill \
+  --no-cancel \
+  --width=350
 
 case ${PIPESTATUS[0]} in
 	11)
 		zenity --error --width=350 --text="Update canceled: No Internet connection."
 		;;
 	12)
-		zenity --error --width=350 --text="Update canceled: Can not connect to remote repository."
+		zenity --error --width=350 --text="Update canceled: Could not connect to remote repository."
 		;;
 	13)
-		zenity --error --width=350 --text="Update canceled: Can not connect to remote repository."
+		zenity --error --width=350 --text="Update canceled: Could not connect to remote repository."
 		;;
 	14)
 		zenity --error --width=350 --text="Update canceled: There was a problem with merging the latest version to local."
