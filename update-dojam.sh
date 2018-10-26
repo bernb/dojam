@@ -9,29 +9,48 @@ if ! ping -c1 google.com &>/dev/null ; then
 fi
 
 # =================================================================
-echo "25"
-echo "# Running Second Task." ; sleep 2
-# Command for second task goes on this line.
+echo "10"
+echo "# Checking connection to remote repository" 
+if ! git ls-remote ; then
+	exit 12
+fi
+
+# =================================================================
+echo "20"
+echo "# Retrieving information about changes" 
+if ! git remote update ; then
+	exit 13
+fi
+
+# =================================================================
+echo "30"
+echo "# Synchronize with local installation" 
+if ! git pull ; then
+	exit 14
+fi
+
+
+# =================================================================
+echo "40"
+echo "# Post-Installation: Install new dependencies" 
+if ! bundle install ; then
+	exit 15
+fi
 
 # =================================================================
 echo "50"
-echo "# Running Third Task." ; sleep 2
-# Command for third task goes on this line.
-
-# =================================================================
-echo "75"
-echo "# Running Fourth Task." ; sleep 2
-# Command for fourth task goes on this line.
+echo "# Post-Installation: Update database structure" 
+if ! rails db:migrate ; then
+	exit 16
+fi
 
 
 # =================================================================
-echo "99"
-echo "# Running Fifth Task." ; sleep 2
-# Command for fifth task goes on this line.
-
-# =================================================================
-echo "# All finished." ; sleep 2
-echo "100"
+echo "60"
+echo "# Post-Installation: Restart local server" 
+if ! service puma restart ; then
+	exit 17
+fi
 
 
 ) |
@@ -41,6 +60,26 @@ zenity --progress \
   --auto-close \
   --auto-kill
 
-if [ ${PIPESTATUS[0]} -eq 11 ] ; then
-	zenity --error --width=350 --text="Update canceled: No Internet connection."
-fi
+case ${PIPESTATUS[0]} in
+	11)
+		zenity --error --width=350 --text="Update canceled: No Internet connection."
+		;;
+	12)
+		zenity --error --width=350 --text="Update canceled: Can not connect to remote repository."
+		;;
+	13)
+		zenity --error --width=350 --text="Update canceled: Can not connect to remote repository."
+		;;
+	14)
+		zenity --error --width=350 --text="Update canceled: There was a problem with merging the latest version to local."
+		;;
+	15)
+		zenity --error --width=350 --text="Update canceled: Could not install needed dependencies"
+		;;
+	16)
+		zenity --error --width=350 --text="Update canceled: Could not update database structure"
+		;;
+	17)
+		zenity --error --width=350 --text="Update canceled: Could not restart local server"
+		;;
+esac
