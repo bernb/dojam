@@ -45,6 +45,8 @@ if ! sudo /bin/systemctl restart puma ; then
 	exit 17
 fi
 
+sleep 3 # Give server time to restart
+
 # =================================================================
 echo "70"
 echo "# Update complete. Starting DOJAM now" 
