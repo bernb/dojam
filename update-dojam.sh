@@ -48,7 +48,7 @@ fi
 # =================================================================
 echo "70"
 echo "# Update complete. Starting DOJAM now" 
-google-chrome --kiosk localhost:22333
+chromium --kiosk localhost:22333
 
 ) |
 zenity --progress \
