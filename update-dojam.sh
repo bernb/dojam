@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Change into directory of script
+cd "$(dirname "$0")"
 
 (
 # =================================================================
