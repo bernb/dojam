@@ -50,7 +50,7 @@ sleep 3 # Give server time to restart
 # =================================================================
 echo "70"
 echo "# Update complete. Starting DOJAM now" 
-chromium http://localhost:22333 --password-store=basic
+chromium http://localhost:22333 --password-store=basic &
 
 ) |
 zenity --progress \
