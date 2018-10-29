@@ -6,6 +6,8 @@
 #
 erd.pdf
 
+public/uploads/
+
 # Ignore typical tmp file ending ~
 *~
 
