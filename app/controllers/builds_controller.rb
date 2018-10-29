@@ -50,6 +50,19 @@ class BuildsController < ApplicationController
 			end
 		end
 
+		if step == :step_material_specified
+			main_material_specified_id = @museum_object.main_material_specified.id
+			found = false
+			params[:museum_object][:material_specified_ids].reject(&:blank?).each do |ms_id|
+				if main_material_specified_id.to_s == ms_id
+					found = true
+				end
+			end
+			if !found
+				@museum_object.main_path = nil
+			end
+		end
+
 		if step == :step_kind_of_object
 			ms = MaterialSpecified.find params[:museum_object][:main_material_specified_id]
 			material = ms.material
