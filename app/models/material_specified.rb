@@ -8,10 +8,10 @@ class MaterialSpecified < Termlist
 	end
 
 	def kind_of_objects
-		kind_of_objects = []
-		self.paths.first.direct_children.each do |child|
-			kind_of_objects << child.objects[2]
-		end
+		# We query KindOfObject to get the default scope and therefore
+		# correct order of results
+		children_paths = self.paths.first.direct_children.map(&:path)
+		kind_of_objects = KindOfObject.joins(:paths).where(paths: {path: children_paths})
 		return kind_of_objects
 	end
 end
