@@ -61,11 +61,6 @@ class MuseumObject < ApplicationRecord
   end
 
 	def get_possible_props_for classname
-		if !(classname.constantize < Termlist) 
-			# ToDo: Throw error instead
-			return Termlist.none
-		end
-
 		if classname.constantize.is_independent_of_paths
 			return classname.constantize.all
 		else
