@@ -75,7 +75,7 @@ module ExcelImporterHelper
 			if object.errors.size > 0
 				#logger.tagged("Row #{i.to_s}", "Warning"){logger.warn "Could not save object:"}
 				object.errors.full_messages.each do |message|
-					logger.tagged("Row #{i.to_s}"){logger.warn message}
+					logger.tagged("Row #{i.to_s}", object.decorate.full_inv_number){logger.warn message}
 				end
 				next
 			end
@@ -85,7 +85,7 @@ module ExcelImporterHelper
 			set_main_path object, row
 			if object.errors.size > 0
 				object.errors.full_messages.each do |message|
-					logger.tagged("Row #{i.to_s}"){logger.warn message}
+					logger.tagged("Row #{i.to_s}", object.decorate.full_inv_number){logger.warn message}
 				end
 				#logger.tagged("Row #{i.to_s}"){logger.warn "Skipping termlists..."}
 				next
@@ -142,7 +142,7 @@ module ExcelImporterHelper
 
 			if object.errors.size > 0
 				object.errors.full_messages.each do |message|
-					logger.tagged("Row #{i.to_s}"){logger.warn message}
+					logger.tagged("Row #{i.to_s}", object.decorate.full_inv_number){logger.warn message}
 				end
 				#logger.tagged("Row #{i.to_s}"){logger.warn "Setting unfinished flag for this object"}
 			else
@@ -152,7 +152,7 @@ module ExcelImporterHelper
 			if object.save 
 				#logger.tagged("Row #{i.to_s}"){logger.debug "Saved with id #{object.id}"}
 			else
-				logger.tagged("Row #{i.to_s}"){logger.error "Could not save object: #{object.errors.full_messages}"}
+				logger.tagged("Row #{i.to_s}", object.decorate.full_inv_number){logger.error "Could not save object: #{object.errors.full_messages}"}
 			end
 
 		end # xlsx.each
