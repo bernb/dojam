@@ -1,17 +1,16 @@
 $faience_material_data = {
-
 	material_name: "vitreous material",
-
 	material_specifieds: [
 		"faience"
-	],
+		],
 	kind_of_objects: [
 		"inlay",
 		{"jewelry": [
 			"bead",
 			"cylinder seal",
 			"pendant",
-			"scarab"]
+			"scarab"
+			]
 		},
 		{"vessel": [
 			"alabastron",
@@ -24,35 +23,26 @@ $faience_material_data = {
 			"jar",
 			"jug",
 			"lamp",
-			"plate"]
+			"plate"
+			]
 		}
 	],
 	production_techniques: [
 		"cast",
 		"core-formed",
 		"undetermined"
-	],
+		],
 	colors: [
-		"blue transparent",
-		"brown transparent",
-		"green transparent",
-		"white transparent",
-		"light yellow",
-		"dark yellow",
-		"light blue",
-		"dark blue",
-		"light turquoise",
-		"dark turquoise",
-		"red",
-		"blue-green",
-		"green-blue",
-		"light green",
-		"dark green",
-		"violet",
-		"light brown",
-		"dark brown",
+		"beige",
+		"blue",
+		"brown",
+		"green",
+		"grey",
+		"turquoise",
+		"white",
+		"yellow",
 		"undetermined"
-	],
+		],
 	decoration_techniques: [
 		"applying",
 		"cutting",
@@ -63,43 +53,37 @@ $faience_material_data = {
 		"pulling",
 		"rolling-in",
 		"undetermined"
-	],
+		],
 	decoration_colors: [
-		"light yellow",
-		"dark yellow",
-		"light blue",
-		"dark blue",
-		"light turquoise",
-		"dark turquoise",
-		"red",
-		"blue-green",
-		"green-blue",
-		"light green",
-		"dark green",
-		"violet",
-		"light brown",
-		"dark brown",
+		"beige",
+		"blue",
+		"brown",
+		"green",
+		"grey",
+		"turquoise",
+		"white",
+		"yellow",
 		"none",
 		"undetermined"
-	],
+		],
 	decorations: [
 		"feather decoration",
 		"figurative",
-		"geometric",
+		"geometrical",
 		"dot",
 		"noppe",
 		"spiral",
 		"zig-zag",
 		"none",
 		"undetermined"
-	],
+		],
 	preservation_materials: [
 		"corrosion layer",
 		"cracked",
 		"iridescence",
 		"pitting",
 		"undetermined"
-	],
+		],
 	preservation_objects: [
 		"bottom",
 		"complete",
@@ -113,5 +97,5 @@ $faience_material_data = {
 		"stem",
 		"wall-to-bottom",
 		"undetermined"
-	] 
-}
+		] 
+	}

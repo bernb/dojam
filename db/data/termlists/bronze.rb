@@ -1,24 +1,24 @@
 $bronze_material_data = {
-
 	material_name: "metal",
-
 	material_specifieds: [
 		"bronze",
-	],
+		],
 	kind_of_objects: [
 		"coin",
 		{"cosmetic cutlery": [
 			"applicator",
 			"cosmetic spatula",
 			"cosmetic spoon",
-			"kohl stick"]
+			"kohl stick"
+			]
 		},
 		{"fitting": [
 			"cross",
 			"door knocker",
 			"handle",
 			"hook",
-			"ring"]
+			"ring"
+			]
 		},
 		{"jewelry": [
 			"anklet",
@@ -32,10 +32,12 @@ $bronze_material_data = {
 			"finger ring",
 			"hair pin",
 			"pendant",
-			"stamp seal"]
+			"stamp seal"
+			]
 		},
 		{"sculpture": [
-			"figurine"]
+			"figurine"
+			]
 		},
 		{"tool": [
 			"axe",
@@ -50,7 +52,8 @@ $bronze_material_data = {
 			"plow share",
 			"saw blade",
 			"shovel",
-			"skewer"]
+			"skewer"
+			]
 		},
 		{"vessel": [
 			"brazier",
@@ -66,7 +69,8 @@ $bronze_material_data = {
 			"platter",
 			"reliquary",
 			"situla",
-			"skewer"]
+			"skewer"
+			]
 		},
 		{"weapon/armor": [
 			"arrowhead",     
@@ -76,7 +80,8 @@ $bronze_material_data = {
 			"dagger", 
 			"spearhead",
 			"sword",
-			"undetermined"]
+			"undetermined"
+			]
 		}
 	],
 	production_techniques: [
@@ -85,8 +90,8 @@ $bronze_material_data = {
 		"casting with lost wax technique",
 		"hammering",
 		"undetermined"
-	],
-	colors: [
+ 		],
+        colors: [
 		"black",
 		"bronze colored",
 		"brown",
@@ -95,7 +100,7 @@ $bronze_material_data = {
 		"green",
 		"red",
 		"undetermined"
-	],
+ 		],
 	decoration_techniques: [
 		"chasing",
 		"engraving",
@@ -109,14 +114,14 @@ $bronze_material_data = {
 		"stamping",
 		"none",
 		"undetermined"
-	],
+		],
 	decorations: [
 		"figurative",
 		"floral",
-		"geometric",
+		"geometrical",
 		"none",
 		"undetermined"
-	],
+		],
 	decoration_colors: [
 		"black",
 		"bronze colored",
@@ -125,7 +130,7 @@ $bronze_material_data = {
 		"red",
 		"none",
 		"undetermined"
-	],
+		],
 	preservation_objects: [
 		"bottom",
 		"complete",
@@ -139,12 +144,12 @@ $bronze_material_data = {
 		"stem",
 		"wall-to-bottom",
 		"undetermined"
-	],
+		],
 	preservation_materials: [
-		"chipped",
-		"corroded",
-		"fair",
-		"good",
+                "chipped",
+                "corroded",
+                "fair",
+                "good",
 		"undetermined"
-	]
-}
+		]
+	}

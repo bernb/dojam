@@ -1,14 +1,13 @@
 $silver_material_data = {
-
 	material_name: "metal",
-
 	material_specifieds: [
 		"silver"
-	],
+		],
 	kind_of_objects: [
 		"coin",
 		{"cosmetic cutlery": [
-			"applicator"]
+			"applicator"
+			]
 		},
 		{"jewelry": [
 			"anklet",
@@ -21,7 +20,8 @@ $silver_material_data = {
 			"fibula",
 			"finger ring",
 			"hair pin",
-			"pendant"]
+			"pendant"
+			]
 		},
 		{"vessel": [
 			"bowl",
@@ -29,8 +29,10 @@ $silver_material_data = {
 			"candle holder",
 			"censer",
 			"cosmetic container",
-			"reliquary"]}
-	],
+			"reliquary"
+			]
+		}
+  		],
 	production_techniques: [
 		"casting in a mould",
 		"casting with lost wax technique",
@@ -43,18 +45,18 @@ $silver_material_data = {
 		"wire drawing",
 		"soldering",
 		"undetermined"
-	],
+		],
 	colors: [
 		"silver colored",
 		"undetermined"
-	],
+		],
 	decorations: [
 		"figurativ",
 		"floral",
-		"geometric",
+		"geometrical",
 		"none",
 		"undetermined"
-	],
+		],
 	decoration_techniques: [
 		"differential alloying",
 		"engraving",
@@ -69,7 +71,7 @@ $silver_material_data = {
 		"plated",
 		"none",
 		"undetermined"
-	],
+		],
 	decoration_colors: [
 		"black",
 		"bronze colored",
@@ -79,11 +81,11 @@ $silver_material_data = {
 		"green",
 		"silver colored",
 		"none"
-	],
+		],
 	preservation_materials: [
 		"corroded",
 		"flaked"
-	],
+		],
 	preservation_objects: [
 		"bottom",
 		"complete",
@@ -96,4 +98,5 @@ $silver_material_data = {
 		"rim-to-wall",
 		"stem",
 		"wall-to-bottom"
-	]}
+		]
+	}

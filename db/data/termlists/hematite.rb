@@ -1,53 +1,49 @@
-$enstatite_material_data = {
+$hematite_material_data = {
 	material_name: "stone/mineral",
 	material_specifieds: [
-		"enstatite"
-	],
+		"hematite"
+		],
 	kind_of_objects: [
 		{"jewelry": [
-			"scarab",
-			"stamp seal"
-		]}
+			"cylinder seal"
+			]
+		}
 	],
 	production_techniques: [
 		"cutting",
 		"drilling",
 		"polishing",
 		"smoothing"
-	],
+		],
 	colors: [
-		"beige",
-		"brown",
-		"green",
+		"black",
+                "brown",
 		"grey",
-		"white",
-	],
+		],
 	decoration_techniques: [
 		"engraving",
-		"glazing",
 		"none"
-	],
+		],
 	decorations: [
 		"figurative",
 		"floral",
 		"geometrical",
 		"none"
-	],
+		],
 	decoration_colors: [
-		"white",
 		"none"
-	],
+		],
 	preservation_objects: [
 		"fragmentary",
 		"almost complete",
 		"complete"
-	],
+		],
 	preservation_materials: [
 		"broken",
 		"chipped",
-		"good",
-		"fair",
+                "good",
+                "fair",
 		"sintered",
 		"worn"
-	]
-}
+		]
+	}
