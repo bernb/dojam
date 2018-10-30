@@ -1,37 +1,40 @@
 $bone_undetermined_material_data = {
-
 	material_name: "organic material (faunal)",
-
 	material_specifieds: [
 		"bone",
-	],
+		],
 	kind_of_objects: [
 		{"fitting": [
 			"handle",
 			"inlay",
-			"undetermined"]
+			"undetermined"
+			]
 		},
 		{"jewelry": [
 			"bangle",
 			"bead",
 			"hair pin",
-			"pendant",
-			"undetermined"]
+                        "pendant",
+			"scaraboid",
+			"undetermined"
+			]
 		},
 		{"tool": [
 			"awl",
-			"comb",
-			"needle",
+                        "comb",
+                        "needle",
 			"pin",
 			"weaving spatula",
-			"undetermined"]
+			"undetermined"
+			]
 		},
 		{"skeletal remains": [
 			"complete skeleton",
 			"articulated bones",
 			"single bone/s",
 			"skull",
-			"undetermined"]
+			"undetermined"
+			]
 		}
 	],
 	production_techniques: [
@@ -41,36 +44,36 @@ $bone_undetermined_material_data = {
 		"smoothing",
 		"none",
 		"undetermined"
-	],
+		],
 	colors: [
 		"beige",
 		"brown",
 		"white",
 		"undetermined"
-	],
+		],
 	decoration_techniques: [
 		"engraving",
 		"inlay",
 		"plastering",
 		"none",
 		"undetermined"
-	],
+		],
 	decorations: [
 		"figurative",
 		"floral",
 		"geometrical",
 		"none",
 		"undetermined"
-	],
+		],
 	decoration_colors: [
 		"none"
-	],
+		],
 	preservation_objects: [
 		"almost complete",
 		"complete",		
 		"fragment",
 		"undetermined"
-	],
+		],
 	preservation_materials: [
 		"cracked",
 		"fair",
@@ -78,6 +81,5 @@ $bone_undetermined_material_data = {
 		"good",
 		"sintered",
 		"undetermined"
-	]
-}
-
+		]
+	}

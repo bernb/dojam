@@ -1,14 +1,13 @@
 $glass_material_data = {
-
 	material_name: "vitreous material",
-
 	material_specifieds: [
 		"glass"
-	],
+		],
 	kind_of_objects: [
 		{"architectural element": [
 			"tesserae",
-			"window pane"]
+			"window pane"
+			]
 		},
 		"inlay",
 		{"jewelry": [
@@ -16,24 +15,27 @@ $glass_material_data = {
 			"bead",
 			"cylinder seal",
 			"pendant",
-			"scarab"]
+			"scarab"
+			]
 		},
 		{"primary product/waste": [
 			"drop",
 			"granulate",
 			"ingot",
 			"lump",
-			"waste"]
+			"waste"
+			]
 		},
 		{"tool": [
 			"tube",
-			"weight"]
+			"weight"
+			]
 		},
 		{"vessel": [
 			"alabastron",
 			"amphoriskos",
 			"balsamarium",
-			"beaker",
+                        "beaker",
 			"bowl",
 			"dish",
 			"double balsamarium",
@@ -45,7 +47,8 @@ $glass_material_data = {
 			"lamp",
 			"plate",
 			"theriomorphic vessel",
-			"unguentarium"]
+			"unguentarium"
+			]
 		}
 	],
 	production_techniques: [
@@ -54,7 +57,7 @@ $glass_material_data = {
 		"core-formed",
 		"mold-blown",
 		"mosaic"
-	],
+		],
 	colors: [
 		"blue",
 		"brown",
@@ -69,7 +72,7 @@ $glass_material_data = {
 		"red",
 		"violet",
 		"undetermined"
-	],
+		],
 	decoration_techniques: [
 		"applying",
 		"cutting",
@@ -83,7 +86,7 @@ $glass_material_data = {
 		"trail-wound",
 		"wheel-cutting",
 		"undetermined"
-	],
+		],
 	decoration_colors: [
 		"blue",
 		"brown",
@@ -98,25 +101,25 @@ $glass_material_data = {
 		"red",
 		"violet",
 		"undetermined"
-	],
+		],
 	decorations: [
 		"feather decoration",
 		"figurative",
-		"geometric",
+		"geometrical",
 		"dot",
 		"noppe",
 		"spiral",
 		"zig-zag",
 		"none",
 		"undetermined"
-	],
+		],
 	preservation_materials: [
 		"corrosion layer",
 		"cracked",
 		"iridescence",
 		"pitting",
 		"undetermined"
-	],
+		],
 	preservation_objects: [
 		"bottom",
 		"complete",
@@ -130,5 +133,5 @@ $glass_material_data = {
 		"stem",
 		"wall-to-bottom",
 		"undetermined"
-	] 
-}
+		] 
+	}

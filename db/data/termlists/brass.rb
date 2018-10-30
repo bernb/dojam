@@ -1,13 +1,13 @@
 $brass_material_data = {
-
 	material_name: "metal",
-
 	material_specifieds: [
 		"brass"
 	],
 	kind_of_objects: [
 		{"vessel": [
-			"platter"]}
+			"platter"
+			]
+		}
 	],
 	production_techniques: [
 		"beating",
@@ -19,7 +19,7 @@ $brass_material_data = {
 		"riveting",
 		"soldering",
 		"undetermined"
-	],
+		],
 	colors: [
 		"black",
 		"bronze colored",
@@ -29,14 +29,14 @@ $brass_material_data = {
 		"green",
 		"red",
 		"undetermined"
-	],
+		],
 	decorations: [
 		"figurativ",
 		"floral",
-		"geometric",
+		"geometrical",
 		"none",
 		"undetermined"
-	],
+		],
 	decoration_techniques: [
 		"chasing",
 		"differential alloying",
@@ -50,7 +50,7 @@ $brass_material_data = {
 		"plated",
 		"none",
 		"undetermined"
-	],
+		],
 	decoration_colors: [
 		"black",
 		"bronze colored",
@@ -60,10 +60,10 @@ $brass_material_data = {
 		"green",
 		"silver colored",
 		"none"
-	],
+		],
 	preservation_materials: [
 		"corroded"
-	],
+		],
 	preservation_objects: [
 		"bottom",
 		"complete",
@@ -76,4 +76,5 @@ $brass_material_data = {
 		"rim-to-wall",
 		"stem",
 		"wall-to-bottom"
-	]}
+		]
+	}

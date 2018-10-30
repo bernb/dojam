@@ -1,14 +1,13 @@
 $gold_material_data = {
-
 	material_name: "metal",
-
 	material_specifieds: [
 		"gold",
-	],
+		],
 	kind_of_objects: [
 		"coin",
 		{"cosmetic cutlery": [
-			"applicator"]
+			"applicator"
+			]
 		},
 		{"jewelry": [
 			"anklet",
@@ -21,10 +20,13 @@ $gold_material_data = {
 			"fibula",
 			"finger ring",
 			"hair pin",
-			"pendant"]
+			"pendant"
+			]
 		},
 		{"vessel": [
-			"goblet"]}
+			"goblet"
+			]
+		}
 	],
 	production_techniques: [
 		"casting in a mould",
@@ -39,18 +41,18 @@ $gold_material_data = {
 		"wire drawing",
 		"soldering",
 		"undetermined"
-	],
+		],
 	colors: [
 		"golden",
 		"undetermined"
-	],
+		],
 	decorations: [
 		"figurativ",
 		"floral",
-		"geometric",
+		"geometrical",
 		"none",
 		"undetermined"
-	],
+		],
 	decoration_techniques: [
 		"differential alloying",
 		"engraving",
@@ -65,7 +67,7 @@ $gold_material_data = {
 		"plated",
 		"none",
 		"undetermined"
-	],
+		],
 	decoration_colors: [
 		"black",
 		"bronze colored",
@@ -75,12 +77,12 @@ $gold_material_data = {
 		"green",
 		"silver colored",
 		"none"
-	],
+		],
 	preservation_materials: [
 		"corroded",
 		"flaked",
 		"good"
-	],
+		],
 	preservation_objects: [
 		"bottom",
 		"complete",
@@ -93,4 +95,5 @@ $gold_material_data = {
 		"rim-to-wall",
 		"stem",
 		"wall-to-bottom"
-	]}
+		]
+	}

@@ -1,16 +1,15 @@
 $vitreous_material_data = {
-
 	material_name: "vitreous material",
-
 	material_specifieds: [
 		"Egyptian blue",
 		"faience",
 		"glass"
-	],
+		],
 	kind_of_objects: [
 		{"architectural element": [
 			"tesserae",
-			"window pane"]
+			"window pane"
+			]
 		},
 		"inlay",
 		{"jewelry": [
@@ -18,14 +17,16 @@ $vitreous_material_data = {
 			"bead",
 			"cylinder seal",
 			"pendant",
-			"scarab"]
+			"scarab"
+			]
 		},
 		{"primary product/waste": [
 			"drop",
 			"granulate",
 			"ingot",
 			"lump",
-			"waste"]
+			"waste"
+			]
 		},
 		{"vessel": [
 			"alabastron",
@@ -39,7 +40,8 @@ $vitreous_material_data = {
 			"jug",
 			"lamp",
 			"plate",
-			"theriomorphic vessel"]
+			"theriomorphic vessel"
+			]
 		}
 	],
 	production_techniques: [
@@ -48,7 +50,7 @@ $vitreous_material_data = {
 		"core-formed",
 		"mold-blown",
 		"mosaic"
-	],
+		],
 	colors: [
 		"blue",
 		"brown",
@@ -63,7 +65,7 @@ $vitreous_material_data = {
 		"red",
 		"violet",
 		"undetermined"
-	],
+		],
 	decoration_techniques: [
 		"applying",
 		"cutting",
@@ -77,7 +79,7 @@ $vitreous_material_data = {
 		"trail-wound",
 		"wheel-cutting",
 		"undetermined"
-	],
+		],
 	decoration_colors: [
 		"blue",
 		"brown",
@@ -92,18 +94,18 @@ $vitreous_material_data = {
 		"red",
 		"violet",
 		"undetermined"
-	],
+		],
 	decorations: [
 		"feather decoration",
 		"figurative",
-		"geometric",
+		"geometrical",
 		"dot",
 		"noppe",
 		"spiral",
 		"zig-zag",
 		"none",
 		"undetermined"
-	],
+		],
 	preservation_materials: [
 		"corrosion layer",
 		"cracked",
@@ -111,7 +113,7 @@ $vitreous_material_data = {
 		"iridescence",
 		"pitting",
 		"undetermined"
-	],
+		],
 	preservation_objects: [
 		"bottom",
 		"complete",
@@ -125,5 +127,5 @@ $vitreous_material_data = {
 		"stem",
 		"wall-to-bottom",
 		"undetermined"
-	] 
-}
+		] 
+	}

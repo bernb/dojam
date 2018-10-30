@@ -1,14 +1,13 @@
 $iron_material_data = {
-
 	material_name: "metal",
-
 	material_specifieds: [
 		"iron",
-	],
+		],
 	kind_of_objects: [
 		{"fitting": [
 			"nail",
-			"ring"]
+			"ring"
+			]
 		},
 		{"tool": [
 			"axe",
@@ -16,7 +15,8 @@ $iron_material_data = {
 			"knife",
 			"pin",
 			"plowshare",
-			"saw blade"]
+			"saw blade"
+			]
 		},
 		{"weapon/armor": [
 			"axe",
@@ -24,10 +24,11 @@ $iron_material_data = {
 			"cannon",  
 			"chain armor",
 			"dagger",
-			"plate armor", 
+                        "plate armor", 
 			"spearhead",
 			"sword",
-			"undetermined"]
+			"undetermined"
+			]
 		}
 	],
 	production_techniques: [
@@ -40,21 +41,21 @@ $iron_material_data = {
 		"wire drawing",
 		"soldering",
 		"undetermined"
-	],
+  		],
 	colors: [
 		"black",
 		"brown",
 		"green",
 		"red",
 		"undetermined"
-	],
+ 		 ],
 	decorations: [
 		"figurativ",
 		"floral",
-		"geometric",
+		"geometrical",
 		"none",
 		"undetermined"
-	],
+		],
 	decoration_techniques: [
 		"chasing",
 		"differential alloying",
@@ -62,7 +63,7 @@ $iron_material_data = {
 		"plated",
 		"none",
 		"undetermined"
-	],
+		],
 	decoration_colors: [
 		"black",
 		"bronze colored",
@@ -72,13 +73,13 @@ $iron_material_data = {
 		"green",
 		"silver colored",
 		"none"
-	],
+		],
 	preservation_materials: [
 		"chipped",
 		"corroded",
 		"good",
 		"fair"
-	],
+		],
 	preservation_objects: [
 		"bottom",
 		"complete",
@@ -91,5 +92,5 @@ $iron_material_data = {
 		"rim-to-wall",
 		"stem",
 		"wall-to-bottom"
-	]
-}
+		]
+	}

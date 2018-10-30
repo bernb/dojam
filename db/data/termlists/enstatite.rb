@@ -1,7 +1,5 @@
-$carnelian_material_data = {
-
+$enstatite_material_data = {
 	material_name: "stone/mineral",
-
 	material_specifieds: [
 		"enstatite"
 	],
@@ -21,6 +19,7 @@ $carnelian_material_data = {
 		"beige",
 		"brown",
 		"green",
+		"grey",
 		"white",
 	],
 	decoration_techniques: [
@@ -30,10 +29,12 @@ $carnelian_material_data = {
 	],
 	decorations: [
 		"figurative",
+		"floral",
 		"geometrical",
 		"none"
 	],
 	decoration_colors: [
+		"white",
 		"none"
 	],
 	preservation_objects: [
@@ -42,9 +43,11 @@ $carnelian_material_data = {
 		"complete"
 	],
 	preservation_materials: [
+		"broken",
 		"chipped",
 		"good",
 		"fair",
-		"sintered"
+		"sintered",
+		"worn"
 	]
 }

@@ -1,10 +1,8 @@
 $limestone_material_data = {
-
 	material_name: "stone/mineral",
-
 	material_specifieds: [
 		"limestone"
-	],
+		],
 	kind_of_objects: [ 
 		{"architectural element": [
 			"architectural sculpture",
@@ -13,13 +11,17 @@ $limestone_material_data = {
 			"capital",
 			"column",
 			"door hinge",
-			"frieze"]
+			"frieze"
+			]
 		},
 		{"jewelry": [
 			"bangle",
-			"cylinder seal"]
+			"cylinder seal",
+			"scaraboid",
+			"stamp seal"
+			]
 		},
-		"sarcophagus",
+                "sarcophagus",
 		{"sculpture": [
 			"bust",
 			"figurine anthropomorphic",
@@ -27,19 +29,22 @@ $limestone_material_data = {
 			"head",
 			"torso",
 			"statue",
-			"stela"]
+			"stela"
+			]
 		},
 		{"tool": [
 			"axe",
 			"grinding stone",
 			"pestle",
-			"rubbing stone"]
+			"rubbing stone"
+			]
 		},
 		{"vessel": [
 			"bowl",
 			"censer",
 			"cosmetic bowl",
-			"mortar bowl"]
+			"mortar bowl"
+			]
 		}
 	],
 	production_techniques: [
@@ -49,40 +54,40 @@ $limestone_material_data = {
 		"pecking",
 		"smoothing",
 		"undetermined"
-	],
+		],
 	colors: [
 		"beige",
-		"black",
+                "black",
 		"brown",
-		"red",
-		"white",
+                "red",
+                "white",
 		"undetermined"
-	],
+		],
 	decoration_techniques: [
 		"carving",
 		"engraving",
-		"incising",
+                "incising",
 		"painting",
 		"relief",
 		"none",
 		"undetermined"
-	],
+		],
 	decorations: [
 		"figurative",
 		"floral",
 		"geometrical",
 		"none",
 		"undetermined"
-	],
+		],
 	decoration_colors: [
 		"red",
 		"black",
 		"none",
 		"undetermined"
-	],
+		],
 	preservation_objects: [
 		"almost complete",
-		"bottom",
+                "bottom",
 		"complete",
 		"complete profile",
 		"fragment",
@@ -91,13 +96,14 @@ $limestone_material_data = {
 		"rim to wall",
 		"wall",
 		"wall to bottom"
-	],
+		],
 	preservation_materials: [
 		"cracked",
 		"chipped",
-		"discolored",
+                "discolored",
 		"fair",
-		"good",
-		"sintered"
-	]
-}
+                "good",
+		"sintered",
+		"worn"
+		]
+	}
