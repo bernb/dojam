@@ -19,7 +19,8 @@ $ceramic_material_data = {
 		"pseudo-celadon",
 		"sintered-quartz ceramic",
 		"Terra Sigillata (TS)",
-		"White Slip Ware"
+		"White Slip Ware",
+		"undetermined"
 		],
 	kind_of_objects: [
 		{"architectural element": [
@@ -49,9 +50,9 @@ $ceramic_material_data = {
                 {"sculpture": [
 			"bust",
                         "column", 
-			"figurine anthropomorphic",
-			"figurine anthropomorphic-theriomorphic",
-			"figurine theriomorphic",
+			"figurine, anthropomorphic",
+			"figurine, anthropomorphic-zoomorphic",
+			"figurine, zoomorphic",
                         "head",
 			"mask"
 			]
@@ -70,7 +71,6 @@ $ceramic_material_data = {
 			"alabastron",
 			"amphora",
 			"amphoriskos",
-			"anthropomorphic vessel",
 			"askos",
 			"basin",
 			"beaker",
@@ -124,7 +124,10 @@ $ceramic_material_data = {
 			"tripod cup",
 			"twin-amphoriskos",
 			"twin-cup",
-			"unguentarium"
+			"unguentarium",
+			"vessel, anthropomorphic",
+			"vessel, zoomorphic",
+			"undetermined"
 			]
 		} # kind of object specifieds hash
 	], # kind of object array
@@ -133,8 +136,8 @@ $ceramic_material_data = {
 		"wheel-made",
 		"mould-made"
 		],
-	decorations: [
-		"figurativ",
+	decoration_styles: [
+		"figurative",
 		"floral",
 		"geometrical",
 		"none"

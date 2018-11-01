@@ -9,6 +9,7 @@ $stone_material_data = {
     "basalt",
     "calcite",
     "carnelian",
+    "chalcedony",
     "chalk",
     "chlorite",
     "clay (unbaked)",

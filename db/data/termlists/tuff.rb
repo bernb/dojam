@@ -23,7 +23,7 @@ $tuff_material_data = {
 		"engraving",
 		"none"
 		],
-	decorations: [
+	decoration_styles: [
 		"figurative",
 		"floral",
 		"geometrical",

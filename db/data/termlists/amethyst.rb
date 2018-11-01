@@ -1,28 +1,31 @@
-$carnelian_material_data = {
+$amethyst_material_data = {
 	material_name: "stone/mineral",
 	material_specifieds: [
-		"carnelian"
+		"amethyst"
 		],
 	kind_of_objects: [
 		{"jewelry": [
 			"bead",
 			"cameo",
 			"pendant",
-			"scaraboid",
+			"scarab",
 			"stamp seal"
 			]
 		}
 	],
 	production_techniques: [
 		"cutting",
-		"drilling",
+		"piercing",
 		"polishing",
 		"smoothing"
 		],
 	colors: [
+		"beige",
 		"brown",
+		"green",
 		"red",
 		"white",
+		"yellow"
 		],
 	decoration_techniques: [
 		"engraving",
