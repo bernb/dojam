@@ -85,6 +85,7 @@ $faience_material_data = {
 		"undetermined"
 		],
 	preservation_objects: [
+		"almost complete",
 		"bottom",
 		"complete",
 		"complete profile",

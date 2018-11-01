@@ -15,6 +15,7 @@ $glass_material_data = {
 			"bead",
 			"cylinder seal",
 			"pendant",
+			"stamp seal",
 			"scarab"
 			]
 		},
@@ -102,7 +103,7 @@ $glass_material_data = {
 		"violet",
 		"undetermined"
 		],
-	decorations: [
+	decoration_styles: [
 		"feather decoration",
 		"figurative",
 		"geometrical",

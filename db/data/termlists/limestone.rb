@@ -72,7 +72,7 @@ $limestone_material_data = {
 		"none",
 		"undetermined"
 		],
-	decorations: [
+	decoration_styles: [
 		"figurative",
 		"floral",
 		"geometrical",
