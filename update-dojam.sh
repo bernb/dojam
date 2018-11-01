@@ -45,6 +45,13 @@ fi
 
 # =================================================================
 echo "60"
+echo "# Post-Installation: Update termlists. This may take a while." 
+if ! rails db:seed ; then
+	exit 16
+fi
+
+# =================================================================
+echo "70"
 echo "# Post-Installation: Restart local server" 
 if ! sudo /bin/systemctl restart puma ; then
 	exit 17
