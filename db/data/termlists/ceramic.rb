@@ -136,7 +136,7 @@ $ceramic_material_data = {
 		"wheel-made",
 		"mould-made"
 		],
-	decoration_styles: [
+	decorations: [
 		"figurative",
 		"floral",
 		"geometrical",
