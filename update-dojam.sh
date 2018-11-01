@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Attempts to forward to the latest master commit and then start
+# rails specific tasks like bundle install or rails migrate
+
 # Change into directory of script
 cd "$(dirname "$0")"
 
