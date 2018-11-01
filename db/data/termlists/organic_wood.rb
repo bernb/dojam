@@ -29,7 +29,7 @@ $organic_wood_material_data = {
 		"black",
 		"undetermined"
 		],
-	decoration_styles: [
+	decorations: [
 		"figurative",
 		"floral",
 		"geometrical",

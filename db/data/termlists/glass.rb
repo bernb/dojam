@@ -103,7 +103,7 @@ $glass_material_data = {
 		"violet",
 		"undetermined"
 		],
-	decoration_styles: [
+	decorations: [
 		"feather decoration",
 		"figurative",
 		"geometrical",
