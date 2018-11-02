@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_19_083646) do
+ActiveRecord::Schema.define(version: 2018_11_02_111117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -295,6 +295,7 @@ ActiveRecord::Schema.define(version: 2018_09_19_083646) do
     t.text "remarks_acquisition"
     t.integer "excavation_site_category_id"
     t.float "thickness"
+    t.float "max_dm"
     t.index ["excavation_site_id"], name: "index_museum_objects_on_excavation_site_id"
     t.index ["main_material_specified_id"], name: "index_museum_objects_on_main_material_specified_id"
     t.index ["storage_location_id"], name: "index_museum_objects_on_storage_location_id"

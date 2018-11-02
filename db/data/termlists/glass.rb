@@ -15,6 +15,7 @@ $glass_material_data = {
 			"bead",
 			"cylinder seal",
 			"pendant",
+			"stamp seal",
 			"scarab"
 			]
 		},

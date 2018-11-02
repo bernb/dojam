@@ -1,13 +1,12 @@
 $alabaster_c_material_data = {
-
 	material_name: "stone/mineral",
-
 	material_specifieds: [
 		"alabaster/calcite/gypsum"
-	],
+		],
 	kind_of_objects: [ 
 		{"cosmetic utensil":  [
-			"cosmetic palette"]
+			"cosmetic palette"
+			]
 		},
 		{"vessel": [
 			"alabastron",
@@ -15,7 +14,8 @@ $alabaster_c_material_data = {
 			"bowl",
 			"goblet",
 			"juglet",
-			"plate"]
+			"plate"
+			]
 		}
 	],
 	production_techniques: [
@@ -23,29 +23,29 @@ $alabaster_c_material_data = {
 		"drilling",
 		"pecking",
 		"smoothing"
-	],
+		],
 	colors: [
 		"beige",
 		"brown",
 		"grey",
 		"white",
 		"yellow"
-	],
+		],
 	decoration_techniques: [
 		"engraving",
 		"inlays",
 		"relief",
 		"none"
-	],
+		],
 	decorations: [
 		"figurative",
 		"geometrical",
 		"none"
-	],
+		],
 	decoration_colors: [
 		"black",
 		"none"
-	],
+		],
 	preservation_objects: [
 		"bottom",
 		"complete",
@@ -56,11 +56,11 @@ $alabaster_c_material_data = {
 		"rim to wall",
 		"wall",
 		"wall to bottom"
-	],
+		],
 	preservation_materials: [
 		"discolored",
 		"chipped",
 		"good",
 		"sintered"
-	]
-}
+		]
+	}
