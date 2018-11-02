@@ -65,6 +65,14 @@ class MuseumObjectDecorator < Draper::Decorator
 		end
 	end
 
+	def max_dm_decorated
+		if self.max_dm.blank? 
+			"undetermined"
+		else
+			self.max_dm
+		end
+	end
+
 	def weight_in_gram_decorated
 		if self.weight_in_gram.blank? 
 			"undetermined"

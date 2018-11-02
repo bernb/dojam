@@ -339,7 +339,7 @@ class BuildsController < ApplicationController
 																					:acquisition_year, :acquisition_month, :acquisition_day, :acquisition_date_unknown,
 																					:is_dating_period_unknown, :is_dating_millennium_unknown, :dating_century_begin_id, :dating_century_end_id,
 																				 	:is_dating_century_unknown, :is_dating_timespan_unknown,
-																					:max_length, :max_width, :height, :opening_dm, :bottom_dm, :weight_in_gram,
+																					:max_length, :max_width, :height, :opening_dm, :bottom_dm, :max_dm, :weight_in_gram,
                                           images: [],
                                           dating_century_ids: [],
                                           color_ids: [],                                   
