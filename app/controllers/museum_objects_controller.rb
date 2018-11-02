@@ -1,10 +1,20 @@
 class MuseumObjectsController < ApplicationController
   
   def index
-  if params.has_key? :search_query
+  if params.has_key? :fulltext_search
     museum_objects = MuseumObject.search "#{params[:search_query]}"
-  else
-    musem_objects = MuseumObject.find :all, limit: 100
+	elsif params.has_key? :inv_number_search
+		searchstring = params[:inv_number_search]
+		split_string = searchstring.split("-")
+		museum_objects = MuseumObject.where inv_number: split_string[0]
+		if split_string.size == 2
+			museum_objects = museum_objects.where inv_extension: split_string[1]
+		end
+		if museum_objects.count == 1
+			redirect_to museum_object_path(museum_objects.first)
+		end
+	else
+    museum_objects = MuseumObject.limit 25
   end
   @museum_cards = MuseumCardDecorator.decorate_collection(museum_objects)
 	@museum_objects = museum_objects.map(&:decorate)
