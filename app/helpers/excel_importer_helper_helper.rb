@@ -322,7 +322,8 @@ module ExcelImporterHelperHelper
 		array = [:needs_cleaning, :needs_conservation, :storage_location, :excavation_site, :colors, :production_technique_id, :decoration_color_id, :decoration_technique_id]
 			array.include?(key) ||
 			key.to_s.include?("kind_of") ||
-			key.to_s.include?("material") ||
+			key.to_s.include?("main_material") ||
+			key.to_s.include?("secondary_material") ||
 			key.to_s.include?("dating") ||
 			key.to_s.include?("storage")
 	end
