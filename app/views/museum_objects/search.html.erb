@@ -5,7 +5,7 @@
 		<div class="form-group">
 			<%= form_tag(museum_objects_path, method: "get") do %>
 				<%= label_tag(:inv_number_search, "inventory number") %>
-				<%= text_field_tag :inv_number_search, nil, placeholder: "J.0000-0", class: "form-control" %>
+				<%= text_field_tag :inv_number_search, nil, placeholder: "J.0000-0", class: "form-control", required: true %>
 		</div>
 		<%= submit_tag "Search", class: "btn btn-primary" %>
 	<% end %>
