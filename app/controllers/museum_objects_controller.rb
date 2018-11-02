@@ -13,6 +13,11 @@ class MuseumObjectsController < ApplicationController
 		if museum_objects.count == 1
 			redirect_to museum_object_path(museum_objects.first)
 		end
+
+		if museum_objects.count == 0
+			flash[:info] = "Object with inventory number \"#{params[:inv_number_search]}\" not found"
+			redirect_to museum_objects_search_path
+		end
 	else
     museum_objects = MuseumObject.limit 25
   end
