@@ -24,8 +24,8 @@ $limestone_material_data = {
                 "sarcophagus",
 		{"sculpture": [
 			"bust",
-			"figurine anthropomorphic",
-			"figurine theriomorphic",
+			"figurine, anthropomorphic",
+			"figurine, zoomorphic",
 			"head",
 			"torso",
 			"statue",
@@ -72,7 +72,7 @@ $limestone_material_data = {
 		"none",
 		"undetermined"
 		],
-	decorations: [
+	decoration_styles: [
 		"figurative",
 		"floral",
 		"geometrical",
