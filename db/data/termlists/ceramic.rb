@@ -7,8 +7,8 @@ $ceramic_material_data = {
 		"Cypriote Base-Ring-Ware",
 		"Chocolate-on-White Ware",
 		"Cypriote Red Slip Ware (CRSW)",
-                "Eastern Sigillata (ES)",
-                "Eastern Sigillata A (ESA)",
+		"Eastern Sigillata (ES)",
+		"Eastern Sigillata A (ESA)",
 		"Eastern Terra Sigillata (ETS)",
 		"Khirbet Kerak Ware",
 		"Late Helladic (LH)",
@@ -22,13 +22,13 @@ $ceramic_material_data = {
 		"Terra Sigillata (TS)",
 		"White Slip Ware",
 		"undetermined"
-		],
+	],
 	kind_of_objects: [
 		{"architectural element": [
 			"floor tile", 
 			"roof tile", 
 			"water pipe"
-			]
+		]
 		},
 		"coffin",
 		"coffin lid",
@@ -36,27 +36,27 @@ $ceramic_material_data = {
 		{"jewelry": [
 			"button",
 			"pendant",
-                        "stamp seal"
-			]
+			"stamp seal"
+		]
 		},
-                {"fitting": [
-		        "knob"
-			]
+		{"fitting": [
+			"knob"
+		]
 		},
 		{"sarcophagus": [
-                        "sarcophagus anthropoid",
-                        "sarcophagus lid"
-			]
+			"sarcophagus anthropoid",
+			"sarcophagus lid"
+		]
 		},
-                {"sculpture": [
+		{"sculpture": [
 			"bust",
-                        "column", 
+			"column", 
 			"figurine, anthropomorphic",
 			"figurine, anthropomorphic-zoomorphic",
 			"figurine, zoomorphic",
-                        "head",
+			"head",
 			"mask"
-			]
+		]
 		},
 		{"tool": [
 			"door knocker",
@@ -66,7 +66,7 @@ $ceramic_material_data = {
 			"spindle whorl", 
 			"spoon",
 			"tobacco pipe"
-			]
+		]
 		},
 		{"vessel": [
 			"alabastron",
@@ -97,7 +97,7 @@ $ceramic_material_data = {
 			"jar",
 			"jug",
 			"juglet",
-			"juglet, anthropomorphic
+			"juglet, anthropomorphic",
 			"kernos",
 			"krater",
 			"lagynos",
@@ -106,7 +106,7 @@ $ceramic_material_data = {
 			"lid",
 			"milk bowl",
 			"oil lamp",
-	        	"ostracon",
+			"ostracon",
 			"pan",
 			"pilgrim flask",
 			"pithos",
@@ -129,31 +129,31 @@ $ceramic_material_data = {
 			"vessel, anthropomorphic",
 			"vessel, zoomorphic",
 			"undetermined"
-			]
+		]
 		} # kind of object specifieds hash
 	], # kind of object array
 	production_techniques: [
 		"hand-made",
 		"wheel-made",
 		"mould-made"
-		],
-	decoration_styles: [
+	],
+	decorations: [
 		"figurative",
 		"floral",
 		"geometrical",
 		"none"
-		],
+	],
 	colors: [
 		"beige",
 		"black",
 		"brown",
 		"buff",
-                "green",
+		"green",
 		"grey",
 		"pink",
 		"red",
 		"white"
-		], 
+	], 
 	decoration_colors: [
 		"beige",
 		"black",
@@ -170,14 +170,14 @@ $ceramic_material_data = {
 		"white",
 		"yellow",
 		"none"
-		], 
+	], 
 	decoration_techniques: [
 		"application",
 		"attaching",
 		"burnishing",
 		"carving",
 		"combing",
-                "engobe",
+		"engobe",
 		"glazing",
 		"grooving",
 		"inlay",
@@ -191,7 +191,7 @@ $ceramic_material_data = {
 		"sgraffito",
 		"slip",
 		"none"
-		],
+	],
 	preservation_materials: [
 		"burnt",
 		"cracked",
@@ -200,7 +200,7 @@ $ceramic_material_data = {
 		"fair",
 		"flaked",
 		"sintered"
-		],
+	],
 	preservation_objects: [
 		"base",
 		"body",
@@ -213,5 +213,5 @@ $ceramic_material_data = {
 		"handle-to-body",
 		"rim",
 		"rim-to-body"
-		]
-	} # hash
+	]
+} # hash

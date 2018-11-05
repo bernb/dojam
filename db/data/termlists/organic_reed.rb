@@ -24,7 +24,7 @@ $organic_reed_material_data = {
 		"black",
 		"undetermined"
 		],
-	decoration_styles: [
+	decorations: [
 		"none",
 		"undetermined"
 		]
