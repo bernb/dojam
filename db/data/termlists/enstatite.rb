@@ -2,12 +2,12 @@ $enstatite_material_data = {
 	material_name: "stone/mineral",
 	material_specifieds: [
 		"enstatite"
-		],
+	],
 	kind_of_objects: [
 		{"jewelry": [
-                        "scarab",
+			"scarab",
 			"stamp seal"
-			]
+		]
 		}
 	],
 	production_techniques: [
@@ -15,41 +15,41 @@ $enstatite_material_data = {
 		"drilling",
 		"polishing",
 		"smoothing"
-		],
+	],
 	colors: [
 		"beige",
-                "brown",
-                "green",
+		"brown",
+		"green",
 		"grey",
 		"white",
-		],
+	],
 	decoration_techniques: [
 		"engraving",
-                "glazing",
+		"glazing",
 		"none"
-		],
-	decoration_styles: [
+	],
+	decorations: [
 		"figurative",
 		"floral",
 		"geometrical",
 		"inscription",
 		"none"
-		],
+	],
 	decoration_colors: [
-		"white"
+		"white",
 		"none"
-		],
+	],
 	preservation_objects: [
 		"fragmentary",
 		"almost complete",
 		"complete"
-		],
+	],
 	preservation_materials: [
 		"broken",
 		"chipped",
-                "good",
-                "fair",
+		"good",
+		"fair",
 		"sintered",
 		"worn"
-		]
-	}
+	]
+}
