@@ -103,7 +103,7 @@ $glass_material_data = {
 		"violet",
 		"undetermined"
 		],
-	decorations: [
+	decoration_styles: [
 		"feather decoration",
 		"figurative",
 		"geometrical",
@@ -122,6 +122,7 @@ $glass_material_data = {
 		"undetermined"
 		],
 	preservation_objects: [
+		"almost complete",
 		"bottom",
 		"complete",
 		"complete profile",

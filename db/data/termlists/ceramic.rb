@@ -18,6 +18,7 @@ $ceramic_material_data = {
 		"porcelain",
 		"pseudo-celadon",
 		"sintered-quartz ceramic",
+		"Tell Yahudiyeh Ware",
 		"Terra Sigillata (TS)",
 		"White Slip Ware",
 		"undetermined"
@@ -96,6 +97,7 @@ $ceramic_material_data = {
 			"jar",
 			"jug",
 			"juglet",
+			"juglet, anthropomorphic
 			"kernos",
 			"krater",
 			"lagynos",
@@ -120,7 +122,6 @@ $ceramic_material_data = {
 			"strainer",
 			"sugar bowl",
 			"table amphora",
-			"theriomorphic vessel",
 			"tripod cup",
 			"twin-amphoriskos",
 			"twin-cup",
@@ -136,7 +137,7 @@ $ceramic_material_data = {
 		"wheel-made",
 		"mould-made"
 		],
-	decorations: [
+	decoration_styles: [
 		"figurative",
 		"floral",
 		"geometrical",
