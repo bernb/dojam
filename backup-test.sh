@@ -1,6 +1,9 @@
-cd ../backup-check
+foldername="backup-check-$(date +%Y-%m-%d_%H-%M-%S)"
+mkdir ../"$foldername"
+cd ../"$foldername"
 read -s -p "Borg passphrase: " borg_passphrase
-BORG_PASSPHRASE="$borg_passphrase" borg -v -p check ssh://u168640@u168640.your-storagebox.de:23/./backups/dojam
-latest_archive_name=$(BORG_PASSPHRASE="$borg_passphrase" borg list --last 1 --short ssh://u168640@u168640.your-storagebox.de:23/./backups/dojam)
-BORG_PASSPHRASE="$borg_passphrase" borg list ssh://u168640@u168640.your-storagebox.de:23/./backups/dojam::2018-11-12_16:00 | wc -l
-git checkout master
+git clone git@bitbucket.org:BernardBeitz/jamappv2.git .
+borg_passphrase="$(echo $BORG_PASSPHRASE)"
+BORG_PASSPHRASE=$borg_passphrase borg -p -v check ssh://u168640@u168640.your-storagebox.de:23/./backups/dojam
+BORG_PASSPHRASE=$borg_passphrase borg -p extract --strip-components 3 ssh://u168640@u168640.your-storagebox.de:23/./backups/dojam::2018-11-12_16:00
+cp ../jamappv2/config/secrets.yml config/
