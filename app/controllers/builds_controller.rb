@@ -53,7 +53,7 @@ class BuildsController < ApplicationController
 		if step == :step_material_specified
 			main_material_specified_id = @museum_object.main_material_specified&.id
 			found = false
-			params[:museum_object][:material_specified_ids].reject(&:blank?).each do |ms_id|
+			params[:museum_object][:path_ids].reject(&:blank?).map{|p_id| Path.find(p_id)}.map{|path| path.objects[1]}.each do |ms_id|
 				if main_material_specified_id.to_s == ms_id
 					found = true
 				end
@@ -340,6 +340,7 @@ class BuildsController < ApplicationController
 																					:is_dating_period_unknown, :is_dating_millennium_unknown, :dating_century_begin_id, :dating_century_end_id,
 																				 	:is_dating_century_unknown, :is_dating_timespan_unknown,
 																					:max_length, :max_width, :height, :opening_dm, :bottom_dm, :max_dm, :weight_in_gram,
+																				 	path_ids: [],
                                           images: [],
                                           dating_century_ids: [],
                                           color_ids: [],                                   
