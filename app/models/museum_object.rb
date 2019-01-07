@@ -192,6 +192,7 @@ class MuseumObject < ApplicationRecord
 
 	def material_specifieds=(material_specified_objects)
 		paths = []
+		# Note that we assume a one-to-many relationship
 		material_specified_objects.each do |object|
 			path = Path.depth(2).last_id(object.id)
 			paths << path
