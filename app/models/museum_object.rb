@@ -171,13 +171,12 @@ class MuseumObject < ApplicationRecord
 	end
 
 	def materials=(material_objects)
-		paths = []
-		material_objects.each do |object|
-			path = Path.depth(1).last_id(object.id)
-			paths << path
-		end
-		self.paths.clear
-		self.paths << paths
+		material_paths = material_objects
+			.map(&:paths)
+			.map(&:first)
+			.map(&:path)
+		paths = Path.where('path like any (array[?])', material_paths)
+		add_new_paths paths
 	end
 
 	def material_ids=(material_object_ids)
@@ -197,8 +196,7 @@ class MuseumObject < ApplicationRecord
 			path = Path.depth(2).last_id(object.id)
 			paths << path
 		end
-		self.paths.clear
-		self.paths << paths
+		add_new_paths paths
 	end
 
 	def material_specified_ids
@@ -261,6 +259,10 @@ class MuseumObject < ApplicationRecord
   end
 
 	private
+
+	def add_new_paths paths
+		self.paths = paths.reject{|p| path_implied?(p)}
+	end
 
 	def path_implied? path
 		self.paths.map{|p| p.parent_of?(path)}.reduce(:|)
