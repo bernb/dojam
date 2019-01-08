@@ -26,6 +26,16 @@ class Path < ApplicationRecord
 		Path.where("path SIMILAR TO ?", path_name)
 	end
 
+	def parent_of? other_path
+		other_path.path.starts_with?(self.path) &&
+			other_path.depth > self.depth
+	end
+
+	def child_of? other_path
+		self.path.starts_with?(other_path.path) &&
+			other_path.depth < self.depth
+	end
+
 	def parent
 		ids = self.ids[0...-1]
 		pathname = ""
