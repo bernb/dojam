@@ -262,6 +262,10 @@ class MuseumObject < ApplicationRecord
 
 	private
 
+	def path_implied? path
+		self.paths.map{|p| p.parent_of?(path)}.reduce(:|)
+	end
+
 	def set_default_values
 		termlist_names = [:excavation_site,
 										  :acquisition_kind,
