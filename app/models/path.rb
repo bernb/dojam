@@ -15,6 +15,16 @@ class Path < ApplicationRecord
 		return Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id}/#{koos_id}"
 	end
 
+	def to_depth depth
+		if self.depth <= depth
+			return self
+		end
+		path = self
+		diff = self.depth - depth
+		diff.times{path = path.parent}
+		return path
+	end
+
 	def root?
 		self.parent.nil?
 	end

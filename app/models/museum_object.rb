@@ -113,6 +113,9 @@ class MuseumObject < ApplicationRecord
 	########################
 	
 	def main_material_id= m_id
+		if self.main_path.present?
+			self.paths << self.main_path.to_depth(2)
+		end
 		path = Path.depth(1).last_id(m_id).first
 		self.main_path = path
 	end
@@ -136,6 +139,7 @@ class MuseumObject < ApplicationRecord
 		m_id = objects[0].id.to_s
 		ms_id = objects[1].id.to_s
 		path = Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id.to_s}"
+		self.paths.delete path.parent
 		self.main_path = path
 	end
 
@@ -262,14 +266,20 @@ class MuseumObject < ApplicationRecord
 	def add_new_paths paths
 		new_paths = []
 		paths.each do |path|
+			if path.parent_of?(self.main_path) || path == self.main_path
+				next
+			end
 			if path_implied?(path)
 				new_paths << implied_paths_for(path)
 			else
 				new_paths << path
 			end
 		end
-		new_paths = nil if new_paths.empty?
-		self.paths = new_paths.flatten
+		if new_paths.empty?
+			self.paths.delete_all
+		else
+			self.paths = new_paths.flatten
+		end
 	end
 
 	def implied_paths_for path
