@@ -39,11 +39,17 @@ class Path < ApplicationRecord
 	end
 
 	def parent_of? other_path
+		if other_path.nil?
+			return false
+		end
 		other_path.path.starts_with?(self.path) &&
 			other_path.depth > self.depth
 	end
 
 	def child_of? other_path
+		if other_path.nil?
+			return false
+		end
 		self.path.starts_with?(other_path.path) &&
 			other_path.depth < self.depth
 	end
