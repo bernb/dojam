@@ -7,14 +7,8 @@
 				<dt>material</dt>
 			</div>
 			<div class="col">
-				<% if @museum_object.material_specifieds.blank? %>
-					<dd>undetermined (undetermined)</dd>
-				<% else %>
-					<% @museum_object&.material_specifieds.each do |m| %>
-						<div class="">
-							<dd><%= m.material&.name %> (<%= m.name %>)</dd>
-						</div>
-					<% end %>
+				<% @museum_object.materials_with_specifieds.each do |m_ms| %>
+					<dd><%= m_ms %></dd>
 				<% end %>
 			</div>
 		</div>

@@ -10,6 +10,20 @@ class MuseumObjectDecorator < Draper::Decorator
 		decorate_named_list self.material_specifieds
 	end
 
+	def materials_with_specifieds
+		result = []
+		[self.main_path].push(self.paths.to_a).flatten.each do |path|
+			material_name = path.objects[0].name
+			material_specified_name = path.objects[1]&.name || "undetermined"
+			element = material_name + "(" + material_specified_name + ")"
+			result << element
+		end
+		if result.empty?
+			result << "undetermined (undetermined)"
+		end
+		return result
+	end
+
 	def decorate_named_list list
 		returnstring = ""
 		if list.blank?
