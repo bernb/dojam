@@ -322,20 +322,4 @@ class MuseumObject < ApplicationRecord
 		return objects.uniq
 	end
 
-#	def main_path=(material: nil, material_specified: nil, kind_of_object: nil, kind_of_object_specified: nil)
-#		# ToDo: Throw error instead of returning nil
-#		# Map given parameter to an logical integer array with
-#		# 1: parameter was given
-#		# 0: parameter is blank
-#		parameter_array = [material, material_specified, kind_of_object, kind_of_object_specified] 
-#		logical_array = parameter_array.map(&:present?).map{|l| l ? 1 : 0}
-#		parameters_are_consistent = logical_array.each_cons(2).all?{|left, right| left >= right}
-#		if !parameters_are_consistent
-#			return nil
-#		end
-#
-#		path = parameter_array.reject(&:blank?).reduce(""){|path, object| path += "/" + object.id}
-#
-#	end
-
 end
