@@ -1,6 +1,8 @@
 class Path < ApplicationRecord
 	has_many :termlist_paths
 	has_many :termlists, through: :termlist_paths
+	has_many :museum_object_paths
+	has_many :museum_objects, through: :museum_object_paths
 	scope :last_id, ->(id) {where "path like ?", "%/#{id}"}
 	scope :depth, ->(depth) {where "path similar to ?", "/\\d{1,}" * depth}
 

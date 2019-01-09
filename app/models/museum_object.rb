@@ -4,7 +4,6 @@ class MuseumObject < ApplicationRecord
 	after_initialize :set_default_values
 
   has_one :images, class_name: "MuseumObjectImageList", dependent: :destroy
-  accepts_nested_attributes_for :images
   belongs_to :excavation_site, -> { order(name: :asc) }, required: false 
   belongs_to :storage_location, required: false
   belongs_to :acquisition_delivered_by, -> { order(name: :asc) }, required: false
@@ -33,6 +32,7 @@ class MuseumObject < ApplicationRecord
 	belongs_to :main_path, class_name: "Path", required: false
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true
+  accepts_nested_attributes_for :images, :paths
   
   before_validation :set_is_used
   
@@ -175,7 +175,7 @@ class MuseumObject < ApplicationRecord
 			.map(&:paths)
 			.map(&:first)
 			.map(&:path)
-		paths = Path.where('path like any (array[?])', material_paths)
+		paths = Path.where path: material_paths
 		add_new_paths paths
 	end
 
@@ -190,12 +190,11 @@ class MuseumObject < ApplicationRecord
 	end
 
 	def material_specifieds=(material_specified_objects)
-		paths = []
-		# Note that we assume a one-to-many relationship
-		material_specified_objects.each do |object|
-			path = Path.depth(2).last_id(object.id)
-			paths << path
-		end
+		material_specified_paths = material_specified_objects
+			.map(&:paths)
+			.map(&:first)
+			.map(&:path)
+		paths = Path.where path: material_specified_paths
 		add_new_paths paths
 	end
 
@@ -261,11 +260,24 @@ class MuseumObject < ApplicationRecord
 	private
 
 	def add_new_paths paths
-		self.paths = paths.reject{|p| path_implied?(p)}
+		new_paths = []
+		paths.each do |path|
+			if path_implied?(path)
+				new_paths << implied_paths_for(path)
+			else
+				new_paths << path
+			end
+		end
+		new_paths = nil if new_paths.empty?
+		self.paths = new_paths.flatten
+	end
+
+	def implied_paths_for path
+		self.paths.select{|p| p.child_of?(path)}
 	end
 
 	def path_implied? path
-		self.paths.map{|p| p.parent_of?(path)}.reduce(:|)
+		self.paths.map{|p| p.child_of?(path)}.reduce(:|)
 	end
 
 	def set_default_values
