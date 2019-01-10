@@ -12,7 +12,7 @@ class MuseumObjectDecorator < Draper::Decorator
 
 	def materials_with_specifieds
 		result = []
-		[self.main_path].push(self.paths.to_a).flatten.each do |path|
+		[self.main_path].push(self.paths.to_a).reject(&:blank?).flatten.each do |path|
 			material_name = path.objects[0].name
 			material_specified_name = path.objects[1]&.name || "undetermined"
 			element = material_name + "(" + material_specified_name + ")"
