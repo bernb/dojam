@@ -261,6 +261,26 @@ class MuseumObject < ApplicationRecord
     self.materials.ids.include? material.id
   end
 
+	# Used in material specified view for now
+	def smart_paths
+		self.paths.or(self.main_path)
+	end
+
+	def smart_path_ids
+		ids = self.path_ids
+		ids << self.main_path_id
+		return ids
+	end
+
+	def smart_path_ids=(ids)
+		paths = Path.find ids.reject(&:blank?)
+		self.smart_paths = paths
+	end
+
+	def smart_paths=(paths)
+		add_new_paths paths
+	end
+
 	private
 
 	def add_new_paths paths

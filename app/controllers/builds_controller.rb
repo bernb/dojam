@@ -50,19 +50,6 @@ class BuildsController < ApplicationController
 			end
 		end
 
-		if step == :step_material_specified
-			main_material_specified_id = @museum_object.main_material_specified&.id
-			found = false
-			params[:museum_object][:material_specified_ids].each do |ms_id|
-				if main_material_specified_id.to_s == ms_id
-					found = true
-				end
-			end
-			if !found
-				@museum_object.main_path = nil
-			end
-		end
-
 		if step == :step_kind_of_object
 			ms = MaterialSpecified.find params[:museum_object][:main_material_specified_id]
 			material = ms.material
@@ -346,7 +333,9 @@ class BuildsController < ApplicationController
                                           excavation_site_attributes: [:id, :_destroy],
                                           images_attributes: [:id, :main, list: []],
 																					material_ids: [],
-																					material_specified_ids: []
+																					material_specified_ids: [],
+																					smart_paths: [],
+																					smart_path_ids: []
     end                                
   end
   
