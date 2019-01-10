@@ -15,6 +15,10 @@ class Path < ApplicationRecord
 		return Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id}/#{koos_id}"
 	end
 
+	def last_object_name
+		self.objects.last.name
+	end
+
 	def to_depth depth
 		if self.depth <= depth
 			return self

@@ -1,7 +1,7 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
     <%= simple_form_for @museum_object, url: wizard_path do |f| %>
       <% @museum_object.materials.each do |m| %>
-				<%= f.input :material_specified_ids, collection: m.material_specifieds, label: m.name,  include_blank: false, as: :check_boxes %>
+				<%= f.input :smart_path_ids, collection: Path.where("path similar to ?", "/#{m.id}/\\d{1,}").sort_by{|p| p.last_object_name}, label_method: lambda{|p| p.objects.last.name}, label: m.name, as: :check_boxes %>
       <% end %>
       <%= f.button :submit, "next step" %>
     <% end %>
