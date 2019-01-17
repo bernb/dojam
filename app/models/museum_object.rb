@@ -25,14 +25,15 @@ class MuseumObject < ApplicationRecord
   belongs_to :excavation_site_kind, required: false
   belongs_to :excavation_site_category, required: false
 	belongs_to :priority, required: false
+	belongs_to :m_path, class_name: "Path", foreign_key: "main_path_id", required: false
 	has_many :museum_object_paths
-	has_many :paths, through: :museum_object_paths
+	has_many :s_paths, class_name: "Path",  through: :museum_object_paths, source: :path
 	has_many :color_museum_objects
 	has_many :colors, through: :color_museum_objects
-	belongs_to :main_path, class_name: "Path", required: false
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true
-  accepts_nested_attributes_for :images, :paths
+  accepts_nested_attributes_for :images, :s_paths
+#	private :s_paths, :s_paths=, :s_path_ids, :s_path_ids=, :m_path, :m_path=
   
   before_validation :set_is_used
   
@@ -73,7 +74,8 @@ class MuseumObject < ApplicationRecord
 
 	########################
 	# m/ms/koo/koos getter #
-	# ######################
+	########################
+	
 	def main_material
 		# Note there is the safe navigation version of objects[2]
 		self.main_path&.objects&.[](0)
@@ -108,59 +110,6 @@ class MuseumObject < ApplicationRecord
 		self.kind_of_object_specified&.id
 	end
 
-	########################
-	# m/ms/koo/koos setter #
-	########################
-	
-	def main_material_id= m_id
-		if self.main_path.present?
-			self.paths << self.main_path.to_depth(2)
-		end
-		path = Path.depth(1).last_id(m_id).first
-		self.main_path = path
-	end
-	
-	def main_material= material
-		self.main_material_id = material.id
-	end
-
-	def main_material_specified_id= ms_id
-		m_id = self.main_path.objects[0].id.to_s
-		path = Path.find_by path: "/#{m_id}/#{ms_id.to_s}"
-		self.main_path = path
-	end
-
-	def main_material_specified= material_specified
-		self.main_materal_specified_id = material_specified.id
-	end
-
-	def kind_of_object_id= koo_id
-		objects = self.main_path.objects
-		m_id = objects[0].id.to_s
-		ms_id = objects[1].id.to_s
-		path = Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id.to_s}"
-		self.paths.delete path.parent
-		self.main_path = path
-	end
-
-	def kind_of_object= kind_of_object
-		self.kind_of_object_id = kind_of_object.id
-	end
-
-	def kind_of_object_specified_id= koos_id
-		objects = self.main_path.objects
-		m_id = objects[0].id.to_s
-		ms_id = objects[1].id.to_s
-		koo_id = objects[2].id.to_s
-		path = Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id}/#{koos_id.to_s}"
-		self.main_path = path
-	end
-
-	def kind_of_object_specified= kind_of_object_specified
-		self.kind_of_object_specified_id = kind_of_object_specified.id
-	end
-
-
 
 	def materials
 		paths_objects_for 1
@@ -174,32 +123,8 @@ class MuseumObject < ApplicationRecord
 		return ids
 	end
 
-	def materials=(material_objects)
-		material_paths = material_objects
-			.map(&:paths)
-			.map(&:first)
-			.map(&:path)
-		paths = Path.where path: material_paths
-		add_new_paths paths
-	end
-
-	def material_ids=(material_object_ids)
-		material_object_ids = material_object_ids.reject{|m| m.blank?}
-		material_objects = Material.find material_object_ids
-		self.materials = material_objects
-	end
-
 	def material_specifieds
 		paths_objects_for 2
-	end
-
-	def material_specifieds=(material_specified_objects)
-		material_specified_paths = material_specified_objects
-			.map(&:paths)
-			.map(&:first)
-			.map(&:path)
-		paths = Path.where path: material_specified_paths
-		add_new_paths paths
 	end
 
 	def material_specified_ids
@@ -210,10 +135,49 @@ class MuseumObject < ApplicationRecord
 		return ids
 	end
 
-	def material_specified_ids=(material_specified_object_ids)
-		material_specified_object_ids = material_specified_object_ids.reject{|m| m.blank?}
-		material_specified_objects = MaterialSpecified.find material_specified_object_ids
-		self.material_specifieds = material_specified_objects
+	########################
+	##### path methods #####
+	########################
+	
+	def paths
+		paths = Path.none
+		if m_path.present?
+			paths = Path.where id: m_path.id
+		end
+		if s_paths.present?
+			paths = paths.or(Path.where id: s_path_ids)
+		end
+		return paths
+	end
+
+	def secondary_paths=(paths)
+		s_paths = paths
+	end
+
+	def secondary_paths
+		s_paths
+	end
+
+	def secondary_path_ids
+		s_path_ids
+	end
+
+	def secondary_path_ids=(ids)
+		s_path_ids = ids
+	end
+
+	def main_path=(path)
+	end
+
+	def main_path
+		m_path
+	end
+
+	def main_path_id=(id)
+	end
+
+	def main_path_id
+		m_path_id
 	end
 
 	def acquisition_date
