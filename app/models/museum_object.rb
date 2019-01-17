@@ -27,13 +27,19 @@ class MuseumObject < ApplicationRecord
 	belongs_to :priority, required: false
 	belongs_to :m_path, class_name: "Path", foreign_key: "main_path_id", required: false
 	has_many :museum_object_paths
-	has_many :s_paths, class_name: "Path",  through: :museum_object_paths, source: :path
+	# public getter secondary_paths calls s_paths<< implicitly and must be overwritten here
+	has_many :s_paths, class_name: "Path",  through: :museum_object_paths, source: :path do
+		def <<(values)
+			values = proxy_association.owner.exclude_parent_and_same(values)
+			super values
+		end
+	end
 	has_many :color_museum_objects
 	has_many :colors, through: :color_museum_objects
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true
   accepts_nested_attributes_for :images, :s_paths
-#	private :s_paths, :s_paths=, :s_path_ids, :s_path_ids=, :m_path, :m_path=
+	private :s_paths, :s_paths=, :s_path_ids, :s_path_ids=, :m_path, :m_path=
   
   before_validation :set_is_used
   
@@ -151,7 +157,30 @@ class MuseumObject < ApplicationRecord
 	end
 
 	def secondary_paths=(paths)
-		s_paths = paths
+		is_parent = false
+		paths_to_add = exclude_parent_and_same(paths)
+		s_paths = paths_to_add
+	end
+
+	def exclude_parent_and_same(paths)
+		new_paths = []
+		# Little trick to allow for single path and also multiple paths as array
+		[paths].flatten.each do |path|
+			if path.parent_of?(main_path) || path == main_path
+				is_parent = true
+			end
+			secondary_paths.each do |s_path|
+				if path.parent_of?(s_path) || path == s_path
+					is_parent = true
+				end
+			end
+			if is_parent
+				next
+			else
+				new_paths << path
+			end
+		end
+		return new_paths
 	end
 
 	def secondary_paths
@@ -163,7 +192,6 @@ class MuseumObject < ApplicationRecord
 	end
 
 	def secondary_path_ids=(ids)
-		s_path_ids = ids
 	end
 
 	def main_path=(path)
