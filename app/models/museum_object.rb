@@ -154,15 +154,25 @@ class MuseumObject < ApplicationRecord
 		return paths
 	end
 
-	def secondary_paths=(paths)
-		paths = exclude_parent_and_same(paths)
-		super paths
+	def secondary_paths=(new_paths)
+		includes_parent_of_main = false
+		new_paths.clone.each do |new_path|
+			if new_path.parent_of?(self.main_path)
+				new_paths.delete(new_path)
+				includes_parent_of_main = true
+			elsif path_implied?(new_path)
+				new_paths.delete(new_path)
+				new_paths << implied_paths_for(new_path)
+			end
+		end
+		super new_paths
 	end
 
 
 	def secondary_path_ids=(ids)
+		ids = ids.reject(&:empty?)
 		paths = Path.find(ids)
-		secondary_paths = paths
+		self.secondary_paths = paths
 	end
 
 	def main_path=(path)
