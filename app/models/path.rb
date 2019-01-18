@@ -5,6 +5,10 @@ class Path < ApplicationRecord
 	has_many :museum_objects, through: :museum_object_paths
 	scope :last_id, ->(id) {where "path like ?", "%/#{id}"}
 	scope :depth, ->(depth) {where "path similar to ?", "/\\d{1,}" * depth}
+	scope :materials, ->{depth(1)}
+	scope :material_specifieds, ->{depth(2)}
+	scope :kind_of_objects, ->{depth(3)}
+	scope :kind_of_object_specifieds, ->{depth(4)}
 
 	def self.undetermined_path
 		m_id = Material.find_by(name: "undetermined").id.to_s
