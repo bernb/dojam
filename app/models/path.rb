@@ -5,10 +5,13 @@ class Path < ApplicationRecord
 	has_many :museum_objects, through: :museum_object_paths
 	scope :last_id, ->(id) {where "path like ?", "%/#{id}"}
 	scope :depth, ->(depth) {where "path similar to ?", "/\\d{1,}" * depth}
-	scope :materials, ->{depth(1)}
-	scope :material_specifieds, ->{depth(2)}
-	scope :kind_of_objects, ->{depth(3)}
-	scope :kind_of_object_specifieds, ->{depth(4)}
+	scope :default_order, -> {joins(:termlists)
+		.order(Arel.sql("termlists.name = 'undetermined'"))
+		.order(Arel.sql('termlists.name'))}
+	scope :materials, ->{depth(1).default_order}
+	scope :material_specifieds, ->{depth(2).default_order}
+	scope :kind_of_objects, ->{depth(3).default_order}
+	scope :kind_of_object_specifieds, ->{depth(4).default_order}
 
 	def self.undetermined_path
 		m_id = Material.find_by(name: "undetermined").id.to_s
@@ -46,12 +49,17 @@ class Path < ApplicationRecord
 		Path.where("path SIMILAR TO ?", path_name)
 	end
 
-	def parent_of? other_path
-		if other_path.nil?
+	def parent_of? other_paths
+		if other_paths.blank?
 			return false
 		end
-		other_path.path.starts_with?(self.path) &&
-			other_path.depth > self.depth
+		is_parent = false
+		[other_paths].flatten.each do |other_path|
+			is_parent = is_parent ||
+				other_path.path.starts_with?(self.path) &&
+				other_path.depth > self.depth
+		end
+		return is_parent
 	end
 
 	def child_of? other_path

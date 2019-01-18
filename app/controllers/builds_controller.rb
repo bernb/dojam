@@ -36,18 +36,6 @@ class BuildsController < ApplicationController
     end
 
 		if step == :step_material
-			# Check if now selected materials are consistent with main_material
-			# If selected materials do not match earlier selected main_material, delete main_path
-			main_material_id = @museum_object.main_material&.id
-			found = false
-			params[:museum_object][:material_ids].reject(&:blank?).each do |m_id|
-				if main_material_id.to_s == m_id
-					found = true
-				end
-			end
-			if !found
-				@museum_object.main_path = nil
-			end
 		end
 
 		if step == :step_kind_of_object
@@ -174,7 +162,9 @@ class BuildsController < ApplicationController
 	end
 
 	def step_material_vars
-    @materials = Material.all
+		@material_paths = Path.materials
+		paths = @museum_object.paths
+		@checked_materials = @material_paths.select{|p| p.parent_of?(paths) || paths.include?(p)}.map(&:id)
 	end
 
 	def step_museum_vars
@@ -334,8 +324,7 @@ class BuildsController < ApplicationController
                                           images_attributes: [:id, :main, list: []],
 																					material_ids: [],
 																					material_specified_ids: [],
-																					smart_paths: [],
-																					smart_path_ids: []
+																					secondary_path_ids: []
     end                                
   end
   

@@ -1,6 +1,6 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-		<%= f.input :material_ids, as: :check_boxes, label: false, collection: Material.all %>
+		<%= f.input :secondary_path_ids, as: :check_boxes, label: false, collection: @material_paths, label_method: :last_object_name, checked: @checked_materials %>
     <%= f.button :submit, "next step" %>
   <% end %>
 <% end %>
