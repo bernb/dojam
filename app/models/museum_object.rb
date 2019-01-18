@@ -145,11 +145,11 @@ class MuseumObject < ApplicationRecord
 	
 	def paths
 		paths = Path.none
-		if m_path.present?
-			paths = Path.where id: m_path.id
+		if main_path.present?
+			paths = Path.where id: main_path.id
 		end
-		if s_paths.present?
-			paths = paths.or(Path.where id: s_path_ids)
+		if secondary_paths.present?
+			paths = paths.or(Path.where id: secondary_path_ids)
 		end
 		return paths
 	end
@@ -257,8 +257,8 @@ class MuseumObject < ApplicationRecord
 			if path.parent_of?(main_path) || path == main_path
 				is_parent = true
 			end
-			secondary_paths.each do |s_path|
-				if path.parent_of?(s_path) || path == s_path
+			secondary_paths.each do |secondary_path|
+				if path.parent_of?(secondary_path) || path == secondary_path
 					is_parent = true
 				end
 			end
