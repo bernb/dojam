@@ -25,10 +25,9 @@ class MuseumObject < ApplicationRecord
   belongs_to :excavation_site_kind, required: false
   belongs_to :excavation_site_category, required: false
 	belongs_to :priority, required: false
-	belongs_to :m_path, class_name: "Path", foreign_key: "main_path_id", required: false
+	belongs_to :main_path, class_name: "Path", required: false
 	has_many :museum_object_paths
-	# public getter secondary_paths calls s_paths<< implicitly and must be overwritten here
-	has_many :s_paths, class_name: "Path",  through: :museum_object_paths, source: :path do
+	has_many :secondary_paths, class_name: "Path",  through: :museum_object_paths, source: :path do
 		def <<(values)
 			values = proxy_association.owner.exclude_parent_and_same(values)
 			super values
@@ -38,8 +37,7 @@ class MuseumObject < ApplicationRecord
 	has_many :colors, through: :color_museum_objects
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true
-  accepts_nested_attributes_for :images, :s_paths
-	private :s_paths, :s_paths=, :s_path_ids, :s_path_ids=, :m_path, :m_path=
+  accepts_nested_attributes_for :images, :secondary_paths
   
   before_validation :set_is_used
   
@@ -157,55 +155,31 @@ class MuseumObject < ApplicationRecord
 	end
 
 	def secondary_paths=(paths)
-		is_parent = false
-		paths_to_add = exclude_parent_and_same(paths)
-		s_paths = paths_to_add
+		paths = exclude_parent_and_same(paths)
+		super paths
 	end
 
-	def exclude_parent_and_same(paths)
-		new_paths = []
-		# Little trick to allow for single path and also multiple paths as array
-		[paths].flatten.each do |path|
-			if path.parent_of?(main_path) || path == main_path
-				is_parent = true
-			end
-			secondary_paths.each do |s_path|
-				if path.parent_of?(s_path) || path == s_path
-					is_parent = true
-				end
-			end
-			if is_parent
-				next
-			else
-				new_paths << path
-			end
-		end
-		return new_paths
-	end
-
-	def secondary_paths
-		s_paths
-	end
-
-	def secondary_path_ids
-		s_path_ids
-	end
 
 	def secondary_path_ids=(ids)
+		paths = Path.find(ids)
+		secondary_paths = paths
 	end
 
 	def main_path=(path)
-	end
-
-	def main_path
-		m_path
+		if secondary_paths.include?(path)
+			secondary_paths.delete(path)
+		else
+		 	parent = secondary_paths.find{|p| p.parent_of?(path)}
+			if parent.present?
+				secondary_paths.delete(parent)
+			end
+		end
+		super path
 	end
 
 	def main_path_id=(id)
-	end
-
-	def main_path_id
-		m_path_id
+		path = Path.find(id)
+		main_path = path
 	end
 
 	def acquisition_date
@@ -274,6 +248,28 @@ class MuseumObject < ApplicationRecord
 	end
 
 	private
+
+	def exclude_parent_and_same(paths)
+		is_parent = false
+		new_paths = []
+		# Little trick to allow for single path and also multiple paths as array
+		[paths].flatten.each do |path|
+			if path.parent_of?(main_path) || path == main_path
+				is_parent = true
+			end
+			secondary_paths.each do |s_path|
+				if path.parent_of?(s_path) || path == s_path
+					is_parent = true
+				end
+			end
+			if is_parent
+				next
+			else
+				new_paths << path
+			end
+		end
+		return new_paths
+	end
 
 	def add_new_paths paths
 		new_paths = []
