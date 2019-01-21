@@ -9,6 +9,7 @@ class Path < ApplicationRecord
 		.order(Arel.sql("termlists.name = 'undetermined'"))
 		.order(Arel.sql('termlists.name'))}
 	scope :materials, ->{depth(1).default_order}
+	scope :material_id, ->(id){where "path like ?", "%/#{id}%"}
 	scope :material_specifieds, ->{depth(2).default_order}
 	scope :kind_of_objects, ->{depth(3).default_order}
 	scope :kind_of_object_specifieds, ->{depth(4).default_order}
@@ -47,6 +48,10 @@ class Path < ApplicationRecord
 	def direct_children
 		path_name = self.path + "/\\d{1,}"
 		Path.where("path SIMILAR TO ?", path_name)
+	end
+
+	def included_or_parent_of? other_paths
+		return parent_of?(other_paths) || other_paths.include?(self)
 	end
 
 	def parent_of? other_paths
