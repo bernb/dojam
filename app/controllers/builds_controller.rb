@@ -39,11 +39,6 @@ class BuildsController < ApplicationController
 		end
 
 		if step == :step_kind_of_object
-			ms = MaterialSpecified.find params[:museum_object][:main_material_specified_id]
-			material = ms.material
-			@museum_object.main_material_id = material.id
-			@museum_object.main_material_specified_id = params[:museum_object][:main_material_specified_id]
-			@museum_object.kind_of_object_id = params[:museum_object][:kind_of_object_id]
 		end
     
     if @museum_object.valid? && allow_next_step
@@ -195,8 +190,21 @@ class BuildsController < ApplicationController
 	end
 
 	def step_kind_of_object_vars
-    material_specifieds_ids = @museum_object.material_specified_ids # get ids for choosen spec. materials
-    @kind_of_objects = [] # note that nil results in 'Yes/No' selection in view..
+		@material_with_specified_paths = {}
+		@museum_object.materials.each do |m|
+			@material_with_specified_paths[m.name] = m.paths.map{|p| p.to_depth(2)}.select{|p| p.depth == 2}.select{|p| p.child_of?(m.paths.first)}
+		end
+		@selected_material_specified = @museum_object.main_path&.to_depth(2)
+		@selected_koo_path = nil
+		case @museum_object.main_path&.depth
+		when 2 
+			@koo_paths = @museum_object.main_path.children
+		when 3..4
+			@koo_paths = @museum_object.main_path.to_depth(2).children
+			@selected_koo_path = @museum_object.main_path&.to_depth(3)
+		else
+			@koo_paths = []
+		end
 	end
 
 	def step_kind_of_object_specified_vars

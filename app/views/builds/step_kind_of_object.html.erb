@@ -1,20 +1,11 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
 	<%= simple_form_for @museum_object, data: {parsley_validate: ""}, url: wizard_path do |f| %>
     <h4>primary material</h4>
-      <% @museum_object.materials.each do |material| %>
-        <div><%= material.name %></div>
-        <ul class="list-group">
-          <% material.material_specifieds.each do |spec_material| %>
-						<% if spec_material.in? @museum_object.material_specifieds %>
-							<li class="list-group-item">
-								<label>
-									<%= f.radio_button :main_material_specified_id,  spec_material.id %>
-									<%= spec_material.name %>
-								</label>
-							</li>
-							<% end # if spec_material in museum_object ms %>
-          <% end %>
-        </ul>
+      <% @material_with_specified_paths.keys.each do |material_name| %>
+				<div>
+					<%= material_name %>
+				</div>
+				<%= f.input :main_ms_dummy, collection: @material_with_specified_paths[material_name], label: false, as: :radio_buttons, include_blank: false %>
       <% end %>
       </br>
     <h4>kind of object</h4>
