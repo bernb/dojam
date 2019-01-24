@@ -1,16 +1,25 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
 	<%= simple_form_for @museum_object, data: {parsley_validate: ""}, url: wizard_path do |f| %>
-    <h4>primary material</h4>
-      <% @material_with_specified_paths.keys.each do |material_name| %>
-				<div>
-					<%= material_name %>
-				</div>
-				<%= f.input :main_ms_dummy, collection: @material_with_specified_paths[material_name], label: false, as: :radio_buttons, include_blank: false %>
-      <% end %>
-      </br>
-    <h4>kind of object</h4>
+		<h4>primary material</h4>
+		<% @material_with_specified_paths.keys.each do |material_name| %>
+			<div>
+				<%= material_name %>
+			</div>
+			<ul class="list-group">
+				<% @material_with_specified_paths[material_name].each do |ms_path| %>
+					<li class="list-group-item">
+						<label>
+							<%= radio_button :main_material_specified_path_dummy, :main_material_specified_path_dummy, '', checked: false %>
+							<%= ms_path.last_object_name %>
+						</label>
+					</li>
+			</ul>
+			<% end %>
+		<% end %>
+		</br>
+		<h4>kind of object</h4>
 		<%= f.input :kind_of_object_id, collection: @kind_of_objects, label: false, as: :collection_select, include_blank: true, required: true   %>
-    <%= f.button :submit, "next step" %>
-  <% end %>
+		<%= f.button :submit, "next step" %>
+	<% end %>
 <% end %>
 
