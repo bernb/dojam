@@ -192,7 +192,12 @@ class BuildsController < ApplicationController
 	def step_kind_of_object_vars
 		@material_with_specified_paths = {}
 		@museum_object.materials.each do |m|
-			@material_with_specified_paths[m.name] = m.paths.map{|p| p.to_depth(2)}.select{|p| p.depth == 2}.select{|p| p.child_of?(m.paths.first)}
+			@material_with_specified_paths[m.name] = m.paths
+				.first
+				.direct_children
+				.map{|p| p.to_depth(2)}
+				.select{|p| p.depth == 2}
+				.select{|p| p.included_or_parent_of? @museum_object.paths}
 		end
 		@selected_material_specified = @museum_object.main_path&.to_depth(2)
 		@selected_koo_path = nil
@@ -200,7 +205,7 @@ class BuildsController < ApplicationController
 		when 2 
 			@koo_paths = @museum_object.main_path.children
 		when 3..4
-			@koo_paths = @museum_object.main_path.to_depth(2).children
+			@koo_paths = @museum_object.main_path.to_depth(2).direct_children
 			@selected_koo_path = @museum_object.main_path&.to_depth(3)
 		else
 			@koo_paths = []
