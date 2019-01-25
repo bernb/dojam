@@ -1,0 +1,13 @@
+<% if @kind_of_objects.present? %>
+	$('#museum_object_kind_of_object_id').empty();
+	$('#museum_object_kind_of_object_id').append($('<option value=""></option>'));
+	<% @kind_of_objects.each do |kind| %>
+		$('#museum_object_kind_of_object_id').append($('\
+			<option value="<%= kind.id %>"> \
+			<%= kind.name %> \
+			</option>'));
+	<% end %>
+	<% if @choosen_kind_of_object_id.present? %>
+		$('#museum_object_kind_of_object_id').val(<%= @choosen_kind_of_object_id %>);
+	<% end %>
+<% end %>

@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   get 'builds/storagess', to: "builds#storages"
   get 'builds/storage_locations', to: "builds#storage_locations"
   get 'builds/excavation_site_kinds', to: "builds#excavation_site_kinds"
-  get 'builds/kind_of_objects_for_spec_material', to: "builds#kind_of_objects_for_spec_material"
+  get 'builds/kind_of_objects_for_spec_material_path', to: "builds#kind_of_objects_for_spec_material_path"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
