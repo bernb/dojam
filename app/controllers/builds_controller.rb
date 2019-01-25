@@ -199,7 +199,7 @@ class BuildsController < ApplicationController
 				.select{|p| p.depth == 2}
 				.select{|p| p.included_or_parent_of? @museum_object.paths}
 		end
-		@selected_material_specified = @museum_object.main_path&.to_depth(2)
+		@main_material_specified_path = @museum_object.main_path&.to_depth(2)
 		@selected_koo_path = nil
 		case @museum_object.main_path&.depth
 		when 2 

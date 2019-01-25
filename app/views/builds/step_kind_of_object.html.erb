@@ -9,7 +9,7 @@
 				<% @material_with_specified_paths[material_name].each do |ms_path| %>
 					<li class="list-group-item">
 						<label>
-							<%= radio_button :main_material_specified_path_dummy, :main_material_specified_path_dummy, '', checked: false %>
+							<%= radio_button :main_material_specified_path_dummy, :main_material_specified_path_dummy, '', checked: ms_path == @main_material_specified_path %>
 							<%= ms_path.last_object_name %>
 						</label>
 					</li>
