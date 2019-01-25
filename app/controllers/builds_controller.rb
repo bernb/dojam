@@ -185,7 +185,7 @@ class BuildsController < ApplicationController
 			@material_specified_paths[m.name] = Path.material_specifieds.material_id(m.id).to_a
 		end
 		paths = @museum_object.paths
-		@checked_material_specified_paths = @material_specified_paths.values.flatten.select{|p| p.included_or_parent_of? paths}
+		@checked_material_specified_paths = @material_specified_paths.values.flatten.select{|p| p.included_or_parent_of? paths}.map(&:id)
 	end
 
 	def step_kind_of_object_vars
