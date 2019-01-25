@@ -192,6 +192,21 @@ class MuseumObject < ApplicationRecord
 		self.main_path = path
 	end
 
+	# For simplicify, we keep a kind of object specified
+	# setter for now
+	def kind_of_object_specified=(koos)
+		new_path = self.main_path
+			.to_depth(3)
+			.direct_children
+			.find{|p| p.objects.last == koos}
+		self.main_path = new_path unless new_path.blank?
+	end
+
+	def kind_of_object_specified_id=(koos_id)
+		koos = KindOfObjectSpecified.find koos_id
+		self.kind_of_object_specified = koos
+	end
+
 	def acquisition_date
 		return nil unless self.acquisition_year.present?
 		date_parse_string = self.acquisition_year.to_s
