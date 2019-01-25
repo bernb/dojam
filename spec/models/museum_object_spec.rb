@@ -31,7 +31,21 @@ RSpec.describe MuseumObject, type: :model do
 		end
 	end
 
-	it "should move old main path information to secondary paths if new main path set"
+	it "should move old main path information to secondary paths if new main path set" do
+		main_paths = Path.depth(4).sample(2)
+		expect(main_paths).to be_present
+		old_main = main_paths.first
+		new_main = main_paths.last
+		museum_object.main_path = old_main
+		museum_object.main_path = new_main
+		expect(museum_object.main_path).to eq(new_main)
+		expect(museum_object.secondary_paths).to include(old_main.parent)
+	end
+
+
+
+
+
 	it "should use parent paths if tried to set secondary paths of depth > 2"
 	it "should replace entries of a collection of secondary paths with more specific already existing paths"
 	it "should ignore if tried to add existing main path to secondary paths"
