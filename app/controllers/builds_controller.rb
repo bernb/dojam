@@ -85,16 +85,16 @@ class BuildsController < ApplicationController
   
   def kind_of_objects_for_spec_material_path
     respond_to do |format|
-      format.js {
+      format.js do
 				# Check for parameter as it does not exist on first visit
 				if params[:selected_material_specified_path_id].present?
 					path = Path.find params[:selected_material_specified_path_id]
-					@kind_of_objects = path.direct_children.map{|p| p.objects.last}
+					@kind_of_object_paths = path.direct_children
 					museum_object = MuseumObject.find params[:museum_object_id]
 					# Used to select the correct entry if one was choosen before
-					@choosen_kind_of_object_id = museum_object.kind_of_object&.id
+					@selected_kind_of_object_path = museum_object.main_path.to_depth(3)
 				end
-      }
+			end
     end
   end
   
@@ -199,15 +199,15 @@ class BuildsController < ApplicationController
 				.select{|p| p.included_or_parent_of? @museum_object.paths}
 		end
 		@main_material_specified_path = @museum_object.main_path&.to_depth(2)
-		@selected_koo_path = nil
+		@selected_kind_of_object_path = nil
 		case @museum_object.main_path&.depth
 		when 2 
-			@koo_paths = @museum_object.main_path.children
+			@kind_of_object_paths = @museum_object.main_path.children
 		when 3..4
-			@koo_paths = @museum_object.main_path.to_depth(2).direct_children
-			@selected_koo_path = @museum_object.main_path&.to_depth(3)
+			@kind_of_object_paths = @museum_object.main_path.to_depth(2).direct_children
+			@selected_kind_of_object_path = @museum_object.main_path&.to_depth(3)
 		else
-			@koo_paths = []
+			@kind_of_object_paths = []
 		end
 	end
 
@@ -333,7 +333,7 @@ class BuildsController < ApplicationController
 																					:acquisition_year, :acquisition_month, :acquisition_day, :acquisition_date_unknown,
 																					:is_dating_period_unknown, :is_dating_millennium_unknown, :dating_century_begin_id, :dating_century_end_id,
 																				 	:is_dating_century_unknown, :is_dating_timespan_unknown,
-																					:max_length, :max_width, :height, :opening_dm, :bottom_dm, :max_dm, :weight_in_gram,
+																					:max_length, :max_width, :height, :opening_dm, :bottom_dm, :max_dm, :weight_in_gram, :main_path_id,
                                           images: [],
                                           dating_century_ids: [],
                                           color_ids: [],                                   

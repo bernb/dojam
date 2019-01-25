@@ -189,7 +189,7 @@ class MuseumObject < ApplicationRecord
 
 	def main_path_id=(id)
 		path = Path.find(id)
-		main_path = path
+		self.main_path = path
 	end
 
 	def acquisition_date
