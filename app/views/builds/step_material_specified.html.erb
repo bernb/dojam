@@ -4,7 +4,7 @@
 				<div>
 					<%= m.name %>
 				</div>
-				<%= f.input :secondary_path_ids, as: :check_boxes, label: false, collection: @material_specified_paths[m.name], label_method: :last_object_name, checked: @checked_material_specifieds %>
+				<%= f.input :secondary_path_ids, as: :check_boxes, label: false, collection: @material_specified_paths[m.name], label_method: :last_object_name, checked: @checked_material_specified_paths %>
       <% end %>
       <%= f.button :submit, "next step" %>
     <% end %>
