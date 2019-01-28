@@ -51,6 +51,7 @@ class Path < ApplicationRecord
 	end
 
 	def included_or_parent_of? other_paths
+		return false unless other_paths.present?
 		return parent_of?(other_paths) || other_paths.include?(self)
 	end
 
