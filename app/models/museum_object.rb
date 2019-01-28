@@ -30,7 +30,7 @@ class MuseumObject < ApplicationRecord
 	has_many :secondary_paths, class_name: "Path",  through: :museum_object_paths, source: :path do
 		def <<(values)
 			values = proxy_association.owner.exclude_parent_and_same(values)
-			super values
+			super values.map{|p| p.to_depth(2)}
 		end
 	end
 	has_many :color_museum_objects
@@ -156,17 +156,27 @@ class MuseumObject < ApplicationRecord
 
 	def secondary_paths=(new_paths)
 		includes_parent_of_main = false
+		# Allow for single path and array of paths
+		new_paths = [new_paths].flatten
 		new_paths.clone.each do |new_path|
-			if new_path.parent_of?(self.main_path)
+			# We ignore paths, that are already implied in the main path
+			if new_path.included_or_parent_of?(self.main_path)
 				new_paths.delete(new_path)
 				includes_parent_of_main = true
 			elsif path_implied?(new_path)
 				new_paths.delete(new_path)
-				new_paths << implied_paths_for(new_path)
+				new_paths += implied_paths_for(new_path)
 			end
 		end
-		super new_paths
+		secondary_paths.delete_all
+		secondary_paths << new_paths.uniq
 	end
+
+#def secondary_paths=(new_paths)
+#	# Keep paths that are more specific than given ones
+#	self.secondary_paths.delete_all
+#	self.secondary_paths << new_paths
+#end
 
 
 	def secondary_path_ids=(ids)
@@ -183,6 +193,11 @@ class MuseumObject < ApplicationRecord
 			if parent.present?
 				secondary_paths.delete(parent)
 			end
+		end
+		if main_path.present?
+			new_secondary_path = main_path.to_depth(2)
+			super path
+			secondary_paths << new_secondary_path
 		end
 		super path
 	end
@@ -272,8 +287,6 @@ class MuseumObject < ApplicationRecord
 		add_new_paths paths
 	end
 
-	private
-
 	def exclude_parent_and_same(paths)
 		is_parent = false
 		new_paths = []
@@ -295,6 +308,8 @@ class MuseumObject < ApplicationRecord
 		end
 		return new_paths
 	end
+
+	private
 
 	def add_new_paths paths
 		new_paths = []
