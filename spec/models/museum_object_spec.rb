@@ -79,6 +79,7 @@ RSpec.describe MuseumObject, type: :model do
 			museum_object.secondary_paths = path
 			expect(museum_object.secondary_paths.first).to eq(path.to_depth(2))
 		end
+
 		it "should ignore entries of a collection of secondary paths with more specific already existing paths" do
 			museum_object = create(:museum_object)
 			paths = Path.depth(2).sample(5)
@@ -90,8 +91,14 @@ RSpec.describe MuseumObject, type: :model do
 			expect(museum_object.secondary_paths.map(&:path).sort).to eq(paths.map(&:path).sort)
 		end
 
+		it "should ignore if tried to add existing (or implied) main path to secondary paths" do
+			museum_object = create(:museum_object)
+			main_path = Path.depth(4).sample
+			museum_object.main_path = main_path
+			museum_object.secondary_paths << main_path
+			expect(museum_object.secondary_paths.count).to eq(0)
+			museum_object.secondary_paths << main_path.parent
+			expect(museum_object.secondary_paths.count).to eq(0)
+		end
 
-		it "should ignore if tried to add existing main path to secondary paths"
-		it "should only keep most specific secondary paths if new collection is added"
-	end
 end
