@@ -114,6 +114,13 @@ class MuseumObject < ApplicationRecord
 		self.kind_of_object_specified&.id
 	end
 
+	def secondary_materials
+		secondary_paths&.map(&:objects)&.[](0)
+	end
+
+	def secondary_material_specifieds
+		secondary_paths&.map(&:objects)&.[](1)
+	end
 
 	def materials
 		paths_objects_for 1
