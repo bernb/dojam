@@ -7,7 +7,7 @@ RSpec.describe Path, type: :model do
 	end
 
 	it "should return correct value if asked if instance is included or parent of array or single instance" do
-		path = Path.all.sample
+		path = Path.depth(3).sample
 		children = path.direct_children
 		child = children.first
 		expect(path.included_or_parent_of?(child)).to be(true)
