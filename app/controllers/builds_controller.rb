@@ -92,7 +92,7 @@ class BuildsController < ApplicationController
 					@kind_of_object_paths = path.direct_children
 					museum_object = MuseumObject.find params[:museum_object_id]
 					# Used to select the correct entry if one was choosen before
-					@selected_kind_of_object_path = museum_object.main_path.to_depth(3)
+					@selected_kind_of_object_path = museum_object.main_path&.to_depth(3)
 				end
 			end
     end
