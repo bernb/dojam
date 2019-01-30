@@ -175,6 +175,10 @@ class MuseumObject < ApplicationRecord
 				new_paths += implied_paths_for(new_path)
 			end
 		end
+		# If new paths are not consistent with choosen main path, remove it
+		if main_path.present? && !main_path.included_or_child_of?(new_paths)
+			self.main_path = nil
+		end
 		secondary_paths.delete_all
 		secondary_paths << new_paths.uniq
 	end
@@ -193,6 +197,10 @@ class MuseumObject < ApplicationRecord
 	end
 
 	def main_path=(path)
+		if path.blank?
+			super path
+			return
+		end
 		# Ignore if more specific path already set
 		if path.parent_of? main_path
 			return
