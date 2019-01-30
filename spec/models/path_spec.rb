@@ -10,7 +10,7 @@ RSpec.describe Path, type: :model do
 		path = Path.all.sample
 		children = path.direct_children
 		child = children.first
-		expect(path.included_or_parent_of?(child).to be(true)
+		expect(path.included_or_parent_of?(child)).to be(true)
 		expect(path.included_or_parent_of?(children).to be(true)
 	end
 end
