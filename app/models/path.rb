@@ -70,7 +70,7 @@ class Path < ApplicationRecord
 
 	def included_or_child_of? other_paths
 		return false unless other_paths.present?
-		return child_of(other_paths) || [other_paths].flatten.include(self)
+		return child_of?(other_paths) || [other_paths].flatten.include?(self)
 	end
 
 	def child_of? other_paths
