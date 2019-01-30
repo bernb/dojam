@@ -40,6 +40,22 @@ RSpec.describe MuseumObject, type: :model do
 	end
 
 	context 'with already set paths' do
+		before(:each) do
+			@museum_object = create(:museum_object)
+		end
+
+		it "should remove main path if a parent gets deselected" do
+			path = Path.depth(4).sample
+			@museum_object.main_path = path
+			expect(@museum_object.main_path).to eq(path)
+			main_material_path = path.to_depth(1)
+			material_paths = Path.depth(1)
+			material_paths -= [main_material_path]
+			expect(material_paths.include?(main_material_path)).to be(false)
+			@museum_object.secondary_paths = material_paths
+			expect(@museum_object.main_path).to eq(nil)
+		end
+
 		it "should ignore new main path if it is a parent of already set main path" do
 			museum_object = create(:museum_object)
 			path = Path.depth(4).sample
