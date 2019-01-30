@@ -68,12 +68,20 @@ class Path < ApplicationRecord
 		return is_parent
 	end
 
-	def child_of? other_path
-		if other_path.nil?
-			return false
+	def included_or_child_of? other_paths
+		return false unless other_paths.present?
+		return child_of(other_paths) || [other_paths].flatten.include(self)
+	end
+
+	def child_of? other_paths
+		return false unless other_paths.present?
+		is_child = false
+		[other_paths].flatten.each do |other_path|
+			is_child = is_child || 
+				self.path.starts_with?(other_path.path) &&
+				other_path.depth < self.depth
 		end
-		self.path.starts_with?(other_path.path) &&
-			other_path.depth < self.depth
+		return is_child
 	end
 
 	def parent
