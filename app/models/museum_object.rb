@@ -165,19 +165,20 @@ class MuseumObject < ApplicationRecord
 		includes_parent_of_main = false
 		# Allow for single path and array of paths
 		new_paths = [new_paths].flatten
-		new_paths.clone.each do |new_path|
-			# We ignore paths, that are already implied in the main path
-			if new_path.included_or_parent_of?(self.main_path)
-				new_paths.delete(new_path)
-				includes_parent_of_main = true
-			elsif path_implied?(new_path)
-				new_paths.delete(new_path)
-				new_paths += implied_paths_for(new_path)
-			end
-		end
 		# If new paths are not consistent with choosen main path, remove it
 		if main_path.present? && !main_path.included_or_child_of?(new_paths)
 			self.main_path = nil
+		else
+			# We ignore paths, that are already implied in the main path
+			new_paths.clone.each do |new_path|
+				if new_path.included_or_parent_of?(self.main_path)
+					new_paths.delete(new_path)
+					includes_parent_of_main = true
+				elsif path_implied?(new_path)
+					new_paths.delete(new_path)
+					new_paths += implied_paths_for(new_path)
+				end
+			end
 		end
 		secondary_paths.delete_all
 		secondary_paths << new_paths.uniq

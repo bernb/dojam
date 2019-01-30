@@ -44,6 +44,16 @@ RSpec.describe MuseumObject, type: :model do
 			@museum_object = create(:museum_object)
 		end
 
+		it "should keep main path if consistent with new choosen secondary paths" do
+			path = Path.depth(4).sample
+			@museum_object.main_path = path
+			expect(@museum_object.main_path).to eq(path)
+			main_material_path = path.to_depth(1)
+			@museum_object.secondary_paths = main_material_path
+			expect(@museum_object.main_path).to eq(path)
+		end
+
+
 		it "should remove main path if a parent gets deselected" do
 			path = Path.depth(4).sample
 			@museum_object.main_path = path
