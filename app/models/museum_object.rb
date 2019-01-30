@@ -193,14 +193,22 @@ class MuseumObject < ApplicationRecord
 	end
 
 	def main_path=(path)
+		# Ignore if more specific path already set
+		if path.parent_of? main_path
+			return
+		end
+		# Remove from secondary paths if found
 		if secondary_paths.include?(path)
 			secondary_paths.delete(path)
 		else
+			# Also remove if a parent was set as secondary path.
+			# So we remove /1/2/3 if /1/2/3/4 is the main path now
 		 	parent = secondary_paths.find{|p| p.parent_of?(path)}
 			if parent.present?
 				secondary_paths.delete(parent)
 			end
 		end
+		# Move old main path to secondary paths
 		if main_path.present?
 			new_secondary_path = main_path.to_depth(2)
 			super path

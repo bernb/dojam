@@ -40,6 +40,16 @@ RSpec.describe MuseumObject, type: :model do
 	end
 
 	context 'with already set paths' do
+		it "should ignore new main path if it is a parent of already set main path" do
+			museum_object = create(:museum_object)
+			path = Path.depth(4).sample
+			parent = path.parent
+			museum_object.main_path = path
+			expect(museum_object.main_path).to eq(path)
+			museum_object.main_path = parent
+			expect(museum_object.main_path).to eq(path)
+		end
+
 		it "should ignore if tried to add a parent to existing secondary paths" do
 			museum_object = create(:museum_object)
 			Path.depth(2).sample(5).each do |child|
@@ -100,5 +110,7 @@ RSpec.describe MuseumObject, type: :model do
 			museum_object.secondary_paths << main_path.parent
 			expect(museum_object.secondary_paths.count).to eq(0)
 		end
+
+	end
 
 end
