@@ -162,26 +162,29 @@ class MuseumObject < ApplicationRecord
 	end
 
 	def secondary_paths=(new_paths)
-		includes_parent_of_main = false
 		# Allow for single path and array of paths
 		new_paths = [new_paths].flatten
+
 		# If new paths are not consistent with choosen main path, remove it
 		if main_path.present? && !main_path.included_or_child_of?(new_paths)
 			self.main_path = nil
 		else
-			# We ignore paths, that are already implied in the main path
-			new_paths.clone.each do |new_path|
-				if new_path.included_or_parent_of?(self.main_path)
-					new_paths.delete(new_path)
-					includes_parent_of_main = true
-				elsif path_implied?(new_path)
-					new_paths.delete(new_path)
-					new_paths += implied_paths_for(new_path)
-				end
-			end
+			# Else remove paths, that are already implied in main path
+			new_paths = new_paths.reject{|p| p.included_or_parent_of?(self.main_path)}
 		end
-		secondary_paths.delete_all
-		secondary_paths << new_paths.uniq
+
+		# We remove paths that are already implied in secondary paths
+		# For that, we replace every path with any more specific paths and
+		# call uniq in the end
+		new_paths = new_paths
+			.map{|p| path_in_secondary_implied?(p) ? implied_secondary_paths_for(p) : p}
+			.flatten
+			.uniq
+
+		# Always map to maximum depth of 2
+		new_paths = new_paths.map{|p| p.to_depth(2)}
+		
+		super new_paths
 	end
 
 #def secondary_paths=(new_paths)
@@ -360,6 +363,14 @@ class MuseumObject < ApplicationRecord
 
 	def path_implied? path
 		self.paths.map{|p| p.child_of?(path)}.reduce(:|)
+	end
+
+	def implied_secondary_paths_for path
+		self.secondary_paths.select{|p| p.included_or_child_of?(path)}
+	end
+
+	def path_in_secondary_implied? path
+		self.secondary_paths.map{|p| p.included_or_child_of?(path)}.reduce(:|)
 	end
 
 	def set_default_values
