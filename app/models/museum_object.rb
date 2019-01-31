@@ -170,7 +170,10 @@ class MuseumObject < ApplicationRecord
 			self.main_path = nil
 		else
 			# Else remove paths, that are already implied in main path
-			new_paths = new_paths.reject{|p| p.included_or_parent_of?(self.main_path)}
+			# but not implied by any secondary paths
+			new_paths = new_paths.reject{|p| 
+				p.included_or_parent_of?(self.main_path) && 
+					!path_in_secondary_implied?(p)}
 		end
 
 		# We remove paths that are already implied in secondary paths
