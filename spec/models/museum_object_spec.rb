@@ -44,6 +44,14 @@ RSpec.describe MuseumObject, type: :model do
 			@museum_object = create(:museum_object)
 		end
 
+		it "should not lose secondary paths if new paths of lower depth gets newly selected" do
+			secondary_path = Path.depth(2).sample
+			@museum_object.secondary_paths = secondary_path
+			new_path = Path.depth(1).sample
+			@museum_object.secondary_paths = new_path
+			expect(@museum_object.secondary_paths.include?(secondary_path)).to be(true)
+		end
+
 		it "should keep main path if consistent with new choosen secondary paths" do
 			path = Path.depth(4).sample
 			@museum_object.main_path = path
