@@ -44,11 +44,33 @@ RSpec.describe MuseumObject, type: :model do
 			@museum_object = create(:museum_object)
 		end
 
+		it "should not reject a secondary path that is implied in main path but also implied in a distinct secondary path" do
+			main_path = Path.depth(4).sample
+			@museum_object.main_path = main_path
+			main_path_parent = main_path.to_depth(2)
+			# We construct a path with same root as the main path but not implied
+			# Let's say /1/2/3/4 is main path, then we construct /1/5 as a secondary path
+			secondary_path = main_path_parent
+				.parent
+				.direct_children
+				.reject{|p| p == main_path_parent}
+				.sample
+			# Note that we need to also set a parent of main path, otherwise main path
+			# would get (correctly) removed
+			@museum_object.secondary_paths = [secondary_path, main_path.to_depth(2)]
+			expect(@museum_object.secondary_paths.include?(secondary_path)).to be(true)
+			# The parent path is implied in main path but also in a distinct secondary path 
+			# which we want to keep
+			new_secondary_path = secondary_path.parent
+			@museum_object.secondary_paths = new_secondary_path
+			expect(@museum_object.secondary_paths.include?(secondary_path)).to be(true)
+		end
+
 		it "should not lose secondary paths if new paths of lower depth gets newly selected" do
 			secondary_path = Path.depth(2).sample
 			@museum_object.secondary_paths = secondary_path
 			new_path = Path.depth(1).sample
-			@museum_object.secondary_paths = new_path
+			@museum_object.secondary_paths = [new_path, secondary_path.parent]
 			expect(@museum_object.secondary_paths.include?(secondary_path)).to be(true)
 		end
 
