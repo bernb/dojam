@@ -1,0 +1,6 @@
+<%= render 'layouts/title', title_name: "menu" %>
+
+<%= simple_form_for :termlists, url: import_termlists_submit_path do |f| %>
+	<%= f.input :termlist_files, as: :file, input_html: {multiple: true} %>
+	<%= f.submit %>
+<% end %>
