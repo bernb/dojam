@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+	include TermlistsImporterHelper
   def menu
   end
 
@@ -15,6 +16,15 @@ class StaticPagesController < ApplicationController
 			else
 				flash[:warning] = "Unsupported file formats detected. Only .rb files are supported."
 			end
+		end
+		file_array.each do |file|
+			require file.path
+		end
+		material_attributes = find_all_attributes
+		global_material_variables_array.each do |material_data|
+			Rails.logger.info "Importing variable " + material_data.to_s
+			# Eval as material_data is given as a symbol
+			material_import(eval(material_data.to_s), material_attributes)
 		end
 		flash[:success] = "Uploaded #{file_array.count} files." unless file_array.blank?
 		redirect_to import_termlists_select_path
