@@ -7,26 +7,37 @@ class StaticPagesController < ApplicationController
 	end
 
 	def import_termlists_submit
-		file_array = []
+		materials_for_import = []
 		params.dig(:termlists, :termlist_files).each do |file_path|
 			file = file_path.tempfile
-			if File.extname(file) == ".rb"
+			if File.extname(file) == ".yaml"
 				file = File.open file_path.tempfile
-				file_array << file unless file.blank?
+				material_data = YAML.load_file file
+				# We used symbols as keys in original termlist rb files
+				# but it's a bit ugly in yaml files as additional colon would be
+				# needed to achieve this
+				material_data.transform_keys!(&:to_sym)
+				materials_for_import << material_data
 			else
-				flash[:warning] = "Unsupported file formats detected. Only .rb files are supported."
+				flash[:warning] = "Unsupported file formats detected. Only yaml files are supported."
 			end
 		end
-		file_array.each do |file|
-			require file.path
+		material_attributes = [
+			:material_name,
+			:material_specifieds,
+			:kind_of_objects,
+			:production_techniques,
+			:decorations,
+			:colors,
+			:decoration_colors,
+			:decoration_techniques,
+			:preservation_materials,
+			:preservation_objects
+		]
+		materials_for_import.each do |material_hash|
+			material_import(material_hash, material_attributes)
 		end
-		material_attributes = find_all_attributes
-		global_material_variables_array.each do |material_data|
-			Rails.logger.info "Importing variable " + material_data.to_s
-			# Eval as material_data is given as a symbol
-			material_import(eval(material_data.to_s), material_attributes)
-		end
-		flash[:success] = "Uploaded #{file_array.count} files." unless file_array.blank?
+		flash[:success] = "Uploaded #{materials_for_import.count} files." unless materials_for_import.blank?
 		redirect_to import_termlists_select_path
 	end
 end
