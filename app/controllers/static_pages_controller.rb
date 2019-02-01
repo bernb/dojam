@@ -7,8 +7,9 @@ class StaticPagesController < ApplicationController
 	end
 
 	def import_termlists_submit
+		flash[:warning] = Hash.new
 		materials_for_import = []
-		params.dig(:termlists, :termlist_files).each do |file_path|
+		params.dig(:termlists, :termlist_files)&.each do |file_path|
 			file = file_path.tempfile
 			if File.extname(file) == ".yaml"
 				file = File.open file_path.tempfile
@@ -19,7 +20,7 @@ class StaticPagesController < ApplicationController
 				material_data.transform_keys!(&:to_sym)
 				materials_for_import << material_data
 			else
-				flash[:warning] = "Unsupported file formats detected. Only yaml files are supported."
+				flash[:warning][:unsupported_file] = "Unsupported file formats detected. Only yaml files are supported."
 			end
 		end
 		material_attributes = [
@@ -37,7 +38,11 @@ class StaticPagesController < ApplicationController
 		materials_for_import.each do |material_hash|
 			material_import(material_hash, material_attributes)
 		end
-		flash[:success] = "Uploaded #{materials_for_import.count} files." unless materials_for_import.blank?
+		if materials_for_import.blank?
+			flash[:warning][:no_valid_files] = "No valid files for import found"
+		else
+			flash[:success] = "Uploaded #{materials_for_import.count} files." unless materials_for_import.blank?
+		end
 		redirect_to import_termlists_select_path
 	end
 end
