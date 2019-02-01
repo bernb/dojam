@@ -35,14 +35,14 @@ class StaticPagesController < ApplicationController
 			:preservation_materials,
 			:preservation_objects
 		]
+		log_files = []
 		materials_for_import.each do |material_hash|
-			material_import(material_hash, material_attributes)
+			log_files << material_import(material_hash, material_attributes)
 		end
 		if materials_for_import.blank?
 			flash[:warning][:no_valid_files] = "No valid files for import found"
 		else
 			flash[:success] = "Uploaded #{materials_for_import.count} files." unless materials_for_import.blank?
 		end
-		redirect_to import_termlists_select_path
 	end
 end
