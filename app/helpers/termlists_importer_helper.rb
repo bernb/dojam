@@ -77,6 +77,30 @@ module TermlistsImporterHelper
 		return log_path
 	end
 
+	def parse_import_files file_hash
+		materials_for_import = []
+		warnings = {}
+		file_hash&.each do |file_entity|
+			if File.extname(file_entity.tempfile) == ".yaml"
+				file = File.open file_entity.tempfile
+				material_data = YAML.load_file file
+				# We used symbols as keys in original termlist rb files
+				# but it's a bit ugly in yaml files as additional colon would be
+				# needed to achieve this
+				material_data.transform_keys!(&:to_sym)
+				materials_for_import << material_data
+			else
+				warnings[:unsupported_file] = "Unsupported file format detected. Only yaml files are supported."
+			end
+		end
+		if materials_for_import.blank?
+			warnings[:no_valid_files] = "No valid files for import found"
+		end
+		return materials_for_import, warnings
+	end
+
+
+
 	def global_material_variables_array
 		global_variables.select{|var| var.to_s.ends_with? "_material_data"}
 			.reject{|var| var.to_s.include? "test"}
