@@ -81,23 +81,60 @@ module TermlistsImporterHelper
 		materials_for_import = []
 		warnings = {}
 		file_hash&.each do |file_entity|
-			if File.extname(file_entity.tempfile) == ".yaml"
-				file = File.open file_entity.tempfile
-				material_data = YAML.load_file file
-				# We used symbols as keys in original termlist rb files
-				# but it's a bit ugly in yaml files as additional colon would be
-				# needed to achieve this
-				material_data.transform_keys!(&:to_sym)
-				materials_for_import << material_data
-			else
-				warnings[:unsupported_file] = "Unsupported file format detected. Only yaml files are supported."
-			end
+      filename = file_entity.original_filename
+      if !correct_file_format?(file_entity)
+        warnings[filename.to_sym] = 
+          "#{file_entity.original_filename}: Unsupported file format detected. Only yaml files are supported."
+        next
+      end
+      file = File.open file_entity.tempfile
+      material_data = YAML.safe_load file.read
+      if !valid_material_data?(material_data)
+        forbidden_terms = forbidden_terms(material_data)
+        warnings[filename.to_sym] = 
+          "#{file_entity.original_filename}: Unknown term(s) #{forbidden_terms}. Only whitelisted terms are allowed."
+        next
+      end
+      # We used symbols as keys in original termlist rb files
+      # but it's a bit ugly in yaml files as additional colon would be
+      # needed to achieve this
+      material_data.transform_keys!(&:to_sym)
+      materials_for_import << material_data
 		end
 		if materials_for_import.blank?
 			warnings[:no_valid_files] = "No valid files for import found"
 		end
 		return materials_for_import, warnings
 	end
+
+  def correct_file_format? file_entity
+    return File.extname(file_entity.tempfile) == ".yaml"
+  end
+
+  def forbidden_terms material_data
+    term_whitelist = [
+      "material_name",
+      "material_specifieds",
+      "kind_of_objects",
+      "production_techniques",
+      "colors",
+      "decoration_techniques",
+      "decorations",
+      "decoration_colors",
+      "preservation_objects",
+      "preservation_materials",
+    ]
+    return material_data.keys.reject{|k| k.in?(term_whitelist)}
+  end
+
+  def valid_material_data? material_data
+    if forbidden_terms(material_data).blank?
+      return true
+    else
+      return false
+    end
+  end
+
 
 
 
