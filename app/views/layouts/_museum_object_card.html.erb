@@ -12,22 +12,18 @@
         </dd>
         
         <dt class="col-sm-6">
-				primary material
+          material
         </dt>
         <dd class="col-sm-6">
-          <%= museum_card.main_material_with_specified %>
+          <%= museum_card.list_materials %>
         </dd>
 
-				<% if museum_card.secondary_materials.present? %>
-					<dt class="col-sm-6">
-					additional materials
-					</dt>
-						<dd class="col-sm-6">
-					<% museum_card.secondary_materials_with_specifieds.each do |entry| %>
-						<%= entry %>
-					<% end %>
-						</dd>
-				<% end %>
+        <dt class="col-sm-6">
+          material specifieds
+        </dt>
+        <dd class="col-sm-6">
+          <%= museum_card.list_material_specifieds %>
+        </dd>
         
         <dt class="col-sm-6">
           kind of object
