@@ -1,0 +1,12 @@
+<%= render 'layouts/title', title_name: "import termlists" %>
+
+<div class="row">
+	<div class="col">
+		Importing from files may take several minutes. Please wait until import is finished.</br>
+		Termlists informations can only be extended by importing. This won't delete anything.
+	</div>
+</div>
+<%= simple_form_for :termlists, url: import_termlists_submit_path do |f| %>
+	<%= f.input :termlist_files, as: :file, input_html: {multiple: true}, label: false %>
+	<%= f.submit "import", class: "btn btn-primary" %>
+<% end %>

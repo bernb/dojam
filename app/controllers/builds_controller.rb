@@ -36,39 +36,9 @@ class BuildsController < ApplicationController
     end
 
 		if step == :step_material
-			# Check if now selected materials are consistent with main_material
-			# If selected materials do not match earlier selected main_material, delete main_path
-			main_material_id = @museum_object.main_material&.id
-			found = false
-			params[:museum_object][:material_ids].reject(&:blank?).each do |m_id|
-				if main_material_id.to_s == m_id
-					found = true
-				end
-			end
-			if !found
-				@museum_object.main_path = nil
-			end
-		end
-
-		if step == :step_material_specified
-			main_material_specified_id = @museum_object.main_material_specified&.id
-			found = false
-			params[:museum_object][:material_specified_ids].reject(&:blank?).each do |ms_id|
-				if main_material_specified_id.to_s == ms_id
-					found = true
-				end
-			end
-			if !found
-				@museum_object.main_path = nil
-			end
 		end
 
 		if step == :step_kind_of_object
-			ms = MaterialSpecified.find params[:museum_object][:main_material_specified_id]
-			material = ms.material
-			@museum_object.main_material_id = material.id
-			@museum_object.main_material_specified_id = params[:museum_object][:main_material_specified_id]
-			@museum_object.kind_of_object_id = params[:museum_object][:kind_of_object_id]
 		end
     
     if @museum_object.valid? && allow_next_step
@@ -113,19 +83,18 @@ class BuildsController < ApplicationController
     
   end
   
-  def kind_of_objects_for_spec_material
+  def kind_of_objects_for_spec_material_path
     respond_to do |format|
-      format.js {
+      format.js do
 				# Check for parameter as it does not exist on first visit
-				if params[:selected_material_specified_id].present?
-					material_specified = MaterialSpecified.find(
-						params[:selected_material_specified_id])
-					@kind_of_objects = material_specified.kind_of_objects
+				if params[:selected_material_specified_path_id].present?
+					path = Path.find params[:selected_material_specified_path_id]
+					@kind_of_object_paths = path.direct_children
 					museum_object = MuseumObject.find params[:museum_object_id]
 					# Used to select the correct entry if one was choosen before
-					@choosen_kind_of_object_id = museum_object.kind_of_object&.id
+					@selected_kind_of_object_path = museum_object.main_path&.to_depth(3)
 				end
-      }
+			end
     end
   end
   
@@ -187,7 +156,9 @@ class BuildsController < ApplicationController
 	end
 
 	def step_material_vars
-    @materials = Material.all
+		@material_paths = Path.materials
+		paths = @museum_object.paths
+		@checked_materials = @material_paths.select{|p| p.parent_of?(paths) || paths.include?(p)}.map(&:id)
 	end
 
 	def step_museum_vars
@@ -209,12 +180,35 @@ class BuildsController < ApplicationController
 	end
 
 	def step_material_specified_vars
-    @materials = Material.where(id: session[:material_ids])
+		@material_specified_paths = {}
+		@museum_object.materials.each do |m|
+			@material_specified_paths[m.name] = Path.material_specifieds.material_id(m.id).to_a
+		end
+		paths = @museum_object.paths
+		@checked_material_specified_paths = @material_specified_paths.values.flatten.select{|p| p.included_or_parent_of? paths}.map(&:id)
 	end
 
 	def step_kind_of_object_vars
-    material_specifieds_ids = @museum_object.material_specified_ids # get ids for choosen spec. materials
-    @kind_of_objects = [] # note that nil results in 'Yes/No' selection in view..
+		@material_with_specified_paths = {}
+		@museum_object.materials.each do |m|
+			@material_with_specified_paths[m.name] = m.paths
+				.first
+				.direct_children
+				.map{|p| p.to_depth(2)}
+				.select{|p| p.depth == 2}
+				.select{|p| p.included_or_parent_of? @museum_object.paths}
+		end
+		@main_material_specified_path = @museum_object.main_path&.to_depth(2)
+		@selected_kind_of_object_path = nil
+		case @museum_object.main_path&.depth
+		when 2 
+			@kind_of_object_paths = @museum_object.main_path.children
+		when 3..4
+			@kind_of_object_paths = @museum_object.main_path.to_depth(2).direct_children
+			@selected_kind_of_object_path = @museum_object.main_path&.to_depth(3)
+		else
+			@kind_of_object_paths = []
+		end
 	end
 
 	def step_kind_of_object_specified_vars
@@ -326,7 +320,7 @@ class BuildsController < ApplicationController
                                           :acquisition_kind_id, :acquisition_delivered_by_id, :acquisition_deliverer_name, :acquisition_date,
                                           :finding_context, :finding_remarks, :authenticity_id, :priority, :priority_determined_by,
                                           :inscription_decoration, :inscription_letters, :inscription_text, :inscription_translation, 
-                                          :excavation_site_id, :excavation_site_category_id, :material_specified_ids, :kind_of_object_specified_id,
+                                          :excavation_site_id, :excavation_site_category_id, :kind_of_object_specified_id,
                                           :is_acquisition_date_exact, :acquisition_document_number, :name_expedition, :site_number_mega, :site_number_expedition,
                                           :coordinates_mega, :excavation_site_kind_id, :dating_period_id, :dating_millennium_id,
                                           :production_technique_id, :decoration_style_id, :decoration_color_id, :decoration_technique_id,
@@ -339,14 +333,15 @@ class BuildsController < ApplicationController
 																					:acquisition_year, :acquisition_month, :acquisition_day, :acquisition_date_unknown,
 																					:is_dating_period_unknown, :is_dating_millennium_unknown, :dating_century_begin_id, :dating_century_end_id,
 																				 	:is_dating_century_unknown, :is_dating_timespan_unknown,
-																					:max_length, :max_width, :height, :opening_dm, :bottom_dm, :max_dm, :weight_in_gram,
+																					:max_length, :max_width, :height, :opening_dm, :bottom_dm, :max_dm, :weight_in_gram, :main_path_id,
                                           images: [],
                                           dating_century_ids: [],
                                           color_ids: [],                                   
                                           excavation_site_attributes: [:id, :_destroy],
                                           images_attributes: [:id, :main, list: []],
 																					material_ids: [],
-																					material_specified_ids: []
+																					material_specified_ids: [],
+																					secondary_path_ids: []
     end                                
   end
   

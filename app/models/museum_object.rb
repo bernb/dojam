@@ -4,7 +4,6 @@ class MuseumObject < ApplicationRecord
 	after_initialize :set_default_values
 
   has_one :images, class_name: "MuseumObjectImageList", dependent: :destroy
-  accepts_nested_attributes_for :images
   belongs_to :excavation_site, -> { order(name: :asc) }, required: false 
   belongs_to :storage_location, required: false
   belongs_to :acquisition_delivered_by, -> { order(name: :asc) }, required: false
@@ -26,13 +25,19 @@ class MuseumObject < ApplicationRecord
   belongs_to :excavation_site_kind, required: false
   belongs_to :excavation_site_category, required: false
 	belongs_to :priority, required: false
+	belongs_to :main_path, class_name: "Path", required: false
 	has_many :museum_object_paths
-	has_many :paths, through: :museum_object_paths
+	has_many :secondary_paths, class_name: "Path",  through: :museum_object_paths, source: :path do
+		def <<(values)
+			values = proxy_association.owner.exclude_parent_and_same(values)
+			super values.map{|p| p.to_depth(2)}
+		end
+	end
 	has_many :color_museum_objects
 	has_many :colors, through: :color_museum_objects
-	belongs_to :main_path, class_name: "Path", required: false
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true
+  accepts_nested_attributes_for :images, :secondary_paths
   
   before_validation :set_is_used
   
@@ -73,7 +78,8 @@ class MuseumObject < ApplicationRecord
 
 	########################
 	# m/ms/koo/koos getter #
-	# ######################
+	########################
+	
 	def main_material
 		# Note there is the safe navigation version of objects[2]
 		self.main_path&.objects&.[](0)
@@ -108,55 +114,13 @@ class MuseumObject < ApplicationRecord
 		self.kind_of_object_specified&.id
 	end
 
-	########################
-	# m/ms/koo/koos setter #
-	########################
-	
-	def main_material_id= m_id
-		path = Path.depth(1).last_id(m_id).first
-		self.main_path = path
-	end
-	
-	def main_material= material
-		self.main_material_id = material.id
+	def secondary_materials
+		secondary_paths&.map(&:objects)&.[](0)
 	end
 
-	def main_material_specified_id= ms_id
-		m_id = self.main_path.objects[0].id.to_s
-		path = Path.find_by path: "/#{m_id}/#{ms_id.to_s}"
-		self.main_path = path
+	def secondary_material_specifieds
+		secondary_paths&.map(&:objects)&.[](1)
 	end
-
-	def main_material_specified= material_specified
-		self.main_materal_specified_id = material_specified.id
-	end
-
-	def kind_of_object_id= koo_id
-		objects = self.main_path.objects
-		m_id = objects[0].id.to_s
-		ms_id = objects[1].id.to_s
-		path = Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id.to_s}"
-		self.main_path = path
-	end
-
-	def kind_of_object= kind_of_object
-		self.kind_of_object_id = kind_of_object.id
-	end
-
-	def kind_of_object_specified_id= koos_id
-		objects = self.main_path.objects
-		m_id = objects[0].id.to_s
-		ms_id = objects[1].id.to_s
-		koo_id = objects[2].id.to_s
-		path = Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id}/#{koos_id.to_s}"
-		self.main_path = path
-	end
-
-	def kind_of_object_specified= kind_of_object_specified
-		self.kind_of_object_specified_id = kind_of_object_specified.id
-	end
-
-
 
 	def materials
 		paths_objects_for 1
@@ -170,34 +134,8 @@ class MuseumObject < ApplicationRecord
 		return ids
 	end
 
-	def materials=(material_objects)
-		paths = []
-		material_objects.each do |object|
-			path = Path.depth(1).last_id(object.id)
-			paths << path
-		end
-		self.paths.clear
-		self.paths << paths
-	end
-
-	def material_ids=(material_object_ids)
-		material_object_ids = material_object_ids.reject{|m| m.blank?}
-		material_objects = Material.find material_object_ids
-		self.materials = material_objects
-	end
-
 	def material_specifieds
 		paths_objects_for 2
-	end
-
-	def material_specifieds=(material_specified_objects)
-		paths = []
-		material_specified_objects.each do |object|
-			path = Path.depth(2).last_id(object.id)
-			paths << path
-		end
-		self.paths.clear
-		self.paths << paths
 	end
 
 	def material_specified_ids
@@ -208,10 +146,110 @@ class MuseumObject < ApplicationRecord
 		return ids
 	end
 
-	def material_specified_ids=(material_specified_object_ids)
-		material_specified_object_ids = material_specified_object_ids.reject{|m| m.blank?}
-		material_specified_objects = MaterialSpecified.find material_specified_object_ids
-		self.material_specifieds = material_specified_objects
+	########################
+	##### path methods #####
+	########################
+	
+	def paths
+		paths = Path.none
+		if main_path.present?
+			paths = Path.where id: main_path.id
+		end
+		if secondary_paths.present?
+			paths = paths.or(Path.where id: secondary_path_ids)
+		end
+		return paths
+	end
+
+	def secondary_paths=(new_paths)
+		# Allow for single path and array of paths
+		new_paths = [new_paths].flatten
+
+		# If new paths are not consistent with choosen main path, remove it
+		if main_path.present? && !main_path.included_or_child_of?(new_paths)
+			self.main_path = nil
+		else
+			# Else remove paths, that are already implied in main path
+			# but not implied by any secondary paths
+			new_paths = new_paths.reject{|p| 
+				p.included_or_parent_of?(self.main_path) && 
+					!path_in_secondary_implied?(p)}
+		end
+
+		# We remove paths that are already implied in secondary paths
+		# For that, we replace every path with any more specific paths and
+		# call uniq in the end
+		new_paths = new_paths
+			.map{|p| path_in_secondary_implied?(p) ? implied_secondary_paths_for(p) : p}
+			.flatten
+			.uniq
+
+		# Always map to maximum depth of 2
+		new_paths = new_paths.map{|p| p.to_depth(2)}
+		
+		super new_paths
+	end
+
+#def secondary_paths=(new_paths)
+#	# Keep paths that are more specific than given ones
+#	self.secondary_paths.delete_all
+#	self.secondary_paths << new_paths
+#end
+
+
+	def secondary_path_ids=(ids)
+		ids = ids.reject(&:empty?)
+		paths = Path.find(ids)
+		self.secondary_paths = paths
+	end
+
+	def main_path=(path)
+		if path.blank?
+			super path
+			return
+		end
+		# Ignore if more specific path already set
+		if path.parent_of? main_path
+			return
+		end
+		# Remove from secondary paths if found
+		if secondary_paths.include?(path)
+			secondary_paths.delete(path)
+		else
+			# Also remove if a parent was set as secondary path.
+			# So we remove /1/2/3 if /1/2/3/4 is the main path now
+		 	parent = secondary_paths.find{|p| p.parent_of?(path)}
+			if parent.present?
+				secondary_paths.delete(parent)
+			end
+		end
+		# Move old main path to secondary paths
+		if main_path.present?
+			new_secondary_path = main_path.to_depth(2)
+			super path
+			secondary_paths << new_secondary_path
+		end
+		super path
+	end
+
+	def main_path_id=(id)
+		path = Path.find(id)
+		self.main_path = path
+	end
+
+	# For simplicify, we keep a kind of object specified
+	# setter for now
+	def kind_of_object_specified=(koos)
+		new_path = self.main_path
+			.to_depth(3)
+			.direct_children
+			.find{|p| p.objects.last == koos}
+		self.main_path = new_path unless new_path.blank?
+	end
+
+	def kind_of_object_specified_id=(koos_id)
+		koos = KindOfObjectSpecified.find koos_id
+		self.kind_of_object_specified = koos
 	end
 
 	def acquisition_date
@@ -259,7 +297,84 @@ class MuseumObject < ApplicationRecord
     self.materials.ids.include? material.id
   end
 
+	# Used in material specified view for now
+	def smart_paths
+		self.paths.or(self.main_path)
+	end
+
+	def smart_path_ids
+		ids = self.path_ids
+		ids << self.main_path_id
+		return ids
+	end
+
+	def smart_path_ids=(ids)
+		paths = Path.find ids.reject(&:blank?)
+		self.smart_paths = paths
+	end
+
+	def smart_paths=(paths)
+		add_new_paths paths
+	end
+
+	def exclude_parent_and_same(paths)
+		is_parent = false
+		new_paths = []
+		# Little trick to allow for single path and also multiple paths as array
+		[paths].flatten.each do |path|
+			if path.parent_of?(main_path) || path == main_path
+				is_parent = true
+			end
+			secondary_paths.each do |secondary_path|
+				if path.parent_of?(secondary_path) || path == secondary_path
+					is_parent = true
+				end
+			end
+			if is_parent
+				next
+			else
+				new_paths << path
+			end
+		end
+		return new_paths
+	end
+
 	private
+
+	def add_new_paths paths
+		new_paths = []
+		paths.each do |path|
+			if path.parent_of?(self.main_path) || path == self.main_path
+				next
+			end
+			if path_implied?(path)
+				new_paths << implied_paths_for(path)
+			else
+				new_paths << path
+			end
+		end
+		if new_paths.empty?
+			self.paths.delete_all
+		else
+			self.paths = new_paths.flatten
+		end
+	end
+
+	def implied_paths_for path
+		self.paths.select{|p| p.child_of?(path)}
+	end
+
+	def path_implied? path
+		self.paths.map{|p| p.child_of?(path)}.reduce(:|)
+	end
+
+	def implied_secondary_paths_for path
+		self.secondary_paths.select{|p| p.included_or_child_of?(path)}
+	end
+
+	def path_in_secondary_implied? path
+		self.secondary_paths.map{|p| p.included_or_child_of?(path)}.reduce(:|)
+	end
 
 	def set_default_values
 		termlist_names = [:excavation_site,
@@ -302,21 +417,5 @@ class MuseumObject < ApplicationRecord
 		end
 		return objects.uniq
 	end
-
-#	def main_path=(material: nil, material_specified: nil, kind_of_object: nil, kind_of_object_specified: nil)
-#		# ToDo: Throw error instead of returning nil
-#		# Map given parameter to an logical integer array with
-#		# 1: parameter was given
-#		# 0: parameter is blank
-#		parameter_array = [material, material_specified, kind_of_object, kind_of_object_specified] 
-#		logical_array = parameter_array.map(&:present?).map{|l| l ? 1 : 0}
-#		parameters_are_consistent = logical_array.each_cons(2).all?{|left, right| left >= right}
-#		if !parameters_are_consistent
-#			return nil
-#		end
-#
-#		path = parameter_array.reject(&:blank?).reduce(""){|path, object| path += "/" + object.id}
-#
-#	end
 
 end

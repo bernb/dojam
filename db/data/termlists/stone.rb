@@ -7,7 +7,6 @@ $stone_material_data = {
     "alabaster/calcite/gypsum",
     "amethyst",
     "basalt",
-    "calcite",
     "carnelian",
     "chalcedony",
     "chalk",
