@@ -1,5 +1,5 @@
 Dir["#{Rails.root}/db/data/termlists/**/*.rb"].reject{|file| file.include?("test") || file.include?("general") || File.directory?(file) }.each {|file| require file}
-require "#{Rails.root}/db/seed_helper.rb"
+require "#{Rails.root}/app/helper/termlists_importer_helper.rb"
 
 Rails.logger.info "*** Starting material import ***"
 # We first determine which keys/attributes are found over all file

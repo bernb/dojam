@@ -2,12 +2,48 @@ class MuseumObjectDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
 
+	def main_material_with_specified
+		return "undetermined (undetermined)" unless main_path.present?
+			material_name = main_path.objects[0].name
+			material_specified_name = main_path.objects[1]&.name || "undetermined"
+			result = material_name + " (" + material_specified_name + ")"
+		return result
+	end
+
+	def secondary_materials_with_specifieds
+		result = []
+		secondary_paths.each do |path|
+			material_name = path.objects[0].name
+			material_specified_name = path.objects[1]&.name || "undetermined"
+			element = material_name + "(" + material_specified_name + ")"
+			result << element
+		end
+		if result.empty?
+			result << "undetermined (undetermined)"
+		end
+		return result
+	end
+
 	def materials_decorated
 		decorate_named_list self.materials
 	end
 
 	def material_specifieds_decorated
 		decorate_named_list self.material_specifieds
+	end
+
+	def materials_with_specifieds
+		result = []
+		[self.main_path].push(self.paths.to_a).reject(&:blank?).flatten.each do |path|
+			material_name = path.objects[0].name
+			material_specified_name = path.objects[1]&.name || "undetermined"
+			element = material_name + "(" + material_specified_name + ")"
+			result << element
+		end
+		if result.empty?
+			result << "undetermined (undetermined)"
+		end
+		return result
 	end
 
 	def decorate_named_list list

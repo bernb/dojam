@@ -1,0 +1,13 @@
+<% if @kind_of_object_paths.present? %>
+	$('#museum_object_main_path_id').empty();
+	$('#museum_object_main_path_id').append($('<option value=""></option>'));
+	<% @kind_of_object_paths.each do |path| %>
+		$('#museum_object_main_path_id').append($('\
+			<option value="<%= path.id %>"> \
+			<%= path.last_object_name %> \
+			</option>'));
+	<% end %>
+	<% if @selected_kind_of_object_path.present? %>
+		$('#museum_object_main_path_id').val(<%= @selected_kind_of_object_path.id %>);
+	<% end %>
+<% end %>

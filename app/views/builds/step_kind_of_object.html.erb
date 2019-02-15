@@ -1,25 +1,25 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
 	<%= simple_form_for @museum_object, data: {parsley_validate: ""}, url: wizard_path do |f| %>
-    <h4>primary material</h4>
-      <% @museum_object.materials.each do |material| %>
-        <div><%= material.name %></div>
-        <ul class="list-group">
-          <% material.material_specifieds.each do |spec_material| %>
-						<% if spec_material.in? @museum_object.material_specifieds %>
-							<li class="list-group-item">
-								<label>
-									<%= f.radio_button :main_material_specified_id,  spec_material.id %>
-									<%= spec_material.name %>
-								</label>
-							</li>
-							<% end # if spec_material in museum_object ms %>
-          <% end %>
-        </ul>
-      <% end %>
-      </br>
-    <h4>kind of object</h4>
-		<%= f.input :kind_of_object_id, collection: @kind_of_objects, label: false, as: :collection_select, include_blank: true, required: true   %>
-    <%= f.button :submit, "next step" %>
-  <% end %>
+		<h4>primary material</h4>
+		<% @material_with_specified_paths.keys.each do |material_name| %>
+			<div>
+				<%= material_name %>
+			</div>
+			<ul class="list-group">
+				<% @material_with_specified_paths[material_name].each do |ms_path| %>
+					<li class="list-group-item">
+						<label>
+							<%= radio_button :main_material_specified_path_dummy, :main_material_specified_path_dummy, ms_path.id, checked: ms_path == @main_material_specified_path %>
+							<%= ms_path.last_object_name %>
+						</label>
+					</li>
+			</ul>
+			<% end %>
+		<% end %>
+		</br>
+		<h4>kind of object</h4>
+		<%= f.input :main_path_id, collection: @kind_of_object_paths, label: false, as: :collection_select, selected: @selected_kind_of_object_path, label_method: :last_object_name, include_blank: true, required: true   %>
+		<%= f.button :submit, "next step" %>
+	<% end %>
 <% end %>
 
