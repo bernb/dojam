@@ -80,6 +80,7 @@ module TermlistsImporterHelper
 	def parse_import_files file_hash
 		materials_for_import = []
 		warnings = {}
+    filename = nil # Make it available for rescue block
 		file_hash&.each do |file_entity|
       filename = file_entity.original_filename
       if !correct_file_format?(file_entity)
@@ -104,7 +105,11 @@ module TermlistsImporterHelper
 		if materials_for_import.blank?
 			warnings[:no_valid_files] = "No valid files for import found"
 		end
-		return materials_for_import, warnings
+    return materials_for_import, warnings
+  rescue Psych::SyntaxError => e
+    warnings[filename.to_sym] = "Syntax Error in File #{filename} " + e.message
+    warnings[:general] = "Stopped import."
+    return materials_for_import, warnings
 	end
 
   def correct_file_format? file_entity
