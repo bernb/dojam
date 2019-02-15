@@ -14,7 +14,16 @@ RSpec.describe TermlistsImporterHelper, type: :helper do
       materials_for_import, warnings = helper.parse_import_files [file]
       expect(materials_for_import).to be_empty
     end
-    it "should disallow files with invalid terms"
-    it "should allow to import a correctly formatted yaml file with only whitelisted entries"
+    it "should disallow files with invalid terms" do
+      file = fixture_file_upload @fixture_path + "invalid_terms.yaml"
+      materials_for_import, warnings = helper.parse_import_files [file]
+      expect(materials_for_import).to be_empty
+    end
+    it "should allow to import a correctly formatted yaml file with only whitelisted entries" do
+      file = fixture_file_upload @fixture_path + "valid_termlist_file.yaml"
+      materials_for_import, warnings = helper.parse_import_files [file]
+      expect(warnings).to be_empty
+      expect(materials_for_import.count).to eq(1)
+    end
 	end
 end
