@@ -44,12 +44,12 @@ if ! rails db:migrate ; then
 fi
 
 # =================================================================
-echo "60"
-echo "# Post-Installation: Update termlists. This may take a while." 
-if ! rails db:seed ; then
-	exit 16
-fi
-
+#echo "60"
+#echo "# Post-Installation: Update termlists. This may take a while." 
+#if ! rails db:seed ; then
+#	exit 16
+#fi
+#
 # =================================================================
 echo "70"
 echo "# Post-Installation: Restart local server" 
