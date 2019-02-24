@@ -15,59 +15,9 @@ class MuseumObjectValidator < ActiveModel::Validator
         validate_step_museum_for record
       when "step_acquisition"
         validate_step_acquisition_for record
-      when "step_provenance"
-        validate_step_provenance_for record
-      when "step_material"
-        validate_step_material_for record
-      when "step_material_specified"
-        validate_step_material_specified_for record
-      when "step_kind_of_object"
-        validate_step_kind_of_object_for record
-      when "step_kind_of_object_specified"
-        validate_step_kind_of_object_specified_for record
-      when "step_production"
-        validate_step_production_for record
-      when "step_color"
-        validate_step_color_for record
-      when "step_decoration"
-        validate_step_decoration_for record
-      when "step_inscription"
-        validate_step_inscription_for record
-      when "step_measurements"
-        validate_step_measurements_for record
-      when "step_authenticity"
-        validate_step_authenticity_for record
-      when "step_preservation"
-        validate_step_preservation_for record
-      when "step_conservation"
-        validate_step_conservation_for record
-      when "step_dating"
-        validate_step_dating_for record
-      when "step_remarks"
-        validate_step_remarks_for record
-      when "step_images_upload"
-        validate_step_images_upload_for record
-      when "step_literature"
-        validate_step_literature_for record
       when "step_confirm"
         validate_step_museum_for record
         validate_step_acquisition_for record
-        validate_step_provenance_for record
-        validate_step_material_for record
-        validate_step_material_specified_for record
-        validate_step_kind_of_object_for record
-        validate_step_kind_of_object_specified_for record
-        validate_step_production_for record
-        validate_step_color_for record
-        validate_step_decoration_for record
-        validate_step_inscription_for record
-        validate_step_measurements_for record
-        validate_step_authenticity_for record
-        validate_step_conservation_for record
-        validate_step_dating_for record
-        validate_step_remarks_for record
-        validate_step_images_upload_for record
-        validate_step_literature_for record
       else
         can_not_validate record
     end
@@ -90,64 +40,6 @@ class MuseumObjectValidator < ActiveModel::Validator
     #check_not_empty record, :deliverer_name, record.acquisition_deliverer_name
   end
   
-  def validate_step_provenance_for record
-  
-  end
-  
-  def validate_step_material_for record
-    # This is done in controller as material itself is not saved in db
-  end
-  
-  def validate_step_material_specified_for record
-  end
-  
-  def validate_step_kind_of_object_for record
-  end
-  
-  def validate_step_kind_of_object_specified_for record
-  end
-  
-  def validate_step_production_for record
-  end
-  
-  def validate_step_color_for record
-  end
-  
-  def validate_step_decoration_for record
-  end
-  
-  def validate_step_inscription_for record
-  end
-  
-  def validate_step_measurements_for record
-  end
-
-	def validate_step_preservation_for record
-	end
-  
-  def validate_step_authenticity_for record
-  end
-  
-  def validate_step_conservation_for record
-  end
-  
-  def validate_step_dating_for record
-  end
-  
-  def validate_step_remarks_for record
-  end
-  
-  def validate_step_images_upload_for record
-    #check_assoc_exists record, :main_image, record.images&.main
-  end
-  
-  def validate_step_literature_for record
-  end
-  
-  
-  
-  
-
   def check_date_consistency record, year, month, day 
 		if year.blank? && (month.present? || day.present?)
 			record.errors.add :date_of_acquisition, "error: Can not save acquisition month or day without year."
@@ -182,6 +74,4 @@ class MuseumObjectValidator < ActiveModel::Validator
     end
 
   end
-  
-
 end
