@@ -18,6 +18,12 @@ class MuseumObjectValidator < ActiveModel::Validator
       when "step_confirm"
         validate_step_museum_for record
         validate_step_acquisition_for record
+      when "step_provenance", "step_material", "step_material_specified",
+        "step_kind_of_object", "step_kind_of_object_specified", "step_production",
+        "step_color", "step_decoration", "step_inscription", "step_measurements",
+        "step_preservation", "step_conservation", "step_authenticity", "step_dating",
+        "step_remarks", "step_images_upload", "step_literature"
+        # Do nothing, as these steps have no fields to be validated
       else
         can_not_validate record
     end
