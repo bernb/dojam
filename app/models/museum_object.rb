@@ -167,7 +167,7 @@ class MuseumObject < ApplicationRecord
 
 		# If new paths are not consistent with choosen main path, remove it
 		if main_path.present? && !main_path.included_or_child_of?(new_paths)
-			self.main_path = nil
+      self.main_path = Path.undetermined_path
 		else
 			# Else remove paths, that are already implied in main path
 			# but not implied by any secondary paths
@@ -394,6 +394,8 @@ class MuseumObject < ApplicationRecord
 											:priority,
 											:dating_period,
 		]
+
+    self.main_path = Path.undetermined_path
 		termlist_names.each do |termlist_name|
 			if termlist_name == :decoration_style
 				undetermined_entry = Decoration.find_by(name: "undetermined")
