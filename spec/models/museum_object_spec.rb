@@ -2,39 +2,38 @@ require 'rails_helper'
 
 RSpec.describe MuseumObject, type: :model do
 	context 'without any set paths' do
+    before(:each) do
+      @museum_object = create(:pathless_museum_object)
+    end
 		it "should allow to set single seconday path as array" do
-			museum_object = create(:museum_object)
 			Path.depth(2).sample(5).each do |path|
-				museum_object.secondary_paths = [path]
-				expect(museum_object.secondary_paths.count).to eq(1)
-				expect(museum_object.secondary_path_ids.first).to eq(path.id)
+				@museum_object.secondary_paths = [path]
+				expect(@museum_object.secondary_paths.count).to eq(1)
+				expect(@museum_object.secondary_path_ids.first).to eq(path.id)
 			end
 		end
 
 		it "should allow to set single seconday path given as plain object" do
-			museum_object = create(:museum_object)
 			Path.depth(2).sample(5).each do |path|
-				museum_object.secondary_paths = path
-				expect(museum_object.secondary_paths.count).to eq(1)
-				expect(museum_object.secondary_path_ids.first).to eq(path.id)
+				@museum_object.secondary_paths = path
+				expect(@museum_object.secondary_paths.count).to eq(1)
+				expect(@museum_object.secondary_path_ids.first).to eq(path.id)
 			end
 		end
 
 		it "should allow to append single seconday path as array" do
-			museum_object = create(:museum_object)
 			Path.all.sample(5).each do |path|
-				path_count = museum_object.secondary_paths.count
-				museum_object.secondary_paths << [path]
-				expect(museum_object.secondary_paths.count).to eq(path_count+1)
+				path_count = @museum_object.secondary_paths.count
+				@museum_object.secondary_paths << [path]
+				expect(@museum_object.secondary_paths.count).to eq(path_count+1)
 			end
 		end
 
 		it "should allow to append single seconday path given as plain object" do
-			museum_object = create(:museum_object)
 			Path.all.sample(5).each do |path|
-				path_count = museum_object.secondary_paths.count
-				museum_object.secondary_paths << path
-				expect(museum_object.secondary_paths.count).to eq(path_count+1)
+				path_count = @museum_object.secondary_paths.count
+				@museum_object.secondary_paths << path
+				expect(@museum_object.secondary_paths.count).to eq(path_count+1)
 			end
 		end
 	end
@@ -93,7 +92,7 @@ RSpec.describe MuseumObject, type: :model do
 			material_paths -= [main_material_path]
 			expect(material_paths.include?(main_material_path)).to be(false)
 			@museum_object.secondary_paths = material_paths
-			expect(@museum_object.main_path).to eq(nil)
+      expect(@museum_object.main_path).to eq(Path.undetermined_path)
 		end
 
 		it "should ignore new main path if it is a parent of already set main path" do
@@ -122,7 +121,7 @@ RSpec.describe MuseumObject, type: :model do
 			child = Path.all.sample(1).first
 			parent = child.parent
 			museum_object.main_path = child
-			museum_object.secondary_paths << parent
+			museum_object.secondary_paths = parent
 			expect(museum_object.secondary_paths.count).to eq(0)
 		end
 
@@ -161,12 +160,11 @@ RSpec.describe MuseumObject, type: :model do
 			museum_object = create(:museum_object)
 			main_path = Path.depth(4).sample
 			museum_object.main_path = main_path
-			museum_object.secondary_paths << main_path
+			museum_object.secondary_paths = main_path
 			expect(museum_object.secondary_paths.count).to eq(0)
-			museum_object.secondary_paths << main_path.parent
+			museum_object.secondary_paths = main_path.parent
 			expect(museum_object.secondary_paths.count).to eq(0)
 		end
-
 	end
 
 end
