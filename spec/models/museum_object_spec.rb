@@ -92,7 +92,7 @@ RSpec.describe MuseumObject, type: :model do
 			material_paths -= [main_material_path]
 			expect(material_paths.include?(main_material_path)).to be(false)
 			@museum_object.secondary_paths = material_paths
-      expect(@museum_object.main_path).to eq(Path.undetermined_path)
+      expect(@museum_object.main_path).to eq(nil)
 		end
 
 		it "should ignore new main path if it is a parent of already set main path" do
