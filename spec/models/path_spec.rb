@@ -43,4 +43,21 @@ RSpec.describe Path, type: :model do
 		path = paths.sample
 		expect(path.included_or_child_of?(paths)).to be(true)
 	end
+
+  it "should return it's correct undetermined child" do
+    path = Path.depth(4).sample
+    expect(path.named_path).to eq(path.undetermined_child.named_path)
+
+    path = Path.depth(3).sample
+    correct_pathname = path.named_path + "/undetermined"
+    expect(correct_pathname).to eq(path.undetermined_child.named_path)
+
+    path = Path.depth(2).sample
+    correct_pathname = path.named_path + "/undetermined/undetermined"
+    expect(correct_pathname).to eq(path.undetermined_child.named_path)
+
+    path = Path.depth(1).sample
+    correct_pathname = path.named_path + "/undetermined/undetermined/undetermined"
+    expect(correct_pathname).to eq(path.undetermined_child.named_path)
+  end
 end
