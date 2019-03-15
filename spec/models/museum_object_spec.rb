@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe MuseumObject, type: :model do
 	context 'without any set paths' do
     before(:each) do
-      @museum_object = create(:museum_object)
+      @museum_object = create(:valid_museum_object)
     end
 		it "should allow to set single seconday path as array" do
 			Path.depth(2).sample(5).each do |path|
@@ -40,7 +40,7 @@ RSpec.describe MuseumObject, type: :model do
 
 	context 'with already set paths' do
 		before(:each) do
-			@museum_object = create(:museum_object)
+			@museum_object = create(:valid_museum_object)
 		end
 
 		it "should not reject a secondary path that is implied in main path but also implied in a distinct secondary path" do
@@ -96,7 +96,7 @@ RSpec.describe MuseumObject, type: :model do
 		end
 
 		it "should ignore new main path if it is a parent of already set main path" do
-			museum_object = create(:museum_object)
+			museum_object = create(:valid_museum_object)
 			path = Path.depth(4).sample
 			parent = path.parent
 			museum_object.main_path = path
@@ -106,7 +106,7 @@ RSpec.describe MuseumObject, type: :model do
 		end
 
 		it "should ignore if tried to add a parent to existing secondary paths" do
-			museum_object = create(:museum_object)
+			museum_object = create(:valid_museum_object)
 			Path.depth(2).sample(5).each do |child|
 				parent = child.parent
 				museum_object.secondary_paths = child
@@ -117,7 +117,7 @@ RSpec.describe MuseumObject, type: :model do
 		end
 
 		it "should ignore if tried to add a parent of main path to secondary paths" do
-			museum_object = create(:museum_object)
+			museum_object = create(:valid_museum_object)
 			child = Path.all.sample(1).first
 			parent = child.parent
 			museum_object.main_path = child
@@ -126,7 +126,7 @@ RSpec.describe MuseumObject, type: :model do
 		end
 
 		it "should move old main path information to secondary paths if new main path set" do
-			museum_object = create(:museum_object)
+			museum_object = create(:valid_museum_object)
 			main_paths = Path.depth(4).sample(2)
 			expect(main_paths).to be_present
 			old_main = main_paths.first
@@ -139,14 +139,14 @@ RSpec.describe MuseumObject, type: :model do
 		end
 
 		it "should use parent paths if tried to set secondary paths of depth > 2" do
-			museum_object = create(:museum_object)
+			museum_object = create(:valid_museum_object)
 			path = Path.depth(4).sample(1).first
 			museum_object.secondary_paths = path
 			expect(museum_object.secondary_paths.first).to eq(path.to_depth(2))
 		end
 
 		it "should ignore entries of a collection of secondary paths with more specific already existing paths" do
-			museum_object = create(:museum_object)
+			museum_object = create(:valid_museum_object)
 			paths = Path.depth(2).sample(5)
 			museum_object.secondary_paths = paths
 			new_paths = paths.clone
@@ -157,7 +157,7 @@ RSpec.describe MuseumObject, type: :model do
 		end
 
 		it "should ignore if tried to add existing (or implied) main path to secondary paths" do
-			museum_object = create(:museum_object)
+			museum_object = create(:valid_museum_object)
 			main_path = Path.depth(4).sample
 			museum_object.main_path = main_path
 			museum_object.secondary_paths = main_path
@@ -179,6 +179,7 @@ RSpec.describe MuseumObject, type: :model do
     it "should not reset undetermined path if reloaded" do
       path = Path.all.sample
       @museum_object.secondary_paths = path
+      @museum_object.save
       @museum_object = MuseumObject.find(@museum_object.id)
       expect(@museum_object.paths.include?(Path.undetermined_path)).to eq(false)
     end

@@ -21,8 +21,10 @@ RSpec.feature "Add new object steps", js: true, type: :feature do
     click_button('next step')
     expect(page).to have_text("material")
     undet_path_id = Path.undetermined_path.to_depth(1).id
-    expect(page).to have_selector(
-      "#museum_object_secondary_path_ids_" + undet_path_id.to_s)
+    checkbox_id = "#museum_object_secondary_path_ids_" + undet_path_id.to_s
+    expect(page).to have_selector(checkbox_id)
+    checkbox = find(checkbox_id)
+    expect(checkbox.checked?).to eq(true)
 
     click_button('next step')
     expect(page).to have_text("material specified")

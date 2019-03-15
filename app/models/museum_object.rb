@@ -1,7 +1,7 @@
 class MuseumObject < ApplicationRecord
   include SearchCop
-  validates_with MuseumObjectValidator
-	after_create :set_default_values
+  validates_with MuseumObjectValidator, on: :update
+	before_create :set_default_values
 
   has_one :images, class_name: "MuseumObjectImageList", dependent: :destroy
   belongs_to :excavation_site, -> { order(name: :asc) }, required: false 
@@ -400,16 +400,17 @@ class MuseumObject < ApplicationRecord
 											:priority,
 											:dating_period,
 		]
-    self.main_path = Path.undetermined_path
+    self.assign_attributes({main_path: Path.undetermined_path})
+    default_termlists = {}
 		termlist_names.each do |termlist_name|
 			if termlist_name == :decoration_style
-				undetermined_entry = Decoration.find_by(name: "undetermined")
-				self.send(termlist_name.to_s+"=", undetermined_entry) if self.send(termlist_name.to_s).blank?
+        default_termlists[termlist_name] = Decoration.find_by(name: "undetermined")
 			else
 				undetermined_entry = termlist_name.to_s.camelize.constantize.find_by(name: "undetermined")
-				self.send(termlist_name.to_s+"=", undetermined_entry) if self.send(termlist_name.to_s).blank?
+        default_termlists[termlist_name] = undetermined_entry
 			end
 		end
+    self.assign_attributes(default_termlists)
 	end
 
 	# depth 1 = materials
