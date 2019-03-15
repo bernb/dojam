@@ -1,7 +1,7 @@
 class MuseumObject < ApplicationRecord
   include SearchCop
   validates_with MuseumObjectValidator
-	after_initialize :set_default_values
+	after_create :set_default_values
 
   has_one :images, class_name: "MuseumObjectImageList", dependent: :destroy
   belongs_to :excavation_site, -> { order(name: :asc) }, required: false 
@@ -164,6 +164,12 @@ class MuseumObject < ApplicationRecord
 	def secondary_paths=(new_paths)
 		# Allow for single path and array of paths
 		new_paths = [new_paths].flatten
+
+    # Remove undetermined path if any other path is set
+#    if self.main_path == Path.undetermined_path &&
+#        new_paths.any?
+#      self.main_path = nil
+#    end
 
 		# If new paths are not consistent with choosen main path, remove it
 		if main_path.present? && !main_path.included_or_child_of?(new_paths)
@@ -394,7 +400,7 @@ class MuseumObject < ApplicationRecord
 											:priority,
 											:dating_period,
 		]
-
+    self.main_path = Path.undetermined_path
 		termlist_names.each do |termlist_name|
 			if termlist_name == :decoration_style
 				undetermined_entry = Decoration.find_by(name: "undetermined")

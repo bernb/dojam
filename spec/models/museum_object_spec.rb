@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe MuseumObject, type: :model do
 	context 'without any set paths' do
     before(:each) do
-      @museum_object = create(:pathless_museum_object)
+      @museum_object = create(:museum_object)
     end
 		it "should allow to set single seconday path as array" do
 			Path.depth(2).sample(5).each do |path|
@@ -165,6 +165,23 @@ RSpec.describe MuseumObject, type: :model do
 			museum_object.secondary_paths = main_path.parent
 			expect(museum_object.secondary_paths.count).to eq(0)
 		end
+
+    it "should have undetermined path" do
+      expect(@museum_object.main_path&.id).to eq(Path.undetermined_path.id)
+    end
+
+    it "should remove undetermined path if any other path is set" do
+      path = Path.all.sample
+      @museum_object.secondary_paths = path
+      expect(@museum_object.paths.include?(Path.undetermined_path)).to eq(false)
+    end
+    
+    it "should not reset undetermined path if reloaded" do
+      path = Path.all.sample
+      @museum_object.secondary_paths = path
+      @museum_object = MuseumObject.find(@museum_object.id)
+      expect(@museum_object.paths.include?(Path.undetermined_path)).to eq(false)
+    end
 	end
 
 end
