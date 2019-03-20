@@ -29,8 +29,28 @@ RSpec.feature "Add new object steps", js: true, type: :feature do
     click_button('next step')
     expect(page).to have_text("material specified")
     undet_path_id = Path.undetermined_path.to_depth(2).id
-    expect(page).to have_selector(
-      "#museum_object_secondary_path_ids_" + undet_path_id.to_s)
+    checkbox_id = "#museum_object_secondary_path_ids_" + undet_path_id.to_s
+    expect(page).to have_selector(checkbox_id)
+    checkbox = find(checkbox_id)
+    expect(checkbox.checked?).to eq(true)
+
+    click_button('next step')
+    expect(page).to have_text("primary material")
+    undet_path_id = Path.undetermined_path.id
+    dropdown_id = "#museum_object_main_path_id"
+    expect(page).to have_selector(dropdown_id)
+    expect(page.has_select?(
+           'museum_object_main_path_id', with_options: ['undetermined'])).to eq(true)
+
+    click_button('next step')
+    expect(page). to have_text('kind of object specified')
+    dropdown_id = "#museum_object_kind_of_object_specified_id"
+    expect(page).to have_selector(dropdown_id)
+    expect(page.has_select?(
+           'museum_object_kind_of_object_specified_id', with_options: ['undetermined'])).to eq(true)
+
+    click_button('next step')
+    expect(page). to have_text('production')
   end
 
 end
