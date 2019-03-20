@@ -7,6 +7,41 @@ RSpec.feature "Add new object steps", js: true, type: :feature do
     expect(page).to have_text("add new object")
   end
 
+  scenario "User deselects undetermined entry in material step" do
+    museum_object = create(:valid_museum_object)
+    visit '/museum_objects/' + museum_object.id.to_s + '/builds/step_material'
+    undet_path_id = Path.undetermined_path.to_depth(1).id
+    undet_checkbox_id = "#museum_object_secondary_path_ids_" + undet_path_id.to_s
+    undet_checkbox = find(undet_checkbox_id)
+    expect(undet_checkbox.checked?).to eq(true)
+    ceramic_path = Material.find_by(name: 'ceramic').paths.first
+    ceramic_checkbox = find(
+      '#museum_object_secondary_path_ids_' + ceramic_path.id.to_s)
+    ceramic_checkbox.click
+    expect(undet_checkbox.checked?).to eq(false)
+  end
+
+  scenario 'User unselects material in material step' do
+    museum_object = create(:valid_museum_object)
+    ceramic_id = Material.find_by(name: 'ceramic').id
+    path = Path.material_id(ceramic_id).first
+      .direct_children.first
+      .direct_children.first
+      .direct_children.first
+    museum_object.main_path = path
+    visit '/museum_objects/' + museum_object.id.to_s + '/builds/step_material'
+    undet_path_id = Path.undetermined_path.to_depth(1).id
+    undet_checkbox_id = "#museum_object_secondary_path_ids_" + undet_path_id.to_s
+    undet_checkbox = find(undet_checkbox_id)
+    expect(undet_checkbox.checked?).to eq(false)
+    ceramic_path = Material.find_by(name: 'ceramic').paths.first
+    ceramic_checkbox = find(
+      '#museum_object_secondary_path_ids_' + ceramic_path.id.to_s)
+    expect(ceramic_checkbox.checked?).to eq(true)
+    ceramic_checkbox.click
+    expect(undet_checkbox.checked?).to eq(true)
+  end
+
   scenario "User adds a new object with valid location and leave rest to default" do
     visit '/museum_objects/new'
     select('hall A', from: 'storage_storage_id')
