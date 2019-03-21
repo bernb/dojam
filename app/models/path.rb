@@ -23,6 +23,23 @@ class Path < ApplicationRecord
 		return Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id}/#{koos_id}"
 	end
 
+  def undetermined_child
+    return self if depth == 4
+
+		ms_id = MaterialSpecified.find_by(name: "undetermined").id.to_s
+		koo_id = KindOfObject.find_by(name: "undetermined").id.to_s
+		koos_id = KindOfObjectSpecified.find_by(name: "undetermined").id.to_s
+
+    if depth == 3
+      path_name = self.path + "/#{koos_id}"
+    elsif depth == 2
+      path_name = self.path + "/#{koo_id}/#{koos_id}"
+    elsif depth == 1
+      path_name = self.path + "/#{ms_id}/#{koo_id}/#{koos_id}"
+    end
+    return Path.find_by path: path_name
+  end
+
 	def last_object_name
 		self.objects.last.name
 	end

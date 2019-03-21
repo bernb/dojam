@@ -98,6 +98,9 @@ group :development, :test do
 	gem 'rspec-rails'
 	gem 'guard'
 	gem 'guard-rspec'
+  gem 'capybara' # for feature tests
+  gem "capybara-webkit"
+#  gem 'selenium-webdriver' # have capybara know about ajax calls
 end
   # ToDo: MOVE to dev group
  gem 'listen', '~> 3.0.5'

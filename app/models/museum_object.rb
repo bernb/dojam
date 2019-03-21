@@ -1,7 +1,7 @@
 class MuseumObject < ApplicationRecord
   include SearchCop
-  validates_with MuseumObjectValidator
-	after_initialize :set_default_values
+  validates_with MuseumObjectValidator, on: :update
+	before_create :set_default_values
 
   has_one :images, class_name: "MuseumObjectImageList", dependent: :destroy
   belongs_to :excavation_site, -> { order(name: :asc) }, required: false 
@@ -70,7 +70,7 @@ class MuseumObject < ApplicationRecord
 			return classname.constantize.all
 		else
 			if self.main_path.blank?
-				return classname.constantize.none
+				return classname.constantize.where(name: "undetermined")
 			end
 			return self.main_path.termlists.where(type: classname)
 		end
@@ -165,9 +165,15 @@ class MuseumObject < ApplicationRecord
 		# Allow for single path and array of paths
 		new_paths = [new_paths].flatten
 
+    # Remove undetermined path if any other path is set
+#    if self.main_path == Path.undetermined_path &&
+#        new_paths.any?
+#      self.main_path = nil
+#    end
+
 		# If new paths are not consistent with choosen main path, remove it
 		if main_path.present? && !main_path.included_or_child_of?(new_paths)
-			self.main_path = nil
+      self.main_path = nil
 		else
 			# Else remove paths, that are already implied in main path
 			# but not implied by any secondary paths
@@ -186,6 +192,10 @@ class MuseumObject < ApplicationRecord
 
 		# Always map to maximum depth of 2
 		new_paths = new_paths.map{|p| p.to_depth(2)}
+
+    # Also do not save depth 1, but replace with
+    # undetermined child of depth 2
+    new_paths = new_paths.map{|p| p.depth == 1 ? p.undetermined_child : p}
 		
 		super new_paths
 	end
@@ -394,15 +404,17 @@ class MuseumObject < ApplicationRecord
 											:priority,
 											:dating_period,
 		]
+    self.assign_attributes({main_path: Path.undetermined_path})
+    default_termlists = {}
 		termlist_names.each do |termlist_name|
 			if termlist_name == :decoration_style
-				undetermined_entry = Decoration.find_by(name: "undetermined")
-				self.send(termlist_name.to_s+"=", undetermined_entry) if self.send(termlist_name.to_s).blank?
+        default_termlists[termlist_name] = Decoration.find_by(name: "undetermined")
 			else
 				undetermined_entry = termlist_name.to_s.camelize.constantize.find_by(name: "undetermined")
-				self.send(termlist_name.to_s+"=", undetermined_entry) if self.send(termlist_name.to_s).blank?
+        default_termlists[termlist_name] = undetermined_entry
 			end
 		end
+    self.assign_attributes(default_termlists)
 	end
 
 	# depth 1 = materials
