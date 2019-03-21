@@ -218,8 +218,16 @@ class MuseumObjectDecorator < Draper::Decorator
     self&.material_specifieds.each do |ms|
       list << ms.name << "<p>"
     end
-    
+    list = "undetermined" if list.empty?
     return helpers.sanitize list
+  end
+
+  def kind_of_object_decorated
+    return self.kind_of_object&.name || "undetermined"
+  end
+
+  def kind_of_object_specified_decorated
+    return self.kind_of_object_specified&.name || "undetermined"
   end
   
   def links variant
