@@ -28,7 +28,8 @@ RSpec.feature "Add new object steps", js: true, type: :feature do
       .direct_children.first
       .direct_children.first
       .direct_children.first
-    museum_object.main_path = path
+    museum_object.secondary_paths = path
+    museum_object.save!
     visit '/museum_objects/' + museum_object.id.to_s + '/builds/step_material'
     undet_path_id = Path.undetermined_path.to_depth(1).id
     undet_checkbox_id = "#museum_object_secondary_path_ids_" + undet_path_id.to_s
