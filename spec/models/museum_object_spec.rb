@@ -13,8 +13,9 @@ RSpec.describe MuseumObject, type: :model do
 			end
 		end
 
+    # ToDo: This one did fail in some yet unknown edge case
 		it "should allow to set single seconday path given as plain object" do
-			Path.depth(2).sample(5).each do |path|
+			Path.depth(2).sample(50).each do |path|
 				@museum_object.secondary_paths = path
 				expect(@museum_object.secondary_paths.count).to eq(1)
 				expect(@museum_object.secondary_path_ids.first).to eq(path.id)
