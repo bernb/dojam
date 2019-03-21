@@ -192,6 +192,10 @@ class MuseumObject < ApplicationRecord
 
 		# Always map to maximum depth of 2
 		new_paths = new_paths.map{|p| p.to_depth(2)}
+
+    # Also do not save depth 1, but replace with
+    # undetermined child of depth 2
+    new_paths = new_paths.map{|p| p.depth == 1 ? p.undetermined_child : p}
 		
 		super new_paths
 	end
