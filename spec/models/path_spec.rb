@@ -1,6 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Path, type: :model do
+  it "should return the correct parent for a path" do
+    Path.depth(2).sample(100).each do |path|
+      parent_name = "/" + path.path.split("/").reject(&:empty?).first
+      expect(path.parent.path).to eq(parent_name)
+    end
+    Path.depth(3).sample(100).each do |path|
+      ids = path.path.split("/").reject(&:empty?)
+      parent_name = "/" + ids[0] + "/" + ids[1]
+      expect(path.parent.path).to eq(parent_name)
+    end
+  end
+
 	it "should return that nil is not included or parent of instance" do
 		path = Path.all.sample
 		expect(path.included_or_parent_of?(nil)).to be(false)
@@ -43,4 +55,21 @@ RSpec.describe Path, type: :model do
 		path = paths.sample
 		expect(path.included_or_child_of?(paths)).to be(true)
 	end
+
+  it "should return it's correct undetermined child" do
+    path = Path.depth(4).sample
+    expect(path.named_path).to eq(path.undetermined_child.named_path)
+
+    path = Path.depth(3).sample
+    correct_pathname = path.named_path + "/undetermined"
+    expect(correct_pathname).to eq(path.undetermined_child.named_path)
+
+    path = Path.depth(2).sample
+    correct_pathname = path.named_path + "/undetermined/undetermined"
+    expect(correct_pathname).to eq(path.undetermined_child.named_path)
+
+    path = Path.depth(1).sample
+    correct_pathname = path.named_path + "/undetermined/undetermined/undetermined"
+    expect(correct_pathname).to eq(path.undetermined_child.named_path)
+  end
 end

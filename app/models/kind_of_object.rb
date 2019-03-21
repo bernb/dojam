@@ -7,6 +7,6 @@ class KindOfObject < Termlist
 		ms_id = material_specified.id
 		paths = Path.where("path SIMILAR TO ?", "/\\d{1,}/#{ms_id}/#{self.id}/%")
 		koos = paths.map{|p| p.objects[3]}
-		return koos
+    return koos.uniq
 	end
 end
