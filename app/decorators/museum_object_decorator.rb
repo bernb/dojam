@@ -185,11 +185,11 @@ class MuseumObjectDecorator < Draper::Decorator
     end
   end
 	def needs_cleaning_yesno?
-		self.needs_cleaning ? "Yes" : "No"
+		self.needs_cleaning ? "yes" : "no"
 	end
 
 	def needs_conservation_yesno?
-		self.needs_conservation ? "Yes" : "No"
+		self.needs_conservation ? "yes" : "no"
 	end
 
 
