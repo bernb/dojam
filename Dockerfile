@@ -6,14 +6,18 @@ RUN mkdir /dojam
 WORKDIR /dojam
 COPY Gemfile /dojam/Gemfile
 COPY Gemfile.lock /dojam/Gemfile.lock
+# Install bundler 2
+RUN gem install bundler -v 2.0.1
 RUN bundle install
 COPY . /dojam
+# Recreate directories that are ignored by Docker
+RUN mkdir /dojam/log && mkdir /dojam/tmp
 
 # Add a script to be executed every time the container starts.
 COPY docker-entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
-EXPOSE 3000
+EXPOSE 22333
 
 # Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-b", "0.0.0.0", "-p", "22333"]
