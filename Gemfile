@@ -59,8 +59,8 @@ gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# DSL to build json structures
+gem 'jbuilder', '~> 2.5'
 
 # postgres
 gem 'pg'
