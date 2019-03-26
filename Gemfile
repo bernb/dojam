@@ -36,7 +36,7 @@ gem 'simple_form', '~> 4.0'
 gem 'wicked'
 
 # Used for rails 5.2 for faster application start
-gem 'bootsnap', require: false, '~> 1.4'
+gem 'bootsnap', '~> 1.4', require: false
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2'
@@ -76,7 +76,7 @@ gem 'acts_as_list', '~> 0.9'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri, '~> 11.0'
+  gem 'byebug', '~> 11.0', platform: :mri
   gem "factory_bot_rails", '~> 5.0'
 	gem 'rspec-rails'
 	gem 'guard'
