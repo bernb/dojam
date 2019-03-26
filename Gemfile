@@ -93,10 +93,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem "rails-erd" # Generate Entity-Relationship Diagrams
-  gem 'capistrano'
-  gem 'capistrano-bundler' # for bundle install task
-  gem 'capistrano-rails' # migrate and compile asset tasks
-  gem 'capistrano3-puma' # puma tasks
   gem 'scout_apm' # used for profiling
   gem 'rack-mini-profiler' # also profiling
   gem 'memory_profiler' # For memory profiling used by rack-mini-profiler
