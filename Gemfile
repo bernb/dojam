@@ -9,12 +9,12 @@ end
 gem 'search_cop'
 
 # used by active storage to create thumbnail
-gem 'mini_magick'
+gem 'mini_magick', '~> 4.9'
 
-gem "image_processing"
+gem "image_processing", '~> 1.8'
 
 # Reads Excel files
-gem "roo", "~> 2.7.0"
+gem "roo", "~> 2.8"
 
 # Show hashes nicely with ap method
 gem "awesome_print"
@@ -23,11 +23,11 @@ gem "awesome_print"
 gem "fuzzy_match"
 
 # helps with decorators
-gem 'draper'
+gem 'draper', '~> 3.1'
 
 # needed by bootstrap gem
 gem 'sprockets-rails'
-gem 'bootstrap'
+gem 'bootstrap', '~> 4.3'
 
 # will be initialized with bootstrap support
 gem 'simple_form', '~> 4.0'
@@ -36,13 +36,13 @@ gem 'simple_form', '~> 4.0'
 gem 'wicked'
 
 # Used for rails 5.2 for faster application start
-gem 'bootsnap', require: false
+gem 'bootsnap', require: false, '~> 1.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2'
 
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.12'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -66,22 +66,22 @@ gem 'jbuilder', '~> 2.5'
 gem 'pg'
 
 # batch import
-gem 'activerecord-import'
+gem 'activerecord-import', '~> 1.0'
 
 # makes credential in config/application.yml available for rail (added to .gitignore)
 gem "figaro"
 
 # Gives sorted models
-gem 'acts_as_list'
+gem 'acts_as_list', '~> 0.9'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
-  gem "factory_bot_rails"
+  gem 'byebug', platform: :mri, '~> 11.0'
+  gem "factory_bot_rails", '~> 5.0'
 	gem 'rspec-rails'
 	gem 'guard'
 	gem 'guard-rspec'
-  gem 'capybara' # for feature tests
+  gem 'capybara', '~> 3.15' # for feature tests
   gem "capybara-webkit"
 #  gem 'selenium-webdriver' # have capybara know about ajax calls
 end
@@ -93,9 +93,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem "rails-erd" # Generate Entity-Relationship Diagrams
-  gem 'scout_apm' # used for profiling
-  gem 'rack-mini-profiler' # also profiling
-  gem 'memory_profiler' # For memory profiling used by rack-mini-profiler
+  gem 'scout_apm', '~> 2.4' # used for profiling
+  gem 'rack-mini-profiler', '~> 1.0' # also profiling
+  gem 'memory_profiler', '~> 0.9' # For memory profiling used by rack-mini-profiler
   # For call-stack profiling flamegraphs used by rack-mini-profiler
   gem 'flamegraph'
   gem 'stackprof'
