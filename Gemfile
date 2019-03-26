@@ -13,14 +13,6 @@ gem 'mini_magick'
 
 gem "image_processing"
 
-# read env variables from serverfile as puma doesnt load env variables itself
-# we switch to canonical config file secrets.yml
-#gem 'dotenv-rails', :require => 'dotenv/rails-now'
-
-# bootstrap 3 for use with simple_form
-# now using bootstrap 4 as simple_form 4 supports it now
-#gem 'bootstrap-sass'
-
 # Reads Excel files
 gem "roo", "~> 2.7.0"
 
@@ -43,37 +35,29 @@ gem 'simple_form', '~> 4.0'
 # creates multistep forms for models
 gem 'wicked'
 
-# creates simple and nice nested forms
-gem 'cocoon'
-
 # Used for rails 5.2 for faster application start
 gem 'bootsnap', require: false
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -87,8 +71,7 @@ gem 'activerecord-import'
 # makes credential in config/application.yml available for rail (added to .gitignore)
 gem "figaro"
 
-gem 'activerecord-import'
-
+# Gives sorted models
 gem 'acts_as_list'
 
 group :development, :test do
@@ -102,8 +85,6 @@ group :development, :test do
   gem "capybara-webkit"
 #  gem 'selenium-webdriver' # have capybara know about ajax calls
 end
-  # ToDo: MOVE to dev group
- gem 'listen', '~> 3.0.5'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
@@ -124,11 +105,3 @@ group :development do
   gem 'stackprof'
 	gem 'ruby-prof'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-# Use of rails_admin for more technical administrations
-gem 'administrate'
-#gem 'rails_admin', '~> 1.3'
-#gem "rails_admin_simple_has_many" # Alternative widget to select has_many
