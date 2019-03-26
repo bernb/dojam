@@ -1,3 +1,5 @@
 tmp
 log
 .git
+.env
+Dockerfile
