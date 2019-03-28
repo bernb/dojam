@@ -12,7 +12,6 @@ default: &default
 
 development:
   <<: *default
-  host: db
   database: DOJAM_DB
   username: dojam
   password: <%= Rails.application.secrets.dojam_db_password %>
