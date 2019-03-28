@@ -8,6 +8,8 @@ services:
             - "5432"
     env_file:
             - dojam-postgres.env
+    volumes:
+            - ./postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
   app:
     build:
       context: .
