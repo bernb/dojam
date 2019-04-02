@@ -1,5 +1,5 @@
-tmp
-log
+app/tmp
+app/log
 .git
 .env
 Dockerfile
