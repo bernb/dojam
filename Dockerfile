@@ -1,4 +1,6 @@
 FROM ruby:2.6.2
+# Debian stable ships with nodejs 8 which is too old for rails
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 # For Capybara-webkit gem
 RUN apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
