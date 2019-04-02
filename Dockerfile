@@ -20,4 +20,4 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 EXPOSE 22333
 
 # Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "22333"]
+#CMD ["rails", "server", "-b", "0.0.0.0", "-p", "22333"]
