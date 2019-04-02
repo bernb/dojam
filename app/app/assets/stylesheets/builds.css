@@ -1,0 +1,48 @@
+// Place all the styles related to the Builds controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#museum_object_termlist_material_specified_ids {
+  min-width: 300px;
+}
+
+.bar-step {
+    position:absolute;
+    margin-top:-20px;
+	  z-index:1;
+    font-size:12px;
+}
+
+.label-txt {
+    float: left;
+}
+
+.label-line {
+    float: right;
+    background: #000;
+    height:50px;
+	  width:1px;
+    margin-left: 5px;
+}
+
+.label-percent {
+    float: right;
+    margin-left: 5px;   
+}
+
+// We omit for now until client side feedback is implemented completely
+.help-block {
+  display: none;
+}
+
+span.checkbox {
+  display: block;
+}
+
+.spacer {
+     margin-bottom: 20px !important;
+}
+
+.hidden {
+  display: none;
+}

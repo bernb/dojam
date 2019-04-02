@@ -1,0 +1,18 @@
+<%= form_for(shown_object) do |f| %>
+  <% if shown_object.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(shown_object.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <ul>
+      <% shown_object.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= render 'layouts/edit_form_fields', shown_object: shown_object %>
+  
+  <div class="actions">
+  <%= f.submit %>
+  </div>
+<% end %>

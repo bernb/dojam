@@ -1,0 +1,31 @@
+<% unless images.nil? %>
+  <div class="row">
+  <strong>main image</strong>
+  </div>
+  <div class="row">
+    <%# ToDo: refactor into decorator. link_to didn't got generated correctly %>
+    <%# Note that check for nil does NOT WORK for attached_one, as it is never nil, but will trigger a DelegationError if accessed %>
+    <%# unless images.main.nil? %>
+    <% if images.main.attached? %>
+      <div class="col-4">
+        <%= link_to images.main.filename, images.main, class: "card-img-top", target:"_blank" %>
+      </div> 
+      <div class="col-4">
+        <%= link_to "remove", delete_image_path(images.id, images.main.id), method: :delete, confirm: "Delete image?", class: "text-warning" %>
+      </div>
+   <% end %>
+  </div>
+  <div class="row">
+    <strong>other images</strong>
+  </div>
+  <% images&.list&.each do |image| %>
+    <div class="row">
+      <div class="col-4">
+        <%= link_to image.blob.filename, image, class: "card-img-top", target:"_blank" %>
+      </div>
+      <div class="col-4">
+        <%= link_to "remove", delete_image_path(images.id, image.id), method: :delete, confirm: "Delete image?", class: "text-warning" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,60 @@
+<div class="museum_object_page museum_object_dating_remarks_literature">
+  <h2>dating/remarks/literature</h2>
+  <%= link_to "edit", wizard_path(:step_dating) %>
+  <dl class="dl-horizontal">
+    <div class="row">
+      <div class="col-3">
+        <dt>period</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.dating_period_decorated %></dd>
+      </div>
+    </div>
+      
+    <div class="row">
+      <div class="col-3">
+        <dt>millennium</dt>
+      </div>
+      <div class="col">
+				<dd><%= @museum_object&.dating_millennium %>
+      </div>
+    </div>
+      
+    <div class="row">
+      <div class="col-3">
+        <dt>years</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.dating_timespan %></dd>
+      </div>
+    </div>
+      
+    <div class="row">
+      <div class="col-3">
+        <dt>centuries</dt>
+      </div>
+			<div class="col">
+				<dd><%= @museum_object&.dating_century %> </dd>
+			</div>
+    </div>
+      
+    <div class="row">
+      <div class="col-3">
+        <dt>remarks</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.remarks %></dd>
+      </div>
+    </div>
+      
+    <div class="row">
+      <div class="col-3">
+        <dt>literature</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.literature %></dd>
+      </div>
+    </div>
+    
+  </dl>
+</div>

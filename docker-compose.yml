@@ -7,17 +7,17 @@ services:
     expose:
             - "5432"
     env_file:
-            - dojam-postgres.env
+            - ./dojam-postgres.env
     volumes:
             - ./postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
-            - ./db-data:/var/lib/postgresql/data
+            - ./db:/var/lib/postgresql/data
   app:
     build:
       context: .
       dockerfile: Dockerfile
     command: bundle exec rails s -p 22333 -b '0.0.0.0'
     volumes:
-      - .:/dojam
+      - ./app:/dojam
     ports:
       - "22333:22333"
     depends_on:

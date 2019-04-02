@@ -1,0 +1,46 @@
+<div class="card">
+  <%# museum_card&.top_image %>
+  <div class="card-body">
+    <h5 class="card-title"><%= museum_card&.name %></h5>
+    <p class="card-text">
+      <dl class="row">
+        <dt class="col-sm-6">
+          location
+        </dt>
+        <dd class="col-sm-6">
+          <%= museum_card&.storage_location&.name %>
+        </dd>
+        
+        <dt class="col-sm-6">
+          material
+        </dt>
+        <dd class="col-sm-6">
+          <%= museum_card.list_materials %>
+        </dd>
+
+        <dt class="col-sm-6">
+          material specifieds
+        </dt>
+        <dd class="col-sm-6">
+          <%= museum_card.list_material_specifieds %>
+        </dd>
+        
+        <dt class="col-sm-6">
+          kind of object
+        </dt>
+        <dd class="col-sm-6">
+          <%= museum_card&.kind_of_object_decorated %>
+        </dd>
+				
+        <dt class="col-sm-6">
+          kind of object specified
+        </dt>
+        <dd class="col-sm-6">
+          <%= museum_card&.kind_of_object_specified_decorated %>
+        </dd>
+
+      </dl>
+    </p>
+    <%= museum_card.links variant %>
+  </div>
+</div>

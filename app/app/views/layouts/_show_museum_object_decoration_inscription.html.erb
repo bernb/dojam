@@ -1,0 +1,79 @@
+<div class="museum_object_page museum_object_decoration_inscription">
+  <h2>decoration/inscription</h2>
+  <%= link_to "edit", wizard_path(:step_decoration) %>
+  <dl class="dl-horizontal">
+
+    <div class="row">
+      <div class="col-3">
+        <dt>style</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.decoration_style&.name %></dd>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <dt>technique</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.decoration_technique&.name %></dd>
+      </div>
+    </div>
+      
+    <div class="row">
+      <div class="col-3">
+        <dt>color</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object.decoration_color&.name %></dd>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <dt>Munsell color</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object.munsell_color %></dd>
+      </div>
+    </div>
+      
+    <div class="row">
+      <div class="col-3">
+        <dt>letters of inscription</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object.inscription_letter&.name %></dd>
+      </div>
+    </div>
+      
+    <div class="row">
+      <div class="col-3">
+        <dt>language of inscription</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object.inscription_language&.name %></dd>
+      </div>
+    </div>
+      
+    <div class="row">
+      <div class="col-3">
+        <dt>inscription text</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object.inscription_text %></dd>
+      </div>
+    </div>
+      
+    <div class="row">
+      <div class="col-3">
+        <dt>inscription translation</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object.inscription_translation %></dd>
+      </div>
+    </div>
+    
+  </dl>
+</div>

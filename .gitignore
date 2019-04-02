@@ -4,9 +4,9 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 #
-erd.pdf
+/app/erd.pdf
 
-public/uploads/
+/app/public/uploads/
 
 # Ignore environment files
 *.env
@@ -18,29 +18,25 @@ public/uploads/
 .*.sw?
 
 # Ignore bundler config.
-/.bundle
+/app/.bundle
 
 # directory contains images of museum objects
-/storage
+/app/storage
 
 # Directory of postgres database
-/db-data
-
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
+/db
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+/app/log/*
+/app/tmp/*
+!/app/log/.keep
+!/app/tmp/.keep
 
 # Ignore Byebug command history file.
-.byebug_history
+/.byebug_history
 
 # Ignore application configuration
-/config/application.yml
+/app/config/application.yml
 
 # Ignore credential file
-/config/secrets.yml
+/app/config/secrets.yml

@@ -1,7 +1,0 @@
-<%= render "layouts/build_steps_layout", step_name: @step do %>
-  <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-    <%= f.input :literature, label: 'literature' %>
-    <%= f.button :submit, "next step" %>
-  <% end %>
-<% end %>
-

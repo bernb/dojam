@@ -1,0 +1,59 @@
+<div class="museum_object_page museum_object_storage">
+  <h2>storage</h2>
+  <%= link_to "edit", wizard_path(:step_museum) %>
+  <dl class="dl-horizontal">
+    <div class="row">
+      <div class="col-3">
+        <dt>museum</dt>
+      </div>
+      <div class="col">
+        <dd><%= @museum_object&.museum&.name %></dd>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-3">
+        <dt>inv. number</dt>
+      </div>  
+        <div class="col">
+					<dd><%= @museum_object&.full_inv_number %></dd>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-3">
+        <dt>other inv. number</dt>
+      </div>
+        <div class="col">
+        <dd><%= @museum_object&.inv_numberdoa %></dd>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-3">
+        <dt>number of objects</dt>
+      </div>
+        <div class="col">
+        <dd><%= @museum_object&.amount %></dd>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-3">
+        <dt>place of storage</dt>
+      </div>
+        <div class="col">
+        <dd><%= @museum_object&.storage&.name %></dd>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-3">
+        <dt>place of storage specified</dt>
+      </div>
+        <div class="col">
+        <dd><%= @museum_object&.storage_location&.name %></dd>
+      </div>
+    </div>
+  </dl>
+</div>

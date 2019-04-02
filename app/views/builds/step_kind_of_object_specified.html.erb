@@ -1,7 +1,0 @@
-<%= render "layouts/build_steps_layout", step_name: @step do %>
-	<%= simple_form_for @museum_object, data:{parsley_validate:""}, url: wizard_path do |f| %>
-    <%= f.input :kind_of_object_specified_id, collection: @kind_of_object_specifieds, label: false, as: :collection_select, include_blank: false %>
-    <%= f.button :submit, "next step" %>
-  <% end %>
-<% end %>
-

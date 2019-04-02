@@ -1,0 +1,19 @@
+// shows how to apply a controller-action combination
+var ready;
+
+ready = function() {
+  var site_name = ".step_museum"; 
+  if($(document.body).is(site_name)){
+    step_museum_js();
+  }
+};
+
+function step_museum_js() {
+  $('.storage_selection').val(initial_storage_id); // var gets set in view
+  $(document).on('change', '.storage_selection', function() {
+      if($('.storage_selection').val() == "") {
+      }
+    });
+}
+
+$(document).on('turbolinks:load', ready);

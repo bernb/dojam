@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOJAM</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="<%= controller_name %> <%= action_name %> <%= request.path.split('/').last %>">
+    <div class="container container-border">
+      <%= render 'layouts/navbar' %>
+      <%= render 'layouts/flashbar' %>
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>
