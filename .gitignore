@@ -40,3 +40,6 @@
 
 # Ignore credential file
 /app/config/secrets.yml
+
+# Ignore Qt Debug dir
+*-Debug/
