@@ -43,3 +43,6 @@
 
 # Ignore Qt Debug dir
 *-Debug/
+
+# Ignore qt user related project properties
+/loader/loader.pro.user
