@@ -31,8 +31,7 @@ SOURCES += \
 HEADERS += \
         loaderwindow.h
 
-FORMS += \
-        loaderwindow.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
