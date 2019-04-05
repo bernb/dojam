@@ -49,3 +49,6 @@
 
 # Ignore qtcreator autosave files
 /loader/*.autosave
+
+/staging-area
+/backup-check*
