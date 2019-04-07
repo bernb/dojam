@@ -99,7 +99,7 @@ QPushButton {
     <enum>QLayout::SetDefaultConstraint</enum>
    </property>
    <item row="1" column="2">
-    <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0">
+    <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0">
      <property name="spacing">
       <number>6</number>
      </property>
@@ -168,7 +168,7 @@ QPushButton {
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLabel" name="buildnumber">
+      <widget class="QLabel" name="build">
        <property name="text">
         <string>143</string>
        </property>
