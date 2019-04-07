@@ -7,7 +7,8 @@
 #include <QTextStream>
 #include <QApplication>
 #include <QDir>
-#include<QDebug>
+#include <QDebug>
+#include <QProcess>
 
 namespace Ui {
 class mainwindow;
@@ -20,11 +21,14 @@ class MainWindow : public QWidget
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+public slots:
+    void setUpdateStatus(int exitCode);
 
 private:
     Ui::mainwindow *ui;
     QString m_version;
     QString m_build;
+    QProcess *m_check_updates;
     void setVersion();
 };
 

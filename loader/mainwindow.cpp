@@ -7,13 +7,25 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::mainwindow),
     m_version(""),
-    m_build("")
+    m_build(""),
+    m_check_updates(new QProcess())
 {
     ui->setupUi(this);
     setVersion();
 
     ui->version->setText(m_version);
     ui->build->setText(m_build);
+
+    ui->check_updates->setText("Checking for updates...");
+    ui->check_updates->setEnabled(false);
+
+    m_check_updates->start("sleep 3");
+
+    connect(m_check_updates,
+            SIGNAL(finished(int, QProcess::ExitStatus)),
+            this,
+            SLOT(setUpdateStatus(int)));
+
 }
 
 void MainWindow::setVersion()
@@ -31,6 +43,10 @@ void MainWindow::setVersion()
         m_version = version_build.first();
         m_build = version_build.last();
     }
+}
+
+void MainWindow::setUpdateStatus(int exitCode) {
+    ui->check_updates->setText("Check complete!");
 }
 
 MainWindow::~MainWindow()
