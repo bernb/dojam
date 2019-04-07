@@ -25,6 +25,7 @@ private:
     Ui::mainwindow *ui;
     QString m_version;
     QString m_build;
+    void setVersion();
 };
 
 #endif // MAINWINDOW_H

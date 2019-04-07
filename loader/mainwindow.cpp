@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::mainwindow),
@@ -8,6 +10,14 @@ MainWindow::MainWindow(QWidget *parent) :
     m_build("")
 {
     ui->setupUi(this);
+    setVersion();
+
+    ui->version->setText(m_version);
+    ui->build->setText(m_build);
+}
+
+void MainWindow::setVersion()
+{
     QDir app_dir(QApplication::applicationDirPath());
     QFile version_file(app_dir.path() + "/version");
     if(!version_file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -21,8 +31,6 @@ MainWindow::MainWindow(QWidget *parent) :
         m_version = version_build.first();
         m_build = version_build.last();
     }
-    ui->version->setText(m_version);
-    ui->build->setText(m_build);
 }
 
 MainWindow::~MainWindow()
