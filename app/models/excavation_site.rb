@@ -1,6 +1,5 @@
 class ExcavationSite < ApplicationRecord
-  belongs_to :termlist_excavation_site_kind, required: false, foreign_key: 'excavation_site_kind_id' # for now in dev state without validations
-  has_many :museum_objects, inverse_of: :excavation_site
+  has_many :museum_objects, inverse_of: :excavation_site, dependent: :restrict_with_error
 
 	def self.is_independent_of_paths
 		true
