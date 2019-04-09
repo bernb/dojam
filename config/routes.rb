@@ -38,7 +38,7 @@ Rails.application.routes.draw do
       resources :priorities
       resources :production_techniques
 
-      root to: "museum_objects#index"
+      root to: "excavation_sites#index"
     end
   get 'termlists/index'
   get 'termlists/choose'
