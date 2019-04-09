@@ -25,6 +25,10 @@ MainWindow::MainWindow(QWidget *parent) :
             SIGNAL(finished(int, QProcess::ExitStatus)),
             this,
             SLOT(setUpdateStatus(int)));
+    connect(ui->start_app,
+            SIGNAL(clicked()),
+                   this,
+            SLOT(start_app()));
 
 }
 
@@ -46,10 +50,16 @@ void MainWindow::setVersion()
 }
 
 void MainWindow::setUpdateStatus(int exitCode) {
-    ui->check_updates->setText("Check complete!");
+    ui->check_updates->setText("No new updates");
+}
+
+void MainWindow::start_app() {
+    this->app_view = new LoaderWindow();
+    this->app_view->showMaximized();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete app_view;
 }
