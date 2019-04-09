@@ -8,15 +8,15 @@ class ExcavationSiteCategoryDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+    id: Field::Number,
+    name: Field::String,
+    created_at: Field::DateTime,
+    updated_at: Field::DateTime,
     termlist_paths: Field::HasMany,
     paths: Field::HasMany,
     excavation_site_category_kinds: Field::HasMany,
     excavation_site_kinds: Field::HasMany.with_options(class_name: "Termlist"),
-    id: Field::Number,
     type: Field::String,
-    name: Field::String,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
     position: Field::Number,
   }.freeze
 
