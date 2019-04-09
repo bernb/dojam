@@ -24,40 +24,30 @@ class AcquisitionDeliveredByDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :termlist_paths,
-    :paths,
     :id,
-    :type,
+    :name
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :termlist_paths,
-    :paths,
     :id,
-    :type,
     :name,
     :created_at,
     :updated_at,
-    :position,
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :termlist_paths,
-    :paths,
-    :type,
     :name,
-    :position,
   ].freeze
 
   # Overwrite this method to customize how acquisition delivered bies are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(acquisition_delivered_by)
-  #   "AcquisitionDeliveredBy ##{acquisition_delivered_by.id}"
-  # end
+   def display_resource(acquisition_delivered_by)
+     "Delivered By #{acquisition_delivered_by.name}"
+   end
 end

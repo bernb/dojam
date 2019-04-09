@@ -21,18 +21,17 @@ class StorageLocationDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :storage,
     :id,
     :name,
-    :created_at,
+    :storage,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :storage,
     :id,
     :name,
+    :storage,
     :created_at,
     :updated_at,
   ].freeze
@@ -48,7 +47,7 @@ class StorageLocationDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how storage locations are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(storage_location)
-  #   "StorageLocation ##{storage_location.id}"
-  # end
+   def display_resource(storage_location)
+     "Storage Location #{storage_location.name}"
+   end
 end

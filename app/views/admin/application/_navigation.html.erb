@@ -7,7 +7,7 @@ for all resources in the admin dashboard,
 as defined by the routes in the `admin/` namespace
 %>
 
-<% whitelist = ["excavation_sites", "excavation_site_category_kinds"].freeze %>
+<% whitelist = ["excavation_sites", "storage_locations", "storages", "acquisition_kinds", "acquisition_delivered_bies", "excavation_site_kinds", "excavation_site_categories"] %>
 
 <nav class="navigation" role="navigation">
   <% Administrate::Namespace.new(namespace).resources.select{|i| i.resource.in?(whitelist)}.each do |resource| %>

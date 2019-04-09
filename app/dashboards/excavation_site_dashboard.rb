@@ -21,7 +21,6 @@ class ExcavationSiteDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :museum_objects,
     :id,
     :name,
   ].freeze
@@ -29,7 +28,6 @@ class ExcavationSiteDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :museum_objects,
     :id,
     :name,
     :created_at,
@@ -40,14 +38,13 @@ class ExcavationSiteDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :museum_objects,
     :name,
   ].freeze
 
   # Overwrite this method to customize how excavation sites are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(excavation_site)
-  #   "ExcavationSite ##{excavation_site.id}"
-  # end
+   def display_resource(excavation_site)
+     "Excavation Site #{excavation_site.name}"
+   end
 end
