@@ -9,6 +9,7 @@
 #include <QDir>
 #include <QDebug>
 #include <QProcess>
+#include "loaderwindow.h"
 
 namespace Ui {
 class mainwindow;
@@ -23,12 +24,14 @@ public:
     ~MainWindow();
 public slots:
     void setUpdateStatus(int exitCode);
+    void start_app();
 
 private:
     Ui::mainwindow *ui;
     QString m_version;
     QString m_build;
     QProcess *m_check_updates;
+    LoaderWindow *app_view;
     void setVersion();
 };
 
