@@ -22,19 +22,19 @@ class StorageDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :museum,
-    :storage_locations,
     :id,
+    :museum,
     :name,
+    :storage_locations,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :museum,
-    :storage_locations,
     :id,
+    :museum,
     :name,
+    :storage_locations,
     :created_at,
     :updated_at,
   ].freeze
@@ -51,7 +51,7 @@ class StorageDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how storages are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(storage)
-  #   "Storage ##{storage.id}"
-  # end
+   def display_resource(storage)
+     "Storage #{storage.name}"
+   end
 end

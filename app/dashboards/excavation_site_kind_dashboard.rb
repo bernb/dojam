@@ -26,44 +26,33 @@ class ExcavationSiteKindDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :termlist_paths,
-    :paths,
-    :excavation_site_category_kinds,
-    :excavation_site_categories,
+    :id,
+    :name,
+    :excavation_site_categories
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :termlist_paths,
-    :paths,
-    :excavation_site_category_kinds,
-    :excavation_site_categories,
     :id,
-    :type,
     :name,
+    :excavation_site_categories,
     :created_at,
     :updated_at,
-    :position,
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :termlist_paths,
-    :paths,
-    :excavation_site_category_kinds,
     :excavation_site_categories,
-    :type,
     :name,
-    :position,
   ].freeze
 
   # Overwrite this method to customize how excavation site kinds are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(excavation_site_kind)
-  #   "ExcavationSiteKind ##{excavation_site_kind.id}"
-  # end
+   def display_resource(excavation_site_kind)
+     "Excavation Site Kind #{excavation_site_kind.name}"
+   end
 end

@@ -23,10 +23,9 @@ class ExcavationSiteCategoryKindDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
+    :id,
     :excavation_site_category,
     :excavation_site_kind,
-    :id,
-    :excavation_site_category_id,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -54,7 +53,7 @@ class ExcavationSiteCategoryKindDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how excavation site category kinds are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(excavation_site_category_kind)
-  #   "ExcavationSiteCategoryKind ##{excavation_site_category_kind.id}"
-  # end
+   def display_resource(excavation_site_category_kind)
+     "Excavation Site Category Kind #{excavation_site_category_kind.name}"
+   end
 end

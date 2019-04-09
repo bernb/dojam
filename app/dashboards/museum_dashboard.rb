@@ -22,18 +22,18 @@ class MuseumDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :storages,
     :id,
     :name,
+    :storages,
     :created_at,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :storages,
     :id,
     :name,
+    :storages,
     :created_at,
     :updated_at,
     :prefix,
@@ -43,7 +43,6 @@ class MuseumDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :storages,
     :name,
     :prefix,
   ].freeze
@@ -51,7 +50,7 @@ class MuseumDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how museums are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(museum)
-  #   "Museum ##{museum.id}"
-  # end
+   def display_resource(museum)
+     "#{museum.name}"
+   end
 end
