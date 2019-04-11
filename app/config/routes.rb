@@ -1,5 +1,45 @@
 Rails.application.routes.draw do
   
+  namespace :admin do
+      resources :museum_objects
+      resources :museum_object_image_lists
+      resources :termlists
+      resources :color_museum_objects
+      resources :excavation_sites
+      resources :excavation_site_category_kinds
+      resources :material_museum_objects
+      resources :material_specified_museum_objects
+      resources :museums
+      resources :museum_object_paths
+      resources :paths
+      resources :storages
+      resources :storage_locations
+      resources :termlist_paths
+      resources :acquisition_delivered_bies
+      resources :acquisition_kinds
+      resources :authenticities
+      resources :colors
+      resources :dating_centuries
+      resources :dating_millennia
+      resources :dating_periods
+      resources :decorations
+      resources :decoration_colors
+      resources :decoration_techniques
+      resources :excavation_site_categories
+      resources :excavation_site_kinds
+      resources :inscription_languages
+      resources :inscription_letters
+      resources :kind_of_objects
+      resources :kind_of_object_specifieds
+      resources :materials
+      resources :material_specifieds
+      resources :preservation_materials
+      resources :preservation_objects
+      resources :priorities
+      resources :production_techniques
+
+      root to: "excavation_sites#index"
+    end
   get 'termlists/index'
   get 'termlists/choose'
   get 'termlists/show'
