@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class ExcavationSiteDashboard < Administrate::BaseDashboard
+class StorageDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,7 +8,8 @@ class ExcavationSiteDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    museum_objects: Field::HasMany,
+    museum: Field::BelongsTo,
+    storage_locations: Field::HasMany,
     id: Field::Number,
     name: Field::String,
     created_at: Field::DateTime,
@@ -22,14 +23,18 @@ class ExcavationSiteDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :id,
+    :museum,
     :name,
+    :storage_locations,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
+    :museum,
     :name,
+    :storage_locations,
     :created_at,
     :updated_at,
   ].freeze
@@ -38,13 +43,15 @@ class ExcavationSiteDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :museum,
+    :storage_locations,
     :name,
   ].freeze
 
-  # Overwrite this method to customize how excavation sites are displayed
+  # Overwrite this method to customize how storages are displayed
   # across all pages of the admin dashboard.
   #
-   def display_resource(excavation_site)
-     "Excavation Site #{excavation_site.name}"
+   def display_resource(storage)
+     "Storage #{storage.name}"
    end
 end
