@@ -51,4 +51,4 @@
 /loader/*.autosave
 
 /staging-area
-/backup-check*
+/backup-tests

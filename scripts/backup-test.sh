@@ -5,8 +5,8 @@ foldername="backup-check-$(date +%Y-%m-%d_%H-%M-%S)"
 echo "Retrieving name of latest archive..."
 latest_archive="$(borg list --short --last 1)"
 echo "$latest_archive"
-mkdir ./"$foldername"
-cd ./"$foldername"
+mkdir ../backup-tests/"$foldername"
+cd ../backup-tests/"$foldername"
 
 echo "Download latest app version to $foldername"
 git clone git@bitbucket.org:BernardBeitz/jamappv2.git .
