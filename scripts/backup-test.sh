@@ -18,4 +18,4 @@ echo "Extract archive $latest_archive to $foldername"
 borg -p extract --strip-components 3 ::"$latest_archive"
 
 echo "Copy secrets into backup folder"
-cp ../jamappv2/config/secrets.yml config/
+cp ../../app/config/secrets.yml config/
