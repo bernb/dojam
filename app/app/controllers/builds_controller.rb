@@ -317,7 +317,7 @@ class BuildsController < ApplicationController
   def museum_object_params
     if params.key? :museum_object # Used for forms that do not directly belong to model (like material) ToDo: Check for a cleaner way
       params.require(:museum_object).permit :inv_number, :inv_extension, :inv_numberdoa, :amount, :storage_location_id, 
-                                          :acquisition_kind_id, :acquisition_delivered_by_id, :acquisition_deliverer_name, :acquisition_date,
+                                          :acquisition_kind_id, :acquisition_delivered_by_id, :acquisition_deliverer_name, :acquisition_date, :remarks_acquisition,
                                           :finding_context, :finding_remarks, :authenticity_id, :priority, :priority_determined_by,
                                           :inscription_decoration, :inscription_letters, :inscription_text, :inscription_translation, 
                                           :excavation_site_id, :excavation_site_category_id, :kind_of_object_specified_id,
