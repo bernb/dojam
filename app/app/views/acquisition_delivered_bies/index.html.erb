@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Acquisition Delivered Bies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @acquisition_delivered_bies.each do |acquisition_delivered_by| %>
+      <tr>
+        <td><%= acquisition_delivered_by.name %></td>
+        <td><%= link_to 'Show', acquisition_delivered_by %></td>
+        <td><%= link_to 'Edit', edit_acquisition_delivered_by_path(acquisition_delivered_by) %></td>
+        <td><%= link_to 'Destroy', acquisition_delivered_by, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Acquisition Delivered By', new_acquisition_delivered_by_path %>

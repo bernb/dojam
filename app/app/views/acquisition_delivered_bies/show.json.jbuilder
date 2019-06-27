@@ -1,0 +1,1 @@
+json.partial! "acquisition_delivered_bies/acquisition_delivered_by", acquisition_delivered_by: @acquisition_delivered_by
