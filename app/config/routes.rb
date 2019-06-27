@@ -27,5 +27,8 @@ Rails.application.routes.draw do
 	get  '/import_termlists/select', to: 'static_pages#import_termlists_select'
 	post '/import_termlists/submit', to: 'static_pages#import_termlists_submit'
 
+  # CRUDs
+  resources :acquisition_delivered_bies
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

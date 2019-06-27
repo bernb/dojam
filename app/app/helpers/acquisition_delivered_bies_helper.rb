@@ -1,0 +1,2 @@
+module AcquisitionDeliveredBiesHelper
+end
