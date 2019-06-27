@@ -60,6 +60,13 @@ class MuseumObjectDecorator < Draper::Decorator
 		return returnstring.chomp(",")
 	end
 
+  def munsell_color_decorated
+    if self.munsell_color.nil? || self.munsell_color == ""
+      return "undetermined"
+    else
+      return self.munsell_color
+    end
+  end
 
 	def max_length_decorated
 		if self.max_length.blank? 
