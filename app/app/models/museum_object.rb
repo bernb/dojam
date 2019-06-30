@@ -45,6 +45,8 @@ class MuseumObject < ApplicationRecord
   has_many :decoration_colors, through: :decoration_color_museum_objects
   has_many :inscription_letter_museum_objects
   has_many :inscription_letters, through: :inscription_letter_museum_objects
+  has_many :inscription_language_museum_objects
+  has_many :inscription_languages, through: :inscription_language_museum_objects
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true
   accepts_nested_attributes_for :images, :secondary_paths
