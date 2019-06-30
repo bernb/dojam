@@ -43,13 +43,17 @@
         <dd> <%= @museum_object&.munsell_color_decorated %> </dd>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-3">
-        <dt>production technique</dt>
-      </div>  
-      <div class="col">
-        <dd> <%= @museum_object&.production_technique&.name %> </dd>
+        <dt>production techniques</dt>
+      </div> 
+      <div class="col"> 
+        <% @museum_object.production_techniques&.each do |p| %>
+          <div class="">
+            <dd><%= p.name %></dd>
+          </div>
+        <% end %>
       </div>
     </div>
     
