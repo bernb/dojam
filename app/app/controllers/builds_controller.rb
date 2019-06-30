@@ -338,6 +338,7 @@ class BuildsController < ApplicationController
                                           decoration_technique_ids: [],
                                           decoration_color_ids: [],
                                           production_technique_ids: [],
+                                          inscription_letter_ids: [],
                                           images: [],
                                           dating_century_ids: [],
                                           color_ids: [],                                   

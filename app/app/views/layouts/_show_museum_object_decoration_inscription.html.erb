@@ -50,13 +50,17 @@
         <dd><%= @museum_object.munsell_color %></dd>
       </div>
     </div>
-      
+
     <div class="row">
       <div class="col-3">
         <dt>letters of inscription</dt>
-      </div>
-      <div class="col">
-        <dd><%= @museum_object.inscription_letter&.name %></dd>
+      </div> 
+      <div class="col"> 
+        <% @museum_object.inscription_letters&.each do |d| %>
+          <div class="">
+            <dd><%= d.name %></dd>
+          </div>
+        <% end %>
       </div>
     </div>
       
