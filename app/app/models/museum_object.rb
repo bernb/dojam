@@ -41,6 +41,8 @@ class MuseumObject < ApplicationRecord
   has_many :decoration_styles, through: :decoration_style_museum_objects
   has_many :decoration_technique_museum_objects
   has_many :decoration_techniques, through: :decoration_technique_museum_objects
+  has_many :decoration_color_museum_objects
+  has_many :decoration_colors, through: :decoration_color_museum_objects
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true
   accepts_nested_attributes_for :images, :secondary_paths

@@ -2,7 +2,7 @@
 	<%= simple_form_for @museum_object, data:{parsley_validate:""}, url: wizard_path do |f| %>
     <%= f.association :decoration_styles, collection: @decoration_styles, label: "style", as: :check_boxes, include_blank: false, wrapper_html: {class: 'dojam-multi-select'}%>
     <%= f.association :decoration_techniques, collection: @decoration_techniques, label: "technique", as: :check_boxes, include_blank: false, wrapper_html: {class: 'dojam-multi-select'} %>
-    <%= f.association :decoration_color, collection: @decoration_colors, label: "color", as: :select, include_blank: false %>
+    <%= f.association :decoration_colors, collection: @decoration_colors, label: "color", as: :check_boxes, include_blank: false, wrapper_html: {class: 'dojam-multi-select'}%>
     <%= f.input :munsell_color, label: "Munsell color" %>
     <%= f.button :submit, "next step" %>
   <% end %>
