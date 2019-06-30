@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_30_143423) do
+ActiveRecord::Schema.define(version: 2019_06_30_144412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,15 @@ ActiveRecord::Schema.define(version: 2019_06_30_143423) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "inscription_language_museum_objects", force: :cascade do |t|
+    t.bigint "museum_object_id"
+    t.integer "inscription_language_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inscription_language_id"], name: "index_inscr_language_m_objects_on_inscr_language_id"
+    t.index ["museum_object_id"], name: "index_inscription_language_museum_objects_on_museum_object_id"
   end
 
   create_table "inscription_languages_ms_koo_specs", force: :cascade do |t|
@@ -702,6 +711,8 @@ ActiveRecord::Schema.define(version: 2019_06_30_143423) do
   add_foreign_key "decorations_ms_koo_specs", "termlist_decorations"
   add_foreign_key "excavation_site_category_kinds", "termlists", column: "excavation_site_category_id"
   add_foreign_key "excavation_site_category_kinds", "termlists", column: "excavation_site_kind_id"
+  add_foreign_key "inscription_language_museum_objects", "museum_objects"
+  add_foreign_key "inscription_language_museum_objects", "termlists", column: "inscription_language_id"
   add_foreign_key "inscription_languages_ms_koo_specs", "material_specifieds_koo_specs"
   add_foreign_key "inscription_languages_ms_koo_specs", "termlist_inscription_languages"
   add_foreign_key "inscription_letter_museum_objects", "museum_objects"

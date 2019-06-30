@@ -63,13 +63,17 @@
         <% end %>
       </div>
     </div>
-      
+
     <div class="row">
       <div class="col-3">
-        <dt>language of inscription</dt>
-      </div>
-      <div class="col">
-        <dd><%= @museum_object.inscription_language&.name %></dd>
+        <dt>languages of inscription</dt>
+      </div> 
+      <div class="col"> 
+        <% @museum_object.inscription_languages&.each do |d| %>
+          <div class="">
+            <dd><%= d.name %></dd>
+          </div>
+        <% end %>
       </div>
     </div>
       
