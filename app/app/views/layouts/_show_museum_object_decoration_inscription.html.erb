@@ -18,13 +18,17 @@
 
     <div class="row">
       <div class="col-3">
-        <dt>technique</dt>
-      </div>
-      <div class="col">
-        <dd><%= @museum_object&.decoration_technique&.name %></dd>
+        <dt>techniques</dt>
+      </div> 
+      <div class="col"> 
+        <% @museum_object.decoration_techniques&.each do |d| %>
+          <div class="">
+            <dd><%= d.name %></dd>
+          </div>
+        <% end %>
       </div>
     </div>
-      
+
     <div class="row">
       <div class="col-3">
         <dt>color</dt>
