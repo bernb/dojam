@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_30_140701) do
+ActiveRecord::Schema.define(version: 2019_06_30_142534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,15 @@ ActiveRecord::Schema.define(version: 2019_06_30_140701) do
     t.datetime "updated_at", null: false
     t.index ["material_specifieds_koo_spec_id"], name: "index_dating_periods_ms_koo_specs_on_ms_koo_spec_id"
     t.index ["termlist_dating_period_id"], name: "index_dating_periods_ms_koo_specs_on_dating_period_koo_spec_id"
+  end
+
+  create_table "decoration_color_museum_objects", force: :cascade do |t|
+    t.bigint "museum_object_id"
+    t.integer "decoration_color_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["decoration_color_id"], name: "index_decoration_color_museum_objects_on_decoration_color_id"
+    t.index ["museum_object_id"], name: "index_decoration_color_museum_objects_on_museum_object_id"
   end
 
   create_table "decoration_colors_ms_koo_specs", force: :cascade do |t|
@@ -670,6 +679,8 @@ ActiveRecord::Schema.define(version: 2019_06_30_140701) do
   add_foreign_key "dating_millennia_ms_koo_specs", "termlist_dating_millennia"
   add_foreign_key "dating_periods_ms_koo_specs", "material_specifieds_koo_specs"
   add_foreign_key "dating_periods_ms_koo_specs", "termlist_dating_periods"
+  add_foreign_key "decoration_color_museum_objects", "museum_objects"
+  add_foreign_key "decoration_color_museum_objects", "termlists", column: "decoration_color_id"
   add_foreign_key "decoration_colors_ms_koo_specs", "material_specifieds_koo_specs"
   add_foreign_key "decoration_colors_ms_koo_specs", "termlist_decoration_colors"
   add_foreign_key "decoration_style_museum_objects", "museum_objects"

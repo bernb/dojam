@@ -336,6 +336,7 @@ class BuildsController < ApplicationController
 																					:max_length, :max_width, :height, :opening_dm, :bottom_dm, :max_dm, :weight_in_gram, :main_path_id,
                                           decoration_style_ids: [],
                                           decoration_technique_ids: [],
+                                          decoration_color_ids: [],
                                           production_technique_ids: [],
                                           images: [],
                                           dating_century_ids: [],
