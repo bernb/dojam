@@ -2,6 +2,9 @@
 <% state_string = state.to_s %>
 <% state_string["step_"] = "" %>
 <% state_string = state_string.gsub '_', ' ' %>
+<% if state_string == "remarks" %>
+  <% state_string = "description" %>
+<% end %>
  <div class="progress">
   <div class="progress-bar" role="progressbar" aria-valuenow="<%= perc %>"
   aria-valuemin="0" aria-valuemax="100" style="width:<%= perc %>%">
