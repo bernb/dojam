@@ -5,10 +5,14 @@
 
     <div class="row">
       <div class="col-3">
-        <dt>style</dt>
-      </div>
-      <div class="col">
-        <dd><%= @museum_object&.decoration_style&.name %></dd>
+        <dt>styles</dt>
+      </div> 
+      <div class="col"> 
+        <% @museum_object.decoration_styles&.each do |d| %>
+          <div class="">
+            <dd><%= d.name %></dd>
+          </div>
+        <% end %>
       </div>
     </div>
 
