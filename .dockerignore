@@ -3,3 +3,4 @@ app/log
 .git
 .env
 Dockerfile
+backup-tests
