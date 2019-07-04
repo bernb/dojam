@@ -26,7 +26,7 @@ if [ "$container_count" -gt 0 ]; then
 fi
 
 sudo docker-compose build
-sudo docker-compose up 
+sudo docker-compose up --detach
 
 sudo docker-compose exec db dropdb -U dojam DOJAM_DB
 sudo docker-compose exec db createdb -U dojam DOJAM_DB
