@@ -4,3 +4,4 @@ app/log
 .env
 Dockerfile
 backup-tests
+staging-area
