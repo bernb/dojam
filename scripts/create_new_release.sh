@@ -1,8 +1,15 @@
 #!/bin/bash
 
-cd staging-area
+cd ~/Projekte/jamappv2/staging-area
 
-git pull
+# check if .git dir exists aka directory already contains repo
+# else clone and prepare directory
+if [ -d ".git" ]; then
+	git pull
+else
+	mkdir -p db # db is not part of repo
+	git clone git@bitbucket.org:BernardBeitz/jamappv2.git
+fi
 
 # Grep latest db backup
 latest_archive="$(borg list --short --last 1)"
@@ -12,18 +19,7 @@ cp ../app/config/secrets.yml config/
 docker-compose build
 docker-compose up
 
-cd app/
-RAILS_ENV=staging rails rspec spec
-# Show test-result and wait for confirmation
-# Grep latest version from version file
-# Increment version and write back to file
-# Merge staging into master
-# Move back to development branch
-
-# Use parameters to determine if release is only to be tested or
-# should be merged into master for real
-
-#git checkout master
-#git merge --no-ff development 
-#git push
-#git checkout development
+docker-compose exec db dropdb -U dojam DOJAM_DB
+docker-compose exec db createdb -U dojam DOJAM_DB
+docker-compose exec db pg_restore -U dojam -d DOJAM_DB /var/lib/postgresql/data/dojam.dump
+docker-compose exec app xvfb-run -a bundle exec rspec
