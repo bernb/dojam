@@ -1,5 +1,8 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+
+  # Use thoughtbot's webkit driver
+  Capybara.javascript_driver = :webkit
 	
 	# Seperate SQL Logs as it tends to be too many lines to be really useful for debuggung
 	ActiveRecord::Base.logger = Logger.new('log/development_sql.log')
