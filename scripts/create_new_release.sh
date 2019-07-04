@@ -31,6 +31,6 @@ sudo docker-compose up --detach
 sudo docker-compose exec db dropdb -U dojam DOJAM_DB
 sudo docker-compose exec db createdb -U dojam DOJAM_DB
 sudo docker-compose exec db pg_restore -U dojam -d DOJAM_DB /var/lib/postgresql/data/dojam.dump
-sudo docker-compose exec bundle exec rails db:migrate # Call here again as we just dropped all migrations with db
+sudo docker-compose exec app rails db:migrate # Call here again as we just dropped all migrations with db
 sudo docker-compose exec --env RAILS_ENV=development app xvfb-run -a bundle exec rspec
 sudo docker-compose down
