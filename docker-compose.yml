@@ -13,7 +13,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: bundle exec rails s -p 22333 -b '0.0.0.0'
+    command: rails db:migrate && bundle exec rails s -p 22333 -b '0.0.0.0'
     volumes:
       - ./app:/dojam
     ports:
