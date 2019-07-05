@@ -85,7 +85,7 @@ group :development, :test do
 	gem 'rspec-rails'
 	gem 'guard'
 	gem 'guard-rspec'
-  gem 'capybara', '~> 3.15' # for feature tests
+  gem 'capybara' # for feature tests
   gem "capybara-webkit"
 #  gem 'selenium-webdriver' # have capybara know about ajax calls
 end
