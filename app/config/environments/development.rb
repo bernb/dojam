@@ -1,6 +1,11 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  Capybara::Webkit.configure do |config|
+    config.allow_url("https://fonts.googleapis.com")
+    config.allow_url("https://fonts.gstatic.com")
+  end
+
   # Use thoughtbot's webkit driver
   Capybara.javascript_driver = :webkit
 	
