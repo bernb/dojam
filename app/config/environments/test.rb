@@ -4,6 +4,7 @@ Rails.application.configure do
   Capybara::Webkit.configure do |config|
     config.allow_url("https://fonts.googleapis.com")
     config.allow_url("https://fonts.gstatic.com")
+    config.raise_javascript_errors = true
   end
 
   # Use thoughtbot's webkit driver
