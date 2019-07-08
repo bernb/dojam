@@ -1,0 +1,13 @@
+[Unit]
+Description=Service for DOJAM Containers
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+WorkingDirectory=/home/dojam/jamappv2
+ExecStart=/usr/local/bin/docker-compose up
+ExecStop=/usr/local/bin/docker-compose down 
+
+[Install]
+WantedBy=multi-user.target

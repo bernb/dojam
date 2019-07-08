@@ -1,0 +1,6 @@
+[Unit]
+Description=Start Backup with Borg
+
+[Service]
+ExecStart=/etc/dojamdbbackup.sh
+Type=simple
