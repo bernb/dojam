@@ -1,14 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  Capybara::Webkit.configure do |config|
-    config.allow_url("https://fonts.googleapis.com")
-    config.allow_url("https://fonts.gstatic.com")
-    config.raise_javascript_errors = true
-  end
-
-  # Use thoughtbot's webkit driver
-  Capybara.javascript_driver = :webkit
+  Capybara.javascript_driver = :selenium_headless
 
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
