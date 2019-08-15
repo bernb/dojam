@@ -53,7 +53,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt>letters of inscription</dt>
+        <dt>scripts(s)</dt>
       </div> 
       <div class="col"> 
         <% @museum_object.inscription_letters&.each do |d| %>
@@ -66,7 +66,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt>languages of inscription</dt>
+        <dt>language(s)</dt>
       </div> 
       <div class="col"> 
         <% @museum_object.inscription_languages&.each do |d| %>
@@ -79,7 +79,7 @@
       
     <div class="row">
       <div class="col-3">
-        <dt>inscription text</dt>
+        <dt>transliteration</dt>
       </div>
       <div class="col">
         <dd><%= @museum_object.inscription_text %></dd>
@@ -88,7 +88,7 @@
       
     <div class="row">
       <div class="col-3">
-        <dt>inscription translation</dt>
+        <dt>translation</dt>
       </div>
       <div class="col">
         <dd><%= @museum_object.inscription_translation %></dd>
