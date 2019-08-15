@@ -5,6 +5,6 @@
     <%= f.association :inscription_languages, collection: @inscription_language, label: "language of inscription", as: :check_boxes, include_blank: false, wrapper_html: {class: 'dojam-multi-select'} %>
     <%= f.input :inscription_text, label: "text of inscription" %>
     <%= f.input :inscription_translation, label: "translation of inscription" %>
-    <%= f.button :submit, "next step" %>
+    <%= f.button :submit, "confirm" %>
   <% end %>
 <% end %>

@@ -1,6 +1,6 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
 	<%= simple_form_for @museum_object, data:{parsley_validate:""}, url: wizard_path do |f| %>
       <%= f.association :production_techniques, collection: @production_techniques, label: false, as: :check_boxes, include_blank: false, wrapper_html: {class: 'dojam-multi-select'}%>
-      <%= f.button :submit, "next step" %>
+      <%= f.button :submit, "confirm" %>
     <% end %>
 <% end %>

@@ -20,6 +20,6 @@
     <%= f.collection_select(:excavation_site_kind_id, @excavation_site_kinds, :id, :name,{}, {id: "excavation_site_kind_selection", class: "form-control select required"}) %>
     <%= f.input :finding_context, label: "finding context specified" %>
     <%= f.input :finding_remarks, label: "remarks" %>
-    <%= f.button :submit, "next step" %>
+    <%= f.button :submit, "confirm" %>
   <% end %>
 <% end %>

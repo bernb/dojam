@@ -4,7 +4,7 @@
     <%= f.association :decoration_techniques, collection: @decoration_techniques, label: "technique", as: :check_boxes, include_blank: false, wrapper_html: {class: 'dojam-multi-select'} %>
     <%= f.association :decoration_colors, collection: @decoration_colors, label: "color", as: :check_boxes, include_blank: false, wrapper_html: {class: 'dojam-multi-select'}%>
     <%= f.input :munsell_color, label: "Munsell color" %>
-    <%= f.button :submit, "next step" %>
+    <%= f.button :submit, "confirm" %>
   <% end %>
 <% end %>
 
