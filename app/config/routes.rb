@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
   
-  get 'termlists/index'
-  get 'termlists/choose'
-  get 'termlists/show'
+#  get 'termlists/index'
+#  get 'termlists/choose'
+#  get 'termlists/show'
+  resources :termlists
 
   root 'static_pages#menu'
   get 'builds/new'
   get 'static_pages/menu'
 
   get 'museum_objects/search' # remember that orders matter
+  get 'museum_objects/search_result_fulltext'
+  get 'museum_objects/search_result_invnumber'
   resources :museum_objects do
     resources :builds
     post 'builds/step_confirm', to: 'builds#create'

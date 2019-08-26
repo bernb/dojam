@@ -186,4 +186,26 @@ RSpec.describe MuseumObject, type: :model do
     end
 	end
 
+  it "returns empty array if search does not yield any results" do
+    museum_objects = MuseumObject.search "ffffffffkffkffff"
+    expect(museum_objects).to be_empty
+  end
+
+  it "returns the correct museum objects for existing termlists" do
+    results = MuseumObject.search('red')
+    expect(results.length).to be > 5
+  end
+
+  it "returns an array of museum objects as search results" do
+    for i in 1..100 do
+      term = Termlist.all.sample
+      museum_object = term.museum_objects
+      name = term.name
+      results = MuseumObject.search(name)
+      if results.any?
+        expect(results).to include(museum_object)
+      end
+    end
+  end
+
 end

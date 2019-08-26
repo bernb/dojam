@@ -1,4 +1,7 @@
 class MaterialSpecified < Termlist
+  has_many :material_specified_museum_objects
+  has_many :museum_objects, through: :material_specified_museum_objects
+
 	def depth
 		2
 	end

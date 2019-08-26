@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Whitelist docker address space
+  config.web_console.whitelisted_ips = '172.0.0.0/8'
+
 	# Seperate SQL Logs as it tends to be too many lines to be really useful for debuggung
 	ActiveRecord::Base.logger = Logger.new('log/development_sql.log')
 

@@ -1,0 +1,6 @@
+Inside db container:
+touch dump.sql
+chown postgres:postgres dump.sql
+su postgres
+pg_dump -a -O DOJAM_DB > dump.sql
+psql -U TEST_dojam -a -c -d TEST_DB -f dump.sql

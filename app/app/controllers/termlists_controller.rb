@@ -13,6 +13,10 @@ class TermlistsController < ApplicationController
     
     @objects = table_string.constantize.all
   end
+
+  def show
+    @term = Termlist.find params[:id]
+  end
   
   def choose
     @termlists = get_termlist_names_from ActiveRecord::Base.connection.tables

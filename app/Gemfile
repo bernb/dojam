@@ -10,6 +10,9 @@ end
 # Simpliest fulltext search
 gem 'search_cop'
 
+# use postgreSQL's own fulltext search
+gem 'pg_search'
+
 # used by active storage to create thumbnail
 gem 'mini_magick', '~> 4.9'
 
@@ -77,6 +80,9 @@ gem "figaro"
 
 # Gives sorted models
 gem 'acts_as_list', '~> 0.9'
+
+# Provides pagination
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
