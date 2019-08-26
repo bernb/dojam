@@ -9,9 +9,12 @@
       <th>materials specified</th>
       <th>kind of object</th>
       <th>kind of object specified</th>
+      <% if @termlists.present? %>
+        <th>matched by</th>
+      <% end %>
     </tr>
   </thead>
-  <% @museum_objects.each do |o| %>
+  <% @museum_objects.each.with_index do |o,i| %>
     <tbody>
       <tr class="search-result-row" data-link="<%= museum_object_path(o) %>">
         <td><%= o.full_inv_number %></td>
@@ -21,6 +24,9 @@
         <td><%= o.material_specifieds_decorated %></td>
         <td><%= o.kind_of_object&.name %></td>
         <td><%= o.kind_of_object_specified&.name %></td>
+        <% if @termlists.present? %>
+          <td> <%= @termlists[i].class.to_s.humanize.downcase + " - " +@termlists[i].name %>
+        <% end %>
       </tr>
     </tbody>
   <% end %>

@@ -1,0 +1,11 @@
+<%= render 'layouts/title', title_name: @term.class.to_s.underscore.humanize.downcase %>
+<dl>
+  <dt>name</dt>
+  <dd><%= @term.name %></dd>
+  <dt>museum objects </dt>
+  <% @term.museum_objects.each do |object| %>
+    <%= render 'layouts/museum_object_card', museum_card: object.decorate, variant: nil %>
+  <% end %>
+</dl>
+
+

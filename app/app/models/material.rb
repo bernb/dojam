@@ -1,9 +1,20 @@
 class Material < Termlist
-	has_many :material_museum_objects
-	has_many :museum_objects, through: :material_museum_objects
 	def depth
 		1
 	end
+
+  def paths
+    Path.material_id(self.id)
+  end 
+
+  def museum_objects
+    paths = self.paths
+    secs = MuseumObject.joins(secondary_paths: :termlists).where(paths: {id: paths.ids}).where(termlists: {id: m.id})
+    mains = MuseumObject.where(main_path: paths)
+    mains + secs
+    # ToDo: Why does this not work? -> join table path <-> mu only used for main_path, but still seems to be wrong?
+    #self.paths.map{|p| p.museum_objects}.reject(&:empty?).flatten
+  end
 
 	def material_specifieds
 		# We query MaterialSpecified to get the default scope and therefore

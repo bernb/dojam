@@ -48,13 +48,13 @@ RSpec.feature "Add new object steps", js: true, type: :feature do
     select('hall A', from: 'storage_storage_id')
     select('showcase A1', from: 'museum_object_storage_location_id')
     fill_in('inventory number of museum', with: 'T.1111')
-    click_button('next step')
+    click_button('confirm')
     expect(page).to have_text("acquisition")
 
-    click_button('next step')
+    click_button('confirm')
     expect(page).to have_text("provenance")
 
-    click_button('next step')
+    click_button('confirm')
     expect(page).to have_text("material")
     undet_path_id = Path.undetermined_path.to_depth(1).id
     checkbox_id = "#museum_object_secondary_path_ids_" + undet_path_id.to_s
@@ -62,7 +62,7 @@ RSpec.feature "Add new object steps", js: true, type: :feature do
     checkbox = find(checkbox_id)
     expect(checkbox.checked?).to eq(true)
 
-    click_button('next step')
+    click_button('confirm')
     expect(page).to have_text("material specified")
     undet_path_id = Path.undetermined_path.to_depth(2).id
     checkbox_id = "#museum_object_secondary_path_ids_" + undet_path_id.to_s
@@ -70,7 +70,7 @@ RSpec.feature "Add new object steps", js: true, type: :feature do
     checkbox = find(checkbox_id)
     expect(checkbox.checked?).to eq(true)
 
-    click_button('next step')
+    click_button('confirm')
     expect(page).to have_text("primary material")
     undet_path_id = Path.undetermined_path.id
     dropdown_id = "#museum_object_main_path_id"
@@ -78,14 +78,14 @@ RSpec.feature "Add new object steps", js: true, type: :feature do
     expect(page.has_select?(
            'museum_object_main_path_id', with_options: ['undetermined'])).to eq(true)
 
-    click_button('next step')
+    click_button('confirm')
     expect(page). to have_text('kind of object specified')
     dropdown_id = "#museum_object_kind_of_object_specified_id"
     expect(page).to have_selector(dropdown_id)
     expect(page.has_select?(
            'museum_object_kind_of_object_specified_id', with_options: ['undetermined'])).to eq(true)
 
-    click_button('next step')
+    click_button('confirm')
     expect(page). to have_text('production')
   end
 

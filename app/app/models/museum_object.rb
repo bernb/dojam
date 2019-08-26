@@ -1,5 +1,26 @@
 class MuseumObject < ApplicationRecord
-  include SearchCop
+  include PgSearch::Model
+  multisearchable against: [:finding_context,
+                            :finding_remarks,
+                            :description_conservation,
+                            :acquisition_deliverer_name,
+                            :inscription_decoration,
+                            :inscription_text,
+                            :inscription_translation,
+                            :priority_determined_by,
+                            :remarks,
+                            :literature,
+                            :acquisition_document_number,
+                            :name_mega_jordan,
+                            :name_expedition,
+                            :site_number_mega,
+                            :site_number_jadis,
+                            :site_number_expedition,
+                            :coordinates_mega_long,
+                            :coordinates_mega_lat,
+                            :munsell_color,
+                            :description,
+                            :remarks_acquisition]
   validates_with MuseumObjectValidator, on: :update
 	before_create :set_default_values
 
@@ -53,30 +74,6 @@ class MuseumObject < ApplicationRecord
   
   before_validation :set_is_used
   
-  
-  search_scope :search do
-    attributes :inv_number, 
-               :inv_extension, 
-               :inv_numberdoa, 
-               :acquisition_deliverer_name, 
-               :finding_context, 
-               :finding_remarks, 
-               :priority_determined_by,
-               :inscription_decoration, 
-               :inscription_text, 
-               :inscription_translation, 
-               :acquisition_document_number, 
-               :name_expedition, 
-               :site_number_mega, 
-               :site_number_expedition,
-               :description_conservation,
-               :remarks, 
-               :literature
-    attributes storage_location: "storage_location.name"
-    
-                                          
-  end
-
 	def get_possible_props_for classname
 		if classname.constantize.is_independent_of_paths
 			return classname.constantize.all
@@ -441,5 +438,21 @@ class MuseumObject < ApplicationRecord
 		end
 		return objects.uniq
 	end
+
+  def self.search param
+    results = PgSearch.multisearch(param)
+    termlists = results.map{|r| Termlist.find(r.searchable_id)}
+    termlist_result = []
+    museum_object_result = []
+    termlists.each do |termlist|
+      objects = termlist.museum_objects
+      objects&.each do |object|
+        termlist_result.append(termlist)
+        museum_object_result.append(object)
+      end
+    end
+    return [termlist_result, museum_object_result]
+#    termlists.map{|t| [t, t.museum_objects]}
+  end
 
 end
