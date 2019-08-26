@@ -1,29 +1,7 @@
-<div class="col">
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>type</th>
-      <th>name / inv. number</th>
-      <th>museum objects</th>
-    </tr>
-  </thead>
-  <% @results.each do |result| %>
-    <tbody>
-      <% if result.searchable_type == "MuseumObject" %>
-        <% object = result.searchable_type.constantize.find result.searchable_id %>
-        <tr class="search-result-row" data-link="<%= museum_object_path(object) %>">
-          <td>museum object</td>
-          <td><%= object.decorate.full_inv_number %></td>
-          <td>1</td>
-        </tr>
-      <% elsif result.searchable_type == "Termlist" %>
-        <% term = result.searchable_type.constantize.find result.searchable_id %>
-        <tr class="search-result-row" data-link="<%= termlist_path(term.id) %>">
-        <td><%= term.type.underscore.humanize.downcase  %></td>
-        <td><%= term.name %></td>
-        <td><%= term.museum_objects.count %>
-      <% end %>
-    </tbody>
+<div class="row">
+  <% @results.each do |object| %>
+    <div class="col mb-3">
+      <%= render 'layouts/museum_object_card', museum_card: object.decorate, variant: nil %>
+    </div>
   <% end %>
-</table>
 </div>
