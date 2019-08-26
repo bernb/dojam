@@ -440,19 +440,17 @@ class MuseumObject < ApplicationRecord
 	end
 
   def self.search param
-    results = PgSearch.multisearch(param)
-    termlists = results.map{|r| Termlist.find(r.searchable_id)}
-    termlist_result = []
-    museum_object_result = []
-    termlists.each do |termlist|
-      objects = termlist.museum_objects
-      objects&.each do |object|
-        termlist_result.append(termlist)
-        museum_object_result.append(object)
-      end
-    end
-    return [termlist_result, museum_object_result]
-#    termlists.map{|t| [t, t.museum_objects]}
+    # Multisearch gives a mix of terms and museum objects
+    # we map those to museum objects ids and on the result
+    # so that we we a active records relation of museum objects as result
+    # which can be processed in a clean way, for example for pagination
+    search_result = PgSearch.multisearch param
+    museum_object_ids = search_result
+      .map{|r| r.searchable_type.constantize.find r.searchable_id}
+      .map{|r| r.class < Termlist ? r.museum_objects : r}
+      .flatten
+      .map(&:id)
+    return MuseumObject.where(id: museum_object_ids)&.order(:id)&.page(page)
   end
 
 end
