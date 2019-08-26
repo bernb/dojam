@@ -29,12 +29,22 @@ class MuseumObjectsController < ApplicationController
 
   def search_result_fulltext
     page = params[:page] || 1
-    @results = PgSearch.multisearch(params[:fulltext_search]).page(page)
-    @result_count = PgSearch.multisearch(params[:fulltext_search]).count
-    if @results.blank?
+    # Multisearch gives a mix of terms and museum objects
+    # we map those to museum objects ids and on the result
+    # so that we we a active records relation of museum objects as result
+    # which can be processed in a clean way, for example for pagination
+    search_result = PgSearch.multisearch(params[:fulltext_search])
+    museum_object_ids = search_result
+      .map{|r| r.searchable_type.constantize.find r.searchable_id}
+      .map{|r| r.class < Termlist ? r.museum_objects : r}
+      .flatten
+      .map(&:id)
+      .sort
+    if museum_object_ids.blank?
       flash[:info] = "No results found for search string \"#{params[:fulltext_search]}\""
       redirect_to museum_objects_search_path
     end
+    @results = MuseumObject.where(id: museum_object_ids).order(:id).page(page)
   end
 
   def search_result_invnumber
