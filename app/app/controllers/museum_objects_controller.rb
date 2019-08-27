@@ -10,7 +10,16 @@ class MuseumObjectsController < ApplicationController
   end
 
   def show
-		redirect_to museum_object_build_path params[:id], :step_confirm
+    respond_to do |format|
+      format.html do
+        redirect_to museum_object_build_path params[:id], :step_confirm
+      end
+      format.pdf do
+        @museum_object = MuseumObject.find(params[:id]).decorate
+        render pdf: @museum_object.full_inv_number,
+          template: "museum_objects/overview.pdf.erb"
+      end
+    end
   end
   
   def new
