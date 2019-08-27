@@ -17,7 +17,8 @@ class MuseumObjectsController < ApplicationController
       format.pdf do
         @museum_object = MuseumObject.find(params[:id]).decorate
         render pdf: @museum_object.full_inv_number,
-          template: "museum_objects/overview.pdf.erb"
+          template: "museum_objects/overview.pdf.erb",
+          layout: "overview.html.erb"
       end
     end
   end
