@@ -1,7 +1,7 @@
 <div class="row">
   <% @results.each do |object| %>
     <div class="col mb-3">
-      <%= render 'layouts/museum_object_card', museum_card: object.decorate, variant: nil %>
+      <%= render 'layouts/museum_object_card', museum_card: object.decorate, variant: {show: ''} %>
     </div>
   <% end %>
 </div>
