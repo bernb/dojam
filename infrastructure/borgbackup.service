@@ -1,5 +1,7 @@
 [Unit]
 Description=Start Backup with Borg
+Requires=dojam-containers.service
+After=dojam-containers.service
 
 [Service]
 ExecStart=/etc/dojamdbbackup.sh
