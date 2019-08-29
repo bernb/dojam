@@ -205,7 +205,8 @@ class MuseumObjectDecorator < Draper::Decorator
     if self&.images&.main&.attachment.nil?
       html = "<div class=\"card-img-dummy\"></div>"
     else
-      html = self.h.image_tag self.images.main, class: "card-img-top"
+      image = self.images.main_for_render
+      html = self.h.image_tag image, class: "card-img-top"
     end
     
     return helpers.sanitize html
