@@ -4,7 +4,7 @@ class MuseumObjectImageList < ApplicationRecord
   has_many_attached :list
   has_one_attached :main
   has_one_attached :main_r
-  before_save :purge_main_r
+  after_validation :purge_main_r
 
   # Not working
   def purge_main_r
@@ -22,8 +22,7 @@ class MuseumObjectImageList < ApplicationRecord
     original_image_path = ActiveStorage::Blob.service.path_for main.key
     converted_image = MiniMagick::Image.open original_image_path 
     converted_image.format "png"
-    converted_image.write main.blob.filename.base + ".png"
-    main_r.attach(io: File.open(converted_image.path),
+    main_r.attach(io: File.open(converted_image.tempfile),
                   filename: main.blob.filename.base + ".png",
                   content_type: "image/png")
   end
