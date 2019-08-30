@@ -19,11 +19,12 @@ class MuseumObjectImageList < ApplicationRecord
   end
 
   def rerender_main
-    original_image_path = ActiveStorage::Blob.service.path_for main.key
-    converted_image = MiniMagick::Image.open original_image_path 
-    converted_image.format "png"
-    main_r.attach(io: File.open(converted_image.tempfile),
-                  filename: main.blob.filename.base + ".png",
-                  content_type: "image/png")
+      original_image_path = ActiveStorage::Blob.service.path_for main.key
+      converted_image = MiniMagick::Image.open original_image_path 
+      converted_image.format "png"
+      main_r.attach(io: File.open(converted_image.tempfile),
+                    filename: main.blob.filename.base + ".png",
+                    content_type: "image/png")
+    rescue Errno::ENOENT => e
   end
 end
