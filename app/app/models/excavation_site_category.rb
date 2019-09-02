@@ -1,4 +1,5 @@
 class ExcavationSiteCategory < Termlist
+  has_many :museum_objects
 	has_many :excavation_site_category_kinds
 	has_many :excavation_site_kinds, through: :excavation_site_category_kinds
 	def self.is_independent_of_paths

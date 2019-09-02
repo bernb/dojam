@@ -7,7 +7,6 @@ class Termlist < ApplicationRecord
 	after_save :add_default_path_for_roots, on: :create
 	has_many :termlist_paths
 	has_many :paths, through: :termlist_paths
-  has_many :museum_objects
 
 	def depth
 		5
