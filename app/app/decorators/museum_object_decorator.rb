@@ -2,6 +2,44 @@ class MuseumObjectDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
 
+  def basic_object_properties
+    properties = ""
+    material_unknown = false
+    kind_unknown = false
+
+    if self.main_material_specified.name != "undetermined"
+      properties << self.main_material_specified.name
+    elsif self.main_material.name != "undetermined"
+      properties << self.main_material.name
+    elsif
+     material_unknown = true 
+    end
+
+    properties << " "
+
+    if self.kind_of_object_specified.name != "undetermined"
+      properties << self.kind_of_object_specified.name
+    elsif self.kind_of_object.name != "undetermined"
+      properties << self.kind_of_object.name
+    elsif
+      kind_unknown = true
+    end
+
+    if material_unknown
+      properties << ", material undetermined"
+    end
+
+    if kind_unknown
+      properties << ", kind of object undetermined"
+    end
+
+    if material_unknown && kind_unknown
+      properties = "material and kind of object undetermined"
+    end
+
+    return properties
+  end
+
 	def main_material_with_specified
 		return "undetermined (undetermined)" unless main_path.present?
 			material_name = main_path.objects[0].name
