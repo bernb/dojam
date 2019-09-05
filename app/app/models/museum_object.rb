@@ -450,7 +450,8 @@ class MuseumObject < ApplicationRecord
       .map{|r| r.class < Termlist ? r.museum_objects : r}
       .flatten
       .map(&:id)
-    return MuseumObject.where(id: museum_object_ids)&.order(:id)&.page(page)
+      .sort
+    return MuseumObject.where(id: museum_object_ids)&.order(:id)
   end
 
 end
