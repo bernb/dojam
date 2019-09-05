@@ -1,0 +1,8 @@
+<% render 'layouts/title', title_name: 'search results: ' + results.total_count.to_s %>
+<%= paginate results %>
+<div class="row mb-4">
+  <div class="col">
+    <%= results.total_count.to_s %> results
+  </div>
+</div>
+<%= render 'layouts/search_results_as_cards' %>

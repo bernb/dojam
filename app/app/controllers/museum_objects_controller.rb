@@ -1,5 +1,5 @@
 class MuseumObjectsController < ApplicationController
-  
+
   def index
     museum_objects = MuseumObject.limit 25
     @museum_cards = MuseumCardDecorator.decorate_collection(museum_objects)
@@ -22,7 +22,7 @@ class MuseumObjectsController < ApplicationController
       end
     end
   end
-  
+
   def new
     @museum_object = MuseumObject.create
     redirect_to new_museum_object_build_path @museum_object.id # automatically sets correct params[:museum_object_id]
@@ -33,28 +33,18 @@ class MuseumObjectsController < ApplicationController
 
   def update
   end
-  
+
   def search
+    if params.has_key?(:fulltext_search)
+      page = params[:page] || 1
+      @results = MuseumObject.search(params[:fulltext_search]).page(page)
+      if @results.blank?
+        flash[:info] = "No results found for search string \"#{params[:fulltext_search]}\""
+      end
+    end
   end
 
   def search_result_fulltext
-    page = params[:page] || 1
-    # Multisearch gives a mix of terms and museum objects
-    # we map those to museum objects ids and on the result
-    # so that we we a active records relation of museum objects as result
-    # which can be processed in a clean way, for example for pagination
-    search_result = PgSearch.multisearch(params[:fulltext_search])
-    museum_object_ids = search_result
-      .map{|r| r.searchable_type.constantize.find r.searchable_id}
-      .map{|r| r.class < Termlist ? r.museum_objects : r}
-      .flatten
-      .map(&:id)
-      .sort
-    if museum_object_ids.blank?
-      flash[:info] = "No results found for search string \"#{params[:fulltext_search]}\""
-      redirect_to museum_objects_search_path
-    end
-    @results = MuseumObject.where(id: museum_object_ids).order(:id).page(page)
   end
 
   def search_result_invnumber

@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   get 'static_pages/menu'
 
   get 'museum_objects/search' # remember that orders matter
-  get 'museum_objects/search_result_fulltext'
   get 'museum_objects/search_result_invnumber'
   resources :museum_objects do
     resources :builds
