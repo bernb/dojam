@@ -40,5 +40,6 @@
     </dl>
   </div>
 </div>
-<%= link_to 'Edit', edit_loan_out_path(@loan_out) %> |
-<%= link_to 'Back', loan_outs_path %>
+<%= link_to 'edit', edit_loan_out_path(@loan_out) %> |
+<%= link_to 'all loans', loan_outs_path %> |
+<%= link_to 'show object', museum_object_path(@loan_out.museum_object) %>
