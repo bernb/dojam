@@ -25,6 +25,7 @@ class MuseumObject < ApplicationRecord
 	before_create :set_default_values
 
   has_one :images, class_name: "MuseumObjectImageList", dependent: :destroy
+  has_one :loan_out
   belongs_to :excavation_site, -> { order(name: :asc) }, required: false 
   belongs_to :storage_location, required: false
   belongs_to :acquisition_delivered_by, -> { order(name: :asc) }, required: false
