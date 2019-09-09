@@ -1,4 +1,44 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/title', title_name: "loan for #{@loan_out.museum_object.decorate.full_inv_number}" %>
+<div class="row">
+  <div class="col">
+    <dl>
+      <dt>loan to institution</dt>
+      <dd><%= @loan_out.to_institution %></dd>
 
+      <dt>name of borrower</dt>
+      <dd><%= @loan_out.borrower_name %></dd>
+
+      <dt>job position of borrower</dt>
+      <dd><%= @loan_out.borrower_job_title %></dd>
+
+      <dt>date of loan</dt>
+      <dd><%= @loan_out.date_out %></dd>
+
+      <dt>document no. of request</dt>
+      <dd><%= @loan_out.request_document_number %></dd>
+
+      <dt>date of document</dt>
+      <dd><%= @loan_out.request_document_date %></dd>
+
+      <dt>signed by</dt>
+      <dd><%= @loan_out.request_document_signed_by %></dd>
+
+      <dt>name of lender</dt>
+      <dd><%= @loan_out.lender_name %></dd>
+
+      <dt>job position of lender</dt>
+      <dd><%= @loan_out.lender_job_title %></dd>
+
+      <dt>loan document no.</dt>
+      <dd><%= @loan_out.loan_document_number %></dd>
+
+      <dt>condition of object</dt>
+      <dd><%= @loan_out.object_condition %></dd>
+
+      <dt>date of planned return</dt>
+      <dd><%= @loan_out.return_date %></dd>
+    </dl>
+  </div>
+</div>
 <%= link_to 'Edit', edit_loan_out_path(@loan_out) %> |
 <%= link_to 'Back', loan_outs_path %>

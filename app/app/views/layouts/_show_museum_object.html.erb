@@ -38,8 +38,20 @@
   <li class="nav-item">
     <a class="nav-link" id="images_tab" data-toggle="tab" href="#images" role="tab" aria-controls="images" aria-selected="false">images</a>
   </li>
-
 </ul>
+<% if @museum_object.loan_out.present? %>
+  <div class="row">
+    <div class="col">
+      <div class="alert alert-info", role="alert">
+        object on loan
+        <% if @museum_object.loan_out.to_institution.present? %>
+          to <%= @museum_object.loan_out.to_institution %>
+      <% end %>
+      <%= link_to "show", loan_out_path(@museum_object.loan_out) %>
+      </div>
+    </div>
+  </div>
+<% end %>
 <div class="row">
   <div class="col">
     <div class="tab-content">
