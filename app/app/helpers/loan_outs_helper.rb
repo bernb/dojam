@@ -1,0 +1,2 @@
+module LoanOutsHelper
+end

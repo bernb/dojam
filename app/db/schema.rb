@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_19_125233) do
+ActiveRecord::Schema.define(version: 2019_09_09_090312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -210,6 +210,25 @@ ActiveRecord::Schema.define(version: 2019_08_19_125233) do
     t.datetime "updated_at", null: false
     t.index ["museum_object_id"], name: "index_join_museum_object"
     t.index ["termlist_material_specified_id"], name: "index_join_material_specified"
+  end
+
+  create_table "loan_outs", force: :cascade do |t|
+    t.string "to_institution"
+    t.string "borrower_name"
+    t.string "borrower_job_title"
+    t.date "date_out"
+    t.string "request_document_number"
+    t.date "request_document_date"
+    t.string "request_document_signed_by"
+    t.string "lender_name"
+    t.string "lender_job_title"
+    t.string "loan_document_number"
+    t.date "return_date"
+    t.text "object_condition"
+    t.bigint "museum_object_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["museum_object_id"], name: "index_loan_outs_on_museum_object_id"
   end
 
   create_table "material_museum_objects", force: :cascade do |t|
@@ -730,6 +749,7 @@ ActiveRecord::Schema.define(version: 2019_08_19_125233) do
   add_foreign_key "inscription_letters_ms_koo_specs", "termlist_inscription_letters"
   add_foreign_key "join_museum_object_dating_centuries", "museum_objects"
   add_foreign_key "join_museum_object_dating_centuries", "termlist_dating_centuries"
+  add_foreign_key "loan_outs", "museum_objects"
   add_foreign_key "material_museum_objects", "museum_objects"
   add_foreign_key "material_museum_objects", "termlists", column: "material_id"
   add_foreign_key "material_specified_museum_objects", "museum_objects"

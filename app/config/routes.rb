@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 #  get 'termlists/choose'
 #  get 'termlists/show'
   resources :termlists
+  resources :loan_outs
 
   root 'static_pages#menu'
   get 'builds/new'
