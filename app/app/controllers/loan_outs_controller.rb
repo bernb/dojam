@@ -57,6 +57,7 @@ class LoanOutsController < ApplicationController
         :lender_job_title,
         :loan_document_number,
         :object_condition,
-        :return_date)
+        :return_date,
+        :museum_object_id)
     end
 end

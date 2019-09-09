@@ -1,0 +1,28 @@
+<div class="col">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>inv. number</th>
+        <th>borrower</th>
+        <th>date of loan</th>
+        <th>document number</th>
+        <th>planned return</th>
+      </tr>
+    </thead>
+    <% loan_outs.each do |o| %>
+      <tbody>
+        <% warn_class = "" %>
+        <% if o.return_date < DateTime.now.to_date %>
+          <% warn_class = "table-warning" %>
+        <% end %>
+        <tr class="search-result-row <%= warn_class %>" data-link="<%= loan_out_path(o) %>">
+          <td><%= o.museum_object.decorate.full_inv_number %></td>
+          <td><%= o.to_institution %></td>
+          <td><%= o.date_out %></td>
+          <td><%= o.loan_document_number %></td>
+          <td><%= o.return_date %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+</div>
