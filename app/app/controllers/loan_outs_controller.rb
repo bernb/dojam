@@ -18,7 +18,8 @@ class LoanOutsController < ApplicationController
   def create
     @loan_out = LoanOut.new(loan_out_params)
     if @loan_out.save
-      redirect_to @loan_out, info: 'loan out was successfully created'
+      redirect_to @loan_out
+      flash[:success] = 'loan was successfully created'
     else
       render :new
     end
@@ -26,15 +27,18 @@ class LoanOutsController < ApplicationController
 
   def update
     if @loan_out.update(loan_out_params)
-      redirect_to @loan_out, notice: 'loan out was successfully updated'
+      redirect_to @loan_out
+      flash[:success] =  'loan was successfully updated'
     else
       render :edit
+      flash[:warning] = "could not update loan, please check inputs"
     end
   end
 
   def destroy
     @loan_out.destroy
-    redirect_to loan_outs_url, notice: 'loan out was successfully destroyed'
+    redirect_to loan_outs_url
+    flash[:success] = 'loan out was successfully destroyed'
   end
 
   private
