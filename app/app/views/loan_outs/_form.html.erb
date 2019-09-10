@@ -1,20 +1,33 @@
 <%= simple_form_for(@loan_out) do |f| %>
   <div class="form-inputs">
-    <%= f.association :museum_object, label: 'inv. number of museum object', collection: MuseumObjectDecorator.decorate_collection(MuseumObject.all.order(:inv_number)), label_method: :full_inv_number %>
-    <% label_tag "inv. number of museum object" %><p>
-    <% text_field_tag :museum_object %>
-    <%= f.input :to_institution, label: 'loan to institution' %>
-    <%= f.input :borrower_name, label: 'name of borrower' %>
-    <%= f.input :borrower_job_title, label: 'job position of borrower' %>
-    <%= f.input :date_out, label: 'date of loan' %>
-    <%= f.input :request_document_number, label: 'document no. of request' %>
-    <%= f.input :request_document_date, label: 'date of document' %>
-    <%= f.input :request_document_signed_by, label: 'signed by' %>
-    <%= f.input :lender_name, label: 'name of lender' %>
-    <%= f.input :lender_job_title, label: 'job position of lender' %>
-    <%= f.input :loan_document_number, label: 'loan document no.' %>
-    <%= f.input :object_condition, label: 'condition of object' %>
-    <%= f.input :return_date, label: 'date of planned return' %>
+    <div class="row">
+      <div class="col">
+        <h2>loan information</h2>
+      <%= f.association :museum_object, label: 'inv. number of museum object', collection: MuseumObjectDecorator.decorate_collection(MuseumObject.all.order(:inv_number)), label_method: :full_inv_number %>
+      <% label_tag "inv. number of museum object" %><p>
+      <% text_field_tag :museum_object %>
+      <%= f.input :to_institution, label: 'loan to institution' %>
+      <%= f.input :borrower_name, label: 'name of borrower' %>
+      <%= f.input :borrower_job_title, label: 'job position of borrower' %>
+      <%= f.input :date_out, label: 'date of loan' %>
+      <%= f.input :request_document_number, label: 'document no. of request' %>
+      <%= f.input :request_document_date, label: 'date of document' %>
+      <%= f.input :request_document_signed_by, label: 'signed by' %>
+      <%= f.input :lender_name, label: 'name of lender' %>
+      <%= f.input :lender_job_title, label: 'job position of lender' %>
+      <%= f.input :loan_document_number, label: 'loan document no.' %>
+      <%= f.input :object_condition, label: 'condition of object' %>
+      <%= f.input :planned_return, label: 'date of planned return' %>
+      </div>
+      <div class="col">
+        <h2>return information</h2>
+        <%= f.input :return_date, label: 'date of return', include_blank: true %>
+        <%= f.input :return_document_number, label: 'document no. of return' %>
+        <%= f.input :return_document_signed_by, label: 'signed by' %>
+        <%= f.input :return_condition, label: 'condition of object' %>
+        <%= f.input :return_remarks, label: 'remarks' %>
+      </div>
+    </div>
   </div>
 
   <div class="form-actions">

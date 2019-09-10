@@ -7,12 +7,13 @@
         <th>date of loan</th>
         <th>document number</th>
         <th>planned return</th>
+        <th>return date</th>
       </tr>
     </thead>
     <% loan_outs.each do |o| %>
       <tbody>
         <% warn_class = "" %>
-        <% if o.return_date < DateTime.now.to_date %>
+        <% if o.overdue? %>
           <% warn_class = "table-warning" %>
         <% end %>
         <tr class="search-result-row <%= warn_class %>" data-link="<%= loan_out_path(o) %>">
@@ -20,7 +21,8 @@
           <td><%= o.to_institution %></td>
           <td><%= o.date_out %></td>
           <td><%= o.loan_document_number %></td>
-          <td><%= o.return_date %></td>
+          <td><%= o.planned_return %></td>
+          <td><%= o.return_date.present? ? o.return_date : "not yet returned" %></td>
         </tr>
       </tbody>
     <% end %>

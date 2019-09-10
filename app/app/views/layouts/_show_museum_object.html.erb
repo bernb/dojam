@@ -39,7 +39,7 @@
     <a class="nav-link" id="images_tab" data-toggle="tab" href="#images" role="tab" aria-controls="images" aria-selected="false">images</a>
   </li>
 </ul>
-<% if @museum_object.loan_out.present? %>
+<% if @museum_object.on_loan? %>
   <div class="row">
     <div class="col">
       <div class="alert alert-info", role="alert">

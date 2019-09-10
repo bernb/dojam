@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_090312) do
+ActiveRecord::Schema.define(version: 2019_09_10_120840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -228,6 +228,11 @@ ActiveRecord::Schema.define(version: 2019_09_09_090312) do
     t.bigint "museum_object_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "planned_return"
+    t.text "return_condition"
+    t.text "return_remarks"
+    t.string "return_document_number"
+    t.string "return_document_signed_by"
     t.index ["museum_object_id"], name: "index_loan_outs_on_museum_object_id"
   end
 
