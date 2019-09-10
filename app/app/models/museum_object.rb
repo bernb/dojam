@@ -359,6 +359,13 @@ class MuseumObject < ApplicationRecord
 		return new_paths
 	end
 
+  def on_loan?
+    # Get the latest loan in terms of loan start date and
+    # check if it was returned already
+    loan = LoanOut.where(museum_object: self).order(:date_out).first
+    return loan.return_date.blank?
+  end
+
 	private
 
 	def add_new_paths paths

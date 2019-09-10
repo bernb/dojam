@@ -1,6 +1,7 @@
 <%= render 'layouts/title', title_name: "loan for #{@loan_out.museum_object.decorate.full_inv_number}" %>
 <div class="row">
   <div class="col">
+    <h2>loan information</h2>
     <dl>
       <dt>loan to institution</dt>
       <dd><%= @loan_out.to_institution %></dd>
@@ -37,6 +38,25 @@
 
       <dt>date of planned return</dt>
       <dd><%= @loan_out.return_date %></dd>
+    </dl>
+  </div>
+  <div class="col">
+    <h2>return information</h2>
+    <dl>
+      <dt>date of return</dt>
+      <dd><%= @loan_out.return_date %></dd>
+
+      <dt>document no. of return</dt>
+      <dd><%= @loan_out.return_document_number %></dd>
+
+      <dt>signed by</dt>
+      <dd><%= @loan_out.return_document_signed_by %></dd>
+
+      <dt>condition of object</dt>
+      <dd><%= @loan_out.return_condition %></dd>
+
+      <dt>remarks</dt>
+      <dd><%= @loan_out.return_remarks %></dd>
     </dl>
   </div>
 </div>
