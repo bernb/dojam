@@ -363,7 +363,7 @@ class MuseumObject < ApplicationRecord
     # Get the latest loan in terms of loan start date and
     # check if it was returned already
     loan = LoanOut.where(museum_object: self).order(:date_out).first
-    return loan.return_date.blank?
+    return loan.present? && loan.return_date.blank?
   end
 
 	private
