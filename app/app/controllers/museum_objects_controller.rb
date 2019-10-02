@@ -47,10 +47,10 @@ class MuseumObjectsController < ApplicationController
   def search_form
     if params.has_key?(:form_search)
       term = MaterialSpecified.find params[:material_specified_id]
-      # Find all secondary path matches, then all main_path matches
-      sec = MuseumObject.joins(museum_object_paths: :path).where("path LIKE ?",  term.paths.first.path + "%")
-      prim = MuseumObject.joins(:main_path).where("path LIKE ?", term.paths.first.path + "%")
-      # Using or does not work atm on this kind of active record queries, so we have to use arrays
+      paths = Path.where("path LIKE ?", term.paths.first.path + "%")
+      prim = MuseumObject.where(main_path: paths)
+      sec = MuseumObject.joins(:museum_object_paths).where(museum_object_paths: {path_id: paths.ids})
+      # Using or does not work on some classes of more complex active record queries, so we have to use arrays
       @results = sec + prim
       page = params[:page] || 1
       @results =  Kaminari.paginate_array(@results).page(page)
