@@ -58,6 +58,13 @@ class MuseumObjectsController < ApplicationController
     render 'search'
   end
 
+  def add_search_field
+    respond_to do |format|
+      format.js do
+      end
+    end
+  end
+
   def search_result_fulltext
   end
 

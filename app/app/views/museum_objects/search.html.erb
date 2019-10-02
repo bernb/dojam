@@ -30,8 +30,12 @@
       <div class="col">
         <div class="form-group">
           <%= form_tag(museum_objects_search_form_path, method: "get") do %>
-            <%= label_tag(:form_search, "form search") %>
+            <%= label_tag(:form_search, "form search") %></p>
             <%= hidden_field_tag "form_search", "true" %>
+              <%= link_to "add", museum_objects_add_search_field_path, remote: true %>
+              <%= select_tag :selected_term, options_for_select(Termlist.list_types_humanized), class: "form-control" %>
+              <div class="testul">
+              </div>
             <%= select_tag :material_specified_id, options_for_select(MaterialSpecified.all.map{|m| [m.name, m.id]}), class: "form-control" %>
         </div>
         <%= submit_tag "Search", class: "btn btn-primary" %>
