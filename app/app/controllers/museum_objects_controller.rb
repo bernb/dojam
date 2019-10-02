@@ -61,6 +61,8 @@ class MuseumObjectsController < ApplicationController
   def add_search_field
     respond_to do |format|
       format.js do
+        terms = Material.all
+        @list = terms.map{|t| [t.name, t.id]}
       end
     end
   end
