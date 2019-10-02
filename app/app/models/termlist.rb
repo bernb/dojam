@@ -18,6 +18,10 @@ class Termlist < ApplicationRecord
 		false
 	end
 
+  def self.list_types_humanized
+    Termlist.pluck(:type).uniq.sort.map{|t| t.underscore.gsub('_', ' ')}
+  end
+
 	private
 	# Materials have no parents but a path to themselves i.e.
 	# material always has path /material.id
