@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get 'museum_objects/search' # remember that orders matter
   get 'museum_objects/search_result_invnumber'
+  get 'museum_objects/search_form'
   resources :museum_objects do
     resources :builds
     post 'builds/step_confirm', to: 'builds#create'

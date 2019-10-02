@@ -25,7 +25,21 @@
       <% end %>
       </div>
     </div>
+
+    <div class="row mt-5">
+      <div class="col">
+        <div class="form-group">
+          <%= form_tag(museum_objects_search_form_path, method: "get") do %>
+            <%= label_tag(:form_search, "form search") %>
+            <%= hidden_field_tag "form_search", "true" %>
+            <%= select_tag :material_specified_id, options_for_select(MaterialSpecified.all.map{|m| [m.name, m.id]}), class: "form-control" %>
+        </div>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      <% end %>
+      </div>
+    </div>
   </div>
+
   <div class="col-8 align-self-center">
     <% if @results.present? %>
       <%= render 'layouts/search_results', results: @results %>
