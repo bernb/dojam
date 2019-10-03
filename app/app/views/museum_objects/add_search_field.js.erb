@@ -1,1 +1,6 @@
-  $('.testul').append($('<div></div>').html('<%= j select_tag(:selected_term, options_for_select(@list), class: "form-control") %>'));
+$('.search_form_fields').append(
+  '<div class="search_form_field">' +
+  '<%= j select_tag(@term, options_for_select(@list), class: "form-control") %>' +
+  '<a class="search_form_remove_field' + '" href="#">-</a>' +
+  '</div>'
+);

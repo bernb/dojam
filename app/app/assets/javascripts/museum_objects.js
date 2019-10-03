@@ -17,6 +17,11 @@ ready = function() {
 		});
 	});
 
+	$(".search_form_fields").on("click", ".search_form_remove_field", function(event) {
+		event.preventDefault();
+		$(this).parent().remove();
+	});
+
 };
 
 $(document).on('turbolinks:load', ready);
