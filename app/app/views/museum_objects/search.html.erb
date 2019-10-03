@@ -29,7 +29,7 @@
     <div class="row mt-5">
       <div class="col">
         <div class="form-group">
-          <%= form_tag(museum_objects_search_form_path, method: "get") do %>
+          <%= form_tag(museum_objects_search_form_path, method: "get", remote: true) do %>
             <%= label_tag(:form_search, "form search") %></p>
             <%= hidden_field_tag "form_search", "true" %>
             <%= link_to "add", museum_objects_add_search_field_path, class: "form-search-add" %>
@@ -44,8 +44,6 @@
   </div>
 
   <div class="col-8 align-self-center">
-    <% if @results.present? %>
       <%= render 'layouts/search_results', results: @results %>
-    <% end %>
   </div>
 </div>

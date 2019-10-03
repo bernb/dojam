@@ -1,8 +1,10 @@
-<% render 'layouts/title', title_name: 'search results: ' + results.total_count.to_s %>
-<%= paginate results %>
-<div class="row mb-4">
-  <div class="col">
-    <%= results.total_count.to_s %> results
+<% render 'layouts/title', title_name: 'search results: ' + (results&.total_count&.to_s || "0") %>
+<div class="search-results">
+  <%= paginate results unless results.blank? %>
+  <div class="row mb-4">
+    <div class="col">
+      <%= results&.total_count&.to_s || 0 %> results
+    </div>
   </div>
+  <%= render 'layouts/search_results_as_cards' unless results.blank? %>
 </div>
-<%= render 'layouts/search_results_as_cards' %>

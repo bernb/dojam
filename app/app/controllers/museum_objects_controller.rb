@@ -45,31 +45,45 @@ class MuseumObjectsController < ApplicationController
   end
 
   def search_form
-    if params.has_key?(:form_search)
-      terms = {}
-      results = []
-      params.each do |k,v|
-        next unless k.to_s.starts_with?('search_form_field')
-        term = k.gsub('search_form_field_', '').titleize.gsub(' ', '')
-        terms[term] = params[k]
-      end
-
-      terms.each do |k,v|
-        termclass = k.to_s.constantize
-        term = termclass.find v
-        if k.in?(["Material", "MaterialSpecified", "KindOfObject", "KindOfObjectSpecified"])
-          paths = Path.where("path LIKE ?", term.paths.first.path + "%")
-          prim = MuseumObject.where(main_path: paths)
-          sec = MuseumObject.joins(:museum_object_paths).where(museum_object_paths: {path_id: paths.ids})
-          results +=  sec + prim
-          next
+    respond_to do |format|
+      format.js do
+        unless params.has_key?(:form_search)
+          flash[:danger] = "Could not complete search: form_search parameter missing"
+          redirect_to museum_objects_search_path
         end
-        results += term.museum_objects 
+        terms = {}
+        results = []
+        params.each do |k,v|
+          next unless k.to_s.starts_with?('search_form_field')
+          term = k.gsub('search_form_field_', '').titleize.gsub(' ', '')
+          terms[term] = params[k]
+        end
+
+        if terms.blank?
+          flash.now[:warning] = "No terms given"
+          render 'search' and return
+        end
+
+        terms.each do |k,v|
+          termclass = k.to_s.constantize
+          term = termclass.find v
+          if k.in?(["Material", "MaterialSpecified", "KindOfObject", "KindOfObjectSpecified"])
+            paths = Path.where("path LIKE ?", term.paths.first.path + "%")
+            prim = MuseumObject.where(main_path: paths)
+            sec = MuseumObject.joins(:museum_object_paths).where(museum_object_paths: {path_id: paths.ids})
+            results <<  sec + prim
+          else
+            results << term.museum_objects 
+          end
+        end
+        page = params[:page] || 1
+        results = results.reduce(&:&).uniq
+        @results =  Kaminari.paginate_array(results).page(page)
+        if @results.blank?
+          # Info gets inserted in search_form view
+        end
       end
-      page = params[:page] || 1
-      @results =  Kaminari.paginate_array(results).page(page)
     end
-    render 'search'
   end
 
   def add_search_field

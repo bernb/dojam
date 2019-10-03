@@ -1,0 +1,5 @@
+$('.alert').remove();
+$('.search-results').replaceWith("<%= j render 'layouts/search_results', results: @results %>");
+<% if @results.blank? %>
+    $('.navbar').after('<div class="alert alert-info">No results found for given attributes</div>');
+<% end %>
