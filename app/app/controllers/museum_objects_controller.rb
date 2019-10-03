@@ -46,14 +46,28 @@ class MuseumObjectsController < ApplicationController
 
   def search_form
     if params.has_key?(:form_search)
-      term = MaterialSpecified.find params[:material_specified_id]
-      paths = Path.where("path LIKE ?", term.paths.first.path + "%")
-      prim = MuseumObject.where(main_path: paths)
-      sec = MuseumObject.joins(:museum_object_paths).where(museum_object_paths: {path_id: paths.ids})
-      # Using or does not work on some classes of more complex active record queries, so we have to use arrays
-      @results = sec + prim
+      terms = {}
+      results = []
+      params.each do |k,v|
+        next unless k.to_s.starts_with?('search_form_field')
+        term = k.gsub('search_form_field_', '').titleize.gsub(' ', '')
+        terms[term] = params[k]
+      end
+
+      terms.each do |k,v|
+        termclass = k.to_s.constantize
+        term = termclass.find v
+        if k.in?(["Material", "MaterialSpecified", "KindOfObject", "KindOfObjectSpecified"])
+          paths = Path.where("path LIKE ?", term.paths.first.path + "%")
+          prim = MuseumObject.where(main_path: paths)
+          sec = MuseumObject.joins(:museum_object_paths).where(museum_object_paths: {path_id: paths.ids})
+          results +=  sec + prim
+          next
+        end
+        results += term.museum_objects 
+      end
       page = params[:page] || 1
-      @results =  Kaminari.paginate_array(@results).page(page)
+      @results =  Kaminari.paginate_array(results).page(page)
     end
     render 'search'
   end
