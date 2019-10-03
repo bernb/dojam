@@ -32,11 +32,10 @@
           <%= form_tag(museum_objects_search_form_path, method: "get") do %>
             <%= label_tag(:form_search, "form search") %></p>
             <%= hidden_field_tag "form_search", "true" %>
-              <%= link_to "add", museum_objects_add_search_field_path, class: "form-search-add" %>
-              <%= select_tag :selected_term, options_for_select(Termlist.list_types_humanized), class: "form-control" %>
-              <div class="search_form_fields">
-              </div>
-            <%= select_tag :material_specified_id, options_for_select(MaterialSpecified.all.map{|m| [m.name, m.id]}), class: "form-control" %>
+            <%= link_to "add", museum_objects_add_search_field_path, class: "form-search-add" %>
+            <%= select_tag :selected_term, options_for_select(Termlist.list_types_humanized), class: "form-control" %>
+            <div class="search_form_fields">
+            </div>
         </div>
         <%= submit_tag "Search", class: "btn btn-primary" %>
       <% end %>
