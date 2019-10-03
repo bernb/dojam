@@ -8,9 +8,11 @@ ready = function() {
 
 	$(".form-search-add").click(function(event) {
 		event.preventDefault();
+		var selected_term = $('#selected_term').val();
 		$.ajax({
 			url: 'add_search_field',
 			type: 'GET',
+			data: {selected_term: selected_term},
 			dataType: 'script'
 		});
 	});

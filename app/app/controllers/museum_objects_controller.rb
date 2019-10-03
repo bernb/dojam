@@ -61,7 +61,13 @@ class MuseumObjectsController < ApplicationController
   def add_search_field
     respond_to do |format|
       format.js do
-        terms = Material.all
+        selected_term = params[:selected_term]
+        unless Termlist.list_types_humanized.include?(selected_term)
+          flash[:error] = "Invalid term sent"
+          redirect_to museum_objects_search_path
+        end
+        termclass = selected_term.titleize.gsub(' ', '').constantize
+        terms = termclass.all
         @list = terms.map{|t| [t.name, t.id]}
       end
     end
