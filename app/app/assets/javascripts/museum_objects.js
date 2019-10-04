@@ -19,7 +19,7 @@ ready = function() {
 
 	$(".search_form_fields").on("click", ".search_form_remove_field", function(event) {
 		event.preventDefault();
-		$(this).parent().remove();
+		$(this).closest('.search_form_field').remove();
 	});
 
 };
