@@ -1,9 +1,23 @@
 <%= render 'layouts/title', title_name: "Search" %>
 
-<div class="row">
-  <div class="col-2">
-    <div class="row">
-      <div class="col">
+<ul class="nav nav-tabs" id="search-tabs", role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="search-inv-number-tab" data-toggle="tab" href="#search-inv-number" role="tab" aria-controls="search-inv-number" aria-selected="true">inv. number</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" id="search-fulltext-tab" data-toggle="tab" href="#search-fulltext" role="tab" aria-controls="search-fulltext" aria-selected="false">fulltext</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" id="search-form-tab" data-toggle="tab" href="#search-form" role="tab" aria-controls="search-form" aria-selected="false">form</a>
+  </li>
+</ul>
+
+<div class="row mt-5">
+  <div class="col-3">
+    <div class="tab-content" id="search-tabs">
+      <div class="tab-pane fade show active" id="search-inv-number" role="tabpanel" aria-labelledby="search-inv-number-tab">
         <%= form_tag(museum_objects_search_result_invnumber_path, method: "get") do %>
           <div class="form-group">
             <%= label_tag(:inv_number_search, "inventory number") %>
@@ -12,10 +26,8 @@
           <%= submit_tag "Search", class: "btn btn-primary" %>
         <% end %>
       </div>
-    </div>
 
-    <div class="row mt-5">
-      <div class="col">
+      <div class="tab-pane fade" id="search-fulltext" role="tabpanel" aria-labelledby="search-fulltext-tab">
         <div class="form-group">
           <%= form_tag(museum_objects_search_path, method: "get") do %>
             <%= label_tag(:search_query, "fulltext") %>
@@ -24,16 +36,21 @@
         <%= submit_tag "Search", class: "btn btn-primary" %>
       <% end %>
       </div>
-    </div>
 
-    <div class="row mt-5">
-      <div class="col">
+      <div class="tab-pane fade" id="search-form" role="tabpanel" aria-labelledby="search-form-tab">
         <div class="form-group">
           <%= form_tag(museum_objects_search_form_path, method: "get", remote: true) do %>
-            <%= label_tag(:form_search, "form search") %></p>
+            <%= label_tag(:form_search, "form search") %>
             <%= hidden_field_tag "form_search", "true" %>
-            <%= link_to "add", museum_objects_add_search_field_path, class: "form-search-add" %>
-            <%= select_tag :selected_term, options_for_select(Termlist.list_types_humanized), class: "form-control" %>
+            <div class="row align-items-center">
+              <div class="col">
+                <%= select_tag :selected_term, options_for_select(Termlist.list_types_humanized), class: "form-control" %>
+              </div>
+              <div class="col-2">
+                <%= link_to "+", museum_objects_add_search_field_path, class: "form-search-add" %>
+              </div>
+            </div>
+            <hr/>
             <div class="search_form_fields">
             </div>
         </div>
@@ -44,6 +61,6 @@
   </div>
 
   <div class="col-8 align-top">
-      <%= render 'layouts/search_results', results: @results %>
+    <%= render 'layouts/search_results', results: @results %>
   </div>
 </div>
