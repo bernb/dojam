@@ -7,7 +7,7 @@ $('.search_form_fields').append(
   '</div>' +
   '<div class="row mb-3 align-items-center">' +
   '<div class="col">' +
-  '<%= j select_tag(@select_tag_id, options_for_select(@list), class: "form-control") %>' +
+  '<%= j select_tag(@select_tag_id, options_for_select(@list), class: "form-control", multiple: true) %>' +
   '</div>' +
   '<div class="col-2">' +
   '<a class="search_form_remove_field" href="#">-</a>' +
