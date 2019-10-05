@@ -66,15 +66,19 @@ class MuseumObjectsController < ApplicationController
 
         terms.each do |k,v|
           termclass = k.to_s.constantize
-          term = termclass.find v
-          if k.in?(["Material", "MaterialSpecified", "KindOfObject", "KindOfObjectSpecified"])
-            paths = Path.where("path LIKE ?", term.paths.first.path + "%")
-            prim = MuseumObject.where(main_path: paths)
-            sec = MuseumObject.joins(:museum_object_paths).where(museum_object_paths: {path_id: paths.ids})
-            results <<  sec + prim
-          else
-            results << term.museum_objects 
+          term_results = []
+          v.each do |term_id|
+            term = termclass.find term_id 
+            if k.in?(["Material", "MaterialSpecified", "KindOfObject", "KindOfObjectSpecified"])
+              paths = Path.where("path LIKE ?", term.paths.first.path + "%")
+              prim = MuseumObject.where(main_path: paths)
+              sec = MuseumObject.joins(:museum_object_paths).where(museum_object_paths: {path_id: paths.ids})
+              term_results +=  sec + prim
+            else
+              term_results += term.museum_objects 
+            end
           end
+          results << term_results.uniq
         end
         page = params[:page] || 1
         results = results.reduce(&:&).uniq
