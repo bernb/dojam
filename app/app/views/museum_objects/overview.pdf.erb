@@ -17,7 +17,7 @@
               <h6>
                 <strong>type</strong>
               </h6>
-              <span>ceramic vessel</span>
+              <span><%= museum_object.basic_object_properties %></span>
             </td>
           </tr>
           <tr>
@@ -25,7 +25,7 @@
               <h6>
                 <strong>measurements</strong>
               </h6>
-              <span>23x12x6cm</span>
+              <span><%= museum_object.measurements %></span>
             </td>
           </tr>
           <tr>
@@ -33,14 +33,14 @@
               <h6>
                 <strong>color</strong>
               </h6>
-              <span>dark red</span>
+              <span><%= museum_object.color_list %></span>
             </td>
           </tr>
           <td>
             <h6>
               <strong>description</strong>
             </h6>
-            <span>"chotecolate on white" pottery flask with two loop handles, decorated with brown bands and circles</span>
+            <span><%= museum_object.remarks %></span>
           </td>
           </tr>
         </tbody>
@@ -65,7 +65,7 @@
           <h6>
             <strong>museum inventory number</strong>
           </h6>
-          <span>J.10080</span>
+          <span><%= museum_object.full_inv_number %></span>
         </td>
       </tr>
       <tr>
@@ -74,7 +74,7 @@
             <h6>
               <strong>authenticity</strong>
             </h6>
-            <span>archaeological object</span>
+            <span><%= museum_object.authenticity&.name %></span>
           </td>
         </tr>
     </tbody>
