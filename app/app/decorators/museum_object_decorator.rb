@@ -19,12 +19,10 @@ class MuseumObjectDecorator < Draper::Decorator
      material_unknown = true 
     end
 
-    properties << " "
-
     if self.kind_of_object_specified.present? && self.kind_of_object_specified.name != "undetermined"
-      properties << self.kind_of_object_specified.name
+      properties << " " + self.kind_of_object_specified.name
     elsif self.kind_of_object.present? && self.kind_of_object.name != "undetermined"
-      properties << self.kind_of_object.name
+      properties << " " + self.kind_of_object.name
     elsif
       kind_unknown = true
     end
