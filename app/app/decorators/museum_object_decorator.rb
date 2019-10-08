@@ -6,6 +6,43 @@ class MuseumObjectDecorator < Draper::Decorator
     PaginatingDecorator
   end
 
+  def color_list
+    self.decorate_named_list self.colors
+  end
+
+  def measurements
+    measurement = ""
+    postfix = ""
+    if self.max_width.present?
+      measurement << self.max_width.to_i.to_s
+      postfix << "width"
+    end
+
+    if self.max_length.present?
+      if measurement.present?
+        measurement << "x"
+        postfix << "x"
+      end
+      measurement << self.max_length.to_i.to_s
+      postfix << "length"
+    end
+
+    if self.height.present?
+      if measurement.present?
+        measurement << "x"
+        postfix << "x"
+      end
+      measurement << self.height.to_i.to_s
+      postfix << "height"
+    end
+
+    if measurement.present?
+      measurement << " cm" 
+    else
+      measurement = "undetermined"
+    end
+  end
+
   def basic_object_properties
     properties = ""
     material_unknown = false
