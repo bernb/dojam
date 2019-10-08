@@ -1,9 +1,9 @@
 class MuseumObjectsController < ApplicationController
 
   def index
-    museum_objects = MuseumObject.limit 25
-    @museum_cards = MuseumCardDecorator.decorate_collection(museum_objects)
-    @museum_objects = museum_objects.map(&:decorate)
+    page = params[:page] || 1
+    @museum_objects = MuseumObject.page(page)
+    @museum_objects = MuseumObjectDecorator.decorate_collection(@museum_objects)
     # We use a hash to allow more complex variants later
     # But for now only the key is used by museum card decorator
     @variant = {"edit": nil}

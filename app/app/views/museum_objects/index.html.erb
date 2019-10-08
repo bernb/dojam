@@ -1,11 +1,3 @@
 <%= render 'layouts/title', title_name: 'Search results' %>
-<%= render 'layouts/search_results_table' %>
-<% if false %>
-	<div class="row equal">
-		<% @museum_cards.each do |object| %>
-			<div class="col">
-				<%= render 'layouts/museum_object_card', museum_card: object, variant: @variant %>
-			</div>
-		<% end %>
-	</div>
-<% end %>
+<%= paginate @museum_objects %>
+<%= render 'layouts/search_results_as_table' %>
