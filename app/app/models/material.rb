@@ -9,7 +9,7 @@ class Material < Termlist
 
   def museum_objects
     paths = self.paths
-    secs = MuseumObject.joins(secondary_paths: :termlists).where(paths: {id: paths.ids}).where(termlists: {id: m.id})
+    secs = MuseumObject.joins(secondary_paths: :termlists).where(paths: {id: paths.ids}).where(termlists: {id: self.id})
     mains = MuseumObject.where(main_path: paths)
     mains + secs
     # ToDo: Why does this not work? -> join table path <-> mu only used for main_path, but still seems to be wrong?
