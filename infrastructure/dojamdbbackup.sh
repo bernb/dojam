@@ -45,7 +45,7 @@ export PGUSER="dojam"
 
 #su -c "pg_dump -Fc DOJAM_DB > /home/dojam/Documents/dojam.dump" dojam
 cd /home/dojam/jamappv2
-docker-compose exec -T db sh -c 'pg_dump -Fc DOJAM_DB -U dojam > /var/lib/postgresql/data/dojam.dump'
+docker-compose exec -T db sh -c 'pg_dump DOJAM_DB -U dojam > /var/lib/postgresql/data/dojam.dump'
 
 ##
 ## Dateien ins Repository übertragen
