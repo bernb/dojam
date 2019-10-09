@@ -7,3 +7,8 @@
   height: 200px;
   background-color: #F8F5F0;
 }
+
+.card-img-top {
+	height: 25vh;
+	object-fit: contain;
+}
