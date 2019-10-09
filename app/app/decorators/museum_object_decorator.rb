@@ -279,10 +279,10 @@ class MuseumObjectDecorator < Draper::Decorator
 
   def top_image
     html = ""
-    if self&.images&.main_r&.attachment.nil?
+    if self&.images&.main&.attachment.nil?
       html = "<div class=\"card-img-dummy\"></div>"
     else
-      image = self.images.main_for_render.variant(resample: "100x100")
+      image = self.images.main.variant(resample: "200x200")
       html = self.h.image_tag image, class: "card-img-top"
     end
     
