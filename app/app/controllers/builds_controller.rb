@@ -102,7 +102,7 @@ class BuildsController < ApplicationController
     respond_to do |format|
       format.js {
         excavation_site_category = ExcavationSiteCategory.find params[:excavation_site_category_id]
-        @excavation_site_kinds = excavation_site_category.excavation_site_kinds
+        @excavation_site_kinds = excavation_site_category.excavation_site_kinds.uniq
       }
     end
   end
@@ -176,7 +176,7 @@ class BuildsController < ApplicationController
     @excavation_site_categories = ExcavationSiteCategory.all
 		@selected_excavation_site_category = @museum_object.excavation_site_category
     @selected_excavation_site_category ||= ExcavationSiteCategory.first
-    @excavation_site_kinds = @selected_excavation_site_category.excavation_site_kinds
+    @excavation_site_kinds = @selected_excavation_site_category.excavation_site_kinds.uniq
 	end
 
 	def step_material_specified_vars
