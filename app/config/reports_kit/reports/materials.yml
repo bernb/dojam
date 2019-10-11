@@ -1,0 +1,3 @@
+data_method: CustomReports.materials
+chart:
+  type: pie

@@ -4,9 +4,10 @@ class StaticPagesController < ApplicationController
   end
 
   def reports
-    @museum_objects = MuseumObject.order(:created_at)
+    @museum_objects = MuseumObject.order(created_at: :desc)
       .limit(10)
       .decorate
+      .reject{|o| o.inv_number.blank?}
   end
 
 	def import_termlists_select

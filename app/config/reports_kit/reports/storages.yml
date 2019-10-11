@@ -1,0 +1,7 @@
+data_method: CustomReports.storages
+chart:
+  type: pie
+  options:
+    responsive: true
+    legend: 
+      display: true

@@ -1,14 +1,26 @@
 <div class="row">
   <div class="col">
-    <h3>priorities</h3>
+    <h3>storage</h3>
+    <%= render_report "storages", actions: [] %>
+  </div>
+
+  <div class="col">
+    <h3>priority</h3>
     <%= render_report "priorities", actions: [] %>
   </div>
 
   <div class="col">
-    <h3>authenticities</h3>
+    <h3>authenticity</h3>
     <%= render_report "authenticities", actions: [] %>
   </div>
 
+  <div class="col">
+    <h3>material</h3>
+    <%= render_report "materials", actions: [] %>
+  </div>
+</div>
+
+<div class="row">
   <div class="col">
     <h3>last added</h3>
     <%= render "layouts/search_results_as_table" %>
