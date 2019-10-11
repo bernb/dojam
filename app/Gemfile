@@ -7,6 +7,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+
+# Reporting with visuals
+gem 'reports_kit'
+
 # Simpliest fulltext search
 gem 'search_cop'
 
