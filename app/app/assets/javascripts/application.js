@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require activestorage
+//= require reports_kit/application
 //= require_tree .

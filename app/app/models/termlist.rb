@@ -12,6 +12,10 @@ class Termlist < ApplicationRecord
 		5
 	end
 
+  def to_s
+    name
+  end
+
 	# Some termlists do no actually have any paths,
 	# those are valid choices for all of them
 	def self.is_independent_of_paths

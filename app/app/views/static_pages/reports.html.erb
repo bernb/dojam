@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col">
+    <h3>priorities</h3>
+    <%= render_report "priorities", actions: [] %>
+  </div>
+
+  <div class="col">
+    <h3>authenticities</h3>
+    <%= render_report "authenticities", actions: [] %>
+  </div>
+
+  <div class="col">
+    <h3>last added</h3>
+    <%= render "layouts/search_results_as_table" %>
+  </div>
+</div>

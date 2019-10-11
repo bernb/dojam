@@ -3,6 +3,12 @@ class StaticPagesController < ApplicationController
   def menu
   end
 
+  def reports
+    @museum_objects = MuseumObject.order(:created_at)
+      .limit(10)
+      .decorate
+  end
+
 	def import_termlists_select
 	end
 

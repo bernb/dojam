@@ -1,0 +1,8 @@
+measure: museum_object 
+dimensions: 
+- main_material
+chart: 
+  type: pie
+  options:
+    legend:
+      display: true

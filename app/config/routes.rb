@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   resources :termlists
   resources :loan_outs
 
+# Reports from reports_kit
+  mount ReportsKit::Engine, at: '/'
+
   root 'static_pages#menu'
+  get 'static_pages/reports'
   get 'builds/new'
   get 'static_pages/menu'
 
