@@ -14,6 +14,7 @@
     <%= link_to "import termlists",import_termlists_select_path, class: "btn btn-primary"%></button>
     <% link_to "manage termlists", '/admin', class: "btn btn-primary" %>
     <%= link_to "view last activities","", class: "btn btn-primary disabled"%>
+    <%= link_to "reports", static_pages_reports_path, class: "btn btn-primary", data: {turbolinks: false} %>
     <% link_to "manual backup","", class: "btn btn-primary disabled" %>
     <% link_to "load backup","", class: "btn btn-primary disabled" %>
   </div>
