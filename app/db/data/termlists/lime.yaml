@@ -5,6 +5,7 @@ material_specifieds:
 kind_of_objects:
 - architectural element:
   - wall plaster
+  - dummy-term
 - sculpture:
   - figurine anthropomorphic
   - mask
