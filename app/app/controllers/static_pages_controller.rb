@@ -15,13 +15,6 @@ class StaticPagesController < ApplicationController
 
   def import_termlists_submit
     file_hash = params.dig(:termlists, :termlist_files)
-    determine_termlist_type file_hash
-    import_materials
-    redirect_to import_termlists_select_path
-  end
-
-  private
-  def determine_termlist_type file_hash
     warnings = {}
     file_hash&.each do |file_entity|
       filename = file_entity.original_filename
@@ -33,14 +26,21 @@ class StaticPagesController < ApplicationController
       file = File.open file_entity.tempfile
       data = YAML.safe_load file.read
       if data.keys.include?("material_name")
-        import_materials
+        import_materials data
       elsif data.keys.include?("museum")
-        #import_museum_data
+        helpers.import_museum_data data
+      elsif data.keys.include?("site_name")
+        helpers.import_site_names data
       end
     end
+    if flash[:danger].blank? && flash[:warning].blank?
+      flash[:success] = "Data successfully imported"
+    end
+    redirect_to import_termlists_select_path
   end
 
-  def import_materials
+  private
+  def import_materials data
     flash[:warning] = Hash.new
     materials_for_import = []
     materials_for_import, warnings =
