@@ -14,7 +14,7 @@ module StaticPagesHelper
       else
         storage = Storage.create name: storage_name, museum: museum
       end
-      storage_hash.values.each do |storage_location_name|
+      storage_hash[storage_name].each do |storage_location_name|
         if storage.storage_locations.map{|sl| sl.name}.include?(storage_location_name)
           next
         else
