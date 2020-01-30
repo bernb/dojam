@@ -24,7 +24,13 @@ class StaticPagesController < ApplicationController
         next
       end
       file = File.open file_entity.tempfile
-      data = YAML.safe_load file.read
+      begin
+        data = YAML.safe_load file.read
+      rescue Psych::SyntaxError => se
+        line_number = se.message.match(/line (\d+)/).captures[0]
+        warnings[filename.to_sym] = "#{file_entity.original_filename}: Syntax Error around line #{line_number}. Please check the file for errors and try again."
+        next
+      end
       if data.keys.include?("material_name")
         import_materials data
       elsif data.keys.include?("museum")
@@ -33,6 +39,7 @@ class StaticPagesController < ApplicationController
         helpers.import_site_names data
       end
     end
+    flash[:warning] = warnings
     if flash[:danger].blank? && flash[:warning].blank?
       flash[:success] = "Data successfully imported"
     end
