@@ -122,6 +122,10 @@ class Path < ApplicationRecord
 		return objects
 	end
 
+  def last_object
+    return objects.last
+  end
+
 	def named_path
 		named_path = ""
 		self.objects.each do |object|
