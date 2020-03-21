@@ -32,7 +32,6 @@ class Termlist < ApplicationRecord
 	def add_default_path_for_roots
 		if self.depth == 1
 			path = Path.find_or_create_by path: "/" + self.id.to_s
-			self.paths << path
 		end
 	end
 end
