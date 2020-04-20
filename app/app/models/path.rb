@@ -114,6 +114,10 @@ class Path < ApplicationRecord
 		self.path.split("/").drop(1)
 	end
 
+  def last_id
+    self.ids.last.to_i
+  end
+
 	def objects
 		objects = []
 		self.ids.each do |id|
