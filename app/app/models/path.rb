@@ -67,6 +67,11 @@ class Path < ApplicationRecord
 		Path.where("path SIMILAR TO ?", path_name)
 	end
 
+  def transitiv_children_ids
+    path_name = self.path + "/%"
+    Path.where("path LIKE ?", path_name)
+  end
+
 	def included_or_parent_of? other_paths
 		return false unless other_paths.present?
 		return parent_of?(other_paths) || [other_paths].flatten.include?(self)
