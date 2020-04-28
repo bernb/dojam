@@ -2,6 +2,7 @@
 material_name: stone/mineral
 material_specifieds:
 - nearly_lime
+- nearly_lime2
 kind_of_objects:
 - architectural element:
   - wall plaster
