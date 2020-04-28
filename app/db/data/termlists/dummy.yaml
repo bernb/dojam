@@ -1,14 +1,11 @@
 ---
-material_name: stone/mineral
+material_name: dummy
 material_specifieds:
-- lime
+- glass_dummy
 kind_of_objects:
 - architectural element:
-  - wall plaster
   - dummy-term
 - sculpture:
-  - figurine anthropomorphic
-  - mask
   - statue anthropomorphic
 - undetermined
 

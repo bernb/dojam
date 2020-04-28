@@ -1,16 +1,12 @@
 ---
 material_name: stone/mineral
 material_specifieds:
-- lime
+- nearly_lime
 kind_of_objects:
 - architectural element:
   - wall plaster
-  - dummy-term
 - sculpture:
   - figurine anthropomorphic
-  - mask
-  - statue anthropomorphic
-- undetermined
 
 production_techniques:
 - hand-made
