@@ -88,6 +88,10 @@ class Path < ApplicationRecord
     transitiv_children.map(&:id)
   end
 
+  def transitive_object_hull
+    return transitive_children.map(&:last_object)
+  end
+
 	def included_or_parent_of? other_paths
 		return false unless other_paths.present?
 		return parent_of?(other_paths) || [other_paths].flatten.include?(self)
