@@ -1,6 +1,11 @@
 class MaterialSpecified < Termlist
+  scope :material, ->(m_id) {joins(:paths).where("paths.path LIKE ?", "/#{m_id}%")}
   has_many :material_specified_museum_objects
   has_many :museum_objects, through: :material_specified_museum_objects
+
+  def self.ransackable_scopes(auth_object = nil)
+    [:material]
+  end
 
 	def depth
 		2
