@@ -7,6 +7,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# Default since rails 6.0
+#gem 'webpacker'
+
 gem 'activeadmin'
 gem 'devise'
 gem 'cancancan'
@@ -21,9 +24,9 @@ gem 'search_cop'
 gem 'pg_search'
 
 # used by active storage to create thumbnail
-gem 'mini_magick', '~> 4.9'
+gem 'mini_magick', '~> 4.10'
 
-gem "image_processing", '~> 1.8'
+gem "image_processing", '~> 1.10'
 
 # Reads Excel files
 gem "roo", "~> 2.8"
@@ -35,14 +38,14 @@ gem "awesome_print"
 gem "fuzzy_match"
 
 # helps with decorators
-gem 'draper', '~> 3.1'
+gem 'draper', '~> 4.0'
 
 # needed by bootstrap gem
 gem 'sprockets-rails'
-gem 'bootstrap', '~> 4.3'
+gem 'bootstrap', '~> 4.4'
 
 # will be initialized with bootstrap support
-gem 'simple_form', '~> 4.0'
+gem 'simple_form', '~> 5.0'
 
 # creates multistep forms for models
 gem 'wicked'
@@ -51,21 +54,21 @@ gem 'wicked'
 gem 'bootsnap', '~> 1.4', require: false
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 6.0'
 
 # Use Puma as the app server
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3'
 
 gem 'administrate', '~> 0.11'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails', '~> 5.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -74,7 +77,7 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 
 # DSL to build json structures
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder', '~> 2.10'
 
 # postgres
 gem 'pg'
@@ -86,7 +89,7 @@ gem 'activerecord-import', '~> 1.0'
 gem "figaro"
 
 # Gives sorted models
-gem 'acts_as_list', '~> 0.9'
+gem 'acts_as_list', '~> 1.0'
 
 # Provides pagination
 gem 'kaminari'
@@ -97,8 +100,8 @@ gem 'wkhtmltopdf-binary'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', '~> 11.0', platform: :mri
-  gem "factory_bot_rails", '~> 5.0'
+  gem 'byebug', '~> 11.1', platform: :mri
+  gem "factory_bot_rails", '~> 5.2'
 	gem 'rspec-rails'
 	gem 'guard'
 	gem 'guard-rspec'
@@ -108,12 +111,12 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console', '>= 4.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem "rails-erd" # Generate Entity-Relationship Diagrams
-  gem 'scout_apm', '~> 2.4' # used for profiling
+  gem 'scout_apm', '~> 2.6' # used for profiling
   gem 'rack-mini-profiler', '~> 1.0' # also profiling
   gem 'memory_profiler', '~> 0.9' # For memory profiling used by rack-mini-profiler
   # For call-stack profiling flamegraphs used by rack-mini-profiler
