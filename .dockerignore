@@ -1,5 +1,6 @@
 app/tmp
 app/log
+app/storage
 .git
 .env
 Dockerfile
