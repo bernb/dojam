@@ -1,7 +1,5 @@
 class MaterialSpecified < Termlist
   scope :material, ->(m_id) {joins(:paths).where("paths.path LIKE ?", "/#{m_id}%")}
-  has_many :material_specified_museum_objects
-  has_many :museum_objects, through: :material_specified_museum_objects
 
   def self.ransackable_scopes(auth_object = nil)
     [:material]
@@ -10,6 +8,20 @@ class MaterialSpecified < Termlist
 	def depth
 		2
 	end
+
+  def museum_objects
+    paths = self
+      .paths.map{|p| p.transitiv_children}
+      .flatten
+      .select{|p| p.depth == 4}
+    path_ids = paths.map(&:id)
+    secs = MuseumObject
+      .joins(secondary_paths: :termlists)
+      .where(paths: {id: path_ids})
+      .where(termlists: {id: self.id})
+    mains = MuseumObject.where(main_path: paths)
+    mains + secs
+  end
 
 	def material
 		self.paths.first.objects[0]
