@@ -24,7 +24,7 @@ ActiveAdmin.register MaterialSpecified do
     attributes_table do
       row :id
       row :name
-      row :kind_of_object do |m|
+      row :kind_of_objects do |m|
         m.kind_of_objects.map{|koo| link_to koo.name, '#'}
       end
       row :museum_objects do |m|
@@ -38,6 +38,27 @@ ActiveAdmin.register MaterialSpecified do
       row :updated_at
     end
     active_admin_comments
+  end
+
+  form do |f|
+    inputs 'material specified details' do
+      @ms = MaterialSpecified.find params[:id]
+      @materials = Material.all.map{|m| [m.name, m.id]}
+      @all_ms = MaterialSpecified.all
+      semantic_errors
+      input :name
+      input :material, label: "current material", as: :string, 
+        collection: @ms.material, 
+        input_html: {disabled: true}
+      input :material, label: "move to material", as: :select, 
+        collection: @materials, 
+        include_blank: true,
+        hint: "this will associate #{@ms.name} with the selected material"
+      input :new_material_specified, label: "merge into", as: :select, 
+        collection: @all_ms, 
+        hint: "this will delete #{@ms.name} and move all associated terms and museum object to the selected material specified"
+      actions
+    end
   end
 
 end
