@@ -1,5 +1,6 @@
 class MaterialSpecified < Termlist
   scope :material, ->(m_id) {joins(:paths).where("paths.path LIKE ?", "/#{m_id}%")}
+  attr_reader :material, :new_material_specified # Used in active_admin to merge into other model
 
   def self.ransackable_scopes(auth_object = nil)
     [:material]
