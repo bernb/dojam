@@ -1,5 +1,5 @@
 ActiveAdmin.register MaterialSpecified do
-  permit_params :type, :name 
+  permit_params :type, :name, :material, :merge_into_ms
   filter :name
   filter :material,
     as: :select,
@@ -53,11 +53,33 @@ ActiveAdmin.register MaterialSpecified do
       input :material, label: "move to material", as: :select, 
         collection: @materials, 
         include_blank: true,
-        hint: "this will associate #{@ms.name} with the selected material"
-      input :new_material_specified, label: "merge into", as: :select, 
+        hint: "this will associate '#{@ms.name}' with the selected material"
+      input :merge_into_ms, label: "merge into", as: :select, 
         collection: @all_ms, 
-        hint: "this will delete #{@ms.name} and move all associated terms and museum object to the selected material specified"
+        hint: "this will delete '#{@ms.name}' and move all associated terms and museum object to the selected material specified"
       actions
+    end
+  end
+
+  controller do
+    def update
+      @model = Termlist.find params[:id]
+      model_params = params[:material_specified]
+      @model.name = params[:material_specified][:name]
+
+      if model_params[:material].present?
+        new_m_id = model_params[:material]
+        m_id, ms_id = @model.paths.first.ids
+        model_paths = Path.where("path LIKE ?", "/#{m_id}/#{ms_id}%")
+        model_paths.update_all("path = REPLACE(path, '#{m_id}', '#{new_m_id}')")
+      elsif model_params[:merge_into_ms].present?
+
+      end
+
+      if @model.save
+        flash[:notice] = "termlist edited"
+        redirect_to admin_material_specified_path(@model)
+      end
     end
   end
 
