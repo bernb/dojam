@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read -r -p "Warning: This script will DELETE the local dojam database as well as the local app storage where dojam saves it's images/files. Continue? [y/N] " response
+read -r -p "Warning: This script will DELETE the local dojam database as well as the local app storage where dojam saves it's images/files. The script will also stop all related docker containers. Continue? [y/N] " response
 response=${response,,}    # tolower
 if [[ ! "$response" =~ ^(yes|y)$ ]]; then
 	echo "Aborted"
@@ -8,14 +8,37 @@ if [[ ! "$response" =~ ^(yes|y)$ ]]; then
 fi
 
 SCRIPT_HOME="../tmp"
-BORG_LATEST="$(borg list --short --last 1)"
-
 cd $SCRIPT_HOME
-echo "Extracting latest DB dump: ${BORG_LATEST}..."
-borg extract --progress --strip-components 4 ::$BORG_LATEST
+
+if [ -z "$1" ]; then
+	REPO=$(borg list --short --last 1)
+else
+	REPO=$1
+fi
+
+if [[ ! -d "$REPO" ]]; then
+	echo "Directory ${SCRIPT_HOME}/${REPO} not found. Please download latest borg backup or specify which backup to use in ${SCRIPT_HOME}"
+	exit 1;
+fi
+
+cd $REPO
+if [[ ! -d storage ]]; then
+	echo "Directory ${SCRIPT_HOME}/${REPO}/storage not found."
+	exit 1;
+fi
+
+if [[ ! -f dojam.dump ]]; then
+	echo "Database dump ${SCRIPT_HOME}/${REPO}/dojam.dump not found."
+	exit 1;
+fi
+
+
 echo "Replacing app/storage/ directory"
 rm -rf ../app/storage/
 mv storage/ ../app/
+echo "Restarting containers"
+docker-compose down
+docker-compose up -d
 echo "Dropping and recreating local DB"
 docker-compose exec -u postgres db dropdb -U dojam DOJAM_DB
 docker-compose exec -u postgres db createdb -U dojam DOJAM_DB
@@ -27,3 +50,4 @@ if [[ $(wc -l < ./db_import_errors.out) -gt 0 ]]; then
 else
 	echo "Completed"
 fi
+docker-compose down
