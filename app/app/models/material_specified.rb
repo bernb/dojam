@@ -10,6 +10,38 @@ class MaterialSpecified < Termlist
 		2
 	end
 
+  def merge_into other
+    # Rewrite paths, if encounter duplicates:
+    #  * Copy termlist associations
+    #  * Copy museum_objects (main and secondary)
+    #  * Remove path
+    old_id = self.id.to_s
+    new_id = other.id.to_s
+    new_pathnames = self.paths.first
+      .transitive_children
+      .map(&:path)
+      .map{|s| s.sub(old_id, new_id)}
+    duplicates = self.paths.first
+      .transitive_children
+      .select{|p| Path.find_by(path: p.path.sub(old_id, new_id)).present?}
+    non_duplicates = self.paths.first
+      .transitive_children
+      .select{|p| Path.find_by(path: p.path.sub(old_id, new_id)).blank?}
+
+    non_duplicates.each do |non_dup|
+      non_dup.path = non_dup.path.sub(old_id, new_id)
+      non_dup.save
+    end
+
+    duplicates.each do |dup|
+      old_path = Path.find_by(path: dup.path.sub(new_id, old_id))
+      new_path = Path.find_by(path: self.paths.first.path.sub(old_id, new_id))
+      old_path.move_all_from(new_path)
+    end
+    self.paths.delete_all
+    self.delete
+  end
+
   def museum_objects
     paths = self
       .paths.map{|p| p.transitiv_children}
