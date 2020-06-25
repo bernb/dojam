@@ -1,13 +1,18 @@
 ---
 material_name: stone/mineral
 material_specifieds:
-- nearly_lime
-- nearly_lime2
+- not_lime
+- not_lime2
 kind_of_objects:
 - architectural element:
   - wall plaster
+  - dummy-term
+  - not-lime-term
 - sculpture:
   - figurine anthropomorphic
+  - mask
+  - statue anthropomorphic
+- undetermined
 
 production_techniques:
 - hand-made
