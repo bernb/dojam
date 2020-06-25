@@ -1,4 +1,4 @@
-FROM ruby:2.6.2
+FROM ruby:2.7.1
 # Debian stable ships with nodejs 8 which is too old for rails
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
@@ -19,7 +19,8 @@ WORKDIR /dojam
 COPY ./app/Gemfile /dojam/Gemfile
 COPY ./app/Gemfile.lock /dojam/Gemfile.lock
 # Install bundler 2
-RUN gem install bundler -v 2.0.1
+RUN gem install bundler -v 2.1.4
+RUN bundle update
 RUN bundle install
 COPY ./app /dojam
 # Recreate directories that are ignored by Docker
