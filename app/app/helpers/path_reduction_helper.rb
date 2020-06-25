@@ -38,4 +38,14 @@ module PathReductionHelper
       .values
   end
 
+  def self.save_in_tmp results
+    results.each_with_index do |result, index|
+      path = "tmp/termlists/"
+      filename = i.to_s + "_" + result["material_name"].gsub(/[\s\/]/, "_")
+      file_extension = ".yaml"
+      File.open(path + filename + file_extension, 'w') do |file|
+        file.write(result.to_yaml)
+      end
+    end
+  end
 end
