@@ -35,10 +35,11 @@ fi
 
 echo "Replacing app/storage/ directory"
 rm -rf ../app/storage/
-mv storage/ ../app/
+cp -R storage ../../app/
 echo "Restarting containers"
 docker-compose down
 docker-compose up -d
+sleep 5
 echo "Dropping and recreating local DB"
 docker-compose exec -u postgres db dropdb -U dojam DOJAM_DB
 docker-compose exec -u postgres db createdb -U dojam DOJAM_DB
