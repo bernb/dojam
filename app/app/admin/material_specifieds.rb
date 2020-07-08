@@ -65,6 +65,8 @@ ActiveAdmin.register MaterialSpecified do
     def update
       @model = Termlist.find params[:id]
       model_params = params[:material_specified]
+      merge = model_params[:merge_into_ms].present?
+      merge_finished = false
       @model.name = params[:material_specified][:name]
 
       if model_params[:material].present?
@@ -72,12 +74,20 @@ ActiveAdmin.register MaterialSpecified do
         m_id, ms_id = @model.paths.first.ids
         model_paths = Path.where("path LIKE ?", "/#{m_id}/#{ms_id}%")
         model_paths.update_all("path = REPLACE(path, '#{m_id}', '#{new_m_id}')")
-      elsif model_params[:merge_into_ms].present?
-
+      elsif merge
+        new_id = model_params[:merge_into_ms]
+        merge_into_model = Termlist.find model_params[:merge_into_ms]
+        puts "*** merged ***"
+        if @model.merge_into(merge_into_model)
+          flash[:notice] = "models merged"
+          merge_finished = true
+        else
+          flash[:warn] = "Could not merge: #{@model.errors.messages}"
+        end
       end
-
-      if @model.save
-        flash[:notice] = "termlist edited"
+      if merge && merge_finished
+        redirect_to admin_material_specifieds_path
+      else
         redirect_to admin_material_specified_path(@model)
       end
     end
