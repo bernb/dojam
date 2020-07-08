@@ -3,6 +3,7 @@ class Path < ApplicationRecord
 	has_many :termlists, through: :termlist_paths
 	has_many :museum_object_paths
 	has_many :museum_objects, through: :museum_object_paths
+  has_many :museum_objects_as_main, class_name: "MuseumObject", foreign_key: :main_path_id
 	scope :last_id, ->(id) {where "path like ?", "%/#{id}"}
 	scope :depth, ->(depth) {where "path similar to ?", "/\\d{1,}" * depth}
 	scope :default_order, -> {joins(:termlists)
@@ -22,6 +23,25 @@ class Path < ApplicationRecord
 
 		return Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id}/#{koos_id}"
 	end
+
+  # Will not copy path that relates to own m/ms/koo/koos
+  def copy_all_from(other)
+    ar = ["Material", "MaterialSpecified", "KindOfObject", "KindOfObjectSpecified"] 
+    byebug
+    termlists = other.termlists.reject{|t| t.type.in? ar}
+    museum_objects_main = other.museum_objects_as_main
+    museum_objects_sec = other.museum_objects
+    self.termlists << termlists.reject{|t| t.in? self.termlists}
+    self.museum_objects_as_main << museum_objects_main.reject{|m| m.in? self.museum_objects_as_main}
+    self.museum_objects << museum_objects_sec.reject{|m| m.in? self.museum_objects}
+  end
+
+  def move_all_from(other)
+    copy_all_from(other)
+    other.termlists.delete_all
+    other.museum_objects_as_main.delete_all
+    other.museum_objects.delete_all
+  end
 
   def undetermined_child
     return self if depth == 4
