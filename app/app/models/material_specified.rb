@@ -36,7 +36,7 @@ class MaterialSpecified < Termlist
   end
 
 	def material
-		self.paths.first.objects[0]
+    self.paths&.first&.objects&.fetch(0)
 	end
 
 	def kind_of_objects

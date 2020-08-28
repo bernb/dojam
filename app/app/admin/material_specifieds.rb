@@ -66,7 +66,6 @@ ActiveAdmin.register MaterialSpecified do
       @model = Termlist.find params[:id]
       model_params = params[:material_specified]
       merge = model_params[:merge_into_ms].present?
-      merge_finished = false
       @model.name = params[:material_specified][:name]
 
       if model_params[:material].present?
@@ -75,17 +74,31 @@ ActiveAdmin.register MaterialSpecified do
         model_paths = Path.where("path LIKE ?", "/#{m_id}/#{ms_id}%")
         model_paths.update_all("path = REPLACE(path, '#{m_id}', '#{new_m_id}')")
       elsif merge
-        new_id = model_params[:merge_into_ms]
+        # We try to rename the pathnames here.
+        # First we solve conflicts when the new path already exists
+        merge_into_id = model_params[:merge_into_ms]
         merge_into_model = Termlist.find model_params[:merge_into_ms]
-        puts "*** merged ***"
-        if @model.merge_into(merge_into_model)
-          flash[:notice] = "models merged"
-          merge_finished = true
-        else
-          flash[:warn] = "Could not merge: #{@model.errors.messages}"
+        old_model_paths = Path.where("path LIKE '%#{@model.id.to_s}%'")
+        new_path_names = old_model_paths.map(&:path).map{|p| p.sub(@model.id.to_s, merge_into_id)}
+
+        conflicting_paths = Path.where(path: new_path_names)
+        conflicting_paths.each do |path|
+          old_path_name = path.path.sub(merge_into_id, @model.id.to_s)
+          old_path = Path.find_by path: old_path_name
+          path.move_all_from(old_path)
+          path.delete
+        end
+
+        # After iterating over all conflicting paths there are none left,
+        # so we can safely rename all that are still present
+        old_model_paths = Path.where("path LIKE '%#{@model.id.to_s}%'")
+        old_model_paths.each do |path|
+          old_path = path.path
+          new_path = old_path.sub(@model.id.to_s, merge_into_id)
+          path.path = new_path
         end
       end
-      if merge && merge_finished
+      if merge
         redirect_to admin_material_specifieds_path
       else
         redirect_to admin_material_specified_path(@model)
