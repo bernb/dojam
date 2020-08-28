@@ -1,0 +1,15 @@
+<h1>users</h1>
+<% @users.each do |user| %>
+  <table>
+    <tr>
+      <th>email</th>
+      <th>activated?</th>
+      <th>expanded access?</th>
+      <th>reset password</th>
+    </tr>
+
+    <tr>
+      <td><%= user.email %></td>
+    </tr>
+  </table>
+<% end %>
