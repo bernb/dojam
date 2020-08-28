@@ -27,7 +27,6 @@ class Path < ApplicationRecord
   # Will not copy path that relates to own m/ms/koo/koos
   def copy_all_from(other)
     ar = ["Material", "MaterialSpecified", "KindOfObject", "KindOfObjectSpecified"] 
-    byebug
     termlists = other.termlists.reject{|t| t.type.in? ar}
     museum_objects_main = other.museum_objects_as_main
     museum_objects_sec = other.museum_objects
