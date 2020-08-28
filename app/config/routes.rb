@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'users/index'
+  devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 #  get 'termlists/index'
@@ -7,6 +9,7 @@ Rails.application.routes.draw do
 #  get 'termlists/show'
   resources :termlists
   resources :loan_outs
+  resources :users
 
 # Reports from reports_kit
   mount ReportsKit::Engine, at: '/'
