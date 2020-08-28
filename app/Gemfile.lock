@@ -60,7 +60,7 @@ GEM
     activerecord (6.0.3.2)
       activemodel (= 6.0.3.2)
       activesupport (= 6.0.3.2)
-    activerecord-import (1.0.5)
+    activerecord-import (1.0.6)
       activerecord (>= 3.2)
     activestorage (6.0.3.2)
       actionpack (= 6.0.3.2)
@@ -91,14 +91,14 @@ GEM
     arbre (1.2.1)
       activesupport (>= 3.0.0)
     ast (2.4.1)
-    autoprefixer-rails (9.8.4)
+    autoprefixer-rails (9.8.6.3)
       execjs
     awesome_print (1.8.0)
-    bcrypt (3.1.13)
+    bcrypt (3.1.15)
     bindex (0.8.1)
-    bootsnap (1.4.6)
+    bootsnap (1.4.8)
       msgpack (~> 1.0)
-    bootstrap (4.5.0)
+    bootstrap (4.5.2)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
@@ -123,7 +123,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.7)
     crass (1.0.6)
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
@@ -175,8 +175,10 @@ GEM
     has_scope (0.7.2)
       actionpack (>= 4.1)
       activesupport (>= 4.1)
-    i18n (1.8.3)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
+    i18n-active_record (0.4.0)
+      i18n (>= 0.5.0)
     image_processing (1.11.0)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
@@ -206,10 +208,10 @@ GEM
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.6.0)
+    loofah (2.7.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    lumberjack (1.2.6)
+    lumberjack (1.2.7)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
@@ -344,7 +346,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    scout_apm (2.6.8)
+    scout_apm (2.6.9)
       parser
     search_cop (1.1.0)
       treetop
@@ -358,7 +360,7 @@ GEM
       activemodel (>= 5.0)
     spreadsheet (1.2.6)
       ruby-ole (>= 1.0)
-    spring (2.1.0)
+    spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
@@ -384,7 +386,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     warden (1.2.8)
       rack (>= 2.0.6)
-    web-console (4.0.3)
+    web-console (4.0.4)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
@@ -396,10 +398,10 @@ GEM
       railties (>= 3.0.7)
     wicked_pdf (2.1.0)
       activesupport
-    wkhtmltopdf-binary (0.12.6.2)
+    wkhtmltopdf-binary (0.12.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.3.1)
+    zeitwerk (2.4.0)
 
 PLATFORMS
   ruby
@@ -424,6 +426,7 @@ DEPENDENCIES
   fuzzy_match
   guard
   guard-rspec
+  i18n-active_record
   image_processing (~> 1.10)
   jbuilder (~> 2.10)
   jquery-rails
