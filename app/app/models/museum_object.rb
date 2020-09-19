@@ -26,10 +26,10 @@ class MuseumObject < ApplicationRecord
 
   has_one :images, class_name: "MuseumObjectImageList", dependent: :destroy
   has_one :loan_out
-  belongs_to :excavation_site, -> { order(name: :asc) }, required: false 
+  belongs_to :excavation_site, required: false 
   belongs_to :storage_location, required: false
-  belongs_to :acquisition_delivered_by, -> { order(name: :asc) }, required: false
-  belongs_to :acquisition_kind, -> { order(name: :asc) }, required: false
+  belongs_to :acquisition_delivered_by, required: false
+  belongs_to :acquisition_kind, required: false
   belongs_to :authenticity, required: false
   belongs_to :dating_millennium_begin, required: false, class_name: "DatingMillennium"
   belongs_to :dating_millennium_end, required: false, class_name: "DatingMillennium"
