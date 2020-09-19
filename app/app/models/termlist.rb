@@ -1,9 +1,10 @@
 class Termlist < ApplicationRecord
   include PgSearch::Model
-  multisearchable against: :name
+  translates :name
+  multisearchable against: :name_en
 	# See https://stackoverflow.com/questions/4088532/custom-order-by-explanation for explaination 
 	# how the first order parameter gets evaluated and why this works
-	default_scope {order(Arel.sql("termlists.name = 'undetermined'"), position: :asc, name: :asc)}
+	default_scope {order(Arel.sql("termlists.name_en = 'undetermined'"), position: :asc, name_en: :asc)}
 	after_create :add_default_path_for_roots
 	has_many :termlist_paths
 	has_many :paths, through: :termlist_paths
