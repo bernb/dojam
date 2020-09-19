@@ -12,7 +12,11 @@ gem 'i18n-active_record', :require => 'i18n/active_record'
 # Default since rails 6.0
 #gem 'webpacker'
 
+# Allow translation of model attributes (used for terms)
+gem 'traco'
+
 gem 'activeadmin'
+gem 'active_admin_import'
 gem 'devise'
 gem 'cancancan'
 
