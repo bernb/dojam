@@ -3,10 +3,12 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def switch_locale locale
+  def switch_locale
+    locale = params[:locale]
     if locale.in? ["ar", "en"]
       current_user.locale = locale
+      current_user.save
     end
-    redirect_to root
+    redirect_back fallback_location: :root
   end
 end

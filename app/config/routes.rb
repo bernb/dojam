@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 #  get 'termlists/show'
   resources :termlists
   resources :loan_outs
+  get 'users/switch_locale', to: 'users#switch_locale'
   resources :users
 
 # Reports from reports_kit
