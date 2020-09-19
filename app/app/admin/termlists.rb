@@ -3,11 +3,12 @@ ActiveAdmin.register Termlist do
     on_duplicate_key_update: ["name_ar"],
     template_object: ActiveAdminImport::Model.new(
       hint: "file will be imported with such header format: 'name_en, 'name_ar' and updated based on column 'name_en'",
-    csv_headers: ["id", "name_ar"]),
+      csv_headers: ["id", "name_ar"]),
     before_batch_import: ->(importer) {
-        names = importer.values_at("id")
+        names = importer.values_at("id").collect(&:strip)
         terms = Termlist.where(name_en: names).pluck(:name_en, :id)
         options = Hash[*terms.flatten]
+        asdfasdf
         importer.batch_replace("id", options)
       }
   )

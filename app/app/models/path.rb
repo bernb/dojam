@@ -7,8 +7,8 @@ class Path < ApplicationRecord
 	scope :last_id, ->(id) {where "path like ?", "%/#{id}"}
 	scope :depth, ->(depth) {where "path similar to ?", "/\\d{1,}" * depth}
 	scope :default_order, -> {joins(:termlists)
-		.order(Arel.sql("termlists.name = 'undetermined'"))
-		.order(Arel.sql('termlists.name'))}
+		.order(Arel.sql("termlists.name_en = 'undetermined'"))
+		.order(Arel.sql('termlists.name_en'))}
 	scope :materials, ->{depth(1).default_order}
 	scope :material_id, ->(id){where "path like ?", "%/#{id}%"}
 	scope :material_specifieds, ->{depth(2).default_order}
@@ -16,10 +16,10 @@ class Path < ApplicationRecord
 	scope :kind_of_object_specifieds, ->{depth(4).default_order}
 
 	def self.undetermined_path
-		m_id = Material.find_by(name: "undetermined").id.to_s
-		ms_id = MaterialSpecified.find_by(name: "undetermined").id.to_s
-		koo_id = KindOfObject.find_by(name: "undetermined").id.to_s
-		koos_id = KindOfObjectSpecified.find_by(name: "undetermined").id.to_s
+		m_id = Material.undetermined.id.to_s
+		ms_id = MaterialSpecified.undetermined.id.to_s
+		koo_id = KindOfObject.undetermined.id.to_s
+		koos_id = KindOfObjectSpecified.undetermined.id.to_s
 
 		return Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id}/#{koos_id}"
 	end
@@ -45,9 +45,9 @@ class Path < ApplicationRecord
   def undetermined_child
     return self if depth == 4
 
-		ms_id = MaterialSpecified.find_by(name: "undetermined").id.to_s
-		koo_id = KindOfObject.find_by(name: "undetermined").id.to_s
-		koos_id = KindOfObjectSpecified.find_by(name: "undetermined").id.to_s
+		ms_id = MaterialSpecified.undetermined.id.to_s
+		koo_id = KindOfObject.undetermined.id.to_s
+		koos_id = KindOfObjectSpecified.undetermined.id.to_s
 
     if depth == 3
       path_name = self.path + "/#{koos_id}"

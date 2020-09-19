@@ -4,4 +4,8 @@ class ExcavationSite < ApplicationRecord
 	def self.is_independent_of_paths
 		true
 	end
+
+  def self.undetermined
+    return ExcavationSite.find_by name: "undetermined"
+  end
 end

@@ -80,7 +80,7 @@ class MuseumObject < ApplicationRecord
 			return classname.constantize.all
 		else
 			if self.main_path.blank?
-				return classname.constantize.where(name: "undetermined")
+				return classname.constantize.where(name_en: "undetermined")
 			end
 			return self.main_path.termlists.where(type: classname)
 		end
@@ -425,9 +425,9 @@ class MuseumObject < ApplicationRecord
     default_termlists = {}
 		termlist_names.each do |termlist_name|
 			if termlist_name == :decoration_style
-        default_termlists[termlist_name] = Decoration.find_by(name: "undetermined")
+        default_termlists[termlist_name] = Decoration.undetermined
 			else
-				undetermined_entry = termlist_name.to_s.camelize.constantize.find_by(name: "undetermined")
+				undetermined_entry = termlist_name.to_s.camelize.constantize.undetermined
         default_termlists[termlist_name] = undetermined_entry
 			end
 		end
