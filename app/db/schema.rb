@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_161729) do
+ActiveRecord::Schema.define(version: 2020_09_19_131334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -740,10 +740,11 @@ ActiveRecord::Schema.define(version: 2020_08_28_161729) do
 
   create_table "termlists", force: :cascade do |t|
     t.string "type"
-    t.string "name"
+    t.string "name_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "position"
+    t.string "name_ar"
   end
 
   create_table "translations", force: :cascade do |t|
