@@ -9,6 +9,11 @@ class Termlist < ApplicationRecord
 	has_many :termlist_paths
 	has_many :paths, through: :termlist_paths
 
+  def self.undetermined
+    type = self.first.type
+    return Termlist.find_by name_en: "undetermined", type: type
+  end
+
 	def depth
 		5
 	end
