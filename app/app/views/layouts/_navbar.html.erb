@@ -3,20 +3,22 @@
     <%= image_tag "DOJAM_Logo.png" %>
   </a>
   <ul class="navbar-nav mr-auto">
-    <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
+    <li class="nav-item"><%= link_to t('home'), root_path, class: "nav-link" %></li>
   </ul>
   <ul class="navbar-nav">
-    <li class="nav-item"><span class="navbar-text">Welcome back, <%= current_user.email %></span></li>
+    <% if current_user.present? %>
+      <li class="nav-item"><span class="navbar-text"><%= t('hello') %> <%= current_user.email %></span></li>
     <li class="nav-item dropdown">
       <% lang = [{short: "en", name: "english"}, {short: "ar", name: "arabic"}] %>
       <% if current_user.locale == "ar" %>
         <% lang = lang.reverse %>
       <% end %>
-      <a class="nav-link dropdown-toggle" href="#<%= lang.first[:short] %>" id="lang_selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a class="nav-link dropdown-toggle" href="/users/switch_locale?locale=<%= lang.first[:short] %>" id="lang_selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="flag-icon elag-icon-<%= lang.first[:short] %>"> </span><%= lang.first[:name] %></a>
       <div class="dropdown-menu" aria-labelledby="lang_selector">
-        <a class="dropdown-item" href="#<%= lang.second[:short] %>"><span class="flag-icon flag-icon-<%= lang.second[:short] %>"> </span><%= lang.second[:name] %></a>
+        <a class="dropdown-item" href="/users/switch_locale?locale=<%= lang.second[:short] %>"><span class="flag-icon flag-icon-<%= lang.second[:short] %>"> </span><%= lang.second[:name] %></a>
       </div>
     </li>
+    <% end %>
   </ul>
 </nav>
