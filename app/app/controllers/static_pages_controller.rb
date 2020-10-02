@@ -14,6 +14,36 @@ class StaticPagesController < ApplicationController
   end
 
   def import_translations_submit
+    file_entity = params.dig(:translations, :translation_file)
+    warnings = {}
+    filename = file_entity.original_filename
+    if !correct_file_format?(file_entity, ".xls") && !correct_file_format?(file_entity, ".xlsx")
+      warnings[filename.to_sym] = 
+        "#{file_entity.original_filename}: Unsupported file format detected. Only .xls and .xlsx files are supported."
+      flash[:warning] = warnings
+      redirect_to import_translations_select_path
+    end
+
+    logger = ActiveSupport::TaggedLogging.new(Logger.new("#{Rails.root}/log/excel_importer.log"))
+    file = File.open(file_entity)
+    xlsx = Roo::Spreadsheet.open(file)
+    xlsx.each_with_index do |row, i|
+      name_en = row.first.strip
+      name_ar = row.second.strip
+      term = Termlist.find_by name_en: name_en
+      if term.blank?
+        logger.tagged("Row #{i.to_s}"){logger.warn "Could not find english term '#{name_en}'. Skipping row."}
+        next
+      end
+      term.name_ar = row.second
+      term.save
+    end
+    if warnings.empty?
+      flash[:success] = "Translations successfully imported"
+    else
+      flash[:warning] = warnings
+    end
+    redirect_to import_translations_select_path
   end
 
   def import_termlists_select
@@ -24,7 +54,7 @@ class StaticPagesController < ApplicationController
     warnings = {}
     file_hash&.each do |file_entity|
       filename = file_entity.original_filename
-      if !correct_file_format?(file_entity)
+      if !correct_file_format?(file_entity, ".yaml")
         warnings[filename.to_sym] = 
           "#{file_entity.original_filename}: Unsupported file format detected. Only yaml files are supported."
         next
@@ -80,7 +110,7 @@ class StaticPagesController < ApplicationController
     end
   end
 
-  def correct_file_format? file_entity
-    return File.extname(file_entity.tempfile) == ".yaml"
+  def correct_file_format? file_entity, format_string
+    return File.extname(file_entity.tempfile) == format_string
   end
 end

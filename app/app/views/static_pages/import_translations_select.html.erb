@@ -1,0 +1,11 @@
+<%= render 'layouts/title', title_name: "import translations" %>
+
+<div class="row">
+	<div class="col">
+		Importing from files may take several minutes. Please wait until import is finished.</br>
+	</div>
+</div>
+<%= simple_form_for :translations, url: import_translations_submit_path do |f| %>
+	<%= f.input :translation_file, as: :file, input_html: {multiple: false}, label: false %>
+	<%= f.submit "import", class: "btn btn-primary" %>
+<% end %>
