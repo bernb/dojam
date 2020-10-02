@@ -7,9 +7,12 @@ ActiveAdmin.register Termlist do
     before_batch_import: ->(importer) {
         names = importer.values_at("id").collect(&:strip)
         terms = Termlist.where(name_en: names).pluck(:name_en, :id)
-        options = Hash[*terms.flatten]
-        asdfasdf
-        importer.batch_replace("id", options)
+        terms_hash = Hash[*terms.flatten]
+        importer.csv_lines = importer.csv_lines
+          .select{|l| l.first.in? terms_hash.keys}
+          .map{|l| [terms_hash[l.first], l.second]}
+      },
+      after_batch_import: ->(importer) {
       }
   )
   permit_params :type, :name_en, :name_ar
