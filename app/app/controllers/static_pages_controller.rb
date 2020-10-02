@@ -10,6 +10,12 @@ class StaticPagesController < ApplicationController
       .reject{|o| o.inv_number.blank?}
   end
 
+  def import_translations_select
+  end
+
+  def import_translations_submit
+  end
+
   def import_termlists_select
   end
 
