@@ -38,14 +38,22 @@ class StaticPagesController < ApplicationController
     xlsx.each_with_index do |row, i|
       name_en = row.first.strip
       name_ar = row.second.strip
-      term = Termlist.find_by name_en: name_en
+      term = Termlist.where name_en: name_en
       if term.blank?
         logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Term '#{name_en}' not found."}
         warnings[:skipped] = "Some rows were skipped, see below for more information"
         next
       end
-      term.name_ar = row.second
-      term.save
+      if term.count > 1
+        logger.tagged("Row #{i.to_s}", "Duplicate information"){logger.info "Term '#{name_en}' found #{term.count.to_s} times in database."}
+        term.each do |t|
+          t.name_ar = row.second
+          t.save
+        end
+      else
+        term.first.name_ar = row.second
+        term.first.save
+      end
     end
     if warnings.empty?
       flash[:success] = "Translations successfully imported"
