@@ -9,3 +9,12 @@
 	<%= f.input :translation_file, as: :file, input_html: {multiple: false}, label: false %>
 	<%= f.submit "import", class: "btn btn-primary" %>
 <% end %>
+<% if @log_messages.present? %>
+  <div class="row pt-4">
+    <span class="border">
+      <div class="col">
+        <%= simple_format @log_messages %>
+      </div>
+    </span>
+  </div>
+<% end %>

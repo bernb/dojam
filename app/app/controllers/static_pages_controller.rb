@@ -11,6 +11,10 @@ class StaticPagesController < ApplicationController
   end
 
   def import_translations_select
+    if session[:log_path].present?
+      @log_messages = File.read(session[:log_path])
+      session[:log_path] = nil
+    end
   end
 
   def import_translations_submit
@@ -24,7 +28,11 @@ class StaticPagesController < ApplicationController
       redirect_to import_translations_select_path
     end
 
-    logger = ActiveSupport::TaggedLogging.new(Logger.new("#{Rails.root}/log/excel_importer.log"))
+    timestamp = DateTime.now.strftime("%Y-%m-%d %H:%M:%S:%L")
+    filename = timestamp + " translation import.log"
+    log_path = "#{Rails.root}/log/" + filename
+    session[:log_path] = log_path
+    logger = ActiveSupport::TaggedLogging.new(Logger.new(log_path))
     file = File.open(file_entity)
     xlsx = Roo::Spreadsheet.open(file)
     xlsx.each_with_index do |row, i|
@@ -32,7 +40,8 @@ class StaticPagesController < ApplicationController
       name_ar = row.second.strip
       term = Termlist.find_by name_en: name_en
       if term.blank?
-        logger.tagged("Row #{i.to_s}"){logger.warn "Could not find english term '#{name_en}'. Skipping row."}
+        logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Term '#{name_en}' not found."}
+        warnings[:skipped] = "Some rows were skipped, see below for more information"
         next
       end
       term.name_ar = row.second
