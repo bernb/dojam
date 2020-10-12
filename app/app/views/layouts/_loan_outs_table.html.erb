@@ -22,7 +22,7 @@
           <td><%= o.date_out %></td>
           <td><%= o.loan_document_number %></td>
           <td><%= o.planned_return %></td>
-          <td><%= o.return_date.present? ? o.return_date : "not yet returned" %></td>
+          <td><%= o.return_date.present? ? o.return_date : t('not yet returned') %></td>
         </tr>
       </tbody>
     <% end %>

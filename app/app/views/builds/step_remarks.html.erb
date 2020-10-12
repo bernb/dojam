@@ -1,7 +1,7 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
     <%= f.input :remarks, label: 'description' %>
-    <%= f.button :submit, "confirm" %>
+    <%= f.button :submit, t('confirm') %>
   <% end %>
 <% end %>
 

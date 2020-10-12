@@ -1,4 +1,4 @@
-<% render 'layouts/title', title_name: 'search results: ' + (results&.total_count&.to_s || "0") %>
+<% render 'layouts/title', title_name: 'search results: ' + (results&.total_count&.to_s || t('0')) %>
 <div class="search-results">
   <%= paginate results unless results.blank? %>
   <div class="row mb-4">

@@ -1,6 +1,6 @@
 <div class="museum_object_page museum_object_material">
   <h2>material</h2>
-  <%= link_to "edit", wizard_path(:step_material) %>
+  <%= link_to t('edit'), wizard_path(:step_material) %>
   <dl class="dl-horizontal">
 		<div class="row">
 			<div class="col-3">
@@ -18,7 +18,7 @@
         <dt>kind of object</dt>
       </div>
       <div class="col">
-        <dd><%= @museum_object&.kind_of_object&.name || "undetermined" %> (<%= @museum_object&.kind_of_object_specified&.name || "undetermined" %>)
+        <dd><%= @museum_object&.kind_of_object&.name || t('undetermined') %> (<%= @museum_object&.kind_of_object_specified&.name || t('undetermined') %>)
       </div>
     </div>
     

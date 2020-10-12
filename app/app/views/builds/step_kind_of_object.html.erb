@@ -19,7 +19,7 @@
 		</br>
 		<h4>kind of object</h4>
 		<%= f.input :main_path_id, collection: @kind_of_object_paths, label: false, as: :collection_select, selected: @selected_kind_of_object_path, label_method: :last_object_name, include_blank: true, required: true   %>
-		<%= f.button :submit, "confirm" %>
+		<%= f.button :submit, t('confirm') %>
 	<% end %>
 <% end %>
 

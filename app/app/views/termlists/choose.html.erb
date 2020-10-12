@@ -1,10 +1,10 @@
-<%= render 'layouts/title', title_name: "Choose Section" %>
+<%= render 'layouts/title', title_name: t('Choose Section') %>
 <table class="table">
   <tr>
     <th>Name</th>
   </tr>
   <tr>
-    <td><%= link_to "Museum", termlists_index_path, termlist_name: "museum" %></td>
+    <td><%= link_to t('Museum'), termlists_index_path, termlist_name: "museum" %></td>
   </tr>
   <% @termlists&.each do |termlist| %>
     <% fullname = termlist.clone; %>

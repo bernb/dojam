@@ -1,4 +1,4 @@
-<%= render 'layouts/title', title_name: "Add new Object" %>
+<%= render 'layouts/title', title_name: t('Add new Object') %>
 <%= render 'layouts/new_entry_progress_bar', state: @step %>
 
 <%= render 'layouts/show_museum_object' %>
@@ -7,13 +7,13 @@
   <div class="col-xs-1">
     <%= simple_form_for @museum_object, url: wizard_path, method: 'put' do |f| %>
       <%= f.input :is_finished, as: :hidden, input_html: {value: "true"} %>
-      <%= f.button :submit, "confirm" %>
+      <%= f.button :submit, t('confirm') %>
     <% end %>
   </div>
   <div class="col-xs-1">
-    <% link_to "Edit", edit_museum_object_path, class: "btn btn-primary" %>
+    <% link_to t('Edit'), edit_museum_object_path, class: "btn btn-primary" %>
   </div>
 </div>
   <div class="text-right">
-    <%= link_to "export as pdf", museum_object_path(@museum_object, format: :pdf), class: "btn" %>
+    <%= link_to t('export as pdf'), museum_object_path(@museum_object, format: :pdf), class: "btn" %>
   </div>

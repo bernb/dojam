@@ -1,25 +1,25 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-    <%= f.association :excavation_site, label: 'site name', include_blank: false  %>
-    <%= f.input :name_expedition, label: 'other site name(s)' %>
-    <%= f.input :site_number_mega, label: "site number according to MEGA" %>
-    <%= f.input :site_number_jadis, label: "site number according to JADIS" %>
-    <%= f.input :site_number_expedition, label: "site number according to expedition" %>
-    <%= f.label "", "coordinates of site according to MEGA" %>
+    <%= f.association :excavation_site, label: t('site name'), include_blank: false  %>
+    <%= f.input :name_expedition, label: t('other site name(s)') %>
+    <%= f.input :site_number_mega, label: t('site number according to MEGA') %>
+    <%= f.input :site_number_jadis, label: t('site number according to JADIS') %>
+    <%= f.input :site_number_expedition, label: t('site number according to expedition') %>
+    <%= f.label "", t('coordinates of site according to MEGA') %>
     <div class="row">
       <div class="col">
-        <%= f.input :coordinates_mega_long, label: "Long = E" %>
+        <%= f.input :coordinates_mega_long, label: t('Long = E') %>
       </div>
       <div class="col">
-        <%= f.input :coordinates_mega_lat, label: "Lat = N" %>
+        <%= f.input :coordinates_mega_lat, label: t('Lat = N') %>
       </div>
     </div>
-    <%= f.label "", "kind of site" %>
+    <%= f.label "", t('kind of site') %>
     <%= f.collection_select(:excavation_site_category_id, @excavation_site_categories, :id, :name, {}, {id: "excavation_site_category_selection", class: "form-control select required"}) %>
-    <%= f.label "", "kind of site specified" %>
+    <%= f.label "", t('kind of site specified') %>
     <%= f.collection_select(:excavation_site_kind_id, @excavation_site_kinds, :id, :name,{}, {id: "excavation_site_kind_selection", class: "form-control select required"}) %>
-    <%= f.input :finding_context, label: "finding context specified" %>
-    <%= f.input :finding_remarks, label: "remarks" %>
-    <%= f.button :submit, "confirm" %>
+    <%= f.input :finding_context, label: t('finding context specified') %>
+    <%= f.input :finding_remarks, label: t('remarks') %>
+    <%= f.button :submit, t('confirm') %>
   <% end %>
 <% end %>
