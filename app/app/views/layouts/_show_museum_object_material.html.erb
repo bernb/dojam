@@ -4,7 +4,7 @@
   <dl class="dl-horizontal">
 		<div class="row">
 			<div class="col-3">
-				<dt>material</dt>
+				<dt><%= t('material') %></dt>
 			</div>
 			<div class="col">
 				<% @museum_object.materials_with_specifieds.each do |m_ms| %>
@@ -15,7 +15,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>kind of object</dt>
+        <dt><%= t('kind of object') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object&.kind_of_object&.name || t('undetermined') %> (<%= @museum_object&.kind_of_object_specified&.name || t('undetermined') %>)
@@ -24,7 +24,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>colors</dt>
+        <dt><%= t('colors') %></dt>
       </div> 
       <div class="col"> 
         <% @museum_object&.colors&.uniq.each do |m| %>
@@ -37,7 +37,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt>Munsell color</dt>
+        <dt><%= t('Munsell color') %></dt>
       </div>  
       <div class="col">
         <dd> <%= @museum_object&.munsell_color_decorated %> </dd>
@@ -46,7 +46,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt>production techniques</dt>
+        <dt><%= t('production techniques') %></dt>
       </div> 
       <div class="col"> 
         <% @museum_object.production_techniques&.each do |p| %>

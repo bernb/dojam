@@ -4,7 +4,7 @@
   <dl class="dl-horizontal">
     <div class="row">
       <div class="col-3">
-        <dt>museum</dt>
+        <dt><%= t('museum') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object&.museum&.name %></dd>
@@ -13,7 +13,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>inv. number</dt>
+        <dt><%= t('inv. number') %></dt>
       </div>  
         <div class="col">
 					<dd><%= @museum_object&.full_inv_number %></dd>
@@ -22,7 +22,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>other inv. number</dt>
+        <dt><%= t('other inv. number') %></dt>
       </div>
         <div class="col">
         <dd><%= @museum_object&.inv_numberdoa %></dd>
@@ -31,7 +31,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>number of objects</dt>
+        <dt><%= t('number of objects') %></dt>
       </div>
         <div class="col">
         <dd><%= @museum_object&.amount %></dd>
@@ -40,7 +40,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>location</dt>
+        <dt><%= t('location') %></dt>
       </div>
         <div class="col">
         <dd><%= @museum_object&.storage&.name %></dd>
@@ -49,7 +49,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>location specified</dt>
+        <dt><%= t('location specified') %></dt>
       </div>
         <div class="col">
         <dd><%= @museum_object&.storage_location&.name %></dd>
