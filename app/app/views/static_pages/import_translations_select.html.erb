@@ -1,4 +1,4 @@
-<%= render 'layouts/title', title_name: "import translations" %>
+<%= render 'layouts/title', title_name: t('import translations') %>
 
 <div class="row">
 	<div class="col">
@@ -7,7 +7,7 @@
 </div>
 <%= simple_form_for :translations, url: import_translations_submit_path do |f| %>
 	<%= f.input :translation_file, as: :file, input_html: {multiple: false}, label: false %>
-	<%= f.submit "import", class: "btn btn-primary" %>
+	<%= f.submit t('import'), class: "btn btn-primary" %>
 <% end %>
 <% if @log_messages.present? %>
   <div class="row pt-4">

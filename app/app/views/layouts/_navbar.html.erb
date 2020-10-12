@@ -9,7 +9,7 @@
     <% if current_user.present? %>
       <li class="nav-item"><span class="navbar-text"><%= t('welcome back') %> <%= current_user.email %></span></li>
     <li class="nav-item dropdown">
-      <% lang = [{short: "en", name: "english"}, {short: "ar", name: "arabic"}] %>
+      <% lang = [{short: "en", name: t('english')}, {short: "ar", name: t('arabic')}] %>
       <% if current_user.locale == "ar" %>
         <% lang = lang.reverse %>
       <% end %>

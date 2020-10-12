@@ -1,5 +1,5 @@
 <div class="museum_object_page museum_object_images">
   <h2>images</h2>
-  <%= link_to "edit", wizard_path(:step_images_upload) %>
+  <%= link_to t('edit'), wizard_path(:step_images_upload) %>
   <%= render "layouts/image_list", images: @museum_object&.images&.decorate %>
 </div>

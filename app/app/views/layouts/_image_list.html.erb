@@ -11,7 +11,7 @@
         <%= link_to images.main.filename, images.main, class: "card-img-top", target:"_blank" %>
       </div> 
       <div class="col-4">
-        <%= link_to "remove", delete_image_path(images.id, images.main.id), method: :delete, confirm: "Delete image?", class: "text-warning" %>
+        <%= link_to t('remove'), delete_image_path(images.id, images.main.id), method: :delete, confirm: t('Delete image?'), class: "text-warning" %>
       </div>
    <% end %>
   </div>
@@ -24,7 +24,7 @@
         <%= link_to image.blob.filename, image, class: "card-img-top", target:"_blank" %>
       </div>
       <div class="col-4">
-        <%= link_to "remove", delete_image_path(images.id, image.id), method: :delete, confirm: "Delete image?", class: "text-warning" %>
+        <%= link_to t('remove'), delete_image_path(images.id, image.id), method: :delete, confirm: t('Delete image?'), class: "text-warning" %>
       </div>
     </div>
   <% end %>

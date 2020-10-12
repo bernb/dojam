@@ -47,7 +47,7 @@
         <% if @museum_object.loan_out.to_institution.present? %>
           to <%= @museum_object.loan_out.to_institution %>
       <% end %>
-      <%= link_to "show", loan_out_path(@museum_object.loan_out) %>
+      <%= link_to t('show'), loan_out_path(@museum_object.loan_out) %>
       </div>
     </div>
   </div>

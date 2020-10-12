@@ -4,7 +4,7 @@
       <div class="col">
         <h2>loan information</h2>
       <%= f.association :museum_object, label: 'inv. number of museum object', collection: MuseumObjectDecorator.decorate_collection(MuseumObject.all.order(:inv_number)), label_method: :full_inv_number %>
-      <% label_tag "inv. number of museum object" %><p>
+      <% label_tag t('inv. number of museum object') %><p>
       <% text_field_tag :museum_object %>
       <%= f.input :to_institution, label: 'loan to institution' %>
       <%= f.input :borrower_name, label: 'name of borrower' %>

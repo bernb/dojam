@@ -1,4 +1,4 @@
-<%= render 'layouts/title', title_name: "loan for #{@loan_out.museum_object.decorate.full_inv_number}" %>
+<%= render 'layouts/title', title_name: t('loan for ') + @loan_out.museum_object.decorate.full_inv_number %>
 <div class="row">
   <div class="col">
     <h2>loan information</h2>

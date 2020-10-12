@@ -1,14 +1,14 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
 	<%= simple_form_for @museum_object, data:{parsley_validate:""}, url: wizard_path do |f| %>
-		<%= f.label "", "period" %>
+		<%= f.label "", t('period') %>
 		<div class="input-group row">
 			<div class="input-group col">
 				<%= f.association :dating_period, collection: @dating_periods, as: :select, label: false, include_blank: false %>
-				<% f.input :is_dating_period_unknown, label: "unknown" %>
+				<% f.input :is_dating_period_unknown, label: t('unknown') %>
 			</div>
 		</div>
 		
-		<%= f.label  "", "millennium" %>
+		<%= f.label  "", t('millennium') %>
 		<div class="input-group row">
 			<div class="input-group col">
 				<%= f.association :dating_millennium_begin, collection: @dating_millennia, as: :select, label: false, include_blank: false, class: "form-control col", html: {type: "number"} %>
@@ -18,9 +18,9 @@
 				<%= f.association :dating_millennium_end, collection: @dating_millennia, as: :select, label: false, include_blank: false, class: "form-control col" %>
 			</div>
 		</div>
-		<% f.input :is_dating_millennium_unknown, label: "unknown" %>
+		<% f.input :is_dating_millennium_unknown, label: t('unknown') %>
 
-		<%= f.label  "", "century" %>
+		<%= f.label  "", t('century') %>
 		<div class="input-group row">
 			<div class="input-group col">
 				<%= f.association :dating_century_begin, collection: @dating_centuries, as: :select, label: false, include_blank: false, class: "form-control col", html: {type: "number"} %>
@@ -30,16 +30,16 @@
 				<%= f.association :dating_century_end, collection: @dating_centuries, as: :select, label: false, include_blank: false, class: "form-control col" %>
 			</div>
 		</div>
-		<% f.input :is_dating_century_unknown, label: "unknown" %>
+		<% f.input :is_dating_century_unknown, label: t('unknown') %>
 
-		<%= f.label "", "timespan" %>
+		<%= f.label "", t('timespan') %>
 		<div class="form-group row">
 			<div class="input-group col">
 				<%= f.input_field :dating_timespan_begin, label: false,
 					discard_day: true, 
 					discard_month: true,
 					as: :string, value: f.object&.dating_timespan_begin&.strftime("%Y"), class: "form-control col" %>
-				<%= f.input_field :is_dating_timespan_begin_BC, as: :select, :collection => [['BC',true],['AD',false]], include_blank: false, class: "form-control select col-5" %>
+				<%= f.input_field :is_dating_timespan_begin_BC, as: :select, :collection => [[t('BC'),true],[t('AD'),false]], include_blank: false, class: "form-control select col-5" %>
 			</div>
 			<span class="form-control-static col-0">_</span>
 			<div class="input-group col">
@@ -50,9 +50,9 @@
 				<%= f.input_field :is_dating_timespan_end_BC, as: :select, :collection => [['BC',true],['AD',false]], include_blank: false, class: "form-control select col-5" %>
 			</div>
 		</div>
-		<% f.input :is_dating_timespan_unknown, label: "unknown" %>
+		<% f.input :is_dating_timespan_unknown, label: t('unknown') %>
 
-		<%= f.button :submit, "confirm" %>
+		<%= f.button :submit, t('confirm') %>
 	<% end %>
 <% end %>
 

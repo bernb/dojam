@@ -3,19 +3,19 @@
 </script>
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path, method: :put do |f| %>
-    <% label_tag "", "museum" %>
+    <% label_tag "", t('museum') %>
     <%= collection_select(:museum, :museum_id, @museums, :id, :name, {}, {class: "museum_selection form-control select required disabled"}) %>
     </p>
-    <%= label_tag "", "storage location" %>
+    <%= label_tag "", t('storage location') %>
     <%= collection_select(:storage, :storage_id, @storages, :id, :name, {include_blank: true, selected: @selected_storage_id}, {class: "storage_selection form-control select required"}) %>
     </p>
-    <%= label_tag "", "detailed location" %>
+    <%= label_tag "", t('detailed location') %>
     <%= f.collection_select(:storage_location_id, @storage_locations, :id, :name,{include_blank: true}, {class: "storage_location_selection form-control select required"}) %>
     </p>
-    <%= f.input :inv_number, label: "inventory number of museum", as: :string %>
-    <%= f.input :inv_extension, label: "extension of inventory number", as: :string %>
-    <%= f.input :inv_numberdoa, label: "other inventory number", as: :string %>
-    <%= f.input :amount, label: "number of objects", input_html: {value: f.object.amount || '1'} %>
-    <%= f.button :submit, "confirm" %>
+    <%= f.input :inv_number, label: t('inventory number of museum'), as: :string %>
+    <%= f.input :inv_extension, label: t('extension of inventory number'), as: :string %>
+    <%= f.input :inv_numberdoa, label: t('other inventory number'), as: :string %>
+    <%= f.input :amount, label: t('number of objects'), input_html: {value: f.object.amount || '1'} %>
+    <%= f.button :submit, t('confirm') %>
   <% end %>
 <% end %>
