@@ -129,4 +129,5 @@ group :development do
   gem 'flamegraph'
   gem 'stackprof'
 	gem 'ruby-prof'
+  gem 'i18n-tasks', '~> 0.9.31'
 end
