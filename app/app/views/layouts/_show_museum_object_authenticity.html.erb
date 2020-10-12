@@ -5,7 +5,7 @@
   
     <div class="row">
       <div class="col-3">
-        <dt>authenticity</dt>
+        <dt><%= t('authenticity') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object&.authenticity&.name %></dd>
@@ -14,7 +14,7 @@
       
     <div class="row">
       <div class="col-3">
-        <dt>priority</dt>
+        <dt><%= t('priority') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object&.priority&.name %></dd>
@@ -23,7 +23,7 @@
       
     <div class="row">
       <div class="col-3">
-        <dt>priority determined by</dt>
+        <dt><%= t('priority determined by') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object&.priority_determined_by %></dd>

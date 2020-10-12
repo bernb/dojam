@@ -3,59 +3,59 @@
   <div class="col">
     <h2>loan information</h2>
     <dl>
-      <dt>loan to institution</dt>
+      <dt><%= t('loan to institution') %></dt>
       <dd><%= @loan_out.to_institution %></dd>
 
-      <dt>name of borrower</dt>
+      <dt><%= t('name of borrower') %></dt>
       <dd><%= @loan_out.borrower_name %></dd>
 
-      <dt>job position of borrower</dt>
+      <dt><%= t('job position of borrower') %></dt>
       <dd><%= @loan_out.borrower_job_title %></dd>
 
-      <dt>date of loan</dt>
+      <dt><%= t('date of loan') %></dt>
       <dd><%= @loan_out.date_out %></dd>
 
-      <dt>document no. of request</dt>
+      <dt><%= t('document no. of request') %></dt>
       <dd><%= @loan_out.request_document_number %></dd>
 
-      <dt>date of document</dt>
+      <dt><%= t('date of document') %></dt>
       <dd><%= @loan_out.request_document_date %></dd>
 
-      <dt>signed by</dt>
+      <dt><%= t('signed by') %></dt>
       <dd><%= @loan_out.request_document_signed_by %></dd>
 
-      <dt>name of lender</dt>
+      <dt><%= t('name of lender') %></dt>
       <dd><%= @loan_out.lender_name %></dd>
 
-      <dt>job position of lender</dt>
+      <dt><%= t('job position of lender') %></dt>
       <dd><%= @loan_out.lender_job_title %></dd>
 
-      <dt>loan document no.</dt>
+      <dt><%= t('loan document no.') %></dt>
       <dd><%= @loan_out.loan_document_number %></dd>
 
-      <dt>condition of object</dt>
+      <dt><%= t('condition of object') %></dt>
       <dd><%= @loan_out.object_condition %></dd>
 
-      <dt>date of planned return</dt>
+      <dt><%= t('date of planned return') %></dt>
       <dd><%= @loan_out.return_date %></dd>
     </dl>
   </div>
   <div class="col">
     <h2>return information</h2>
     <dl>
-      <dt>date of return</dt>
+      <dt><%= t('date of return') %></dt>
       <dd><%= @loan_out.return_date %></dd>
 
-      <dt>document no. of return</dt>
+      <dt><%= t('document no. of return') %></dt>
       <dd><%= @loan_out.return_document_number %></dd>
 
-      <dt>signed by</dt>
+      <dt><%= t('signed by') %></dt>
       <dd><%= @loan_out.return_document_signed_by %></dd>
 
-      <dt>condition of object</dt>
+      <dt><%= t('condition of object') %></dt>
       <dd><%= @loan_out.return_condition %></dd>
 
-      <dt>remarks</dt>
+      <dt><%= t('remarks') %></dt>
       <dd><%= @loan_out.return_remarks %></dd>
     </dl>
   </div>

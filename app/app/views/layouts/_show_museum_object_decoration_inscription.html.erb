@@ -5,7 +5,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt>styles</dt>
+        <dt><%= t('styles') %></dt>
       </div> 
       <div class="col"> 
         <% @museum_object.decoration_styles&.each do |d| %>
@@ -18,7 +18,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt>techniques</dt>
+        <dt><%= t('techniques') %></dt>
       </div> 
       <div class="col"> 
         <% @museum_object.decoration_techniques&.each do |d| %>
@@ -31,7 +31,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt>colors</dt>
+        <dt><%= t('colors') %></dt>
       </div> 
       <div class="col"> 
         <% @museum_object.decoration_colors&.each do |d| %>
@@ -44,7 +44,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt>Munsell color</dt>
+        <dt><%= t('Munsell color') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object.munsell_color %></dd>
@@ -53,7 +53,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt>scripts(s)</dt>
+        <dt><%= t('script(s)') %></dt>
       </div> 
       <div class="col"> 
         <% @museum_object.inscription_letters&.each do |d| %>
@@ -66,7 +66,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt>language(s)</dt>
+        <dt><%= t('language(s)') %></dt>
       </div> 
       <div class="col"> 
         <% @museum_object.inscription_languages&.each do |d| %>
@@ -79,7 +79,7 @@
       
     <div class="row">
       <div class="col-3">
-        <dt>transliteration</dt>
+        <dt><%= t('transliteration') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object.inscription_text %></dd>
@@ -88,7 +88,7 @@
       
     <div class="row">
       <div class="col-3">
-        <dt>translation</dt>
+        <dt><%= t('translation') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object.inscription_translation %></dd>

@@ -4,7 +4,7 @@
   <dl class="dl-horizontal">
     <div class="row">
       <div class="col-3">
-        <dt>site name</dt>
+        <dt><%= t('site name') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object&.excavation_site&.name %></dd>
@@ -13,7 +13,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>other site name</dt>
+        <dt><%= t('other site name') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object&.name_expedition %></dd>
@@ -22,7 +22,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>site number (MEGA)</dt>
+        <dt><%= t('site number (MEGA)') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object&.site_number_mega %></dd>
@@ -31,7 +31,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>site number (expedition)</dt>
+        <dt><%= t('site number (expedition)') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object&.site_number_expedition %></dd>
@@ -40,7 +40,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>coordinates (MEGA)</dt>
+        <dt><%= t('coordinates (MEGA)') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object&.coordinates_mega %></dd>
@@ -49,7 +49,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>kind of site</dt>
+        <dt><%= t('kind of site') %></dt>
       </div>
 			<div class="col">
 				<dd>
@@ -61,7 +61,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>finding context</dt>
+        <dt><%= t('finding context') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object&.finding_context %>
@@ -70,7 +70,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt>remarks</dt>
+        <dt><%= t('remarks') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object&.finding_remarks %>

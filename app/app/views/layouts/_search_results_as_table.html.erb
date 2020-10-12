@@ -2,15 +2,15 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>inv. no.</th>
-      <th>storage</th>
-      <th>detailed location</th>
-      <th>materials</th>
-      <th>materials specified</th>
-      <th>kind of object</th>
-      <th>kind of object specified</th>
+      <th><%= t('inv. no.') %></th>
+      <th><%= t('storage') %></th>
+      <th><%= t('detailed location') %></th>
+      <th><%= t('materials') %></th>
+      <th><%= t('materials specified') %></th>
+      <th><%= t('kind of object') %></th>
+      <th><%= t('kind of object specified') %></th>
       <% if @termlists.present? %>
-        <th>matched by</th>
+        <th><%= t('matched by') %></th>
       <% end %>
     </tr>
   </thead>
