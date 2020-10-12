@@ -21,7 +21,7 @@ class MaterialSpecified < Termlist
     end
   end
 
-  def museum_objects
+  def museum_object
     paths = self
       .paths.map{|p| p.transitiv_children}
       .flatten

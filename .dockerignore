@@ -1,8 +1,15 @@
-app/tmp
+# Ignore everything
+**
+
+# Allow app dir
+!app/**
+
+# Exclude content in app that is not related to the app itself
 app/log
+app/tmp
+app/.idea
 app/storage
-.git
-.env
-Dockerfile
-backup-tests
-staging-area
+
+
+# Allow docker and environment related content
+!docker-entrypoint.sh
