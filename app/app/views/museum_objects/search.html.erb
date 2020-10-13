@@ -23,7 +23,7 @@
             <%= label_tag(:inv_number_search, t('inventory number')) %>
             <%= text_field_tag :inv_number_search, nil, placeholder: t('J.0000-0'), class: "form-control", required: true %>
           </div>
-          <%= submit_tag t('Search'), class: "btn btn-primary" %>
+          <%= submit_tag t('search'), class: "btn btn-primary" %>
         <% end %>
       </div>
 
@@ -33,7 +33,7 @@
             <%= label_tag(:search_query, t('fulltext')) %>
             <%= text_field_tag :fulltext_search, "", class: "form-control" %>
         </div>
-        <%= submit_tag t('Search'), class: "btn btn-primary" %>
+        <%= submit_tag t('search'), class: "btn btn-primary" %>
       <% end %>
       </div>
 
@@ -54,7 +54,7 @@
             <div class="search_form_fields">
             </div>
         </div>
-        <%= submit_tag t('Search'), class: "btn btn-primary" %>
+        <%= submit_tag t('search'), class: "btn btn-primary" %>
       <% end %>
       </div>
     </div>
