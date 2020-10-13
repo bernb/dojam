@@ -28,10 +28,10 @@ class LoanOutsController < ApplicationController
   def update
     if @loan_out.update(loan_out_params)
       redirect_to @loan_out
-      flash[:success] =  'loan was successfully updated'
+      flash[:success] =  I18n.t('loan was successfully updated')
     else
       render :edit
-      flash[:warning] = "could not update loan, please check inputs"
+      flash[:warning] = I18n.t('could not update loan, please check inputs')
     end
   end
 

@@ -48,12 +48,12 @@ class BuildsController < ApplicationController
       end
       
       if step == :step_confirm
-        flash[:success] = "object saved in database"
+        flash[:success] = I18n.t('object saved in database')
       end
     else
       set_variables_for step
       if step == :step_confirm
-        flash.now[:danger] = "could not save object"
+        flash.now[:danger] = I18n.t('could not save object')
       end
     end
     
@@ -69,11 +69,11 @@ class BuildsController < ApplicationController
     museum_object = MuseumObject.find params[:museum_object_id]
     museum_object.is_finished = false
     if museum_object.save
-      flash[:success] = "Object saved in database"
+      flash[:success] = I18n.t('object saved in database')
       redirect_to root_path
     else
       flash[:danger] = Hash.new
-      flash[:danger][:not_saved] = "Could not save object."
+      flash[:danger][:not_saved] = I18n.t('could not save object')
       museum_object.errors.full_messages.each_with_index do |message, i|
         flash[:danger][i] = message
       end
@@ -280,10 +280,10 @@ class BuildsController < ApplicationController
       date = year + "-" + month + "-" + day
     elsif month.present?
       @museum_object.assign_attributes acquisition_date_precision: 2
-      date = year + "-" + month + "-" + "01"
+      date = year + "-" + month + "-" + I18n.t('01')
     else
       @museum_object.assign_attributes acquisition_date_precision: 3
-      date = year + "-" + "01" + "-" + "01"
+      date = year + "-" + I18n.t('01') + "-" + I18n.t('01')
     end
     @museum_object.assign_attributes acquisition_date: date
   end

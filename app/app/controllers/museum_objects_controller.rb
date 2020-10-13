@@ -40,7 +40,7 @@ class MuseumObjectsController < ApplicationController
       page = params[:page] || 1
       @results = MuseumObject.search(params[:fulltext_search]).page(page)
       if @results.blank?
-        flash[:info] = "No results found for search string \"#{params[:fulltext_search]}\""
+        flash[:info] = I18n.t('no results found for search string') + " \"" + params[:fulltext_search] + "\""
       end
     end
   end
@@ -49,7 +49,7 @@ class MuseumObjectsController < ApplicationController
     respond_to do |format|
       format.js do
         unless params.has_key?(:form_search)
-          flash[:danger] = "Could not complete search: form_search parameter missing"
+          flash[:danger] = I18n.t('could not complete search: form_search parameter missing')
           redirect_to museum_objects_search_path
         end
         terms = {}
@@ -61,7 +61,7 @@ class MuseumObjectsController < ApplicationController
         end
 
         if terms.blank?
-          flash.now[:warning] = "No terms given"
+          flash.now[:warning] = I18n.t('no terms given')
           render 'search' and return
         end
 
@@ -96,7 +96,7 @@ class MuseumObjectsController < ApplicationController
       format.js do
         @selected_term = params[:selected_term]
         unless Termlist.list_types_humanized.include?(@selected_term)
-          flash[:error] = "Invalid term sent"
+          flash[:error] = "invalid term sent"
           redirect_to museum_objects_search_path
         end
         termclass = @selected_term.titleize.gsub(' ', '').constantize
@@ -122,7 +122,7 @@ class MuseumObjectsController < ApplicationController
     end
 
     if museum_objects.count == 0
-      flash[:info] = "Object with inventory number \"#{params[:inv_number_search]}\" not found"
+      flash[:info] = I18n.t('object not found') + ". " + I18n.t('inventory number') + ": " + params[:inv_number_search]
       redirect_to museum_objects_search_path
     end
 
