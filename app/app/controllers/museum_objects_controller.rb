@@ -40,7 +40,7 @@ class MuseumObjectsController < ApplicationController
       page = params[:page] || 1
       @results = MuseumObject.search(params[:fulltext_search]).page(page)
       if @results.blank?
-        flash[:info] = I18n.t('no results found for search string') + " \"" + params[:fulltext_search] + "\""
+        flash[:info] = t('no results found')
       end
     end
   end
@@ -49,7 +49,7 @@ class MuseumObjectsController < ApplicationController
     respond_to do |format|
       format.js do
         unless params.has_key?(:form_search)
-          flash[:danger] = I18n.t('could not complete search: form_search parameter missing')
+          flash[:danger] = t('could not complete search: form_search parameter missing')
           redirect_to museum_objects_search_path
         end
         terms = {}
@@ -61,7 +61,7 @@ class MuseumObjectsController < ApplicationController
         end
 
         if terms.blank?
-          flash.now[:warning] = I18n.t('no terms given')
+          flash.now[:warning] = t('no terms given')
           render 'search' and return
         end
 
@@ -122,7 +122,7 @@ class MuseumObjectsController < ApplicationController
     end
 
     if museum_objects.count == 0
-      flash[:info] = I18n.t('object not found') + ". " + I18n.t('inventory number') + ": " + params[:inv_number_search]
+      flash[:info] = t('object not found')
       redirect_to museum_objects_search_path
     end
 
