@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+
+  config.action_view.raise_on_missing_translations = true
+
   # Whitelist docker address space
   config.web_console.whitelisted_ips = '172.0.0.0/8'
 
@@ -36,7 +39,7 @@ Rails.application.configure do
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
-  config.i18n.fallbacks = true
+  config.i18n.fallbacks = false
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
