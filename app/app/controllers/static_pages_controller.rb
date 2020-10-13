@@ -23,7 +23,7 @@ class StaticPagesController < ApplicationController
     filename = file_entity.original_filename
     if !correct_file_format?(file_entity, ".xls") && !correct_file_format?(file_entity, ".xlsx")
       warnings[filename.to_sym] = 
-        "#{file_entity.original_filename}: Unsupported file format detected. Only .xls and .xlsx files are supported."
+        file_entity.original_filename + ": " + I18n.t('Unsupported file format detected. Only .xls and .xlsx files are supported')
       flash[:warning] = warnings
       redirect_to import_translations_select_path
     end
@@ -41,7 +41,7 @@ class StaticPagesController < ApplicationController
       term = Termlist.where name_en: name_en
       if term.blank?
         logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Term '#{name_en}' not found."}
-        warnings[:skipped] = "Some rows were skipped, see below for more information"
+        warnings[:skipped] = I18n.t('some rows were skipped, see below for more information')
         next
       end
       if term.count > 1
@@ -56,7 +56,7 @@ class StaticPagesController < ApplicationController
       end
     end
     if warnings.empty?
-      flash[:success] = "Translations successfully imported"
+      flash[:success] = I18n.t('translations successfully imported')
     else
       flash[:warning] = warnings
     end
@@ -73,7 +73,7 @@ class StaticPagesController < ApplicationController
       filename = file_entity.original_filename
       if !correct_file_format?(file_entity, ".yaml")
         warnings[filename.to_sym] = 
-          "#{file_entity.original_filename}: Unsupported file format detected. Only yaml files are supported."
+          file_entity.original_filename + ": " + I18n.t('Unsupported file format detected. Only yaml files are supported')
         next
       end
       file = File.open file_entity.tempfile
@@ -81,7 +81,7 @@ class StaticPagesController < ApplicationController
         data = YAML.safe_load file.read
       rescue Psych::SyntaxError => se
         line_number = se.message.match(/line (\d+)/).captures[0]
-        warnings[filename.to_sym] = "#{file_entity.original_filename}: Syntax Error around line #{line_number}. Please check the file for errors and try again."
+        warnings[filename.to_sym] = file_entity.original_filename + ": " + I18n.t('Syntax Error around line') + " " + line_number + ". " + I18n.t('Please check the file for errors and try again')
         next
       end
       if data.keys.include?("material_name")
@@ -94,7 +94,7 @@ class StaticPagesController < ApplicationController
     end
     flash[:warning] = warnings
     if flash[:danger].blank? && flash[:warning].blank?
-      flash[:success] = "Data successfully imported"
+      flash[:success] = I18n.t('data successfully imported')
     end
     redirect_to import_termlists_select_path
   end
@@ -123,7 +123,7 @@ class StaticPagesController < ApplicationController
     end
     flash[:warning] = warnings
     if materials_for_import.present?
-      flash[:success] = "Uploaded #{materials_for_import.count} files"
+      flash[:success] = materials_for_import.count + " " + I18n.t('file(s) uploaded')
     end
   end
 
