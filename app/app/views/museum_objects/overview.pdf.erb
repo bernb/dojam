@@ -16,7 +16,7 @@
           <tr>
             <td>
               <h6>
-                <strong>type</strong>
+                <strong><%= t('type') %></strong>
               </h6>
               <span><%= museum_object.basic_object_properties %></span>
             </td>
@@ -24,7 +24,7 @@
           <tr>
             <td>
               <h6>
-                <strong>measurements</strong>
+                <strong><%= t('measurements') %></strong>
               </h6>
               <span><%= museum_object.measurements %></span>
             </td>
@@ -32,14 +32,14 @@
           <tr>
             <td>
               <h6>
-                <strong>color</strong>
+                <strong><%= t('color') %></strong>
               </h6>
               <span><%= museum_object.color_list %></span>
             </td>
           </tr>
           <td>
             <h6>
-              <strong>description</strong>
+              <strong><%= t('description') %></strong>
             </h6>
             <span><%= museum_object.remarks %></span>
           </td>
@@ -50,21 +50,21 @@
   </div>
 
 
-  <h4>general informations</h4>
+  <h4><%= t('general informations') %></h4>
   <table class="table table-bordered table-condensed">
     <tbody>
       <tr>
         <td>
           <h6>
-            <strong>museum</strong>
+            <strong><%= t('museum') %></strong>
           </h6>
-          <span>Jordan Archaeological Museum</span>
+          <span><%= t('Jordan Archaeological Museum') %></span>
         </td>
       </tr>
       <tr>
         <td>
           <h6>
-            <strong>museum inventory number</strong>
+            <strong><%= t('museum inventory number') %></strong>
           </h6>
           <span><%= museum_object.full_inv_number %></span>
         </td>
@@ -73,7 +73,7 @@
         <tr>
           <td>
             <h6>
-              <strong>authenticity</strong>
+              <strong><%= t('authenticity') %></strong>
             </h6>
             <span><%= museum_object.authenticity&.name %></span>
           </td>
@@ -82,7 +82,7 @@
   </table>
 
   <% if false %>
-  <h4>additional images</h4>
+  <h4><%= t('additional images') %></h4>
   <table class="table table-bordered table-condensed">
     <tbody>
       <tr>
