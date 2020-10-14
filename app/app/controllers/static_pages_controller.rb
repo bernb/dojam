@@ -17,6 +17,49 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  def import_static_translations_select
+    if session[:log_path].present?
+      @log_messages = File.read(session[:log_path])
+      session[:log_path] = nil
+    end
+  end
+
+  def import_static_translations_submit
+    file_entity = params.dig(:static_translations, :translation_file)
+    warnings = {}
+    filename = file_entity.original_filename
+    if !correct_file_format?(file_entity, ".xls") && !correct_file_format?(file_entity, ".xlsx")
+      warnings[filename.to_sym] =
+          file_entity.original_filename + ": " + t('Unsupported file format detected. Only .xls and .xlsx files are supported')
+      flash[:warning] = warnings
+      redirect_to import_translations_select_path
+    end
+
+    timestamp = DateTime.now.strftime("%Y-%m-%d %H:%M:%S:%L")
+    filename = timestamp + "static translation import.log"
+    log_path = "#{Rails.root}/log/" + filename
+    session[:log_path] = log_path
+    logger = ActiveSupport::TaggedLogging.new(Logger.new(log_path))
+    file = File.open(file_entity)
+    xlsx = Roo::Spreadsheet.open(file)
+    xlsx.each_with_index do |row, i|
+      name_en = row.first&.strip
+      name_ar = row.second&.strip
+      if name_en.nil? || name_ar.nil?
+        logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Empty cell"}
+        warnings[:skipped] = t('some rows were skipped, see below for more information')
+      else
+        Translation.create locale: "ar", key: name_en, value: name_ar
+      end
+    end
+    if warnings.empty?
+      flash[:success] = t('translations successfully imported')
+    else
+      flash[:warning] = warnings
+    end
+    redirect_to import_translations_select_path
+  end
+
   def import_translations_submit
     file_entity = params.dig(:translations, :translation_file)
     warnings = {}
@@ -36,8 +79,13 @@ class StaticPagesController < ApplicationController
     file = File.open(file_entity)
     xlsx = Roo::Spreadsheet.open(file)
     xlsx.each_with_index do |row, i|
-      name_en = row.first.strip
-      name_ar = row.second.strip
+      name_en = row.first&.strip
+      name_ar = row.second&.strip
+      if name_en.nil? || name_ar.nil?
+        logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Empty cell"}
+        warnings[:skipped] = t('some rows were skipped, see below for more information')
+        next
+      end
       term = Termlist.where name_en: name_en
       if term.blank?
         logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Term '#{name_en}' not found."}

@@ -12,7 +12,8 @@
   <div class = "col-md-12">
     <h2>administration</h2>
     <%= link_to t('import termlists'),import_termlists_select_path, class: "btn btn-primary"%></button>
-    <%= link_to t('import translations'),import_translations_select_path, class: "btn btn-primary"%></button>
+    <%= link_to t('import termlist translations'),import_translations_select_path, class: "btn btn-primary"%></button>
+    <%= link_to t('import other translations'),import_static_translations_select_path, class: "btn btn-primary"%></button>
     <% link_to t('manage termlists'), '/admin', class: "btn btn-primary" %>
     <%= link_to t('view last activities'),"", class: "btn btn-primary disabled"%>
     <%= link_to t('reports'), static_pages_reports_path, class: "btn btn-primary", data: {turbolinks: false} %>
