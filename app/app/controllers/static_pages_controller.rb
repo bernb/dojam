@@ -48,6 +48,11 @@ class StaticPagesController < ApplicationController
       if name_en.nil? || name_ar.nil?
         logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Empty cell"}
         warnings[:skipped] = t('some rows were skipped, see below for more information')
+        next
+      end
+      translation = Translation.find_by key: name_en
+      if translation.present?
+        translation.value = name_ar
       else
         Translation.create locale: "ar", key: name_en, value: name_ar
       end
@@ -57,7 +62,8 @@ class StaticPagesController < ApplicationController
     else
       flash[:warning] = warnings
     end
-    redirect_to import_translations_select_path
+    I18n.backend.reload! # Translations are cached and won't show up otherwise
+    redirect_to import_static_translations_select_path
   end
 
   def import_translations_submit
@@ -108,6 +114,7 @@ class StaticPagesController < ApplicationController
     else
       flash[:warning] = warnings
     end
+    I18n.backend.reload! # Translations are cached and won't show up otherwise
     redirect_to import_translations_select_path
   end
 
