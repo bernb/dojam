@@ -15,11 +15,10 @@ class MuseumObjectsController < ApplicationController
         redirect_to museum_object_build_path params[:id], :step_confirm
       end
       format.pdf do
-        @museum_object = MuseumObject.find(params[:id]).decorate
-        render pdf: @museum_object.full_inv_number,
-          template: "museum_objects/overview.pdf.erb",
-          layout: "overview.html.erb",
-          locals: {museum_object: @museum_object}
+        @museum_object = MuseumObject.where(id: params[:id]).map(&:decorate)
+        render pdf: @museum_object.first.full_inv_number,
+          template: "museum_objects/museum_objects_pdf.html.erb",
+          locals: {museum_objects: @museum_object}
       end
     end
   end
