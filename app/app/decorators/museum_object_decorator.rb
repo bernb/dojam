@@ -52,7 +52,7 @@ class MuseumObjectDecorator < Draper::Decorator
       properties << self.main_material_specified.name
     elsif self.main_material.present? && self.main_material.name != "undetermined"
       properties << self.main_material.name
-    elsif
+    else
      material_unknown = true 
     end
 
@@ -60,7 +60,7 @@ class MuseumObjectDecorator < Draper::Decorator
       properties << " " + self.kind_of_object_specified.name
     elsif self.kind_of_object.present? && self.kind_of_object.name != "undetermined"
       properties << " " + self.kind_of_object.name
-    elsif
+    else
       kind_unknown = true
     end
 
