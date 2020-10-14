@@ -4,6 +4,9 @@
     <div class="col">
       <%= results&.total_count&.to_s || t('0') %> <%= t('results') %>
     </div>
+    <div class="col-auto">
+      <%= link_to t('export all as pdf'), museum_objects_path(format: :pdf, search_result_ids: results.ids), target: :_blank %>
+    </div>
   </div>
   <%= render 'layouts/search_results_as_cards' unless results.blank? %>
 </div>

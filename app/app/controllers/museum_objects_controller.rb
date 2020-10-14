@@ -1,12 +1,24 @@
 class MuseumObjectsController < ApplicationController
 
   def index
-    page = params[:page] || 1
-    @museum_objects = MuseumObject.page(page)
-    @museum_objects = MuseumObjectDecorator.decorate_collection(@museum_objects)
-    # We use a hash to allow more complex variants later
-    # But for now only the key is used by museum card decorator
-    @variant = {"edit": nil}
+    respond_to do |format|
+      format.html do
+        page = params[:page] || 1
+        @museum_objects = MuseumObject.page(page)
+        @museum_objects = MuseumObjectDecorator.decorate_collection(@museum_objects)
+        # We use a hash to allow more complex variants later
+        # But for now only the key is used by museum card decorator
+        @variant = {"edit": nil}
+      end
+      format.pdf do
+        ids = params[:search_result_ids]
+        museum_objects = MuseumObjectDecorator.decorate_collection(MuseumObject.where(id: ids))
+        #ToDo: If image is too large, two pages are used. Set max height property in top_image decorater method
+        render pdf: t('search results'),
+               template: "museum_objects/museum_objects_pdf.html.erb",
+               locals: {museum_objects: museum_objects}
+      end
+    end
   end
 
   def show
