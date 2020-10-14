@@ -8,8 +8,10 @@
     <div id="header">
       <%= wicked_pdf_image_tag 'mysite.jpg' %>
     </div>
+    <% museum_objects.each do |museum_object| %>
     <div id="content">
-      <%= yield %>
+      <%= render 'layouts/museum_object_pdf', museum_object: museum_object %>
     </div>
+    <% end %>
   </body>
 </html>
