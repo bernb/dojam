@@ -1,0 +1,20 @@
+<%= render 'layouts/title', title_name: t('Import static translations') %>
+
+<div class="row">
+	<div class="col">
+		Importing from files may take several minutes. Please wait until import is finished.</br>
+	</div>
+</div>
+<%= simple_form_for :static_translations, url: import_static_translations_submit_path do |f| %>
+	<%= f.input :translation_file, as: :file, input_html: {multiple: false}, label: false %>
+	<%= f.submit t('import'), class: "btn btn-primary" %>
+<% end %>
+<% if @log_messages.present? %>
+  <div class="row pt-4">
+    <span class="border">
+      <div class="col">
+        <%= simple_format @log_messages %>
+      </div>
+    </span>
+  </div>
+<% end %>
