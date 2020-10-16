@@ -4,12 +4,11 @@
     <meta charset='utf-8' />
     <%= wicked_pdf_stylesheet_link_tag "application" -%>
   </head>
-  <body onload='number_pages'>
+  <body>
     <div id="header">
-      <%= wicked_pdf_image_tag 'mysite.jpg' %>
     </div>
     <% museum_objects.each do |museum_object| %>
-    <div id="content", style="page-break-after: always">
+    <div id="content-<%= museum_object.full_inv_number.gsub(/\W/, '') %>", style="page-break-after: always">
       <%= render 'layouts/museum_object_pdf', museum_object: museum_object %>
     </div>
     <% end %>
