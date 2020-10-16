@@ -282,8 +282,8 @@ class MuseumObjectDecorator < Draper::Decorator
     if self&.images&.main&.attachment.nil?
       html = "<div class=\"card-img-dummy\"></div>"
     else
-      image = self.images.main.variant(resample: "200x200")
-      html = self.h.image_tag image, class: "card-img-top"
+      image = self.images.main.variant(resize_to_limit: [286, 286]) # Default bootstrap 4 card size
+			html = self.h.image_tag image, class: "card-img-top"
     end
     
     return helpers.sanitize html
