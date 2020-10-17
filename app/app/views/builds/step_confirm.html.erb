@@ -15,5 +15,5 @@
   </div>
 </div>
   <div class="text-right">
-    <%= link_to t('export as pdf'), museum_object_path(@museum_object, format: :pdf), class: "btn", target: :_blank %>
+    <%= render 'layouts/export_pdf_button' %>
   </div>
