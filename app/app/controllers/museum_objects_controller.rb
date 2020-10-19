@@ -31,6 +31,11 @@ class MuseumObjectsController < ApplicationController
     end
   end
 
+  def download_pdf
+    pdf = current_user.pdf_export
+    send_data pdf
+  end
+
   def check_for_new_pdf
     respond_to do |format|
       format.js do

@@ -1,21 +1,21 @@
 var ready;
 
 ready = function() {
-    if ($('#pdf-export-button').length) {
-        window.setInterval(wait_for_new_pdf(), 500);
+    let pdf_export_button_exists = $('#pdf-export-button').length;
+    if (pdf_export_button_exists) {
+        setInterval(wait_for_new_pdf, 1500);
     }
 };
 
 function wait_for_new_pdf() {
-    return function () {
-        let is_finished;
-        if ($('#pdf-export-button').hasClass('running')) {
-            is_finished = check_for_new_pdf();
-            if (is_finished) {
-
-            }
-        }
-    };
+    if ($('#pdf-export-button').hasClass('running')) {
+        check_for_new_pdf();
+    }
+    if ($('#pdf-export-button').hasClass('completed')) {
+        $('#pdf-export-button').hide();
+        $('#pdf-export-button').removeClass('running');
+        $('#pdf-export-download-button').show();
+    }
 }
 
 function check_for_new_pdf() {
@@ -24,10 +24,12 @@ function check_for_new_pdf() {
         url: '/museum_objects/check_for_new_pdf',
         success: function (pdf_ready) {
             if (pdf_ready  == "true") {
-                return true
-            } else {
-                return false
+                $('#pdf-export-button').removeClass('running');
+                $('#pdf-export-button').addClass('completed');
             }
         }
     });
 }
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

@@ -1,1 +1,11 @@
-<%= link_to t('export as pdf'), museum_objects_export_pdf_path(ids: [@museum_object.id]), id: "pdf-export-button", class: "btn", remote: true %>
+<%= link_to t('export as pdf'),
+            museum_objects_export_pdf_path(ids: [@museum_object.id]),
+            id: "pdf-export-button",
+            class: "btn",
+            remote: true %>
+<%= link_to t('click here to download pdf'),
+            museum_objects_download_pdf_path,
+            id: "pdf-export-download-button",
+            class: "btn",
+            style: "display:none;"
+%>

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'museum_objects/search_form'
   get 'museum_objects/add_search_field'
   get 'museum_objects/export_pdf'
+  get 'museum_objects/download_pdf'
   get 'museum_objects/check_for_new_pdf'
   resources :museum_objects do
     resources :builds
