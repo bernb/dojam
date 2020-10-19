@@ -1,6 +1,10 @@
 class GenerateMuseumObjectsPdfJob < ApplicationJob
   queue_as :default
-  after_perform :send_pdf_to_user
+  after_perform do |job|
+    current_user = job.arguments.second
+    current_user.pdf_export_finished = true
+    current_user.save
+  end
 
   def perform(museum_objects, user)
     museum_objects = museum_objects.map(&:decorate)
@@ -9,10 +13,5 @@ class GenerateMuseumObjectsPdfJob < ApplicationJob
                                  locals: {museum_objects: museum_objects})
     user.pdf_export = pdf
     user.save
-  end
-
-  private
-  def send_pdf_to_user
-    puts "*** FINISHED ***"
   end
 end
