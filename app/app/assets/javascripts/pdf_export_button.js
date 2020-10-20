@@ -3,7 +3,7 @@ var ready;
 ready = function() {
     let pdf_export_button_exists = $('#pdf-export-button').length;
     if (pdf_export_button_exists) {
-        setInterval(wait_for_new_pdf, 1500);
+        setInterval(wait_for_new_pdf, 500);
     }
 };
 
