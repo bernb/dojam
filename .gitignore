@@ -37,7 +37,7 @@
 !/app/tmp/.keep
 
 # Ignore Byebug command history file.
-app/.byebug_history
+/app/.byebug_history
 
 # Ignore application configuration
 /app/config/application.yml
