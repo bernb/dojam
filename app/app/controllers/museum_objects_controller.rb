@@ -25,7 +25,13 @@ class MuseumObjectsController < ApplicationController
   def export_pdf
     respond_to do |format|
         format.js do
-          museum_objects = MuseumObject.where(id: params[:ids]).map(&:decorate)
+          puts params
+          ids = params.dig(:museum_objects_export_pdf, :ids).presence || "[]"
+          puts ids
+          puts ids.class
+          ids = JSON.parse ids
+          puts ids.class
+          museum_objects = MuseumObject.where(id: ids).map(&:decorate)
           GenerateMuseumObjectsPdfJob.perform_later museum_objects, current_user
         end
     end
@@ -33,6 +39,8 @@ class MuseumObjectsController < ApplicationController
 
   def download_pdf
     pdf = current_user.pdf_export
+    current_user.pdf_export_finished = false
+    current_user.save
     send_data pdf, filename: t('export') + '.pdf', type: 'application/pdf'
   end
 
@@ -63,7 +71,8 @@ class MuseumObjectsController < ApplicationController
   def search
     if params.has_key?(:fulltext_search)
       page = params[:page] || 1
-      @results = MuseumObject.search(params[:fulltext_search]).page(page)
+      @all_results = MuseumObject.search(params[:fulltext_search])
+      @results = @all_results.page(page)
       if @results.blank?
         flash[:info] = t('no results found')
       end
@@ -94,7 +103,7 @@ class MuseumObjectsController < ApplicationController
           termclass = k.to_s.constantize
           term_results = []
           v.each do |term_id|
-            term = termclass.find term_id 
+            term = termclass.find term_id
             if k.in?(["Material", "MaterialSpecified", "KindOfObject", "KindOfObjectSpecified"])
               paths = Path.where("path LIKE ?", term.paths.first.path + "%")
               prim = MuseumObject.where(main_path: paths)
@@ -107,8 +116,9 @@ class MuseumObjectsController < ApplicationController
           results << term_results.uniq
         end
         page = params[:page] || 1
-        results = results.reduce(&:&).uniq
-        @results =  Kaminari.paginate_array(results).page(page)
+        @all_results = results.reduce(&:&).uniq
+        @all_results = Kaminari.paginate_array(@all_results)
+        @results =  @all_results.page(page)
         if @results.blank?
           # Info gets inserted in search_form view
         end

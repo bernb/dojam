@@ -6,7 +6,7 @@
     </div>
     <% if results.present? %>
       <div class="col-auto">
-        <%= link_to t('export all as pdf'), museum_objects_path(format: :pdf, search_result_ids: results.ids), target: :_blank %>
+        <%= render 'layouts/export_pdf_button', export_ids: @all_results.ids %>
       </div>
     <% end %>
   </div>
