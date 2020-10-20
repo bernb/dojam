@@ -1,5 +1,5 @@
 <%= link_to t('export as pdf'),
-            museum_objects_export_pdf_path(ids: [@museum_object.id]),
+            museum_objects_export_pdf_path(ids: ids),
             id: "pdf-export-button",
             class: "btn",
             remote: true %>
