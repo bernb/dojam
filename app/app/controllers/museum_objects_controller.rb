@@ -33,7 +33,7 @@ class MuseumObjectsController < ApplicationController
 
   def download_pdf
     pdf = current_user.pdf_export
-    send_data pdf
+    send_data pdf, filename: t('export') + '.pdf', type: 'application/pdf'
   end
 
   def check_for_new_pdf
