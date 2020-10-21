@@ -9,7 +9,10 @@
   <div class="row">
     <div class="col align-self-center">
       <% wicked_pdf_image_tag 'not_available_image', class: 'rounded mx-auto d-block' %>
-      <%# wicked_pdf_image_tag museum_object.images.main %>
+      <% if museum_object.images&.main.present? %>
+        <img src="file://<%= ActiveStorage::Blob.service.send(:path_for, museum_object.images.main.variant(resize_to_limit: [400, 400]).processed.key) %>">
+      <% end %>
+      <%# wicked_pdf_image_tag Rails.application.routes.url_helpers.rails_representation_url(museum_object.images.main.variant(resize: '300x300').processed, only_path: true) %>
     </div>
   </div>
 
