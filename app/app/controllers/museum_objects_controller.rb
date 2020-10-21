@@ -72,6 +72,7 @@ class MuseumObjectsController < ApplicationController
     if params.has_key?(:fulltext_search)
       page = params[:page] || 1
       @all_results = MuseumObject.search(params[:fulltext_search])
+      @all_results_ids = @all_results.ids
       @results = @all_results.page(page)
       if @results.blank?
         flash[:info] = t('no results found')
@@ -117,6 +118,7 @@ class MuseumObjectsController < ApplicationController
         end
         page = params[:page] || 1
         @all_results = results.reduce(&:&).uniq
+        @all_results_ids = @all_results.map(&:id)
         @all_results = Kaminari.paginate_array(@all_results)
         @results =  @all_results.page(page)
         if @results.blank?
