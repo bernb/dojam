@@ -4,6 +4,9 @@
   </a>
   <ul class="navbar-nav mr-auto">
     <li class="nav-item"><%= link_to t('home'), root_path, class: "nav-link" %></li>
+    <% if current_user.has_extended_access? %>
+      <li class="nav-item"><%= link_to t('administration'), admin_root_path, class: "nav-link", data: {turbolinks: false} %></li>
+    <% end %>
   </ul>
   <ul class="navbar-nav">
     <% if current_user.present? %>
