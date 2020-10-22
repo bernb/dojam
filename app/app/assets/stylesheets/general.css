@@ -1,4 +1,12 @@
 .doa-logo-small {
-	width: 50px;
+	width: 150px;
 	max-height: auto;
+}
+
+.pdf-no-image{
+    height: 300px;
+    width: 400px;
+    background-color: #F8F5F0;
+    text-align: center;
+    line-height: 300px;
 }
