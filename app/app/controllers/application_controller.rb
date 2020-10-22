@@ -3,6 +3,14 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   around_action :switch_locale
 
+  def check_extended_access!
+    puts current_user
+    unless current_user.has_extended_access?
+      flash[:alert] = t('not authorized. You need extended access to do this.')
+      redirect_to root_path
+    end
+  end
+
   def switch_locale(&action)
     locale = current_user.try(:locale) || I18n.default_locale
     I18n.with_locale(locale, &action)
