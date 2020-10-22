@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   around_action :switch_locale
 
   def check_extended_access!
-    puts current_user
     unless current_user.has_extended_access?
       flash[:alert] = t('not authorized. You need extended access to do this.')
       redirect_to root_path
