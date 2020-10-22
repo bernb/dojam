@@ -1,18 +1,21 @@
 <div class="container">
-  <h1><%= museum_object.full_inv_number %></h1>
   <div class="row mb-4">
-    <div class="col text-right">
-      <%#= wicked_pdf_image_tag 'doa_logo.png',class: "doa-logo-small" %>
+    <div class="col text-center">
+      <%= wicked_pdf_image_tag 'doa-logo.jpg', class: "doa-logo-small" %>
     </div>
   </div>
+  <h1><%= museum_object.full_inv_number %></h1>
 
   <div class="row">
     <div class="col align-self-center">
       <% wicked_pdf_image_tag 'not_available_image', class: 'rounded mx-auto d-block' %>
       <% if museum_object.images&.main.present? %>
         <img src="file://<%= ActiveStorage::Blob.service.send(:path_for, museum_object.images.main.variant(resize_to_limit: [400, 400]).processed.key) %>">
+      <% else %>
+        <div class="pdf-no-image">
+          <%= t('no image provided') %>
+        </div>
       <% end %>
-      <%# wicked_pdf_image_tag Rails.application.routes.url_helpers.rails_representation_url(museum_object.images.main.variant(resize: '300x300').processed, only_path: true) %>
     </div>
   </div>
 
@@ -59,7 +62,7 @@
 
   <div class="row">
     <div class="col">
-      <h4><%= t('general informations') %></h4>
+      <h4><%= t('general information') %></h4>
       <table class="table table-bordered table-condensed">
         <tbody>
         <tr>
