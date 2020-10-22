@@ -1,7 +1,7 @@
 <%= render 'layouts/title', title_name: t('Menu') %>
 <div class = "row">
   <div class = "col-md-12">
-    <h2>database functions</h2>
+    <h2><%= t('database functions') %></h2>
     <%= link_to t('new entry'), new_museum_object_path, class: "btn btn-primary" %>
     <%= link_to t('search'), museum_objects_search_path, class: "btn btn-primary", data: {turbolinks: false} %>
     <%= link_to t('loan'),loan_outs_path, class: "btn btn-primary" %>
@@ -10,7 +10,7 @@
 
 <div class = "row">  
   <div class = "col-md-12">
-    <h2>administration</h2>
+    <h2><%= t('administration') %></h2>
     <%= link_to t('import termlists'),import_termlists_select_path, class: "btn btn-primary"%></button>
     <%= link_to t('import termlist translations'),import_translations_select_path, class: "btn btn-primary"%></button>
     <%= link_to t('import other translations'),import_static_translations_select_path, class: "btn btn-primary"%></button>
