@@ -1,75 +1,87 @@
 <div class="container">
   <div class="row mb-4">
-    <div class="col text-right">
-        <%= wicked_pdf_image_tag 'doa_logo.png',class: "doa-logo-small" %>
+    <div class="col text-center">
+      <%= wicked_pdf_image_tag 'doa-logo.jpg', class: "doa-logo-small" %>
     </div>
   </div>
+  <h1><%= museum_object.full_inv_number %></h1>
 
   <div class="row">
     <div class="col align-self-center">
       <% wicked_pdf_image_tag 'not_available_image', class: 'rounded mx-auto d-block' %>
-      <%= museum_object.top_image %>
+      <% if museum_object.images&.main.present? %>
+        <img src="file://<%= ActiveStorage::Blob.service.send(:path_for, museum_object.images.main.variant(resize_to_limit: [400, 400]).processed.key) %>">
+      <% else %>
+        <div class="pdf-no-image">
+          <%= t('no image provided') %>
+        </div>
+      <% end %>
     </div>
+  </div>
+
+  <div class="row">
     <div class="col">
+      <h4><%= t('visual description') %></h4>
       <table class="table table-bordered table-condensed">
         <tbody>
-          <tr>
-            <td>
-              <h6>
-                <strong><%= t('type') %></strong>
-              </h6>
-              <span><%= museum_object.basic_object_properties %></span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <h6>
-                <strong><%= t('measurements') %></strong>
-              </h6>
-              <span><%= museum_object.measurements %></span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <h6>
-                <strong><%= t('color') %></strong>
-              </h6>
-              <span><%= museum_object.color_list %></span>
-            </td>
-          </tr>
+        <tr>
           <td>
             <h6>
-              <strong><%= t('description') %></strong>
+              <strong><%= t('type') %></strong>
             </h6>
-            <span><%= museum_object.remarks %></span>
+            <span><%= museum_object.basic_object_properties %></span>
           </td>
-          </tr>
+        </tr>
+        <tr>
+          <td>
+            <h6>
+              <strong><%= t('measurements') %></strong>
+            </h6>
+            <span><%= museum_object.measurements %></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h6>
+              <strong><%= t('color') %></strong>
+            </h6>
+            <span><%= museum_object.color_list %></span>
+          </td>
+        </tr>
+        <td>
+          <h6>
+            <strong><%= t('description') %></strong>
+          </h6>
+          <span><%= museum_object.remarks %></span>
+        </td>
+        </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-
-  <h4><%= t('general informations') %></h4>
-  <table class="table table-bordered table-condensed">
-    <tbody>
-      <tr>
-        <td>
-          <h6>
-            <strong><%= t('museum') %></strong>
-          </h6>
-          <span><%= t('Jordan Archaeological Museum') %></span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <h6>
-            <strong><%= t('museum inventory number') %></strong>
-          </h6>
-          <span><%= museum_object.full_inv_number %></span>
-        </td>
-      </tr>
-      <tr>
+  <div class="row">
+    <div class="col">
+      <h4><%= t('general information') %></h4>
+      <table class="table table-bordered table-condensed">
+        <tbody>
+        <tr>
+          <td>
+            <h6>
+              <strong><%= t('museum') %></strong>
+            </h6>
+            <span><%= t('Jordan Archaeological Museum') %></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h6>
+              <strong><%= t('museum inventory number') %></strong>
+            </h6>
+            <span><%= museum_object.full_inv_number %></span>
+          </td>
+        </tr>
+        <tr>
         <tr>
           <td>
             <h6>
@@ -78,13 +90,15 @@
             <span><%= museum_object.authenticity&.name %></span>
           </td>
         </tr>
-    </tbody>
-  </table>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <% if false %>
-  <h4><%= t('additional images') %></h4>
-  <table class="table table-bordered table-condensed">
-    <tbody>
+    <h4><%= t('additional images') %></h4>
+    <table class="table table-bordered table-condensed">
+      <tbody>
       <tr>
         <td>
           <%= wicked_pdf_image_tag 'not_available_image', class: 'img-thumbnail' %>
@@ -96,7 +110,7 @@
           <%= wicked_pdf_image_tag 'not_available_image', class: 'img-thumbnail' %>
         </td>
       </tr>
-    </tbody>
-  </table>
-<% end %>
+      </tbody>
+    </table>
+  <% end %>
 </div>

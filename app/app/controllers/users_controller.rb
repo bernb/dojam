@@ -1,8 +1,4 @@
 class UsersController < ApplicationController
-  def index
-    @users = User.all
-  end
-
   def switch_locale
     locale = params[:locale]
     if locale.in? ["ar", "en"]
