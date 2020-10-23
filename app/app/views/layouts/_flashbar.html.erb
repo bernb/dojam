@@ -4,6 +4,9 @@
       <div class="alert alert-<%= key %>"><%= nested_value %></div>
     <% end %>
   <% else %>
+    <%# Rewrite devise alert categories to be compatible with bootstrap 4 %>
+    <% key = "danger" if key == "alert" %>
+    <% key = "success" if key == "notice" %>
     <div class="alert alert-<%= key %>"><%= value %></div>
   <% end %>
 <% end %>

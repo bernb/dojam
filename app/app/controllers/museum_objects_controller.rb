@@ -16,23 +16,45 @@ class MuseumObjectsController < ApplicationController
         #ToDo: If image is too large, two pages are used. Set max height property in top_image decorater method
         render pdf: t('search results'),
                template: "museum_objects/museum_objects_pdf.html.erb",
-               locals: {museum_objects: museum_objects}
+               locals: {museum_objects: museum_objects},
+               show_as_html: params.key?('debug')
+      end
+    end
+  end
+
+  def export_pdf
+    respond_to do |format|
+        format.js do
+          puts params
+          ids = params.dig(:museum_objects_export_pdf, :ids).presence || "[]"
+          puts ids
+          puts ids.class
+          ids = JSON.parse ids
+          puts ids.class
+          museum_objects = MuseumObject.where(id: ids).map(&:decorate)
+          GenerateMuseumObjectsPdfJob.perform_later museum_objects, current_user
+        end
+    end
+  end
+
+  def download_pdf
+    pdf = current_user.pdf_export
+    current_user.pdf_export_finished = false
+    current_user.save
+    send_data pdf, filename: t('export') + '.pdf', type: 'application/pdf'
+  end
+
+  def check_for_new_pdf
+    respond_to do |format|
+      format.js do
+        pdf_ready = current_user.pdf_export_finished
+        render json: pdf_ready.to_s
       end
     end
   end
 
   def show
-    respond_to do |format|
-      format.html do
-        redirect_to museum_object_build_path params[:id], :step_confirm
-      end
-      format.pdf do
-        @museum_object = MuseumObject.where(id: params[:id]).map(&:decorate)
-        render pdf: @museum_object.first.full_inv_number,
-          template: "museum_objects/museum_objects_pdf.html.erb",
-          locals: {museum_objects: @museum_object}
-      end
-    end
+    redirect_to museum_object_build_path params[:id], :step_confirm
   end
 
   def new
@@ -49,7 +71,9 @@ class MuseumObjectsController < ApplicationController
   def search
     if params.has_key?(:fulltext_search)
       page = params[:page] || 1
-      @results = MuseumObject.search(params[:fulltext_search]).page(page)
+      @all_results = MuseumObject.search(params[:fulltext_search])
+      @all_results_ids = @all_results.ids
+      @results = @all_results.page(page)
       if @results.blank?
         flash[:info] = t('no results found')
       end
@@ -80,7 +104,7 @@ class MuseumObjectsController < ApplicationController
           termclass = k.to_s.constantize
           term_results = []
           v.each do |term_id|
-            term = termclass.find term_id 
+            term = termclass.find term_id
             if k.in?(["Material", "MaterialSpecified", "KindOfObject", "KindOfObjectSpecified"])
               paths = Path.where("path LIKE ?", term.paths.first.path + "%")
               prim = MuseumObject.where(main_path: paths)
@@ -93,8 +117,10 @@ class MuseumObjectsController < ApplicationController
           results << term_results.uniq
         end
         page = params[:page] || 1
-        results = results.reduce(&:&).uniq
-        @results =  Kaminari.paginate_array(results).page(page)
+        @all_results = results.reduce(&:&).uniq
+        @all_results_ids = @all_results.map(&:id)
+        @all_results = Kaminari.paginate_array(@all_results)
+        @results =  @all_results.page(page)
         if @results.blank?
           # Info gets inserted in search_form view
         end
