@@ -5,6 +5,9 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 #
 
+# Ignore master.key
+/app/config/master.key
+
 # temporary directory used by scripts
 /tmp
 
