@@ -3,7 +3,7 @@ FROM ruby:2.7.2
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 # For Capybara-webkit gem
-RUN apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x firefox-esr 
+RUN apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x firefox-esr vim
 # Install geckodriver for firefox, used by selenium/capybara
 RUN GK_VERSION="0.24.0" \
   && echo "Using GeckoDriver version: "$GK_VERSION \
