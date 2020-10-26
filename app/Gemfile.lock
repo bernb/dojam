@@ -65,7 +65,7 @@ GEM
     activerecord (6.0.3.4)
       activemodel (= 6.0.3.4)
       activesupport (= 6.0.3.4)
-    activerecord-import (1.0.6)
+    activerecord-import (1.0.7)
       activerecord (>= 3.2)
     activestorage (6.0.3.4)
       actionpack (= 6.0.3.4)
@@ -138,6 +138,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.9.2)
+      devise (>= 4.7.1)
     diff-lcs (1.4.4)
     draper (4.0.1)
       actionpack (>= 5.0)
@@ -329,7 +331,7 @@ GEM
       rspec-mocks (~> 3.9.0)
     rspec-core (3.9.3)
       rspec-support (~> 3.9.3)
-    rspec-expectations (3.9.2)
+    rspec-expectations (3.9.3)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-mocks (3.9.1)
@@ -343,7 +345,7 @@ GEM
       rspec-expectations (~> 3.9)
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
-    rspec-support (3.9.3)
+    rspec-support (3.9.4)
     ruby-ole (1.2.12.2)
     ruby-prof (1.4.1)
     ruby-vips (2.0.17)
@@ -360,7 +362,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    scout_apm (2.6.9)
+    scout_apm (2.6.10)
       parser
     search_cop (1.1.0)
       treetop
@@ -385,7 +387,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    stackprof (0.2.15)
+    stackprof (0.2.16)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
     thor (1.0.1)
@@ -439,6 +441,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 5.0)
   devise
+  devise-i18n
   draper (~> 4.0)
   factory_bot_rails (~> 5.2)
   figaro
