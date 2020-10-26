@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   
-  get 'users/index'
+  #get 'users/index'
   devise_for :users
+  # See https://github.com/heartcombo/devise/issues/4573 and
+  # https://github.com/heartcombo/devise/issues/4470 for the reasoning. Note that
+  # this problem is also related to turbolinks
+  devise_scope :user do
+    get '/users', to: 'devise/registrations#edit'
+    get '/users/password', to: 'devise/passwords#new'
+  end
   ActiveAdmin.routes(self)
 #  get 'termlists/index'
 #  get 'termlists/choose'
@@ -9,7 +16,7 @@ Rails.application.routes.draw do
   resources :termlists
   resources :loan_outs
   get 'users/switch_locale', to: 'users#switch_locale'
-  resources :users
+#resources :users
 
 # Reports from reports_kit
   mount ReportsKit::Engine, at: '/'
