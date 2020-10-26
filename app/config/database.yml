@@ -14,7 +14,7 @@ development:
   <<: *default
   database: DOJAM_DB
   username: dojam
-  password: <%= Rails.application.secrets.dojam_db_password %>
+  password: <%= Rails.application.credentials[:development][:dojam_db_password] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
