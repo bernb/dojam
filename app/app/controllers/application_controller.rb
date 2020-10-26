@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
-  around_action :switch_locale
+  around_action :set_locale
 
   def check_extended_access!
     unless current_user.has_extended_access?
@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def switch_locale(&action)
+  def set_locale(&action)
     locale = current_user.try(:locale) || I18n.default_locale
     I18n.with_locale(locale, &action)
   end
