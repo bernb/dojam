@@ -10,9 +10,6 @@ Rails.application.routes.draw do
     get '/users/password', to: 'devise/passwords#new'
   end
   ActiveAdmin.routes(self)
-#  get 'termlists/index'
-#  get 'termlists/choose'
-#  get 'termlists/show'
   resources :termlists
   resources :loan_outs
   get 'users/switch_locale', to: 'users#switch_locale'
