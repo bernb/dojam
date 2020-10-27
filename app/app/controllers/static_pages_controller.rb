@@ -7,23 +7,18 @@ class StaticPagesController < ApplicationController
     node_id = params[:id]
     root = []
     if node_id == '#'
-      Path.materials.default_order.each do |m_path|
-        node_id = "N" + m_path.path.gsub('/', '-')
-        m_node = {"id": node_id, "text": m_path.last_object_name, "children": true}
-        root << m_node
-      end
+      paths = Path.depth(1).to_a
     else
       path_name = node_id.gsub('-', '/').delete_prefix('N')
       path = Path.find_by path: path_name
-      last_level = path.depth == 3 ? false : true
-      path.direct_children
-          .to_a
-          .sort_by{|p| [p.last_object_name == "undetermined" ? 1 : 0, p.last_object_name]}
-          .each do |c_path|
-        node_id = "N" + c_path.path.gsub('/', '-')
-        c_node = {"id": node_id, "text": c_path.last_object_name, "children": last_level}
-        root << c_node
-      end
+      paths = path.direct_children.to_a
+    end
+    paths
+        .sort_by{|p| [p.last_object_name == "undetermined" ? 1 : 0, p.last_object_name]}
+        .each do |c_path|
+      node_id = "N" + c_path.path.gsub('/', '-')
+      c_node = {"id": node_id, "text": c_path.last_object_name, "children": true}
+      root << c_node
     end
     render json: root
   end
