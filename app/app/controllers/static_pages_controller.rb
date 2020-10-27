@@ -14,17 +14,20 @@ class StaticPagesController < ApplicationController
       path = Path.find_by path: path_name
       has_children = false if path.depth == 3
       paths = path.direct_children
+      museum_object_count = path.all_transitive_museum_objects.count
+      mo_node = {
+          "id": "M" + path.id.to_s,
+          "text": museum_object_count.to_s + " " + t('museum objects'),
+          "children": false,
+          "type": "museum_object"}
+      root << mo_node
     end
+
     paths
         .sort_by{|p| [p.last_object_name == "undetermined" ? 1 : 0, p.last_object_name]}
         .each do |c_path|
 
-      leafs = c_path.transitive_children.depth(4)
-      museum_object_count =
-          leafs.joins(:museum_objects_as_main).count +
-          leafs.joins(:museum_objects).count +
-          c_path.museum_objects.count +
-          c_path.museum_objects_as_main.count
+      museum_object_count = c_path.all_transitive_museum_objects.count
       node_id = "N" + c_path.path.gsub('/', '-')
       c_node = {"id": node_id, "text": c_path.last_object_name + " (#{museum_object_count})", "children": has_children}
       root << c_node

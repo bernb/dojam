@@ -3,6 +3,12 @@
 <script>
     $(function() {
         $('#jstreecontainer').jstree({
+            'plugins' : ["types"],
+            'types' : {
+                "museum_object" : {
+                    "icon" : "jstree-file"
+                }
+            },
             'core' : {
                 'data' : {
                     "url" : "/jstreedata",
