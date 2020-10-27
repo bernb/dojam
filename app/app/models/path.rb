@@ -193,7 +193,7 @@ class Path < ApplicationRecord
 	private
 
 	def museum_objects_for_ids ids
-		MuseumObject.left_joins(:main_path, :secondary_paths).where(paths: {id: ids})
+		MuseumObject.left_joins(:main_path, :secondary_paths).where(paths: {id: ids}).distinct
 	end
 
 end
