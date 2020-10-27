@@ -15,6 +15,14 @@ class Path < ApplicationRecord
 	scope :kind_of_objects, ->{depth(3).default_order}
 	scope :kind_of_object_specifieds, ->{depth(4).default_order}
 
+	def all_museum_objects
+		museum_objects_for_ids self.id
+	end
+
+	def all_transitive_museum_objects
+		museum_objects_for_ids self.transitiv_children_ids
+	end
+
 	def self.undetermined_path
 		m_id = Material.undetermined.id.to_s
 		ms_id = MaterialSpecified.undetermined.id.to_s
@@ -180,6 +188,12 @@ class Path < ApplicationRecord
 			named_path += "/" + object.name
 		end
 		return named_path
+	end
+
+	private
+
+	def museum_objects_for_ids ids
+		MuseumObject.left_joins(:main_path, :secondary_paths).where(paths: {id: ids})
 	end
 
 end
