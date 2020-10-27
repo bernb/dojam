@@ -3,6 +3,25 @@ class StaticPagesController < ApplicationController
   def menu
   end
 
+  def jstreedata
+    root = []
+    Path.materials.default_order.each do |m_path|
+      m_node = {"id": m_path.id, "text": m_path.last_object_name}
+      m_children = []
+      m_path.direct_children.default_order.each do |ms_path|
+        puts ms_path.named_path
+        m_children << {"id": ms_path.id, "text": ms_path.last_object_name}
+      end
+      m_node["children"] = m_children
+      root << m_node
+    end
+    render json: root
+  end
+
+  def jstreetest
+
+  end
+
   def reports
     @museum_objects = MuseumObject.order(created_at: :desc)
       .limit(10)
