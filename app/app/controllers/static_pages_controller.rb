@@ -6,18 +6,16 @@ class StaticPagesController < ApplicationController
   def jstreedata
     node_id = params[:id]
     root = []
-    has_children = true
     if node_id == '#'
       paths = Path.depth(1)
     else
       path_name = node_id.gsub('-', '/').delete_prefix('N')
       path = Path.find_by path: path_name
-      has_children = false if path.depth == 3
       paths = path.direct_children
-      museum_object_count = path.all_transitive_museum_objects.count
+      museum_object_count = path.all_transitive_museum_objects.count + path.all_museum_objects.count
       mo_node = {
           "id": "M" + path.id.to_s,
-          "text": museum_object_count.to_s + " " + t('museum objects'),
+          "text": museum_object_count.to_s + " " + t("museum object".pluralize(museum_object_count)),
           "children": false,
           "type": "museum_object"}
       root << mo_node
@@ -27,9 +25,9 @@ class StaticPagesController < ApplicationController
         .sort_by{|p| [p.last_object_name == "undetermined" ? 1 : 0, p.last_object_name]}
         .each do |c_path|
 
-      museum_object_count = c_path.all_transitive_museum_objects.count
+      museum_object_count = c_path.all_transitive_museum_objects.count + c_path.all_museum_objects.count
       node_id = "N" + c_path.path.gsub('/', '-')
-      c_node = {"id": node_id, "text": c_path.last_object_name + " (#{museum_object_count})", "children": has_children}
+      c_node = {"id": node_id, "text": c_path.last_object_name + " (#{museum_object_count})", "children": true}
       root << c_node
     end
     render json: root
