@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   root 'static_pages#menu'
   get 'static_pages/reports'
+  get 'jstreetest', to: 'static_pages#jstreetest'
+  get 'jstreedata', to: 'static_pages#jstreedata'
   get 'builds/new'
   get 'static_pages/menu'
 

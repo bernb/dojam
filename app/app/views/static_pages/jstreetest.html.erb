@@ -1,0 +1,13 @@
+<%= render 'layouts/title', title_name: t('JsTree Test') %>
+<div id="jstreecontainer"></div>
+<script>
+    $(function() {
+        $('#jstreecontainer').jstree({
+            'core' : {
+                'data' : {
+                    "url" : "/jstreedata"
+                }
+            }
+        });
+    });
+</script>
