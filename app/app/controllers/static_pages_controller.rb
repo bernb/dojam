@@ -6,18 +6,27 @@ class StaticPagesController < ApplicationController
   def jstreedata
     node_id = params[:id]
     root = []
+    has_children = true
     if node_id == '#'
-      paths = Path.depth(1).to_a
+      paths = Path.depth(1)
     else
       path_name = node_id.gsub('-', '/').delete_prefix('N')
       path = Path.find_by path: path_name
-      paths = path.direct_children.to_a
+      has_children = false if path.depth == 3
+      paths = path.direct_children
     end
     paths
         .sort_by{|p| [p.last_object_name == "undetermined" ? 1 : 0, p.last_object_name]}
         .each do |c_path|
+
+      leafs = c_path.transitive_children.depth(4)
+      museum_object_count =
+          leafs.joins(:museum_objects_as_main).count +
+          leafs.joins(:museum_objects).count +
+          c_path.museum_objects.count +
+          c_path.museum_objects_as_main.count
       node_id = "N" + c_path.path.gsub('/', '-')
-      c_node = {"id": node_id, "text": c_path.last_object_name, "children": true}
+      c_node = {"id": node_id, "text": c_path.last_object_name + " (#{museum_object_count})", "children": has_children}
       root << c_node
     end
     render json: root
