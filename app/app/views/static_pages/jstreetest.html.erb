@@ -5,7 +5,10 @@
         $('#jstreecontainer').jstree({
             'core' : {
                 'data' : {
-                    "url" : "/jstreedata"
+                    "url" : "/jstreedata",
+                    "data" : function (node) {
+                        return { "id" : node.id };
+                    }
                 }
             }
         });
