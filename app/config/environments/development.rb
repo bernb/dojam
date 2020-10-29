@@ -16,7 +16,10 @@ Rails.application.configure do
   config.cache_classes = false
 
   # Do not eager load code on boot.
-  config.eager_load = false
+  # We do eager load to have access to Termlist.descendants, which is used to
+  # get a list of all Termlists with Class.is_independent_of_paths == true,
+  # to show them in admin tree view for editing termlists
+  config.eager_load = true
 
   # Show full error reports.
   config.consider_all_requests_local = true
