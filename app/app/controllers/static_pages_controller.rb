@@ -12,23 +12,11 @@ class StaticPagesController < ApplicationController
       path_name = node_id.gsub('-', '/').delete_prefix('N')
       path = Path.find_by path: path_name
       paths = path.direct_children
-      museum_object_count = path.all_transitive_museum_objects.count + path.all_museum_objects.count
-      mo_node = {
-          "id": "M" + path.id.to_s,
-          "text": museum_object_count.to_s + " " + t("museum object".pluralize(museum_object_count)),
-          "children": false,
-          "type": "museum_object"}
-      root << mo_node
+      root << JsTreeService.create_museum_object_node_from_path(path)
     end
 
-    paths
-        .sort_by{|p| [p.last_object_name == "undetermined" ? 1 : 0, p.last_object_name]}
-        .each do |c_path|
-
-      museum_object_count = c_path.all_transitive_museum_objects.count + c_path.all_museum_objects.count
-      node_id = "N" + c_path.path.gsub('/', '-')
-      c_node = {"id": node_id, "text": c_path.last_object_name + " (#{museum_object_count})", "children": true}
-      root << c_node
+    PathService.sort_by_last_object_name(paths).each do |c_path|
+      root << JsTreeService.create_termlist_node_from_path(c_path)
     end
     render json: root
   end
