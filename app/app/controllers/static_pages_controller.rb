@@ -9,8 +9,7 @@ class StaticPagesController < ApplicationController
     if node_id == '#'
       paths = Path.depth(1)
     else
-      path_name = node_id.gsub('-', '/').delete_prefix('N')
-      path = Path.find_by path: path_name
+      path = JsTreeService.node_id_to_path node_id
       paths = path.direct_children
       root << JsTreeService.create_museum_object_node_from_path(path)
     end
