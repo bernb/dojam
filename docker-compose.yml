@@ -4,6 +4,9 @@ services:
     image: postgres:9.6
     expose:
       - "5432"
+    # Exposing external ports only used for dev, not neccessary for production
+    ports:
+      - "5556:5432"
     env_file:
         - ./dojam-postgres.env
     volumes:
