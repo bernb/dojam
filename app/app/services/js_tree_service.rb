@@ -1,5 +1,17 @@
 class JsTreeService
 
+  def self.build_termlists_for node_id
+    path = JsTreeService.node_id_to_path node_id
+    nodes = []
+    Termlist.path_dependent_descendants.each do |t_class|
+      term_count = t_class.for_path(path).count
+      human_classname = t_class.to_s.underscore.humanize(capitalize: false).pluralize(term_count)
+      nodes << self.create_node(id: self.create_node_id(t_class.to_s, path),
+                                text: human_classname + ':' + ' ' + term_count.to_s)
+    end
+    return nodes
+  end
+
   def self.build_root
     paths = Path.depth(1)
     self.main_nodes_for(paths)
