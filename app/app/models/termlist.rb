@@ -9,6 +9,33 @@ class Termlist < ApplicationRecord
 	has_many :termlist_paths
 	has_many :paths, through: :termlist_paths
 
+	def self.for_path path
+		self
+				.unscoped
+				.joins(:paths)
+				.where("paths.path LIKE ?", path.path + '%')
+				.distinct
+				.to_a
+				.sort{|a, b| a.name_en == 'undetermined' ? 1 : a <=> b}
+	end
+
+	def self.path_dependent_descendants
+		# We are only interested in those classes that depend on those classes:
+		path_classes = [
+				Material,
+				MaterialSpecified,
+				KindOfObject,
+				KindOfObjectSpecified
+		]
+		return Termlist
+							 .pluck(:type)
+							 .uniq
+							 .sort
+							 .map(&:constantize)
+							 .reject(&:is_independent_of_paths)
+							 .reject{|c| c.in? path_classes}
+	end
+
   def self.undetermined
     type = self.first.type
     return Termlist.find_by name_en: "undetermined", type: type
