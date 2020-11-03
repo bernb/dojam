@@ -9,6 +9,9 @@ end
 
 gem 'i18n-active_record', :require => 'i18n/active_record'
 
+# Used by rubymine
+gem 'rubocop'
+
 # Default since rails 6.0
 #gem 'webpacker'
 
