@@ -5,19 +5,16 @@ class StaticPagesController < ApplicationController
 
   def jstreedata
     node_id = params[:id]
-    root = []
-    if node_id == '#'
-      paths = Path.depth(1)
-    else
-      path = JsTreeService.node_id_to_path node_id
-      paths = path.direct_children
-      root << JsTreeService.create_museum_object_node_from_path(path)
-    end
-
-    PathService.sort_by_last_object_name(paths).each do |c_path|
-      root << JsTreeService.create_termlist_node_from_path(c_path)
-    end
-    render json: root
+    puts JsTreeService.prefix_of(node_id)
+    nodes =
+        case JsTreeService.prefix_of(node_id)
+        when '#'
+          JsTreeService.build_root
+        when 'N'
+          JsTreeService.build_main_for(node_id)
+        end
+    puts nodes
+    render json: nodes
   end
 
   def jstreetest
