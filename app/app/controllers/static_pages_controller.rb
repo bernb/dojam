@@ -5,13 +5,16 @@ class StaticPagesController < ApplicationController
 
   def jstreedata
     node_id = params[:id]
-    puts JsTreeService.prefix_of(node_id)
     nodes =
         case JsTreeService.prefix_of(node_id)
         when '#'
           JsTreeService.build_root
         when 'N'
           JsTreeService.build_main_for(node_id)
+        when 'TP'
+          JsTreeService.build_termlists_for(node_id)
+        else
+          []
         end
     puts nodes
     render json: nodes
