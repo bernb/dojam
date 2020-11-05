@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   around_action :set_locale
 
+  def default_url_options
+    if user_signed_in?
+      return super
+    end
+    {locale: I18n.locale}
+  end
+
   def check_extended_access!
     unless current_user.has_extended_access?
       flash[:danger] = t('not authorized. You need extended access to do this.')
@@ -13,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale(&action)
-    locale = current_user.try(:locale) || I18n.default_locale
+    locale = current_user.try(:locale) || params[:locale] || I18n.default_locale
     I18n.with_locale(locale, &action)
   end
 
