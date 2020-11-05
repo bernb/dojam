@@ -1,6 +1,6 @@
-<h2><%= t('log in') %></h2>
+<h2><%= t(".sign_in").downcase %></h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "col-md-3"}) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'col-md-3'}) do |f| %>
   <div class="form-inputs">
     <%= f.input :email,
                 required: false,
@@ -13,7 +13,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, t('log in') %>
+    <%= f.button :submit, t(".sign_in") %>
   </div>
 <% end %>
 
