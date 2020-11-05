@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   
   #get 'users/index'
-  devise_for :users
+  devise_for :users, controllers: {
+      registrations: 'users/registrations'
+  }
   # See https://github.com/heartcombo/devise/issues/4573 and
   # https://github.com/heartcombo/devise/issues/4470 for the reasoning. Note that
   # this problem is also related to turbolinks
