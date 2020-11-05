@@ -24,6 +24,10 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'cancancan'
 
+# Authorization
+# Used to protect main admin (id: 1) and protect termlists from users without extended access
+gem 'pundit'
+
 # Reporting with visuals
 gem 'reports_kit'
 
