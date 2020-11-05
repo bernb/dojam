@@ -1,6 +1,5 @@
 class UserPolicy < ApplicationPolicy
   def update?
-    return false
     # Only main admin account is allowed to change itself
     if @record.id == 1
       if @user.id == 1
