@@ -7,7 +7,7 @@ ActiveAdmin.setup do |config|
   config.site_title = "home"
 
   # Set the link url for the title. For example, to take
-  # users to your main site. Defaults to no link.
+  # devise to your main site. Defaults to no link.
   #
   config.site_title_link = "/"
 
@@ -62,12 +62,12 @@ ActiveAdmin.setup do |config|
   # method in a before filter of all controller actions to
   # ensure that there is a user with proper rights. You can use
   # CanCanAdapter or make your own. Please refer to documentation.
-  # config.authorization_adapter = ActiveAdmin::CanCanAdapter
+  config.authorization_adapter = ActiveAdmin::PunditAdapter
 
   # In case you prefer Pundit over other solutions you can here pass
   # the name of default policy class. This policy will be used in every
   # case when Pundit is unable to find suitable policy.
-  # config.pundit_default_policy = "MyDefaultPunditPolicy"
+  config.pundit_default_policy = "ApplicationPolicy"
 
   # If you wish to maintain a separate set of Pundit policies for admin
   # resources, you may set a namespace here that Pundit will search
@@ -121,7 +121,7 @@ ActiveAdmin.setup do |config|
 
   # == Admin Comments
   #
-  # This allows your users to comment on any resource registered with Active Admin.
+  # This allows your devise to comment on any resource registered with Active Admin.
   #
   # You can completely disable comments:
   # config.comments = false
@@ -178,7 +178,7 @@ ActiveAdmin.setup do |config|
   #
   # Add additional meta tags to the head element of active admin pages.
   #
-  # Add tags to all pages logged in users see:
+  # Add tags to all pages logged in devise see:
   #   config.meta_tags = { author: 'My Company' }
 
   # By default, sign up/sign in/recover password pages are excluded
