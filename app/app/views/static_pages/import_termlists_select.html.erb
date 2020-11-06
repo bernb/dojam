@@ -10,3 +10,4 @@
 	<%= f.input :termlist_files, as: :file, input_html: {multiple: true}, label: false %>
 	<%= f.submit t('import'), class: "btn btn-primary" %>
 <% end %>
+<%= render 'layouts/log_messages', log_messages: @log_messages %>
