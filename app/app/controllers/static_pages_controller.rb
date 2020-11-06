@@ -3,6 +3,52 @@ class StaticPagesController < ApplicationController
   def menu
   end
 
+  def new_main_account
+    if User.find_by(id: 1).present?
+      redirect_to root_path
+    end
+  end
+
+  def create_main_account
+
+    @email = params[:email]
+    @email_confirmation = params[:email_confirmation]
+    @password = params[:password]
+    @password_confirmation = params[:password_confirmation]
+
+    if @email.empty? ||
+        @email_confirmation.empty? ||
+        @password.empty? ||
+        @password_confirmation.empty?
+      error = I18n.t('please fill out all inputs')
+    end
+    if @email != @email_confirmation
+      error = I18n.t('email must match email confirmation')
+    end
+    if @password != @password_confirmation
+      error = I18n.t('password must match password confirmation')
+    end
+    if error.present?
+      flash.now[:danger] = error
+      render 'static_pages/new_main_account'
+      return
+    end
+    main_account = User.new id: 1,
+                            email: @email,
+                            password: @password,
+                            is_enabled: true,
+                            has_extended_access: true
+    if main_account.save
+      sign_in(main_account)
+      flash[:notice] = I18n.t('main account created')
+      redirect_to root_path
+    else
+      flash.now[:danger] = main_account.errors
+      render 'static_pages/new_main_account'
+      return
+    end
+  end
+
   def jstreedata
     node_id = params[:id]
     nodes =

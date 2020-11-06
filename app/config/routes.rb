@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   get 'jstreedata', to: 'static_pages#jstreedata'
   get 'builds/new'
   get 'static_pages/menu'
+  get 'main_account/new', to: 'static_pages#new_main_account'
+  post 'main_account', to: 'static_pages#create_main_account'
 
   get 'museum_objects/search' # remember that orders matter
   get 'museum_objects/search_result_invnumber'
