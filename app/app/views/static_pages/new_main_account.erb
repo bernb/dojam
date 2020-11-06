@@ -1,0 +1,33 @@
+<%= render 'layouts/title', title_name: t('create main account') %>
+<div class="row">
+  <div class="col">
+    Create the main account. This account has full access to the application.
+    Additional users with full access can be created, but the main account has the following unique properties:
+    <ul>
+      <li>It can can not be removed</li>
+      <li>It can can not be edited by other users</li>
+    </ul>
+    Password must be at least 6 characters long.
+  </div>
+</div>
+<%= form_with url: main_account_path, html: {class: 'col-md-3'}, local: true do %>
+  <div class="form-group">
+    <%= label_tag :email, 'email' %></br>
+    <%= email_field_tag :email, @email %>
+    </br></br>
+
+    <%= label_tag :email_confirmation, 'email confirmation' %>
+    <%= email_field_tag :email_confirmation, @email_confirmation %>
+    </br></br>
+
+    <%= label_tag :password, 'password' %>
+    <%= password_field_tag :password, @password %>
+    </br></br>
+
+    <%= label_tag :password_confirmation, 'password confirmation' %>
+    <%= password_field_tag :password_confirmation, @password_confirmation %>
+    </br></br>
+
+    <%= submit_tag 'create main account' %>
+  </div>
+<% end %>
