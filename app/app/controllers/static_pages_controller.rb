@@ -186,6 +186,10 @@ class StaticPagesController < ApplicationController
   end
 
   def import_termlists_select
+    if session[:log_path].present?
+      @log_messages = File.read(session[:log_path])
+      session[:log_path] = nil
+    end
   end
 
   def import_termlists_submit
