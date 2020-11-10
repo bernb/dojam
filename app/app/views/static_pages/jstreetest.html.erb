@@ -1,4 +1,4 @@
-<%= render 'layouts/title', title_name: t('JsTree Test') %>
+<%= render 'layouts/title', title_name: 'jstree test' %>
 <div id="jstreecontainer"></div>
 <script>
     $(function() {
@@ -7,6 +7,9 @@
             'types' : {
                 "museum_object" : {
                     "icon" : "jstree-file"
+                },
+                "termlist": {
+                    "icon" : "jstree-open"
                 }
             },
             'core' : {
