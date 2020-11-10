@@ -73,6 +73,9 @@ gem 'rails', '~> 6.0'
 # Rails locale data repository
 gem 'rails-i18n', '~> 6.0'
 
+# Add i18n to kaminari. ar not available as of today
+gem 'kaminari-i18n'
+
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
 
