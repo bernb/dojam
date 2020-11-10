@@ -1,42 +1,42 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link active" id="storage_tab" data-toggle="tab" href="#storage" role="tab" aria-controls="storage" aria-selected="true">location</a>
+    <a class="nav-link active" id="storage_tab" data-toggle="tab" href="#storage" role="tab" aria-controls="storage" aria-selected="true"><%= t('location') %></a>
   </li>
   
   <li class="nav-item">
-    <a class="nav-link" id="acquisition_tab" data-toggle="tab" href="#acquisition" role="tab" aria-controls="acquisition" aria-selected="false">acquisition</a>
+    <a class="nav-link" id="acquisition_tab" data-toggle="tab" href="#acquisition" role="tab" aria-controls="acquisition" aria-selected="false"><%= t('acquisition') %></a>
   </li>
   
   <li class="nav-item">
-    <a class="nav-link" id="provenance_tab" data-toggle="tab" href="#provenance" role="tab" aria-controls="provenance" aria-selected="false">provenance</a>
+    <a class="nav-link" id="provenance_tab" data-toggle="tab" href="#provenance" role="tab" aria-controls="provenance" aria-selected="false"><%= t('provenance') %></a>
   </li>
   
   <li class="nav-item">
-    <a class="nav-link" id="material_tab" data-toggle="tab" href="#material" role="tab" aria-controls="material" aria-selected="false">material</a>
+    <a class="nav-link" id="material_tab" data-toggle="tab" href="#material" role="tab" aria-controls="material" aria-selected="false"><%= t('material') %></a>
   </li>
   
   <li class="nav-item">
-    <a class="nav-link" id="decoration_inscription_tab" data-toggle="tab" href="#decoration_inscription" role="tab" aria-controls="decoration_inscription" aria-selected="false">decoration/inscription</a>
+    <a class="nav-link" id="decoration_inscription_tab" data-toggle="tab" href="#decoration_inscription" role="tab" aria-controls="decoration_inscription" aria-selected="false"><%= t('decoration/inscription') %></a>
   </li>
   
   <li class="nav-item">
-    <a class="nav-link" id="measurements_tab" data-toggle="tab" href="#measurements" role="tab" aria-controls="measurements" aria-selected="false">measurements</a>
+    <a class="nav-link" id="measurements_tab" data-toggle="tab" href="#measurements" role="tab" aria-controls="measurements" aria-selected="false"><%= t('measurements') %></a>
   </li>
   
   <li class="nav-item">
-    <a class="nav-link" id="authenticity_tab" data-toggle="tab" href="#authenticity" role="tab" aria-controls="authenticity" aria-selected="false">authenticity</a>
+    <a class="nav-link" id="authenticity_tab" data-toggle="tab" href="#authenticity" role="tab" aria-controls="authenticity" aria-selected="false"><%= t('authenticity') %></a>
   </li>
   
   <li class="nav-item">
-    <a class="nav-link" id="preservation_conservation_tab" data-toggle="tab" href="#preservation_conservation" role="tab" aria-controls="preservation_conservation" aria-selected="false">preservation/conservation</a>
+    <a class="nav-link" id="preservation_conservation_tab" data-toggle="tab" href="#preservation_conservation" role="tab" aria-controls="preservation_conservation" aria-selected="false"><%= t('preservation/conservation') %></a>
   </li>
   
   <li class="nav-item">
-    <a class="nav-link" id="dating_remarks_literature_tab" data-toggle="tab" href="#dating_remarks_literature" role="tab" aria-controls="dating_remarks_literature" aria-selected="false">dating/remarks/literature</a>
+    <a class="nav-link" id="dating_remarks_literature_tab" data-toggle="tab" href="#dating_remarks_literature" role="tab" aria-controls="dating_remarks_literature" aria-selected="false"><%= t('dating') + '/' + t('remarks') + '/' + t('literature') %></a>
   </li>
   
   <li class="nav-item">
-    <a class="nav-link" id="images_tab" data-toggle="tab" href="#images" role="tab" aria-controls="images" aria-selected="false">images</a>
+    <a class="nav-link" id="images_tab" data-toggle="tab" href="#images" role="tab" aria-controls="images" aria-selected="false"><%= t('images') %></a>
   </li>
 </ul>
 <% if @museum_object.on_loan? %>
