@@ -44,6 +44,9 @@ Rails.application.configure do
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = false
 
+  # Only load needed translations
+  config.i18n.available_locales = [:en, :ar]
+
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
 
