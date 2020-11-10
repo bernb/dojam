@@ -9,23 +9,12 @@
     <% end %>
   </ul>
   <ul class="navbar-nav">
-    <% if current_user.present? %>
-      <li class="nav-item dropdown">
-        <% lang = [{short: "en", name: t('english')}, {short: "ar", name: t('arabic')}] %>
-        <% if current_user.locale == "ar" %>
-          <% lang = lang.reverse %>
-        <% end %>
-        <a class="nav-link dropdown-toggle" href="/users/switch_locale?locale=<%= lang.first[:short] %>" id="lang_selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="flag-icon elag-icon-<%= lang.first[:short] %>"> </span><%= lang.first[:name] %></a>
-        <div class="dropdown-menu" aria-labelledby="lang_selector">
-          <a class="dropdown-item" href="/users/switch_locale?locale=<%= lang.second[:short] %>"><span class="flag-icon flag-icon-<%= lang.second[:short] %>"> </span><%= lang.second[:name] %></a>
-        </div>
-      </li>
+    <% if signed_in? %>
+      <%= render 'layouts/language_selector', base_url: '/users/switch_locale' %>
       <li class="nav-item"><%=link_to current_user.email, edit_user_registration_path(current_user), class: "nav-link" %></li>
       <li class="nav-item"><span class="navbar-text"><%= link_to t('sign out'), destroy_user_session_path, method: :delete %></span></li>
     <% else %>
-      <li class="nav-item"><%= link_to t('english'), '/users/sign_in?locale=en', class: 'nav-link'%></li>
-      <li class="nav-item"><%= link_to t('arabic'), '/users/sign_in?locale=ar', class: 'nav-link' %></li>
+      <%= render 'layouts/language_selector', base_url: '/users/sign_in' %>
     <% end %>
   </ul>
 </nav>
