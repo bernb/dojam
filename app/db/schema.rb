@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_22_123009) do
+ActiveRecord::Schema.define(version: 2020_11_11_140145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -444,18 +444,20 @@ ActiveRecord::Schema.define(version: 2020_10_22_123009) do
   end
 
   create_table "storage_locations", id: :serial, force: :cascade do |t|
-    t.string "name"
+    t.string "name_en"
     t.integer "storage_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name_ar"
     t.index ["storage_id"], name: "index_storage_locations_on_storage_id"
   end
 
   create_table "storages", id: :serial, force: :cascade do |t|
-    t.string "name"
+    t.string "name_en"
     t.integer "museum_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name_ar"
     t.index ["museum_id"], name: "index_storages_on_museum_id"
   end
 
