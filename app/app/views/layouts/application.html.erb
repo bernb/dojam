@@ -8,7 +8,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="<%= controller_name %> <%= action_name %> <%= request.path.split('/').last %>">
+  <% direction = I18n.locale == :ar ? "rtl" : "ltr" %>
+  <body class="<%= controller_name %> <%= action_name %> <%= request.path.split('/').last %>" dir="<%= direction %>">
     <div class="container container-border">
       <%= render 'layouts/navbar' %>
       <%= render 'layouts/flashbar' %>
