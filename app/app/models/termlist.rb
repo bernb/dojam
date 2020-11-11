@@ -19,6 +19,18 @@ class Termlist < ApplicationRecord
 				.sort{|a, b| a.name_en == 'undetermined' ? 1 : a <=> b}
 	end
 
+	def self.use_default_order(termlist)
+		return termlist.sort do |a, b|
+			if a.name_en == 'undetermined'
+				1
+			elsif b.name_en == 'undetermined'
+				-1
+			else
+				a.name_en <=> b.name_en
+			end
+			end
+	end
+
 	def self.path_dependent_descendants
 		# We are only interested in those classes that depend on those classes:
 		path_classes = [
