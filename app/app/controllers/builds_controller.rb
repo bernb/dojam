@@ -215,6 +215,7 @@ class BuildsController < ApplicationController
 		main_path = @museum_object&.main_path
 		kind_of_object = @museum_object.kind_of_object
 		@kind_of_object_specifieds = kind_of_object.kind_of_object_specifieds(material_specified: @museum_object.main_material_specified)
+    @kind_of_object_specifieds = Termlist.use_default_order(@kind_of_object_specifieds)
 	end
 
 	def step_color_vars
