@@ -44,7 +44,7 @@
             <%= hidden_field_tag "form_search", "true" %>
             <div class="row align-items-center">
               <div class="col">
-                <%= select_tag :selected_term, options_for_select(Termlist.list_types_humanized), class: "form-control" %>
+                <%= select_tag :selected_term, options_for_select(Termlist.list_types_humanized.map{|term| [t(term), term]}), class: "form-control" %>
               </div>
               <div class="col-2">
                 <%= link_to "+", museum_objects_add_search_field_path, class: "form-search-add" %>
