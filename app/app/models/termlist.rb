@@ -56,8 +56,35 @@ class Termlist < ApplicationRecord
 	end
 
   def self.list_types_humanized
-    Termlist.pluck(:type).uniq.sort.map{|t| t.underscore.gsub('_', ' ')}
-  end
+    Termlist.pluck(:type)
+				.uniq
+				.sort
+				.map{|t| Termlist.to_external_type(t)}
+				.map{|t| t.underscore.gsub('_', ' ')}
+	end
+
+	@@typename_mapping = {
+			"ExcavationSiteKind" => "KindOfSite",
+			"ExcavationSiteCategory" => "KindOfSiteSpecified"
+	}
+
+	# Helper method for Termlist.list_types_humanized, as for some termlists database type does not match with
+	# the name shown to the user
+	def self.to_internal_type(typename)
+		if @@typename_mapping.invert.has_key?(typename)
+			return @@typename_mapping.invert[typename]
+		else
+			return typename
+		end
+	end
+
+	def self.to_external_type(typename)
+		if @@typename_mapping.has_key?(typename)
+			return @@typename_mapping[typename]
+		else
+			return typename
+		end
+	end
 
 	private
 	# Materials have no parents but a path to themselves i.e.
