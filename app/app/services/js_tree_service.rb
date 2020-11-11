@@ -7,7 +7,9 @@ class JsTreeService
       term_count = t_class.for_path(path).count
       human_classname = t_class.to_s.underscore.humanize(capitalize: false).pluralize(term_count)
       nodes << self.create_node(id: self.create_node_id(t_class.to_s, path),
-                                text: human_classname + ':' + ' ' + term_count.to_s)
+                                text: human_classname + ':' + ' ' + term_count.to_s,
+                                children: true,
+                                type: "termlist")
     end
     return nodes
   end
@@ -52,7 +54,7 @@ class JsTreeService
     return self.create_node(id: self.create_node_id("TP", path),
                             text: I18n.t("termlists"),
                             children: true,
-                            type: "termlist-parent")
+                            type: "termlist")
   end
 
   def self.termlist_node_from_path path
