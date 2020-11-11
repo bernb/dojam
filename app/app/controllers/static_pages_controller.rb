@@ -161,6 +161,12 @@ class StaticPagesController < ApplicationController
       end
       term = Termlist.where name_en: name_en
       if term.blank?
+        term = Storage.where name_en: name_en
+      end
+      if term.blank?
+        term = StorageLocation.where name_en: name_en
+      end
+      if term.blank?
         logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Term '#{name_en}' not found."}
         warnings[:skipped] = t('some rows were skipped, see below for more information')
         next
