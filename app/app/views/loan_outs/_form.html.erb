@@ -2,7 +2,7 @@
   <div class="form-inputs">
     <div class="row">
       <div class="col">
-        <h2>loan information</h2>
+        <h2><%= t('loan information') %></h2>
       <%= f.association :museum_object, label: 'inv. number of museum object', collection: MuseumObjectDecorator.decorate_collection(MuseumObject.all.order(:inv_number)), label_method: :full_inv_number %>
       <% label_tag t('inv. number of museum object') %><p>
       <% text_field_tag :museum_object %>
@@ -20,7 +20,7 @@
       <%= f.input :planned_return, label: 'date of planned return' %>
       </div>
       <div class="col">
-        <h2>return information</h2>
+        <h2><%= t('return information') %></h2>
         <%= f.input :return_date, label: 'date of return', include_blank: true %>
         <%= f.input :return_document_number, label: 'document no. of return' %>
         <%= f.input :return_document_signed_by, label: 'signed by' %>
