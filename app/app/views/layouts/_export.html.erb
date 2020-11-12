@@ -1,0 +1,8 @@
+<% if @all_results_ids.present? %>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-auto">
+      <%= render 'layouts/export_pdf_button', export_ids: @all_results_ids %>
+    </div>
+  </div>
+<% end %>
