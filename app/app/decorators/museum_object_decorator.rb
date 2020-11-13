@@ -320,10 +320,10 @@ class MuseumObjectDecorator < Draper::Decorator
     if variant.blank? || !variant.class == Hash
       return  helpers.sanitize links
     elsif variant.key?(:edit)
-        edit_link = h.link_to "edit", self.h.museum_object_build_path(id, :step_confirm)
+        edit_link = h.link_to I18n.t('edit'), self.h.museum_object_build_path(id, :step_confirm)
         links << edit_link
     elsif
-      show_link = h.link_to("show", self.h.museum_object_path(id))
+      show_link = h.link_to(I18n.t('show'), self.h.museum_object_path(id))
       links << show_link
     end
     return  helpers.sanitize links
