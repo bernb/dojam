@@ -7,7 +7,7 @@
         <dt><%= t('site name') %></dt>
       </div>
       <div class="col">
-        <dd><%= @museum_object&.excavation_site&.name %></dd>
+        <dd><%= t @museum_object&.excavation_site&.name %></dd>
       </div>
     </div>
     
@@ -16,7 +16,7 @@
         <dt><%= t('other site name') %></dt>
       </div>
       <div class="col">
-        <dd><%= @museum_object&.name_expedition %></dd>
+        <dd><%= t @museum_object&.name_expedition %></dd>
       </div>
     </div>
     
@@ -25,7 +25,7 @@
         <dt><%= t('site number (MEGA)') %></dt>
       </div>
       <div class="col">
-        <dd><%= @museum_object&.site_number_mega %></dd>
+        <dd><%= t @museum_object&.site_number_mega %></dd>
       </div>
     </div>
     
@@ -34,7 +34,7 @@
         <dt><%= t('site number (expedition)') %></dt>
       </div>
       <div class="col">
-        <dd><%= @museum_object&.site_number_expedition %></dd>
+        <dd><%= t @museum_object&.site_number_expedition %></dd>
       </div>
     </div>
     
@@ -43,7 +43,7 @@
         <dt><%= t('coordinates (MEGA)') %></dt>
       </div>
       <div class="col">
-        <dd><%= @museum_object&.coordinates_mega %></dd>
+        <dd><%= t @museum_object&.coordinates_mega %></dd>
       </div>
     </div>
     
@@ -53,8 +53,8 @@
       </div>
 			<div class="col">
 				<dd>
-				<%= @museum_object&.excavation_site_category&.name %>; 
-				<%= @museum_object&.excavation_site_kind&.name %>
+				<%= t @museum_object&.excavation_site_category&.name %>;
+				<%= t @museum_object&.excavation_site_kind&.name %>
 				</dd>
 			</div>
     </div>
@@ -64,7 +64,7 @@
         <dt><%= t('finding context') %></dt>
       </div>
       <div class="col">
-        <dd><%= @museum_object&.finding_context %>
+        <dd><%= t @museum_object&.finding_context %>
       </div>
     </div>
     
@@ -73,7 +73,7 @@
         <dt><%= t('remarks') %></dt>
       </div>
       <div class="col">
-        <dd><%= @museum_object&.finding_remarks %>
+        <dd><%= t @museum_object&.finding_remarks %>
       </div>
     </div>
   </dl>
