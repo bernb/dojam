@@ -1,0 +1,17 @@
+ar:
+  helpers:
+    page_entries_info:
+      more_pages:
+        display_entries: عرض %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> من <b>%{total}</b> في المجموع
+      one_page:
+        display_entries:
+          one: عرض <b>%{count}</b> %{entry_name}
+          other: عرض <b>كل %{count}</b> %{entry_name}
+          zero: لا %{entry_name} موجود
+  views:
+    pagination:
+      first: "&laquo; الأول"
+      last: الأخير &raquo;
+      next: التالي &rsaquo;
+      previous: "&lsaquo; السابق"
+      truncate: "&hellip;"
