@@ -15,7 +15,7 @@ class MuseumObjectDecorator < Draper::Decorator
     postfix = ""
     if self.max_width.present?
       measurement << self.max_width.to_i.to_s
-      postfix << "width"
+      postfix << I18n.t('width')
     end
 
     if self.max_length.present?
@@ -24,7 +24,7 @@ class MuseumObjectDecorator < Draper::Decorator
         postfix << "x"
       end
       measurement << self.max_length.to_i.to_s
-      postfix << "length"
+      postfix << I18n.t('length')
     end
 
     if self.height.present?
@@ -33,13 +33,13 @@ class MuseumObjectDecorator < Draper::Decorator
         postfix << "x"
       end
       measurement << self.height.to_i.to_s
-      postfix << "height"
+      postfix << I18n.t('height')
     end
 
     if measurement.present?
       measurement << " cm" 
     else
-      measurement = "undetermined"
+      measurement = I18n.t('undetermined')
     end
   end
 
@@ -48,17 +48,17 @@ class MuseumObjectDecorator < Draper::Decorator
     material_unknown = false
     kind_unknown = false
 
-    if self.main_material_specified.present? && self.main_material_specified.name != "undetermined"
+    if self.main_material_specified.present? && self.main_material_specified.name != I18n.t('undetermined')
       properties << self.main_material_specified.name
-    elsif self.main_material.present? && self.main_material.name != "undetermined"
+    elsif self.main_material.present? && self.main_material.name != I18n.t('undetermined')
       properties << self.main_material.name
     else
      material_unknown = true 
     end
 
-    if self.kind_of_object_specified.present? && self.kind_of_object_specified.name != "undetermined"
+    if self.kind_of_object_specified.present? && self.kind_of_object_specified.name != I18n.t('undetermined')
       properties << " " + self.kind_of_object_specified.name
-    elsif self.kind_of_object.present? && self.kind_of_object.name != "undetermined"
+    elsif self.kind_of_object.present? && self.kind_of_object.name != I18n.t('undetermined')
       properties << " " + self.kind_of_object.name
     else
       kind_unknown = true
@@ -73,16 +73,16 @@ class MuseumObjectDecorator < Draper::Decorator
     end
 
     if material_unknown && kind_unknown
-      properties = "main material and kind of object undetermined"
+      properties = I18n.t('main material and kind of object undetermined')
     end
 
     return properties
   end
 
 	def main_material_with_specified
-		return "undetermined (undetermined)" unless main_path.present?
+		return I18n.t('undetermined') + ' (' + I18n.t('undetermined') + ')' unless main_path.present?
 			material_name = main_path.objects[0].name
-			material_specified_name = main_path.objects[1]&.name || "undetermined"
+			material_specified_name = main_path.objects[1]&.name || I18n.t('undetermined')
 			result = material_name + " (" + material_specified_name + ")"
 		return result
 	end
@@ -91,12 +91,12 @@ class MuseumObjectDecorator < Draper::Decorator
 		result = []
 		secondary_paths.each do |path|
 			material_name = path.objects[0].name
-			material_specified_name = path.objects[1]&.name || "undetermined"
+			material_specified_name = path.objects[1]&.name || I18n.t('undetermined')
 			element = material_name + "(" + material_specified_name + ")"
 			result << element
 		end
 		if result.empty?
-			result << "undetermined (undetermined)"
+			result << I18n.t('undetermined') + ' (' + I18n.t('undetermined') + ')'
 		end
 		return result
 	end
@@ -113,12 +113,12 @@ class MuseumObjectDecorator < Draper::Decorator
 		result = []
 		[self.main_path].push(self.paths.to_a).reject(&:blank?).flatten.each do |path|
 			material_name = path.objects[0].name
-			material_specified_name = path.objects[1]&.name || "undetermined"
+			material_specified_name = path.objects[1]&.name || I18n.t('undetermined')
 			element = material_name + "(" + material_specified_name + ")"
 			result << element
 		end
 		if result.empty?
-			result << "undetermined (undetermined)"
+			result << I18n.t('undetermined') + ' (' + I18n.t('undetermined') + ')'
 		end
 		return result
 	end
@@ -126,7 +126,7 @@ class MuseumObjectDecorator < Draper::Decorator
 	def decorate_named_list list
 		returnstring = ""
 		if list.blank?
-			returnstring = "undetermined"
+			returnstring = I18n.t('undetermined')
 		elsif list.size == 1
 			returnstring = list.first.name
 		else
@@ -139,7 +139,7 @@ class MuseumObjectDecorator < Draper::Decorator
 
   def munsell_color_decorated
     if self.munsell_color.nil? || self.munsell_color == ""
-      return "undetermined"
+      return I18n.t('undetermined')
     else
       return self.munsell_color
     end
@@ -147,7 +147,7 @@ class MuseumObjectDecorator < Draper::Decorator
 
 	def max_length_decorated
 		if self.max_length.blank? 
-			"undetermined"
+			I18n.t('undetermined')
 		else
 			self.max_length
 		end
@@ -155,7 +155,7 @@ class MuseumObjectDecorator < Draper::Decorator
 
 	def max_width_decorated
 		if self.max_width.blank? 
-			"undetermined"
+			I18n.t('undetermined')
 		else
 			self.max_width
 		end
@@ -163,7 +163,7 @@ class MuseumObjectDecorator < Draper::Decorator
 
 	def height_decorated
 		if self.height.blank? 
-			"undetermined"
+			I18n.t('undetermined')
 		else
 			self.height
 		end
@@ -171,7 +171,7 @@ class MuseumObjectDecorator < Draper::Decorator
 
 	def opening_dm_decorated
 		if self.opening_dm.blank? 
-			"undetermined"
+			I18n.t('undetermined')
 		else
 			self.opening_dm
 		end
@@ -179,7 +179,7 @@ class MuseumObjectDecorator < Draper::Decorator
 	
 	def bottom_dm_decorated
 		if self.bottom_dm.blank? 
-			"undetermined"
+			I18n.t('undetermined')
 		else
 			self.bottom_dm
 		end
@@ -187,7 +187,7 @@ class MuseumObjectDecorator < Draper::Decorator
 
 	def max_dm_decorated
 		if self.max_dm.blank? 
-			"undetermined"
+			I18n.t('undetermined')
 		else
 			self.max_dm
 		end
@@ -195,7 +195,7 @@ class MuseumObjectDecorator < Draper::Decorator
 
 	def weight_in_gram_decorated
 		if self.weight_in_gram.blank? 
-			"undetermined"
+			I18n.t('undetermined')
 		else
 			self.weight_in_gram
 		end
@@ -207,7 +207,7 @@ class MuseumObjectDecorator < Draper::Decorator
 
 	def dating_millennium
 		if self.is_dating_millennium_unknown? || self.dating_millennium_begin.blank? || self.dating_millennium_begin.blank?
-			return "undetermined"
+			return I18n.t('undetermined')
 		else
 			if self.dating_millennium_begin&.id == self.dating_millennium_end&.id
 				return self.dating_millennium_begin&.name
@@ -219,7 +219,7 @@ class MuseumObjectDecorator < Draper::Decorator
 
 	def dating_century
 		if self.is_dating_century_unknown? || self.dating_century_begin.blank? || self.dating_century_begin.blank?
-			return "undetermined"
+			return I18n.t('undetermined')
 		else
 			if self.dating_century_begin&.id == self.dating_century_end&.id
 				return self.dating_century_begin&.name
@@ -231,7 +231,7 @@ class MuseumObjectDecorator < Draper::Decorator
 
 	def dating_period_decorated
 		if self.is_dating_period_unknown? || self.dating_period.blank?
-			return "undetermined"
+			return I18n.t('undetermined')
 		else
 			return self.dating_period.name
 		end
@@ -258,10 +258,12 @@ class MuseumObjectDecorator < Draper::Decorator
   
   def dating_timespan
 		if self.is_dating_timespan_unknown?
-			return "undetermined"
+			return I18n.t('undetermined')
 		end
-    timespan_begin_suffix = is_dating_timespan_begin_BC? ? " BC" : " AD"
-    timespan_end_suffix = is_dating_timespan_end_BC? ? " BC" : " AD"
+		timespan_begin_suffix = ' '
+		timespan_end_suffix = ' '
+    timespan_begin_suffix += is_dating_timespan_begin_BC? ? I18n.t('BC') : I18n.t(' AD')
+    timespan_end_suffix += is_dating_timespan_end_BC? ? I18n.t('BC') : I18n.t('AD')
     if dating_timespan_begin.present? && dating_timespan_end.present?
       return dating_timespan_begin&.strftime("%Y") + timespan_begin_suffix + " - " + dating_timespan_end&.strftime("%Y") + timespan_end_suffix
     else
@@ -269,11 +271,11 @@ class MuseumObjectDecorator < Draper::Decorator
     end
   end
 	def needs_cleaning_yesno?
-		self.needs_cleaning ? "yes" : "no"
+		self.needs_cleaning ? I18n.t('yes') : I18n.t('no')
 	end
 
 	def needs_conservation_yesno?
-		self.needs_conservation ? "yes" : "no"
+		self.needs_conservation ? I18n.t('yes') : I18n.t('no')
 	end
 
 
@@ -303,16 +305,16 @@ class MuseumObjectDecorator < Draper::Decorator
     self&.material_specifieds.each do |ms|
       list << ms.name << "<p>"
     end
-    list = "undetermined" if list.empty?
+    list = I18n.t('undetermined') if list.empty?
     return helpers.sanitize list
   end
 
   def kind_of_object_decorated
-    return self.kind_of_object&.name || "undetermined"
+    return self.kind_of_object&.name || I18n.t('undetermined')
   end
 
   def kind_of_object_specified_decorated
-    return self.kind_of_object_specified&.name || "undetermined"
+    return self.kind_of_object_specified&.name || I18n.t('undetermined')
   end
   
   def links variant

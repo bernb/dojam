@@ -1,6 +1,6 @@
 <% unless images.nil? %>
   <div class="row">
-  <strong>primary image</strong>
+  <strong><%= t('primary image') %></strong>
   </div>
   <div class="row">
     <%# ToDo: refactor into decorator. link_to didn't got generated correctly %>
@@ -16,7 +16,7 @@
    <% end %>
   </div>
   <div class="row">
-    <strong>other images</strong>
+    <strong><%= t('other images') %></strong>
   </div>
   <% images&.list&.each do |image| %>
     <div class="row">
