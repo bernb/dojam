@@ -1,4 +1,6 @@
 ActiveAdmin.register Translation, as: "Translations" do
+  after_update :reload_i18n_backend
+  after_create :reload_i18n_backend
   permit_params :locale, :key, :value
   filter :locale
   filter :key
@@ -27,5 +29,11 @@ ActiveAdmin.register Translation, as: "Translations" do
       row :updated_at
     end
     active_admin_comments
+  end
+
+  controller do
+    def reload_i18n_backend(_)
+      I18n.backend.reload!
+    end
   end
 end
