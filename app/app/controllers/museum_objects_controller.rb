@@ -68,12 +68,8 @@ class MuseumObjectsController < ApplicationController
   def export_pdf
     respond_to do |format|
         format.js do
-          puts params
           ids = params.dig(:museum_objects_export_pdf, :ids).presence || "[]"
-          puts ids
-          puts ids.class
           ids = JSON.parse ids
-          puts ids.class
           museum_objects = MuseumObject.where(id: ids).map(&:decorate)
           GenerateMuseumObjectsPdfJob.perform_later museum_objects, current_user
         end
