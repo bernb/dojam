@@ -295,6 +295,10 @@ class BuildsController < ApplicationController
     @step = step # also used for partials like progress bar
     @museum_object.update_column :current_build_step, step
 
+    # Enable to export single entry
+    if step == :step_confirm
+      @all_results_ids = [@museum_object.id]
+    end
 		# We are bit lazy/clever here:
 		# If check if we can deduce the needed collection from the step name
 		# otherwise call the related private method
