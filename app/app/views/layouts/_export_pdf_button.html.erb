@@ -1,12 +1,34 @@
-<%= simple_form_for :museum_objects_export_pdf, url: museum_objects_export_pdf_path, remote: true do |f|  %>
-  <%# Note: autocomplete: 'off' is neccessary, as browsers tend to overwrite values trying to be clever %>
-  <%= f.hidden_field :ids, value: export_ids.to_json, autocomplete: 'off' %>
-  <%= f.submit t('export as pdf'), class: "btn", id: "pdf-export-button", data: { disable_with: false } %>
+<% if current_user.pdf_export_running %>
+  <%= link_to t('please wait'), '#', class: "btn disabled running", id: "pdf-export-button", data: { disable_with: false } %>
+  <%= link_to t('click here to download pdf'),
+              museum_objects_download_pdf_path,
+              id: "pdf-export-download-button",
+              class: "btn",
+              style: "display:none;",
+              target: "_blank"
+  %>
+<% else %>
+  <% if current_user.pdf_export_finished %>
+    <%= link_to t('click here to download pdf'),
+                museum_objects_download_pdf_path,
+                id: "pdf-export-download-button",
+                class: "btn",
+                target: "_blank"
+    %>
+  <% else %>
+    <% if export_ids.present? %>
+      <%= simple_form_for :museum_objects_export_pdf, url: museum_objects_export_pdf_path, remote: true do |f|  %>
+        <%# Note: autocomplete: 'off' is neccessary, as browsers tend to overwrite values trying to be clever %>
+        <%= f.hidden_field :ids, value: export_ids.to_json, autocomplete: 'off' %>
+        <%= f.submit t('export as pdf'), class: "btn", id: "pdf-export-button", data: { disable_with: false } %>
+      <% end %>
+      <%= link_to t('click here to download pdf'),
+                  museum_objects_download_pdf_path,
+                  id: "pdf-export-download-button",
+                  class: "btn",
+                  style: "display:none;",
+                  target: "_blank"
+      %>
+    <% end %>
+  <% end %>
 <% end %>
-<%= link_to t('click here to download pdf'),
-            museum_objects_download_pdf_path,
-            id: "pdf-export-download-button",
-            class: "btn",
-            style: "display:none;",
-            target: "_blank"
-%>
