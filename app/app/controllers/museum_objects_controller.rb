@@ -22,6 +22,49 @@ class MuseumObjectsController < ApplicationController
     end
   end
 
+  def export_list
+    export = Spreadsheet::Workbook.new
+    sheet = export.create_worksheet
+    ids = params.dig(:museum_objects_export_list, :ids).presence || "[]"
+    ids = JSON.parse ids
+    museum_objects = MuseumObject.where(id: ids).map(&:decorate)
+    sheet.row(0).push I18n.t('museum'),
+                     I18n.t('inventory no. incl. extension'),
+                     I18n.t('other inventory no.'),
+                     I18n.t('location'),
+                     I18n.t('detailed location'),
+                     I18n.t('site name'),
+                     I18n.t('material'),
+                     I18n.t('material specified'),
+                     I18n.t('kind of object'),
+                     I18n.t('kind of object specified'),
+                     I18n.t('preservation of object'),
+                     I18n.t('dating period'),
+                     I18n.t('description')
+    museum_objects.each_with_index do |m, i|
+      row = sheet.row(i+1)
+      row.push m.museum.name,
+               m.full_inv_number,
+               m.inv_numberdoa,
+               m.storage.name,
+               m.storage_location.name,
+               m.excavation_site.name,
+               m.main_material.name,
+               m.main_material_specified.name,
+               m.kind_of_object.name,
+               m.kind_of_object_specified.name,
+               m.preservation_object.name,
+               m.dating_period.name,
+               # More than 30k chars / 32kB will result in a corrupted file,
+               # see https://github.com/zdavatz/spreadsheet/blob/master/GUIDE.md#cautionary-note-about-cell-content-length
+               m.remarks[0..30_000]
+    end
+    ExcelExporterHelper.fit_columns(sheet)
+    file = StringIO.new
+    export.write file
+    send_data file.string.force_encoding('binary'), filename: "export.xls"
+  end
+
   def export_pdf
     respond_to do |format|
         format.js do

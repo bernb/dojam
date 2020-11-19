@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col"></div>
   <div class="col-auto">
+    <%= render 'layouts/export_list_button', export_ids: @all_results_ids %>
+  </div>
+  <div class="col-auto">
     <%= render 'layouts/export_pdf_button', export_ids: @all_results_ids %>
   </div>
 </div>
