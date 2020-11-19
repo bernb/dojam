@@ -1,0 +1,1 @@
+docker-compose exec -T db sh -c 'pg_dump -U dojam -O -t active_storage_attachments -t active_storage_blobs -t museum_object_image_lists -t museum_object_paths -t museum_objects -t paths -t termlist_paths -t termlists DOJAM_DB > /var/lib/postgresql/data/dojam.dump'
