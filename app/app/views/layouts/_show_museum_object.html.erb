@@ -43,9 +43,10 @@
   <div class="row">
     <div class="col">
       <div class="alert alert-info", role="alert">
-        object on loan
         <% if @museum_object.loan_out.to_institution.present? %>
-          to <%= @museum_object.loan_out.to_institution %>
+           <%= t('object on loan to') + ' ' + @museum_object.loan_out.to_institution %>
+        <% else %>
+          <%= t('object on loan') %>
       <% end %>
       <%= link_to t('show'), loan_out_path(@museum_object.loan_out) %>
       </div>
