@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   post 'museum_objects/export_pdf'
   get 'museum_objects/download_pdf'
   get 'museum_objects/check_for_new_pdf'
+  post 'museum_objects/export_list'
   resources :museum_objects do
     resources :builds
     post 'builds/step_confirm', to: 'builds#create'

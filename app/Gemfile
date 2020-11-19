@@ -45,6 +45,9 @@ gem "image_processing", '~> 1.10'
 # Reads Excel files
 gem "roo", "~> 2.8"
 
+# Writes .xls files (not xlsx!)
+gem "spreadsheet", "~> 1.2.6"
+
 # Show hashes nicely with ap method
 gem "awesome_print"
 
