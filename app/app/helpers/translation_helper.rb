@@ -1,8 +1,11 @@
 module TranslationHelper
+
+  # Allow to clean a single string by wrapping it in an array
   def self.clean_str(str)
     return self.clean_collection([str]).first
   end
 
+  # See comment for self.transform_keys
   def self.clean_collection(array)
     return array
                .map(&:downcase)
@@ -12,6 +15,10 @@ module TranslationHelper
                .map{|e| e.gsub(/\s/, '_')} # replace all remaining underscores with a whitespace
   end
 
+  # Search recursive in ruby files (.rb, .erb) for calls to translations t('string') and replace them with proper keys.
+  # This was used as initial we used 'natural language' keys, i.e. t('no. of document'), but this lead to bugs as
+  # characters as a dot has a special meaning. So this function would transform the example into t('no_of_document').
+  # Note that this might lead to overlapping keys.
   def self.transform_keys(path, simulate: true)
     search_pattern = /(?<=[^a-z]t\(['"]).*?(?=['"]\))/
     Dir.chdir(path)
