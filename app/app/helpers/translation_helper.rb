@@ -2,6 +2,25 @@ module TranslationHelper
   @@search_pattern = /(?<=[^a-z]t\(['"]).*?(?=['"]\))/
   @@file_pattern = %w[**/*.rb **/*.erb]
 
+  def self.missing_keys
+    missing_keys = []
+    files = Dir.glob(@@file_pattern)
+    files.each do |f|
+      text = File.read(f)
+      matches = text.scan(@@search_pattern)
+      matches.each do |match|
+        I18n.t(match, raise: true, locale: "en")
+      rescue I18n::MissingInterpolationArgument
+        # noop
+      rescue I18n::MissingTranslationData
+        missing_keys << match
+      end
+    end
+    missing_keys = missing_keys
+        .sort
+        .uniq.each{|k| puts k}
+  end
+
   # Allow to clean a single string by wrapping it in an array
   def self.clean_str(str)
     return self.clean_collection([str]).first
