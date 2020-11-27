@@ -15,7 +15,7 @@
     
     <div class="row">
       <div class="col-3">
-        <dt><%= t('kind of object') %></dt>
+        <dt><%= t('kind_of_object') %></dt>
       </div>
       <div class="col">
         <dd><%= @museum_object&.kind_of_object&.name || t('undetermined') %> (<%= @museum_object&.kind_of_object_specified&.name || t('undetermined') %>)
@@ -37,7 +37,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt><%= t('Munsell color') %></dt>
+        <dt><%= t('munsell_color') %></dt>
       </div>  
       <div class="col">
         <dd> <%= t @museum_object&.munsell_color_decorated %> </dd>
@@ -46,7 +46,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt><%= t('production techniques') %></dt>
+        <dt><%= t('production_techniques') %></dt>
       </div> 
       <div class="col"> 
         <% @museum_object.production_techniques&.each do |p| %>

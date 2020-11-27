@@ -2,7 +2,7 @@
 	<%= simple_form_for @museum_object, data:{parsley_validate:""}, url: wizard_path do |f| %>
     <%= f.association :authenticity, label: t('authenticity'), as: :select, include_blank: false %>
     <%= f.association :priority, label: t('priority'), as: :select, include_blank: false %>
-    <%= f.input :priority_determined_by, label: t('priority determined by') %>
+    <%= f.input :priority_determined_by, label: t('priority_determined_by') %>
     <%= f.button :submit, t('confirm') %>
   <% end %>
 <% end %>

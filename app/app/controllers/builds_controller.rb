@@ -48,12 +48,12 @@ class BuildsController < ApplicationController
       end
       
       if step == :step_confirm
-        flash[:success] = t('object saved in database')
+        flash[:success] = t('object_saved_in_database')
       end
     else
       set_variables_for step
       if step == :step_confirm
-        flash.now[:danger] = t('could not save object')
+        flash.now[:danger] = t('could_not_save_object')
       end
     end
     
@@ -69,11 +69,11 @@ class BuildsController < ApplicationController
     museum_object = MuseumObject.find params[:museum_object_id]
     museum_object.is_finished = false
     if museum_object.save
-      flash[:success] = t('object saved in database')
+      flash[:success] = t('object_saved_in_database')
       redirect_to root_path
     else
       flash[:danger] = Hash.new
-      flash[:danger][:not_saved] = t('could not save object')
+      flash[:danger][:not_saved] = t('could_not_save_object')
       museum_object.errors.full_messages.each_with_index do |message, i|
         flash[:danger][i] = message
       end

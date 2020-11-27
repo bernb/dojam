@@ -20,13 +20,13 @@ class StaticPagesController < ApplicationController
         @email_confirmation.empty? ||
         @password.empty? ||
         @password_confirmation.empty?
-      error = I18n.t('please fill out all inputs')
+      error = I18n.t('please_fill_out_all_inputs')
     end
     if @email != @email_confirmation
-      error = I18n.t('email must match email confirmation')
+      error = I18n.t('email_must_match_email_confirmation')
     end
     if @password != @password_confirmation
-      error = I18n.t('password must match password confirmation')
+      error = I18n.t('password_must_match_password_confirmation')
     end
     if error.present?
       flash.now[:danger] = error
@@ -40,7 +40,7 @@ class StaticPagesController < ApplicationController
                             has_extended_access: true
     if main_account.save
       sign_in(main_account)
-      flash[:notice] = I18n.t('main account created')
+      flash[:notice] = I18n.t('main_account_created')
       redirect_to root_path
     else
       flash.now[:danger] = main_account.errors
@@ -97,7 +97,7 @@ class StaticPagesController < ApplicationController
     filename = file_entity.original_filename
     if !correct_file_format?(file_entity, ".xls") && !correct_file_format?(file_entity, ".xlsx")
       warnings[filename.to_sym] =
-          file_entity.original_filename + ": " + t('Unsupported file format detected. Only .xls and .xlsx files are supported')
+          file_entity.original_filename + ": " + t('unsupported_file_format_detected_only_xls_and_xlsx_files_are_supported')
       flash[:warning] = warnings
       redirect_to import_translations_select_path
     end
@@ -114,7 +114,7 @@ class StaticPagesController < ApplicationController
       name_ar = row.second&.to_s&.strip
       if name_en.nil? || name_ar.nil?
         logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Empty cell"}
-        warnings[:skipped] = t('some rows were skipped, see below for more information')
+        warnings[:skipped] = t('some_rows_were_skipped_see_below_for_more_information')
         next
       end
       translation = Translation.find_by key: name_en
@@ -125,7 +125,7 @@ class StaticPagesController < ApplicationController
       end
     end
     if warnings.empty?
-      flash[:success] = t('translations successfully imported')
+      flash[:success] = t('translations_successfully_imported')
     else
       flash[:warning] = warnings
     end
@@ -139,7 +139,7 @@ class StaticPagesController < ApplicationController
     filename = file_entity.original_filename
     if !correct_file_format?(file_entity, ".xls") && !correct_file_format?(file_entity, ".xlsx")
       warnings[filename.to_sym] = 
-        file_entity.original_filename + ": " + t('Unsupported file format detected. Only .xls and .xlsx files are supported')
+        file_entity.original_filename + ": " + t('unsupported_file_format_detected_only_xls_and_xlsx_files_are_supported')
       flash[:warning] = warnings
       redirect_to import_translations_select_path
     end
@@ -156,7 +156,7 @@ class StaticPagesController < ApplicationController
       name_ar = row.second&.strip
       if name_en.nil? || name_ar.nil?
         logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Empty cell"}
-        warnings[:skipped] = t('some rows were skipped, see below for more information')
+        warnings[:skipped] = t('some_rows_were_skipped_see_below_for_more_information')
         next
       end
       term = Termlist.where name_en: name_en
@@ -168,7 +168,7 @@ class StaticPagesController < ApplicationController
       end
       if term.blank?
         logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Term '#{name_en}' not found."}
-        warnings[:skipped] = t('some rows were skipped, see below for more information')
+        warnings[:skipped] = t('some_rows_were_skipped_see_below_for_more_information')
         next
       end
       if term.count > 1
@@ -183,7 +183,7 @@ class StaticPagesController < ApplicationController
       end
     end
     if warnings.empty?
-      flash[:success] = t('translations successfully imported')
+      flash[:success] = t('translations_successfully_imported')
     else
       flash[:warning] = warnings
     end
@@ -205,7 +205,7 @@ class StaticPagesController < ApplicationController
       filename = file_entity.original_filename
       if !correct_file_format?(file_entity, ".yaml")
         warnings[filename.to_sym] = 
-          file_entity.original_filename + ": " + t('unsupported file format detected. Only yaml files are supported')
+          file_entity.original_filename + ": " + t('unsupported_file_format_detected_only_yaml_files_are_supported')
         next
       end
       file = File.open file_entity.tempfile
@@ -213,7 +213,7 @@ class StaticPagesController < ApplicationController
         data = YAML.safe_load file.read
       rescue Psych::SyntaxError => se
         line_number = se.message.match(/line (\d+)/).captures[0] # Not used to simplify translation as variables can't be part of the key
-        warnings[filename.to_sym] = file_entity.original_filename + ": " + t('syntax Error in file. Please check the file for errors and try again')
+        warnings[filename.to_sym] = file_entity.original_filename + ": " + t('syntax_error_in_file_please_check_the_file_for_errors_and_try_again')
         next
       end
       if data.keys.include?("material_name")
@@ -226,7 +226,7 @@ class StaticPagesController < ApplicationController
     end
     flash[:warning] = warnings
     if flash[:danger].blank? && flash[:warning].blank?
-      flash[:success] = t('data successfully imported')
+      flash[:success] = t('data_successfully_imported')
     end
     redirect_to import_termlists_select_path
   end
@@ -255,7 +255,7 @@ class StaticPagesController < ApplicationController
     end
     flash[:warning] = warnings
     if materials_for_import.present?
-      flash[:success] = materials_for_import.count + " " + t('file(s) uploaded')
+      flash[:success] = materials_for_import.count + " " + t('files_uploaded')
     end
   end
 

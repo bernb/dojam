@@ -2,6 +2,6 @@
   <%= simple_form_for :museum_objects_export_list, url: museum_objects_export_list_path do |f|  %>
     <%# Note: autocomplete: 'off' is neccessary, as browsers tend to overwrite values trying to be clever %>
     <%= f.hidden_field :ids, value: export_ids.to_json, autocomplete: 'off' %>
-    <%= f.submit t('export as list'), class: "btn", id: "list-export-button", data: { disable_with: false } %>
+    <%= f.submit t('export_as_list'), class: "btn", id: "list-export-button", data: { disable_with: false } %>
   <% end %>
 <% end %>

@@ -13,7 +13,7 @@
         <img src="file://<%= ActiveStorage::Blob.service.send(:path_for, museum_object.images.main.variant(resize_to_limit: [400, 400]).processed.key) %>">
       <% else %>
         <div class="pdf-no-image">
-          <%= t('no image provided') %>
+          <%= t('no_image_provided') %>
         </div>
       <% end %>
     </div>
@@ -21,7 +21,7 @@
 
   <div class="row">
     <div class="col">
-      <h4><%= t('visual description') %></h4>
+      <h4><%= t('visual_description') %></h4>
       <table class="table table-bordered table-condensed">
         <tbody>
         <tr>
@@ -62,7 +62,7 @@
 
   <div class="row">
     <div class="col">
-      <h4><%= t('general information') %></h4>
+      <h4><%= t('general_information') %></h4>
       <table class="table table-bordered table-condensed">
         <tbody>
         <tr>
@@ -70,13 +70,13 @@
             <h6>
               <strong><%= t('museum') %></strong>
             </h6>
-            <span><%= t('Jordan Archaeological Museum') %></span>
+            <span><%= t('jordan_archaeological_museum') %></span>
           </td>
         </tr>
         <tr>
           <td>
             <h6>
-              <strong><%= t('museum inventory number') %></strong>
+              <strong><%= t('museum_inventory_number') %></strong>
             </h6>
             <span><%= museum_object.full_inv_number %></span>
           </td>
@@ -96,7 +96,7 @@
   </div>
 
   <% if false %>
-    <h4><%= t('additional images') %></h4>
+    <h4><%= t('additional_images') %></h4>
     <table class="table table-bordered table-condensed">
       <tbody>
       <tr>

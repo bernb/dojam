@@ -1,4 +1,4 @@
-<%= render 'layouts/title', title_name: t('add new object') %>
+<%= render 'layouts/title', title_name: t('add_new_object') %>
 <div class="row">
   <div class="col">
     <%= render 'layouts/new_entry_progress_bar', state: step_name %>
@@ -8,7 +8,7 @@
   <div class="col-4">
     <%= yield %>
     <%= link_to t('back'), previous_wizard_path, class: "btn" %>
-    <%= link_to t('skip and finish'), wizard_path(:step_confirm), class: "btn" %>
+    <%= link_to t('skip_and_finish'), wizard_path(:step_confirm), class: "btn" %>
   </div>
   <div class="col-auto">
     <div class="row">

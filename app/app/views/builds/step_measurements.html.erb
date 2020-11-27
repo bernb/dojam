@@ -1,12 +1,12 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
-    <%= f.input :max_length, as: :string, label: t('max. length') %>
-    <%= f.input :max_width, as: :string, label: t('max. width') %>
+    <%= f.input :max_length, as: :string, label: t('max_length') %>
+    <%= f.input :max_width, as: :string, label: t('max_width') %>
     <%= f.input :height, as: :string, label: t('height') %>
-    <%= f.input :opening_dm, as: :string, label: t('opening dm') %>
-    <%= f.input :bottom_dm, as: :string, label: t('bottom dm') %>
-    <%= f.input :max_dm, as: :string, label: t('max. dm') %>
-    <%= f.input :weight_in_gram, as: :string, label: t('weight in gram') %>
+    <%= f.input :opening_dm, as: :string, label: t('opening_dm') %>
+    <%= f.input :bottom_dm, as: :string, label: t('bottom_dm') %>
+    <%= f.input :max_dm, as: :string, label: t('max_dm') %>
+    <%= f.input :weight_in_gram, as: :string, label: t('weight_in_gram') %>
     <%= f.button :submit, t('confirm') %>
   <% end %>
 <% end %>

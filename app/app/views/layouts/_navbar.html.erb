@@ -12,7 +12,7 @@
     <% if signed_in? %>
       <%= render 'layouts/language_selector', base_url: '/users/switch_locale' %>
       <li class="nav-item"><%=link_to current_user.email, edit_user_registration_path(current_user), class: "nav-link" %></li>
-      <li class="nav-item"><span class="navbar-text"><%= link_to t('sign out'), destroy_user_session_path, method: :delete %></span></li>
+      <li class="nav-item"><span class="navbar-text"><%= link_to t('sign_out'), destroy_user_session_path, method: :delete %></span></li>
     <% else %>
       <%= render 'layouts/language_selector', base_url: '/users/sign_in' %>
     <% end %>

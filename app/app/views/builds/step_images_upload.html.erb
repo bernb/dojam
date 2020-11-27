@@ -1,9 +1,9 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path do |f| %>
     <%= f.simple_fields_for :images do |i| %>
-      <%= f.label "", t('primary image') %>
+      <%= f.label "", t('primary_image') %>
       <%= i.file_field :main, multiple: false, class: "spacer" %>
-      <%= f.label "", t('add more images') %>
+      <%= f.label "", t('add_more_images') %>
       <%= i.file_field :list, multiple: true, class: "spacer" %>
     <% end %>
     <%= f.button :submit, t('confirm') %>

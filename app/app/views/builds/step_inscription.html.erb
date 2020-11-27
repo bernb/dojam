@@ -1,8 +1,8 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
 	<%= simple_form_for @museum_object, data:{parsley_validate:""}, url: wizard_path do |f| %>
-    <% f.input :inscription_decoration, label: t('decoration/inscription') %>
-    <%= f.association :inscription_letters, collection: @inscription_letters, label: t('script(s)'), as: :check_boxes, include_blank: false, wrapper_html: {class: 'dojam-multi-select'} %>
-    <%= f.association :inscription_languages, collection: @inscription_language, label: t('language of inscription'), as: :check_boxes, include_blank: false, wrapper_html: {class: 'dojam-multi-select'} %>
+    <% f.input :inscription_decoration, label: t('decoration_inscription') %>
+    <%= f.association :inscription_letters, collection: @inscription_letters, label: t('scripts'), as: :check_boxes, include_blank: false, wrapper_html: {class: 'dojam-multi-select'} %>
+    <%= f.association :inscription_languages, collection: @inscription_language, label: t('language_of_inscription'), as: :check_boxes, include_blank: false, wrapper_html: {class: 'dojam-multi-select'} %>
     <%= f.input :inscription_text, label: t('transliteration') %>
     <%= f.input :inscription_translation, label: t('translation') %>
     <%= f.button :submit, t('confirm') %>

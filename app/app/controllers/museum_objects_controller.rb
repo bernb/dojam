@@ -14,7 +14,7 @@ class MuseumObjectsController < ApplicationController
         ids = params[:search_result_ids]
         museum_objects = MuseumObjectDecorator.decorate_collection(MuseumObject.where(id: ids))
         #ToDo: If image is too large, two pages are used. Set max height property in top_image decorater method
-        render pdf: t('search results'),
+        render pdf: t('search_results'),
                template: "museum_objects/museum_objects_pdf.html.erb",
                locals: {museum_objects: museum_objects},
                show_as_html: params.key?('debug')
@@ -28,19 +28,19 @@ class MuseumObjectsController < ApplicationController
     ids = params.dig(:museum_objects_export_list, :ids).presence || "[]"
     ids = JSON.parse ids
     museum_objects = MuseumObject.where(id: ids).map(&:decorate)
-    sheet.row(0).push I18n.t('on loan to institution'),
+    sheet.row(0).push I18n.t('on_loan_to_institution'),
              I18n.t('museum'),
-                     I18n.t('inventory no. incl. extension'),
-                     I18n.t('other inventory no.'),
+                     I18n.t('inventory_no_incl_extension'),
+                     I18n.t('other_inventory_no'),
                      I18n.t('location'),
-                     I18n.t('detailed location'),
-                     I18n.t('site name'),
+                     I18n.t('detailed_location'),
+                     I18n.t('site_name'),
                      I18n.t('material'),
-                     I18n.t('material specified'),
-                     I18n.t('kind of object'),
-                     I18n.t('kind of object specified'),
-                     I18n.t('preservation of object'),
-                     I18n.t('dating period'),
+                     I18n.t('material_specified'),
+                     I18n.t('kind_of_object'),
+                     I18n.t('kind_of_object_specified'),
+                     I18n.t('preservation_of_object'),
+                     I18n.t('dating_period'),
                      I18n.t('description')
     museum_objects.each_with_index do |m, i|
       row = sheet.row(i+1)
@@ -116,7 +116,7 @@ class MuseumObjectsController < ApplicationController
       @all_results_ids = @all_results.ids
       @results = @all_results.page(page)
       if @results.blank?
-        flash[:info] = t('no results found')
+        flash[:info] = t('no_results_found')
       end
     end
   end
@@ -125,7 +125,7 @@ class MuseumObjectsController < ApplicationController
     respond_to do |format|
       format.js do
         unless params.has_key?(:form_search)
-          flash[:danger] = t('could not complete search: form_search parameter missing')
+          flash[:danger] = t('could_not_complete_search_form_search_parameter_missing')
           redirect_to museum_objects_search_path
         end
         terms = {}
@@ -137,7 +137,7 @@ class MuseumObjectsController < ApplicationController
         end
 
         if terms.blank?
-          flash.now[:warning] = t('no terms given')
+          flash.now[:warning] = t('no_terms_given')
           render 'search' and return
         end
 
@@ -201,7 +201,7 @@ class MuseumObjectsController < ApplicationController
     end
 
     if museum_objects.count == 0
-      flash[:info] = t('object not found')
+      flash[:info] = t('object_not_found')
       redirect_to museum_objects_search_path
     end
 
