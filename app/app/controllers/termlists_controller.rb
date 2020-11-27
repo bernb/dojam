@@ -1,7 +1,7 @@
 class TermlistsController < ApplicationController
   def index
     if not params.key? :termlist_name
-      flash[:danger] = t('no termlist name given')
+      flash[:danger] = t('no_termlist_name_given')
       redirect_to root_path
     else
       termlist_name = params[:termlist_name]

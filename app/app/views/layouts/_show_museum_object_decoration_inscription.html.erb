@@ -44,7 +44,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt><%= t('Munsell color') %></dt>
+        <dt><%= t('munsell_color') %></dt>
       </div>
       <div class="col">
         <dd><%= t @museum_object.munsell_color %></dd>
@@ -53,7 +53,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt><%= t('script(s)') %></dt>
+        <dt><%= t('scripts') %></dt>
       </div> 
       <div class="col"> 
         <% @museum_object.inscription_letters&.each do |d| %>
@@ -66,7 +66,7 @@
 
     <div class="row">
       <div class="col-3">
-        <dt><%= t('language(s)') %></dt>
+        <dt><%= t('languages') %></dt>
       </div> 
       <div class="col"> 
         <% @museum_object.inscription_languages&.each do |d| %>

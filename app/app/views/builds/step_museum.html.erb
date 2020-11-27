@@ -6,16 +6,16 @@
     <% label_tag "", t('museum') %>
     <%= collection_select(:museum, :museum_id, @museums, :id, :name, {}, {class: "museum_selection form-control select required disabled"}) %>
     </p>
-    <%= label_tag "", t('storage location') %>
+    <%= label_tag "", t('storage_location') %>
     <%= collection_select(:storage, :storage_id, @storages, :id, :name, {include_blank: true, selected: @selected_storage_id}, {class: "storage_selection form-control select required"}) %>
     </p>
-    <%= label_tag "", t('detailed location') %>
+    <%= label_tag "", t('detailed_location') %>
     <%= f.collection_select(:storage_location_id, @storage_locations, :id, :name,{include_blank: true}, {class: "storage_location_selection form-control select required"}) %>
     </p>
-    <%= f.input :inv_number, label: t('inventory number of museum'), as: :string %>
-    <%= f.input :inv_extension, label: t('extension of inventory number'), as: :string %>
-    <%= f.input :inv_numberdoa, label: t('other inventory number'), as: :string %>
-    <%= f.input :amount, label: t('number of objects'), input_html: {value: f.object.amount || '1'} %>
+    <%= f.input :inv_number, label: t('inventory_number_of_museum'), as: :string %>
+    <%= f.input :inv_extension, label: t('extension_of_inventory_number'), as: :string %>
+    <%= f.input :inv_numberdoa, label: t('other_inventory_number'), as: :string %>
+    <%= f.input :amount, label: t('number_of_objects'), input_html: {value: f.object.amount || '1'} %>
     <%= f.button :submit, t('confirm') %>
   <% end %>
 <% end %>

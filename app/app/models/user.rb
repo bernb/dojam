@@ -9,6 +9,6 @@ class User < ApplicationRecord
   end
 
   def inactive_message
-    is_enabled? ? super : I18n.t('your account is not yet enabled')
+    is_enabled? ? super : I18n.t('your_account_is_not_yet_enabled')
   end
 end

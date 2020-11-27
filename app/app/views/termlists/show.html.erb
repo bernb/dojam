@@ -2,7 +2,7 @@
 <dl>
   <dt><%= t('name') %></dt>
   <dd><%= @term.name %></dd>
-  <dt><%= t('museum objects ') %></dt>
+  <dt><%= t('museum_objects') %></dt>
   <% @term.museum_objects.each do |object| %>
     <%= render 'layouts/museum_object_card', museum_card: object.decorate, variant: nil %>
   <% end %>

@@ -16,7 +16,7 @@
   </li>
   
   <li class="nav-item">
-    <a class="nav-link" id="decoration_inscription_tab" data-toggle="tab" href="#decoration_inscription" role="tab" aria-controls="decoration_inscription" aria-selected="false"><%= t('decoration/inscription') %></a>
+    <a class="nav-link" id="decoration_inscription_tab" data-toggle="tab" href="#decoration_inscription" role="tab" aria-controls="decoration_inscription" aria-selected="false"><%= t('decoration_inscription') %></a>
   </li>
   
   <li class="nav-item">
@@ -28,7 +28,7 @@
   </li>
   
   <li class="nav-item">
-    <a class="nav-link" id="preservation_conservation_tab" data-toggle="tab" href="#preservation_conservation" role="tab" aria-controls="preservation_conservation" aria-selected="false"><%= t('preservation/conservation') %></a>
+    <a class="nav-link" id="preservation_conservation_tab" data-toggle="tab" href="#preservation_conservation" role="tab" aria-controls="preservation_conservation" aria-selected="false"><%= t('preservation_conservation') %></a>
   </li>
   
   <li class="nav-item">
@@ -44,9 +44,9 @@
     <div class="col">
       <div class="alert alert-info", role="alert">
         <% if @museum_object.loan_out.to_institution.present? %>
-           <%= t('object on loan to') + ' ' + @museum_object.loan_out.to_institution %>
+           <%= t('object_on_loan_to') + ' ' + @museum_object.loan_out.to_institution %>
         <% else %>
-          <%= t('object on loan') %>
+          <%= t('object_on_loan') %>
       <% end %>
       <%= link_to t('show'), loan_out_path(@museum_object.loan_out) %>
       </div>

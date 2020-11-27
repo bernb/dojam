@@ -1,6 +1,6 @@
 <% unless images.nil? %>
   <div class="row">
-  <strong><%= t('primary image') %></strong>
+  <strong><%= t('primary_image') %></strong>
   </div>
   <div class="row">
     <%# ToDo: refactor into decorator. link_to didn't got generated correctly %>
@@ -11,12 +11,12 @@
         <%= link_to images.main.filename, images.main, class: "card-img-top", target:"_blank" %>
       </div> 
       <div class="col-4">
-        <%= link_to t('remove'), delete_image_path(images.id, images.main.id), method: :delete, confirm: t('Delete image?'), class: "text-warning" %>
+        <%= link_to t('remove'), delete_image_path(images.id, images.main.id), method: :delete, confirm: t('delete_image'), class: "text-warning" %>
       </div>
    <% end %>
   </div>
   <div class="row">
-    <strong><%= t('other images') %></strong>
+    <strong><%= t('other_images') %></strong>
   </div>
   <% images&.list&.each do |image| %>
     <div class="row">
@@ -24,7 +24,7 @@
         <%= link_to image.blob.filename, image, class: "card-img-top", target:"_blank" %>
       </div>
       <div class="col-4">
-        <%= link_to t('remove'), delete_image_path(images.id, image.id), method: :delete, confirm: t('Delete image?'), class: "text-warning" %>
+        <%= link_to t('remove'), delete_image_path(images.id, image.id), method: :delete, confirm: t('delete_image'), class: "text-warning" %>
       </div>
     </div>
   <% end %>

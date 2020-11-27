@@ -73,7 +73,7 @@ class MuseumObjectDecorator < Draper::Decorator
     end
 
     if material_unknown && kind_unknown
-      properties = I18n.t('main material and kind of object undetermined')
+      properties = I18n.t('main_material_and_kind_of_object_undetermined')
     end
 
     return properties
@@ -262,8 +262,8 @@ class MuseumObjectDecorator < Draper::Decorator
 		end
 		timespan_begin_suffix = ' '
 		timespan_end_suffix = ' '
-    timespan_begin_suffix += is_dating_timespan_begin_BC? ? I18n.t('BC') : I18n.t(' AD')
-    timespan_end_suffix += is_dating_timespan_end_BC? ? I18n.t('BC') : I18n.t('AD')
+    timespan_begin_suffix += is_dating_timespan_begin_BC? ? I18n.t('bc') : I18n.t('ad')
+    timespan_end_suffix += is_dating_timespan_end_BC? ? I18n.t('bc') : I18n.t('ad')
     if dating_timespan_begin.present? && dating_timespan_end.present?
       return dating_timespan_begin&.strftime("%Y") + timespan_begin_suffix + " - " + dating_timespan_end&.strftime("%Y") + timespan_end_suffix
     else

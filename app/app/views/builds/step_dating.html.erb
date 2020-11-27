@@ -39,7 +39,7 @@
 					discard_day: true, 
 					discard_month: true,
 					as: :string, value: f.object&.dating_timespan_begin&.strftime("%Y"), class: "form-control col" %>
-				<%= f.input_field :is_dating_timespan_begin_BC, as: :select, :collection => [[t('BC'),true],[t('AD'),false]], include_blank: false, class: "form-control select col-5" %>
+				<%= f.input_field :is_dating_timespan_begin_BC, as: :select, :collection => [[t('bc'),true],[t('ad'),false]], include_blank: false, class: "form-control select col-5" %>
 			</div>
 			<span class="form-control-static col-0">_</span>
 			<div class="input-group col">
