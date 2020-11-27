@@ -26,6 +26,7 @@ module TranslationHelper
         puts "\n**********************************\n\n"
         if !simulate
           text.gsub!(search_pattern, replace_hash)
+          File.open(f, 'w') {|file| file.puts text}
         end
       end
       # matches.each do |match|
