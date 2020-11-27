@@ -111,18 +111,23 @@ class StaticPagesController < ApplicationController
     xlsx = Roo::Spreadsheet.open(file)
     xlsx.each_with_index do |row, i|
       name_en = row.first&.to_s&.strip
+      key = TranslationHelper.clean_str(row.first&.to_s)
       name_ar = row.second&.to_s&.strip
       if name_en.nil? || name_ar.nil?
         logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Empty cell"}
         warnings[:skipped] = t('some_rows_were_skipped_see_below_for_more_information')
         next
       end
-      translation = Translation.find_by key: name_en
-      if translation.present?
-        translation.value = name_ar
-      else
-        Translation.create locale: "ar", key: name_en, value: name_ar
+
+      Translation.find_or_create_by(key: key, locale: "ar") do |t|
+        t.value = name_ar
+        t.save
       end
+      Translation.find_or_create_by(key: key, locale: "en") do |t|
+        t.value = name_en
+        t.save
+      end
+
     end
     if warnings.empty?
       flash[:success] = t('translations_successfully_imported')
