@@ -1,4 +1,6 @@
 module TranslationHelper
+  @@search_pattern = /(?<=[^a-z]t\(['"]).*?(?=['"]\))/
+  @@file_pattern = %w[**/*.rb **/*.erb]
 
   # Allow to clean a single string by wrapping it in an array
   def self.clean_str(str)
@@ -20,19 +22,18 @@ module TranslationHelper
   # characters as a dot has a special meaning. So this function would transform the example into t('no_of_document').
   # Note that this might lead to overlapping keys.
   def self.transform_keys(path, simulate: true)
-    search_pattern = /(?<=[^a-z]t\(['"]).*?(?=['"]\))/
     Dir.chdir(path)
-    files = Dir.glob(%w[**/*.rb **/*.erb])
+    files = Dir.glob(@@file_pattern)
     files.each do |f|
       text = File.read(f)
-      matches = text.scan(search_pattern)
+      matches = text.scan(@@search_pattern)
       if matches.present?
         puts "File #{File.basename(f)} after replacement:"
         replace_hash = matches.zip(self.clean_collection(matches)).to_h
-        puts text.gsub(search_pattern, replace_hash)
+        puts text.gsub(@@search_pattern, replace_hash)
         puts "\n**********************************\n\n"
         if !simulate
-          text.gsub!(search_pattern, replace_hash)
+          text.gsub!(@@search_pattern, replace_hash)
           File.open(f, 'w') {|file| file.puts text}
         end
       end
