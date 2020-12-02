@@ -218,7 +218,7 @@ class StaticPagesController < ApplicationController
         data = YAML.safe_load file.read
       rescue Psych::SyntaxError => se
         line_number = se.message.match(/line (\d+)/).captures[0] # Not used to simplify translation as variables can't be part of the key
-        warnings[filename.to_sym] = file_entity.original_filename + ": " + t('syntax_error_in_file_please_check_the_file_for_errors_and_try_again')
+        warnings[filename.to_sym] = file_entity.original_filename + " " + t('line') + " " + line_number.to_s + ': ' + t('syntax_error_in_file_please_check_the_file_for_errors_and_try_again')
         next
       end
       if data.keys.include?("material_name")
