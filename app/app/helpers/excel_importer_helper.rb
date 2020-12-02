@@ -115,7 +115,7 @@ module ExcelImporterHelper
 						set_color(object: object, values: colors) unless colors.blank?
 					when :secondary_material
 						if row[key].present?
-							material = Material.find_by name: row[key]
+							material = Material.find_by name_en: row[key]
 							if material.blank?
 								object.errors[:base] << "Could not find secondary material #{row[key]}"
 							else
@@ -126,7 +126,7 @@ module ExcelImporterHelper
 					when :main_material_specified
 						if row[key].include?(',')
 							ms_name = split_entry(row[key])[1]
-							ms = MaterialSpecified.find_by name: ms_name
+							ms = MaterialSpecified.find_by name_en: ms_name
 							if ms.blank?
 								object.errors[:base] << "Could not find secondary material specified #{ms_name}"
 							else 

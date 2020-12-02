@@ -2,10 +2,11 @@ museum:	JAM
 storages:
   - storage T:
     - shelf 1-1
-   hall A:
+  - hall A:
     - showcase A1
     - showcase T
   - hall B:
     - showcase T
     - showcase T2
+    - showcase X
     - showcase X
