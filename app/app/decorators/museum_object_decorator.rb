@@ -329,6 +329,14 @@ class MuseumObjectDecorator < Draper::Decorator
       links << show_link
     end
     return  helpers.sanitize links
-  end
+	end
+
+	private
+	def try_to_translate_attribute(name)
+		cleaned_name = TranslationHelper.clean_str(name)
+		return I18n.t(cleaned_name, raise: true)
+	rescue ReservedInterpolationKey, MissingTranslationData, MissingInterpolationArgument, MissingTranslation
+		return nil
+	end
   
 end
