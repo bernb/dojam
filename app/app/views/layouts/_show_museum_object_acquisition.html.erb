@@ -25,7 +25,7 @@
         <dt><%= t('name_of_deliverer') %></dt>
       </div>  
       <div class="col">
-        <dd><%= t @museum_object&.acquisition_deliverer_name %></dd>
+        <dd><%= @museum_object&.acquisition_deliverer_name %></dd>
       </div>
     </div>
     
@@ -34,7 +34,7 @@
         <dt><%= t('acquisition_date') %></dt>
       </div>
       <div class="col">
-        <dd><%= t @museum_object&.acquisition_date %></dd>
+        <dd><%= @museum_object&.acquisition_date %></dd>
       </div>
     </div>
     
@@ -43,7 +43,7 @@
         <dt><%= t('no_of_acquisition_document') %></dt>
       </div>  
       <div class="col">
-        <dd><%= t @museum_object&.acquisition_document_number %></dd>
+        <dd><%= @museum_object&.acquisition_document_number %></dd>
       </div>
     </div>
 
@@ -52,7 +52,7 @@
         <dt><%= t('remarks') %></dt>
       </div>  
       <div class="col">
-        <dd><%= t @museum_object&.remarks_acquisition %></dd>
+        <dd><%= @museum_object&.remarks_acquisition %></dd>
       </div>
     </div>
   </dl>
