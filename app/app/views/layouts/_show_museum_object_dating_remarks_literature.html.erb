@@ -25,7 +25,7 @@
         <dt><%= t('years') %></dt>
       </div>
       <div class="col">
-        <dd><%= t @museum_object&.dating_timespan %></dd>
+        <dd><%= @museum_object&.dating_timespan %></dd>
       </div>
     </div>
       
@@ -34,7 +34,7 @@
         <dt><%= t('centuries') %></dt>
       </div>
 			<div class="col">
-				<dd><%= t @museum_object&.dating_century %> </dd>
+				<dd><%= @museum_object&.dating_century %> </dd>
 			</div>
     </div>
       
@@ -43,7 +43,7 @@
         <dt><%= t('description') %></dt>
       </div>
       <div class="col">
-        <dd><%= t @museum_object&.remarks %></dd>
+        <dd><%= @museum_object&.remarks %></dd>
       </div>
     </div>
       
