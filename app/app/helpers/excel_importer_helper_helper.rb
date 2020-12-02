@@ -70,7 +70,7 @@ module ExcelImporterHelperHelper
 		@@attributes[:literature] = "literature"
 
 	def set_museum_properties object, row
-		object.storage_location = StorageLocation.find_by name: row[:storage_location]
+		object.storage_location = StorageLocation.find_by name_en: row[:storage_location]
 		if object.storage_location.blank?
 			add_termlist_not_found_error object: object, value: row[:storage_location], termlist_name: "StorageLocation"
 			return
@@ -237,7 +237,7 @@ module ExcelImporterHelperHelper
 
 	def search_for_possible_props object, termlist_class, termlist_value
 		valid_terms = object.get_possible_props_for(termlist_class.to_s)
-		found_term = valid_terms.find_by(name: termlist_value.to_s)
+		found_term = valid_terms.find_by(name_en: termlist_value.to_s)
 		return found_term
 	end
 
@@ -279,15 +279,15 @@ module ExcelImporterHelperHelper
 			return false
 		end
 
-		material = Material.find_by name: row[:main_material]
+		material = Material.find_by name_en: row[:main_material]
 		if row[:main_material_specified].include?(',')
 			ms_string = split_entry(row[:main_material_specified])[0]
 		else
 			ms_string = row[:main_material_specified]
 		end
-		material_specified = MaterialSpecified.find_by name: ms_string
-		kind_of_object = KindOfObject.find_by name: row[:kind_of_object]
-		kind_of_object_specified = KindOfObjectSpecified.find_by name: row[:kind_of_object_specified]
+		material_specified = MaterialSpecified.find_by name_en: ms_string
+		kind_of_object = KindOfObject.find_by name_en: row[:kind_of_object]
+		kind_of_object_specified = KindOfObjectSpecified.find_by name_en: row[:kind_of_object_specified]
 		return material, material_specified, kind_of_object, kind_of_object_specified
 	end
 
