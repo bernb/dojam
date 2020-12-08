@@ -1,5 +1,9 @@
 version: '3.6'
 services:
   db:
-    env_file:
-      - ./dojam-postgres-dev.env
+    ports:
+      # Used to access the database from the IDE
+      - "5556:5432"
+  app:
+    build:
+      dockerfile: Dockerfile-DEV
