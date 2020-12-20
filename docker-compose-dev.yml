@@ -7,3 +7,5 @@ services:
   app:
     build:
       dockerfile: Dockerfile-DEV
+    volumes:
+      - ./app:dojam

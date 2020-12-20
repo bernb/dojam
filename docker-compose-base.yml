@@ -8,15 +8,11 @@ services:
         - ./dojam-postgres.env
     volumes:
       - /scripts/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
-      - type: bind
-        source: ./db
-        target: /var/lib/postgresql/data
+      - ./db:/var/lib/postgresql/data
   app:
     build:
       context: .
     command: bundle exec rails s -p 22333 -b '0.0.0.0'
-    volumes:
-      - ./app:/dojam
     ports:
       - "22333:22333"
     depends_on:
