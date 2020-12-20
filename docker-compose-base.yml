@@ -7,8 +7,9 @@ services:
     env_file:
         - ./dojam-postgres.env
     volumes:
+      # Files in docker-entrypoint-initdb.d get executed if database is empty
       - /scripts/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
-      - ./db:/var/lib/postgresql/data
+      - /db:/var/lib/postgresql/data
   app:
     build:
       context: .
