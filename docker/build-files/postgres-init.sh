@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-psql <<-EOSQL
+psql -v ON_ERROR_STOP=1 <<-EOSQL
     CREATE USER dojam WITH PASSWORD '$DOJAM_DB_PASSWORD';
     ALTER USER dojam CREATEDB;
     CREATE USER "TEST_dojam" WITH PASSWORD '000000000000';

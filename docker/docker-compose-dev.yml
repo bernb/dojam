@@ -6,7 +6,7 @@ services:
       - "5556:5432"
   app:
     build:
-      dockerfile: Dockerfile
+      dockerfile: docker/Dockerfile
       target: dev
     volumes:
       - ./app:/dojam

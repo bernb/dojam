@@ -5,14 +5,14 @@ services:
     expose:
       - "5432"
     env_file:
-        - ./dojam-postgres.env
+        - env-files/db.env
     volumes:
       # Files in docker-entrypoint-initdb.d get executed if database is empty
-      - /scripts/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
-      - /db:/var/lib/postgresql/data
+      - ../scripts/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
+      - ../db:/var/lib/postgresql/data
   app:
     build:
-      context: .
+      context: ..
     command: bundle exec rails s -p 22333 -b '0.0.0.0'
     ports:
       - "22333:22333"

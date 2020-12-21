@@ -15,9 +15,9 @@ COPY ./app /dojam
 RUN mkdir /dojam/log && mkdir /dojam/tmp
 
 # Add a script to be executed every time the container starts.
-COPY docker-entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/docker-entrypoint.sh
-ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
+COPY docker/build-files/app-entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/app-entrypoint.sh
+ENTRYPOINT ["/usr/bin/app-entrypoint.sh"]
 EXPOSE 22333
 
 FROM base AS dev
