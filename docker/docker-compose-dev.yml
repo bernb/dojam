@@ -9,4 +9,4 @@ services:
       dockerfile: docker/Dockerfile
       target: dev
     volumes:
-      - ./app:/dojam
+      - ../app:/dojam
