@@ -15,3 +15,4 @@ app/storage
 
 # Allow docker and environment related content
 !docker/build-files/app-entrypoint.sh
+!docker/build-files/app-first-deploy-entrypoint.sh
