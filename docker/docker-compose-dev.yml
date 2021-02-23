@@ -6,7 +6,9 @@ services:
       - "5556:5432"
   app:
     build:
-      dockerfile: docker/Dockerfile
       target: dev
     volumes:
       - ../app:/dojam
+    command: bundle exec rails s -p 22333 -b '0.0.0.0'
+    ports:
+      - "22333:22333"

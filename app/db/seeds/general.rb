@@ -1,5 +1,5 @@
-Dir["#{Rails.root}/db/data/general_terms/*.rb"].reject{|file| file.include?("test")}.each {|file| require file}
-
+Dir["#{Rails.root}/db/seeds/data/*.rb"].each {|file| require file}
+# ToDo: Add somewhat generic seed data for a first deploy and fix script below (Storage not existent anymore)
 # *** Import museum and storage data ***
 $museum_storage_data.keys.each do |museum_name|
 	data = $museum_storage_data[museum_name]
