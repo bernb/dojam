@@ -25,6 +25,7 @@
       <excludeFolder url="file://$MODULE_DIR$/../../app/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/../../app/vendor/bundle" />
       <excludeFolder url="file://$MODULE_DIR$/../../app/vendor/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/../../app/storage" />
     </content>
     <orderEntry type="jdk" jdkName="Remote: ruby-2.7.2-p137" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

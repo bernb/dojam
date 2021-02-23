@@ -12,10 +12,8 @@ services:
       - ../db:/var/lib/postgresql/data
   app:
     build:
+      dockerfile: docker/Dockerfile
       context: ..
-    command: bundle exec rails s -p 22333 -b '0.0.0.0'
-    ports:
-      - "22333:22333"
     depends_on:
       - db
     stdin_open: true
