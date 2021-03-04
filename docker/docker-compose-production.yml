@@ -1,5 +1,8 @@
 version: '3.6'
 services:
+  db:
+    networks:
+      app_internal:
   app:
     build:
       target: base
@@ -7,12 +10,17 @@ services:
       - ../dojam/storage:/dojam/storage
     command: bundle exec rails s -p 22333 -b '0.0.0.0'
     networks:
-      default:
+      app_internal:
       app_external:
         ipv4_address: 10.0.1.100
     ports:
       - "22333:22333"
 networks:
+  app_internal:
+    internal: true
+    ipam:
+      config:
+        - subnet: 10.0.100.0/24
   app_external:
     ipam:
       config:
