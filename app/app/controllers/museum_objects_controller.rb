@@ -129,6 +129,7 @@ class MuseumObjectsController < ApplicationController
         if @results.blank?
           # Info gets inserted in search_form view
         end
+        render 'search'
       end
     end
   end
