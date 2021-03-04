@@ -40,6 +40,7 @@ class MuseumObject < ApplicationRecord
   belongs_to :decoration_technique, required: false
   belongs_to :decoration_color, required: false
   belongs_to :decoration_style, required: false, class_name: "Decoration"
+	alias_attribute :decoration_id, :decoration_style_id
   belongs_to :preservation_material, required: false
   belongs_to :preservation_object, required: false
   belongs_to :inscription_letter, required: false
