@@ -7,6 +7,7 @@ if [[ ! "$response" =~ ^(yes|y)$ ]]; then
 	exit 1;
 fi
 
+export COMPOSE_FILE="../../docker/docker-compose-base.yml:../../docker/docker-compose-dev.yml"
 SCRIPT_HOME="../tmp"
 cd $SCRIPT_HOME
 
