@@ -1,5 +1,5 @@
 <div class="search-results">
-  <%= paginate results unless results.blank? %>
+  <%= paginate(results, remote: true) unless results.blank? %>
   <div class="row mb-4">
     <div class="col">
       <%= results&.total_count&.to_s || t('0') %> <%= t('results') %>
