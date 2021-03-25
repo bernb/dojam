@@ -31,6 +31,16 @@ ActiveAdmin.register Translation, as: "Translations" do
     active_admin_comments
   end
 
+  form title: :key do |f|
+    f.semantic_errors
+    inputs do
+      input :locale, as: :select, collection: ['en', 'ar'], include_blank: false
+      input :key
+      input :value, input_html: {rows: 1}
+    end
+    f.actions
+  end
+
   controller do
     def reload_i18n_backend(_)
       I18n.backend.reload!
