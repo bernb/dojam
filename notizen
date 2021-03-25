@@ -2,3 +2,17 @@ ip addr add 10.0.0.100 dev wg0
 ifconfig eth0:1 10.0.0.11 netmask 255.255.255.0 up
     https://stackoverflow.com/questions/25036895/how-to-expose-docker-containers-ip-and-port-to-outside-docker-host-without-port/25041782#25041782
 https://stackoverflow.com/questions/35466423/how-to-set-docker-container-hostname-ip-permanently
+
+
+ansible:
+imagemagick notwendig für ActiveStorage variants
+
+ggf.
+rails active_storage:update
+rails db:migrate
+siehe: https://github.com/rails/rails/issues/40895
+
+
+
+*** BUG ***
+Resizing falsch bei museum object cards
