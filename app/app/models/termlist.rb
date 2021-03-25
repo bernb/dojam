@@ -70,8 +70,8 @@ class Termlist < ApplicationRecord
   def self.list_types_humanized
     Termlist.pluck(:type)
 				.uniq
-				.sort
 				.map{|t| Termlist.to_external_type(t)}
+				.sort
 				.map{|t| t.underscore.gsub('_', ' ')}
 	end
 
