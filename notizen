@@ -1,3 +1,10 @@
+termlist bereinigung:
+Es reicht, die Pfade zu identifizieren und dann zu entfernen im wesentlichen, der Rest wird über die Assoziationen
+abgewickelt:
+* Error wenn museum objekt noch verknüpft ist
+* Term-Verknüpfungen werden automatisch entfernt
+Siehe dazu auch commit vom 1. April 2021
+
 ip addr add 10.0.0.100 dev wg0
 ifconfig eth0:1 10.0.0.11 netmask 255.255.255.0 up
     https://stackoverflow.com/questions/25036895/how-to-expose-docker-containers-ip-and-port-to-outside-docker-host-without-port/25041782#25041782
@@ -16,3 +23,21 @@ siehe: https://github.com/rails/rails/issues/40895
 
 *** BUG ***
 Resizing falsch bei museum object cards
+
+
+
+** rebuild TEST database **
+
+im db service:
+su - postgres
+dropdb TEST_DB
+createdb TEST_DB
+pg_dump DOJAM_DB | psql TEST_DB
+psql
+postgres=# alter database "TEST_DB" owner to "TEST_dojam";
+postgres=# \c "TEST_DB"
+TEST_DB=# reassign owned by dojam to "TEST_dojam";
+TEST_DB=# \q
+
+app service:
+root@3c639d291300:/dojam# rails db:environment:set RAILS_ENV=test
