@@ -1,9 +1,14 @@
 class Path < ApplicationRecord
-	has_many :termlist_paths
+	has_many :termlist_paths, dependent: :destroy
 	has_many :termlists, through: :termlist_paths
 	has_many :museum_object_paths
-	has_many :museum_objects, through: :museum_object_paths
-  has_many :museum_objects_as_main, class_name: "MuseumObject", foreign_key: :main_path_id
+	has_many :museum_objects,
+					 through: :museum_object_paths,
+					 dependent: :restrict_with_error
+  has_many :museum_objects_as_main,
+					 class_name: "MuseumObject",
+					 foreign_key: :main_path_id,
+					 dependent: :restrict_with_error
 	scope :last_id, ->(id) {where "path like ?", "%/#{id}"}
 	scope :depth, ->(depth) {where "path similar to ?", "/\\d{1,}" * depth}
 	scope :default_order, -> {joins(:termlists)
