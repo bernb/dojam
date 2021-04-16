@@ -229,7 +229,7 @@ class StaticPagesController < ApplicationController
         helpers.import_site_names data
       end
     end
-    flash[:warning] = warnings
+    flash[:warning].merge! warnings
     if flash[:danger].blank? && flash[:warning].blank?
       flash[:success] = t('data_successfully_imported')
     end
