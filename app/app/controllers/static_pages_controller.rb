@@ -260,7 +260,7 @@ class StaticPagesController < ApplicationController
     end
     flash[:warning] = warnings
     if materials_for_import.present?
-      flash[:success] = materials_for_import.count + " " + t('files_uploaded')
+      flash[:success] = materials_for_import.count.to_s + " " + t('files_uploaded')
     end
   end
 
