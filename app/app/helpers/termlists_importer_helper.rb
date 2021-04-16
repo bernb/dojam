@@ -83,7 +83,7 @@ module TermlistsImporterHelper
     filename = nil # Make it available for rescue block
 		file_hash&.each do |file_entity|
       filename = file_entity.original_filename
-      if !correct_file_format?(file_entity)
+      if !correct_file_format?(file_entity, ".yaml")
         warnings[filename.to_sym] = 
           "#{file_entity.original_filename}: Unsupported file format detected. Only yaml files are supported."
         next
@@ -112,10 +112,6 @@ module TermlistsImporterHelper
     return materials_for_import, warnings
 	end
 
-  def correct_file_format? file_entity
-    return File.extname(file_entity.tempfile) == ".yaml"
-  end
-
   def forbidden_terms material_data
     term_whitelist = [
       "material_name",
@@ -138,10 +134,7 @@ module TermlistsImporterHelper
     else
       return false
     end
-  end
-
-
-
+	end
 
 	def global_material_variables_array
 		global_variables.select{|var| var.to_s.ends_with? "_material_data"}
