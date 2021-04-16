@@ -204,6 +204,8 @@ class StaticPagesController < ApplicationController
   end
 
   def import_termlists_submit
+    flash[:warning] = Hash.new
+    flash[:success] = Hash.new
     file_hash = params.dig(:termlists, :termlist_files)
     warnings = {}
     file_hash&.each do |file_entity|
@@ -231,14 +233,13 @@ class StaticPagesController < ApplicationController
     end
     flash[:warning].merge! warnings
     if flash[:danger].blank? && flash[:warning].blank?
-      flash[:success] = t('data_successfully_imported')
+      flash[:success][:top_level] = t('data_successfully_imported')
     end
     redirect_to import_termlists_select_path
   end
 
   private
   def import_materials data
-    flash[:warning] = Hash.new
     materials_for_import = []
     materials_for_import, warnings =
       parse_import_files params.dig(:termlists, :termlist_files)
@@ -260,7 +261,7 @@ class StaticPagesController < ApplicationController
     end
     flash[:warning] = warnings
     if materials_for_import.present?
-      flash[:success] = materials_for_import.count.to_s + " " + t('files_uploaded')
+      flash[:success][:file_import] = materials_for_import.count.to_s + " " + t('files_uploaded')
     end
   end
 
