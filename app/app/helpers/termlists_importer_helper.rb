@@ -90,6 +90,8 @@ module TermlistsImporterHelper
       end
       file = File.open file_entity.tempfile
       material_data = YAML.safe_load file.read
+			# Name of decorations changed to decoration_styles
+			material_data["decorations"] = material_data.delete("decoration_styles")
       if !valid_material_data?(material_data)
         forbidden_terms = forbidden_terms(material_data)
         warnings[filename.to_sym] = 
