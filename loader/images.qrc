@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/com/bernbeger/dojam">
-        <file alias="dojam_logo">resources/images/DOJAM_Logo.png</file>
-        <file alias="doa-logo">resources/images/doa-logo.png</file>
-    </qresource>
-</RCC>
