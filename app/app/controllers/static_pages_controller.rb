@@ -225,6 +225,7 @@ class StaticPagesController < ApplicationController
       end
       if data.keys.include?("material_name")
         import_materials data
+        #remove_non_existent_paths data
       elsif data.keys.include?("museum")
         helpers.import_museum_data data
       elsif data.keys.include?("site_name")
@@ -239,6 +240,25 @@ class StaticPagesController < ApplicationController
   end
 
   private
+  # ToDo: Do not remove 'undetermiend' paths
+  def remove_non_existent_paths data
+    material_specified = MaterialSpecified.find_by name_en: data["material_specifieds"]
+    m_id = Material.find_by(name_en: data["material_name"]).id
+    ms_id = material_specified.id
+    ms_path = Path.find_by(path: "/#{m_id}/#{ms_id}")
+    existing_pathnames = ms_path.transitive_children.depth(4).map(&:path)
+    imported_pathnames = []
+    data["kind_of_objects"].each do |koo_hash|
+      koo_id = KindOfObject.find_by(name_en: koo_hash.keys.first).id
+      koo_hash.values.flatten.each do |koos|
+        koos_id = KindOfObjectSpecified.find_by(name_en: koos).id
+        imported_pathnames << "/#{m_id}/#{ms_id}/#{koo_id}/#{koos_id}"
+      end
+    end
+    remove_pathnames = existing_pathnames - imported_pathnames
+    Path.where(path: remove_pathnames).destroy_all
+  end
+
   def import_materials data
     materials_for_import = []
     materials_for_import, warnings =
