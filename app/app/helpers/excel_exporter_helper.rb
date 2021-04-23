@@ -12,6 +12,40 @@ module ExcelExporterHelper
     return sheet
   end
 
+  # Not used in the application itself, but for research purposes where we want labeled images
+  def self.create_image_property_sheet
+    require 'csv'
+    file = "export.csv"
+    museum_objects = MuseumObject.all
+    headers = [
+      'id',
+      I18n.t('material'),
+      I18n.t('material_specified'),
+      I18n.t('kind_of_object'),
+      I18n.t('kind_of_object_specified'),
+      I18n.t('preservation_of_object'),
+      I18n.t('description'),
+      'filename'
+    ]
+    CSV.open(file, 'w', write_headers: true, headers: headers) do |writer|
+      museum_objects.each do |m|
+        row = [
+          m.id,
+          m.main_material&.name,
+          m.main_material_specified&.name,
+          m.kind_of_object&.name,
+          m.kind_of_object_specified&.name,
+          m.preservation_object&.name,
+          # More than 30k chars / 32kB will result in a corrupted file,
+          # see https://github.com/zdavatz/spreadsheet/blob/master/GUIDE.md#cautionary-note-about-cell-content-length
+          m.remarks&.[](0..30_000),
+          m.images&.main&.blob&.key
+        ]
+        writer << row
+      end
+    end
+  end
+
   def self.create_sheet(ids)
     export = Spreadsheet::Workbook.new
     sheet = export.create_worksheet
