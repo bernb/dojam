@@ -3,6 +3,7 @@ class Material < Termlist
 		1
 	end
 
+  # ToDo: Do not override method from Termlist
   def paths
     Path.material_id(self.id)
   end 
