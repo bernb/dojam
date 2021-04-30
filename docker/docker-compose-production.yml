@@ -4,6 +4,7 @@ services:
     networks:
       app_internal:
   app:
+    image: dojam_app:latest
     build:
       target: base
     volumes:
