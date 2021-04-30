@@ -101,6 +101,7 @@ class Termlist < ApplicationRecord
 	private
 	# Materials have no parents but a path to themselves i.e.
 	# material always has path /material.id
+	# ToDo: Why is that needed? Such a callback is unexpected and did break things when seeding
 	def add_default_path_for_roots
 		if self.depth == 1
 			path = Path.find_or_create_by path: "/" + self.id.to_s
