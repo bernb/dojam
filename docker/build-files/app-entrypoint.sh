@@ -4,6 +4,8 @@ set -e
 # Remove a potentially pre-existing server.pid for Rails.
 rm -f /dojam/tmp/pids/server.pid
 
+# Sleep to wait for db service. See https://docs.docker.com/compose/startup-order/ for more elaborate solutions.
+sleep 2
 # Run migrations if neccessary
 #bundle exec rails db:migrate
 
