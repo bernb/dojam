@@ -30,3 +30,45 @@ You need the following authorizations / credentials:
   * `rails db:create` creates the databases
   * `rails db:schema:load` loads the structure (as defined in `app/db/schema.rb`)
   * `rails db:seed` applies initial data (as definied in `app/db/seeds.rb`).
+  
+## Restore Backup
+
+### Requirements
+You need the following authorizations / credentials:
+* Access to the storage box by having your public key registered as authorized entity for the storage box
+* borgbackup passphrase for the corresponding repository
+
+## Retrieve backup
+* [Install](https://borgbackup.readthedocs.io/en/stable/installation.html) borgbackup
+* Set the following environmental variables:
+  * BORG_REPO
+  * BORG_PASSPHRASE 
+  * See [documentation](https://borgbackup.readthedocs.io/en/stable/usage/general.html#environment-variables) for more details
+* `borg list --short --last 1` to get the name of the latest backup `<LATEST_BACKUP>`
+* `borg extract --strip-components 4 ::<LATEST_BACKUP>` to retrieve the backup.
+
+The structure of the backup is as following:
+* `storage/` a folder containing all images and potentially other assets saved by the Rails storage provider `ActiveStorage`
+* `dojam.dumb` a dumb of the postgresql database
+
+See `scripts/get_latest_db_backup.sh` for a bash script.
+
+## Load Backup
+
+### Requirements
+A running installation of the dojam application.
+
+### Steps
+* Replace `app/storage/` folder with the backup
+* `docker-compose exec -u postgres db dropdb -U dojam DOJAM_DB` and 
+* `docker-compose exec -u postgres db createdb -U dojam DOJAM_DB` to delete an recreate the database
+* `docker cp dojam.dump "$(docker-compose ps -q db)":dojam.dump` to copy the database dumb into the docker container
+* `docker-compose exec -T -u postgres db psql --echo-errors --quiet --dbname=DOJAM_DB --single-transaction --file=dojam.dump > /dev/null 2> db_import_errors.out` to load the dumb into the database
+  * `-T` as we do not nee a TTY for this
+  * `--echo-errors` as we want more verbose errors
+  * `--quiet` to supress other information
+  * `--single-transaction` do everything within a single transaction which means postgres will do a full rollback if any errors occur
+  * `> /dev/null 2> db_import_errors.out` note that the error redirect is done within the docker context
+  * See [documentation](https://docs.docker.com/compose/reference/exec/) fore more details
+
+See `scripts/load_latest_db_backup.sh` for a bash script. Note that this script assumes the latest within within the folder `../tmp/<LATEST_BACKUP>`.
