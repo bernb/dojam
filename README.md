@@ -26,7 +26,7 @@ You need the following authorizations / credentials:
 * Copy `master.key` to `app/config/`
 * Copy `db.env` to `docker/env-files/`
 * Make docker accessible as a normal user: Follow the related [Post-installation steps for Linux](https://docs.docker.com/engine/install/linux-postinstall/)
-* `docker-compose up -d` to start the application in the background
+* `docker-compose up -d` to build and start the application in the background. This will take some time as the application image must be built
 * `docker-compose exec app rails db:setup` which is a simple shortcut for three commands (see [Rails guide](https://guides.rubyonrails.org/active_record_migrations.html) for more details):
   * `rails db:create` creates the databases
   * `rails db:schema:load` loads the structure (as defined in `app/db/schema.rb`)
