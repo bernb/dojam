@@ -25,6 +25,7 @@ You need the following authorizations / credentials:
 * `mkdir docker/env-files` to create the local-only environment variable directory
 * Copy `master.key` to `app/config/`
 * Copy `db.env` to `docker/env-files/`
+* Make docker accessible as a normal user: Follow the related [Post-installation steps for Linux](https://docs.docker.com/engine/install/linux-postinstall/)
 * `docker-compose up -d` to start the application in the background
 * `docker-compose exec app rails db:setup` which is a simple shortcut for three commands (see [Rails guide](https://guides.rubyonrails.org/active_record_migrations.html) for more details):
   * `rails db:create` creates the databases
