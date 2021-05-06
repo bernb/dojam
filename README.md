@@ -26,7 +26,10 @@ You need the following authorizations / credentials:
 * Copy `master.key` to `app/config/`
 * Copy `db.env` to `docker/env-files/`
 * Make docker accessible as a normal user: Follow the related [Post-installation steps for Linux](https://docs.docker.com/engine/install/linux-postinstall/)
-* `docker-compose up -d` to build and start the application in the background. This will take some time as the application image must be built
+* As it takes some time to initial the database, on the first run the database will not be ready when needed by the application. So instead of just running `docker-compose up -d`, which is sufficient in principle, we split up the process:
+  * `docker-compose build` to download the database image and build the application image. This will take some time
+  * `docker-compose up db` to only start the database for an initial run. When postgresql signalizes it has finished its initialization kill the process (Crtl+C)
+  * `docker-compose up -d` to start the containers. From now on you can use this command to start the application
 * `docker-compose exec app rails db:setup` which is a simple shortcut for three commands (see [Rails guide](https://guides.rubyonrails.org/active_record_migrations.html) for more details):
   * `rails db:create` creates the databases
   * `rails db:schema:load` loads the structure (as defined in `app/db/schema.rb`)
