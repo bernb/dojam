@@ -18,7 +18,7 @@ You need the following authorizations / credentials:
 * Rails credential key file `master.key`
 
 ### Steps
-* [Install](https://docs.docker.com/compose/install/) docker and docker-compose 
+* [Install](https://docs.docker.com/compose/install/) docker (>= 18.09.1) and docker-compose (>= 1.21.0)
 * `git clone git@github.com:bernb/dojam.git` to clone the repo
 * `cd dojam` to enter the project root directory
 * Set `COMPOSE_FILE=docker/docker-compose-base.yml:docker/docker-compose-dev.yml` as an environmental variable for your session. Consult your operating system's documentation for more details 
@@ -43,7 +43,7 @@ You need the following authorizations / credentials:
 * borgbackup passphrase for the corresponding repository
 
 ## Retrieve backup
-* [Install](https://borgbackup.readthedocs.io/en/stable/installation.html) borgbackup
+* [Install](https://borgbackup.readthedocs.io/en/stable/installation.html) borgbackup (>= 1.1.9)
 * Set the following environmental variables:
   * BORG_REPO
   * BORG_PASSPHRASE 
