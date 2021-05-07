@@ -73,7 +73,7 @@ A running installation of the dojam application.
   * `--echo-errors` as we want more verbose errors
   * `--quiet` to supress other information
   * `--single-transaction` do everything within a single transaction which means postgres will do a full rollback if any errors occur
-  * `> /dev/null 2> db_import_errors.out` note that the error redirect is done within the docker context
+  * `> /dev/null 2> db_import_errors.out` to redirect error messages into a file on the local machine
   * See [documentation](https://docs.docker.com/compose/reference/exec/) fore more details
 
 See `scripts/load_latest_db_backup.sh` for a bash script. Note that this script assumes the latest within within the folder `../tmp/<LATEST_BACKUP>`.
