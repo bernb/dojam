@@ -77,6 +77,11 @@ class StaticPagesController < ApplicationController
       .reject{|o| o.inv_number.blank?}
   end
 
+  def export_termlists
+    data = FileExportHelper.call
+    send_data data, filename: "test.yaml"
+  end
+
   def import_translations_select
     if session[:log_path].present?
       @log_messages = File.read(session[:log_path])
@@ -201,41 +206,16 @@ class StaticPagesController < ApplicationController
       @log_messages = File.read(session[:log_path])
       session[:log_path] = nil
     end
+    if session[:import_errors].present?
+      @log_messages = session[:import_errors]
+      session[:import_errors] = nil
+    end
   end
 
   def import_termlists_submit
-    flash[:warning] = Hash.new
-    flash[:success] = Hash.new
-    file_hash = params.dig(:termlists, :termlist_files)
-    warnings = {}
-    file_hash&.each do |file_entity|
-      filename = file_entity.original_filename
-      if !correct_file_format?(file_entity, ".yaml")
-        warnings[filename.to_sym] = 
-          file_entity.original_filename + ": " + t('unsupported_file_format_detected_only_yaml_files_are_supported')
-        next
-      end
-      file = File.open file_entity.tempfile
-      begin
-        data = YAML.safe_load file.read
-      rescue Psych::SyntaxError => se
-        line_number = se.message.match(/line (\d+)/).captures[0] # Not used to simplify translation as variables can't be part of the key
-        warnings[filename.to_sym] = file_entity.original_filename + " " + t('line') + " " + line_number.to_s + ': ' + t('syntax_error_in_file_please_check_the_file_for_errors_and_try_again')
-        next
-      end
-      if data.keys.include?("material_name")
-        import_materials data
-        #remove_non_existent_paths data
-      elsif data.keys.include?("museum")
-        helpers.import_museum_data data
-      elsif data.keys.include?("site_name")
-        helpers.import_site_names data
-      end
-    end
-    flash[:warning].merge! warnings
-    if flash[:danger].blank? && flash[:warning].blank?
-      flash[:success][:top_level] = t('data_successfully_imported')
-    end
+    file = params.dig(:termlists, :termlist_files).first
+    data = FileImportHelper.termlist_to_hash file
+    session[:import_errors] = FileImportHelper.import_and_remove data
     redirect_to import_termlists_select_path
   end
 
