@@ -72,6 +72,7 @@ class Path < ApplicationRecord
     return Path.find_by path: path_name
   end
 
+	# ToDo: Today, name is an alias and result depends on the language setting. Is this still correct and what we want here?
 	def last_object_name
 		self.objects.last.name
 	end
@@ -122,7 +123,15 @@ class Path < ApplicationRecord
 
   def transitive_object_hull
     return transitive_children.map(&:last_object)
-  end
+	end
+
+	def is_leaf?
+		self.depth == 4
+	end
+
+	def leafs
+		self.transitive_children.select{|p| p.depth == 4}
+	end
 
 	def included_or_parent_of? other_paths
 		return false unless other_paths.present?
