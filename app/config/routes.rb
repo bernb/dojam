@@ -51,7 +51,8 @@ Rails.application.routes.draw do
   get 'builds/excavation_site_kinds', to: "builds#excavation_site_kinds"
   get 'builds/kind_of_objects_for_spec_material_path', to: "builds#kind_of_objects_for_spec_material_path"
 
-	# importer actions
+	# importer/exporter actions
+  get  '/export_termlists', to: 'static_pages#export_termlists'
 	get  '/import_termlists/select', to: 'static_pages#import_termlists_select'
 	get  '/import_translations/select', to: 'static_pages#import_translations_select'
   get  '/import_static_translations/select', to: 'static_pages#import_static_translations_select'
