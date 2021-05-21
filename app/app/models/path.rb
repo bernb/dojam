@@ -1,6 +1,6 @@
 class Path < ApplicationRecord
-	has_many :termlist_paths, dependent: :destroy
-	has_many :termlists, through: :termlist_paths
+	has_many :termlist_paths
+	has_many :termlists, through: :termlist_paths, dependent: :destroy
 	has_many :museum_object_paths
 	has_many :museum_objects,
 					 through: :museum_object_paths,
