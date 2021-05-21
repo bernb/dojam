@@ -67,6 +67,10 @@ class Termlist < ApplicationRecord
 		false
 	end
 
+	def self.existing_typenames
+		Termlist.select(:type).map(&:type).uniq
+	end
+
   def self.list_types_humanized
     Termlist.pluck(:type)
 				.uniq
@@ -75,9 +79,11 @@ class Termlist < ApplicationRecord
 				.map{|t| t.underscore.gsub('_', ' ')}
 	end
 
+	# internal name => external name
 	@@typename_mapping = {
 			"ExcavationSiteKind" => "KindOfSite",
-			"ExcavationSiteCategory" => "KindOfSiteSpecified"
+			"ExcavationSiteCategory" => "KindOfSiteSpecified",
+			"Decoration" => "DecorationStyle"
 	}
 
 	# Helper method for Termlist.list_types_humanized, as for some termlists database type does not match with
