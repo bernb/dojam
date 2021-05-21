@@ -16,7 +16,15 @@ module FileExportHelper
     leaf = ms.paths.first.leafs.first
     term_types.each do |term_type|
       external_name = Termlist.to_external_type(term_type).underscore.pluralize
-      terms = term_type.constantize.for_path(leaf).map(&:name_en)
+      terms = term_type.constantize.for_path(leaf).map(&:name_en).sort do |a, b|
+        if a == 'undetermined'
+          1
+        elsif b == 'undetermined'
+          -1
+        else
+          a <=> b
+        end
+      end
       term_hash[external_name] = terms unless terms.empty?
     end
     term_hash
