@@ -1,3 +1,3 @@
 class PreservationObject < Termlist
-  has_many :museum_objects
+  has_many :museum_objects, dependent: :restrict_with_error
 end
