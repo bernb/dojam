@@ -214,20 +214,14 @@ class StaticPagesController < ApplicationController
 
   def import_termlists_submit
     files = params.dig(:termlists, :termlist_files)
-    file_successfully_read = true
     files.each do |file|
       begin
         data = FileImportHelper.termlist_to_hash file
-      rescue Psych::SyntaxError => se
-        line_number = se.message.match(/line (\d+)/).captures[0]
-        flash[:danger] = file.original_filename + " " + 'around line' + " " + line_number.to_s + ': ' + 'syntax_error_in_file_please_check_the_file_for_errors_and_try_again'
-        file_successfully_read = false
-      rescue Psych::DisallowedClass => se
-        flash[:danger] = file.original_filename + ': ' + 'syntax error in file please check the file for errors and try again'
-        file_successfully_read = false
-      end
-      if file_successfully_read
         session[:import_errors] << FileImportHelper.import_and_remove(data)
+      rescue
+        filename = file.original_filename
+        flash[:danger] ||= {}
+        flash[:danger][filename] = 'skipped file because of error: ' + file.original_filename
       end
     end
     redirect_to import_termlists_select_path
