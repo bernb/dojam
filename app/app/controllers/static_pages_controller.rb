@@ -214,10 +214,19 @@ class StaticPagesController < ApplicationController
 
   def import_termlists_submit
     files = params.dig(:termlists, :termlist_files)
+
+    timestamp = DateTime.now.strftime("%Y-%m-%d %H:%M:%S:%L")
+    filename = timestamp + "termlist import.log"
+    log_path = "#{Rails.root}/log/" + filename
+    session[:log_path] = log_path
+    logger = ActiveSupport::TaggedLogging.new(Logger.new(log_path))
+
     files.each do |file|
       begin
+        puts file.original_filename
         data = FileImportHelper.termlist_to_hash file
-        session[:import_errors] << FileImportHelper.import_and_remove(data)
+        import_errors = FileImportHelper.import_and_remove(data)
+        logger.tagged("file " + file.original_filename){logger.warn import_errors} unless import_errors.empty?
       rescue
         filename = file.original_filename
         flash[:danger] ||= {}
