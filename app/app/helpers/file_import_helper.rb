@@ -48,11 +48,6 @@ module FileImportHelper
     errors = {}
     begin
       data = YAML.safe_load file.read
-    rescue Psych::SyntaxError => se
-      line_number = se.message.match(/line (\d+)/).captures[0]
-      errors[:file] = file_entity.original_filename + " " + t('line') + " " + line_number.to_s + ': ' + t('syntax_error_in_file_please_check_the_file_for_errors_and_try_again')
-    rescue Psych::DisallowedClass => se
-      errors[:file] = file_entity.original_filename + ': ' + t('syntax_error_in_file_please_check_the_file_for_errors_and_try_again')
     end
     return data
   end
