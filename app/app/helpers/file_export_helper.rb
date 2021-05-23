@@ -64,7 +64,7 @@ module FileExportHelper
       koo_path.direct_children.each do |koos_path|
         koos_array << koos_path.last_object_name
       end
-      koo_hash[koo_name] = koos_array
+      koo_hash[koo_name] = koos_array.sort_termlist
       ms_hash["kind_of_objects"] << koo_hash
     end
     ms_hash
