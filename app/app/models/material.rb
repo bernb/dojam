@@ -3,13 +3,12 @@ class Material < Termlist
 		1
 	end
 
-  # ToDo: Do not override method from Termlist
-  def paths
+  def transitive_paths
     Path.material_id(self.id)
   end 
 
   def museum_objects
-    paths = self.paths
+    paths = self.transitive_paths
     secs = MuseumObject.joins(secondary_paths: :termlists).where(paths: {id: paths.ids}).where(termlists: {id: self.id})
     mains = MuseumObject.where(main_path: paths)
     mains + secs
@@ -20,7 +19,7 @@ class Material < Termlist
 	def material_specifieds
 		# We query MaterialSpecified to get the default scope and therefore
 		# correct order of results
-		children_paths = self.paths.first.direct_children.map(&:path)
+		children_paths = self.transitive_paths.first.direct_children.map(&:path)
 		material_specifieds = MaterialSpecified.joins(:paths).where(paths: {path: children_paths}) 
 		return material_specifieds
 	end
