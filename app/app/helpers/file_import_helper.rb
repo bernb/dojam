@@ -106,15 +106,14 @@ module FileImportHelper
 
   def self.create_non_leaf_paths data
     material = Material.find_by name_en: data["material_name"]
-    Path.find_or_create_by path: "/#{material.id}"
+    material.paths.find_or_create_by(path: "/#{material.id}")
 
     material_specified = MaterialSpecified.find_by name_en: data["material_specified"]
-    Path.find_or_create_by path: "/#{material.id}/#{material_specified.id}"
-
+    material_specified.paths.find_or_create_by(path: "/#{material.id}/#{material_specified.id}")
     data["kind_of_objects"].each do |kind_of_object_hash|
       kind_of_object_name = kind_of_object_hash.keys.first
       kind_of_object = KindOfObject.find_by name_en: kind_of_object_name
-      Path.find_or_create_by path: "/#{material.id}/#{material_specified.id}/#{kind_of_object.id}"
+      kind_of_object.paths.find_or_create_by(path: "/#{material.id}/#{material_specified.id}/#{kind_of_object.id}")
     end
   end
 
