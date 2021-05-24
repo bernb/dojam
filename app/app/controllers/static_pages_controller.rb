@@ -226,7 +226,7 @@ class StaticPagesController < ApplicationController
         puts file.original_filename
         data = FileImportHelper.termlist_to_hash file
         import_errors = FileImportHelper.import_and_remove(data)
-        logger.tagged("file " + file.original_filename){logger.warn import_errors} unless import_errors.empty?
+        logger.tagged(file.original_filename){logger.warn import_errors} unless import_errors.empty?
       rescue
         filename = file.original_filename
         flash[:danger] ||= {}
