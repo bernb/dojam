@@ -1,16 +1,18 @@
 module FileExportHelper
 
   def self.call
-    m = Material.find_by name_en: "stone/mineral"
     zipbuffer = Zip::OutputStream::write_buffer do |zip|
-      m.material_specifieds.each do |ms|
-        ms_hash = material_specified_to_hash ms
-        path_dependent_term_hash = path_dependent_terms_to_hash ms
-        file_data = YAML.dump ms_hash.merge(path_dependent_term_hash)
-        ms_name = ms.name_en.tr('/', '_').gsub(/[^\w_]/, '')
-        m_name = m.name_en.tr('/', '_').gsub(/[^\w_]/, '')
-        zip.put_next_entry(m_name + '/' + ms_name + '.yaml')
-        zip.write(file_data)
+      Material.all.each do |m|
+        m.material_specifieds.each do |ms|
+          ms_hash = material_specified_to_hash ms
+          path_dependent_term_hash = path_dependent_terms_to_hash ms
+          file_data = YAML.dump ms_hash.merge(path_dependent_term_hash)
+          ms_name = ms.name_en.tr('/', '_').gsub(/[^\w_]/, '')
+          m_name = m.name_en.tr('/', '_').gsub(/[^\w_]/, '')
+          puts m_name + ' - ' + ms_name
+          zip.put_next_entry(m_name + '/' + ms_name + '.yaml')
+          zip.write(file_data)
+        end
       end
     end
     zipbuffer.string
