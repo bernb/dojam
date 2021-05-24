@@ -3,6 +3,10 @@ class KindOfObject < Termlist
 		3
 	end
 
+	def path
+		self.paths.first
+	end
+
   def museum_objects
     paths = Path.depth(3)
       .last_id(self.id)
