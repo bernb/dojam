@@ -6,6 +6,10 @@ class MaterialSpecified < Termlist
     [:material]
   end
 
+  def path
+    self.paths.first
+  end
+
 	def depth
 		2
 	end

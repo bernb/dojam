@@ -5,7 +5,11 @@ class Material < Termlist
 
   def transitive_paths
     Path.material_id(self.id)
-  end 
+  end
+
+  def path
+    self.paths.first
+  end
 
   def museum_objects
     paths = self.transitive_paths
