@@ -26,6 +26,8 @@ class MuseumObject < ApplicationRecord
 
   has_one :images, class_name: "MuseumObjectImageList", dependent: :destroy
   has_one :loan_out
+	# ToDo: Remove redundant associations
+	# ToDo: For path dependent terms use a single join table to allow easy querying of all associated terms.
   belongs_to :excavation_site, required: false 
   belongs_to :storage_location, required: false
   belongs_to :acquisition_delivered_by, required: false
@@ -73,6 +75,11 @@ class MuseumObject < ApplicationRecord
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true
   accepts_nested_attributes_for :images, :secondary_paths
+	scope :where_path, ->(given_path) {
+		joins(:secondary_paths)
+			.where(main_path: given_path)
+			.or(
+				where(paths: {path: given_path})) }
   
   before_validation :set_is_used
   
@@ -160,7 +167,8 @@ class MuseumObject < ApplicationRecord
 	########################
 	##### path methods #####
 	########################
-	
+
+	# ToDo: Implement as scope
 	def paths
 		paths = Path.none
 		if main_path.present?
