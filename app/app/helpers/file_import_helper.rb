@@ -44,7 +44,6 @@ module FileImportHelper
       still_referenced = terms_to_remove.map{|t| [t, museum_objects_with_path & t.museum_objects]}
                                         .reject{|_, object_list| object_list.empty?}
                                         .to_h
-      byebug if path.named_path == "/stone/mineral/marble/vessel/bowl zoomophic"
       term_errors = still_referenced.map{|t, objects| ["#{path.named_path} - #{t.name_en} (#{t.type})", objects.map(&:id)]}.to_h
       path.termlists = terms + still_referenced.keys
       errors = errors.merge(term_errors)
