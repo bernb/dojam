@@ -34,13 +34,21 @@ module FileImportHelper
         typename = Termlist.to_internal_type(typename_file.titleize.remove(" ").singularize)
         terms << Termlist.where(type: typename, name_en: termlist)
       end
-      # ToDo: Check if there are still museum objects associated with terms that get removed by this command
       terms = terms.flatten
-      #path.termlists << (terms - path.termlists)
-      #path.termlists.except(terms).destroy_all
-      path.termlists = terms
+      terms_to_remove = path.termlists - terms
+      # We first catch all museum objects that are associated with the current path.
+      # Then we catch all museum objects for the terms that will get removed.
+      # The intersection of both are museum objects that would become invalid because they belong to a path that would
+      # not have that term any more
+      museum_objects_with_path = MuseumObject.where_path(path)
+      still_referenced = terms_to_remove.map{|t| [t, museum_objects_with_path & t.museum_objects]}
+                                        .reject{|_, object_list| object_list.empty?}
+                                        .to_h
+      byebug if path.named_path == "/stone/mineral/marble/vessel/bowl zoomophic"
+      term_errors = still_referenced.map{|t, objects| ["#{path.named_path} - #{t.name_en} (#{t.type})", objects.map(&:id)]}.to_h
+      path.termlists = terms + still_referenced.keys
+      errors = errors.merge(term_errors)
     end
-
     self.humanize_errors errors
   end
 
@@ -81,7 +89,7 @@ module FileImportHelper
     errors_h << 'Could not remove terms because they are still referenced by museum objects:'
     errors.each do |path, objects_ids|
       inv_numbers = objects_ids.map{|id| MuseumObject.find id}.map(&:decorate).map(&:full_inv_number)
-      errors_h << path + ": " + inv_numbers.to_s
+      errors_h << path.to_s + ": " + inv_numbers.to_s
     end
     errors_h.join("\n")
   end
