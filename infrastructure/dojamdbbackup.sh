@@ -4,10 +4,6 @@
 ## Setzten von Umgebungsvariablen
 ##
 
-## falls nicht der Standard SSH Key verwendet wird können
-## Sie hier den Pfad zu Ihrem private Key angeben
- export BORG_RSH="ssh -i /home/dojam/.ssh/id_rsa"
-
 ## Damit das Passwort vom Repository nicht eingegeben werden muss
 ## kann es in der Umgepungsvariable gesetzt werden
  export BORG_PASSPHRASE="HqebktiU2howNrCtGTjRoqcJ3HcN"
@@ -19,6 +15,8 @@
 LOG="/var/log/borg/backup.log"
 BACKUP_USER="u168640"
 REPOSITORY_DIR="dojam"
+
+export COMPOSE_FILE=/root/docker/docker-compose-base.yml:/root/docker/docker-compose-dev.yml
 
 ## Hinweis: Für die Verwendung mit einem Backup-Account muss
 ## 'your-storagebox.de' in 'your-backup.de' geändert werden.
@@ -44,7 +42,6 @@ echo "###### Backup gestartet: $(date) ######"
 export PGUSER="dojam"
 
 #su -c "pg_dump -Fc DOJAM_DB > /home/dojam/Documents/dojam.dump" dojam
-cd /home/dojam/jamappv2
 docker-compose exec -T db sh -c 'pg_dump DOJAM_DB -U dojam > /var/lib/postgresql/data/dojam.dump'
 
 ##
@@ -59,8 +56,8 @@ docker-compose exec -T db sh -c 'pg_dump DOJAM_DB -U dojam > /var/lib/postgresql
 echo "Übertrage Dateien ..."
 borg create -v --stats                   \
     $REPOSITORY::'{now:%Y-%m-%d_%H:%M}'  \
-    /home/dojam/jamappv2/db/dojam.dump       \
-    /home/dojam/jamappv2/app/storage
+    /root/db/dojam.dump       \
+    /root/dojam/storage
 
 
 echo "###### Backup beendet: $(date) ######"
