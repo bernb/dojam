@@ -208,7 +208,9 @@ class Path < ApplicationRecord
 	private
 
 	def museum_objects_for_ids ids
-		MuseumObject.left_joins(:main_path, :secondary_paths).where(paths: {id: ids}).distinct
+		MuseumObject.select("DISTINCT ON (museum_objects.id) museum_objects.*")
+								.left_joins(:main_path, :secondary_paths)
+								.where(paths: {id: ids})
 	end
 
 end
