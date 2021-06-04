@@ -1,10 +1,6 @@
 module FileImportHelper
   @@path_terms = %w[material_name material_specified material_specifieds kind_of_objects]
 
-  # ToDo:
-  # Get all now existing and relevant paths
-  # remove path dependent terms that are not found within the data
-  # add all new ones
   def self.import_and_remove data
     FileImportHelper.create_new_terms data
     FileImportHelper.create_non_leaf_paths data
@@ -22,8 +18,6 @@ module FileImportHelper
     Path.depth(3).select{|p| p.direct_children.count == 0}.map(&:destroy)
 
     # Remove path dependent terms that are not in the list
-    # Iterate over typenames
-    # Get all associated
     paths = ms_path.leafs
     create_path_dependent_terms data
     given_terms = path_dependent_terms_as_list data
@@ -40,6 +34,7 @@ module FileImportHelper
       # Then we catch all museum objects for the terms that will get removed.
       # The intersection of both are museum objects that would become invalid because they belong to a path that would
       # not have that term any more
+      # This check is neccessary for paths that do not get removed themselve, but have associated terms that would get removed
       museum_objects_with_path = MuseumObject.where_path(path)
       still_referenced = terms_to_remove.map{|t| [t, museum_objects_with_path & t.museum_objects]}
                                         .reject{|_, object_list| object_list.empty?}
