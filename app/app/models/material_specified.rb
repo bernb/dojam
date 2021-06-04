@@ -1,4 +1,6 @@
 class MaterialSpecified < Termlist
+  # ToDo: Always create a path to itself as an after_create callback as we might end up with a term without any path
+  # which might break things
   scope :material, ->(m_id) {joins(:paths).where("paths.path LIKE ?", "/#{m_id}%")}
   attr_reader :material, :merge_into_ms # Used in active_admin to merge into other model
 
