@@ -3,6 +3,12 @@ class MaterialSpecified < Termlist
   # which might break things
   scope :material, ->(m_id) {joins(:paths).where("paths.path LIKE ?", "/#{m_id}%")}
   attr_reader :material, :merge_into_ms # Used in active_admin to merge into other model
+  before_destroy :abort_if_museum_objects_associated
+  before_destroy :destroy_transitive_children
+
+  def museum_objects_associated?
+    path&.leafs&.map{|l| l.all_museum_objects}&.flatten&.any?
+  end
 
   def self.ransackable_scopes(auth_object = nil)
     [:material]
@@ -51,5 +57,22 @@ class MaterialSpecified < Termlist
 		children_paths = self.paths.first.direct_children.map(&:path)
 		kind_of_objects = KindOfObject.joins(:paths).where(paths: {path: children_paths})
 		return kind_of_objects
-	end
+  end
+
+  private
+  def destroy_transitive_children
+    path = self.path
+    path.destroy
+    if path.errors.any?
+      errors.add(:base, "could not be destroyed because a (transitive) child path could not be destroyed")
+      throw(:abort)
+    end
+  end
+
+  def abort_if_museum_objects_associated
+    if museum_objects_associated?
+      self.errors.add(:base, "could not be destroyed because there are still museum objects associated")
+      throw(:abort)
+    end
+  end
 end
