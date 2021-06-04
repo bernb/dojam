@@ -6,6 +6,7 @@ class Termlist < ApplicationRecord
 	# how the first order parameter gets evaluated and why this works
 	default_scope {order(Arel.sql("termlists.name_en = 'undetermined'"), position: :asc, name_en: :asc)}
 	after_create :add_default_path_for_roots
+	# ToDo: What should be the semantics for a destroy?
 	has_many :termlist_paths
 	has_many :paths, through: :termlist_paths
 
