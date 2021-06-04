@@ -20,6 +20,7 @@ class Path < ApplicationRecord
 	scope :material_specifieds, ->{depth(2).default_order}
 	scope :kind_of_objects, ->{depth(3).default_order}
 	scope :kind_of_object_specifieds, ->{depth(4).default_order}
+	before_destroy :destroy_transitive_children
 
 	def all_museum_objects
 		museum_objects_for_ids self.id
@@ -206,6 +207,17 @@ class Path < ApplicationRecord
 	end
 
 	private
+
+	def destroy_transitive_children
+		begin
+			ActiveRecord::Base.transaction do
+				self.transitive_children.each(&:destroy!)
+			end
+		rescue ActiveRecord::RecordNotDestroyed => e
+			errors.add(:base, "could not be destroyed because a transitive child (id: #{e.record.id}) could not be destroyed (#{e.record.named_path}).")
+			throw(:abort)
+		end
+	end
 
 	def museum_objects_for_ids ids
 		MuseumObject.select("DISTINCT ON (museum_objects.id) museum_objects.*")
