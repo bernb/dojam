@@ -23,11 +23,14 @@ class Path < ApplicationRecord
 	before_destroy :destroy_transitive_children
 
 	def all_museum_objects
-		museum_objects_for_ids self.id
+		self.museum_objects.or(self.museum_objects_as_main)
 	end
 
 	def all_transitive_museum_objects
-		museum_objects_for_ids self.transitiv_children_ids
+		self.transitive_children
+				.map{|p| p.all_museum_objects}
+				.flatten
+				.uniq
 	end
 
 	def self.undetermined_path
@@ -218,11 +221,4 @@ class Path < ApplicationRecord
 			throw(:abort)
 		end
 	end
-
-	def museum_objects_for_ids ids
-		MuseumObject.select("DISTINCT ON (museum_objects.id) museum_objects.*")
-								.left_joins(:main_path, :secondary_paths)
-								.where(paths: {id: ids})
-	end
-
 end
