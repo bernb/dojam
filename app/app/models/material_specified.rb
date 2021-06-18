@@ -7,7 +7,8 @@ class MaterialSpecified < Termlist
   before_destroy :destroy_transitive_children
 
   def museum_objects_associated?
-    path&.leafs&.map{|l| l.all_museum_objects}&.flatten&.any?
+    path.all_museum_objects.any? ||
+    path.transitive_children.map{|l| l.all_museum_objects}.flatten.any?
   end
 
   def self.ransackable_scopes(auth_object = nil)
