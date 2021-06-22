@@ -12,10 +12,11 @@
 This section is about how to get the app up and running for local development, DO NOT use this for production deployment.
 
 ### Requirements
-You need the following authorizations / credentials:
+You need the following authorizations / files:
 * Full access to https://github.com/bernb/dojam
-* Database environment file `db.env`
-* Rails credential key file `master.key`
+* Encrypted KeePass file `DOJAM Credentials.kdbx` containing the following secrets:
+  * Database environment file `db.env`
+  * Rails credential key file `master.key`
 
 ### Steps
 * [Install](https://docs.docker.com/compose/install/) docker (>= 18.09.1) and docker-compose (>= 1.21.0)
