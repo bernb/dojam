@@ -223,11 +223,14 @@ class StaticPagesController < ApplicationController
 
     files.each do |file|
       begin
-        puts file.original_filename
         data = FileImportHelper.termlist_to_hash file
-        import_errors = FileImportHelper.import_and_remove(data)
-        logger.tagged(file.original_filename){logger.warn import_errors} unless import_errors.empty?
-      rescue
+        if data.has_key?("museum") && data.has_key?("storages")
+          StaticPagesHelper.import_museum_data data
+        else
+          import_errors = FileImportHelper.import_and_remove(data)
+          logger.tagged(file.original_filename){logger.warn import_errors} unless import_errors.empty?
+        end
+      rescue StandardError => e
         filename = file.original_filename
         flash[:danger] ||= {}
         flash[:danger][filename] = 'skipped file because of error: ' + file.original_filename

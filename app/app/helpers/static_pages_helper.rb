@@ -1,5 +1,5 @@
 module StaticPagesHelper
-  def import_museum_data data
+  def self.import_museum_data data
     museum_name = data["museum"]
     if museum_name != "JAM"
       flash[:danger] = "Data for JAM museum can be imported only"
