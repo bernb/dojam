@@ -15,6 +15,9 @@ ActiveAdmin.register Storage do
       link_to storage.name_ar, admin_storage_path(storage) unless storage.name_ar.nil?
     end
     column :storage_locations
+    column :museum_objects do |storage|
+      storage.museum_objects.count
+    end
     column :created_at
     column :updated_at
     actions
@@ -26,6 +29,9 @@ ActiveAdmin.register Storage do
       row :name_en
       row :name_ar
       row :storage_locations
+      row :museum_objects do |storage|
+        storage.museum_objects.count
+      end
     end
   end
 
