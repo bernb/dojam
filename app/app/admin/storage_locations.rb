@@ -17,7 +17,13 @@ ActiveAdmin.register StorageLocation do
     end
     column :storage
     column :museum_objects do |storage|
-      storage.museum_objects.count
+      mo_count = storage.museum_objects.count
+      if mo_count == 0
+        mo_count
+      else
+        link_to storage.museum_objects.count,
+                admin_museum_objects_path(q:{storage_location_id_eq: storage.id})
+      end
     end
     column :created_at
     column :updated_at
