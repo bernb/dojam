@@ -14,6 +14,9 @@ ActiveAdmin.register Storage do
     column :name_ar do |storage|
       link_to storage.name_ar, admin_storage_path(storage) unless storage.name_ar.nil?
     end
+    # ToDo: Create helper to unify how potentially large list are shown within the backend:
+    # 1. Show first X entries, linkin to the admin show view
+    # 2. Add link 'show all' linking to the admin index view with preset filter
     column :storage_locations
     column :museum_objects do |storage|
       mo_count = storage.museum_objects.count
