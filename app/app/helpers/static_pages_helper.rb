@@ -6,20 +6,15 @@ module StaticPagesHelper
       return
     end
     museum = Museum.find_by name: museum_name
-    museum_storage_names = museum.storages.map{|s| s.name}
-    data["storages"].each do |storage_hash|
+    data["storages"].each.with_index(1) do |storage_hash, index|
       storage_name = storage_hash.keys.first
-      if museum_storage_names.include?(storage_name)
-        storage = museum.storages.find_by name_en: storage_name
-      else
-        storage = Storage.create name_en: storage_name, museum: museum
-      end
-      storage_hash[storage_name].each do |storage_location_name|
-        if storage.storage_locations.map{|sl| sl.name}.include?(storage_location_name)
-          next
-        else
-          storage_location = StorageLocation.create name_en: storage_location_name, storage: storage
-        end
+      storage = museum.storages
+                      .find_or_create_by(name_en: storage_name)
+      storage.update(position: index)
+      storage_hash[storage_name].each.with_index(1) do |location_name, index|
+        location = StorageLocation.find_or_create_by(name_en: location_name,
+                                                     storage: storage)
+        location.update(position: index)
       end
     end
   end
