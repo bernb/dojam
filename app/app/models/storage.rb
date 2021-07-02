@@ -1,6 +1,7 @@
 class Storage < ApplicationRecord
   translates :name
   acts_as_list
+  default_scope {order(:position)}
   belongs_to :museum
   has_many :storage_locations, dependent: :restrict_with_error
 
