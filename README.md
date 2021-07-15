@@ -51,7 +51,7 @@ You need the following authorizations / credentials:
   * See [documentation](https://borgbackup.readthedocs.io/en/stable/usage/general.html#environment-variables) for more details
 * `mkdir tmp && cd tmp` to use a temporary sub folder to retrieve the backup
 * `borg list --short --last 1` to get the name of the latest backup `<LATEST_BACKUP>`
-* `borg extract --strip-components 4 ::<LATEST_BACKUP>` to retrieve the backup.
+* `borg extract --strip-components 2 ::<LATEST_BACKUP>` to retrieve the backup.
 
 The structure of the backup is as following:
 * `storage/` a folder containing all images and potentially other assets saved by the Rails storage provider `ActiveStorage`
