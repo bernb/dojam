@@ -339,6 +339,7 @@ class BuildsController < ApplicationController
 																					:is_dating_period_unknown, :is_dating_millennium_unknown, :dating_century_begin_id, :dating_century_end_id,
 																				 	:is_dating_century_unknown, :is_dating_timespan_unknown,
 																					:max_length, :max_width, :height, :opening_dm, :bottom_dm, :max_dm, :weight_in_gram, :main_path_id,
+                                          :munsell_color_of_object,
                                           decoration_style_ids: [],
                                           decoration_technique_ids: [],
                                           decoration_color_ids: [],
