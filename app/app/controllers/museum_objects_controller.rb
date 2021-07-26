@@ -96,7 +96,7 @@ class MuseumObjectsController < ApplicationController
         results = []
         params.each do |k,v|
           next unless k.to_s.starts_with?('search_form_field')
-          term = Termlist.to_internal_type(k.gsub('search_form_field_', '').titleize.gsub(' ', ''))
+          term = Termlist.to_internal_type(k.gsub('search_form_field_', '').titleize(downcase: false).gsub(' ', ''))
           terms[term] = params[k]
         end
 
@@ -143,7 +143,7 @@ class MuseumObjectsController < ApplicationController
           redirect_to museum_objects_search_path
         end
         puts @selected_term
-        termclass = Termlist.to_internal_type(@selected_term.titleize.gsub(' ', '')).constantize
+        termclass = Termlist.to_internal_type(@selected_term.titleize(downcase: false).gsub(' ', '')).constantize
         @select_tag_id = "search_form_field_" + @selected_term.gsub(' ','_')
         terms = termclass.all
         @list = terms.map{|t| [t.name, t.id]}
