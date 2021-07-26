@@ -1,4 +1,4 @@
-ActiveAdmin.register User do
+ActiveAdmin.register User, as: "Users" do
   permit_params :email,
                 :is_enabled,
                 :has_extended_access
