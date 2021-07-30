@@ -7,4 +7,4 @@ cd $SCRIPT_HOME
 mkdir $BORG_LATEST
 cd $BORG_LATEST
 echo "Extracting latest DB dump: ${BORG_LATEST}..."
-borg extract --strip-components 4 ::$BORG_LATEST
+borg extract --strip-components 2 ::$BORG_LATEST
