@@ -231,6 +231,7 @@ class StaticPagesController < ApplicationController
           logger.tagged(file.original_filename){logger.warn import_errors} unless import_errors.empty?
         end
       rescue StandardError => e
+        STDERR.puts e
         filename = file.original_filename
         flash[:danger] ||= {}
         flash[:danger][filename] = 'skipped file because of error: ' + file.original_filename
