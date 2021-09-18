@@ -19,7 +19,7 @@ module StaticPagesHelper
     end
   end
 
-  def import_site_names data
+  def self.import_site_names data
     data["site_name"].each do |site_name|
       ExcavationSite.find_or_create_by name: site_name
     end
