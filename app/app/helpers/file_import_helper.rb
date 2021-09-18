@@ -25,7 +25,7 @@ module FileImportHelper
     paths.each do |path|
       terms = []
       data.except(*@@path_terms).each do |typename_file, termlist|
-        typename = Termlist.to_internal_type(typename_file.titleize.remove(" ").singularize)
+        typename = Termlist.to_internal_type(typename_file.titleize(downcase: false).remove(" ").singularize)
         terms << Termlist.where(type: typename, name_en: termlist)
       end
       terms = terms.flatten
@@ -70,7 +70,7 @@ module FileImportHelper
 
   def self.create_path_dependent_terms data
     data.except(*@@path_terms).each do |typename_file, termlist|
-      typename = Termlist.to_internal_type(typename_file.titleize.remove(" ").singularize)
+      typename = Termlist.to_internal_type(typename_file.titleize(downcase: false).remove(" ").singularize)
       termlist.each do |term|
         Termlist.find_or_create_by type: typename, name_en: term
       end
