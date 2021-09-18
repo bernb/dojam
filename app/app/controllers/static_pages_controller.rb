@@ -226,6 +226,8 @@ class StaticPagesController < ApplicationController
         data = FileImportHelper.termlist_to_hash file
         if data.has_key?("museum") && data.has_key?("storages")
           StaticPagesHelper.import_museum_data data
+        elsif data.has_key?("site_name")
+          StaticPagesHelper.import_site_names data
         else
           import_errors = FileImportHelper.import_and_remove(data)
           logger.tagged(file.original_filename){logger.warn import_errors} unless import_errors.empty?
@@ -236,6 +238,9 @@ class StaticPagesController < ApplicationController
         flash[:danger] ||= {}
         flash[:danger][filename] = 'skipped file because of error: ' + file.original_filename
       end
+    end
+    if flash[:danger].nil?
+      flash[:success] = I18n.t('import complete')
     end
     redirect_to import_termlists_select_path
   end
