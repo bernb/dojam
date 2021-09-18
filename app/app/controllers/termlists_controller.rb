@@ -8,8 +8,8 @@ class TermlistsController < ApplicationController
     end
     
     @title = params[:nice_name]
-    
-    table_string = termlist_name.gsub("_"," ").titleize.gsub(" ","").singularize
+
+    table_string = termlist_name.gsub("_"," ").titleize(downcase: false).gsub(" ","").singularize
     
     @objects = table_string.constantize.all
   end
