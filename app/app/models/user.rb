@@ -11,4 +11,8 @@ class User < ApplicationRecord
   def inactive_message
     is_enabled? ? super : I18n.t('your_account_is_not_yet_enabled')
   end
+
+  def show_museum_for_objects?
+    return self.has_extended_access?
+  end
 end
