@@ -2,6 +2,11 @@
   <%= museum_card&.top_image %>
   <div class="card-body">
     <h5 class="card-title"><%= museum_card&.name %></h5>
+    <% if current_user.show_museum_for_objects? %>
+      <div class="card-text">
+        <%= museum_card.museum&.name %>
+      </div>
+    <% end %>
     <div class="card-text">
       <%= museum_card.basic_object_properties %>
     </div>
