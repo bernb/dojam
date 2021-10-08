@@ -80,6 +80,10 @@ class MuseumObject < ApplicationRecord
 			.where(main_path: given_path)
 			.or(
 				where(paths: {path: given_path})) }
+	scope :museum, ->(given_museum) {
+		joins(storage_location: {storage: :museum})
+			.where('museum.id': given_museum)
+	}
   
   before_validation :set_is_used
   
@@ -456,7 +460,7 @@ class MuseumObject < ApplicationRecord
 		return objects.uniq
 	end
 
-  def self.search param
+  def self.search param, user
     # Multisearch gives a mix of terms and museum objects
     # we map those to museum objects ids and on the result
     # so that we we a active records relation of museum objects as result
@@ -468,7 +472,7 @@ class MuseumObject < ApplicationRecord
       .flatten
       .map(&:id)
       .sort
-    return MuseumObject.where(id: museum_object_ids)&.order(:id)
+    return Pundit::policy_scope(user, MuseumObject).where(id: museum_object_ids)&.order(:id)
   end
 
 end
