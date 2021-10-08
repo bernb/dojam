@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_23_133632) do
+ActiveRecord::Schema.define(version: 2021_10_08_130905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -766,7 +766,9 @@ ActiveRecord::Schema.define(version: 2021_07_23_133632) do
     t.boolean "has_extended_access", default: false
     t.boolean "is_enabled", default: false, null: false
     t.boolean "pdf_export_running", default: false
+    t.bigint "museum_id", default: 1, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["museum_id"], name: "index_users_on_museum_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -858,4 +860,5 @@ ActiveRecord::Schema.define(version: 2021_07_23_133632) do
   add_foreign_key "termlist_kind_of_object_specifieds_inscription_letters", "termlist_kind_of_object_specifieds"
   add_foreign_key "termlist_paths", "paths"
   add_foreign_key "termlist_paths", "termlists"
+  add_foreign_key "users", "museums"
 end
