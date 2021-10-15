@@ -11,6 +11,7 @@ class Path < ApplicationRecord
 					 foreign_key: :main_path_id,
 					 dependent: :restrict_with_error
 	scope :last_id, ->(id) {where "path like ?", "%/#{id}"}
+	scope :with_id, ->(id) {where "path like ?", "%#{id}%"}
 	scope :depth, ->(depth) {where "path similar to ?", "/\\d{1,}" * depth}
 	scope :default_order, -> {joins(:termlists)
 		.order(Arel.sql("termlists.name_en = 'undetermined'"))
