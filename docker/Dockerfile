@@ -1,6 +1,6 @@
-FROM ruby:3.0.1 AS base
+FROM ruby:3.0.2 AS base
 # Debian stable ships with nodejs 8 which is too old for rails
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 RUN mkdir /dojam
 WORKDIR /dojam
