@@ -24,15 +24,4 @@ ENTRYPOINT ["/usr/bin/app-entrypoint.sh"]
 EXPOSE 22333
 
 FROM base AS dev
-# For Capybara-webkit gem
-RUN apt-get install -y g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x firefox-esr vim
-# Install geckodriver for firefox, used by selenium/capybara
-RUN GK_VERSION="0.24.0" \
-  && echo "Using GeckoDriver version: "$GK_VERSION \
-  && wget --no-verbose -O /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v$GK_VERSION/geckodriver-v$GK_VERSION-linux64.tar.gz \
-  && rm -rf /opt/geckodriver \
-  && tar -C /opt -zxf /tmp/geckodriver.tar.gz \
-  && rm /tmp/geckodriver.tar.gz \
-  && mv /opt/geckodriver /opt/geckodriver-$GK_VERSION \
-  && chmod 755 /opt/geckodriver-$GK_VERSION \
-  && ln -fs /opt/geckodriver-$GK_VERSION /usr/bin/geckodriver
+RUN apt-get install -y chromium-driver chromium
