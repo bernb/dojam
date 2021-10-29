@@ -1,6 +1,12 @@
 FactoryBot.define do
+  sequence :email do |n|
+    "testuser#{n}@example.com"
+  end
+end
+
+FactoryBot.define do
   factory :user do
-    email {"user@test.com"}
+    email
     password {"password"}
     is_enabled {true}
 
