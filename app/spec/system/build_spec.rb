@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.feature "Add new object steps", type: :system do
-  scenario "User starts adding a new object from home" do
-    visit '/'
-    #click_link "new entry"
-    expect(page).to have_text("create main account")
-  end
+feature "Add new object steps", type: :system do
+  # scenario "User starts adding a new object from home" do
+  #   visit '/'
+  #   #click_link "new entry"
+  #   expect(page).to have_text("log in")
+  # end
 
   # scenario "User deselects undetermined entry in material step" do
   #   museum_object = create(:valid_museum_object)
