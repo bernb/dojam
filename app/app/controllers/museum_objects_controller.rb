@@ -4,7 +4,7 @@ class MuseumObjectsController < ApplicationController
     respond_to do |format|
       format.html do
         page = params[:page] || 1
-        @museum_objects = MuseumObject.page(page)
+        @museum_objects = policy_scope(MuseumObject).page(page)
         @museum_objects = MuseumObjectDecorator.decorate_collection(@museum_objects)
         # We use a hash to allow more complex variants later
         # But for now only the key is used by museum card decorator
@@ -12,7 +12,7 @@ class MuseumObjectsController < ApplicationController
       end
       format.pdf do
         ids = params[:search_result_ids]
-        museum_objects = MuseumObjectDecorator.decorate_collection(MuseumObject.where(id: ids))
+        museum_objects = MuseumObjectDecorator.decorate_collection(policy_scope(MuseumObject).where(id: ids))
         #ToDo: If image is too large, two pages are used. Set max height property in top_image decorater method
         render pdf: t('search_results'),
                template: "museum_objects/museum_objects_pdf.html.erb",
@@ -76,7 +76,7 @@ class MuseumObjectsController < ApplicationController
   def search
     if params.has_key?(:fulltext_search)
       page = params[:page] || 1
-      @all_results = MuseumObject.search(params[:fulltext_search])
+      @all_results = MuseumObject.search(params[:fulltext_search], current_user)
       @all_results_ids = @all_results.ids
       @results = @all_results.page(page)
       if @results.blank?
