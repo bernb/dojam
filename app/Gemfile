@@ -130,9 +130,9 @@ group :development, :test do
   gem "factory_bot_rails", '~> 5.2'
 	gem 'rspec-rails'
 	gem 'guard'
-	gem 'guard-rspec'
-  gem 'capybara' # for feature tests
-  gem 'selenium-webdriver' # have capybara know about ajax calls
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end
 
 group :development do
