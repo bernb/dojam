@@ -32,7 +32,8 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
-  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :system
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -60,4 +61,16 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.before(:suite) do
+    # Stuff created here might not get cleaned if tests crashes
+    # See above: Main admin might still be present which is not an issue but must be taken into account
+    FactoryBot.create(:main_admin) unless User.count > 0
+    # As we explicitly set the id, the db sequence becomes wrong within this test context
+    ActiveRecord::Base.connection.reset_pk_sequence!('users')
+  end
+  config.before(:example) do
+    @user = create(:user)
+    sign_in @user
+  end
 end
