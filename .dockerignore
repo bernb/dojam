@@ -1,4 +1,4 @@
-# File should be located in context parent directory, this is where docker looks for it:
+# File should be located in context root directory, this is where docker looks for it:
 # https://docs.docker.com/engine/reference/builder/#dockerignore-file
 # Ignore everything
 **
