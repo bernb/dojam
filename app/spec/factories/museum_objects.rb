@@ -1,12 +1,14 @@
 FactoryBot.define do
-  factory :valid_museum_object, class: :museum_object  do
-		inv_number { "T.1234" }
-    amount { 1 }
-    storage_location { StorageLocation.first }
+  sequence :inv_number do |n|
+    ("T.1"..).each
   end
 
-  factory :pathless_museum_object, class: :museum_object do
-    inv_number { "T.0000" }
-    main_path { nil }
+  factory :museum_object do
+    inv_number
+    storage_location
+    amount {1}
+    factory :fully_defined_museum_object do
+
+    end
   end
 end
