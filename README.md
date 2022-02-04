@@ -23,7 +23,7 @@ You need the following authorizations / files:
 * `git clone git@github.com:bernb/dojam.git` to clone the repo
 * `cd dojam` to enter the project root directory
 * Set `COMPOSE_FILE=docker/docker-compose-base.yml:docker/docker-compose-dev.yml` as an environmental variable for your session. Consult your operating system's documentation for more details 
-* `mkdir docker/env-files` to create the local-only environment variable directory
+* `mkdir docker/env-files` to create the local-only environment variable directory (for Windows you must use ';' as file separator)
 * Copy `master.key` to `app/config/`
 * Copy `db.env` to `docker/env-files/`
 * Make docker accessible as a normal user: Follow the related [Post-installation steps for Linux](https://docs.docker.com/engine/install/linux-postinstall/)
