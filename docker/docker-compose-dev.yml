@@ -9,9 +9,10 @@ services:
       target: dev
     volumes:
       - ../app:/dojam
-      - bootsnap_cache:/dojam/tmp/cache/bootsnap
+      - tmp_files:/dojam/tmp/
+
     command: bundle exec rails s -p 22333 -b '0.0.0.0'
     ports:
       - "22333:22333"
 volumes:
-  bootsnap_cache:
+  tmp_files:
