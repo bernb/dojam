@@ -1,34 +1,10 @@
 require 'rails_helper'
-require 'ruby-prof'
 
 feature "Add new object steps", type: :system do
   scenario "User starts adding a new object from home" do
-    puts "** before visit"
-    driven_by :rack_test
-    RubyProf.start
     visit '/'
-    result = RubyProf.stop
-    printer = RubyProf::FlatPrinter.new(result)
-    puts "*******"
-    puts "*******"
-    puts "*******"
-    printer.print(STDOUT, min_percent: 10)
-    printer = RubyProf::GraphPrinter.new(result)
-    printer.print(STDOUT, min_percent: 10)
-
-    # File.open "profile-graph.html", 'w+' do |file|
-    #   RubyProf::GraphHtmlPrinter.new(result).print(file, min_percent: 10)
-    # end
-    # File.open "profile-stack.html", 'w+' do |file|
-    #   RubyProf::CallStackPrinter.new(result).print(file, min_percent: 10)
-    # end
-
-    puts "after visit"
-
-    visit '/'
-    puts "after second visit"
-    #click_link "new entry"
-    expect(page).to have_text("log in")
+    click_link "new entry"
+    expect(page).to have_text("add new object")
   end
 
   # scenario "User deselects undetermined entry in material step" do
