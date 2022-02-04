@@ -44,6 +44,10 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
-  # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
+  # This takes sprockets out of the loop as only precompiled assets are used.
+  # This is way faster for docker containers as dynamically caching/compiling needs
+  # a lot of disk read/writes.
+  # However you might need to invoke `RAILS_ENV=test rake assets:precompile` if assets
+  # are not precompiled now.
+  config.assets.compile = false
 end
