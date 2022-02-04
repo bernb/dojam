@@ -69,8 +69,9 @@ RSpec.configure do |config|
     # As we explicitly set the id, the db sequence becomes wrong within this test context
     ActiveRecord::Base.connection.reset_pk_sequence!('users')
   end
-  # config.before(:example, type: :system) do
-  #   @user = create(:user)
-  #   sign_in @user
-  # end
+  # Note that before(:all) hooks do net get cleaned up correctly if an error occurs
+  config.before(:each, type: :system) do
+    @user = create(:user)
+    sign_in @user
+  end
 end
