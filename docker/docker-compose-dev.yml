@@ -9,10 +9,12 @@ services:
       target: dev
     volumes:
       - ../app:/dojam
-      - tmp_files:/dojam/tmp/
+      - tmp_files:/dojam/tmp/ # For faster bootsnap
+      - asset_files:/dojam/public/assets # For faster system tests / precompiled assets
 
     command: bundle exec rails s -p 22333 -b '0.0.0.0'
     ports:
       - "22333:22333"
 volumes:
   tmp_files:
+  asset_files:
