@@ -33,5 +33,31 @@ feature "Add a new object" do
                                                   .storage_locations
                                                   .map(&:name_en))
     end
+
+    scenario "confirm with empty inv. number field" do
+      path = current_path
+      click_button 'confirm'
+      expect(page).to have_current_path(path)
+      expect(page).to have_css ".alert-warning"
+    end
+
+    scenario 'confirm without selected detailed location' do
+      path = current_path
+      select storage1.name_en, from: storage_select
+      click_button 'confirm'
+      expect(page).to have_current_path(path)
+      expect(page).to have_css '.alert-warning'
+    end
+
+    scenario 'confirm with correctly filled form' do
+      path = current_path
+      fill_in inv_field, with: 'T.000'
+      select storage1.name_en, from: storage_select
+      select storage1.storage_locations.map(&:name_en).first, from: storage_location_select
+      click_button 'confirm'
+      expect(page).not_to have_current_path(path)
+      expect(page).not_to have_css '.alert-warning'
+      expect(page).to have_current_path(/step_acquisition/)
+    end
   end
 end
