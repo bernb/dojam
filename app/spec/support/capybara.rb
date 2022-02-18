@@ -1,7 +1,7 @@
 RSpec.configure do |config|
-  # config.before(:each, type: :system) do
-  #   driven_by :rack_test
-  # end
+  config.before(:all, type: :system) do
+    driven_by :rack_test
+  end
 end
 
 Capybara.register_driver :chrome_headless do |app|
