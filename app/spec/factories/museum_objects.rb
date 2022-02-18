@@ -8,14 +8,4 @@ FactoryBot.define do
 
     factory :mo_at_step_acquisition, traits: [:step_museum_complete]
   end
-
-  #
-  # factory :museum_object do
-  #   inv_number
-  #   storage_location
-  #   amount {1}
-  #   factory :fully_defined_museum_object do
-  #
-  #   end
-  # end
 end
