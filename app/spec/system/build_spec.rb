@@ -2,10 +2,7 @@ require 'rails_helper'
 
 feature "Add new object steps", type: :system do
   scenario "User starts adding a new object from home" do
-    @museum_object = create(:museum_object)
-    @museum = create(:JAM)
-    @storage1 = create(:storage, museum: @museum)
-    @storage2 = create(:storage, museum: @museum)
+    create(:JAM_with_storage_locations)
     visit '/'
     click_link "new entry"
     expect(page).to have_text("add new object")
