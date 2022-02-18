@@ -56,5 +56,27 @@ feature 'Add a new object' do
       expect(page).not_to have_css '.alert-warning'
       expect(page).to have_current_path(/step_provenance/)
     end
+
+    scenario 'created terms show up in correct order' do
+      create(:acquisition_kind, name_en: 'undetermined')
+      create(:acquisition_delivered_by, name_en: 'undetermined')
+      create_list(:acquisition_kind, 12)
+      create_list(:acquisition_delivered_by, 12)
+      visit "/museum_objects/#{museum_object.id}/builds/step_acquisition"
+      expect(page).to have_select(kind_of_acquisition_select,
+                                  selected: 'undetermined')
+      expect(page).to have_select(delivered_by_select,
+                                  selected: 'undetermined')
+      expect(page
+               .find_field(kind_of_acquisition_select)
+               .find(':last-child')
+               .text)
+        .to eq('undetermined')
+      expect(page
+               .find_field(delivered_by_select)
+               .find(':last-child')
+               .text)
+        .to eq('undetermined')
+    end
   end
 end
