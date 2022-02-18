@@ -55,7 +55,6 @@ feature "Add a new object" do
       select storage1.name_en, from: storage_select
       select storage1.storage_locations.map(&:name_en).first, from: storage_location_select
       click_button 'confirm'
-      expect(page).not_to have_current_path(path)
       expect(page).not_to have_css '.alert-warning'
       expect(page).to have_current_path(/step_acquisition/)
     end
