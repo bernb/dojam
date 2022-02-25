@@ -7,12 +7,8 @@ feature 'Add a new object' do
     let(:kind_of_site_select)                 { 'museum_object[excavation_site_category_id]' }
     let(:kind_of_site_specified_select)       { 'museum_object[excavation_site_kind_id]' }
 
-    before(:each) do
-      visit "/museum_objects/#{museum_object.id}/builds/step_provenance"
-    end
-
     scenario 'form has correct default values' do
-
+      visit "/museum_objects/#{museum_object.id}/builds/step_provenance"
       expect(page).to have_select(site_name_select,
                                   selected: 'undetermined')
       expect(page).to have_select(kind_of_site_select,
@@ -22,6 +18,7 @@ feature 'Add a new object' do
     end
 
     scenario 'user confirms default choices' do
+      visit "/museum_objects/#{museum_object.id}/builds/step_provenance"
       click_button 'confirm'
       expect(page).not_to have_css '.alert-warning'
       expect(page).to have_current_path(/step_material/)
