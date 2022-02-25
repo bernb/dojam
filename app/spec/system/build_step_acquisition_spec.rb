@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Add a new object' do
-  feature 'step_museum', type: :system, js: true do
+  feature 'step_acquisition', type: :system, js: true do
     let!(:museum_object)                { create :mo_at_step_acquisition }
     let(:kind_of_acquisition_select)          { 'museum_object[acquisition_kind_id]' }
     let(:delivered_by_select)                 { 'museum_object[acquisition_delivered_by_id]' }
