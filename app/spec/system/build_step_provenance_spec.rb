@@ -56,5 +56,13 @@ feature 'Add a new object' do
                .text)
         .to eq('undetermined')
     end
+
+    scenario 'user changes kind of site' do
+      excavation_site_category = create(:excavation_site_category_with_site_kinds)
+      correct_excavation_site_kinds = excavation_site_category.excavation_site_kinds.map(&:name_en)
+      visit "/museum_objects/#{museum_object.id}/builds/step_provenance"
+      select excavation_site_category.name_en, from: kind_of_site_select
+      expect(page).to have_select(kind_of_site_specified_select, options: correct_excavation_site_kinds)
+    end
     end
   end
