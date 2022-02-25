@@ -117,7 +117,6 @@ class Termlist < ApplicationRecord
 	# ToDo: Why is that needed? Such a callback is unexpected and did break things when seeding
 	def add_default_path_for_roots
 		if self.depth == 1
-			puts TermlistPath.count
 			path = Path.create path: "/" + self.id.to_s
 			self.paths << path
 		end
