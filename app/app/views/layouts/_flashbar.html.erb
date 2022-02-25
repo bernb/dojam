@@ -11,7 +11,9 @@
   <% end %>
 <% end %>
 <% unless @museum_object.nil? %>
-  <% @museum_object.errors.each do |field, error| %>
-    <div class="alert alert-warning"><%= field.to_s.humanize capitalize: false %> <%= error %></div>
+  <% @museum_object.errors.each do |error| %>
+    <% attribute = error.attribute %>
+    <% message = error.message %>
+    <div class="alert alert-warning"><%= message.to_s.humanize capitalize: true %> <%= attribute %></div>
   <% end %>
 <% end %>
