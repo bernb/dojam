@@ -5,7 +5,14 @@ FactoryBot.define do
       inv_number    { generate(:inv_number) }
       storage_location
     end
+    trait :step_acquisition_complete do
+      acquisition_delivered_by
+      acquisition_kind
+    end
 
     factory :mo_at_step_acquisition, traits: [:step_museum_complete]
+    factory :mo_at_step_provenance, traits: [
+      :step_museum_complete,
+      :step_acquisition_complete]
   end
 end
