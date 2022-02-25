@@ -56,8 +56,8 @@ class Termlist < ApplicationRecord
 	end
 
   def self.undetermined
-    type = self.first.type
-    return Termlist.find_by name_en: "undetermined", type: type
+    type = self.name
+    return Termlist.find_or_create_by name_en: "undetermined", type: type
   end
 
 	def depth
