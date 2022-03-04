@@ -36,7 +36,7 @@ gem 'pg_search'
 # used by active storage to create thumbnail
 gem 'mini_magick', '~> 4.10'
 
-gem "image_processing", '~> 1.10'
+gem "image_processing", '~> 1.12'
 
 # Reads Excel files
 gem "roo", "~> 2.8"
