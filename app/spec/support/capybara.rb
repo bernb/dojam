@@ -1,5 +1,5 @@
 RSpec.configure do |config|
-  config.before(:each, type: :system) do
+  config.before(:all, type: :system) do
     driven_by :rack_test
   end
 end
@@ -10,5 +10,5 @@ Capybara.register_driver :chrome_headless do |app|
   options.add_argument('--headless')
   options.add_argument('--no-sandbox')
 
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: [options])
 end

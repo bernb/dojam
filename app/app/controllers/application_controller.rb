@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include Pundit
+  include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :exception
   before_action :main_account_must_exist, except: [:new_main_account, :create_main_account]

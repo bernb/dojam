@@ -7,6 +7,6 @@ class ExcavationSite < ApplicationRecord
 	end
 
   def self.undetermined
-    return ExcavationSite.find_by name: "undetermined"
+    return ExcavationSite.find_or_create_by name: "undetermined"
   end
 end
