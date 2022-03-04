@@ -10,9 +10,17 @@ FactoryBot.define do
       acquisition_kind
     end
 
-    factory :mo_at_step_acquisition, traits: [:step_museum_complete]
+    trait :step_provenance_complete do
+    end
+
+    factory :mo_at_step_acquisition, traits: [
+      :step_museum_complete]
     factory :mo_at_step_provenance, traits: [
       :step_museum_complete,
       :step_acquisition_complete]
+    factory :mo_at_step_material, traits: [
+      :step_museum_complete,
+      :step_acquisition_complete,
+      :step_provenance_complete]
   end
 end
