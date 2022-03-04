@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 feature "Add new object steps", type: :system do
-  # scenario "User starts adding a new object from home" do
-  #   visit '/'
-  #   #click_link "new entry"
-  #   expect(page).to have_text("log in")
-  # end
+  scenario "User starts adding a new object from home" do
+    create(:JAM_with_storage_locations)
+    visit '/'
+    click_link "new entry"
+    expect(page).to have_text("add new object")
+  end
 
   # scenario "User deselects undetermined entry in material step" do
   #   museum_object = create(:valid_museum_object)
