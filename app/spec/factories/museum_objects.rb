@@ -1,12 +1,18 @@
 FactoryBot.define do
-  factory :valid_museum_object, class: :museum_object  do
-		inv_number { "T.1234" }
-    amount { 1 }
-    storage_location { StorageLocation.first }
-  end
+  sequence(:inv_number) { |n| "T.#{n}"}
+  factory :museum_object do
+    trait :step_museum_complete do
+      inv_number    { generate(:inv_number) }
+      storage_location
+    end
+    trait :step_acquisition_complete do
+      acquisition_delivered_by
+      acquisition_kind
+    end
 
-  factory :pathless_museum_object, class: :museum_object do
-    inv_number { "T.0000" }
-    main_path { nil }
+    factory :mo_at_step_acquisition, traits: [:step_museum_complete]
+    factory :mo_at_step_provenance, traits: [
+      :step_museum_complete,
+      :step_acquisition_complete]
   end
 end

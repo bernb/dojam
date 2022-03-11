@@ -5,4 +5,11 @@ class ExcavationSiteCategory < Termlist
 	def self.is_independent_of_paths
 		true
 	end
+
+	def self.undetermined
+		site_kind_undetermined = ExcavationSiteKind.undetermined
+		site_category_undetermined = ExcavationSiteCategory.find_or_create_by name_en: 'undetermined'
+		site_category_undetermined.excavation_site_kinds << site_kind_undetermined
+		return site_category_undetermined
+	end
 end
