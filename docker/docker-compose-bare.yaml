@@ -1,0 +1,44 @@
+version: '3.6'
+services:
+  db:
+    image: postgres:9.6
+    expose:
+      - "5432"
+    env_file:
+        - env-files/db.env
+    volumes:
+      # Files in docker-entrypoint-initdb.d get executed if database is empty
+      - ./build-files/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
+      - ./db:/var/lib/postgresql/data
+    networks:
+      app_internal:
+  app:
+    #build:
+    #  dockerfile: docker/Dockerfile
+    #  context: ..
+    depends_on:
+      - db
+    stdin_open: true
+    #tty: trueversion: '3.6'
+    image: dojam_app:latest
+    #build:
+    #  target: base
+    volumes:
+      - ./storage:/dojam/storage
+    command: bundle exec rails s -p 22333 -b '0.0.0.0'
+    networks:
+      app_internal:
+      app_external:
+        ipv4_address: 10.0.1.100
+    ports:
+      - "22333:22333"
+networks:
+  app_internal:
+    internal: true
+    ipam:
+      config:
+        - subnet: 10.0.100.0/24
+  app_external:
+    ipam:
+      config:
+        - subnet: 10.0.1.0/24
