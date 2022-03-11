@@ -1,12 +1,5 @@
 source 'https://rubygems.org'
 
-# Workaround for bundler 1.x to avoid it
-# pulling without TLS
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
-
 gem 'i18n-active_record', :require => 'i18n/active_record'
 
 # Used by rubymine
@@ -43,7 +36,7 @@ gem 'pg_search'
 # used by active storage to create thumbnail
 gem 'mini_magick', '~> 4.10'
 
-gem "image_processing", '~> 1.10'
+gem "image_processing", '~> 1.12'
 
 # Reads Excel files
 gem "roo", "~> 2.8"
@@ -133,6 +126,8 @@ group :development, :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'rspec'
+  gem 'faker'
 end
 
 group :development do

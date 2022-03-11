@@ -9,7 +9,7 @@ FactoryBot.define do
     request_document_signed_by { "MyString" }
     lender_name { "MyString" }
     lender_job_title { "MyString" }
-    loadn_document_number { "MyString" }
+    loan_document_number { "MyString" }
     return_date { "2019-09-09" }
     object_condition { "MyText" }
     museum_object { nil }
