@@ -13,6 +13,14 @@ FactoryBot.define do
     trait :step_provenance_complete do
     end
 
+    trait :step_material_complete do
+      after(:create) do |mo|
+        material = create(:material_with_ms)
+        mo.secondary_paths == [material.path]
+        mo.save
+      end
+    end
+
     factory :mo_at_step_acquisition, traits: [
       :step_museum_complete]
     factory :mo_at_step_provenance, traits: [
@@ -22,5 +30,10 @@ FactoryBot.define do
       :step_museum_complete,
       :step_acquisition_complete,
       :step_provenance_complete]
+    factory :mo_at_step_material_specified, traits: [
+      :step_museum_complete,
+      :step_acquisition_complete,
+      :step_provenance_complete,
+      :step_material_complete]
   end
 end
