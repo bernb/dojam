@@ -180,6 +180,10 @@ class MuseumObject < ApplicationRecord
 		return paths
 	end
 
+	# ToDo: It might be way easier and more intuitive to no override this method but instead let the controller get the
+	# correct paths to present to the user
+	# One thing this method does is rewrite the path so that if '/metal' is given what is actually saved is the path matching
+	# '/metal/undetermined/undetermined/undetermined'
 	def secondary_paths=(new_paths)
 		# Allow for single path and array of paths
 		new_paths = [new_paths].flatten
