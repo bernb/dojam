@@ -162,8 +162,8 @@ class StaticPagesController < ApplicationController
     file = File.open(file_entity)
     xlsx = Roo::Spreadsheet.open(file)
     xlsx.each_with_index do |row, i|
-      name_en = row.first&.strip
-      name_ar = row.second&.strip
+      name_en = row.first&.to_s&.strip
+      name_ar = row.second&.to_s&.strip
       if name_en.nil? || name_ar.nil?
         logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Empty cell"}
         warnings[:skipped] = t('some_rows_were_skipped_see_below_for_more_information')
