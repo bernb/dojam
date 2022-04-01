@@ -67,14 +67,15 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     # Stuff created here might not get cleaned if tests crashes
+    museum = FactoryBot.create(:museum)
     # See above: Main admin might still be present which is not an issue but must be taken into account
-    FactoryBot.create(:main_admin) unless User.count > 0
+    FactoryBot.create(:main_admin, museum: museum) unless User.count > 0
     # As we explicitly set the id, the db sequence becomes wrong within this test context
     ActiveRecord::Base.connection.reset_pk_sequence!('users')
   end
   # Note that before(:all) hooks do net get cleaned up correctly if an error occurs
   config.before(:each, type: :system) do
-    @user = create(:user)
+    @user = create(:user, museum: Museum.first)
     sign_in @user
   end
 end
