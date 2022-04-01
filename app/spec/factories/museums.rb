@@ -7,6 +7,16 @@ FactoryBot.define do
     name {"JAM"}
   end
 
+  factory :museum_with_storage_locations, class: "Museum" do
+    transient do
+      storage_count {3}
+    end
+    after(:create) do |museum, eval|
+      create_list(:storage_with_locations, eval.storage_count, museum: museum)
+      museum.reload
+    end
+  end
+
   factory :JAM_with_storage_locations, class: "Museum" do
     name {"JAM"}
     transient do
