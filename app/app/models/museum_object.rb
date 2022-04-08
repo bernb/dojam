@@ -420,35 +420,25 @@ class MuseumObject < ApplicationRecord
 		self.secondary_paths.map{|p| p.included_or_child_of?(path)}.reduce(:|)
 	end
 
+	# ToDo: This is not the best/proper way to do it Better way might be to use a after_initialize callback
 	def set_default_values
-		termlist_names = [:excavation_site,
-										  :acquisition_kind,
-											:acquisition_delivered_by,
-											:excavation_site_kind,
-											:excavation_site_category,
-											:production_technique,
-											:decoration_technique,
-											:decoration_color,
-											:decoration_style,
-											:inscription_letter,
-											:inscription_language,
-											:preservation_material,
-											:preservation_object,
-											:authenticity,
-											:priority,
-											:dating_period,
-		]
-    self.assign_attributes({main_path: Path.undetermined_path})
-    default_termlists = {}
-		termlist_names.each do |termlist_name|
-			if termlist_name == :decoration_style
-        default_termlists[termlist_name] = Decoration.undetermined
-			else
-				undetermined_entry = termlist_name.to_s.camelize.constantize.undetermined
-        default_termlists[termlist_name] = undetermined_entry
-			end
-		end
-    self.assign_attributes(default_termlists)
+		self.main_path 									||= Path.undetermined_path
+		self.excavation_site 						||= ExcavationSite.undetermined
+		self.acquisition_kind 					||= AcquisitionKind.undetermined
+		self.acquisition_delivered_by 	||= AcquisitionDeliveredBy.undetermined
+		self.excavation_site_kind 			||= ExcavationSiteKind.undetermined
+		self.excavation_site_category 	||= ExcavationSiteCategory.undetermined
+		self.production_technique 			||= ProductionTechnique.undetermined
+		self.decoration_technique 			||= DecorationTechnique.undetermined
+		self.decoration_color 					||= DecorationColor.undetermined
+		self.decoration_style 					||= Decoration.undetermined # Table got renamed to 'decorations' at some point
+		self.inscription_letter 				||= InscriptionLetter.undetermined
+		self.inscription_language 			||= InscriptionLanguage.undetermined
+		self.preservation_material 			||= PreservationMaterial.undetermined
+		self.preservation_object 				||= PreservationObject.undetermined
+		self.authenticity 							||= Authenticity.undetermined
+		self.priority 									||= Priority.undetermined
+		self.dating_period 							||= DatingPeriod.undetermined
 	end
 
 	# depth 1 = materials
