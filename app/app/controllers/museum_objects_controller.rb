@@ -112,11 +112,14 @@ class MuseumObjectsController < ApplicationController
             term = termclass.find term_id
             if k.in?(["Material", "MaterialSpecified", "KindOfObject", "KindOfObjectSpecified"])
               paths = Path.where("path LIKE ?", term.paths.first.path + "%")
-              prim = MuseumObject.where(main_path: paths)
-              sec = MuseumObject.joins(:museum_object_paths).where(museum_object_paths: {path_id: paths.ids})
+              prim = policy_scope(MuseumObject).where(main_path: paths)
+              sec = policy_scope(MuseumObject).joins(:museum_object_paths).where(museum_object_paths: {path_id: paths.ids})
               term_results +=  sec + prim
             else
-              term_results += term.museum_objects 
+              if k == 'Decoration'
+                k = 'DecorationStyle'
+              end
+              term_results += policy_scope(MuseumObject).where("#{k.underscore}_id = '#{term.id}'")
             end
           end
           results << term_results.uniq
@@ -142,7 +145,6 @@ class MuseumObjectsController < ApplicationController
           flash[:error] = "invalid term sent"
           redirect_to museum_objects_search_path
         end
-        puts @selected_term
         termclass = Termlist.to_internal_type(@selected_term.titleize(downcase: false).gsub(' ', '')).constantize
         @select_tag_id = "search_form_field_" + @selected_term.gsub(' ','_')
         terms = termclass.all
