@@ -157,7 +157,7 @@ class MuseumObjectsController < ApplicationController
   def search_result_invnumber
     searchstring = params[:inv_number_search]
     split_string = searchstring.split("-")
-    museum_objects = MuseumObject.where inv_number: split_string[0]
+    museum_objects = policy_scope(MuseumObject).where inv_number: split_string[0]
     if split_string.size == 2
       museum_objects = museum_objects.where inv_extension: split_string[1]
     end
