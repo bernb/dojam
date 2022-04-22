@@ -103,3 +103,22 @@ feature "User must be logged in", type: :system do
     end
   end
 end
+
+feature 'Normal users must have an associated museum', type: :system do
+  context 'user has no associated museum' do
+    let(:user) { create :user_without_museum }
+    scenario "tries to access '/'" do
+      sign_out @user
+      sign_in user
+      visit '/'
+      expect(page).to have_text('log in')
+    end
+  end
+  context 'user has an associated museum' do
+    # We use the default @user that get created within a before_suite callback
+    scenario "tries to access '/'" do
+      visit '/'
+      expect(page).not_to have_text('log in')
+    end
+  end
+end

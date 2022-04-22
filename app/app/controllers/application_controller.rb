@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :exception
   before_action :main_account_must_exist, except: [:new_main_account, :create_main_account]
-  before_action :authenticate_user!, except: [:new_main_account, :create_main_account]
+  before_action :authenticate_user!, except: [:new_main_account, :create_main_account] # Method implemented by devise
+  before_action :normal_users_must_belong_to_a_museum, except: [:new_main_account, :create_main_account, 'sessions#new']
   around_action :set_locale
 
   def default_url_options
@@ -21,6 +22,16 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def normal_users_must_belong_to_a_museum
+    if current_user.present? &&
+      current_user.is_normal_user? &&
+      current_user.museum.nil?
+      flash[:danger] = t('account_must_be_assigned_to_a_museum')
+      sign_out(current_user)
+      redirect_to new_user_session_path
+    end
+  end
 
   def main_account_must_exist
     redirect_to main_account_new_path unless User.find_by(id: 1).present?

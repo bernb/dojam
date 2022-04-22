@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  belongs_to :museum
+  belongs_to :museum, optional: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -15,5 +15,9 @@ class User < ApplicationRecord
 
   def show_museum_for_objects?
     return self.has_extended_access?
+  end
+
+  def is_normal_user?
+    return !self.has_extended_access?
   end
 end
