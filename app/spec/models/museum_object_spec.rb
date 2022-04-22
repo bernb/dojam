@@ -1,16 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe MuseumObject, type: :model do
-  context "doing fulltext search" do
-    before(:each) do
-      # Build user
-      create(:material)
-		end
-    context "by user with extended access" do
+  context 'doing fulltext search' do
+    let(:museum1) { create :museum_with_storage_locations }
+    let!(:object1) { create :museum_object,
+                            storage_location: museum1.storages.first.storage_locations.first,
+                            remarks: 'ttt'}
+    let(:museum2) { create :museum_with_storage_locations }
+    let!(:object2) { create :museum_object,
+                            storage_location: museum2.storages.first.storage_locations.first,
+                            remarks: 'ttt'}
 
+    context 'by user with extended access' do
+      let(:user) { create :ext_user }
+
+      it 'should give results from all museums' do
+        result = MuseumObject.search('ttt', user)
+        expect(result.count).to eq(2)
+      end
     end
-    context "by user without extended access" do
 
+    context 'by user without extended access' do
+      let(:user) { create :user, museum: museum1 }
+
+      it 'should not give results from all museums' do
+        result = MuseumObject.search('ttt', user)
+        expect(result.count).to eq(1)
+      end
 		end
 	end
 end

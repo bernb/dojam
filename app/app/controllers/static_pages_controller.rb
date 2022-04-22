@@ -67,7 +67,7 @@ class StaticPagesController < ApplicationController
   end
 
   def jstreetest
-
+    authorize :admin_links, :show?
   end
 
   def reports
@@ -78,11 +78,13 @@ class StaticPagesController < ApplicationController
   end
 
   def export_termlists
+    authorize :admin_links, :show?
     data = FileExportHelper.call
     send_data data, filename: "ms.zip"
   end
 
   def import_translations_select
+    authorize :admin_links, :show?
     if session[:log_path].present?
       @log_messages = File.read(session[:log_path])
       session[:log_path] = nil
@@ -90,6 +92,7 @@ class StaticPagesController < ApplicationController
   end
 
   def import_static_translations_select
+    authorize :admin_links, :show?
     if session[:log_path].present?
       @log_messages = File.read(session[:log_path])
       session[:log_path] = nil
@@ -97,6 +100,7 @@ class StaticPagesController < ApplicationController
   end
 
   def import_static_translations_submit
+    authorize :admin_links, :show?
     file_entity = params.dig(:static_translations, :translation_file)
     warnings = {}
     filename = file_entity.original_filename
@@ -144,6 +148,7 @@ class StaticPagesController < ApplicationController
   end
 
   def import_translations_submit
+    authorize :admin_links, :show?
     file_entity = params.dig(:translations, :translation_file)
     warnings = {}
     filename = file_entity.original_filename
@@ -162,8 +167,8 @@ class StaticPagesController < ApplicationController
     file = File.open(file_entity)
     xlsx = Roo::Spreadsheet.open(file)
     xlsx.each_with_index do |row, i|
-      name_en = row.first&.strip
-      name_ar = row.second&.strip
+      name_en = row.first&.to_s&.strip
+      name_ar = row.second&.to_s&.strip
       if name_en.nil? || name_ar.nil?
         logger.tagged("Row #{i.to_s}", "Skipped"){logger.warn "Empty cell"}
         warnings[:skipped] = t('some_rows_were_skipped_see_below_for_more_information')
@@ -202,6 +207,7 @@ class StaticPagesController < ApplicationController
   end
 
   def import_termlists_select
+    authorize :admin_links, :show?
     if session[:log_path].present?
       @log_messages = File.read(session[:log_path])
       session[:log_path] = nil
@@ -213,6 +219,7 @@ class StaticPagesController < ApplicationController
   end
 
   def import_termlists_submit
+    authorize :admin_links, :show?
     files = params.dig(:termlists, :termlist_files)
 
     timestamp = DateTime.now.strftime("%Y-%m-%d %H:%M:%S:%L")

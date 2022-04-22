@@ -10,13 +10,15 @@
 
 <div class = "row">  
   <div class = "col-md-12">
-    <h2><%= t('administration') %></h2>
-    <%= link_to t('import_termlists'),import_termlists_select_path, class: "btn btn-primary"%></button>
-    <%= link_to t('import_termlist_translations'),import_translations_select_path, class: "btn btn-primary"%></button>
-    <%= link_to t('import_other_translations'),import_static_translations_select_path, class: "btn btn-primary"%></button>
-    <%= link_to t('export_termlists'), export_termlists_path, class: "btn btn-primary" %>
-    <% link_to t('manage_termlists'), '/admin', class: "btn btn-primary" %>
-    <%= link_to t('view_last_activities'),"", class: "btn btn-primary disabled"%>
-    <%= link_to t('reports'), static_pages_reports_path, class: "btn btn-primary", data: {turbolinks: false} %>
+    <% if policy(:admin_links).show? %>
+      <h2><%= t('administration') %></h2>
+      <%= link_to t('import_termlists'),import_termlists_select_path, class: "btn btn-primary"%></button>
+      <%= link_to t('import_termlist_translations'),import_translations_select_path, class: "btn btn-primary"%></button>
+      <%= link_to t('import_other_translations'),import_static_translations_select_path, class: "btn btn-primary"%></button>
+      <%= link_to t('export_termlists'), export_termlists_path, class: "btn btn-primary" %>
+      <% link_to t('manage_termlists'), '/admin', class: "btn btn-primary" %>
+      <%= link_to t('view_last_activities'),"", class: "btn btn-primary disabled"%>
+      <%= link_to t('reports'), static_pages_reports_path, class: "btn btn-primary", data: {turbolinks: false} %>
+    <% end %>
   </div>
 </div>
