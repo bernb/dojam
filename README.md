@@ -78,3 +78,26 @@ A running installation of the dojam application.
   * See [documentation](https://docs.docker.com/compose/reference/exec/) fore more details
 
 See `scripts/load_latest_db_backup.sh` for a bash script. Note that this script assumes the latest within within the folder `../tmp/<LATEST_BACKUP>`.
+
+## Release new version
+
+### Requirements
+A working development environment of the dojam application.
+
+### Steps
+* Setup an SSH alias named `dojam` in `~/.ssh/config` for the host that's running the app
+  * Use public key authentication
+  * Setup an SSH agent and add your key to it, so you won't be prompted to enter the password during the process. Alternatively you can use a key without a password, although that offers lower security.
+* Run `scripts/new_release.sh`
+  * The previous app image is moved to `dojam_app:old_latest`
+  * A backup of the database volume is created
+  * The script performs a rudimentary check if the application is working. If the response code is 500, check the applications web page to see if a database migration is required. The expected response code is 302.
+
+### Note
+If the host didn't already have a working installation of the dojam app, a manual initialization of the database with `docker-compose exec app rails db:setup` on the host is necessary.
+
+## Rollback to the previous version
+* Execute `scripts/rollback.sh`
+ * The new version is tagged as `dojam_app:rollback_latest` and the old version from `old_latest` is restored
+ * A new backup of the database is created
+ * The old database backup is restored
