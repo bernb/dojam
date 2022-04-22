@@ -2,6 +2,7 @@ version: '3.6'
 services:
   db:
     image: postgres:9.6
+    user: "${UID}"
     expose:
       - "5432"
     env_file:
@@ -21,6 +22,7 @@ services:
     stdin_open: true
     #tty: trueversion: '3.6'
     image: dojam_app:latest
+    user: "${UID}"
     #build:
     #  target: base
     volumes:
