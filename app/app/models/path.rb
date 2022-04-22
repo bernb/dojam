@@ -40,7 +40,7 @@ class Path < ApplicationRecord
 		koo_id = KindOfObject.undetermined.id.to_s
 		koos_id = KindOfObjectSpecified.undetermined.id.to_s
 
-		return Path.find_by path: "/#{m_id}/#{ms_id}/#{koo_id}/#{koos_id}"
+		return Path.find_or_create_by path: "/#{m_id}/#{ms_id}/#{koo_id}/#{koos_id}"
 	end
 
   # Will not copy path that relates to own m/ms/koo/koos
