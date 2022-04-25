@@ -2,7 +2,12 @@
 
 set -e # Abort script in case of error
 
-export COMPOSE_FILE=./docker/docker-compose-base.yml:./docker/docker-compose-production.yml
+case "$(uname -s)" in
+    Linux*)     export COMPOSE_FILE="./docker/docker-compose-base.yml:./docker/docker-compose-production.yml";;
+    CYGWIN*)    export COMPOSE_FILE="./docker/docker-compose-base.yml;./docker/docker-compose-production.yml";;
+    MINGW*)     export COMPOSE_FILE="./docker/docker-compose-base.yml;./docker/docker-compose-production.yml";;
+esac
+#export COMPOSE_FILE=./docker/docker-compose-base.yml:./docker/docker-compose-production.yml
 #export UID=$(id -u)
 #export GID=$(id -g)
 
@@ -13,7 +18,7 @@ echo
 echo "Export image as file..."
 mkdir -p tmp
 docker save dojam_app:latest -o tmp/dojam-app-latest.tar
-rm tmp/dojam-app-latest.tar.bz2 || true
+rm -f tmp/dojam-app-latest.tar.bz2
 bzip2 -v tmp/dojam-app-latest.tar
 
 echo
