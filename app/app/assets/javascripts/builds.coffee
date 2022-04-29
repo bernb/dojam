@@ -20,13 +20,6 @@ ready = ->
       data:
         storage_id: $('.storage_selection option:selected').val()
         museum_object_id: $(".edit_museum_object").attr('id').match(/\d+/)
-  $(".museum_selection").on "change", ->
-    $.ajax
-      url: "/builds/museum_prefix"
-      type: "GET"
-      dataType: "script"
-      data:
-        museum_id: $('.museum_selection option:selected').val()
   $("#excavation_site_category_selection").on "change", ->
     $.ajax
       url: "/builds/excavation_site_kinds"
