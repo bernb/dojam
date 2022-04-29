@@ -2,7 +2,7 @@ class LoanOutsController < ApplicationController
   before_action :set_loan_out, only: [:show, :edit, :update, :destroy]
 
   def index
-    @loan_outs = LoanOut.all
+    @loan_outs = policy_scope(LoanOut)
     @loans_out_layout = current_user.is_normal_user? ? 'layouts/loan_outs_table' : 'layouts/loan_outs_table_with_museum'
   end
 

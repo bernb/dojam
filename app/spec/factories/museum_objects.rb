@@ -35,5 +35,11 @@ FactoryBot.define do
       :step_acquisition_complete,
       :step_provenance_complete,
       :step_material_complete]
+
+    factory :complete_museum_object, traits: [
+      :step_museum_complete,
+      :step_acquisition_complete,
+      :step_provenance_complete,
+      :step_material_complete]
   end
 end
