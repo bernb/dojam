@@ -6,11 +6,13 @@ feature "Add a new object" do
     let!(:museum)           { create :JAM }
     let!(:storage1)         { create :storage_with_locations, museum: museum }
     let!(:storage2)         { create :storage_with_locations, museum: museum }
+    let!(:user)             { create :user, museum: museum}
     let(:inv_field)               { 'museum_object[inv_number]'}
     let(:storage_select)          { 'storage[storage_id]'}
     let(:storage_location_select) { 'museum_object[storage_location_id]'}
 
     before(:each) do
+      sign_in user
       visit "/museum_objects/#{museum_object.id}/builds/step_museum"
     end
 
