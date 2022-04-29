@@ -126,16 +126,7 @@ class BuildsController < ApplicationController
       }
     end
   end
-  
-  def museum_prefix
-    respond_to do |format|
-      format.js {
-        museum = Museum.find params[:museum]
-        @prefix = museum.prefix
-      }
-    end
-  end
-  
+
   private
 
 	def replace_nil_values_with_empty
