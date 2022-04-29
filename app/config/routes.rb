@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   
   
   # Helper actions for ajax call to find correct action
-  get 'builds/storagess', to: "builds#storages"
+  get 'builds/storages', to: "builds#storages"
   get 'builds/storage_locations', to: "builds#storage_locations"
   get 'builds/excavation_site_kinds', to: "builds#excavation_site_kinds"
   get 'builds/kind_of_objects_for_spec_material_path', to: "builds#kind_of_objects_for_spec_material_path"
