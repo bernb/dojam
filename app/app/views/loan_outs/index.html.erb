@@ -1,3 +1,3 @@
 <%= render 'layouts/title', title_name: t('loans_out') %>
-<%= render 'layouts/loan_outs_table', loan_outs: @loan_outs %>
+<%= render @loans_out_layout, loan_outs: @loan_outs %>
 <%= link_to 'new loan out', new_loan_out_path %>
