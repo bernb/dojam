@@ -3,6 +3,7 @@ class LoanOutsController < ApplicationController
 
   def index
     @loan_outs = LoanOut.all
+    @loans_out_layout = current_user.is_normal_user? ? 'layouts/loan_outs_table' : 'layouts/loan_outs_table_with_museum'
   end
 
   def show
