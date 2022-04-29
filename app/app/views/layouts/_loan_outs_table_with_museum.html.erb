@@ -15,9 +15,9 @@
       <tbody>
         <% warn_class = "" %>
         <% if o.overdue? %>
-          <% warn_class = "table-warning" %>
+          <% warn_class = " table-warning" %>
         <% end %>
-        <tr class="search-result-row <%= warn_class %>" data-link="<%= loan_out_path(o) %>">
+        <tr class="search-result-row<%= warn_class %>" data-link="<%= loan_out_path(o) %>">
           <td><%= o.museum_object.museum.name %></td>
           <td><%= o.museum_object.decorate.full_inv_number %></td>
           <td><%= o.to_institution %></td>
