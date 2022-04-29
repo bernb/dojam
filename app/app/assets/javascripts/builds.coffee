@@ -4,7 +4,6 @@
 
 ready = ->
   $(".btn").prop("disabled", false)
-  $(".museum_selection").prop("disabled", true)
   $(".museum_selection").on "change", ->
     $.ajax
       url: "/builds/storages"
