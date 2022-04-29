@@ -3,17 +3,26 @@ require 'rails_helper'
 feature "Add a new object" do
   feature "step_museum", type: :system, js: true do
     let!(:museum_object)    { create :museum_object }
-    let!(:museum)           { create :JAM }
+    let!(:museum)           { create :museum }
+    let!(:museum2)          { create :museum } # Not used, only created to have two museums to test correct scoping
     let!(:storage1)         { create :storage_with_locations, museum: museum }
     let!(:storage2)         { create :storage_with_locations, museum: museum }
     let!(:user)             { create :user, museum: museum}
     let(:inv_field)               { 'museum_object[inv_number]'}
     let(:storage_select)          { 'storage[storage_id]'}
     let(:storage_location_select) { 'museum_object[storage_location_id]'}
+    let(:museum_select)           { 'museum[museum_id]'}
 
     before(:each) do
       sign_in user
       visit "/museum_objects/#{museum_object.id}/builds/step_museum"
+    end
+
+    scenario 'user can not choose another museum' do
+      expect(page).to have_select(museum_select,
+                                  selected: user.museum.name,
+                                  options: [user.museum.name],
+                                  disabled: true)
     end
 
     scenario "correct storage options are available" do

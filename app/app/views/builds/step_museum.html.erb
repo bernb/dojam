@@ -4,7 +4,7 @@
 <%= render "layouts/build_steps_layout", step_name: @step do %>
   <%= simple_form_for @museum_object, url: wizard_path, method: :put do |f| %>
     <% label_tag "", t('museum') %>
-    <%= collection_select(:museum, :museum_id, @museums, :id, :name, {}, {class: "museum_selection form-control select required disabled"}) %>
+    <%= collection_select(:museum, :museum_id, @museums, :id, :name, {}, {class: "museum_selection form-control select required", disabled: @is_museum_select_disabled}) %>
     </p>
     <%= label_tag "", t('storage_location') %>
     <%= collection_select(:storage, :storage_id, @storages, :id, :name, {include_blank: true, selected: @selected_storage_id}, {class: "storage_selection form-control select required"}) %>

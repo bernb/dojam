@@ -153,7 +153,7 @@ class BuildsController < ApplicationController
 	end
 
 	def step_museum_vars
-    @museums = Museum.where name: "JAM" # we restrict to the JAM museum for now
+    @museums = policy_scope(Museum)
     @storages = @museums.first.storages
     # set correct collections if view gets rendered again (i.e. validation error or jump to view for edit)
     # first look if param exist, which means view got just rendered again with a storage choosen by user
@@ -161,6 +161,7 @@ class BuildsController < ApplicationController
     # if no user choice found look if object has storage location defined
     @selected_storage_id = params.dig(:storage, :storage_id) || @museum_object&.storage_location&.storage&.id || ""
     @storage_locations = @storages.find_by(id: @selected_storage_id)&.storage_locations || {}
+    @is_museum_select_disabled = current_user.is_normal_user?
 	end
 
 	def step_provenance_vars
