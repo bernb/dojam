@@ -101,3 +101,11 @@ If the host didn't already have a working installation of the dojam app, a manua
  * The new version is tagged as `dojam_app:rollback_latest` and the old version from `old_latest` is restored
  * A new backup of the database is created
  * The old database backup is restored
+
+# Allow access for new users
+* Switch to the wireguard config directory
+* Run `umask 077; sudo wg genkey | tee privatekey_<name> | wg pubkey > publickey_<name>` (substitute <name> with the name of the new user)
+* Copy the template config `dojam_vpn_template.conf` to a new file `dojam_vpn_<name>.conf` (substitute <name> with the name of the new user)
+* Copy and paste the private- and public key into the new config file `dojam_vpn_<name>.conf` after `PrivateKey = ` and `PublicKey = ` respectively
+* Place `dojam_vpn_<name>.conf` into a ZIP file **protected by a password** and send it to the new user
+* Send the password for the ZIP file **securely via a trusted channel** (e.g. by handing it out on paper)
