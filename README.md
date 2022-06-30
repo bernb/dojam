@@ -103,9 +103,15 @@ If the host didn't already have a working installation of the dojam app, a manua
  * The old database backup is restored
 
 # Allow access for new users
-* Switch to the wireguard config directory
+* Switch to the wireguard config directory `/etc/wireguard`
 * Run `umask 077; sudo wg genkey | tee privatekey_<name> | wg pubkey > publickey_<name>` (substitute <name> with the name of the new user)
-* Copy the template config `dojam_vpn_template.conf` to a new file `dojam_vpn_<name>.conf` (substitute <name> with the name of the new user)
+* Open `wg0.conf` in a text editor
+ * Copy the lowest of the paragraphs starting with `[Peer]` and paste it at the end of the file.
+ * Add the name of the user as a comment above it
+ * Increase `AllowedIPs` by one (example: If the highest IP is `10.0.0.5/32` set the new one to `10.0.0.6/32`)
+ * Copy and paste the generated **public key** after the new `PublicKey = ` entry
+* Restart the Wireguard service with `systemctl restart wg-quick@wg0.service`
+* Copy the template config `dojam_config_example` to a new file `dojam_vpn_<name>.conf` (substitute <name> with the name of the new user)
 * Copy and paste the private- and public key into the new config file `dojam_vpn_<name>.conf` after `PrivateKey = ` and `PublicKey = ` respectively
 * Place `dojam_vpn_<name>.conf` into a ZIP file **protected by a password** and send it to the new user
-* Send the password for the ZIP file **securely via a trusted channel** (e.g. by handing it out on paper)
+* Send the password for the ZIP file **securely via a trusted channel** (e.g. by handing it out on paper or via a secure messenger)
