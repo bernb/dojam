@@ -34,7 +34,7 @@ ActiveAdmin.register Translation, as: "Translations" do
   form title: :key do |f|
     f.semantic_errors
     inputs do
-      input :locale, as: :select, collection: ['en', 'ar'], include_blank: false
+      input :locale, as: :select, collection: %w[en ar], include_blank: false
       input :key
       input :value, input_html: {rows: 1}
     end
