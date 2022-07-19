@@ -9,12 +9,6 @@ class Termlist < ApplicationRecord
 	# ToDo: What should be the semantics for a destroy?
 	has_many :termlist_paths
 	has_many :paths, through: :termlist_paths
-	# ToDo: Move method to another callback
-	# Changing self within an after_create callback can be problematic, is a known limitation of Rails and has produced
-	# nasty bugs in the past (i.e. this callback MUST be after has_many)
-	# See https://github.com/rails/rails/pull/38166 and the warning
-	# at https://guides.rubyonrails.org/active_record_callbacks.html#available-callbacks
-	after_create :add_default_path_for_roots
 
 	def self.for_path path
 		self
@@ -108,17 +102,6 @@ class Termlist < ApplicationRecord
 			return @@typename_mapping[typename]
 		else
 			return typename
-		end
-	end
-
-	private
-	# Materials have no parents but a path to themselves i.e.
-	# material always has path /material.id
-	# ToDo: Why is that needed? Such a callback is unexpected and did break things when seeding
-	def add_default_path_for_roots
-		if self.depth == 1
-			path = Path.create path: "/" + self.id.to_s
-			self.paths << path
 		end
 	end
 end
