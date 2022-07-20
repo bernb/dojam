@@ -5,7 +5,7 @@ ActiveAdmin.register Storage do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name_en, :name_ar
+  permit_params :name_en, :name_ar, :museum_id
 
   index do
     column :name_en do |storage|
