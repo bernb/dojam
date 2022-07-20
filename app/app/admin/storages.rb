@@ -44,6 +44,16 @@ ActiveAdmin.register Storage do
     end
   end
 
+  form title: :name_en do |f|
+    f.semantic_errors
+    inputs do
+      input :museum
+      input :name_en
+      input :name_ar
+    end
+    f.actions
+  end
+
 
   
 end
