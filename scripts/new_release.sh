@@ -38,6 +38,7 @@ echo
 echo "Run install script..."
 ssh dojam './dojam/install.sh'
 
+set +e # Do not abort script anymore
 echo
 echo "Testing server..."
 echo "Waiting 10 seconds for server to come up..."
