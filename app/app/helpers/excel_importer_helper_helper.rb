@@ -319,7 +319,7 @@ module ExcelImporterHelperHelper
 	end
 
 	def is_complex_attribute key
-		array = [:needs_cleaning, :needs_conservation, :storage_location, :excavation_site, :colors, :production_technique_id, :decoration_color_id, :decoration_technique_id]
+		array = [:needs_cleaning, :needs_conservation, :storage_location, :excavation_site_id, :colors, :production_technique_id, :decoration_color_id, :decoration_technique_id]
 			array.include?(key) ||
 			key.to_s.include?("kind_of") ||
 			key.to_s.include?("main_material") ||

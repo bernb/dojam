@@ -136,6 +136,11 @@ module ExcelImporterHelper
 					when :production_technique, :decoration_color, :decoration_technique, :dating_period
 						values = split_entry(row[key])
 						set_association object: object, column: key, termlist_value: values[0], current_line: i unless values[0].blank?
+					when :excavation_site_id
+						# Note that the only 'complex' thing here is that excavation site names do not get translated and therefore their
+						# column name is `name` instead of `name_en`
+						excavation_site = ExcavationSite.find_by name: row[key]
+						object.excavation_site = excavation_site
 					end # case key
 				end # complex attribute
 			end # row.keys.each
