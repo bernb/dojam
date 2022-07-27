@@ -172,8 +172,8 @@ module ExcelImporterHelperHelper
 	def set_century_data object:, value: 
 		object.is_dating_century_unknown = true
 		cent_begin, cent_end = resolve_range_entries value
-		cent_begin_term = DatingCentury.where("name LIKE ?", cent_begin).first
-		cent_end_term = DatingCentury.where("name LIKE ?", cent_end).first
+		cent_begin_term = DatingCentury.where("name_en LIKE ?", cent_begin).first
+		cent_end_term = DatingCentury.where("name_en LIKE ?", cent_end).first
 
 		if cent_begin_term.blank?
 			add_termlist_not_found_error object: object, value: cent_begin, termlist_name: "DatingCentury"
@@ -189,8 +189,8 @@ module ExcelImporterHelperHelper
 	def set_millennium_data object:, value: 
 		object.is_dating_millennium_unknown = true
 		mil_begin, mil_end = resolve_range_entries value
-		mil_begin_term = DatingMillennium.where("name LIKE ?", mil_begin).first
-		mil_end_term = DatingMillennium.where("name LIKE ?", mil_end).first
+		mil_begin_term = DatingMillennium.where("name_en LIKE ?", mil_begin).first
+		mil_end_term = DatingMillennium.where("name_en LIKE ?", mil_end).first
 
 		if mil_begin_term.blank?
 			add_termlist_not_found_error object: object, value: mil_begin, termlist_name:"DatingMillenniun"
