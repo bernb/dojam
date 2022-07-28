@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e # Abort script in case of error
-
 case "$(uname -s)" in
     Linux*)     export COMPOSE_FILE="./docker/docker-compose-base.yml:./docker/docker-compose-production.yml";;
     CYGWIN*)    export COMPOSE_FILE="./docker/docker-compose-base.yml;./docker/docker-compose-production.yml";;
@@ -10,6 +8,25 @@ esac
 #export COMPOSE_FILE=./docker/docker-compose-base.yml:./docker/docker-compose-production.yml
 #export UID=$(id -u)
 #export GID=$(id -g)
+
+target=$1
+
+if [ -z "$target" ]
+  then
+    echo "No target specified"
+    exit 1
+fi
+
+echo "Testing connection to $target..."
+ssh $target 'echo "Connection successful."'
+if [ $? -ne 0 ]
+  then
+    echo "Invalid target $target."
+    exit 2
+fi
+
+
+set -e # Abort script in case of error
 
 echo "Start docker-compose build..."
 docker-compose build --no-cache
@@ -22,26 +39,27 @@ rm -f tmp/dojam-app-latest.tar.bz2
 bzip2 -v tmp/dojam-app-latest.tar
 
 echo
-echo "Copy image to server..."
-ssh dojam 'mkdir -p dojam'
-ssh dojam 'mkdir -p dojam/env-files'
-ssh dojam 'mkdir -p dojam/db'
-ssh dojam 'mkdir -p dojam/build-files'
-scp scripts/install.sh dojam:dojam/
-scp docker/docker-compose-bare.yaml dojam:dojam/
-scp docker/env-files/db.env dojam:dojam/env-files/
-scp docker/build-files/postgres-init.sh dojam:dojam/build-files/
-rsync -v tmp/dojam-app-latest.tar.bz2 dojam:dojam/
-# ssh dojam './git/dojam/scripts/install.sh'
+echo "Copy image to server $target..."
+ssh $target 'mkdir -p dojam'
+ssh $target 'mkdir -p dojam/env-files'
+ssh $target 'mkdir -p dojam/db'
+ssh $target 'mkdir -p dojam/build-files'
+scp scripts/install.sh $target:dojam/
+scp docker/docker-compose-bare.yaml $target:dojam/
+scp docker/env-files/db.env $target:dojam/env-files/
+scp docker/build-files/postgres-init.sh $target:dojam/build-files/
+rsync -v tmp/dojam-app-latest.tar.bz2 $target:dojam/
 
 echo
 echo "Run install script..."
-ssh dojam './dojam/install.sh'
+ssh $target './dojam/install.sh'
 
 set +e # Do not abort script anymore
 echo
 echo "Testing server..."
 echo "Waiting 10 seconds for server to come up..."
 sleep 10
-response=$(curl --write-out '%{http_code}' -Iso /dev/null $(ssh -G dojam | awk '$1 == "hostname" { print $2 }'):22333)
+#aufteilen
+hostname=$(ssh -G $target | awk '$1 == "hostname" { print $2 }')
+response=$(curl --write-out '%{http_code}' -Iso /dev/null $hostname:22333)
 echo "Server response code: $response"
