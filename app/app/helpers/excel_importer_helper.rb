@@ -32,8 +32,7 @@ module ExcelImporterHelper
 			end
 			attribute_column_name = @@attributes[attribute_name]
 			if !xlsx.row(1).include? attribute_column_name
-				logger.warn "Could not find column for attribute #{attribute_name}"
-				logger.warn "Was looking for: #{attribute_column_name}"
+				logger.warn "Could not find column #{attribute_column_name}"
 				@@attributes.delete(attribute_name)
 			else
 				unused_columns.delete(attribute_column_name)
