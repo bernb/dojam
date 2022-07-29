@@ -70,11 +70,21 @@ module ExcelImporterHelperHelper
 		@@attributes[:literature] = "literature"
 
 	def set_museum_properties object, row
-		object.storage_location = StorageLocation.find_by name_en: row[:storage_location]
-		if object.storage_location.blank?
-			add_termlist_not_found_error object: object, value: row[:storage_location], termlist_name: "StorageLocation"
+		museum_name = row[:museum]
+		storage_name = row[:storage]
+		storage_location_name = row[:storage_location]
+		storage_location = StorageLocation
+												 .includes(:storage, storage: :museum)
+												 .where(museum:
+																	{name: museum_name})
+												 .where(storage:
+																	{name_en: storage_name})
+												 .where(name_en: storage_location_name)
+		if storage_location.blank?
+			object.errors[:base] << "Could not find #{storage_location_name} in storage #{storage_name} for museum #{museum_name}"
 			return
 		end
+		object.storage_location = storage_location
 		object.inv_number = row[:inv_number]
 		object.inv_extension = row[:inv_extension]
 		object.amount = row[:amount]
