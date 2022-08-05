@@ -5,6 +5,7 @@ module ExcelImporterHelper
 	def import_excel_from_file file, ignore_keys: nil
 		logger = ActiveSupport::TaggedLogging.new(Logger.new("#{Rails.root}/log/excel_importer.log"))
 		xlsx = Roo::Spreadsheet.open(file)
+		attributes = @@attributes.clone
 		default_sheet = nil
 		xlsx.sheets.each do |sheet|
 			if sheet.include? "import"
@@ -13,7 +14,7 @@ module ExcelImporterHelper
 		end
 
 		if ignore_keys.present?
-			@@attributes.reject!{|a| ignore_keys.include? a}
+			attributes.reject!{|a| ignore_keys.include? a}
 		end
 
 		if default_sheet.blank?
@@ -26,14 +27,11 @@ module ExcelImporterHelper
 
 		logger.info "Trying to match columns..."
 		unused_columns = xlsx.row(1).deep_dup
-		@@attributes.keys.each do |attribute_name|
-			if attribute_name == :name_expedition
-				#debugger
-			end
-			attribute_column_name = @@attributes[attribute_name]
+		attributes.keys.each do |attribute_name|
+			attribute_column_name = attributes[attribute_name]
 			if !xlsx.row(1).include? attribute_column_name
 				logger.warn "Could not find column #{attribute_column_name}"
-				@@attributes.delete(attribute_name)
+				attributes.delete(attribute_name)
 			else
 				unused_columns.delete(attribute_column_name)
 			end
@@ -46,7 +44,7 @@ module ExcelImporterHelper
 
 		# Note that this is a roo specific method each(), unfortunately we can't use any of
 		# the many variants ruby gives us for arrays or ranges, like skipping the first and alike
-		xlsx.each(@@attributes) do |row|
+		xlsx.each(attributes) do |row|
 			i+=1
 			if i==1 then next end
 
