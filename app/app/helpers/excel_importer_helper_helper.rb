@@ -1,6 +1,7 @@
 module ExcelImporterHelperHelper
 
 		@@attributes = {}
+		@@attributes[:museum] = "museum"
 		@@attributes[:storage_general_location] = "storage location"
 		@@attributes[:storage_location] = "detailed location"
 		@@attributes[:inv_number] = "inventory number of museum"
@@ -71,7 +72,7 @@ module ExcelImporterHelperHelper
 
 	def set_museum_properties object, row
 		museum_name = row[:museum]
-		storage_name = row[:storage]
+		storage_name = row[:storage_general_location]
 		storage_location_name = row[:storage_location]
 		storage_location = StorageLocation
 												 .includes(:storage, storage: :museum)
@@ -80,8 +81,9 @@ module ExcelImporterHelperHelper
 												 .where(storage:
 																	{name_en: storage_name})
 												 .where(name_en: storage_location_name)
+												 .first
 		if storage_location.blank?
-			object.errors[:base] << "Could not find #{storage_location_name} in storage #{storage_name} for museum #{museum_name}"
+			object.errors[:base] << "Could not find \"#{storage_location_name}\" in storage \"#{storage_name}\" for museum \"#{museum_name}\""
 			return
 		end
 		object.storage_location = storage_location
@@ -329,7 +331,15 @@ module ExcelImporterHelperHelper
 	end
 
 	def is_complex_attribute key
-		array = [:needs_cleaning, :needs_conservation, :storage_location, :excavation_site_id, :colors, :production_technique_id, :decoration_color_id, :decoration_technique_id]
+		array = [:museum,
+						 :needs_cleaning,
+						 :needs_conservation,
+						 :storage_location,
+						 :excavation_site_id,
+						 :colors,
+						 :production_technique_id,
+						 :decoration_color_id,
+						 :decoration_technique_id]
 			array.include?(key) ||
 			key.to_s.include?("kind_of") ||
 			key.to_s.include?("main_material") ||
