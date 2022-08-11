@@ -2,8 +2,9 @@ module ExcelImporterHelper
 	require 'roo'
 	include ExcelImporterHelperHelper
 
-	def import_excel_from_file file, ignore_keys: nil
-		logger = ActiveSupport::TaggedLogging.new(Logger.new("#{Rails.root}/log/excel_importer.log"))
+	def import_excel_from_file file, ignore_keys: nil, log_path:
+		log_path ||= "#{Rails.root}/log/excel_importer.log"
+		logger = ActiveSupport::TaggedLogging.new(Logger.new(log_path))
 		xlsx = Roo::Spreadsheet.open(file)
 		attributes = @@attributes.clone
 		default_sheet = nil
@@ -159,5 +160,4 @@ module ExcelImporterHelper
 
 		end # xlsx.each
 	end
-
 end
