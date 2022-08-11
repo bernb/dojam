@@ -218,6 +218,39 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  def import_museum_objects_from_excel_select
+    authorize :admin_links, :show?
+    if session[:log_path].present?
+      @log_messages = File.read(session[:log_path])
+      session[:log_path] = nil
+    end
+    if session[:import_errors].present?
+      @log_messages = session[:import_errors]
+      session[:import_errors] = nil
+    end
+  end
+
+  def import_museum_objects_from_excel_submit
+    authorize :admin_links, :show?
+    file_entity = params.dig(:museum_objects, :excel_file)
+    warnings = {}
+    filename = file_entity.original_filename
+    if !correct_file_format?(file_entity, ".xls") && !correct_file_format?(file_entity, ".xlsx")
+      warnings[filename.to_sym] =
+        file_entity.original_filename + ": " + t('unsupported_file_format_detected_only_xls_and_xlsx_files_are_supported')
+      flash[:warning] = warnings
+      redirect_to import_museum_objects_from_excel_select_path
+    end
+
+    timestamp = DateTime.now.strftime("%Y-%m-%d %H:%M:%S:%L")
+    filename = timestamp + " translation import.log"
+    log_path = "#{Rails.root}/log/" + filename
+    session[:log_path] = log_path
+    logger = ActiveSupport::TaggedLogging.new(Logger.new(log_path))
+    MuseumObjectExcelImportService.import_from_file file_entity, log_path
+    redirect_to import_museum_objects_from_excel_select_path
+  end
+
   def import_termlists_submit
     authorize :admin_links, :show?
     files = params.dig(:termlists, :termlist_files)

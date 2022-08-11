@@ -1,0 +1,12 @@
+<%= render 'layouts/title', title_name: t('import museum objects from excel') %>
+
+<div class="row">
+<div class="col">
+  Importing from files may take several minutes. Please wait until import is finished.</br>
+                                                                             </div>
+</div>
+<%= simple_form_for :museum_objects, url: import_museum_objects_from_excel_submit_path do |f| %>
+	<%= f.input :excel_file, as: :file, input_html: {multiple: false}, label: false %>
+<%= f.submit t('import'), class: "btn btn-primary" %>
+<% end %>
+<%= render 'layouts/log_messages', log_messages: @log_messages %>

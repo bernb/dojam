@@ -56,9 +56,11 @@ Rails.application.routes.draw do
 	get  '/import_termlists/select', to: 'static_pages#import_termlists_select'
 	get  '/import_translations/select', to: 'static_pages#import_translations_select'
   get  '/import_static_translations/select', to: 'static_pages#import_static_translations_select'
+  get  '/import_museum_objects_from_excel/select', to: 'static_pages#import_museum_objects_from_excel_select'
 	post '/import_termlists/submit', to: 'static_pages#import_termlists_submit'
 	post '/import_translations/submit', to: 'static_pages#import_translations_submit'
   post '/import_static_translations/submit', to: 'static_pages#import_static_translations_submit'
+  post '/import_museum_objects_from_excel/submit', to: 'static_pages#import_museum_objects_from_excel_submit'
 
 
   # CRUDs
