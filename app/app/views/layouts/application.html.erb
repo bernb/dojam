@@ -10,6 +10,11 @@
 
   <% direction = I18n.locale == :ar ? "rtl" : "ltr" %>
   <body class="<%= controller_name %> <%= action_name %> <%= request.path.split('/').last %>" dir="<%= direction %>">
+  <% if EnvironmentChecker.is_staging? %>
+    <div class="alert alert-info" role="alert">
+      You are using the staging environment. Changes made here will not be reflected in the actual database.
+    </div>
+  <% end %>
     <div class="container container-border">
       <%= render 'layouts/navbar' %>
       <%= render 'layouts/flashbar' %>
