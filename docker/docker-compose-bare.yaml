@@ -34,6 +34,8 @@ services:
         ipv4_address: 10.0.1.100
     ports:
       - "22333:22333"
+    env_file:
+      - env-files/app.env
 networks:
   app_internal:
     internal: true
