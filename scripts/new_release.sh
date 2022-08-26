@@ -1,14 +1,6 @@
 #!/bin/bash
 
-case "$(uname -s)" in
-    Linux*)     export COMPOSE_FILE="./docker/docker-compose-base.yml:./docker/docker-compose-production.yml";;
-    CYGWIN*)    export COMPOSE_FILE="./docker/docker-compose-base.yml;./docker/docker-compose-production.yml";;
-    MINGW*)     export COMPOSE_FILE="./docker/docker-compose-base.yml;./docker/docker-compose-production.yml";;
-esac
-#export COMPOSE_FILE=./docker/docker-compose-base.yml:./docker/docker-compose-production.yml
-#export UID=$(id -u)
-#export GID=$(id -g)
-
+export COMPOSE_FILE=./docker/docker-compose-base.yml:./docker/docker-compose-production.yml
 target=$1
 
 if [ -z "$target" ]
