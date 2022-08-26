@@ -10,13 +10,12 @@ if [ -z "$target" ]
 fi
 
 echo "Testing connection to $target..."
-ssh "$target" 'echo "Connection successful."'
-if [ $? -ne 0 ]
+if ! ssh "$target";
   then
     echo "Invalid target $target."
     exit 2
 fi
-
+echo "Connection successful."
 
 set -e # Abort script in case of error
 
