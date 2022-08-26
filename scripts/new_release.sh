@@ -10,7 +10,7 @@ if [ -z "$target" ]
 fi
 
 echo "Testing connection to $target..."
-ssh $target 'echo "Connection successful."'
+ssh "$target" 'echo "Connection successful."'
 if [ $? -ne 0 ]
   then
     echo "Invalid target $target."
@@ -32,19 +32,19 @@ bzip2 -v tmp/dojam-app-latest.tar
 
 echo
 echo "Copy image to server $target..."
-ssh $target 'mkdir -p dojam'
-ssh $target 'mkdir -p dojam/env-files'
-ssh $target 'mkdir -p dojam/db'
-ssh $target 'mkdir -p dojam/build-files'
-scp scripts/install.sh $target:dojam/
-scp docker/docker-compose-bare.yaml $target:dojam/
-scp docker/env-files/db.env $target:dojam/env-files/
-scp docker/build-files/postgres-init.sh $target:dojam/build-files/
-rsync -v tmp/dojam-app-latest.tar.bz2 $target:dojam/
+ssh "$target" 'mkdir -p dojam'
+ssh "$target" 'mkdir -p dojam/env-files'
+ssh "$target" 'mkdir -p dojam/db'
+ssh "$target" 'mkdir -p dojam/build-files'
+scp scripts/install.sh "$target":dojam/
+scp docker/docker-compose-bare.yaml "$target":dojam/
+scp docker/env-files/db.env "$target":dojam/env-files/
+scp docker/build-files/postgres-init.sh "$target":dojam/build-files/
+rsync -v tmp/dojam-app-latest.tar.bz2 "$target":dojam/
 
 echo
 echo "Run install script..."
-ssh $target './dojam/install.sh'
+ssh "$target" './dojam/install.sh'
 
 set +e # Do not abort script anymore
 echo
@@ -52,6 +52,6 @@ echo "Testing server..."
 echo "Waiting 10 seconds for server to come up..."
 sleep 10
 #aufteilen
-hostname=$(ssh -G $target | awk '$1 == "hostname" { print $2 }')
-response=$(curl --write-out '%{http_code}' -Iso /dev/null $hostname:22333)
+hostname=$(ssh -G "$target" | awk '$1 == "hostname" { print $2 }')
+response=$(curl --write-out '%{http_code}' -Iso /dev/null "$hostname":22333)
 echo "Server response code: $response"
