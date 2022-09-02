@@ -48,9 +48,9 @@ ssh "$target" './dojam/install.sh'
 set +e # Do not abort script anymore
 echo
 echo "Testing server..."
-echo "Waiting 10 seconds for server to come up..."
-sleep 10
-#aufteilen
+echo "Waiting 20 seconds for server to come up..."
+sleep 20
+
 hostname=$(ssh -G "$target" | awk '$1 == "hostname" { print $2 }')
 response=$(curl --write-out '%{http_code}' -Iso /dev/null "$hostname":22333)
 echo "Server response code: $response"
