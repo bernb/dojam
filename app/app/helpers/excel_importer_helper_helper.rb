@@ -282,6 +282,7 @@ module ExcelImporterHelperHelper
 			end
 			object.send(termlist + "=", found_termlist)
 		else
+			with_path = !termlist_class.is_independent_of_paths
 			add_termlist_not_found_error object: object, value: termlist_value, termlist_name: termlist_class.to_s, with_path: with_path
 		end
 	end
