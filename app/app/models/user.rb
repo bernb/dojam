@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   belongs_to :museum, optional: true
+  has_one_attached :museum_objects_excel_import_file
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
