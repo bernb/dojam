@@ -220,7 +220,7 @@ class StaticPagesController < ApplicationController
 
   def import_museum_objects_from_excel_select
     authorize :admin_links, :show?
-    if session[:log_path].present?
+    if session[:log_path].present? && current_user.museum_object_import_running == false
       @log_messages = File.read(session[:log_path])
       session[:log_path] = nil
     end
@@ -247,7 +247,8 @@ class StaticPagesController < ApplicationController
     log_path = "#{Rails.root}/log/" + filename
     session[:log_path] = log_path
     logger = ActiveSupport::TaggedLogging.new(Logger.new(log_path))
-    MuseumObjectExcelImportService.import_from_file file_entity, log_path
+    current_user.museum_objects_excel_import_file.attach file_entity
+    ImportMuseumObjectDataFromExcelJob.perform_later log_path, current_user
     redirect_to import_museum_objects_from_excel_select_path
   end
 
