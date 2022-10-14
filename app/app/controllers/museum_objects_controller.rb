@@ -58,6 +58,15 @@ class MuseumObjectsController < ApplicationController
     end
   end
 
+  def check_for_import_results
+    respond_to do |format|
+      format.js do
+        import_ready = current_user.museum_object_import_finished
+        render json: import_ready.to_s
+      end
+    end
+  end
+
   def show
     redirect_to museum_object_build_path params[:id], :step_confirm
   end

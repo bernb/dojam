@@ -1,0 +1,19 @@
+<% if current_user.museum_object_import_running %>
+  <%= link_to t('please_wait'), '#', class: "btn disabled running", id: "museum-objects-import-button", data: { disable_with: false } %>
+  <%= link_to t('click_here_to_see_import_results'),
+              import_museum_objects_from_excel_select_path,
+              id: "museum-objects-show-import-button",
+              class: "btn",
+              style: "display:none;",
+              target: "_blank"
+  %>
+<% else %>
+  <% if current_user.museum_object_import_finished %>
+    <%= link_to t('click_here_to_see_import_results'),
+                import_museum_objects_from_excel_select_path,
+                id: "museum-objects-show-import-button",
+                class: "btn",
+                target: "_blank"
+    %>
+  <% end %>
+<% end %>

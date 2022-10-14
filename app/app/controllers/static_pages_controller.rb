@@ -220,9 +220,11 @@ class StaticPagesController < ApplicationController
 
   def import_museum_objects_from_excel_select
     authorize :admin_links, :show?
-    if session[:log_path].present? && current_user.museum_object_import_running == false
-      @log_messages = File.read(session[:log_path])
+    if current_user.museum_object_import_finished == true
+      @log_messages = File.read(session[:log_path]) unless session[:log_path].blank?
       session[:log_path] = nil
+      current_user.museum_object_import_finished = false
+      current_user.save
     end
     if session[:import_errors].present?
       @log_messages = session[:import_errors]
