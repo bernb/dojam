@@ -3,6 +3,7 @@ class ImportMuseumObjectDataFromExcelJob < ApplicationJob
   after_perform do |job|
     current_user = job.arguments.second
     current_user.museum_object_import_running = false
+    current_user.museum_object_import_finished = true
     current_user.museum_objects_excel_import_file.purge_later
     current_user.save
   end
