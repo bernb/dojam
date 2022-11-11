@@ -67,5 +67,6 @@ Rails.application.routes.draw do
   # CRUDs
   resources :acquisition_delivered_bies
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # Download public Excel template file
+  get 'download_excel_template_file', to: 'static_pages#download_excel_template_file'
 end
