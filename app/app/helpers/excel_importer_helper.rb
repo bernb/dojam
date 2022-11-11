@@ -26,7 +26,6 @@ module ExcelImporterHelper
 			xlsx.default_sheet = default_sheet
 		end
 
-		logger.info "Trying to match columns..."
 		unused_columns = xlsx.row(1).deep_dup
 		attributes.keys.each do |attribute_name|
 			attribute_column_name = attributes[attribute_name]
