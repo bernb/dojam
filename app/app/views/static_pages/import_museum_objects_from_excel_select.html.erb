@@ -1,12 +1,27 @@
 <%= render 'layouts/title', title_name: t('import museum objects from excel') %>
 
 <div class="row">
-<div class="col">
-  Importing from files may take several minutes. Please wait until import is finished.</br>
-                                                                             </div>
+  <div class="col">
+    Importing from files may take several minutes. Please wait until import is finished.</br>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <%= t('you can download an example file: ') %> <%= link_to t('download example file'), download_excel_template_file_url %>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <%= t('some notes on the format of the excel file')%>
+    <ul>
+      <li> <%= t('the order of the columns does not matter') %></li>
+      <li> <%= t('the names of the columns must not be changed') %></li>
+      <li> <%= t('only data from the excel sheet named \'import\' will be imported') %></li>
+    </ul>
+  </div>
 </div>
 <%= simple_form_for :museum_objects, url: import_museum_objects_from_excel_submit_path do |f| %>
-	<%= f.input :excel_file, as: :file, input_html: {multiple: false}, label: false %>
-<%= f.submit t('import'), class: "btn btn-primary" %>
+  <%= f.input :excel_file, as: :file, input_html: { multiple: false }, label: false %>
+  <%= f.submit t('import'), class: "btn btn-primary" %>
 <% end %>
 <%= render 'layouts/log_messages', log_messages: @log_messages %>

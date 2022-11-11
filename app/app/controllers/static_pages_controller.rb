@@ -288,6 +288,10 @@ class StaticPagesController < ApplicationController
     redirect_to import_termlists_select_path
   end
 
+  def download_excel_template_file
+    send_file("#{Rails.root}/public/Museum_Data_Template.xlsx")
+  end
+
   private
   # ToDo: Do not remove 'undetermiend' paths
   def remove_non_existent_paths data
