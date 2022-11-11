@@ -40,7 +40,7 @@ module ExcelImporterHelperHelper
 		@@attributes[:decoration_style_id] = "decoration style"
 		@@attributes[:decoration_technique_id] = "decoration technique"
 		@@attributes[:decoration_color_id] = "decoration color"
-		@@attributes[:inscription_letter_id] = "scripts(s)"
+		@@attributes[:inscription_letter_id] = "script(s)"
 		@@attributes[:inscription_language_id] = "language of inscription"
 		@@attributes[:inscription_text] = "text of inscription"
 		@@attributes[:inscription_translation] = "translation of inscription"
