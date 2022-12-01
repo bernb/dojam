@@ -21,17 +21,21 @@ class Path < ApplicationRecord
 	scope :material_specifieds, ->{depth(2).default_order}
 	scope :kind_of_objects, ->{depth(3).default_order}
 	scope :kind_of_object_specifieds, ->{depth(4).default_order}
+	scope :self_with_transitive_children, ->(path){where("path LIKE ?", path.path + '%')}
+	scope :transitive_children, ->(path){where("path LIKE ?", path.path + '/%')}
+	scope :direct_children, ->(path){where("path SIMILAR TO ?", path.path + '/\\d{1,}')}
 	before_destroy :destroy_transitive_children
 
 	def all_museum_objects
-		self.museum_objects.or(self.museum_objects_as_main)
+		MuseumObject.where_path(self)
 	end
 
 	def all_transitive_museum_objects
-		self.transitive_children
-				.map{|p| p.all_museum_objects}
-				.flatten
-				.uniq
+		MuseumObject.where_path(self.transitive_children)
+	end
+
+	def all_transitive_with_self_museum_objects
+		MuseumObject.where_path(self.self_with_transitive_children)
 	end
 
 	def self.undetermined_path
@@ -102,8 +106,7 @@ class Path < ApplicationRecord
 	end
 
 	def direct_children
-		path_name = self.path + "/\\d{1,}"
-		Path.where("path SIMILAR TO ?", path_name)
+		Path.direct_children(self)
 	end
 
   def direct_children_ids
@@ -111,24 +114,34 @@ class Path < ApplicationRecord
   end
 
   def transitive_children
-    return transitiv_children
+		Path.transitive_children(self)
   end
 
   def transitive_children_ids
-    return transitiv_children_ids
-  end
+		transitive_children.map(&:id)
+	end
 
+	def self_with_transitive_children
+		Path.self_with_transitive_children(self)
+	end
+
+	def self_with_transitiv_children
+		self_with_transitive_children
+	end
   def transitiv_children
-    path_name = self.path + "/%"
-    Path.where("path LIKE ?", path_name)
+		transitive_children
   end
 
   def transitiv_children_ids
-    transitiv_children.map(&:id)
+		transitive_children_ids
   end
 
   def transitive_object_hull
-    return transitive_children.map(&:last_object)
+		transitive_children.map(&:last_object)
+	end
+
+	def transitiv_object_hull
+		transitive_object_hull
 	end
 
 	def is_leaf?
