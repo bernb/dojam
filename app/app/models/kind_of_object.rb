@@ -1,4 +1,10 @@
 class KindOfObject < Termlist
+	before_destroy :abort_if_museum_objects_associated
+
+	def museum_objects_associated?
+		return false unless path.present?
+		paths.map{|p| p.all_transitive_with_self_museum_objects}&.flatten.any?
+	end
 	def depth
 		3
 	end
@@ -23,5 +29,13 @@ class KindOfObject < Termlist
 		paths = Path.where("path SIMILAR TO ?", "/\\d{1,}/#{ms_id}/#{self.id}/%")
 		koos = paths.map{|p| p.objects[3]}
     return koos.uniq
+	end
+
+	private
+	def abort_if_museum_objects_associated
+		if museum_objects_associated?
+			self.errors.add(:base, "could not be destroyed because there are still museum objects associated")
+			throw(:abort)
+		end
 	end
 end
