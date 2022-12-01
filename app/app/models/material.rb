@@ -5,6 +5,13 @@ class Material < Termlist
   # See https://github.com/rails/rails/pull/38166 and the warning
   # at https://guides.rubyonrails.org/active_record_callbacks.html#available-callbacks
   after_create :add_default_path
+  before_destroy :abort_if_museum_objects_associated
+
+  def museum_objects_associated?
+    return false unless path.present?
+    path.all_museum_objects.any? ||
+      path.transitive_children.map{|l| l.all_museum_objects}.flatten.any?
+  end
 
 	def depth
 		1
@@ -43,5 +50,11 @@ class Material < Termlist
   def add_default_path
     path = Path.create path: "/" + self.id.to_s
     self.paths << path
+  end
+  def abort_if_museum_objects_associated
+    if museum_objects_associated?
+      self.errors.add(:base, "could not be destroyed because there are still museum objects associated")
+      throw(:abort)
+    end
   end
 end
