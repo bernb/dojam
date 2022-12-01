@@ -8,8 +8,7 @@ class MaterialSpecified < Termlist
 
   def museum_objects_associated?
     return false unless path.present?
-    path.all_museum_objects.any? ||
-    path.transitive_children.map{|l| l.all_museum_objects}.flatten.any?
+    path.all_transitive_with_self_museum_objects.any?
   end
 
   def self.ransackable_scopes(auth_object = nil)
