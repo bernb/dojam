@@ -16,14 +16,13 @@ ActiveAdmin.register Termlist do
       }
   )
   permit_params :type, :name_en, :name_ar
+  filter :type, as: :select
   filter :name_en
   filter :name_ar
   filter :created_at
   filter :updated_at
 
   index do
-    column :id
-    column :type
     column :name_en do |m|
       link_to m.name_en, admin_termlist_path(m)
     end
@@ -35,8 +34,11 @@ ActiveAdmin.register Termlist do
         link_to m.name_ar, admin_termlist_path(m)
       end
     end
+    # We do not .underscore.humanize the type names as this would be error prone and to be done at a lot of places
+    column :type
     column :created_at
     column :updated_at
+    actions
   end
 
   show do
