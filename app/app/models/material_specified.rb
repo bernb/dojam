@@ -7,6 +7,7 @@ class MaterialSpecified < Termlist
   before_destroy :destroy_transitive_children
 
   def museum_objects_associated?
+    return false unless path.present?
     path.all_museum_objects.any? ||
     path.transitive_children.map{|l| l.all_museum_objects}.flatten.any?
   end
@@ -63,6 +64,10 @@ class MaterialSpecified < Termlist
   private
   def destroy_transitive_children
     path = self.path
+    if path.blank?
+      warn("model did not have any associated paths. This should never happen. Check associated yaml files for unusual errors.")
+      return
+    end
     path.destroy
     if path.errors.any?
       errors.add(:base, "could not be destroyed because a (transitive) child path could not be destroyed")
