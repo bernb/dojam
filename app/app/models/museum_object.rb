@@ -76,10 +76,10 @@ class MuseumObject < ApplicationRecord
   delegate :storage, to: :storage_location, allow_nil: true
   accepts_nested_attributes_for :images, :secondary_paths
 	scope :where_path, ->(given_path) {
-		joins(:secondary_paths)
+		left_outer_joins(:secondary_paths)
 			.where(main_path: given_path)
 			.or(
-				where(paths: {path: given_path})) }
+				where(paths: {id: given_path})) }
 	scope :museum, ->(given_museum) {
 		joins(storage_location: {storage: :museum})
 			.where('museum.id': given_museum)
