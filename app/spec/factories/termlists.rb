@@ -1,3 +1,4 @@
+# ToDo: Never create m/ms/koo/koos without path
 FactoryBot.define do
   factory :material, aliases: [:m] do
     name_en { Faker::Lorem.word }
@@ -27,10 +28,27 @@ FactoryBot.define do
 
   factory :kind_of_object, aliases: [:koo] do
     name_en { Faker::Lorem.word }
+    factory :kind_of_object_with_path, aliases: [:koo_with_path] do
+      # Note that a path implies existing m/ms
+      after(:create) do |koo|
+        ms = create(:ms_with_material)
+        path = create(:path, path: "/#{ms.material.id}/#{ms.id}/#{koo.id}")
+        koo.paths << path
+      end
+    end
   end
 
   factory :kind_of_object_specified, aliases: [:koos] do
     name_en { Faker::Lorem.word }
+    factory :kind_of_object_specified_with_path, aliases: [:koos_with_path] do
+      # Note that a path implies existing m/ms/koo
+      after(:create) do |koos|
+        koo = create(:koo_with_path)
+        ms = koo.paths.first.parent.last_object
+        path = create(:path, path: "/#{ms.material.id}/#{ms.id}/#{koo.id}/#{koos.id}")
+        koos.paths << path
+      end
+    end
   end
 end
 
