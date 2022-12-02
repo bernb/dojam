@@ -7,11 +7,6 @@ class Material < Termlist
   after_create :add_default_path
   before_destroy :abort_if_museum_objects_associated
 
-  def museum_objects_associated?
-    return false unless path.present?
-    path.all_transitive_with_self_museum_objects.any?
-  end
-
 	def depth
 		1
 	end
@@ -25,12 +20,7 @@ class Material < Termlist
   end
 
   def museum_objects
-    paths = self.transitive_paths
-    secs = MuseumObject.joins(secondary_paths: :termlists).where(paths: {id: paths.ids}).where(termlists: {id: self.id})
-    mains = MuseumObject.where(main_path: paths)
-    mains + secs
-    # ToDo: Why does this not work? -> join table path <-> mu only used for main_path, but still seems to be wrong?
-    #self.paths.map{|p| p.museum_objects}.reject(&:empty?).flatten
+    path&.all_transitive_with_self_museum_objects
   end
 
 	def material_specifieds
@@ -51,7 +41,7 @@ class Material < Termlist
     self.paths << path
   end
   def abort_if_museum_objects_associated
-    if museum_objects_associated?
+    if museum_objects.any?
       self.errors.add(:base, "could not be destroyed because there are still museum objects associated")
       throw(:abort)
     end
