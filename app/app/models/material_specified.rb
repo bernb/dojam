@@ -6,11 +6,6 @@ class MaterialSpecified < Termlist
   before_destroy :abort_if_museum_objects_associated
   before_destroy :destroy_transitive_children
 
-  def museum_objects_associated?
-    return false unless path.present?
-    path.all_transitive_with_self_museum_objects.any?
-  end
-
   def self.ransackable_scopes(auth_object = nil)
     [:material]
   end
@@ -35,17 +30,7 @@ class MaterialSpecified < Termlist
   end
 
   def museum_objects
-    paths = self
-      .paths.map{|p| p.transitiv_children}
-      .flatten
-      .select{|p| p.depth == 4}
-    path_ids = paths.map(&:id)
-    secs = MuseumObject
-      .joins(secondary_paths: :termlists)
-      .where(paths: {id: path_ids})
-      .where(termlists: {id: self.id})
-    mains = MuseumObject.where(main_path: paths)
-    mains + secs
+    path&.all_transitive_with_self_museum_objects
   end
 
 	def material
@@ -75,7 +60,7 @@ class MaterialSpecified < Termlist
   end
 
   def abort_if_museum_objects_associated
-    if museum_objects_associated?
+    if museum_objects.any?
       self.errors.add(:base, "could not be destroyed because there are still museum objects associated")
       throw(:abort)
     end
