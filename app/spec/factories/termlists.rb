@@ -17,7 +17,7 @@ FactoryBot.define do
 
   factory :material_specified, aliases: [:ms] do
     name_en { Faker::Lorem.word }
-    factory :ms_with_material do
+    factory :ms_with_material, aliases: [:ms_with_path] do
       after(:create) do |ms|
         m = create(:material)
         p = create(:path, path: "/#{m.id}/#{ms.id}")
