@@ -1,6 +1,6 @@
 class DatingCentury < Termlist
-  has_many :museum_objects_as_begin, foreign_key: 'dating_century_begin', class_name: 'MuseumObject'
-  has_many :museum_objects_as_end, foreign_key: 'dating_century_end', class_name: 'MuseumObject'
+  has_many :museum_objects_as_begin, foreign_key: 'dating_century_begin', class_name: 'MuseumObject', dependent: :restrict_with_error
+  has_many :museum_objects_as_end, foreign_key: 'dating_century_end', class_name: 'MuseumObject', dependent: :restrict_with_error
 	acts_as_list scope: [:type]
 
   def museum_objects
