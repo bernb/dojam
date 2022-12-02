@@ -31,6 +31,30 @@ RSpec.describe MuseumObject, type: :model do
 	end
 end
 
+RSpec.describe MuseumObject, type: :model do
+  context 'using where_path scope' do
+    let!(:ms_list) { create_list :ms_with_material, 5}
+    let!(:koo_list) { create_list :koo_with_path, 5}
+    let!(:koos_list) { create_list :koos_with_path, 5}
+    let!(:mo_list) { create_list :mo_without_paths, 10 }
+    let(:paths) { Path.all - [Path.undetermined_path] }
+    it 'should find undetermined path for every museum object without explicitly set path' do
+      expect(MuseumObject.where_path(Path.undetermined_path).count).to eq(10)
+    end
+    it 'should give no results if path is not associated with any museum object' do
+      expect(paths.map{|p| MuseumObject.where_path(p).count}.sum).to eq(0)
+    end
+    it 'should give one result if path is associated with a single museum object as main path' do
+
+    end
+    it 'should give one result if path is associated with a single museum object as secondary path'
+    it 'should give two results if path is associated with two museum objects as main path'
+    it 'should give two results if path is associated with two museum objects as secondary path'
+    it 'should give two results if path is associated with two museum objects as a main and a secondary path respectively'
+    it 'should give three results if path is associated with three museum objects'
+  end
+end
+
 # RSpec.describe MuseumObject, type: :model do
 # 	context 'without any set paths' do
 #     before(:each) do
