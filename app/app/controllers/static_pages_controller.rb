@@ -11,6 +11,9 @@ class StaticPagesController < ApplicationController
 
   def create_main_account
 
+    # Create fixtures needed within every database
+    Path.create_undetermined_paths
+
     @email = params[:email]
     @email_confirmation = params[:email_confirmation]
     @password = params[:password]
