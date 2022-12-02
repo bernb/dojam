@@ -9,6 +9,7 @@ class Termlist < ApplicationRecord
 	# ToDo: What should be the semantics for a destroy?
 	has_many :termlist_paths
 	has_many :paths, through: :termlist_paths
+	before_destroy :abort_if_self_is_undetermined_entry # We do not allow removal of undetermined entires
 
 	def self.for_path path
 		self
@@ -103,5 +104,13 @@ class Termlist < ApplicationRecord
 		else
 			return typename
 		end
+	end
+
+	private
+	def abort_if_self_is_undetermined_entry
+		if name_en == 'undetermined'
+			errors.add(:base, 'Removal of undetermined entry is not alliowed')
+			throw(:abort)
+	end
 	end
 end
