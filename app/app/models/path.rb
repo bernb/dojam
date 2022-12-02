@@ -38,6 +38,16 @@ class Path < ApplicationRecord
 		MuseumObject.where_path(self.self_with_transitive_children)
 	end
 
+	def self.create_undetermined_paths
+		m_id = Material.undetermined.id.to_s
+		ms_id = MaterialSpecified.undetermined.id.to_s
+		koo_id = KindOfObject.undetermined.id.to_s
+		koos_id = KindOfObjectSpecified.undetermined.id.to_s
+		Path.find_or_create_by path: "/#{m_id}/#{ms_id}/#{koo_id}/#{koos_id}"
+		Path.find_or_create_by path: "/#{m_id}/#{ms_id}/#{koo_id}"
+		Path.find_or_create_by path: "/#{m_id}/#{ms_id}"
+		Path.find_or_create_by path: "/#{m_id}"
+	end
 	def self.undetermined_path
 		m_id = Material.undetermined.id.to_s
 		ms_id = MaterialSpecified.undetermined.id.to_s
