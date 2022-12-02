@@ -53,11 +53,8 @@ FactoryBot.define do
       main_path { koos.paths.first }
     end
 
-    factory :museum_object_with_secondary_path_koo, aliases: [:mo_with_secondary_koo] do
-      transient do
-        koo {create(:koo_with_path)}
-      end
-      path { koo.paths.first }
+    factory :museum_object_with_secondary_path_ms, aliases: [:mo_with_secondary_ms] do
+      association :secondary_paths, factory: :path_from_ms
     end
 
     factory :museum_object_without_paths, aliases: [:mo_without_paths]

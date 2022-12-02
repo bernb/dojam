@@ -33,6 +33,9 @@ end
 
 RSpec.describe MuseumObject, type: :model do
   context 'using where_path scope' do
+    before(:each) do
+      Path.create_undetermined_paths
+    end
     let!(:ms_list) { create_list :ms_with_material, 5}
     let!(:koo_list) { create_list :koo_with_path, 5}
     let!(:koos_list) { create_list :koos_with_path, 5}
@@ -45,13 +48,32 @@ RSpec.describe MuseumObject, type: :model do
       expect(paths.map{|p| MuseumObject.where_path(p).count}.sum).to eq(0)
     end
     it 'should give one result if path is associated with a single museum object as main path' do
-
+      create(:mo_with_main)
+      expect(paths.map{|p| MuseumObject.where_path(p).count}.sum).to eq(1)
     end
-    it 'should give one result if path is associated with a single museum object as secondary path'
-    it 'should give two results if path is associated with two museum objects as main path'
-    it 'should give two results if path is associated with two museum objects as secondary path'
-    it 'should give two results if path is associated with two museum objects as a main and a secondary path respectively'
-    it 'should give three results if path is associated with three museum objects'
+    it 'should give one result if path is associated with a single museum object as secondary path' do
+      create(:mo_with_secondary_ms)
+      expect(paths.map{|p| MuseumObject.where_path(p).count}.sum).to eq(1)
+    end
+    it 'should give two results if path is associated with two museum objects as main path' do
+      mo = create(:mo_with_main)
+      path = mo.main_path
+      create(:mo_with_main, main_path: path)
+      expect(paths.map{|p| MuseumObject.where_path(p).count}.sum).to eq(2)
+    end
+    it 'should give two results if path is associated with two museum objects as secondary path' do
+      path = create(:path_from_ms)
+      create(:mo_with_secondary_ms, secondary_paths: path)
+      create(:mo_with_secondary_ms, secondary_paths: path)
+      expect(paths.map{|p| MuseumObject.where_path(p).count}.sum).to eq(2)
+    end
+    it 'should give three results if path is associated with three museum objects as main path' do
+      mo = create(:mo_with_main)
+      path = mo.main_path
+      create(:mo_with_main, main_path: path)
+      create(:mo_with_main, main_path: path)
+      expect(paths.map{|p| MuseumObject.where_path(p).count}.sum).to eq(3)
+    end
   end
 end
 
