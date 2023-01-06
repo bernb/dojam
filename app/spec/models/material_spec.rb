@@ -15,4 +15,16 @@ RSpec.describe Material, type: :model do
     material = create(:material)
     expect(material.path.path).to eq("/#{material.id}")
   end
+
+  it "should destroy path to self if destroyed" do
+    material = create(:material)
+    material.destroy
+    expect(material.path).to be_nil
+  end
+
+  it "should destroy join table entry to own path if destroyed" do
+    material = create(:material)
+    material.destroy
+    expect(material.termlist_paths).to be_empty
+  end
 end
