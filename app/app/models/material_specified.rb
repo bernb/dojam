@@ -1,19 +1,14 @@
 class MaterialSpecified < Termlist
+  include MMsKooKoos
   # ToDo: Always create a path to itself as an after_create callback as we might end up with a term without any path
   # which might break things
   scope :material, ->(m_id) {joins(:paths).where("paths.path LIKE ?", "/#{m_id}%")}
   attr_reader :material, :merge_into_ms # Used in active_admin to merge into other model
-  before_destroy :abort_if_museum_objects_associated
   before_destroy :destroy_transitive_children
 
   def self.ransackable_scopes(auth_object = nil)
     [:material]
   end
-
-  def path
-    self.paths.first
-  end
-
 	def depth
 		2
 	end
@@ -27,10 +22,6 @@ class MaterialSpecified < Termlist
     else
       return false
     end
-  end
-
-  def museum_objects
-    path&.all_transitive_with_self_museum_objects
   end
 
 	def material
@@ -55,13 +46,6 @@ class MaterialSpecified < Termlist
     path.destroy
     if path.errors.any?
       errors.add(:base, "could not be destroyed because a (transitive) child path could not be destroyed")
-      throw(:abort)
-    end
-  end
-
-  def abort_if_museum_objects_associated
-    if museum_objects.any?
-      self.errors.add(:base, "could not be destroyed because there are still museum objects associated")
       throw(:abort)
     end
   end
