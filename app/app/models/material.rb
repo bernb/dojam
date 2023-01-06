@@ -1,11 +1,11 @@
 class Material < Termlist
+  include MMsKooKoos
   # ToDo: Avoid after_create callback that change self (see below)
   # Changing self within an after_create callback can be problematic, is a known limitation of Rails and has produced
   # nasty bugs in the past (i.e. this callback MUST be after has_many)
   # See https://github.com/rails/rails/pull/38166 and the warning
   # at https://guides.rubyonrails.org/active_record_callbacks.html#available-callbacks
   after_create :add_default_path
-  before_destroy :abort_if_museum_objects_associated
 
 	def depth
 		1
@@ -13,14 +13,6 @@ class Material < Termlist
 
   def transitive_paths
     Path.material_id(self.id)
-  end
-
-  def path
-    self.paths.first
-  end
-
-  def museum_objects
-    path&.all_transitive_with_self_museum_objects
   end
 
 	def material_specifieds
@@ -39,15 +31,5 @@ class Material < Termlist
   def add_default_path
     path = Path.create path: "/" + self.id.to_s
     self.paths << path
-  end
-  def abort_if_museum_objects_associated
-    if museum_objects.present? && museum_objects.any?
-      self.errors.add(:base, "could not be destroyed because there are still museum objects associated")
-      throw(:abort)
-    end
-  end
-
-  def cleanup_paths
-    self.paths.destroy_all
   end
 end
