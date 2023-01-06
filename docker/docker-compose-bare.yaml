@@ -33,7 +33,7 @@ services:
       app_external:
         ipv4_address: 10.0.1.100
     ports:
-      - "22333:22333"
+      - "10.0.0.0:22333:22333"
     env_file:
       - env-files/app.env
 networks:
