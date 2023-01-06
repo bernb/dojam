@@ -46,4 +46,8 @@ class Material < Termlist
       throw(:abort)
     end
   end
+
+  def cleanup_paths
+    self.paths.destroy_all
+  end
 end
