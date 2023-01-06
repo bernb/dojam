@@ -41,7 +41,7 @@ class Material < Termlist
     self.paths << path
   end
   def abort_if_museum_objects_associated
-    if museum_objects.any?
+    if museum_objects.present? && museum_objects.any?
       self.errors.add(:base, "could not be destroyed because there are still museum objects associated")
       throw(:abort)
     end
