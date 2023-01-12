@@ -1,4 +1,5 @@
 ActiveAdmin.register Termlist do
+  actions :all, except: [:new]
   active_admin_import(
     on_duplicate_key_update: ["name_ar"],
     template_object: ActiveAdminImport::Model.new(
@@ -15,7 +16,7 @@ ActiveAdmin.register Termlist do
       after_batch_import: ->(importer) {
       }
   )
-  permit_params :type, :name_en, :name_ar
+  permit_params :name_en, :name_ar
   filter :type, as: :select
   filter :name_en
   filter :name_ar
@@ -36,6 +37,7 @@ ActiveAdmin.register Termlist do
     end
     # We do not .underscore.humanize the type names as this would be error prone and to be done at a lot of places
     column :type
+    column :position
     column :created_at
     column :updated_at
     actions
@@ -44,6 +46,7 @@ ActiveAdmin.register Termlist do
   show do
     attributes_table do
       row :id
+      row :type
       row :name_en
       row :name_ar
       row :museum_objects do |m|
@@ -55,9 +58,24 @@ ActiveAdmin.register Termlist do
         next if @m_objects.nil?
         [page_entries_info(@m_objects), paginate(@m_objects)] unless @m_objects.nil?
       end
+      row :position
       row :created_at
       row :updated_at
     end
     active_admin_comments
+  end
+
+  form do |f|
+    f.semantic_errors
+    inputs do
+      li do
+        label "Type"
+        div f.object.type
+      end
+      input :name_en
+      input :name_ar
+      input :position
+    end
+    f.actions
   end
 end
