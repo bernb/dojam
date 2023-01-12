@@ -47,12 +47,12 @@ ActiveAdmin.register Termlist do
       row :name_en
       row :name_ar
       row :museum_objects do |m|
-        @m_objects = nil
         next if m.museum_objects.nil?
         @m_objects = Kaminari.paginate_array(m.museum_objects).page(params[:page]).per(50)
         result = @m_objects.map{|m| link_to m.decorate.full_inv_number, admin_museum_object_path(m)}
       end
       row :page do |p|
+        next if @m_objects.nil?
         [page_entries_info(@m_objects), paginate(@m_objects)] unless @m_objects.nil?
       end
       row :created_at
