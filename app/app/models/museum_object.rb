@@ -464,6 +464,7 @@ class MuseumObject < ApplicationRecord
       .map{|r| r.searchable_type.constantize.find r.searchable_id}
       .map{|r| r.class < Termlist ? r.museum_objects : r}
       .flatten
+			.compact # ToDo: This is code smell. Filter out whatever might produce nil beforehand
       .map(&:id)
       .sort
     return Pundit::policy_scope(user, MuseumObject).where(id: museum_object_ids)&.order(:id)
