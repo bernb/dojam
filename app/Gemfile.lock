@@ -168,7 +168,7 @@ GEM
       actionpack (>= 5.2.0)
     formtastic_i18n (0.7.0)
     fuzzy_match (2.1.0)
-    globalid (1.0.0)
+    globalid (1.0.1)
       activesupport (>= 5.0)
     guard (2.18.0)
       formatador (>= 0.2.4)
@@ -243,7 +243,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
-    minitest (5.16.2)
+    minitest (5.17.0)
     momentjs-rails (2.29.1.1)
       railties (>= 3.1)
     msgpack (1.5.3)
@@ -419,7 +419,7 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    tzinfo (2.0.4)
+    tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
@@ -446,7 +446,7 @@ GEM
     wkhtmltopdf-binary (0.12.6.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.0)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   x86_64-linux
