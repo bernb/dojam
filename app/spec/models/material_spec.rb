@@ -27,4 +27,18 @@ RSpec.describe Material, type: :model do
     material.destroy
     expect(material.termlist_paths).to be_empty
   end
+
+  it "should be allowed to be destroyed if no museum object is associated" do
+    museum_object = create(:museum_object_with_main_path)
+    material = museum_object.main_material
+    museum_object.destroy
+    material.destroy
+    expect(material.destroyed?).to be true
+  end
+  it "should not be allowed to be destroyed if a museum object is associated" do
+    museum_object = create(:museum_object_with_main_path)
+    material = museum_object.main_material
+    material.destroy
+    expect(material.destroyed?).to be false
+  end
 end

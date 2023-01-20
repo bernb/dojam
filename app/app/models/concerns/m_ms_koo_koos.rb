@@ -2,7 +2,9 @@ module MMsKooKoos
   extend ActiveSupport::Concern
 
   included do
+    # Note that the order of the callbacks matter as after cleaning up the paths there will be no associated museum objects
     before_destroy :abort_if_museum_objects_associated
+    before_destroy :cleanup_paths
   end
 
   def path

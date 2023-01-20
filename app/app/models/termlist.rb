@@ -9,7 +9,6 @@ class Termlist < ApplicationRecord
 	has_many :termlist_paths
 	has_many :paths, through: :termlist_paths
 	before_destroy :abort_if_self_is_undetermined_entry # We do not allow removal of undetermined entires
-	before_destroy :cleanup_paths
 
 	def self.for_path path
 		self
@@ -112,9 +111,5 @@ class Termlist < ApplicationRecord
 			errors.add(:base, 'Removal of undetermined entry is not alliowed')
 			throw(:abort)
 	end
-	end
-
-	def cleanup_paths
-
 	end
 end
