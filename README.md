@@ -1,117 +1,243 @@
-# DOJAM Application
+<a name="readme-top"></a>
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="https://user-images.githubusercontent.com/15048930/214328703-5e161263-8c90-4497-8403-11595d5cd22a.png" alt="Logo BAI - Biblical Archaeological Institute Wuppertal" height=80px>
+  </a>
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="https://user-images.githubusercontent.com/15048930/214328737-c13bf37a-13df-42f3-b85b-9d4207f87479.gif" alt="Logo GPIA - German Protestant Institute of Archaeology in the Holy Land" height=80px>
+  </a>
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="https://user-images.githubusercontent.com/15048930/214328766-4472a407-8d97-4e8b-ba03-e7af9359498f.png" alt="Logo DOA - Department of Antiquities of the Jordan Government" height=80px>
+  </a>
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="https://user-images.githubusercontent.com/15048930/214328782-3c740e9c-6b21-4611-b2e8-338d336bee65.jpg" alt="Logo Gerda Henkel Stiftung" height=80px>
+  </a>
 
-## Top Level Structure
-* `/.idea` config files of rubymine IDE used by bernb
-* `/app` Ruby on Rails folder, see RoR for more details on the related sub-structure
-* `/docker` all files needed and related to docker(-compose)
-  * `/docker/build-files` scripts consumed by docker(-compose): Entrypoints and files for initial runs
-* `/infrastructure` scripts and config files that are not related to docker(-compose), for example backup related scripts
-* `/scripts` development related scripts to simplify recurring tasks
 
-## Local installation for development
-This section is about how to get the app up and running for local development, DO NOT use this for production deployment.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="https://user-images.githubusercontent.com/15048930/214324373-82c83222-0407-473e-bff3-841a74e175af.png" alt="Logo DOJAM - Documentation of Objects in Jordanian Archaeological Museums">
+  </a>
 
-### Requirements
-You need the following authorizations / files:
-* Full access to https://github.com/bernb/dojam
-* Encrypted KeePass file `DOJAM Credentials.kdbx` containing the following secrets:
-  * Database environment file `db.env`
-  * Rails credential key file `master.key`
+  <h3 align="center"></h3>
 
-### Steps
-* [Install](https://docs.docker.com/compose/install/) docker (>= 18.09.1) and docker-compose (>= 1.21.0)
-* `git clone git@github.com:bernb/dojam.git` to clone the repo
-* `cd dojam` to enter the project root directory
-* Set `COMPOSE_FILE=docker/docker-compose-base.yml:docker/docker-compose-dev.yml` as an environmental variable for your session. Consult your operating system's documentation for more details 
-* `mkdir docker/env-files` to create the local-only environment variable directory (for Windows you must use ';' as file separator)
-* Copy `master.key` to `app/config/`
-* Copy `db.env` to `docker/env-files/`
-* Make docker accessible as a normal user: Follow the related [Post-installation steps for Linux](https://docs.docker.com/engine/install/linux-postinstall/)
-* As it takes some time to initial the database, on the first run the database will not be ready when needed by the application. So instead of just running `docker-compose up -d`, which is sufficient in principle, we split up the process:
-  * `docker-compose build` to download the database image and build the application image. This will take some time
-  * `docker-compose up db` to only start the database for an initial run. When postgresql signalizes it has finished its initialization kill the process (Crtl+C)
-  * `docker-compose up -d` to start the containers. From now on you can use this command to start the application
-* `docker-compose exec app rails db:setup` which is a simple shortcut for three commands (see [Rails guide](https://guides.rubyonrails.org/active_record_migrations.html) for more details):
-  * `rails db:create` creates the databases
-  * `rails db:schema:load` loads the structure (as defined in `app/db/schema.rb`)
-  * `rails db:seed` applies initial data (as definied in `app/db/seeds.rb`).
-  
-## Restore Backup
+  <p align="center">
+    Preserving Cultural Heritage
+    <br />
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+  </p>
+</div>
 
-### Requirements
-You need the following authorizations / credentials:
-* Access to the storage box by having your public key registered as authorized entity for the storage box
-* borgbackup passphrase for the corresponding repository
 
-## Retrieve backup
-* [Install](https://borgbackup.readthedocs.io/en/stable/installation.html) borgbackup (>= 1.1.9)
-* Set the following environmental variables:
-  * BORG_REPO
-  * BORG_PASSPHRASE 
-  * See [documentation](https://borgbackup.readthedocs.io/en/stable/usage/general.html#environment-variables) for more details
-* `mkdir tmp && cd tmp` to use a temporary sub folder to retrieve the backup
-* `borg list --short --last 1` to get the name of the latest backup `<LATEST_BACKUP>`
-* `borg extract --strip-components 2 ::<LATEST_BACKUP>` to retrieve the backup.
 
-The structure of the backup is as following:
-* `storage/` a folder containing all images and potentially other assets saved by the Rails storage provider `ActiveStorage`
-* `dojam.dumb` a dumb of the postgresql database
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-See `scripts/get_latest_db_backup.sh` for a bash script.
 
-## Load Backup
 
-### Requirements
-A running installation of the dojam application.
+<!-- ABOUT THE PROJECT -->
+## About DOJAM
+The public awareness of protecting the cultural heritage worldwide raised during the last years. Media report on the destruction of archaeological and historical places, on raided museums and illicit trafficking of antiques. 
+Therefore, the antiquity authorities all over the world have to rise this challenge. Limited financial support and insufficiently trained employees in museums and other cultural institutions make an effective protection of the cultural assets almost impossible.
+The new co-operation project DOJAM supports Jordan in preserving its cultural heritage.
 
-### Steps
-* Replace `app/storage/` folder with the backup
-* `docker-compose exec -u postgres db dropdb -U dojam DOJAM_DB` and 
-* `docker-compose exec -u postgres db createdb -U dojam DOJAM_DB` to delete an recreate the database
-* `docker cp dojam.dump "$(docker-compose ps -q db)":dojam.dump` to copy the database dumb into the docker container
-* `docker-compose exec -T -u postgres db psql --echo-errors --quiet --dbname=DOJAM_DB --single-transaction --file=dojam.dump > /dev/null 2> db_import_errors.out` to load the dumb into the database
-  * `-T` as we do not nee a TTY for this
-  * `--echo-errors` as we want more verbose errors
-  * `--quiet` to supress other information
-  * `--single-transaction` do everything within a single transaction which means postgres will do a full rollback if any errors occur
-  * `> /dev/null 2> db_import_errors.out` to redirect error messages into a file on the local machine
-  * See [documentation](https://docs.docker.com/compose/reference/exec/) fore more details
+See [the official Website](https://www.zitadelle-amman.de/) for more information.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-See `scripts/load_latest_db_backup.sh` for a bash script. Note that this script assumes the latest within within the folder `../tmp/<LATEST_BACKUP>`.
 
-## Release new version
 
-### Requirements
-* A working development environment of the dojam application.
-* Setup an SSH alias named `dojam` in `~/.ssh/config` for the host that's running the app
-  * Use public key authentication
-  * Setup an SSH agent and add your key to it, so you won't be prompted to enter the password during the process. Alternatively you can use a key without a password, although that offers lower security.
+### Built With
 
-### Steps
-* Run `scripts/new_release.sh`
-  * The previous app image is moved to `dojam_app:old_latest`
-  * A backup of the database volume is created
-  * The script performs a rudimentary check if the application is working. If the response code is 500, check the applications web page to see if a database migration is required. The expected response code is 302.
+* [![Next][Next.js]][Next-url]
+* [![React][React.js]][React-url]
+* [![Vue][Vue.js]][Vue-url]
+* [![Angular][Angular.io]][Angular-url]
+* [![Svelte][Svelte.dev]][Svelte-url]
+* [![Laravel][Laravel.com]][Laravel-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* [![JQuery][JQuery.com]][JQuery-url]
 
-### Note
-If the host didn't already have a working installation of the dojam app, a manual initialization of the database with `docker-compose exec app rails db:setup` on the host is necessary after installation.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Rollback to the previous version
-* Execute `scripts/rollback.sh`
-  * The new version is tagged as `dojam_app:rollback_latest` and the old version from `old_latest` is restored
-  * A new backup of the database is created
-  * The old database backup is restored
 
-# Allow access for new users
-* Switch to the wireguard config directory `/etc/wireguard`
-* Run `umask 077; sudo wg genkey | tee privatekey_<name> | wg pubkey > publickey_<name>` (substitute <name> with the name of the new user)
-* Open `wg0.conf` in a text editor
-  * Copy the lowest of the paragraphs starting with `[Peer]` and paste it at the end of the file.
-  * Add the name of the user as a comment above it
-  * Increase `AllowedIPs` by one (example: If the highest IP is `10.0.0.5/32` set the new one to `10.0.0.6/32`)
-  * Copy and paste the generated **public key** after the new `PublicKey = ` entry
-* Restart the Wireguard service with `systemctl restart wg-quick@wg0.service`
-* Copy the template config `dojam_config_example` to a new file `dojam_vpn_<name>.conf` (substitute <name> with the name of the new user)
-* Copy and paste the private- and public key into the new config file `dojam_vpn_<name>.conf` after `PrivateKey = ` and `PublicKey = ` respectively
-* Place `dojam_vpn_<name>.conf` into a ZIP file **protected by a password** and send it to the new user
-* Send the password for the ZIP file **securely via a trusted channel** (e.g. by handing it out on paper or via a secure messenger)
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/your_username_/Project-Name.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Enter your API in `config.js`
+   ```js
+   const API_KEY = 'ENTER YOUR API';
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+_For more examples, please refer to the [Documentation](https://example.com)_
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [x] Add Changelog
+- [x] Add back to top links
+- [ ] Add Additional Templates w/ Examples
+- [ ] Add "components" document to easily copy & paste sections of the readme
+- [ ] Multi-language Support
+    - [ ] Chinese
+    - [ ] Spanish
+
+See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+
+Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+
+* [Choose an Open Source License](https://choosealicense.com)
+* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
+* [Malven's Grid Cheatsheet](https://grid.malven.co/)
+* [Img Shields](https://shields.io)
+* [GitHub Pages](https://pages.github.com)
+* [Font Awesome](https://fontawesome.com)
+* [React Icons](https://react-icons.github.io/react-icons/search)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/othneildrew
+[product-screenshot]: images/screenshot.png
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[Vue-url]: https://vuejs.org/
+[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[Angular-url]: https://angular.io/
+[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
+[Svelte-url]: https://svelte.dev/
+[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[Laravel-url]: https://laravel.com
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+[JQuery-url]: https://jquery.com 
