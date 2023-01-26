@@ -3,8 +3,10 @@ module MMsKooKoos
 
   included do
     # Note that the order of the callbacks matter as after cleaning up the paths there will be no associated museum objects
-    before_destroy :abort_if_museum_objects_associated
-    before_destroy :cleanup_paths
+    # That's also why we prepend the callbacks, so that the default dependent: :destroy action on termlist_paths association triggers after them
+    # So the resulting order is: abort_if_mo_associated, cleanup_paths, dependent: :destroy
+    before_destroy :cleanup_paths, prepend: true
+    before_destroy :abort_if_museum_objects_associated, prepend: true
   end
 
   def path

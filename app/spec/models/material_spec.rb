@@ -41,4 +41,13 @@ RSpec.describe Material, type: :model do
     material.destroy
     expect(material.destroyed?).to be false
   end
+
+  it "should clean up the join table termlist_paths if destroyed" do
+    museum_object = create(:museum_object_with_main_path)
+    join_table_entry_count = TermlistPath.count
+    material = museum_object.main_material
+    museum_object.destroy
+    material.destroy
+    expect(TermlistPath.count).to eq(join_table_entry_count-1)
+  end
 end
