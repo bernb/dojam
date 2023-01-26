@@ -50,4 +50,7 @@ RSpec.describe Material, type: :model do
     material.destroy
     expect(TermlistPath.count).to eq(join_table_entry_count-1)
   end
+
+  it "should not clean up paths if museum objects are associated"
+  it "should not clean up children if museum objects are associated"
 end
