@@ -6,9 +6,11 @@ class Termlist < ApplicationRecord
 	# how the first order parameter gets evaluated and why this works
 	default_scope {order(Arel.sql("termlists.name_en = 'undetermined'"), position: :asc, name_en: :asc)}
 
-	has_many :termlist_paths
+	# Join table entry should be destroyed for all termlists
+	has_many :termlist_paths, dependent: :destroy
+	# m/ms/koo/koos will clean up their paths in an separate callback. All other termlists should not destroy the paths
 	has_many :paths, through: :termlist_paths
-	before_destroy :abort_if_self_is_undetermined_entry # We do not allow removal of undetermined entires
+	before_destroy :abort_if_self_is_undetermined_entry # We do not allow removal of undetermined entries
 
 	def self.for_path path
 		self
