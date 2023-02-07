@@ -41,6 +41,7 @@ See [the official Website](https://www.zitadelle-amman.de/) for more information
 ## Feature Highlights
 ### Hierarchical Data Acquisition
 ### Extensive Search Capabilities
+### Full Multi-language support
 
 
 <!-- LICENSE -->
