@@ -37,6 +37,7 @@ See [the official Website](https://www.zitadelle-amman.de/) for more information
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## About the DOJAM Database
+Build upon modern open source technology, the DOJAM database provide an easy-to-use interface for managing
 
 ## Feature Highlights
 ### Hierarchical Data Acquisition
