@@ -1,17 +1,6 @@
-<a name="readme-top"></a>
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://user-images.githubusercontent.com/15048930/214328703-5e161263-8c90-4497-8403-11595d5cd22a.png" alt="Logo BAI - Biblical Archaeological Institute Wuppertal" height=80px>
-  </a>
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://user-images.githubusercontent.com/15048930/214328737-c13bf37a-13df-42f3-b85b-9d4207f87479.gif" alt="Logo GPIA - German Protestant Institute of Archaeology in the Holy Land" height=80px>
-  </a>
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://user-images.githubusercontent.com/15048930/214328766-4472a407-8d97-4e8b-ba03-e7af9359498f.png" alt="Logo DOA - Department of Antiquities of the Jordan Government" height=80px>
-  </a>
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://user-images.githubusercontent.com/15048930/214328782-3c740e9c-6b21-4611-b2e8-338d336bee65.jpg" alt="Logo Gerda Henkel Stiftung" height=80px>
-  </a>
 
+
+<a name="readme-top"></a>
 
 <!-- PROJECT LOGO -->
 <br />
@@ -19,50 +8,24 @@
   <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="https://user-images.githubusercontent.com/15048930/214324373-82c83222-0407-473e-bff3-841a74e175af.png" alt="Logo DOJAM - Documentation of Objects in Jordanian Archaeological Museums">
   </a>
-
-  <h3 align="center"></h3>
-
-  <p align="center">
-    Preserving Cultural Heritage
-    <br />
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
-  </p>
+    <h1>DOJAM - Preserving Cultural Heritage</h1>
 </div>
 
-
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
-
+<div align="center">
+  <h4>In Cooperation with</h4>
+    <a href="https://github.com/othneildrew/Best-README-Template">
+      <img src="https://user-images.githubusercontent.com/15048930/214328737-c13bf37a-13df-42f3-b85b-9d4207f87479.gif" alt="Logo GPIA - German Protestant Institute of Archaeology in the Holy Land" height=60px>
+    </a>
+    <a href="https://github.com/othneildrew/Best-README-Template">
+      <img src="https://user-images.githubusercontent.com/15048930/214328703-5e161263-8c90-4497-8403-11595d5cd22a.png" alt="Logo BAI - Biblical Archaeological Institute Wuppertal" height=60px>
+    </a>
+    <a href="https://github.com/othneildrew/Best-README-Template">
+      <img src="https://user-images.githubusercontent.com/15048930/214328766-4472a407-8d97-4e8b-ba03-e7af9359498f.png" alt="Logo DOA - Department of Antiquities of the Jordan Government" height=60px>
+    </a>
+    <a href="https://github.com/othneildrew/Best-README-Template">
+      <img src="https://user-images.githubusercontent.com/15048930/214328782-3c740e9c-6b21-4611-b2e8-338d336bee65.jpg" alt="Logo Gerda Henkel Stiftung" height=60px>
+    </a>
+</div>
 
 <!-- ABOUT THE PROJECT -->
 ## About DOJAM
