@@ -43,6 +43,7 @@ Built upon modern open source technologies, the DOJAM database provides an easy-
 ### Hierarchical Data Acquisition
 ### Extensive Search Capabilities
 ### Full Multi-language support
+## State of the Database
 
 <!-- LICENSE -->
 ## License
