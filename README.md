@@ -13,16 +13,16 @@
 
 <div align="center">
   <h4>In Cooperation with</h4>
-    <a href="https://github.com/othneildrew/Best-README-Template">
+    <a href="https://www.deiahl.de/en/">
       <img src="https://user-images.githubusercontent.com/15048930/214328737-c13bf37a-13df-42f3-b85b-9d4207f87479.gif" alt="Logo GPIA - German Protestant Institute of Archaeology in the Holy Land" height=60px>
     </a>
-    <a href="https://github.com/othneildrew/Best-README-Template">
+    <a href="https://www.bai-wuppertal.de/">
       <img src="https://user-images.githubusercontent.com/15048930/214328703-5e161263-8c90-4497-8403-11595d5cd22a.png" alt="Logo BAI - Biblical Archaeological Institute Wuppertal" height=60px>
     </a>
-    <a href="https://github.com/othneildrew/Best-README-Template">
+    <a href="http://doa.gov.jo/homeen.aspx">
       <img src="https://user-images.githubusercontent.com/15048930/214328766-4472a407-8d97-4e8b-ba03-e7af9359498f.png" alt="Logo DOA - Department of Antiquities of the Jordan Government" height=60px>
     </a>
-    <a href="https://github.com/othneildrew/Best-README-Template">
+    <a href="https://www.gerda-henkel-stiftung.de/en/">
       <img src="https://user-images.githubusercontent.com/15048930/214328782-3c740e9c-6b21-4611-b2e8-338d336bee65.jpg" alt="Logo Gerda Henkel Stiftung" height=60px>
     </a>
 </div>
