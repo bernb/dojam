@@ -42,8 +42,11 @@ Built upon modern open source technologies, the DOJAM database provides an easy-
 ## Feature Highlights
 ### Hierarchical Data Acquisition
 To simplify the registration of new objects, a novel hierarchical system is used. Dependent on the choosen material and kind of the object, only meaningful selections are presented. A detailed description of the technical background of the approach can be found here: [10.1109/ICCE53296.2022.9730499](https://dx.doi.org/10.1109/ICCE53296.2022.9730499)
+![stepwise_animation_ffmpeg](https://user-images.githubusercontent.com/15048930/223083576-c7df80d4-3651-46a5-8270-bd1176e3100e.gif)
 ### Extensive Search Capabilities
+![search_animation_ffmpeg](https://user-images.githubusercontent.com/15048930/223083463-fdaf569b-7e30-480a-86f5-bfd8fb933c33.gif)
 ### Full Multi-language support
+![bilingual_animation_ffmpeg](https://user-images.githubusercontent.com/15048930/223083619-59b35adb-74c0-4b38-b153-271ba93f4706.gif)
 ## State of the Database
 
 <!-- LICENSE -->
