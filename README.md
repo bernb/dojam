@@ -37,7 +37,7 @@ See [the official Website](https://www.zitadelle-amman.de/) for more information
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## About the DOJAM Database
-Built upon modern open source technologies, the DOJAM database provides an easy-to-use interface for managing
+Based on open source technologies, the DOJAM application provides an easy-to-use access to the inventory management of one or multiple museums. The focus lies on an intuitive graphical user interface, which allows usage without extensive training. Furthermore, special attention was paid to data management suitable for scientific purposes. Instead of error-prone free text fields, object properties are primarily chosen on the basis of categories and terms predefined by a curator. This greatly simplifies data entry and object management.
 
 ## Feature Highlights
 ### Hierarchical Data Acquisition
