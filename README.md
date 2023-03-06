@@ -36,7 +36,8 @@ The new co-operation project DOJAM supports Jordan in preserving its cultural he
 See [the official Website](https://www.zitadelle-amman.de/) for more information.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## About the DOJAM Database
+## About the DOJAM Application
+Today, over 24,000 objects from 4 museums of the Department of Antiquities Jordan are managed using the application. Gradually more museums will be added until all 11 museums under the supervision of the Jordanian Department of Antiquities have been added along with their collection.
 Based on open source technologies, the DOJAM application provides an easy-to-use access to the inventory management of one or multiple museums. The focus lies on an intuitive graphical user interface, which allows usage without extensive training. Furthermore, special attention was paid to data management suitable for scientific purposes. Instead of error-prone free text fields, object properties are primarily chosen on the basis of categories and terms predefined by a curator. This greatly simplifies data entry and object management.
 
 ## Feature Highlights
