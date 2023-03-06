@@ -66,10 +66,14 @@ Based on open source technologies, the DOJAM application provides an easy-to-use
 ### Hierarchical Data Acquisition
 To simplify the registration of new objects, a novel hierarchical system is used. Dependent on the choosen material and kind of the object, only meaningful selections are presented. A detailed description of the technical background of the approach can be found here: [10.1109/ICCE53296.2022.9730499](https://dx.doi.org/10.1109/ICCE53296.2022.9730499)
 ![stepwise_animation_ffmpeg](https://user-images.githubusercontent.com/15048930/223083576-c7df80d4-3651-46a5-8270-bd1176e3100e.gif)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <a name="extensive-search-capabilities"></a>
 ### Extensive Search Capabilities
 With three different search modes, the application offers comprehensive options for finding objects. Using the inventory number, an individual object can be accessed quickly and easily. With the help of the free text search, objects can be found based on any entered data. Finally, objects can be searched using specific criteria via the term search.
 ![search_animation_ffmpeg](https://user-images.githubusercontent.com/15048930/223083463-fdaf569b-7e30-480a-86f5-bfd8fb933c33.gif)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <a name="full-multi-language-support"></a>
 ### Full Multi-language Support
 The application is designed to be fully multilingual. In the Arabic variant, the layout is adapted in accordance to the reading direction.
