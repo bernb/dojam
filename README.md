@@ -52,8 +52,6 @@ The application is designed to be fully multilingual. In the Arabic variant, the
 ![bilingual_animation_ffmpeg](https://user-images.githubusercontent.com/15048930/223083619-59b35adb-74c0-4b38-b153-271ba93f4706.gif)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## State of the Database
-
 <!-- CONTACT -->
 ## Contact
 Bernard Beitz - BBDOJAM@gmail.com
