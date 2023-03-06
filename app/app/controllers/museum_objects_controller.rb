@@ -120,7 +120,7 @@ class MuseumObjectsController < ApplicationController
           v.each do |term_id|
             term = termclass.find term_id
             if k.in?(["Material", "MaterialSpecified", "KindOfObject", "KindOfObjectSpecified"])
-              paths = Path.where("path LIKE ?", term.paths.first.path + "%")
+              paths = Path.where("path LIKE ?", "%" + term.id.to_s + "%")
               prim = policy_scope(MuseumObject).where(main_path: paths)
               sec = policy_scope(MuseumObject).joins(:museum_object_paths).where(museum_object_paths: {path_id: paths.ids})
               term_results +=  sec + prim
