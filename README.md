@@ -27,7 +27,25 @@
     </a>
 </div>
 
+
+<!-- TABLE OF CONTENTS -->
+  ## Table of Contents
+  <ol>
+    <li><a href="#about-dojam">About DOJAM</a></li>
+    <li><a href="#about-dojam-application">About the DOJAM Application</a></li>
+    <li>
+      <a href="#feature-highlights">Feature Highlights</a>
+      <ul>
+        <li> <a href="#hierarchical-data-acquisition">Hierarchical Data Acquisition</a></li>
+        <li> <a href="#extensive-search-capabilities">Extensive Search Capabilities</a></li>
+        <li> <a href="#full-multi-language-support">Full Multi-language Support</a></li>
+      </ul>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+
 <!-- ABOUT THE PROJECT -->
+<a name="about-dojam"></a>
 ## About DOJAM
 The public awareness of protecting the cultural heritage worldwide raised during the last years. Media report on the destruction of archaeological and historical places, on raided museums and illicit trafficking of antiques. 
 Therefore, the antiquity authorities all over the world have to rise this challenge. Limited financial support and insufficiently trained employees in museums and other cultural institutions make an effective protection of the cultural assets almost impossible.
@@ -36,24 +54,29 @@ The new co-operation project DOJAM supports Jordan in preserving its cultural he
 See [the official Website](https://www.zitadelle-amman.de/) for more information.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<a name="about-dojam-application"></a>
 ## About the DOJAM Application
 As of 2023, over 24,000 objects from 4 museums of the Department of Antiquities Jordan are managed using the application. Gradually more museums will be added until all 11 museums under the supervision of the Jordanian Department of Antiquities have been added along with their collection.
 Based on open source technologies, the DOJAM application provides an easy-to-use access to the inventory management of one or multiple museums. The focus lies on an intuitive graphical user interface, which allows usage without extensive training. Furthermore, special attention was paid to data management suitable for scientific purposes. Instead of error-prone free text fields, object properties are primarily chosen on the basis of categories and terms predefined by a curator. This greatly simplifies data entry and object management.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<a name="feature-highlights"></a>
 ## Feature Highlights
+<a name="hierarchical-data-acquisition"></a>
 ### Hierarchical Data Acquisition
 To simplify the registration of new objects, a novel hierarchical system is used. Dependent on the choosen material and kind of the object, only meaningful selections are presented. A detailed description of the technical background of the approach can be found here: [10.1109/ICCE53296.2022.9730499](https://dx.doi.org/10.1109/ICCE53296.2022.9730499)
 ![stepwise_animation_ffmpeg](https://user-images.githubusercontent.com/15048930/223083576-c7df80d4-3651-46a5-8270-bd1176e3100e.gif)
+<a name="extensive-search-capabilities"></a>
 ### Extensive Search Capabilities
 With three different search modes, the application offers comprehensive options for finding objects. Using the inventory number, an individual object can be accessed quickly and easily. With the help of the free text search, objects can be found based on any entered data. Finally, objects can be searched using specific criteria via the term search.
 ![search_animation_ffmpeg](https://user-images.githubusercontent.com/15048930/223083463-fdaf569b-7e30-480a-86f5-bfd8fb933c33.gif)
+<a name="full-multi-language-support"></a>
 ### Full Multi-language Support
 The application is designed to be fully multilingual. In the Arabic variant, the layout is adapted in accordance to the reading direction.
 ![bilingual_animation_ffmpeg](https://user-images.githubusercontent.com/15048930/223083619-59b35adb-74c0-4b38-b153-271ba93f4706.gif)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- CONTACT -->
+<a name="contact"></a>
 ## Contact
 Bernard Beitz - BBDOJAM@gmail.com
 
