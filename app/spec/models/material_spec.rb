@@ -44,11 +44,12 @@ RSpec.describe Material, type: :model do
 
   it "should clean up the join table termlist_paths if destroyed" do
     museum_object = create(:museum_object_with_main_path)
-    join_table_entry_count = TermlistPath.count
     material = museum_object.main_material
+    join_table_entry_count = TermlistPath.count
+    m_related_join_table_count = Path.with_id(material.id).map(&:termlist_paths).count
     museum_object.destroy
     material.destroy
-    expect(TermlistPath.count).to eq(join_table_entry_count-1)
+    expect(TermlistPath.count).to eq(join_table_entry_count - m_related_join_table_count)
   end
 
   it "should not clean up paths if museum objects are associated"
