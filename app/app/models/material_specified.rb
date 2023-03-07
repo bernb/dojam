@@ -4,7 +4,6 @@ class MaterialSpecified < Termlist
   # which might break things
   scope :material, ->(m_id) {joins(:paths).where("paths.path LIKE ?", "/#{m_id}%")}
   attr_reader :material, :merge_into_ms # Used in active_admin to merge into other model
-  before_destroy :destroy_transitive_children
 
   def self.ransackable_scopes(auth_object = nil)
     [:material]
@@ -34,19 +33,5 @@ class MaterialSpecified < Termlist
 		children_paths = self.paths.first.direct_children.map(&:path)
 		kind_of_objects = KindOfObject.joins(:paths).where(paths: {path: children_paths})
 		return kind_of_objects
-  end
-
-  private
-  def destroy_transitive_children
-    path = self.path
-    if path.blank?
-      warn("model did not have any associated paths. This should never happen. Check associated yaml files for unusual errors.")
-      return
-    end
-    path.destroy
-    if path.errors.any?
-      errors.add(:base, "could not be destroyed because a (transitive) child path could not be destroyed")
-      throw(:abort)
-    end
   end
 end

@@ -26,6 +26,9 @@ module MMsKooKoos
   end
 
   def cleanup_paths
-    self.paths.destroy_all
+    if Path.with_id(self.id).destroy_all == false
+      errors.add(:base, "could not destroy an associated path")
+      throw(:abort)
+    end
   end
 end
