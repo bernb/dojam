@@ -10,6 +10,8 @@ COPY ./app/Gemfile.lock /dojam/Gemfile.lock
 RUN gem install bundler -v 2.1.4
 RUN bundle update
 RUN bundle install
+# Note that this causes problems if Gemfile.lock gets updated as the updated lock file will get overridden here
+# To resolve the issue, the order of the command could be changed or Gemfile.lock could be added to .dockerignore.
 COPY ./app /dojam
 # Recreate directories that are ignored by Docker
 RUN mkdir /dojam/log && mkdir /dojam/tmp
