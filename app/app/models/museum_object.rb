@@ -51,26 +51,26 @@ class MuseumObject < ApplicationRecord
   belongs_to :excavation_site_category, required: false
 	belongs_to :priority, required: false
 	belongs_to :main_path, class_name: "Path", required: false
-	has_many :museum_object_paths
+	has_many :museum_object_paths, dependent: :destroy
 	has_many :secondary_paths, class_name: "Path",  through: :museum_object_paths, source: :path do
 		def <<(values)
 			values = proxy_association.owner.exclude_parent_and_same(values)
 			super values.map{|p| p.to_depth(2)}
 		end
 	end
-	has_many :color_museum_objects
+	has_many :color_museum_objects, dependent: :destroy
 	has_many :colors, through: :color_museum_objects
-  has_many :production_technique_museum_objects
+  has_many :production_technique_museum_objects, dependent: :destroy
   has_many :production_techniques, through: :production_technique_museum_objects 
-  has_many :decoration_style_museum_objects
+  has_many :decoration_style_museum_objects, dependent: :destroy
   has_many :decoration_styles, through: :decoration_style_museum_objects
-  has_many :decoration_technique_museum_objects
+  has_many :decoration_technique_museum_objects, dependent: :destroy
   has_many :decoration_techniques, through: :decoration_technique_museum_objects
-  has_many :decoration_color_museum_objects
+  has_many :decoration_color_museum_objects, dependent: :destroy
   has_many :decoration_colors, through: :decoration_color_museum_objects
-  has_many :inscription_letter_museum_objects
+  has_many :inscription_letter_museum_objects, dependent: :destroy
   has_many :inscription_letters, through: :inscription_letter_museum_objects
-  has_many :inscription_language_museum_objects
+  has_many :inscription_language_museum_objects, dependent: :destroy
   has_many :inscription_languages, through: :inscription_language_museum_objects
   delegate :museum, to: :storage_location, allow_nil: true
   delegate :storage, to: :storage_location, allow_nil: true
