@@ -1,1 +1,1 @@
-Rack::MiniProfiler.config.start_hidden = true unless Rails.env.test?
+#Rack::MiniProfiler.config.start_hidden = true unless Rails.env.test?
