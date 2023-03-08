@@ -137,12 +137,12 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   #gem "rails-erd" # Generate Entity-Relationship Diagrams; ToDo: Add neccessary 'dot' executable to docker container
-  gem 'scout_apm', '~> 2.6' # used for profiling
-  gem 'rack-mini-profiler', '~> 2.0' # also profiling
-  gem 'memory_profiler', '~> 0.9' # For memory profiling used by rack-mini-profiler
+  #gem 'scout_apm', '~> 2.6' # used for profiling
+  #gem 'rack-mini-profiler', '~> 2.0' # also profiling
+  #gem 'memory_profiler', '~> 0.9' # For memory profiling used by rack-mini-profiler
   # For call-stack profiling flamegraphs used by rack-mini-profiler
-  gem 'flamegraph'
-  gem 'stackprof'
-	gem 'ruby-prof'
+  #gem 'flamegraph'
+  #gem 'stackprof'
+  #gem 'ruby-prof'
   gem 'i18n-tasks', '~> 0.9.31'
 end
