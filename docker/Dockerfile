@@ -24,4 +24,5 @@ ENTRYPOINT ["/usr/bin/app-entrypoint.sh"]
 EXPOSE 22333
 
 FROM base AS dev
+RUN apt-get update -qq
 RUN apt-get install -y chromium-driver chromium
