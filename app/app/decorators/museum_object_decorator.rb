@@ -214,14 +214,13 @@ class MuseumObjectDecorator < Draper::Decorator
 	end
 
 	def dating_millennium
-		if self.is_dating_millennium_unknown? || self.dating_millennium_begin.blank? || self.dating_millennium_begin.blank?
+		if self.is_dating_millennium_unknown? || self.dating_millennium_begin.name_en == "undetermined" || self.dating_millennium_end.name_en == "undetermined"
 			return I18n.t('undetermined')
+		end
+		if self.dating_millennium_begin&.id == self.dating_millennium_end&.id
+			return self.dating_millennium_begin&.name
 		else
-			if self.dating_millennium_begin&.id == self.dating_millennium_end&.id
-				return self.dating_millennium_begin&.name
-			else
-				return self.dating_millennium_begin&.name + " - " + self.dating_millennium_end&.name
-			end
+			return self.dating_millennium_begin&.name + " - " + self.dating_millennium_end&.name
 		end
 	end
 
