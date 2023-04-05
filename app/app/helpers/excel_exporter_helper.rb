@@ -63,7 +63,26 @@ module ExcelExporterHelper
                       I18n.t('kind_of_object_specified'),
                       I18n.t('preservation_of_object'),
                       I18n.t('dating_period'),
-                      I18n.t('description')
+                      I18n.t('description'),
+                      I18n.t('excavation_site'),
+                      I18n.t('excavation_site_kind'),
+                      I18n.t('excavation_site_category'),
+                      I18n.t('finding_context'),
+                      I18n.t('finding_remarks'),
+                      I18n.t('production_technique'),
+                      I18n.t('munsell_color'),
+                      I18n.t('decoration_style'),
+                      I18n.t('decoration_technique'),
+                      I18n.t('inscription_text'),
+                      I18n.t('inscription_translation'),
+                      I18n.t('inscription_language'),
+                      I18n.t('inscription_decoration'),
+                      I18n.t('inscription_letter'),
+                      I18n.t('authenticity'),
+                      I18n.t('dating_century'),
+                      I18n.t('dating_millennium'),
+                      I18n.t('dating_timespan'),
+                      I18n.t('literature')
     museum_objects.each_with_index do |m, i|
       row = sheet.row(i+1)
       row.push m.loan_out&.to_institution || "",
@@ -78,10 +97,30 @@ module ExcelExporterHelper
                m.kind_of_object&.name,
                m.kind_of_object_specified&.name,
                m.preservation_object&.name,
-               m.dating_period&.name,
+               m.dating_period_decorated,
                # More than 30k chars / 32kB will result in a corrupted file,
                # see https://github.com/zdavatz/spreadsheet/blob/master/GUIDE.md#cautionary-note-about-cell-content-length
-               m.remarks&.[](0..30_000)
+               m.remarks&.[](0..30_000),
+               m.excavation_site.name,
+               m.excavation_site_kind.name,
+               m.excavation_site_category.name,
+               m.finding_context,
+               m.finding_remarks,
+               m.production_technique.name_en,
+               m.munsell_color,
+               m.decoration_style.name_en,
+               m.decoration_technique.name_en,
+               m.inscription_text,
+               m.inscription_translation,
+               m.inscription_language.name_en,
+               m.inscription_decoration&.name_en || "",
+               m.inscription_letter.name_en,
+               m.authenticity.name_en,
+               m.dating_century,
+               m.dating_millennium,
+               m.dating_timespan,
+               m.literature
+
     end
     self.fit_columns(sheet)
     return export
